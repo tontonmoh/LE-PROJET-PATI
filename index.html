@@ -12,8 +12,8 @@
 body{font-family:'Nunito',sans-serif;background:var(--sa);color:var(--tx);line-height:1.6;overflow-x:hidden}
 header{background:linear-gradient(135deg,var(--vg) 0%,#00695C 100%);color:var(--bl);padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.15)}
 .hc{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
-.logo span{color:var(--jg)}.logo-icon{width:40px;height:40px;background:var(--jg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+.logo span{color:var(--jg)}.logo-icon{width:36px;height:36px;background:var(--jg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 nav{display:flex;gap:2rem;align-items:center}nav a{color:var(--bl);text-decoration:none;font-weight:600;font-size:.95rem;transition:.3s;position:relative}
 nav a:hover{color:var(--jg)}nav a.active::after{content:'';position:absolute;bottom:-6px;left:0;width:100%;height:3px;background:var(--jg);border-radius:2px}
 .btn{padding:.6rem 1.4rem;border-radius:50px;border:none;font-family:inherit;font-weight:700;cursor:pointer;transition:.3s;font-size:.9rem;display:inline-flex;align-items:center;gap:.4rem}
@@ -21,15 +21,29 @@ nav a:hover{color:var(--jg)}nav a.active::after{content:'';position:absolute;bot
 .bw{background:rgba(255,255,255,.15);color:var(--bl);border:2px solid rgba(255,255,255,.3)}.bw:hover{background:var(--bl);color:var(--vg)}
 .br{background:var(--rg);color:var(--bl)}.br:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(206,17,38,.3)}
 .mm{display:none;font-size:1.5rem;cursor:pointer}
-.hero{background:linear-gradient(135deg,var(--nu) 0%,#283593 50%,var(--vg) 100%);color:var(--bl);padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,var(--nu) 0%,#283593 50%,var(--vg) 100%);color:var(--bl);padding:4rem 1.5rem;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,205,0,.1) 0%,transparent 60%);animation:pu 8s ease-in-out infinite}
 @keyframes pu{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 .hc2{position:relative;z-index:1;max-width:800px;margin:0 auto}
-.hero h1{font-family:'Playfair Display',serif;font-size:3.2rem;margin-bottom:1rem;line-height:1.2}
-.hero h1 span{color:var(--jg)}.hero p{font-size:1.25rem;opacity:.9;margin-bottom:2rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1rem;line-height:1.2}
+.hero h1 span{color:var(--jg)}.hero p{font-size:1.2rem;opacity:.9;margin-bottom:2rem;max-width:600px;margin-left:auto;margin-right:auto}
 .sc{max-width:1200px;margin:0 auto;padding:4rem 1.5rem}
 .st{font-family:'Playfair Display',serif;font-size:2.2rem;text-align:center;margin-bottom:.5rem;color:var(--nu)}
 .ss{text-align:center;color:var(--gr);margin-bottom:3rem;font-size:1.1rem}
+
+/* CARROUSEL */
+.carousel{position:relative;max-width:1000px;margin:0 auto;overflow:hidden}
+.carousel-track{display:flex;transition:transform .5s ease;gap:1.5rem}
+.carousel-card{min-width:100%;padding:0 .5rem;box-sizing:border-box}
+@media(min-width:768px){.carousel-card{min-width:50%}}@media(min-width:1024px){.carousel-card{min-width:33.333%}}
+.carousel-card .lv{margin:0}
+.carousel-nav{display:flex;justify-content:center;gap:1rem;margin-top:2rem;align-items:center}
+.carousel-nav button{background:var(--nu);color:var(--bl);border:none;width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center}
+.carousel-nav button:hover{background:var(--vg);transform:scale(1.1)}
+.carousel-dots{display:flex;gap:.5rem}
+.carousel-dot{width:10px;height:10px;border-radius:50%;background:#ddd;border:none;cursor:pointer;transition:.3s}
+.carousel-dot.ac{background:var(--nu);transform:scale(1.2)}
+
 .lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin-bottom:2rem}
 .lc{background:var(--bl);border-radius:var(--ra);padding:1.2rem;text-align:center;box-shadow:var(--om);transition:.3s;cursor:pointer;border:2px solid transparent}
 .lc:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}.lc.ac{border-color:var(--vg);background:#E8F5E9}.lc.bi{opacity:.5;cursor:not-allowed}
@@ -80,10 +94,33 @@ nav a:hover{color:var(--jg)}nav a.active::after{content:'';position:absolute;bot
 footer{background:var(--nu);color:var(--bl);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
 .fc{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-bottom:2rem}
 .fs h4{color:var(--jg);margin-bottom:1rem;font-family:'Playfair Display',serif}
-.fs a{color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:.5rem;transition:.3s}
-.fs a:hover{color:var(--jg)}.fb{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.9rem}
+.fs a,.fs p{color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:.5rem;transition:.3s;line-height:1.7}
+.fs a:hover{color:var(--jg)}
+.fs .tel{color:var(--jg);font-weight:700;font-size:1.1rem}
+.fb{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.9rem}
 .hi{display:none!important}
-@media(max-width:768px){.hero h1{font-size:2rem}nav{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--vg);flex-direction:column;padding:1rem;gap:1rem}nav.ac{display:flex}.mm{display:block}.mct{grid-template-columns:1fr}.cg{grid-template-columns:1fr}.sc{padding:2rem 1rem}.pdf-nav{font-size:.8rem}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero{padding:3rem 1rem}
+  .hero h1{font-size:2rem}
+  .hero p{font-size:1rem}
+  .logo{font-size:1.25rem}
+  .logo-icon{width:32px;height:32px;font-size:1rem}
+  nav{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--vg);flex-direction:column;padding:1rem;gap:1rem}
+  nav.ac{display:flex}
+  .mm{display:block}
+  .mct{grid-template-columns:1fr}
+  .sc{padding:2rem 1rem}
+  .carousel-card{min-width:85%;padding:0 .3rem}
+  .carousel-nav button{width:36px;height:36px;font-size:1rem}
+  .pdf-nav{font-size:.8rem}
+}
+@media(max-width:480px){
+  .logo{font-size:1.1rem;gap:.3rem}
+  .logo-icon{width:28px;height:28px}
+  .btn{padding:.5rem 1rem;font-size:.8rem}
+}
 </style>
 </head>
 <body>
@@ -92,15 +129,39 @@ footer{background:var(--nu);color:var(--bl);padding:3rem 1.5rem 1.5rem;margin-to
 <div style="display:flex;gap:.5rem;align-items:center;"><button class="btn bw" id="ab" onclick="sp('co')">Se connecter</button><span class="mm" onclick="tm()">☰</span></div></div></header>
 
 <main id="mc">
+
+<!-- PAGE ACCUEIL -->
 <div id="p-ac">
+
+<!-- HERO -->
 <section class="hero"><div class="hc2"><h1>Découvre tes <span>histoires</span> !</h1><p>Livres inspirants et contes traditionnels guinéens pour éveiller les imaginaires. Prochainement : versions audio et dessins animés !</p>
 <button class="btn bj" style="font-size:1.1rem;padding:.9rem 2rem;" onclick="sp('ca')">📖 Explorer le catalogue</button>
 </div></section>
-<section class="sc"><h2 class="st">Choisis ta langue</h2><p class="ss">PATI s'engage à préserver et partager les langues de Guinée</p><div class="lg" id="lg"></div></section>
-<section class="sc" style="background:linear-gradient(135deg,#E8F5E9,#FFF8E1);border-radius:24px;margin:2rem auto;"><h2 class="st">Nouveautés</h2><p class="ss">Les premiers livres de la collection PATI</p><div class="cg" id="ca1"></div></section>
+
+<!-- NOUVEAUTÉS EN CARROUSEL -->
+<section class="sc" style="padding-bottom:2rem;"><h2 class="st">Nouveautés</h2><p class="ss">Les premiers livres de la collection PATI</p>
+<div class="carousel" id="carousel">
+  <div class="carousel-track" id="cTrack"></div>
+  <div class="carousel-nav">
+    <button onclick="cPrev()">◀</button>
+    <div class="carousel-dots" id="cDots"></div>
+    <button onclick="cNext()">▶</button>
+  </div>
 </div>
+</section>
+
+<!-- LANGUES -->
+<section class="sc" style="background:linear-gradient(135deg,#E8F5E9,#FFF8E1);border-radius:24px;margin:2rem auto;"><h2 class="st">Choisis ta langue</h2><p class="ss">PATI s'engage à préserver et partager les langues de Guinée</p><div class="lg" id="lg"></div></section>
+
+</div>
+
+<!-- PAGE CATALOGUE -->
 <div id="p-ca" class="hi"><section class="sc"><h2 class="st">Tout le catalogue</h2><p class="ss">4 histoires pour découvrir la Guinée autrement</p><div class="cg" id="ca2"></div></section></div>
+
+<!-- PAGE BIBLIOTHÈQUE -->
 <div id="p-bi" class="hi"><section class="sc"><h2 class="st">Ma Bibliothèque</h2><p class="ss">Tes livres, ta progression, tes favoris</p><div id="bc"></div></section></div>
+
+<!-- PAGE COMPTE -->
 <div id="p-co" class="hi"><section class="sc"><div id="cg"><div class="cs"><div class="ph"><div class="pa">👤</div><h2>Rejoins la communauté PATI</h2><p style="color:var(--gr);">Crée ton compte pour sauvegarder ta progression et tes livres préférés</p></div>
 <form onsubmit="cc(event)"><div class="fg"><label>Ton prénom</label><input type="text" id="pi" placeholder="Ex: Amadou, Fatima..." required></div>
 <div class="fg"><label>Langue préférée</label><select id="li"><option value="fr">Français</option><option value="en">English</option><option value="pular">Pular</option><option value="soussou">Soussou</option><option value="malinke">Malinké</option></select></div>
@@ -111,6 +172,7 @@ footer{background:var(--nu);color:var(--bl);padding:3rem 1.5rem 1.5rem;margin-to
 <button class="btn br" style="width:100%;" onclick="dc()">🚪 Se déconnecter</button></div></div></section></div>
 </main>
 
+<!-- MODAL LIVRE -->
 <div class="mo" id="ml" onclick="cm(event)"><div class="md" onclick="event.stopPropagation()"><button class="mc" onclick="fm()">×</button><div class="mct" id="mct"></div></div></div>
 
 <!-- LECTEUR PDF -->
@@ -127,12 +189,16 @@ footer{background:var(--nu);color:var(--bl);padding:3rem 1.5rem 1.5rem;margin-to
 <div class="pdf-viewer" id="pdfViewer"></div>
 </div>
 
+<!-- TOAST -->
 <div class="to" id="to"></div>
 
-<footer><div class="fc"><div class="fs"><h4>Le Projet PATI</h4><p style="color:rgba(255,255,255,.7);line-height:1.7;">Édition jeunesse guinéenne dédiée à la préservation des histoires, des langues et des cultures de Guinée à travers des livres numériques accessibles.</p></div>
+<!-- FOOTER -->
+<footer><div class="fc">
+<div class="fs"><h4>Le Projet PATI</h4><p style="color:rgba(255,255,255,.7);line-height:1.7;">Édition jeunesse guinéenne dédiée à la préservation des histoires, des langues et des cultures de Guinée à travers des livres numériques accessibles.</p></div>
 <div class="fs"><h4>Navigation</h4><a href="#" onclick="sp('ac')">Accueil</a><a href="#" onclick="sp('ca')">Catalogue</a><a href="#" onclick="sp('bi')">Ma Bibliothèque</a><a href="#" onclick="sp('co')">Mon Compte</a></div>
-<div class="fs"><h4>Le Projet</h4><a href="#">À propos</a><a href="#">L'Atelier Solidaire</a><a href="#">Partenaires</a><a href="#">Contact</a></div>
-<div class="fs"><h4>Suivez-nous</h4><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div></div>
+<div class="fs"><h4>Le Projet</h4><a href="#" target="_blank">L'Atelier Solidaire</a><a href="#" target="_blank">Partenaires</a><a href="#" target="_blank">À propos</a></div>
+<div class="fs"><h4>Contact</h4><a href="tel:+224611272323" class="tel">📞 +224 611 27 23 23</a><p style="font-size:.9rem;margin-top:.5rem;">Disponible sur WhatsApp</p><a href="#" target="_blank">Facebook</a><a href="#" target="_blank">Instagram</a></div>
+</div>
 <div class="fb"><p>© 2026 Le Projet PATI - L'Atelier Solidaire. Tous droits réservés. 🇬🇳</p></div></footer>
 
 <script>
@@ -141,10 +207,22 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 
 const LV=[{id:'binta-pilote',titre:'Binta Diallo',st:'La Dame Oiseau',auteur:'Mohamed Doumbouya',tag:'heroines',tl:'Héroînes',langues:['fr'],la:'Français',res:"Portrait de Binta Diallo, première femme pilote d'Afrique noire, originaire de Labé. Une histoire inspirante de courage et de détermination.",ctx:"Binta Diallo est une figure méconnue de l'histoire africaine. Originaire de Labé, en Haute-Guinée, elle a brisé les barrières du genre pour prendre les commandes d'un avion dans les années 1930.",ped:"Ce livre aborde les thèmes de l'égalité des genres, de la persévérance et de l'histoire de l'aviation africaine. Idéal pour les jeunes à partir de 8 ans.",cred:"Supervision pédagogique : Kadiatou Baldé (CCFG) et Salif Sylla (éducateur).",eng:null,img:'./images/couverture_binta.jpg',pdf:'./livres/binta-pilote.pdf'},{id:'sacree-dmba',titre:"Sacrée D'mba",st:'Amadou et Fifi au paradis',auteur:'Mohamed Doumbouya',tag:'culture',tl:'Culture',langues:['fr','en'],la:'Français & Anglais',res:'Découverte du masque Baga, symbole de fertilité et icône du "Branding Guinée". Amadou et Fifi nous emmènent dans un voyage magique.',ctx:"Le masque D'mba (ou Nimba) est l'un des symboles les plus puissants de la Guinée. Représentant l'idéal de beauté féminine et la fertilité, il est aujourd'hui l'emblème du tourisme guinéen.",ped:"Bilingue français-anglais, ce livre initie les enfants à la richesse du patrimoine matériel guinéen tout en développant leurs compétences linguistiques.",cred:"Supervision pédagogique : Kadiatou Baldé (CCFG) et Salif Sylla (éducateur).",eng:null,img:'./images/couverture_nimba.jpg',pdf:'./livres/sacree-dmba.pdf'},{id:'chateau-deau',titre:"La Guinée, Château d'eau",st:"Les aventures d'Electroman",auteur:'Mohamed Doumbouya',tag:'environnement',tl:'Environnement',langues:['fr'],la:'Français',res:"Les aventures d'Electroman à Bolodou et l'importance des ressources en eau de la Guinée. Un récit écologique qui sensibilise les enfants.",ctx:'La Guinée est surnommée le "château d\'eau de l\'Afrique de l\'Ouest" grâce à ses nombreux fleuves. Pourtant, l\'accès à l\'eau potable reste un défi.',ped:"À travers les aventures d'Electroman, les enfants découvrent l'hydrologie guinéenne, le cycle de l'eau et l'importance de préserver cette ressource vitale.",cred:"Supervision pédagogique : Kadiatou Baldé (CCFG) et Salif Sylla (éducateur).",eng:'Les bénéfices de ce livre servent à acheter des fournitures scolaires pour les enfants de Guéckédou.',img:'./images/couverture_chateau.png',pdf:'./livres/chateau-deau.pdf'},{id:'laye-kouroussa',titre:'Laye de Kouroussa',st:"L'enfant de la forge",auteur:'Mohamed Doumbouya',tag:'tradition',tl:'Tradition',langues:['fr'],la:'Français',res:'Inspiré de "L\'Enfant Noir" de Camara Laye, ce livre explore la vie traditionnelle et l\'art de la forge à Kouroussa.',ctx:'Kouroussa, ville natale de Camara Laye, est réputée pour ses forgerons et ses griots. Ce livre rend hommage à cette tradition séculaire.',ped:"Une initiation douce à la littérature africaine classique et aux métiers traditionnels guinéens. Parfait pour développer l'imaginaire et la fierté culturelle.",cred:"Supervision pédagogique : Kadiatou Baldé (CCFG) et Salif Sylla (éducateur).",eng:null,img:'./images/couverture_laye.png',pdf:'./livres/laye-kouroussa.pdf'}];
 const LA=[{code:'fr',nom:'Français',dr:'🇫🇷',st:'dispo',lb:'Disponible'},{code:'en',nom:'English',dr:'🇬🇧',st:'partiel',lb:'Partiel'},{code:'pular',nom:'Pular',dr:'🇬🇳',st:'partiel',lb:'Interface'},{code:'soussou',nom:'Soussou',dr:'🇬🇳',st:'partiel',lb:'Interface'},{code:'malinke',nom:'Malinké',dr:'🇬🇳',st:'partiel',lb:'Interface'},{code:'kissi',nom:'Kissi',dr:'🇬🇳',st:'bientot',lb:'Bientôt'},{code:'guerze',nom:'Guerzé',dr:'🇬🇳',st:'bientot',lb:'Bientôt'},{code:'toma',nom:'Toma',dr:'🇬🇳',st:'bientot',lb:'Bientôt'}];
-let cu=null,cl=null,pdfDoc=null,currentPage=1,totalPages=0;
+let cu=null,cl=null,pdfDoc=null,currentPage=1,totalPages=0,cIndex=0;
 
 function sp(p){document.querySelectorAll('#mc > div').forEach(x=>x.classList.add('hi'));document.getElementById('p-'+p).classList.remove('hi');document.querySelectorAll('#mn a').forEach(a=>a.classList.remove('ac'));document.querySelectorAll('#mn a').forEach(a=>{if(a.getAttribute('onclick').includes(p))a.classList.add('ac')});document.getElementById('mn').classList.remove('ac');window.scrollTo({top:0,behavior:'smooth'});if(p==='bi')rb();if(p==='co')uc()}
 function tm(){document.getElementById('mn').classList.toggle('ac')}
+
+// ========== CARROUSEL ==========
+function renderCarousel(){const track=document.getElementById('cTrack');track.innerHTML=LV.map(l=>`<div class="carousel-card"><div class="lv"><img src="${l.img}" alt="${l.titre}" class="lvc" loading="lazy"><div class="lvb"><div class="lt"><span class="tg t${l.tag[0]}">${l.tl}</span><span class="tg" style="background:#F5F5F5;color:#666;">${l.la}</span></div><h3 class="lvt">${l.titre}</h3><p class="lva">✍️ ${l.auteur}</p><p class="lvd">${l.res.substring(0,100)}...</p><div class="la" style="flex-wrap:wrap;"><button class="btn bj bs" onclick="ol('${l.id}')">📖 Découvrir</button><button class="btn bs" style="background:var(--nu);color:white;" onclick="ll('${l.id}')">▶ Lire</button><button class="btn bs" style="background:#9E9E9E;color:white;opacity:.7;cursor:not-allowed;" title="Bientôt disponible" onclick="st('Version audio bientôt disponible ! 🎧')">🎧 Écouter</button><button class="btn bs" style="background:#9E9E9E;color:white;opacity:.7;cursor:not-allowed;" title="Bientôt disponible" onclick="st('Dessin animé bientôt disponible ! 🎬')">🎬 Regarder</button><button class="bf ${ef(l.id)?'ac':''}" onclick="tf('${l.id}',this)">${ef(l.id)?'❤️':'🤍'}</button></div></div></div></div>`).join('');renderDots();updateCarousel()}
+function renderDots(){const d=document.getElementById('cDots');d.innerHTML=LV.map((_,i)=>`<button class="carousel-dot ${i===0?'ac':''}" onclick="cGo(${i})"></button>`).join('')}
+function updateCarousel(){const track=document.getElementById('cTrack');const cardWidth=track.children[0]?.offsetWidth||300;track.style.transform=`translateX(-${cIndex*cardWidth}px)`;document.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('ac',i===cIndex))}
+function cNext(){if(cIndex<LV.length-1){cIndex++;updateCarousel()}}
+function cPrev(){if(cIndex>0){cIndex--;updateCarousel()}}
+function cGo(i){cIndex=i;updateCarousel()}
+
+// Touch swipe pour mobile
+let startX=0;
+document.addEventListener('DOMContentLoaded',()=>{const c=document.getElementById('carousel');if(c){c.addEventListener('touchstart',e=>startX=e.touches[0].clientX);c.addEventListener('touchend',e=>{const diff=startX-e.changedTouches[0].clientX;if(Math.abs(diff)>50){diff>0?cNext():cPrev()}})}})
 
 function rl(){const g=document.getElementById('lg');g.innerHTML=LA.map(l=>`<div class="lc ${l.st==='bientot'?'bi':''} ${cu&&cu.langue===l.code?'ac':''}" onclick="${l.st!=='bientot'?`sl('${l.code}')`:''}"><div class="ld">${l.dr}</div><div class="ln">${l.nom}</div><span class="ls s${l.st[0]}">${l.lb}</span></div>`).join('')}
 function sl(c){if(!cu){st('Crée un compte pour sauvegarder ta langue préférée !');sp('co');return}cu.langue=c;su();rl();st('Langue mise à jour !')}
@@ -179,7 +257,8 @@ function ua(){const b=document.getElementById('ab');if(cu){b.textContent='👤 '
 
 function st(m){const t=document.getElementById('to');t.textContent=m;t.classList.add('sh');setTimeout(()=>t.classList.remove('sh'),3000)}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){fm();fl()}});
-document.addEventListener('DOMContentLoaded',()=>{cu2();rl();rc('ca1',4);rc('ca2',4);rb()});
+document.addEventListener('DOMContentLoaded',()=>{cu2();rl();renderCarousel();rc('ca2',4);rb()});
+window.addEventListener('resize',()=>updateCarousel());
 </script>
 </body>
 </html>
