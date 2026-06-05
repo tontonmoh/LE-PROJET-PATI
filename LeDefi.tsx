@@ -7,6 +7,16 @@ export default function LeDefi() {
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [fs, setFs] = useState(false);
 
+  // Config Supabase injectée au build par Netlify (variables d'environnement Vite).
+  // Absente en local => le jeu reste en localStorage. On la transmet à l'iframe au chargement.
+  const SB_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+  const SB_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+  const sendConfig = () => {
+    if (SB_URL && SB_KEY) {
+      frameRef.current?.contentWindow?.postMessage({ type: "pati-config", url: SB_URL, key: SB_KEY }, "*");
+    }
+  };
+
   const enter = () => {
     setFs(true);
     const el = wrapRef.current as (HTMLDivElement & { requestFullscreen?: () => Promise<void> }) | null;
@@ -34,7 +44,7 @@ export default function LeDefi() {
 
   return (
     <div className="bg-[#FFF6E7]">
-      <section className="max-w-6xl mx-auto px-6 pt-10">
+      <section className="max-w-6xl mx-auto px-6 pt-6 sm:pt-10">
         <div className="flex items-center justify-between gap-3 flex-wrap mb-3">
           <div className="flex items-center gap-2">
             <Puzzle className="text-[#0F6E56]" size={26} />
@@ -47,7 +57,7 @@ export default function LeDefi() {
             <Link to="/" className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Accueil</Link>
           </div>
         </div>
-        <p className="text-[#3a4a42] font-semibold mb-5">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
+        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-5">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
@@ -61,6 +71,7 @@ export default function LeDefi() {
         >
           <iframe
             ref={frameRef}
+            onLoad={sendConfig}
             src="/jeux/puzzle-guinee.html"
             title="Le Défi PATI : Construire la Guinée"
             loading="lazy"
