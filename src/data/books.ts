@@ -119,6 +119,22 @@ export const BOOKS: Book[] = [
     cover: "/images/couverture_milo.jpg",
     keywords: ["milo", "delta", "cigare", "kankan", "nature", "ecologie", "riviere"],
   },
+  {
+    slug: "fendani",
+    band: "Passage",
+    title: "Fendani — Le Secret de la Forêt sans Douleur",
+    description: "Mayenie découvre qu'on peut devenir une femme entière et fière par la parole, le chant et le savoir — sans la lame.",
+    cover: "/images/fendani-couverture.webp",
+    keywords: ["fendani", "mayenie", "excision", "rite", "initiation", "dignité", "soussou", "chant", "tradition", "santé", "forêt", "Pati Passage"],
+  },
+  {
+    slug: "secret-cola",
+    band: "Aventure",
+    title: "Le secret magique qui touche les cœurs",
+    description: "Les enfants découvrent la noix de cola : ses vertus, sa valeur sociale et son rôle dans le mariage coutumier malinké.",
+    cover: "/images/cola-couverture.webp",
+    keywords: ["cola", "noix de cola", "colatier", "malinké", "mariage", "woro tan", "générosité", "coca-cola", "fanta", "balla", "tradition", "Pati Aventure"],
+  },
 ];
 
 export const getBook = (slug: string) => BOOKS.find((b) => b.slug === slug);

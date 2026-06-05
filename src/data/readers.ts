@@ -14,6 +14,7 @@ import { BOSSOU_ML } from "./bossou-ml";
 import { KABACK_ML } from "./kaback-ml";
 import { REVER_ML } from "./rever-ml";
 import { FENDANI_ML } from "./fendani-ml";
+import { COLA_ML } from "./cola-ml";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
@@ -74,6 +75,7 @@ export const READERS: Record<string, MLReader> = {
   "kaback": { ...fromLaye(KABACK_ML), accent: "#0E8A8A" },
   "rever-plus-grand": { ...fromLaye(REVER_ML), accent: "#C8841E" },
   "fendani": { ...fromLaye(FENDANI_ML), accent: "#A23B72" },
+  "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
 };
 
 export function readerLabels(slug: string): string {

@@ -127,6 +127,14 @@ export const BOOKS: Book[] = [
     cover: "/images/fendani-couverture.webp",
     keywords: ["fendani", "mayenie", "excision", "rite", "initiation", "dignité", "soussou", "chant", "tradition", "santé", "forêt", "Pati Passage"],
   },
+  {
+    slug: "secret-cola",
+    band: "Aventure",
+    title: "Le secret magique qui touche les cœurs",
+    description: "Les enfants découvrent la noix de cola : ses vertus, sa valeur sociale et son rôle dans le mariage coutumier malinké.",
+    cover: "/images/cola-couverture.webp",
+    keywords: ["cola", "noix de cola", "colatier", "malinké", "mariage", "woro tan", "générosité", "coca-cola", "fanta", "balla", "tradition", "Pati Aventure"],
+  },
 ];
 
 export const getBook = (slug: string) => BOOKS.find((b) => b.slug === slug);
