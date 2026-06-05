@@ -29,7 +29,7 @@ export default function Home() {
               <Sparkles size={16} /> <span><span className="text-[#FF6B4A]">P</span>our <span className="text-[#FF6B4A]">A</span>pprendre, <span className="text-[#FF6B4A]">T</span>ransmettre et <span className="text-[#FF6B4A]">I</span>nnover</span>
             </div>
             <h1 className="text-4xl md:text-5xl text-[#0D2B1A] leading-tight mb-3">
-              <span className="text-[#FF6B4A]">La Guinée est un paradis</span> qui a tout pour t’offrir si tu la connais
+              <span className="text-[#FF6B4A]">La Guinée est un paradis</span> qui a tout à t’offrir si tu la connais
             </h1>
             <p className="text-sm font-display font-semibold text-[#0F6E56] mb-5">
               PATI, la contribution de L’Atelier Solidaire pour le Programme Simandou&nbsp;2040
