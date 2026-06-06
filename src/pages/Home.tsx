@@ -69,7 +69,7 @@ export default function Home() {
                 <Sparkles size={15} /> Nouvelle série
               </div>
               <h3 className="font-display font-bold text-white text-2xl md:text-3xl mb-1">TAA<span style={{ color: "#FFC93C" }}>DIDI</span> — le cycle du rusé</h3>
-              <p className="text-white/80 font-semibold">Une saga en épisodes, lisible en 4 langues. 3 épisodes sont déjà là.</p>
+              <p className="text-white/80 font-semibold">Une saga en épisodes, lisible en 4 langues. Les premiers épisodes sont déjà là.</p>
             </div>
             <span className="btn-kid text-[#0D2B1A] shadow-kid self-start md:self-auto shrink-0" style={{ background: "#FFC93C" }}>Découvrir la série →</span>
           </div>
