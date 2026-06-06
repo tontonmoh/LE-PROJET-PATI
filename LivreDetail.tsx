@@ -183,6 +183,49 @@ export default function LivreDetail() {
               ))}
             </div>
 
+            {projet.hommage && (
+              <div className="mt-6 bg-white rounded-3xl p-5 md:p-6 shadow-kid border-l-4 border-[#3FB6E8]">
+                <h3 className="font-display font-semibold text-[#1f7fa5] text-lg mb-1">{projet.hommage.titre}</h3>
+                <p className="text-[#3a4a42] italic leading-relaxed mb-4">{projet.hommage.memoriam}</p>
+
+                {projet.hommage.oeuvre.map((p, k) => (
+                  <p key={k} className="text-[#3a4a42] leading-relaxed mb-2">{p}</p>
+                ))}
+
+                {projet.hommage.chiffres && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-5">
+                    {projet.hommage.chiffres.map((c, k) => (
+                      <div key={k} className="bg-[#3FB6E8]/10 rounded-2xl px-3 py-3 text-center">
+                        <div className="font-display font-bold text-[#1f7fa5] text-xl leading-none">{c.v}</div>
+                        <div className="text-xs text-[#5a6b62] font-semibold mt-1 leading-snug">{c.l}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {projet.hommage.photos.map((ph, k) => (
+                    <figure key={k} className="m-0">
+                      <img src={ph.img} alt={ph.legende} className="w-full aspect-[3/4] object-cover rounded-xl" />
+                      <figcaption className="text-xs text-[#5a6b62] font-semibold mt-1.5 leading-snug">{ph.legende}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+
+                {projet.hommage.sources && projet.hommage.sources.length > 0 && (
+                  <p className="text-xs text-[#8a9389] font-semibold mt-4">
+                    Source&nbsp;:{" "}
+                    {projet.hommage.sources.map((s, k) => (
+                      <span key={k}>
+                        {k > 0 && " · "}
+                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-[#1f7fa5]">{s.label}</a>
+                      </span>
+                    ))}
+                  </p>
+                )}
+              </div>
+            )}
+
             <div className="mt-6 bg-[#FFC93C]/20 border border-[#FFC93C]/50 rounded-3xl p-5 md:p-6">
               <div className="flex items-center gap-2 font-display font-semibold text-[#633806] text-lg mb-2">
                 <Heart size={18} /> Éthique &amp; transparence
@@ -197,6 +240,7 @@ export default function LivreDetail() {
               <div className="grid sm:grid-cols-3 gap-3">
                 {projet.encadrement.map((e, k) => (
                   <div key={k} className="bg-white rounded-2xl p-4 shadow-kid">
+                    {e.photo && <img src={e.photo} alt={e.nom} className="w-full aspect-square object-cover object-top rounded-xl mb-3" />}
                     <div className="font-display font-semibold text-[#0D2B1A]">{e.nom}</div>
                     <div className="text-sm text-[#5a6b62] font-semibold leading-snug mt-1">{e.role}</div>
                   </div>
@@ -219,9 +263,15 @@ export default function LivreDetail() {
 
             <div className="mt-8">
               <h3 className="font-display font-semibold text-[#0D2B1A] text-xl mb-3">Partenaires</h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {projet.partenaires.map((p, k) => (
-                  <span key={k} className="font-display font-semibold text-sm bg-[#3FB6E8]/15 text-[#1f7fa5] px-4 py-2 rounded-full">{p}</span>
+                  <div key={k} title={p.nom} className="bg-white rounded-2xl p-4 shadow-kid flex items-center justify-center h-24">
+                    {p.logo ? (
+                      <img src={p.logo} alt={p.nom} className="max-h-14 max-w-[85%] object-contain" />
+                    ) : (
+                      <span className="font-display font-semibold text-sm text-[#1f7fa5] text-center">{p.nom}</span>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
