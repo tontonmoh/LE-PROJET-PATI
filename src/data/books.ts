@@ -143,6 +143,14 @@ export const BOOKS: Book[] = [
     cover: "/images/chimpanzes-bossou-couverture.webp",
     keywords: ["chimpanzés", "bossou", "nimba", "lola", "manon", "primates", "outils", "noix de palme", "unesco", "écologie", "documentaire", "Pati Découverte"],
   },
+  {
+    slug: "maitre-ecole",
+    band: "Aventure",
+    title: "Le Maître d'école",
+    description: "D'après Fodéba Keïta : des enfants rejouent un vieux sketch d'école pour la kermesse, et découvrent la chaîne vivante qui relie le chant, l'hymne national et la mémoire.",
+    cover: "/images/maitre-ecole-couverture.webp",
+    keywords: ["Fodéba Keïta", "Ballets Africains", "hymne", "Liberté", "Alpha Yaya Diallo", "Djéli Mamoudou Kandé", "griot", "transmission", "kermesse", "mise en abyme", "Damba", "Pathé", "Néné", "Pati Aventure"],
+  },
 ];
 
 export const getBook = (slug: string) => BOOKS.find((b) => b.slug === slug);

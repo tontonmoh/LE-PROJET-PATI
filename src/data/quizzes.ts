@@ -2,6 +2,16 @@
 export type QuizQ = { q: string; options: string[]; answer: number; fact?: string };
 
 export const QUIZZES: Record<string, QuizQ[]> = {
+  "maitre-ecole": [
+    { q: "Quel vieux livre Damba trouve-t-elle au fond de la malle de la classe ?", options: ["Contes africains", "Poèmes africains", "Chants du Fouta"], answer: 1, fact: "Un titre fatigué au fond de la malle : « Poèmes africains », signé Fodéba Keïta." },
+    { q: "Dans la scène du vieux livre, quels savants les élèves citent-ils ?", options: ["Victor Hugo et Louis Pasteur", "Sékou Touré et Alpha Yaya", "Djéli Mamoudou et Fodéba"], answer: 0 },
+    { q: "Que répond le petit élève à « qu'est-ce qu'un savant ? »", options: ["Victor Hugo", "Le plus grand savant, c'est vous, maître", "Personne ne sait"], answer: 1, fact: "Flatté, le maître ne corrige pas : il se croit le plus grand savant du monde." },
+    { q: "Qu'a créé Fodéba Keïta, qui « danse toujours » à travers le monde ?", options: ["Les Ballets Africains", "Le Musée National", "L'équipe nationale de football"], answer: 0, fact: "Les Ballets Africains, créés par Fodéba Keïta, tournent encore aujourd'hui." },
+    { q: "Quel lien Fodéba Keïta a-t-il avec l'hymne national « Liberté » ?", options: ["Il l'a interdit", "Il a porté et arrangé l'hymne", "Il ne le connaissait pas"], answer: 1, fact: "Celui qui se moque du maître infatué a façonné l'hymne qu'on chante la main sur le cœur." },
+    { q: "D'où vient l'air de l'hymne, de voix en voix ?", options: ["D'une chanson française", "D'un chant de griot du Fouta louant Alpha Yaya Diallo, repris par Djéli Mamoudou Kandé", "D'un livre de Victor Hugo"], answer: 1, fact: "De bouche en bouche : d'un griot à Fodéba, de Fodéba à l'école, et de l'école aux enfants." },
+    { q: "Quelle leçon Pathé comprend-il pendant les répétitions ?", options: ["Qu'il est vraiment le plus grand", "Qu'il faut JOUER le maître infatué sans le DEVENIR", "Qu'il ne veut plus jouer"], answer: 1, fact: "« Je joue un maître qui se croit grand. Je ne deviens pas un maître qui se croit grand. »" },
+    { q: "Quelle idée résume l'histoire ?", options: ["Les livres sont inutiles", "On est tous un maillon d'une chaîne de transmission", "Le chant est interdit à l'école"], answer: 1, fact: "Personne n'est au bout de la chaîne ; rien n'est mort tant que quelqu'un le chante encore." },
+  ],
   "conakry-belle-propre": [
     { q: "Dans quel quartier de Conakry habite Lamine, là où une maison s'est effondrée ?", options: ["Matam", "Dabondy", "Bonfi"], answer: 1, fact: "Lamine Camara, 14 ans, habite Dabondy, au cœur du sinistre : la maison des Soumah." },
     { q: "Quel axe la professeure Kamano remonte-t-elle, trempée, pour rejoindre l'école ?", options: ["Kaloum → Madina", "Matam → Bonfi → Dabondy → le pont de l'aéroport", "Ratoma → Cosa"], answer: 1, fact: "Elle habite Matam et remonte tout l'axe noyé jusqu'à l'école, près de l'Aviation (Gbessia)." },

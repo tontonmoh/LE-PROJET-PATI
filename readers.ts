@@ -16,6 +16,7 @@ import { REVER_ML } from "./rever-ml";
 import { FENDANI_ML } from "./fendani-ml";
 import { COLA_ML } from "./cola-ml";
 import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
+import * as MAITRE_ML from "./maitre-ecole-ml";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
@@ -63,6 +64,25 @@ function fromChateau(rec: any): { langs: string[]; books: Record<string, MLBook>
   return { langs, books };
 }
 
+// Format aligné : { meta:{title,subtitle:Record<lang>}, sections:[{title:Record<lang>, body:Record<lang,string[]>}] }
+function fromAligned(mod: any): { langs: string[]; books: Record<string, MLBook> } {
+  const labels: Record<string, string> = { fr: "Français", en: "English", ar: "العربية", zh: "中文" };
+  const books: Record<string, MLBook> = {};
+  const langs: string[] = [];
+  for (const code of LANG_ORDER) {
+    if (!mod.meta?.title?.[code]) continue;
+    langs.push(code);
+    books[code] = {
+      dir: code === "ar" ? "rtl" : "ltr",
+      label: labels[code] || code,
+      title: mod.meta.title[code],
+      subtitle: mod.meta.subtitle?.[code],
+      sections: (mod.sections || []).map((s: any) => ({ title: s.title[code], paragraphs: s.body[code] })),
+    };
+  }
+  return { langs, books };
+}
+
 export const READERS: Record<string, MLReader> = {
   "chateau-eau": { ...fromChateau(CHATEAU), accent: "#3FB6E8" },
   "laye-kouroussa": { ...fromLaye(LAYE_ML), accent: "#0F6E56" },
@@ -79,6 +99,7 @@ export const READERS: Record<string, MLReader> = {
   "fendani": { ...fromLaye(FENDANI_ML), accent: "#A23B72" },
   "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
   "chimpanzes-bossou": { ...fromLaye(CHIMPO_ML), accent: "#3F7D5A" },
+  "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
 };
 
 // Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"
