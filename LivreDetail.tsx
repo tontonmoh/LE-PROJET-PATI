@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { READERS, readerLabels } from "../data/readers";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, BookOpen, Headphones, Sparkles, PlayCircle, ShoppingBag, GraduationCap } from "lucide-react";
+import { ArrowLeft, BookOpen, Headphones, Sparkles, PlayCircle, ShoppingBag, GraduationCap, Users, Heart } from "lucide-react";
 import { getBook } from "../data/books";
 import { getCredits } from "../data/credits";
 import { track } from "../lib/track";
 import { getLivret } from "../data/fendani-livret";
+import { getProjet } from "../data/chateau-projet";
 import { SOCIAL } from "../data/site";
 
 export default function LivreDetail() {
   const { id } = useParams();
-  const [tab, setTab] = useState<"presentation" | "livret">("presentation");
+  const [tab, setTab] = useState<"presentation" | "livret" | "projet">("presentation");
   const book = getBook(id || "");
 
   if (!book) {
@@ -26,7 +27,9 @@ export default function LivreDetail() {
 
   const youtubeId = book.teaser?.split("/").pop()?.split("?")[0];
   const livret = getLivret(book.slug);
+  const projet = getProjet(book.slug);
   const credits = getCredits(book.slug);
+  const hasTabs = !!livret || !!projet;
 
   return (
     <section className="bg-[#FFF6E7]">
@@ -35,18 +38,25 @@ export default function LivreDetail() {
           <ArrowLeft size={18} /> Tous les livres
         </Link>
 
-        {livret && (
+        {hasTabs && (
           <div className="flex flex-wrap gap-2 mb-6">
             <button onClick={() => setTab("presentation")} className={`btn-kid text-sm py-2.5 px-5 ${tab === "presentation" ? "bg-[#0F6E56] text-white shadow-kid" : "bg-white text-[#0F6E56]"}`}>
               <BookOpen size={16} /> Présentation
             </button>
-            <button onClick={() => setTab("livret")} className={`btn-kid text-sm py-2.5 px-5 ${tab === "livret" ? "bg-[#A23B72] text-white shadow-kid" : "bg-white text-[#A23B72]"}`}>
-              <GraduationCap size={16} /> Livret pédagogique
-            </button>
+            {livret && (
+              <button onClick={() => setTab("livret")} className={`btn-kid text-sm py-2.5 px-5 ${tab === "livret" ? "bg-[#A23B72] text-white shadow-kid" : "bg-white text-[#A23B72]"}`}>
+                <GraduationCap size={16} /> Livret pédagogique
+              </button>
+            )}
+            {projet && (
+              <button onClick={() => setTab("projet")} className={`btn-kid text-sm py-2.5 px-5 ${tab === "projet" ? "bg-[#3FB6E8] text-white shadow-kid" : "bg-white text-[#1f7fa5]"}`}>
+                <Users size={16} /> Le projet
+              </button>
+            )}
           </div>
         )}
 
-        {(!livret || tab === "presentation") && (<>
+        {(!hasTabs || tab === "presentation") && (<>
         <div className="grid md:grid-cols-[300px_1fr] gap-8 md:gap-10 items-start">
           <div className="rounded-[1.75rem] overflow-hidden border-8 border-white shadow-kid bg-[#0F6E56]/5 mx-auto md:mx-0 max-w-[300px]">
             <img src={book.cover} alt={book.title} className="w-full object-cover" />
@@ -152,6 +162,68 @@ export default function LivreDetail() {
                   ))}
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+        {projet && tab === "projet" && (
+          <div className="max-w-3xl">
+            <h2 className="text-2xl md:text-3xl text-[#0D2B1A] mb-1">{projet.title}</h2>
+            {projet.intro.map((p, k) => (
+              <p key={k} className="text-[#3a4a42] font-semibold leading-relaxed mb-2">{p}</p>
+            ))}
+
+            <div className="space-y-5 mt-6">
+              {projet.sections.map((s, k) => (
+                <div key={k} className="bg-white rounded-3xl p-5 md:p-6 shadow-kid">
+                  <h3 className="font-display font-semibold text-[#1f7fa5] text-lg mb-2">{s.title}</h3>
+                  {s.paragraphs.map((p, j) => (
+                    <p key={j} className="text-[#3a4a42] leading-relaxed mb-2 last:mb-0">{p}</p>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 bg-[#FFC93C]/20 border border-[#FFC93C]/50 rounded-3xl p-5 md:p-6">
+              <div className="flex items-center gap-2 font-display font-semibold text-[#633806] text-lg mb-2">
+                <Heart size={18} /> Éthique &amp; transparence
+              </div>
+              {projet.ethique.map((p, k) => (
+                <p key={k} className="text-[#5a4a1a] font-semibold leading-relaxed mb-2 last:mb-0">{p}</p>
+              ))}
+            </div>
+
+            <div className="mt-8">
+              <h3 className="font-display font-semibold text-[#0D2B1A] text-xl mb-3">Sous la supervision de</h3>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {projet.encadrement.map((e, k) => (
+                  <div key={k} className="bg-white rounded-2xl p-4 shadow-kid">
+                    <div className="font-display font-semibold text-[#0D2B1A]">{e.nom}</div>
+                    <div className="text-sm text-[#5a6b62] font-semibold leading-snug mt-1">{e.role}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <h3 className="font-display font-semibold text-[#0D2B1A] text-xl mb-1">Les enfants auteurs</h3>
+              <p className="text-sm text-[#5a6b62] font-semibold mb-3">Trente enfants, cinq équipes, plusieurs écoles de Conakry.</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                {projet.enfants.map((c, k) => (
+                  <div key={k} className="bg-white rounded-2xl px-4 py-3 shadow-kid">
+                    <div className="font-display font-semibold text-[#0D2B1A] text-sm leading-tight">{c.nom}</div>
+                    <div className="text-xs text-[#8a9389] font-semibold mt-0.5">{c.ecole}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <h3 className="font-display font-semibold text-[#0D2B1A] text-xl mb-3">Partenaires</h3>
+              <div className="flex flex-wrap gap-2">
+                {projet.partenaires.map((p, k) => (
+                  <span key={k} className="font-display font-semibold text-sm bg-[#3FB6E8]/15 text-[#1f7fa5] px-4 py-2 rounded-full">{p}</span>
+                ))}
+              </div>
             </div>
           </div>
         )}

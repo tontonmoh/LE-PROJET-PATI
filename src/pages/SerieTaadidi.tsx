@@ -117,8 +117,10 @@ export default function SerieTaadidi() {
             </div>
           </div>
             </div>
-            <div className="mx-auto md:mx-0">
-              <img src={TAADIDI.cover} alt="Couverture de la série Taadidi" className="w-full max-w-[260px] md:max-w-[300px] rounded-[1.5rem] shadow-kid border-4 border-white/10" />
+            <div className="mx-auto md:mx-0 w-full max-w-[280px] md:max-w-[320px]">
+              <div className="rounded-2xl overflow-hidden border border-[#FFC93C]/30 ring-1 ring-black/30" style={{ boxShadow: "0 28px 55px -12px rgba(0,0,0,0.65)" }}>
+                <img src={TAADIDI.cover} alt="Affiche de la série Taadidi" className="w-full block" />
+              </div>
             </div>
           </div>
         </div>
