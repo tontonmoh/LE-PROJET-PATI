@@ -1,4 +1,4 @@
-// « Fendani — Le Secret de la Forêt sans Douleur » — Une histoire de Fatoumata Yarie Cissé.
+// « Fendani — Le Secret de la Forêt sans Douleur » — Une histoire de Fatoumata Diaraye Cissé.
 // Collection Pati · L'Atelier Solidaire — Pati Passage (13–15 ans).
 // Aborde l'excision par une approche culturelle : remplacer la lame par la parole, le chant et le savoir.
 // Chants soussou + traductions conservés intacts (consigne autrice).
@@ -93,8 +93,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Parce que la culture est un arbre. Elle a besoin de racines profondes et de branches qui s'ouvrent vers le ciel. Elle peut se transformer sans mourir. Elle peut transmettre sans blesser.",
         "« Fendani : parce que la culture est une richesse qui se transmet par la parole, pas par le sang. »",
         "Mayenie a treize ans, et une question qui ne la lâche pas : peut-on appartenir aux siens sans passer par le couteau ?",
-        "Une nuit, dans la cour de son école, les anciennes allument un feu. Elles ne tiennent pas de lame, ce soir — seulement des chants, de l'eau de purification et la mémoire d'un rite plus vieux que la douleur. Le secret de la forêt, Mayenie va l'apprendre autrement.",
-        "Une histoire de Fatoumata Yarie Cissé — Collection Pati · L'Atelier Solidaire." ] },
+        "Une nuit, dans la cour de son école, les anciennes allument un feu. Elles ne tiennent pas de lame, ce soir — seulement des chants, de l'eau de purification et la mémoire d'un rite plus vieux que la douleur. Le secret de la forêt, Mayenie va l'apprendre autrement." ] },
     ],
   },
 
@@ -177,8 +176,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Because culture is a tree. It needs deep roots and branches that open toward the sky. It can transform without dying. It can pass on without wounding.",
         "“Fendani: because culture is a wealth passed on through the word, not through blood.”",
         "Mayenie is thirteen, with a question that will not let her go: can one belong to one's people without going through the blade?",
-        "One night, in her school's courtyard, the elder women light a fire. They hold no blade tonight — only songs, purifying water and the memory of a rite older than pain. The secret of the forest, Mayenie will learn it another way.",
-        "A story by Fatoumata Yarie Cissé — Collection Pati · L'Atelier Solidaire." ] },
+        "One night, in her school's courtyard, the elder women light a fire. They hold no blade tonight — only songs, purifying water and the memory of a rite older than pain. The secret of the forest, Mayenie will learn it another way." ] },
     ],
   },
 
@@ -261,8 +259,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "لأنّ الثقافة شجرة. تحتاج إلى جذورٍ عميقة وأغصانٍ تنفتح نحو السماء. يمكنها أن تتحوّل دون أن تموت. ويمكنها أن تنقل دون أن تجرح.",
         "«فينداني: لأنّ الثقافة ثروة تُنقَل بالكلمة، لا بالدم.»",
         "مايني في الثالثة عشرة، ويلازمها سؤالٌ لا يتركها: هل يمكن أن ينتمي المرء إلى أهله دون المرور بالنصل؟",
-        "ذات ليلة، في فناء مدرستها، تُوقد المُسنّات نارًا. لا يحملن نصلًا هذه الليلة — أناشيد فقط، وماء تطهير، وذاكرة طقسٍ أقدم من الألم. سرّ الغابة، ستتعلّمه مايني بطريقةٍ أخرى.",
-        "قصّة بقلم فاتوماتا ياري سيسي — مجموعة باتي · لاتولييه سوليدير." ] },
+        "ذات ليلة، في فناء مدرستها، تُوقد المُسنّات نارًا. لا يحملن نصلًا هذه الليلة — أناشيد فقط، وماء تطهير، وذاكرة طقسٍ أقدم من الألم. سرّ الغابة، ستتعلّمه مايني بطريقةٍ أخرى." ] },
     ],
   },
 
@@ -345,8 +342,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "因为文化是一棵树。它需要深扎的根，也需要向天空舒展的枝。它能蜕变而不死亡。它能传承而不伤人。",
         "「芬达尼：因为文化是一份以言语、而非以血来传递的财富。」",
         "马耶妮十三岁，有一个挥之不去的问题：人能否不经过刀，就归属于自己的族人？",
-        "一个夜晚，在她学校的院子里，老人家们点起一堆火。今夜她们手中没有刀——只有歌声、净身的水，以及一段比痛苦更古老的仪式记忆。森林的秘密，马耶妮将以另一种方式学会。",
-        "一个由法图玛塔·雅丽·西塞讲述的故事 — 巴提文集 · 团结工坊。" ] },
+        "一个夜晚，在她学校的院子里，老人家们点起一堆火。今夜她们手中没有刀——只有歌声、净身的水，以及一段比痛苦更古老的仪式记忆。森林的秘密，马耶妮将以另一种方式学会。" ] },
     ],
   },
 };

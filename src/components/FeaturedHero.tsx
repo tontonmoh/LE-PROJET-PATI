@@ -5,7 +5,7 @@ import { SOCIAL } from "../data/site";
 import { BOOKS, getBook } from "../data/books";
 import { getBlurb } from "../data/blurbs";
 import { READERS } from "../data/readers";
-import { inProgressSlugs, isDone, getProgress, lastHero, setLastHero, hasHistory } from "../lib/reading";
+import { inProgressSlugs, isDone, getProgress, lastHero, setLastHero } from "../lib/reading";
 
 const CONTEUSE = "/images/pati-conteuse.webp";
 
@@ -34,10 +34,8 @@ function choose(): Feat {
   const bookResume = prog.find((s) => readable.some((b) => b.slug === s));
   if (bookResume) return { kind: "resume-book", slug: bookResume };
 
-  // 2) Tout premier visiteur (rien en mémoire) -> accroche de marque
-  if (!hasHistory()) return { kind: "brand" };
-
-  // 3) Tirage parmi les non-lus + les séries (priorité nouveautés), en évitant le dernier montré
+  // 2) Mise en avant dès l'arrivée : tirage parmi les non-lus + les séries
+  //    (priorité aux nouveautés), en évitant le dernier titre montré
   const unread = readable.filter((b) => !isDone(b.slug));
   const base = unread.length ? unread : readable;
   const novs = base.filter((b) => b.nouveau);

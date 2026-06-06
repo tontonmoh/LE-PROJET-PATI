@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BookOpen, Layers, User, ArrowDownAZ } from "lucide-react";
 import { BOOKS } from "../data/books";
+import { SERIES } from "../data/series";
 import { getCredits } from "../data/credits";
 import BookGrid from "../components/BookGrid";
 
@@ -12,27 +13,37 @@ const BANDS = [
 ];
 
 type Mode = "age" | "auteur" | "az";
-
 const MODES: { key: Mode; label: string; icon: typeof Layers }[] = [
   { key: "age", label: "Par âge", icon: Layers },
   { key: "auteur", label: "Par auteur", icon: User },
   { key: "az", label: "A–Z", icon: ArrowDownAZ },
 ];
 
+type Card = {
+  slug: string; title: string; description: string; cover: string;
+  comingSoon?: boolean; kind?: "book" | "serie"; to?: string;
+  episodes?: { total: number; live: number };
+};
+
+const bookCard = (b: (typeof BOOKS)[number]): Card => ({
+  slug: b.slug, title: b.title, description: b.description, cover: b.cover, comingSoon: b.comingSoon,
+});
+const serieCard = (s: (typeof SERIES)[number]): Card => ({
+  slug: s.slug, title: s.title, description: s.description, cover: s.cover,
+  kind: "serie", to: s.to, episodes: s.episodes,
+});
+
 export default function Catalogue() {
   const [mode, setMode] = useState<Mode>("age");
 
-  // Groupes par auteur (auteur principal = avant " et " / ", ")
   const byAuthor = () => {
-    const groups: Record<string, typeof BOOKS> = {};
-    for (const b of BOOKS) {
-      const a = getCredits(b.slug).auteur || "—";
-      (groups[a] ||= []).push(b);
-    }
+    const groups: Record<string, Card[]> = {};
+    for (const b of BOOKS) (groups[getCredits(b.slug).auteur || "—"] ||= []).push(bookCard(b));
+    for (const s of SERIES) (groups[s.auteur || "—"] ||= []).push(serieCard(s));
     return Object.entries(groups).sort((a, b) => a[0].localeCompare(b[0], "fr"));
   };
 
-  const azList = [...BOOKS].sort((a, b) => a.title.localeCompare(b.title, "fr"));
+  const azList: Card[] = [...BOOKS.map(bookCard), ...SERIES.map(serieCard)].sort((a, b) => a.title.localeCompare(b.title, "fr"));
 
   return (
     <div className="bg-[#FFF6E7] min-h-[60vh]">
@@ -53,7 +64,10 @@ export default function Catalogue() {
         </div>
 
         {mode === "age" && BANDS.map((band) => {
-          const list = BOOKS.filter((b) => b.band === band.key);
+          const list: Card[] = [
+            ...BOOKS.filter((b) => b.band === band.key).map(bookCard),
+            ...SERIES.filter((s) => s.band === band.key).map(serieCard),
+          ];
           if (!list.length) return null;
           return (
             <div key={band.key} className="mb-10">

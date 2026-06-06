@@ -7,7 +7,7 @@ export type Livret = { title: string; subtitle?: string; sections: LivretSection
 export const LIVRETS: Record<string, Livret> = {
   fendani: {
     title: "Livret d'accompagnement pédagogique",
-    subtitle: "Pour les éducateurs, parents et animatrices — en accompagnement du conte « Le Secret de la Forêt sans Douleur » de Fatoumata Yarie Cissé.",
+    subtitle: "Pour les éducateurs, parents et animatrices — en accompagnement du conte « Le Secret de la Forêt sans Douleur » de Fatoumata Diaraye Cissé.",
     sections: [
       { title: "À propos de ce livret", paragraphs: [
         "Ce livret accompagne le conte Le Secret de la Forêt sans Douleur. Le conte se lit seul ; ce livret est destiné aux adultes qui le portent : enseignantes, parents, animatrices de centres communautaires et de camps Fendani.",
