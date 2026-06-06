@@ -17,6 +17,7 @@ import { FENDANI_ML } from "./fendani-ml";
 import { COLA_ML } from "./cola-ml";
 import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
+import g2040Tome0 from "./g2040-tome0";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
@@ -83,6 +84,28 @@ function fromAligned(mod: any): { langs: string[]; books: Record<string, MLBook>
   return { langs, books };
 }
 
+// Format Génération 2040 : { titre:Record<lang>, sections:[{voix, fr,en,ar,zh}] }
+// (chaque langue = un bloc, paragraphes séparés par des doubles sauts de ligne ; pas de titre de section)
+function fromG2040(livre: any): { langs: string[]; books: Record<string, MLBook> } {
+  const labels: Record<string, string> = { fr: "Français", en: "English", ar: "العربية", zh: "中文" };
+  const books: Record<string, MLBook> = {};
+  const langs: string[] = [];
+  for (const code of LANG_ORDER) {
+    if (!livre.titre?.[code]) continue;
+    langs.push(code);
+    books[code] = {
+      dir: code === "ar" ? "rtl" : "ltr",
+      label: labels[code] || code,
+      title: livre.titre[code],
+      sections: (livre.sections || []).map((s: any) => ({
+        title: "",
+        paragraphs: String(s[code] || "").split(/\n\n+/).map((p: string) => p.trim()).filter(Boolean),
+      })),
+    };
+  }
+  return { langs, books };
+}
+
 export const READERS: Record<string, MLReader> = {
   "chateau-eau": { ...fromChateau(CHATEAU), accent: "#3FB6E8" },
   "laye-kouroussa": { ...fromLaye(LAYE_ML), accent: "#0F6E56" },
@@ -100,6 +123,7 @@ export const READERS: Record<string, MLReader> = {
   "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
   "chimpanzes-bossou": { ...fromLaye(CHIMPO_ML), accent: "#3F7D5A" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
+  "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
 };
 
 // Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"

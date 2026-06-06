@@ -7,6 +7,30 @@ export type Lang = "fr" | "en" | "ar" | "zh";
 export type Blurb = { tagline: Record<Lang, string>; blurb: Record<Lang, string[]> };
 
 const BLURBS: Record<string, Blurb> = {
+  "g2040-tome0": {
+    tagline: {
+      fr: "Le jour où une classe de Boffa découvre qu'elle connaît le monde entier — sauf son propre pays.",
+      en: "The day a classroom in Boffa realizes it knows the whole world — except its own country.",
+      ar: "اليوم الذي يكتشف فيه صفٌّ في بوفا أنه يعرف العالم كلّه… إلا بلده.",
+      zh: "在博法，一个班级发现自己认识全世界——唯独不了解自己的国家。",
+    },
+    blurb: {
+      fr: [
+        "À Boffa, dans une classe ordinaire aux bancs fatigués, le professeur n'est pas venu ce matin. Les élèves révisent seuls — jusqu'à ce qu'une visite inattendue change la journée.",
+        "Ils savent réciter l'Asie et les Amériques par cœur. Mais quand on leur demande de parler de la Guinée, de Boffa, de Simandou… le silence tombe. Et si c'était à eux d'apprendre, puis de raconter, le pays de demain ?",
+        "De ce matin-là naît un grand concours national des écoles — et la série Génération 2040.",
+        "Parce que le changement, le plus grand, commence toujours sur les bancs de l'école.",
+      ],
+      en: [
+        "In Boffa, in an ordinary classroom with worn-out benches, the teacher hasn't come this morning. The pupils revise on their own — until an unexpected visit turns the day around.",
+        "They can recite Asia and the Americas by heart. But when asked to speak about Guinea, about Boffa, about Simandou… silence falls. What if it were up to them to learn, and then to tell, the country of tomorrow?",
+        "Out of that morning a great national schools' contest is born — and with it the Génération 2040 series.",
+        "Because the greatest change always begins on the benches of a school.",
+      ],
+      ar: [],
+      zh: [],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",

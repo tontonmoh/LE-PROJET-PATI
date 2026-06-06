@@ -5,6 +5,7 @@ import { READERS } from "../data/readers";
 import { getBlurb } from "../data/blurbs";
 import { getBook } from "../data/books";
 import { track } from "../lib/track";
+import { recordProgress, resumePage } from "../lib/reading";
 import { TAADIDI } from "../data/series/taadidi";
 
 export default function BookReaderML() {
@@ -31,9 +32,12 @@ export default function BookReaderML() {
   // Sécurité : si on change de langue et que l'index dépasse, on borne
   useEffect(() => { if (i > total - 1) setI(total - 1); }, [lang, total, i]);
   // Événement + retour à la couverture quand on change de livre / épisode
-  useEffect(() => { setI(-1); if (reader) track("livre_ouvert", { livre: id }); }, [id]);
+  // Reprise : on ré-ouvre à la dernière page non terminée (sinon couverture)
+  useEffect(() => { setI(resumePage(id || "")); if (reader) track("livre_ouvert", { livre: id }); }, [id]);
   // Remonter en haut à chaque page
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [i]);
+  // Mémoriser la progression locale (dernière page atteinte = livre lu)
+  useEffect(() => { if (i >= 0 && total > 0) recordProgress(id || "", i, total); }, [i, total, id]);
 
   const go = useCallback((d: number) => {
     setI((prev) => Math.max(-1, Math.min(total - 1, prev + d)));
@@ -111,7 +115,7 @@ export default function BookReaderML() {
                 const img = reader.books.fr?.sections[i]?.image || reader.books[reader.langs[0]]?.sections[i]?.image;
                 return img ? <img src={img} alt={scene!.title} loading="lazy" className="w-full rounded-2xl mb-6 shadow-sm" /> : null;
               })()}
-              <h2 className={`font-display font-bold text-2xl md:text-3xl mb-6 ${rtl ? "text-right" : ""}`} style={{ color: accent }}>{scene!.title}</h2>
+              {scene!.title && <h2 className={`font-display font-bold text-2xl md:text-3xl mb-6 ${rtl ? "text-right" : ""}`} style={{ color: accent }}>{scene!.title}</h2>}
               <div className={`${readerClass} ${lang === "fr" || lang === "en" ? "reader-drop" : ""}`} style={{ ["--accent" as any]: accent }}>
                 {scene!.paragraphs.map((p, k) => <p key={k}>{p}</p>)}
               </div>
