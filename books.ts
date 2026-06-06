@@ -135,6 +135,14 @@ export const BOOKS: Book[] = [
     cover: "/images/cola-couverture.webp",
     keywords: ["cola", "noix de cola", "colatier", "malinké", "mariage", "woro tan", "générosité", "coca-cola", "fanta", "balla", "tradition", "Pati Aventure"],
   },
+  {
+    slug: "chimpanzes-bossou",
+    band: "Découverte",
+    title: "Les Chimpanzés de Bossou",
+    description: "Un documentaire pour les 7–9 ans : à la rencontre des chimpanzés sacrés de Bossou, près du mont Nimba.",
+    cover: "/images/chimpanzes-bossou-couverture.webp",
+    keywords: ["chimpanzés", "bossou", "nimba", "lola", "manon", "primates", "outils", "noix de palme", "unesco", "écologie", "documentaire", "Pati Découverte"],
+  },
 ];
 
 export const getBook = (slug: string) => BOOKS.find((b) => b.slug === slug);
