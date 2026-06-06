@@ -17,6 +17,8 @@ export type Book = {
   keywords: string[];
   band?: "Mômes" | "Découverte" | "Aventure" | "Passage";
   comingSoon?: boolean;
+  nouveau?: boolean; // mis en avant comme nouveauté (héros dynamique)
+  heroArt?: string; // illustration paysage SANS titre, pour le fond du héros
 };
 
 export const BOOKS: Book[] = [
@@ -134,6 +136,7 @@ export const BOOKS: Book[] = [
     description: "Les enfants découvrent la noix de cola : ses vertus, sa valeur sociale et son rôle dans le mariage coutumier malinké.",
     cover: "/images/cola-couverture.webp",
     keywords: ["cola", "noix de cola", "colatier", "malinké", "mariage", "woro tan", "générosité", "coca-cola", "fanta", "balla", "tradition", "Pati Aventure"],
+    nouveau: true,
   },
   {
     slug: "chimpanzes-bossou",
@@ -142,6 +145,7 @@ export const BOOKS: Book[] = [
     description: "Un documentaire pour les 7–9 ans : à la rencontre des chimpanzés sacrés de Bossou, près du mont Nimba.",
     cover: "/images/chimpanzes-bossou-couverture.webp",
     keywords: ["chimpanzés", "bossou", "nimba", "lola", "manon", "primates", "outils", "noix de palme", "unesco", "écologie", "documentaire", "Pati Découverte"],
+    nouveau: true,
   },
   {
     slug: "maitre-ecole",
@@ -150,6 +154,7 @@ export const BOOKS: Book[] = [
     description: "D'après Fodéba Keïta : des enfants rejouent un vieux sketch d'école pour la kermesse, et découvrent la chaîne vivante qui relie le chant, l'hymne national et la mémoire.",
     cover: "/images/maitre-ecole-couverture.webp",
     keywords: ["Fodéba Keïta", "Ballets Africains", "hymne", "Liberté", "Alpha Yaya Diallo", "Djéli Mamoudou Kandé", "griot", "transmission", "kermesse", "mise en abyme", "Damba", "Pathé", "Néné", "Pati Aventure"],
+    nouveau: true,
   },
 ];
 
