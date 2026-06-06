@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, BookOpen, Hourglass, Bell, Check, Sparkles } from "lucide-react";
 import { TAADIDI } from "../data/series/taadidi";
+import { track } from "../lib/track";
 
 const GREEN = "#0D2B1A";
 const GOLD = "#FFC93C";
@@ -37,6 +38,7 @@ function NotifyForm() {
     if (!valid || status === "sending") return;
     setStatus("sending");
     await notify(email.trim());
+    track("taadidi_notify");
     setStatus("done");
   };
 

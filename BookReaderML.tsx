@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Sparkles, Music } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Sparkles, Music, Hourglass } from "lucide-react";
 import { READERS } from "../data/readers";
 import { getBook } from "../data/books";
+import { track } from "../lib/track";
+import { TAADIDI } from "../data/series/taadidi";
 
 export default function BookReaderML() {
   const { id } = useParams();
@@ -25,6 +27,8 @@ export default function BookReaderML() {
 
   // Sécurité : si on change de langue et que l'index dépasse, on borne
   useEffect(() => { if (i > total - 1) setI(total - 1); }, [lang, total, i]);
+  // Événement + retour à la couverture quand on change de livre / épisode
+  useEffect(() => { setI(-1); if (reader) track("livre_ouvert", { livre: id }); }, [id]);
   // Remonter en haut à chaque page
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [i]);
 
@@ -121,9 +125,19 @@ export default function BookReaderML() {
             <button onClick={() => go(1)} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>
               {cover ? "Commencer" : "Suivant"} <ChevronRight size={18} />
             </button>
-          ) : isSerie ? (
-            <Link to="/serie/taadidi" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
-          ) : (
+          ) : isSerie ? (() => {
+            const num = parseInt((id || "").replace("taadidi-", ""), 10);
+            const next = num + 1;
+            if (READERS["taadidi-" + next]) return (
+              <Link to={`/livre/taadidi-${next}/lire`} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>Continuer · Épisode {next} <ChevronRight size={18} /></Link>
+            );
+            if (TAADIDI.episodes.some((e) => e.numero === next)) return (
+              <Link to="/serie/taadidi" className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-6"><Hourglass size={16} /> Bientôt · Épisode {next}</Link>
+            );
+            return (
+              <Link to="/serie/taadidi" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
+            );
+          })() : (
             <Link to={`/livre/${id}/quiz`} className="btn-kid bg-[#0F6E56] text-white text-sm py-2.5 px-6"><Sparkles size={16} /> Quiz</Link>
           )}
         </div>

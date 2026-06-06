@@ -3,6 +3,8 @@ import { READERS, readerLabels } from "../data/readers";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, BookOpen, Headphones, Sparkles, PlayCircle, ShoppingBag, GraduationCap } from "lucide-react";
 import { getBook } from "../data/books";
+import { getCredits } from "../data/credits";
+import { track } from "../lib/track";
 import { getLivret } from "../data/fendani-livret";
 import { SOCIAL } from "../data/site";
 
@@ -24,6 +26,7 @@ export default function LivreDetail() {
 
   const youtubeId = book.teaser?.split("/").pop()?.split("?")[0];
   const livret = getLivret(book.slug);
+  const credits = getCredits(book.slug);
 
   return (
     <section className="bg-[#FFF6E7]">
@@ -51,7 +54,14 @@ export default function LivreDetail() {
 
           <div>
             <h1 className="text-3xl md:text-4xl text-[#0D2B1A] mb-3">{book.title}</h1>
-            <p className="text-lg text-[#3a4a42] font-semibold mb-6 leading-relaxed">{book.description}</p>
+            <p className="text-lg text-[#3a4a42] font-semibold mb-4 leading-relaxed">{book.description}</p>
+
+            <div className="mb-6 text-sm text-[#5a6b62] font-semibold flex flex-wrap gap-x-4 gap-y-1">
+              <span>Auteur&nbsp;: {credits.auteur}</span>
+              {credits.illustrateur && <span>Illustrateur&nbsp;: {credits.illustrateur}</span>}
+              {credits.musique && <span>Musique&nbsp;: {credits.musique}</span>}
+              {credits.voix && <span>Voix&nbsp;: {credits.voix}</span>}
+            </div>
 
             {book.comingSoon ? (
               <span className="inline-block font-display font-semibold text-[#633806] bg-[#FFC93C]/40 px-4 py-2 rounded-full">
@@ -72,7 +82,7 @@ export default function LivreDetail() {
                   <Link to={`/livre/${book.slug}/quiz`} className="btn-kid bg-[#FFC93C] text-[#0D2B1A]">
                     <Sparkles size={18} /> Faire le quiz
                   </Link>
-                  <a href={`${SOCIAL.whatsapp}?text=${encodeURIComponent(`Bonjour, je souhaite commander le livre physique « ${book.title} » (30 000 FG).`)}`} target="_blank" rel="noopener noreferrer" className="btn-kid bg-[#0F6E56] text-white">
+                  <a href={`${SOCIAL.whatsapp}?text=${encodeURIComponent(`Bonjour, je souhaite commander le livre physique « ${book.title} » (30 000 FG).`)}`} target="_blank" rel="noopener noreferrer" onClick={() => track("achat_whatsapp", { livre: book.slug })} className="btn-kid bg-[#0F6E56] text-white">
                     <ShoppingBag size={18} /> Acheter ce livre · 30 000 FG
                   </a>
                 </div>
