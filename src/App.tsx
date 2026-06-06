@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
 import Stub from "./pages/Stub";
 import Home from "./pages/Home";
@@ -8,6 +9,7 @@ import BookReader from "./pages/BookReader";
 import BookQuiz from "./pages/BookQuiz";
 import BookReaderML from "./pages/BookReaderML";
 import SerieTaadidi from "./pages/SerieTaadidi";
+import SerieG2040 from "./pages/SerieG2040";
 import Catalogue from "./pages/Catalogue";
 import AudioBibliotheque from "./pages/AudioBibliotheque";
 import DecouvrirTonGenie from "./pages/DecouvrirTonGenie";
@@ -35,6 +37,14 @@ import SimplePage from "./pages/SimplePage";
 const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays"];
 
 export default function App() {
+  const location = useLocation();
+  useEffect(() => {
+    const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+    if (typeof w.gtag === "function") {
+      w.gtag("config", "G-2WN3FSBH14", { page_path: location.pathname + location.search });
+    }
+  }, [location]);
+
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -48,6 +58,7 @@ export default function App() {
         <Route path="/livre/:id/texte" element={<BookReader />} />
         <Route path="/livre/:id/quiz" element={<BookQuiz />} />
         <Route path="/serie/taadidi" element={<SerieTaadidi />} />
+        <Route path="/serie/generation-2040" element={<SerieG2040 />} />
         <Route path="/audio" element={<AudioBibliotheque />} />
         <Route path="/audio/:id" element={<AudioBibliotheque />} />
 

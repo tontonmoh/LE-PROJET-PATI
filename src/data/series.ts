@@ -15,6 +15,16 @@ export type SeriesItem = {
 
 export const SERIES: SeriesItem[] = [
   {
+    slug: "generation-2040",
+    title: "Génération 2040",
+    description: "Le jour où une classe de Boffa découvre qu'elle connaît le monde entier — sauf son propre pays.",
+    cover: "/images/g2040-tome0-couverture.webp",
+    band: "Aventure",
+    to: "/serie/generation-2040",
+    auteur: "Mohamed Doumbouya",
+    episodes: { total: 12, live: 1 },
+  },
+  {
     slug: TAADIDI.id,
     title: TAADIDI.titre,
     description: TAADIDI.pitch,

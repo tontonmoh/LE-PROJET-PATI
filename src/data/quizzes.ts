@@ -2,6 +2,16 @@
 export type QuizQ = { q: string; options: string[]; answer: number; fact?: string };
 
 export const QUIZZES: Record<string, QuizQ[]> = {
+  "g2040-tome0": [
+    { q: "Pourquoi le Président veut-il faire son discours dans une salle de classe ?", options: ["Parce que c'est moins cher", "Parce que le changement commence sur les bancs de l'école", "Parce qu'il n'y avait aucun autre endroit"], answer: 1, fact: "Il refuse l'hôtel et la plage : « Le changement commence toujours sur les bancs de l'école. »" },
+    { q: "Comment le Président arrive-t-il à l'école ?", options: ["En grand costume, entouré de gardes", "Simplement, en polo, avec une sécurité réduite", "En hélicoptère sur la cour"], answer: 1, fact: "Vêtu d'un simple polo, sans lunettes, pour ne pas briser la magie du moment." },
+    { q: "Que les élèves savent-ils parfaitement réciter ?", options: ["La Guinée et Boffa", "L'Asie et les Amériques", "Le Programme Simandou 2040"], answer: 1, fact: "Mbalia récite l'Asie, Tchotcho les Amériques — la leçon est bien apprise." },
+    { q: "Que se passe-t-il quand on leur demande de parler de la Guinée, de Boffa ou de Lola ?", options: ["Toutes les mains se lèvent", "Le silence tombe et les bras redescendent", "La classe se met à chanter"], answer: 1, fact: "Joël finit par souffler : « Il paraît que ça, c'est pour la 10ᵉ année. »" },
+    { q: "Au mot « Simandou », qu'observe le Président ?", options: ["Tous connaissent le mot, mais personne ne sait l'expliquer", "Personne n'en a jamais entendu parler", "Tout le monde sait tout sur Simandou 2040"], answer: 0, fact: "Toutes les mains se lèvent au mot… puis retombent quand il faut dire ce que c'est." },
+    { q: "Quelle idée Tchotcho propose-t-elle ?", options: ["Apprendre la Guinée À LA PLACE de l'Asie", "Apprendre la Guinée AVANT l'Asie — pas à la place", "Ne plus apprendre la géographie"], answer: 1, fact: "« Avant, pas à la place » : elle se le répète encore après le départ du Président." },
+    { q: "Quelle idée Joël glisse-t-il ?", options: ["Demander aux entreprises d'aider les écoles", "Fermer l'école pour la réparer", "Construire un hôtel à Boffa"], answer: 0, fact: "« Je demanderais aux entreprises d'aider les écoles » — la première graine de la série." },
+    { q: "Que naît-il de cette matinée à Boffa ?", options: ["Un grand concours national des écoles", "Une nouvelle chanson", "Des vacances surprises"], answer: 0, fact: "Le Président lance l'idée d'un concours : c'est le point de départ de la série Génération 2040." },
+  ],
   "maitre-ecole": [
     { q: "Quel vieux livre Damba trouve-t-elle au fond de la malle de la classe ?", options: ["Contes africains", "Poèmes africains", "Chants du Fouta"], answer: 1, fact: "Un titre fatigué au fond de la malle : « Poèmes africains », signé Fodéba Keïta." },
     { q: "Dans la scène du vieux livre, quels savants les élèves citent-ils ?", options: ["Victor Hugo et Louis Pasteur", "Sékou Touré et Alpha Yaya", "Djéli Mamoudou et Fodéba"], answer: 0 },
