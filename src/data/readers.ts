@@ -16,6 +16,7 @@ import { REVER_ML } from "./rever-ml";
 import { FENDANI_ML } from "./fendani-ml";
 import { COLA_ML } from "./cola-ml";
 import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
+import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
@@ -79,6 +80,13 @@ export const READERS: Record<string, MLReader> = {
   "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
   "chimpanzes-bossou": { ...fromLaye(CHIMPO_ML), accent: "#3F7D5A" },
 };
+
+// Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"
+for (const ep of TAADIDI.episodes) {
+  if (ep.statut === "live" && ep.reader) {
+    READERS["taadidi-" + ep.numero] = { ...fromLaye(ep.reader), accent: TAADIDI_ACCENT };
+  }
+}
 
 export function readerLabels(slug: string): string {
   const r = READERS[slug];

@@ -29,10 +29,10 @@ export default function Home() {
               <Sparkles size={16} /> <span><span className="text-[#FF6B4A]">P</span>our <span className="text-[#FF6B4A]">A</span>pprendre, <span className="text-[#FF6B4A]">T</span>ransmettre et <span className="text-[#FF6B4A]">I</span>nnover</span>
             </div>
             <h1 className="text-4xl md:text-5xl text-[#0D2B1A] leading-tight mb-3">
-              La Guinée est un <span className="text-[#FF6B4A]">paradis</span> qui a tout pour t’offrir si tu la connais
+              <span className="text-[#FF6B4A]">La Guinée est un paradis</span> qui a tout à t’offrir
             </h1>
             <p className="text-sm font-display font-semibold text-[#0F6E56] mb-5">
-              PATI, la contribution de L’Atelier Solidaire pour le Programme Simandou&nbsp;2040
+              Connais-toi, découvre la Guinée
             </p>
             <p className="text-lg text-[#3a4a42] mb-8 leading-relaxed font-semibold">
               Pour les enfants de 4 à 15 ans, en français et dans nos langues guinéennes.
@@ -58,6 +58,22 @@ export default function Home() {
           className="md:hidden w-full h-72 object-cover object-center"
           style={{ WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, #000 16%)", maskImage: "linear-gradient(to bottom, transparent 0%, #000 16%)" }}
         />
+      </section>
+
+      {/* Bannière-vedette : nouvelle série (format large, distinct des cartes-livre) */}
+      <section className="max-w-6xl mx-auto px-6 pt-10">
+        <Link to="/serie/taadidi" className="block rounded-[1.75rem] overflow-hidden shadow-kid hover:-translate-y-0.5 transition-transform" style={{ background: "#0D2B1A" }}>
+          <div className="px-7 py-7 md:px-10 md:py-9 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 font-display font-semibold text-sm px-3 py-1 rounded-full mb-3" style={{ background: "rgba(255,201,60,0.15)", color: "#FFC93C" }}>
+                <Sparkles size={15} /> Nouvelle série
+              </div>
+              <h3 className="font-display font-bold text-white text-2xl md:text-3xl mb-1">TAA<span style={{ color: "#FFC93C" }}>DIDI</span> — le cycle du rusé</h3>
+              <p className="text-white/80 font-semibold">Une saga en épisodes, lisible en 4 langues. 3 épisodes sont déjà là.</p>
+            </div>
+            <span className="btn-kid text-[#0D2B1A] shadow-kid self-start md:self-auto shrink-0" style={{ background: "#FFC93C" }}>Découvrir la série →</span>
+          </div>
+        </Link>
       </section>
 
       {/* Nos livres — rangées par âge */}

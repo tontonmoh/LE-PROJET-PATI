@@ -60,6 +60,22 @@ export default function Home() {
         />
       </section>
 
+      {/* Bannière-vedette : nouvelle série (format large, distinct des cartes-livre) */}
+      <section className="max-w-6xl mx-auto px-6 pt-10">
+        <Link to="/serie/taadidi" className="block rounded-[1.75rem] overflow-hidden shadow-kid hover:-translate-y-0.5 transition-transform" style={{ background: "#0D2B1A" }}>
+          <div className="px-7 py-7 md:px-10 md:py-9 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 font-display font-semibold text-sm px-3 py-1 rounded-full mb-3" style={{ background: "rgba(255,201,60,0.15)", color: "#FFC93C" }}>
+                <Sparkles size={15} /> Nouvelle série
+              </div>
+              <h3 className="font-display font-bold text-white text-2xl md:text-3xl mb-1">TAA<span style={{ color: "#FFC93C" }}>DIDI</span> — le cycle du rusé</h3>
+              <p className="text-white/80 font-semibold">Une saga en épisodes, lisible en 4 langues. 3 épisodes sont déjà là.</p>
+            </div>
+            <span className="btn-kid text-[#0D2B1A] shadow-kid self-start md:self-auto shrink-0" style={{ background: "#FFC93C" }}>Découvrir la série →</span>
+          </div>
+        </Link>
+      </section>
+
       {/* Nos livres — rangées par âge */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
