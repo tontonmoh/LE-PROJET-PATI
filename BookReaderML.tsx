@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Sparkles, Music, Hourglass } from "lucide-react";
 import { READERS } from "../data/readers";
+import { getBlurb } from "../data/blurbs";
 import { getBook } from "../data/books";
 import { track } from "../lib/track";
 import { TAADIDI } from "../data/series/taadidi";
@@ -14,6 +15,8 @@ export default function BookReaderML() {
   const [i, setI] = useState(-1); // -1 = couverture
 
   const book = reader?.books[lang];
+  const taglineMap = getBlurb(id || "")?.tagline as Record<string, string> | undefined;
+  const tagline = taglineMap?.[lang];
   const total = book?.sections.length ?? 0;
 
   const koraSrc = getBook(id || "")?.kora;
@@ -100,6 +103,7 @@ export default function BookReaderML() {
               </div>
               <h1 className="font-display font-bold text-3xl md:text-4xl text-[#0D2B1A] mb-3">{book.title}</h1>
               {book.subtitle && <p className={readerClass} style={{ fontSize: "1.05rem", color: "#5a6b62" }}>{book.subtitle}</p>}
+              {tagline && <p className={readerClass} style={{ fontSize: "1rem", color: accent, marginTop: "0.75rem", fontStyle: "italic" }}>{tagline}</p>}
             </div>
           ) : (
             <>

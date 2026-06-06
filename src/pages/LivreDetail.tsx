@@ -7,6 +7,7 @@ import { getCredits } from "../data/credits";
 import { track } from "../lib/track";
 import { getLivret } from "../data/fendani-livret";
 import { getProjet } from "../data/chateau-projet";
+import { getBlurb } from "../data/blurbs";
 import { SOCIAL } from "../data/site";
 
 export default function LivreDetail() {
@@ -28,6 +29,7 @@ export default function LivreDetail() {
   const youtubeId = book.teaser?.split("/").pop()?.split("?")[0];
   const livret = getLivret(book.slug);
   const projet = getProjet(book.slug);
+  const blurb = getBlurb(book.slug);
   const credits = getCredits(book.slug);
   const hasTabs = !!livret || !!projet;
 
@@ -64,7 +66,15 @@ export default function LivreDetail() {
 
           <div>
             <h1 className="text-3xl md:text-4xl text-[#0D2B1A] mb-3">{book.title}</h1>
-            <p className="text-lg text-[#3a4a42] font-semibold mb-4 leading-relaxed">{book.description}</p>
+            <p className="text-lg text-[#3a4a42] font-semibold mb-4 leading-relaxed">{blurb?.tagline.fr || book.description}</p>
+            {blurb && (
+              <div className="mb-5 space-y-2 max-w-xl">
+                {blurb.blurb.fr.slice(0, -1).map((p, k) => (
+                  <p key={k} className="text-[#3a4a42] leading-relaxed">{p}</p>
+                ))}
+                <p className="text-sm text-[#8a9389] font-semibold pt-1">{blurb.blurb.fr[blurb.blurb.fr.length - 1]}</p>
+              </div>
+            )}
 
             <div className="mb-6 text-sm text-[#5a6b62] font-semibold flex flex-wrap gap-x-4 gap-y-1">
               <span>Auteur&nbsp;: {credits.auteur}</span>
