@@ -28,7 +28,7 @@ export default function Footer() {
           <div>
             <div className="pf-col-title"><Compass size={13} /> Le Projet</div>
             <Link to="/a-propos" className="pf-link">À propos</Link>
-            <Link to="/atelier-solidaire" className="pf-link">L'Atelier Solidaire</Link>
+            <a href={SOCIAL.websiteAtelier} target="_blank" rel="noopener noreferrer" className="pf-link">L'Atelier Solidaire</a>
             <Link to="/partenaires" className="pf-link">Partenaires</Link>
             <Link to="/presse" className="pf-link">Presse &amp; médias<span className="pf-badge pf-badge-soon">Bientôt</span></Link>
             <Link to="/collaboration" className="pf-link">Offres de collaboration</Link>
@@ -127,7 +127,7 @@ export default function Footer() {
 
         {/* Barre du bas */}
         <div className="pf-bottom">
-          <div className="pf-copyright">© 2025 L'Atelier Solidaire · Conakry, Guinée</div>
+          <div className="pf-copyright">© 2025 <a href={SOCIAL.websiteAtelier} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">L'Atelier Solidaire</a> · Conakry, Guinée</div>
           <div className="pf-legal">
             <a href="#">Confidentialité</a>
             <a href="#">Mentions légales</a>
