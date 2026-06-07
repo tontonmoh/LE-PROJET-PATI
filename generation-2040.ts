@@ -1,6 +1,6 @@
 // Série « Génération 2040 » — données de la page-série /serie/generation-2040.
 // Une école-ville par tome, un Objectif de développement durable, ancré dans Simandou 2040.
-// Tomes 0 à 8 en ligne ; les suivants à paraître. Titres connus : T1 Lola, T2 Guéckédou, T3 Kissidougou, T4 Kouroussa, T5 Dabola, T6 Dalaba, T7 Mali, T8 Télimélé.
+// Tomes 0 à 9 en ligne ; les suivants à paraître. Titres connus : T1 Lola, T2 Guéckédou, T3 Kissidougou, T4 Kouroussa, T5 Dabola, T6 Dalaba, T7 Mali, T8 Télimélé, T9 Kindia.
 export type G2040Tome = {
   numero: number;
   statut: "live" | "soon";
@@ -29,7 +29,7 @@ export const G2040 = {
     { numero: 6, statut: "live", titre: "Les Montagnes et les Sources", lieu: "Dalaba", odd: [6, 13, 15], to: "/livre/g2040-montagnes-et-sources/lire", cover: "/images/g2040-tome6-couverture.webp" },
     { numero: 7, statut: "live", titre: "La Dame qui veille", lieu: "Mali", odd: [9, 11], to: "/livre/g2040-dame-qui-veille/lire", cover: "/images/g2040-tome7-couverture.webp" },
     { numero: 8, statut: "live", titre: "L'Arbre et le Fleuve", lieu: "Télimélé", odd: [7, 9], to: "/livre/g2040-arbre-et-fleuve/lire", cover: "/images/g2040-tome8-couverture.webp" },
-    { numero: 9, statut: "soon" },
+    { numero: 9, statut: "live", titre: "La Ligne qui traverse le pays", lieu: "Kindia", odd: [9, 11, 17], to: "/livre/g2040-la-ligne/lire", cover: "/images/g2040-tome9-couverture.webp" },
     { numero: 10, statut: "soon" },
     { numero: 11, statut: "soon" },
   ] as G2040Tome[],

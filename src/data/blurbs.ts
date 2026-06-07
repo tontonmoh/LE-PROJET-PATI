@@ -303,6 +303,40 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-la-ligne": {
+    tagline: {
+      fr: "À Kindia, la cité-jardin, une sortie au lac de Samaya fait rêver Fatim : et si la grande Ligne du fer, au lieu de seulement traverser le pays, le reliait — comme les pirogues relient les villages du lac ?",
+      en: "In Kindia, the garden-town, a school trip to Lake Samaya sets Fatim dreaming: what if the great iron Line, instead of merely crossing the country, connected it — the way the canoes connect the villages of the lake?",
+      ar: "في Kindia، المدينة-الحديقة، تُشعل رحلةٌ مدرسية إلى بحيرة Samaya خيالَ Fatim: ماذا لو أنّ خطّ الحديد الكبير، بدل أن يَعبُر البلادَ فحسب، وصَلَها — مثلما تصل الزوارقُ قرى البحيرة؟",
+      zh: "在花园之城 Kindia，一次前往 Samaya 湖的郊游让 Fatim 浮想联翩：倘若那条大铁路线不只是穿越国家，而是把它连接起来——就像独木舟把湖上的村庄连起来一样，会怎样呢？",
+    },
+    blurb: {
+      fr: [
+        "Kindia, c'est le Jardin de Guinée : une vraie ville, mais sans le vacarme ni l'air gris des grandes villes — des manguiers dans les rues, trois rivières, et le mont Gangan qui veille.",
+        "Pour le concours de la Simandou Academy, la Maîtresse emmène la classe en sortie. Au bord du lac de Samaya, Fatim découvre la valse des pirogues, les villages posés sur l'eau, les paniers de fruits qui attendent — et se met à rêver.",
+        "Et si l'on reliait tout cela en douceur, par des ponts et de bonnes routes, sans jamais perdre les arbres ni l'air pur ? Et si la grande Ligne du fer ne faisait pas que traverser le pays, mais le reliait vraiment ?",
+        "Un livre tendre sur les infrastructures, la ville qui respire et l'amitié entre les peuples. Génération 2040 · dès 10 ans.",
+      ],
+      en: [
+        "Kindia is the Garden of Guinea: a real town, yet without the din or the grey air of big cities — mango trees in the streets, three rivers, and Mount Gangan keeping watch.",
+        "For the Simandou Academy contest, the teacher takes the class on an outing. By Lake Samaya, Fatim discovers the dance of the canoes, the villages set upon the water, the baskets of fruit waiting their turn — and begins to dream.",
+        "What if all of this were gently connected, by bridges and good roads, without ever losing the trees or the clean air? What if the great iron Line did not merely cross the country, but truly linked it?",
+        "A tender book about infrastructure, the town that breathes, and friendship between peoples. Génération 2040 · ages 10 and up.",
+      ],
+      ar: [
+        "Kindia هي حديقةُ Guinée: مدينةٌ حقيقية، لكن بلا ضجيج المدن الكبرى ولا هوائها الرمادي — أشجارُ المانغو في الشوارع، ثلاثة أنهار، وجبلُ Gangan يَحرس.",
+        "من أجل مسابقة Simandou Academy، تأخذ المعلّمةُ الصفَّ في رحلة. على ضفّة بحيرة Samaya، تكتشف Fatim رقصةَ الزوارق، والقرى القائمة على الماء، وسلالَ الفاكهة التي تنتظر دورها — فتبدأ في الحلم.",
+        "فماذا لو وُصِل كلُّ ذلك برفق، بجسورٍ وطرقٍ جيّدة، دون أن نفقد الأشجارَ أو الهواءَ النقي؟ وماذا لو أنّ خطّ الحديد الكبير لم يَعبُر البلادَ فحسب، بل وصَلَها حقًّا؟",
+        "كتابٌ حنون عن البِنى التحتية، وعن المدينة التي تتنفّس، وعن الصداقة بين الشعوب. Génération 2040 · من 10 سنوات فما فوق.",
+      ],
+      zh: [
+        "Kindia 是几内亚的花园：一座真正的城市，却没有大城市的喧嚣与灰蒙蒙的空气——街上长着芒果树，有三条河，还有 Gangan 山守望着。",
+        "为了 Simandou Academy 的比赛，老师带全班去郊游。在 Samaya 湖边，Fatim 看见了独木舟的舞蹈、坐落在水上的村庄、等待轮到自己的一筐筐水果——于是她开始做梦。",
+        "倘若把这一切都温柔地连接起来，用桥梁和好路，却永远不失去树木和清新的空气，会怎样？倘若那条大铁路线不只是穿越国家，而是真正把它连在一起，又会怎样？",
+        "一本温柔的书，讲述基础设施、会呼吸的城市，以及各民族之间的友谊。Génération 2040 · 适合 10 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",
