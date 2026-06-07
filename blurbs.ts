@@ -133,6 +133,74 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-graine-et-huile": {
+    tagline: {
+      fr: "À Dabola, l'arachide part nue et l'huile revient chère. L'usine, elle, est là — elle a juste faim. Et si on la nourrissait ?",
+      en: "In Dabola, the peanut leaves bare and the oil comes back dear. The mill is right there — it is only hungry. What if we fed it?",
+      ar: "في Dabola، يخرج الفول السوداني عاريًا ويعود الزيت غاليًا. أمّا المصنع، فهو هنا — إنه جائعٌ فقط. فماذا لو أطعمناه؟",
+      zh: "在 Dabola，花生赤裸裸地运出去，油却昂贵地买回来。可榨油厂就在这儿——它只是饿了。我们何不喂饱它呢？",
+    },
+    blurb: {
+      fr: [
+        "Dabola, au cœur du pays, avait deux fiertés : sa gare — la première grande gare du bassin du Niger — et sa grande huilerie d'arachide. Aujourd'hui la gare dort, rails disparus ; et l'usine tourne au ralenti, faute de graines.",
+        "Au marché, Saran observe un manège absurde : on charge l'arachide brute, vendue pour presque rien, et on décharge des bouteilles d'huile, chères, venues d'ailleurs. La même arachide, partie nue, revenue habillée.",
+        "Pour le concours de la Simandou Academy, sa classe trouve l'Objectif : nourrir l'usine au lieu de vendre la graine ; presser l'huile ici ; et réveiller la gare pour que la Ligne emporte des bouteilles pleines, pas des sacs bradés.",
+        "Un livre sur la transformation locale, le travail qui reste au pays et la fierté retrouvée. Génération 2040 · dès 12 ans.",
+      ],
+      en: [
+        "Dabola, in the heart of the country, had two prides: its station — the first great station of the Niger basin — and its big peanut oil mill. Today the station sleeps, its rails gone; and the mill runs at half-speed, short of seed.",
+        "At the market, Saran watches an absurd dance: raw peanut is loaded up, sold for almost nothing, while bottles of oil are unloaded, expensive, come from elsewhere. The same peanut, leaving bare, returning dressed.",
+        "For the Simandou Academy contest, her class finds its Objective: feed the mill instead of selling the seed; press the oil here; and wake the station, so the Line carries full bottles, not cut-price sacks.",
+        "A book about local processing, work that stays in the country, and pride regained. Génération 2040 · ages 12 and up.",
+      ],
+      ar: [
+        "كانت لـ Dabola، في قلب البلد، فخران: محطّتها — أولى محطّات حوض النيجر الكبرى — ومصنعها الكبير لزيت الفول السوداني. أمّا اليوم، فالمحطّة نائمة وقد اختفت قضبانها؛ والمصنع يعمل بنصف طاقته، لقلّة البذور.",
+        "في السوق، تراقب Saran رقصةً عبثية: يُحمَّل الفول السوداني خامًا فيُباع بأبخس ثمن، وتُفرَّغ زجاجات الزيت غاليةً قادمةً من مكانٍ آخر. الفول نفسه: يخرج عاريًا، ويعود مكسوًّا.",
+        "ومن أجل مسابقة Simandou Academy، يجد صفّها هدفه: أن نُطعم المصنع بدل أن نبيع البذرة؛ أن نعصر الزيت هنا؛ وأن نوقظ المحطّة، كي يحمل الخطّ زجاجاتٍ ملأى، لا أكياسًا مباعةً بثمنٍ بخس.",
+        "كتابٌ عن التحويل المحلّي، والعمل الذي يبقى في البلد، والكرامة المستعادة. Génération 2040 · من 12 سنة فما فوق.",
+      ],
+      zh: [
+        "Dabola 地处全国中心，曾有两样骄傲：它的火车站——尼日尔河流域的第一座大站——和它那座大花生榨油厂。如今车站沉睡，铁轨不知去向；榨油厂则因缺少花生，只开半工。",
+        "在集市上，Saran 看着一幕荒唐的景象：生花生被装车运走，贱卖得几乎不值钱；一瓶瓶油却被卸下来，价格高昂，来自别处。同样的花生，赤裸裸地出去，穿戴整齐地回来。",
+        "为了 Simandou Academy 的比赛，全班找到了「目标」：与其卖掉种子，不如喂饱工厂；把油榨在这里；再唤醒车站，让铁路运走的是满瓶的油，而不是贱卖的麻袋。",
+        "一本关于本地加工、把劳动留在国内、重拾骄傲的书。Génération 2040 · 适合 12 岁以上。",
+      ],
+    },
+  },
+  "g2040-tambour-et-livre": {
+    tagline: {
+      fr: "À Kouroussa, un enfant a écrit un livre lu dans le monde entier. Et si notre plus grand trésor d'avenir, c'était notre culture ?",
+      en: "In Kouroussa, a child wrote a book read the world over. What if our greatest treasure for the future were our culture?",
+      ar: "في Kouroussa، كتب طفلٌ كتابًا قُرِئ في العالم كلّه. فماذا لو كان أعظمُ كنوزنا للمستقبل هو ثقافتنا؟",
+      zh: "在 Kouroussa，一个孩子写出了一本风行世界的书。倘若我们面向未来的最大财富，正是我们的文化呢？",
+    },
+    blurb: {
+      fr: [
+        "Kouroussa, au bord du Djoliba, est le cœur du vieux pays mandingue, le Hamana. C'est ici qu'est né Camara Laye — un enfant de forgeron qui, avec un livre, a porté sa ville jusqu'au bout du monde.",
+        "Mais Fanta, elle, croit que tout cela n'est que « le passé » : le dununba qu'on ne sort qu'aux fêtes, la mare sacrée de Baro qu'on laisse se dessécher, les histoires que les jeunes n'écoutent plus.",
+        "Le vieux Mamadi, le djeli, lui ouvre les yeux : un peuple sans ses histoires est un arbre sans racines. Pour le concours de la Simandou Academy, sa classe trouve l'Objectif : faire de la culture une richesse d'avenir — festival, maison des histoires, Baro protégée, et le train qui amène le monde jusqu'à eux.",
+        "Un livre sur la fierté, la mémoire et le pouvoir des mots. Génération 2040 · dès 12 ans.",
+      ],
+      en: [
+        "Kouroussa, on the banks of the Djoliba, is the heart of the old Mandingo country, the Hamana. It is here that Camara Laye was born — a blacksmith's child who, with a single book, carried his town to the ends of the earth.",
+        "But Fanta believes all of it is just \"the past\": the dununba brought out only on feast days, the sacred pool of Baro left to dry up, the stories the young no longer listen to.",
+        "Old Mamadi, the djeli, opens her eyes: a people without its stories is a tree without roots. For the Simandou Academy contest, her class finds its Objective: to make culture a treasure for the future — a festival, a house of stories, Baro protected, and the train that brings the world to them.",
+        "A book about pride, memory, and the power of words. Génération 2040 · ages 12 and up.",
+      ],
+      ar: [
+        "تقع Kouroussa على ضفاف Djoliba، وهي قلب بلاد الماندينغ القديمة، الـ Hamana. هنا وُلد Camara Laye — ابنُ حدّادٍ حمل مدينته، بكتابٍ واحد، إلى أقاصي الأرض.",
+        "لكنّ Fanta تظنّ أنّ هذا كلّه مجرّد «ماضٍ»: الـ dununba لا يُخرَج إلّا في الأعياد، ومستنقع Baro المقدّس يُترَك ليجفّ، والحكايات لم يعد الشباب يصغون إليها.",
+        "يفتح لها الشيخ Mamadi، الـ djeli، عينيها: شعبٌ بلا حكاياته شجرةٌ بلا جذور. ومن أجل مسابقة Simandou Academy، يجد صفّها هدفه: أن يجعل الثقافة كنزًا للمستقبل — مهرجانٌ، وبيتٌ للحكايات، وحمايةُ Baro، والقطارُ الذي يجلب العالم إليهم.",
+        "كتابٌ عن الكرامة والذاكرة وقوّة الكلمات. Génération 2040 · من 12 سنة فما فوق.",
+      ],
+      zh: [
+        "Kouroussa 坐落在 Djoliba 河畔，是古老曼丁哥地区——Hamana——的心脏。Camara Laye 就出生在这里：一个铁匠的孩子，凭一本书把家乡带到了天涯海角。",
+        "可 Fanta 却觉得这一切不过是「过去」：dununba 只在节庆时才搬出来，Baro 的圣潭任由它干涸，老人的故事年轻人也不再听了。",
+        "老 Mamadi——那位 djeli——点醒了她：一个没有故事的民族，就像没有根的树。为了 Simandou Academy 的比赛，全班找到了「目标」：让文化成为面向未来的财富——办 festival、建一座故事之屋、守护 Baro，让火车把世界带到他们面前。",
+        "一本关于骄傲、记忆和文字力量的书。Génération 2040 · 适合 12 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",
