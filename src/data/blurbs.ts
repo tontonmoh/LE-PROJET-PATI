@@ -269,6 +269,40 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-arbre-et-fleuve": {
+    tagline: {
+      fr: "À Télimélé, le nom même de la ville unit deux peuples autour d'un arbre, et son fleuve éclaire tout le pays — sauf elle. Et si les enfants apprenaient à s'éclairer eux-mêmes ?",
+      en: "In Télimélé, the town's very name unites two peoples around a tree, and its river lights up the whole country — except itself. What if the children learned to light their own way?",
+      ar: "في Télimélé، يوحّد اسمُ المدينة نفسه شعبَين حول شجرة، ونهرُها يضيء البلادَ كلَّها — إلا هي. فماذا لو تعلّم الأطفال أن يضيئوا دربهم بأنفسهم؟",
+      zh: "在 Télimélé，城市的名字本身就把两个民族围绕一棵树连在一起，而它的河流照亮了整个国家——唯独照不亮它自己。倘若孩子们学会自己点亮道路，会怎样呢？",
+    },
+    blurb: {
+      fr: [
+        "Télimélé, sur les contreforts ouest du Fouta, est la ville aux huit voisins — une porte entre la montagne et la mer. Mais le soir venu, elle reste dans le noir.",
+        "Pour le concours de la Simandou Academy, Bella la Soussou et Yama la Peule découvrent que le nom de leur ville vient d'un arbre : téli en poular, méli en soussou — deux peuples, une seule ville. Et que leur fleuve, le Konkouré, fait tourner les grands barrages qui éclairent le pays… mais pas eux.",
+        "Plutôt que d'attendre ou de quémander, les enfants décident de conquérir la science de l'énergie pour faire tourner eux-mêmes les barrages, de lancer le Konkouré Fé — un festival annuel pour reboiser le fleuve, danser et partager — et de protéger l'arbre de leur nom : « sans arbres, plus de Télimélé ».",
+        "Un livre sur l'énergie, l'unité de deux peuples et la fierté de s'éclairer soi-même. Génération 2040 · dès 10 ans.",
+      ],
+      en: [
+        "Télimélé, on the western foothills of the Fouta, is the town of eight neighbors — a gateway between the mountains and the sea. Yet when evening comes, it stays in darkness.",
+        "For the Simandou Academy contest, Bella the Soussou and Yama the Fulani discover that their town's name comes from a tree: téli in Pular, méli in Soussou — two peoples, one town. And that their river, the Konkouré, drives the great dams that light up the country… but not them.",
+        "Rather than wait or beg, the children decide to conquer the science of energy so as to run the dams themselves, to launch the Konkouré Fé — a yearly festival to replant the river, dance and share — and to protect the tree of their name: « without trees, no more Télimélé ».",
+        "A book about energy, the unity of two peoples, and the pride of lighting one's own way. Génération 2040 · ages 10 and up.",
+      ],
+      ar: [
+        "Télimélé، على السفوح الغربية للـ Fouta، هي مدينةُ الجيران الثمانية — بوّابةٌ بين الجبال والبحر. ومع ذلك، حين يحلّ المساء، تبقى في الظلام.",
+        "من أجل مسابقة Simandou Academy، تكتشف Bella السوسوية وYama الفولانية أنّ اسم مدينتهما يأتي من شجرة: téli بالبولارية، méli بالسوسوية — شعبان، مدينةٌ واحدة. وأنّ نهرهما، الـ Konkouré، يُدير السدودَ الكبرى التي تضيء البلاد… لكن ليس هما.",
+        "بدل أن ينتظروا أو يستجدوا، يقرّر الأطفال أن يفتحوا علمَ الطاقة ليُديروا السدودَ بأنفسهم، وأن يُطلقوا الـ Konkouré Fé — مهرجانًا سنويًّا لإعادة تشجير النهر والرقص والمشاركة — وأن يحموا شجرة اسمهم: « بلا أشجار، لا Télimélé ».",
+        "كتابٌ عن الطاقة، ووحدة شعبَين، وفخر إضاءة المرء دربَه بنفسه. Génération 2040 · من 10 سنوات فما فوق.",
+      ],
+      zh: [
+        "Télimélé 位于 Fouta 的西部山麓，是拥有八个邻居的城市——群山与大海之间的门户。然而每当夜幕降临，它却仍在黑暗中。",
+        "为了 Simandou Academy 的比赛，苏苏族的 Bella 和富拉族的 Yama 发现，她们城市的名字来自一棵树：富拉语叫 téli，苏苏语叫 méli——两个民族，一座城。她们还发现，她们的河流 Konkouré 驱动着照亮全国的大坝……却唯独照不亮她们自己。",
+        "孩子们决定不再等待或乞求，而是要掌握能源的科学，亲手让大坝运转；发起 Konkouré Fé——一个每年为河流重新植树、跳舞和分享的节日；并守护他们名字里的那棵树：「没有树，就没有 Télimélé」。",
+        "一本关于能源、两个民族的团结，以及自己点亮道路的自豪的书。Génération 2040 · 适合 10 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",
