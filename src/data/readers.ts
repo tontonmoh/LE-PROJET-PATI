@@ -24,6 +24,7 @@ import g2040Tome3 from "./g2040-tome3";
 import g2040Tome4 from "./g2040-tome4";
 import g2040Tome5 from "./g2040-tome5";
 import g2040Tome6 from "./g2040-tome6";
+import g2040Tome7 from "./g2040-tome7";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
@@ -136,6 +137,7 @@ export const READERS: Record<string, MLReader> = {
   "g2040-graine-et-huile": { ...fromG2040(g2040Tome4), accent: "#18402A" },
   "g2040-tambour-et-livre": { ...fromG2040(g2040Tome5), accent: "#18402A" },
   "g2040-montagnes-et-sources": { ...fromG2040(g2040Tome6), accent: "#18402A" },
+  "g2040-dame-qui-veille": { ...fromG2040(g2040Tome7), accent: "#18402A" },
 };
 
 // Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"

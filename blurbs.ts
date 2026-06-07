@@ -235,6 +235,40 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-dame-qui-veille": {
+    tagline: {
+      fr: "À Mali, au sommet du Fouta, une femme de pierre veille sur la ville. Et si, au lieu de la montrer du doigt, on rallumait sa lumière ?",
+      en: "In Mali, atop the Fouta, a woman of stone watches over the town. What if, instead of pointing at her, we relit her light?",
+      ar: "في Mali، فوق سطح Fouta، تسهر امرأةٌ من حجرٍ على المدينة. فماذا لو، بدل أن نشير إليها بالأصابع، أعدنا إشعال نورها؟",
+      zh: "在 Mali，在 Fouta 之巅，一位石头的女子守望着小城。倘若我们不再对她指指点点，而是重新点亮她的灯火，会怎样呢？",
+    },
+    blurb: {
+      fr: [
+        "Mali, tout au nord, est la ville la plus haute de Guinée — le toit du Fouta. À son sommet, le mont Loura, le vent et la pluie ont dessiné dans la pierre la silhouette d'une femme : la Dame de Mali.",
+        "Aux visiteurs, on raconte une vieille histoire qui rabaisse cette femme. Dieynaba en a honte. Sa grand-mère le lui dit : une montagne ne porte pas de faute, et c'est aux enfants de raconter qui elle est vraiment.",
+        "Pour le concours de la Simandou Academy, leur classe lui rend son honneur : la Dame, c'est Néné Gallé, « la mère du foyer », qui montait chaque soir avec sa lampe et dont la lueur guidait les voyageurs perdus — devenue Néné Foutah, la mère de tout le Fouta. « On la regarde » devient « Elle nous veille ». L'Objectif : rallumer sa lampe en phare, désenclaver la route, et faire connaître la pomme de terre de Mali — la Belle de Guinée — née ici, et sa fête.",
+        "Un livre sur la dignité des femmes, la lumière et le désenclavement. Génération 2040 · dès 10 ans.",
+      ],
+      en: [
+        "Mali, in the far north, is the highest town in Guinea — the roof of the Fouta. At its summit, Mount Loura, wind and rain have carved into the stone the silhouette of a woman: the Lady of Mali.",
+        "To visitors, an old story is told that demeans this woman. Dieynaba is ashamed of it. Her grandmother tells her: a mountain bears no fault, and it is for the children to tell who she truly is.",
+        "For the Simandou Academy contest, their class restores her honor: the Lady is Néné Gallé, 'the mother of the household,' who climbed up each evening with her lamp and whose glow guided lost travelers — and who became Néné Foutah, the mother of all the Fouta. 'We look at her' becomes 'She watches over us.' The Objective: to relight her lamp as a beacon, to open up the road, and to make Mali's potato — the Belle de Guinée, born here — and its festival known to all.",
+        "A book about the dignity of women, light, and ending isolation. Génération 2040 · ages 10 and up.",
+      ],
+      ar: [
+        "Mali، في أقصى الشمال، أعلى مدينةٍ في Guinée — سطحُ الـ Fouta. وفي قمّتها، جبل Loura، نحتت الريحُ والمطرُ في الحجر صورةَ امرأة: سيّدة Mali.",
+        "يُروى للزوّار حكايةٌ قديمة تحطّ من قدر هذه المرأة. تشعر Dieynaba بالخجل منها. تقول لها جدّتها: الجبلُ لا يحمل ذنبًا، وعلى الأطفال أن يرووا مَن هي حقًّا.",
+        "من أجل مسابقة Simandou Academy، يردّ صفُّها إليها كرامتها: السيّدة هي Néné Gallé، «أمّ البيت»، التي كانت تصعد كلّ مساءٍ بمصباحها، وكان نورُها يهدي المسافرين التائهين — فصارت Néné Foutah، أمّ الـ Fouta كلّه. «ننظر إليها» تصبح «هي تسهر علينا». الهدف: إعادة إشعال مصباحها منارةً، وفكّ عزلة الطريق، والتعريف ببطاطا Mali — الـ Belle de Guinée، التي وُلدت هنا — وبعيدها.",
+        "كتابٌ عن كرامة النساء والنور وفكّ العزلة. Génération 2040 · من 10 سنوات فما فوق.",
+      ],
+      zh: [
+        "Mali 位于最北端，是 Guinée 海拔最高的城市——Fouta 的屋顶。在它的顶峰 Loura 山上，风和雨在岩石中刻出了一位女子的轮廓：Mali 的夫人。",
+        "人们对游客讲述一个贬低这位女子的古老故事。Dieynaba 为此感到羞愧。她的祖母告诉她：山没有过错，该由孩子们来讲述她究竟是谁。",
+        "为了 Simandou Academy 的比赛，全班为她恢复了荣誉：这位夫人就是 Néné Gallé，「家的母亲」，她每晚提着灯登上山顶，她的微光为迷路的旅人指引方向——后来她成了 Néné Foutah，整个 Fouta 的母亲。「我们注视着她」变成了「她守望着我们」。目标：把她的灯重新点亮成一座灯塔，打通道路，让诞生于此的 Mali 马铃薯——Belle de Guinée——和它的节日为世人所知。",
+        "一本关于女性尊严、光与打破闭塞的书。Génération 2040 · 适合 10 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",
