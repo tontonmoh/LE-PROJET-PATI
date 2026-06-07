@@ -337,6 +337,40 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-port-et-pirogue": {
+    tagline: {
+      fr: "Le bout de la Ligne est chez nous. À nous d'en faire un commencement.",
+      en: "The end of the Line is here, in our home. Ours to turn into a beginning.",
+      ar: "نهاية الخط عندنا، في بلدتنا. وعلينا أن نجعل منها بداية.",
+      zh: "这条大铁路的终点就在我们这里。让我们把它变成一个开始。",
+    },
+    blurb: {
+      fr: [
+        "La grande Ligne a traversé toute la Guinée, et c'est dans la préfecture de Forécariah qu'elle rejoint enfin la mer, au port de Morébaya. La classe est fière : le pays tout entier débouche chez eux.",
+        "Mais Morébaya est loin de la ville. Le maître Camara emmène les enfants sur la route du port — le pont de fer, Maférinyah, Madinagbé — puis leur demande une chose : ne pas regarder les machines, mais écouter les habitants.",
+        "Sira, Morlaye, Yakha et Bafodé reviennent avec des voix : un pêcheur, une famille déplacée, un jeune ouvrier, une vendeuse, un agent de la commune. Peu à peu, ils comprennent qu'une chance ne se transforme pas toute seule.",
+        "Entre la commune et l'entreprise, entre le grand port et le petit quai des pirogues, les enfants dessinent une côte où la richesse qui passe finit par laisser quelque chose ici — pour tous. Génération 2040 · dès 10 ans.",
+      ],
+      en: [
+        "The great Line has crossed all of Guinea, and it is in the prefecture of Forécariah that it finally reaches the sea, at the port of Morébaya. The class is proud: the whole country comes out right at their home.",
+        "But Morébaya is far from the town. Mr. Camara takes the children along the road to the port — the iron bridge, Maférinyah, Madinagbé — then asks one thing of them: not to watch the machines, but to listen to the people.",
+        "Sira, Morlaye, Yakha and Bafodé come back with voices: a fisherman, a displaced family, a young worker, a market woman, a council official. Bit by bit, they understand that luck does not turn itself into anything on its own.",
+        "Between the council and the company, between the great port and the little quay of the pirogues, the children draw a coast where the wealth that passes through finally leaves something behind — for everyone. Génération 2040 · ages 10 and up.",
+      ],
+      ar: [
+        "عبر الخط الكبير غينيا كلها، وفي محافظة فوريكاريا يبلغ البحر أخيرًا، عند ميناء موريبايا. الصف فخور: البلد كله يصبّ عندهم.",
+        "لكن موريبايا بعيدة عن المدينة. يأخذ المعلّم كامارا الأطفال على طريق الميناء — الجسر الحديدي، ومافيرينيا، وماديناغبي — ثم يطلب منهم أمرًا واحدًا: ألا ينظروا إلى الآلات، بل أن يستمعوا إلى الناس.",
+        "يعود سيرا ومورلاي وياخا وبافودي بأصوات: صيّاد، وعائلة مُهجَّرة، وعامل شاب، وبائعة، وموظّف بلدية. وشيئًا فشيئًا يفهمون أن الحظ لا يتحوّل وحده.",
+        "بين البلدية والشركة، بين الميناء الكبير والرصيف الصغير للزوارق، يرسم الأطفال ساحلًا تترك فيه الثروة العابرة شيئًا في النهاية — للجميع. Génération 2040 · من 10 سنوات فما فوق.",
+      ],
+      zh: [
+        "那条大铁路穿过了整个几内亚，正是在福雷卡里亚省，它终于抵达大海，在莫雷巴亚港。全班都很自豪：整个国家就在他们这里通向大海。",
+        "可是莫雷巴亚离城很远。卡马拉老师带孩子们走上通往港口的路——铁桥、马费里尼亚、马迪纳格贝——然后只要求他们一件事：不要看机器，而要听当地人说话。",
+        "西拉、莫尔莱、雅卡和巴福代带回了一个个声音：一位渔民、一户被迁走的人家、一个年轻工人、一个女商贩、一位镇政府工作人员。他们渐渐明白：幸运不会自己变成任何东西。",
+        "在地方政府与公司之间，在大港与独木舟小码头之间，孩子们画出了一片海岸：经过的财富终于在这里留下了些什么——为了所有人。Génération 2040 · 适合 10 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",
