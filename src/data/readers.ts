@@ -19,6 +19,7 @@ import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
 import g2040Tome1 from "./g2040-tome1";
+import g2040Tome2 from "./g2040-tome2";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
@@ -126,6 +127,7 @@ export const READERS: Record<string, MLReader> = {
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
   "g2040-foret-et-fer": { ...fromG2040(g2040Tome1), accent: "#18402A" },
+  "g2040-makona": { ...fromG2040(g2040Tome2), accent: "#18402A" },
 };
 
 // Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"

@@ -23,8 +23,8 @@ export const SERIES: SeriesItem[] = [
     band: "Aventure",
     to: "/serie/generation-2040",
     auteur: "Mohamed Doumbouya",
-    episodes: { total: 12, live: 2 },
-    episodeSlugs: ["g2040-tome0", "g2040-foret-et-fer"],
+    episodes: { total: 12, live: 3 },
+    episodeSlugs: ["g2040-tome0", "g2040-foret-et-fer", "g2040-makona"],
   },
   {
     slug: TAADIDI.id,

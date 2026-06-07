@@ -35,8 +35,8 @@ const BLURBS: Record<string, Blurb> = {
     tagline: {
       fr: "À Lola, une montagne porte une forêt vivante — et, peut-être, un fer endormi. Faut-il choisir ?",
       en: "In Lola, a mountain holds a living forest — and, perhaps, a sleeping iron. Must we choose?",
-      ar: "",
-      zh: "",
+      ar: "في لولا، جبلٌ يحمل غابةً حيّة — وربّما حديدًا نائمًا. هل علينا أن نختار؟",
+      zh: "在洛拉，一座山承载着一片生机勃勃的森林——也许还有沉睡的铁。我们必须做出选择吗？",
     },
     blurb: {
       fr: [
@@ -51,8 +51,52 @@ const BLURBS: Record<string, Blurb> = {
         "Sia refuses to choose. Between the forest and the iron, she writes one small word: AND. As long as we take care of both.",
         "A book about life on land and industry learning to grow up together. Génération 2040 · ages 12 and up.",
       ],
-      ar: [],
-      zh: [],
+      ar: [
+        "في لولا، يسهر الجبل على كلّ شيء: الغابة، والقرى، وشمبانزي Bossou التي تكسر جوزها منذ الأزل. من أجل مسابقة Simandou Academy، على صفّ Sia أن يروي هدفه.",
+        "لكنّ سؤالًا يقسم الأطفال. يُقال إنّ الحديد ينام تحت جبلهم. هل يُوقَظ يومًا لكي تُحسب لولا أخيرًا — على حساب الغابة؟ أم نحمي الغابة — على خطر رحيل الإخوة الكبار؟",
+        "ترفض Sia أن تختار. بين الغابة والحديد، تكتب كلمةً صغيرةً واحدة: وَ. شرط أن نعتني بهما.",
+        "كتابٌ عن الحياة على اليابسة والصناعة وهما يتعلّمان أن يكبرا معًا. Génération 2040 · من 12 سنة.",
+      ],
+      zh: [
+        "在洛拉，大山守护着一切：森林、村庄，还有自古就用石头敲开坚果的 Bossou 黑猩猩。为了 Simandou Academy 的比赛，Sia 的班级要讲述自己的目标。",
+        "但有一个问题让孩子们产生了分歧。据说铁就沉睡在他们的山下。是否有一天该把它唤醒，让洛拉终于被看见——哪怕冒着失去森林的风险？还是守护森林——哪怕看着哥哥们离开？",
+        "Sia 拒绝二选一。在森林与铁之间，她写下一个小小的词：和。前提是好好照看它们。",
+        "一本关于陆地生命与工业学会共同成长的书。Génération 2040 · 12岁以上。",
+      ],
+    },
+  },
+  "g2040-makona": {
+    tagline: {
+      fr: "À Guéckédou, on dit que le Makona est une frontière. Finda, elle, sait que c'est un chemin.",
+      en: "In Guéckédou, they say the Makona is a border. Finda knows it's a path.",
+      ar: "في غيكيدو يقولون إنّ Makona حدود. أمّا Finda، فتعرف أنه طريق.",
+      zh: "在盖凯杜，人们说 Makona 是一道边界。可 Finda 知道，它是一条路。",
+    },
+    blurb: {
+      fr: [
+        "À Guéckédou, ville-carrefour entre la Guinée, le Liberia et la Sierra Leone, la grand-mère de Finda se souvient du plus grand marché de toute la sous-région. Pour le concours de la Simandou Academy, la classe doit raconter son Objectif.",
+        "Sur la carte, le Makona est une frontière. Mais de l'autre côté du fleuve vit Tamba, le cousin de Finda — même famille, même langue, même grand-mère. Alors : le fleuve sépare-t-il, ou relie-t-il ?",
+        "Finda n'efface pas le mot de la maîtresse. Elle ajoute seulement, en dessous : un fleuve qui relie. Et la classe se met à rêver le marché de demain — avec des balances et des sourires, pas des fusils.",
+        "Un livre sur le travail, la paix et les voisins qu'on retrouve. Génération 2040 · dès 12 ans.",
+      ],
+      en: [
+        "In Guéckédou, a crossroads town between Guinea, Liberia and Sierra Leone, Finda's grandmother remembers the biggest market in the whole sub-region. For the Simandou Academy contest, the class must tell its Objective.",
+        "On the map, the Makona is a border. But on the other side of the river lives Tamba, Finda's cousin — same family, same language, same grandmother. So: does the river separate, or connect?",
+        "Finda doesn't erase the teacher's word. She only adds, beneath it: a river that connects. And the class begins to dream up the market of tomorrow — with scales and smiles, not rifles.",
+        "A book about work, peace, and neighbors found again. Génération 2040 · ages 12 and up.",
+      ],
+      ar: [
+        "في غيكيدو، مدينة المفترق بين غينيا وليبيريا وسيراليون، تتذكّر جدّة Finda أكبر سوقٍ في المنطقة كلّها. من أجل مسابقة Simandou Academy، على الصفّ أن يروي هدفه.",
+        "على الخريطة، Makona حدود. لكن على الضفّة الأخرى من النهر يعيش Tamba، ابن عمّ Finda — العائلة نفسها، اللغة نفسها، الجدّة نفسها. إذًا: هل يفصل النهر، أم يَصِل؟",
+        "لا تمحو Finda كلمة الأستاذة. تضيف فقط، تحتها: نهرٌ يَصِل. ويأخذ الصفّ يحلم بسوق الغد — بالموازين والابتسامات، لا بالبنادق.",
+        "كتابٌ عن العمل والسلام والجيران الذين نلتقي بهم من جديد. Génération 2040 · من 12 سنة.",
+      ],
+      zh: [
+        "在盖凯杜，这座几内亚、利比里亚与塞拉利昂之间的十字路口之城，Finda 的祖母记得整个次区域最大的集市。为了 Simandou Academy 的比赛，班级要讲述自己的目标。",
+        "在地图上，Makona 是一道边界。可河的另一岸住着 Finda 的表亲 Tamba——同一个家族，同一种语言，同一位祖母。那么：河，是隔开，还是连接？",
+        "Finda 没有擦掉老师写的词。她只在下面添了一句：一条连接的河。于是全班开始畅想明天的集市——用秤和微笑，而不是枪。",
+        "一本关于劳动、和平，以及重新相遇的邻邦的书。Génération 2040 · 12岁以上。",
+      ],
     },
   },
   "maitre-ecole": {
