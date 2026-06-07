@@ -1,6 +1,6 @@
 // Série « Génération 2040 » — données de la page-série /serie/generation-2040.
 // Une école-ville par tome, un Objectif de développement durable, ancré dans Simandou 2040.
-// Tomes 0 à 10 en ligne ; la finale (T11 Conakry) à paraître. Titres : T1 Lola, T2 Guéckédou, T3 Kissidougou, T4 Kouroussa, T5 Dabola, T6 Dalaba, T7 Mali, T8 Télimélé, T9 Kindia, T10 Forécariah.
+// Série COMPLÈTE : les 12 tomes (0 à 11) en ligne. T11 Conakry = finale « Le Conseil des enfants ».
 export type G2040Tome = {
   numero: number;
   statut: "live" | "soon";
@@ -31,6 +31,6 @@ export const G2040 = {
     { numero: 8, statut: "live", titre: "L'Arbre et le Fleuve", lieu: "Télimélé", odd: [7, 9], to: "/livre/g2040-arbre-et-fleuve/lire", cover: "/images/g2040-tome8-couverture.webp" },
     { numero: 9, statut: "live", titre: "La Ligne qui traverse le pays", lieu: "Kindia", odd: [9, 11, 17], to: "/livre/g2040-la-ligne/lire", cover: "/images/g2040-tome9-couverture.webp" },
     { numero: 10, statut: "live", titre: "Le Port et la Pirogue", lieu: "Forécariah", odd: [8, 11, 14], to: "/livre/g2040-port-et-pirogue/lire", cover: "/images/g2040-tome10-couverture.webp" },
-    { numero: 11, statut: "soon" },
+    { numero: 11, statut: "live", titre: "Le Conseil des enfants", lieu: "Conakry", odd: [16, 10, 17], to: "/livre/g2040-conseil-des-enfants/lire", cover: "/images/g2040-tome11-couverture.webp" },
   ] as G2040Tome[],
 };

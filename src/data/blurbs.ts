@@ -371,6 +371,40 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-conseil-des-enfants": {
+    tagline: {
+      fr: "Simandou, ce n'est pas faire gagner une ville. C'est faire gagner toute la Guinée.",
+      en: "Simandou isn't about making one town win. It's about making all of Guinea win.",
+      ar: "سيماندو ليس أن تفوز مدينة واحدة، بل أن تفوز غينيا كلها.",
+      zh: "西曼杜不是让一座城市获胜，而是让整个几内亚获胜。",
+    },
+    blurb: {
+      fr: [
+        "La grande Ligne a traversé toute la Guinée, et le concours de la Simandou Academy touche à sa fin : sur des centaines de collèges, trente-quatre propositions, puis dix villes finalistes montent à Conakry.",
+        "Un garçon et une fille par ville : vingt enfants réunis trois jours dans une villa pour préparer la finale. En répétant, en mangeant, en riant de leurs accents, dix concurrentes deviennent une équipe.",
+        "On leur demande un discours de remerciement, et de choisir une seule voix pour le lire. Mais choisir une voix, c'est choisir une ville — et après trois jours ensemble, aucun n'en a envie.",
+        "Alors, à vingt mains, ils écrivent une lettre au Président : que chaque école gagne, qu'un Conseil des enfants donne un siège à chaque ville. Car Simandou, c'est faire gagner toute la Guinée. Génération 2040 · dès 10 ans.",
+      ],
+      en: [
+        "The great Line has crossed all of Guinea, and the Simandou Academy's competition is drawing to its end: out of hundreds of middle schools, thirty-four proposals, then ten finalist towns travel up to Conakry.",
+        "A boy and a girl from each town: twenty children gathered for three days in a villa to prepare for the final. Rehearsing, eating, laughing at one another's accents, ten rivals become a team.",
+        "They are asked for a thank-you speech, and to choose a single voice to read it. But to choose a voice is to choose a town — and after three days together, none of them wants to.",
+        "So, with twenty hands, they write a letter to the President: that every school should win, that a Children's Council should give every town a seat. For Simandou is about making all of Guinea win. Génération 2040 · ages 10 and up.",
+      ],
+      ar: [
+        "عبر الخط الكبير غينيا كلها، وتقترب مسابقة أكاديمية سيماندو من نهايتها: من بين مئات الإعداديات، أربعة وثلاثون مقترحًا، ثم عشر مدن نهائية تصعد إلى كوناكري.",
+        "ولد وبنت من كل مدينة: عشرون طفلًا جُمعوا ثلاثة أيام في فيلا لتحضير النهائي. بالتمرين والأكل والضحك من لهجاتهم، تصير عشر منافِسات فريقًا واحدًا.",
+        "يُطلب منهم خطاب شكر، واختيار صوت واحد ليقرأه. لكن اختيار صوت هو اختيار مدينة — وبعد ثلاثة أيام معًا، لا أحد يرغب في ذلك.",
+        "فيكتبون، بعشرين يدًا، رسالة إلى الرئيس: أن تفوز كل مدرسة، وأن يمنح مجلسٌ للأطفال مقعدًا لكل مدينة. لأن سيماندو هو أن تفوز غينيا كلها. Génération 2040 · من 10 سنوات فما فوق.",
+      ],
+      zh: [
+        "那条大铁路穿过了整个几内亚，西曼杜学院的比赛也接近尾声：从数百所初中里选出三十四份提案，再由十座入围城市来到科纳克里。",
+        "每座城市一个男孩、一个女孩：二十个孩子在别墅里聚了三天，准备决赛。一起排练、吃饭、笑彼此的口音，十个对手成了一支队伍。",
+        "他们被要求写一篇感谢词，并选出一个声音来念。可选一个声音，就是选一座城市——而在一起待了三天后，谁都不愿意。",
+        "于是，二十只手一起，给总统写了一封信：让每一所学校都获胜，让一个儿童议会给每座城市一个席位。因为西曼杜，就是让整个几内亚获胜。Génération 2040 · 适合 10 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",
