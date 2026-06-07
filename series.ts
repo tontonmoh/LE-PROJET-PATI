@@ -11,6 +11,7 @@ export type SeriesItem = {
   to: string; // route de la fiche-série
   auteur: string;
   episodes: { total: number; live: number };
+  episodeSlugs: string[]; // slugs des épisodes EN LIGNE (pour le badge « Nouvel épisode »)
 };
 
 export const SERIES: SeriesItem[] = [
@@ -23,6 +24,7 @@ export const SERIES: SeriesItem[] = [
     to: "/serie/generation-2040",
     auteur: "Mohamed Doumbouya",
     episodes: { total: 12, live: 1 },
+    episodeSlugs: ["g2040-tome0"],
   },
   {
     slug: TAADIDI.id,
@@ -36,5 +38,6 @@ export const SERIES: SeriesItem[] = [
       total: TAADIDI.episodes.length,
       live: TAADIDI.episodes.filter((e) => e.statut === "live").length,
     },
+    episodeSlugs: TAADIDI.episodes.filter((e) => e.statut === "live").map((e) => `taadidi-${e.numero}`),
   },
 ];
