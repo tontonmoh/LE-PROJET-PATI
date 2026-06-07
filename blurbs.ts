@@ -201,6 +201,40 @@ const BLURBS: Record<string, Blurb> = {
       ],
     },
   },
+  "g2040-montagnes-et-sources": {
+    tagline: {
+      fr: "À Dalaba, l'air est frais, l'eau jaillit, et le monde rêve de s'y reposer. Et si nos montagnes et nos sources étaient un trésor d'avenir ?",
+      en: "In Dalaba the air is cool, the water springs up, and the world dreams of resting there. What if our mountains and our springs were a treasure for the future?",
+      ar: "في Dalaba، الهواء عليلٌ، والماء يتفجّر، والعالم يحلم بأن يستريح هنا. فماذا لو كانت جبالنا وينابيعنا كنزًا للمستقبل؟",
+      zh: "在 Dalaba，空气清凉，泉水涌流，世界都梦想着来此歇息。倘若我们的群山与清泉，正是一笔面向未来的财富呢？",
+    },
+    blurb: {
+      fr: [
+        "Dalaba, la « petite Suisse » du Fouta Djallon, est perchée dans la fraîcheur des montagnes, là où naissent les sources qui abreuvent trois pays. Quand la nouvelle maîtresse, Madame Baldé, y monte en taxi depuis les plaines chaudes, elle découvre un autre pays : pins, brume, eau claire.",
+        "Pour le concours de la Simandou Academy, la classe de Binta croit que son seul trésor est « du passé » : la vieille case à palabres et l'artisanat des grands-mères, l'indigo et la vannerie.",
+        "Mais Madame Baldé a traversé le pays, et Miriam Makeba, « Mama Africa », était venue se reposer ici : le climat, l'eau et le calme de Dalaba sont un trésor d'avenir. Binta renverse la phrase « on part d'ici » en « on vient ici » — et trouve l'Objectif : protéger les forêts et les sources, faire de Dalaba la ville du repos, et faire vivre ses merveilles, jusqu'à son étonnante architecture aux plafonds tressés.",
+        "Un livre sur l'eau, le climat et la fierté de bâtir. Génération 2040 · dès 10 ans.",
+      ],
+      en: [
+        "Dalaba, the “little Switzerland” of the Fouta Djallon, is perched in the cool of the mountains, where the springs are born that water three countries. When the new teacher, Madame Baldé, climbs up by taxi from the hot plains, she discovers another country: pines, mist, clear water.",
+        "For the Simandou Academy contest, Binta's class believes its only treasure is “the past”: the old palaver house and their grandmothers' crafts, indigo and basketry.",
+        "But Madame Baldé has crossed the country, and Miriam Makeba, “Mama Africa,” once came here to rest: Dalaba's climate, water and calm are a treasure for the future. Binta turns the saying “we leave here” into “we come here” — and finds the Objective: to protect the forests and the springs, to make Dalaba the town of rest, and to keep its wonders alive, down to its astonishing woven-ceiling architecture.",
+        "A book about water, climate, and the pride of building. Génération 2040 · ages 10 and up.",
+      ],
+      ar: [
+        "Dalaba، «سويسرا الصغيرة» في Fouta Djallon، تتربّع في برودة الجبال، حيث تُولَد الينابيع التي تسقي ثلاثة بلدان. وحين تصعد إليها المعلّمة الجديدة، Madame Baldé، بالتاكسي من السهول الحارّة، تكتشف بلدًا آخر: صنوبرٌ، وضبابٌ، وماءٌ صافٍ.",
+        "من أجل مسابقة Simandou Academy، يظنّ صفّ Binta أنّ كنزه الوحيد «من الماضي»: دار المضافة العتيقة وحِرَفُ الجدّات، النيلة (indigo) والسلال (vannerie).",
+        "لكنّ Madame Baldé عبرت البلاد، و Miriam Makeba، «Mama Africa»، جاءت يومًا لتستريح هنا: مناخ Dalaba وماؤها وهدوؤها كنزٌ للمستقبل. تقلب Binta العبارة «من هنا نرحل» إلى «إلى هنا نأتي» — وتجد الهدف: حماية الغابات والينابيع، وجعل Dalaba مدينةَ الراحة، وإحياء عجائبها، حتّى عمارتها المذهلة ذات الأسقف المنسوجة.",
+        "كتابٌ عن الماء والمناخ وكبرياء البناء. Génération 2040 · من 10 سنوات فما فوق.",
+      ],
+      zh: [
+        "Dalaba，Fouta Djallon 的「小瑞士」，高踞在清凉的群山之间，那里诞生着滋养三个国家的水源。当新来的老师 Madame Baldé 从炎热的平原乘出租车上山时，她发现了另一个国度：松林、薄雾、清澈的泉水。",
+        "为了 Simandou Academy 的比赛，Binta 全班都以为自己唯一的宝藏「属于过去」：那座古老的议事大屋，还有祖母们的手艺——靛蓝（indigo）与编筐（vannerie）。",
+        "可 Madame Baldé 走遍了全国，而 Miriam Makeba——「Mama Africa」——也曾来此歇息：Dalaba 的气候、清水与宁静，正是一笔面向未来的财富。Binta 把「我们从这里离开」反转成「人们到这里来」——并找到了「目标」：守护森林与水源，把 Dalaba 变成歇息之城，让它的种种奇景活下去，直到那令人惊叹的、编织顶棚的建筑。",
+        "一本关于水、气候与建造之骄傲的书。Génération 2040 · 适合 10 岁以上。",
+      ],
+    },
+  },
   "maitre-ecole": {
     tagline: {
       fr: "Un vieux livre oublié, une kermesse à préparer… et une chanson qui relie cent ans de mémoire.",

@@ -23,8 +23,8 @@ export const SERIES: SeriesItem[] = [
     band: "Aventure",
     to: "/serie/generation-2040",
     auteur: "Mohamed Doumbouya",
-    episodes: { total: 12, live: 6 },
-    episodeSlugs: ["g2040-tome0", "g2040-foret-et-fer", "g2040-makona", "g2040-plaine-de-riz", "g2040-graine-et-huile", "g2040-tambour-et-livre"],
+    episodes: { total: 12, live: 7 },
+    episodeSlugs: ["g2040-tome0", "g2040-foret-et-fer", "g2040-makona", "g2040-plaine-de-riz", "g2040-graine-et-huile", "g2040-tambour-et-livre", "g2040-montagnes-et-sources"],
   },
   {
     slug: TAADIDI.id,
