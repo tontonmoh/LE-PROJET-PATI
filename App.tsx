@@ -36,6 +36,7 @@ import SimplePage from "./pages/SimplePage";
 import Ressources from "./pages/Ressources";
 import RessourceArticle from "./pages/RessourceArticle";
 import Contes from "./pages/Contes";
+import Atelier from "./pages/Atelier";
 
 const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
@@ -105,6 +106,7 @@ export default function App() {
           <Route key={slug} path={`/${slug}`} element={<SimplePage slug={slug} />} />
         ))}
 
+        <Route path="/atelier" element={<Atelier />} />
         <Route path="*" element={<Stub title="Page introuvable" />} />
       </Route>
     </Routes>
