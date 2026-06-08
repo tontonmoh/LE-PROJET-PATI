@@ -33,6 +33,9 @@ import Auth from "./pages/Auth";
 import Langue from "./pages/Langue";
 import FAQ from "./pages/FAQ";
 import SimplePage from "./pages/SimplePage";
+import Ressources from "./pages/Ressources";
+import RessourceArticle from "./pages/RessourceArticle";
+import Contes from "./pages/Contes";
 
 const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
@@ -59,6 +62,9 @@ export default function App() {
         <Route path="/livre/:id/quiz" element={<BookQuiz />} />
         <Route path="/serie/taadidi" element={<SerieTaadidi />} />
         <Route path="/serie/generation-2040" element={<SerieG2040 />} />
+        <Route path="/ressources" element={<Ressources />} />
+        <Route path="/ressources/:slug" element={<RessourceArticle />} />
+        <Route path="/ecouter-les-contes" element={<Contes />} />
         <Route path="/audio" element={<AudioBibliotheque />} />
         <Route path="/audio/:id" element={<AudioBibliotheque />} />
 
