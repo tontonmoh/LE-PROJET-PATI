@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, BookOpen, Hourglass, Bell, Check, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Hourglass, Bell, Check, Sparkles, Headphones } from "lucide-react";
 import { TAADIDI } from "../data/series/taadidi";
 import { track } from "../lib/track";
 
@@ -129,6 +129,12 @@ export default function SerieTaadidi() {
               <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: GOLD }} />
             </div>
           </div>
+
+          <Link to="/ecouter-les-contes"
+            className="inline-flex items-center gap-2 mt-8 rounded-full font-display font-bold px-6 py-3 hover:opacity-90 transition"
+            style={{ background: GOLD, color: GREEN }}>
+            <Headphones size={18} /> Écouter les contes
+          </Link>
             </div>
             <div className="mx-auto md:mx-0 w-full max-w-[280px] md:max-w-[320px]">
               <div className="rounded-2xl overflow-hidden border border-[#FFC93C]/30 ring-1 ring-black/30" style={{ boxShadow: "0 28px 55px -12px rgba(0,0,0,0.65)" }}>

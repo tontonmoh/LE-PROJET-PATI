@@ -6,9 +6,17 @@
 
 // Catalogue — adapte `audio` (de préférence même origine) et `cover`.
 const TALES = [
-  { id: "foret-et-fer",  title: "La Forêt et le Fer",          sub: "Génération 2040 · Épisode 1", audio: "audio/foret-et-fer.mp3",   cover: "" },
-  { id: "makona",        title: "Makona, un fleuve qui relie", sub: "Génération 2040 · Épisode 2", audio: "audio/makona.mp3",        cover: "" },
-  { id: "plaine-de-riz", title: "La Plaine de riz",            sub: "Génération 2040 · Épisode 3", audio: "audio/plaine-de-riz.mp3", cover: "" },
+  { id: "00-intro",         title: "Introduction",         sub: "Kini Bangaly · conte en soussou", audio: "audio/00-intro.mp3",         cover: "" },
+  { id: "01-sounkhori",     title: "Sounkhori",            sub: "Conte en soussou · Kini Bangaly", audio: "audio/01-sounkhori.mp3",     cover: "" },
+  { id: "02-taadidi",       title: "Taadidi",              sub: "Conte en soussou · Kini Bangaly", audio: "audio/02-taadidi.mp3",       cover: "" },
+  { id: "03-soe-rabori",    title: "Soe rabori",           sub: "Conte en soussou · Kini Bangaly", audio: "audio/03-soe-rabori.mp3",    cover: "" },
+  { id: "04-ta-bare",       title: "Ta bare",              sub: "Conte en soussou · Kini Bangaly", audio: "audio/04-ta-bare.mp3",       cover: "" },
+  { id: "05-yawara",        title: "Yawara",               sub: "Conte en soussou · Kini Bangaly", audio: "audio/05-yawara.mp3",        cover: "" },
+  { id: "06-se-riba",       title: "Se riba",              sub: "Conte en soussou · Kini Bangaly", audio: "audio/06-se-riba.mp3",       cover: "" },
+  { id: "07-bare-n-fougna", title: "Bare n fougna",        sub: "Conte en soussou · Kini Bangaly", audio: "audio/07-bare-n-fougna.mp3", cover: "" },
+  { id: "08-bamba-toumani", title: "Bamba Toumani",        sub: "Conte en soussou · Kini Bangaly", audio: "audio/08-bamba-toumani.mp3", cover: "" },
+  { id: "09-kobadia",       title: "Kobadia",              sub: "Conte en soussou · Kini Bangaly", audio: "audio/09-kobadia.mp3",       cover: "" },
+  { id: "10-kini-special",  title: "Spécial Kini Bangaly", sub: "Conte en soussou · 66 min",       audio: "audio/10-kini-special.mp3", cover: "" },
 ];
 
 const AUDIO_CACHE = "pati-audio-v1"; // doit matcher sw.js
@@ -151,7 +159,7 @@ function playTale(t, fromStart) {
   audio.play().catch(() => {});
   document.querySelectorAll(".tale").forEach((r) => r.classList.toggle("active", r.dataset.id === t.id));
   if ("mediaSession" in navigator) {
-    navigator.mediaSession.metadata = new MediaMetadata({ title:t.title, artist:"Contes Pati", album:"Génération 2040" });
+    navigator.mediaSession.metadata = new MediaMetadata({ title:t.title, artist:"Contes Pati", album:"Kini Bangaly · conte en soussou" });
     navigator.mediaSession.setActionHandler("previoustrack", () => step(-1));
     navigator.mediaSession.setActionHandler("nexttrack", () => step(1));
   }
