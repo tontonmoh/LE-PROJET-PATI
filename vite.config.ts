@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "prompt",
+      registerType: 'autoUpdate',
       includeAssets: ["favicon.ico", "icons/apple-touch-icon-180.png"],
       manifest: {
         name: "PATI — Projet Pati",
