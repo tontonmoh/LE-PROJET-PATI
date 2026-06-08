@@ -368,3 +368,8 @@ h1, h2, h3, .font-display {
 @media (prefers-reduced-motion: reduce) {
   .ticker-track { animation: none; }
 }
+
+/* ===== Mode léger (low-bandwidth) ===== */
+html.lite [data-decorative]{display:none!important}
+html.lite .bg-decor{background-image:none!important}
+html.lite *{animation-duration:0s!important;animation-iteration-count:1!important;transition:none!important}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Headphones, HelpCircle, Heart, Menu, X, Download, Puzzle, Users } from "lucide-react";
+import LowBandwidthToggle from "./LowBandwidthToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,7 @@ export default function Navbar() {
             <Link to="/atelier" className={`navbar-link flex items-center gap-1.5 ${active("/atelier") ? "text-white bg-white/10" : ""}`}>
               <Users size={16} />L'Atelier
             </Link>
+            <LowBandwidthToggle />
           </div>
 
           <Link
@@ -95,6 +97,7 @@ export default function Navbar() {
           >
             <Users size={18} />L'Atelier
           </Link>
+          <LowBandwidthToggle compact />
           <div className="mt-3 pt-3 border-t border-white/20">
             <Link
               to="/contribuer"

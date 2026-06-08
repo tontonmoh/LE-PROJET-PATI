@@ -34,6 +34,9 @@ import Langue from "./pages/Langue";
 import FAQ from "./pages/FAQ";
 import SimplePage from "./pages/SimplePage";
 import Contes from "./pages/Contes";
+import Atelier from "./pages/Atelier";
+import { LiteProvider } from "./lite/LiteContext";
+import InstallPati from "./components/InstallPati";
 
 const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
@@ -47,62 +50,66 @@ export default function App() {
   }, [location]);
 
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+    <LiteProvider>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/binta-diallo" element={<BintaDiallo />} />
-        <Route path="/livre/:id/lire" element={<BookReaderML />} />
-        <Route path="/catalogue" element={<Catalogue />} />
-        <Route path="/bibliotheque" element={<Catalogue />} />
-        <Route path="/livre/:id" element={<LivreDetail />} />
-        <Route path="/livre/:id/texte" element={<BookReader />} />
-        <Route path="/livre/:id/quiz" element={<BookQuiz />} />
-        <Route path="/serie/taadidi" element={<SerieTaadidi />} />
-        <Route path="/serie/generation-2040" element={<SerieG2040 />} />
-        <Route path="/audio" element={<AudioBibliotheque />} />
-        <Route path="/audio/:id" element={<AudioBibliotheque />} />
+          <Route path="/binta-diallo" element={<BintaDiallo />} />
+          <Route path="/livre/:id/lire" element={<BookReaderML />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/bibliotheque" element={<Catalogue />} />
+          <Route path="/livre/:id" element={<LivreDetail />} />
+          <Route path="/livre/:id/texte" element={<BookReader />} />
+          <Route path="/livre/:id/quiz" element={<BookQuiz />} />
+          <Route path="/serie/taadidi" element={<SerieTaadidi />} />
+          <Route path="/serie/generation-2040" element={<SerieG2040 />} />
+          <Route path="/ecouter-les-contes" element={<Contes />} />
+          <Route path="/audio" element={<AudioBibliotheque />} />
+          <Route path="/audio/:id" element={<AudioBibliotheque />} />
 
-        <Route path="/decouvrir-son-genie" element={<DecouvrirTonGenie />} />
-        <Route path="/orientation" element={<DecouvrirTonGenie />} />
-        <Route path="/orientation/questionnaire" element={<BilanSimandou />} />
-        <Route path="/challenge" element={<ChallengePati />} />
+          <Route path="/decouvrir-son-genie" element={<DecouvrirTonGenie />} />
+          <Route path="/orientation" element={<DecouvrirTonGenie />} />
+          <Route path="/orientation/questionnaire" element={<BilanSimandou />} />
+          <Route path="/challenge" element={<ChallengePati />} />
 
-        <Route path="/espace-conteurs" element={<EspaceConteurs />} />
-        <Route path="/espace-enseignants" element={<EspaceEnseignants />} />
-        <Route path="/espace-parents" element={<EspaceParents />} />
-        <Route path="/espace-artistes" element={<EspaceArtistes />} />
-        <Route path="/clubs" element={<ClubsPati />} />
+          <Route path="/espace-conteurs" element={<EspaceConteurs />} />
+          <Route path="/espace-enseignants" element={<EspaceEnseignants />} />
+          <Route path="/espace-parents" element={<EspaceParents />} />
+          <Route path="/espace-artistes" element={<EspaceArtistes />} />
+          <Route path="/clubs" element={<ClubsPati />} />
 
-        <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
-        <Route path="/sobela" element={<Sobela />} />
-        <Route path="/impact" element={<ImpactReport />} />
-        <Route path="/contribuer" element={<Contribuer />} />
-        <Route path="/collaboration" element={<Collaboration />} />
-        <Route path="/appli-mobile" element={<AppliMobile />} />
-        <Route path="/personnalisation" element={<Personnalisation />} />
-        <Route path="/defi" element={<LeDefi />} />
-        <Route path="/assistance" element={<FAQ />} />
+          <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
+          <Route path="/sobela" element={<Sobela />} />
+          <Route path="/impact" element={<ImpactReport />} />
+          <Route path="/contribuer" element={<Contribuer />} />
+          <Route path="/collaboration" element={<Collaboration />} />
+          <Route path="/appli-mobile" element={<AppliMobile />} />
+          <Route path="/personnalisation" element={<Personnalisation />} />
+          <Route path="/defi" element={<LeDefi />} />
+          <Route path="/assistance" element={<FAQ />} />
 
-        <Route path="/abonnement" element={<AccesPati />} />
-        <Route path="/acces/free" element={<AccesPati />} />
-        <Route path="/acces/freemium" element={<AccesPati />} />
-        <Route path="/acces/famille" element={<AccesPati />} />
-        <Route path="/acces/ecole" element={<AccesPati />} />
-        <Route path="/compte" element={<Auth mode="compte" />} />
-        <Route path="/connexion" element={<Auth mode="connexion" />} />
-        <Route path="/inscription" element={<Auth mode="inscription" />} />
+          <Route path="/abonnement" element={<AccesPati />} />
+          <Route path="/acces/free" element={<AccesPati />} />
+          <Route path="/acces/freemium" element={<AccesPati />} />
+          <Route path="/acces/famille" element={<AccesPati />} />
+          <Route path="/acces/ecole" element={<AccesPati />} />
+          <Route path="/compte" element={<Auth mode="compte" />} />
+          <Route path="/connexion" element={<Auth mode="connexion" />} />
+          <Route path="/inscription" element={<Auth mode="inscription" />} />
 
-        <Route path="/langue" element={<Langue />} />
-        <Route path="/langues" element={<Langue />} />
+          <Route path="/langue" element={<Langue />} />
+          <Route path="/langues" element={<Langue />} />
 
-        {SIMPLE.map((slug) => (
-          <Route key={slug} path={`/${slug}`} element={<SimplePage slug={slug} />} />
-        ))}
+          {SIMPLE.map((slug) => (
+            <Route key={slug} path={`/${slug}`} element={<SimplePage slug={slug} />} />
+          ))}
 
-        <Route path="/ecouter-les-contes" element={<Contes />} />
-        <Route path="*" element={<Stub title="Page introuvable" />} />
-      </Route>
-    </Routes>
+          <Route path="/atelier" element={<Atelier />} />
+          <Route path="*" element={<Stub title="Page introuvable" />} />
+        </Route>
+      </Routes>
+      <InstallPati />
+    </LiteProvider>
   );
 }
