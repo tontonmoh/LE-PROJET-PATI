@@ -34,7 +34,7 @@ import Langue from "./pages/Langue";
 import FAQ from "./pages/FAQ";
 import SimplePage from "./pages/SimplePage";
 
-const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays"];
+const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
 export default function App() {
   const location = useLocation();
