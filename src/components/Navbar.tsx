@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Star, HelpCircle, Heart, Menu, X, Download, Puzzle } from "lucide-react";
+import { Headphones, HelpCircle, Heart, Menu, X, Download, Puzzle } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -18,10 +18,10 @@ export default function Navbar() {
           {/* Liens desktop */}
           <div className="hidden md:flex items-center gap-1">
             <Link
-              to="/binta-diallo"
-              className={`navbar-link flex items-center gap-1.5 ${active("/binta-diallo") ? "text-white bg-white/10" : ""} bg-[#c4551a]/20 text-[#F5C518] hover:bg-[#c4551a]/30`}
+              to="/ecouter-les-contes"
+              className={`navbar-link flex items-center gap-1.5 ${active("/ecouter-les-contes") ? "text-white bg-white/10" : ""}`}
             >
-              <Star size={16} />Binta
+              <Headphones size={16} />Contes
             </Link>
             <Link to="/defi" className={`navbar-link flex items-center gap-1.5 ${active("/defi") ? "text-white bg-white/10" : ""}`}>
               <Puzzle size={16} />Le Défi
@@ -58,11 +58,11 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-[#0A4D3C] border-t border-white/10 px-4 pb-4">
           <Link
-            to="/binta-diallo"
-            className={`navbar-link block py-3 mt-2 flex items-center gap-2 ${active("/binta-diallo") ? "text-[#F5C518]" : ""}`}
+            to="/ecouter-les-contes"
+            className={`navbar-link block py-3 mt-2 flex items-center gap-2 ${active("/ecouter-les-contes") ? "text-[#F5C518]" : ""}`}
             onClick={() => setOpen(false)}
           >
-            <Star size={18} />Binta Diallo
+            <Headphones size={18} />Contes
           </Link>
           <Link
             to="/defi"
