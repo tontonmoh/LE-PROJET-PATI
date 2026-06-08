@@ -33,6 +33,7 @@ import Auth from "./pages/Auth";
 import Langue from "./pages/Langue";
 import FAQ from "./pages/FAQ";
 import SimplePage from "./pages/SimplePage";
+import Contes from "./pages/Contes";
 
 const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
@@ -99,6 +100,7 @@ export default function App() {
           <Route key={slug} path={`/${slug}`} element={<SimplePage slug={slug} />} />
         ))}
 
+        <Route path="/ecouter-les-contes" element={<Contes />} />
         <Route path="*" element={<Stub title="Page introuvable" />} />
       </Route>
     </Routes>

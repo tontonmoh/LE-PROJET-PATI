@@ -38,7 +38,7 @@ export default function FeaturedHero() {
             <Link to="/catalogue" className="btn-kid bg-[#FF6B4A] text-white shadow-kid">
               <BookOpen size={18} /> Lire les livres
             </Link>
-            <Link to="/binta-diallo" className="btn-kid bg-[#0F6E56] text-white">
+            <Link to="/ecouter-les-contes" className="btn-kid bg-[#0F6E56] text-white">
               <Headphones size={18} /> Écouter les contes
             </Link>
             <a href={SOCIAL.youtube} target="_blank" rel="noopener noreferrer" className="btn-kid bg-[#FFC93C] text-[#0D2B1A]">
