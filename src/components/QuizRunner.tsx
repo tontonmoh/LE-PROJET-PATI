@@ -1,8 +1,10 @@
+import { bumpCounter } from '../lib/publicStats';
 import { useState } from "react";
 import { Check, X, Sparkles, RefreshCw, Lightbulb } from "lucide-react";
 import type { QuizQ } from "../data/quizzes";
 import { track } from "../lib/track";
 import { logProgress } from "../lib/progress";
+import { bumpCounter } from "../lib/publicStats";
 const TIERS = [
   { min: 0.9, t: "Ambassadeur PATI", d: "Exceptionnel ! Tu connais la Guinée sur le bout des doigts.", c: "#FFC93C" },
   { min: 0.7, t: "Expert", d: "Très fort ! Tu maîtrises l'essentiel de la culture guinéenne.", c: "#0F6E56" },
@@ -28,8 +30,9 @@ export default function QuizRunner({ questions, onRestart, id }: { questions: Qu
     if (i + 1 < questions.length) { setI(i + 1); setPicked(null); }
     else {
       track("quiz_termine", { livre: id, score, total: questions.length });
+      bumpCounter("quiz_joues");
       logProgress("quiz_fini", id, Math.round((score / questions.length) * 100));
-      setDone(true);
+      setDone(true);bumpCounter('quiz_joues');
     }
   };
 

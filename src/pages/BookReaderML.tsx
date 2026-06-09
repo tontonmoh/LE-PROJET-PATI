@@ -7,6 +7,7 @@ import { getBook } from "../data/books";
 import { track } from "../lib/track";
 import { recordProgress, resumePage } from "../lib/reading";
 import { logProgress } from "../lib/progress";
+import { bumpCounter } from "../lib/publicStats";
 import { TAADIDI } from "../data/series/taadidi";
 
 export default function BookReaderML() {
@@ -39,11 +40,14 @@ export default function BookReaderML() {
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [i]);
   // Mémoriser la progression locale (dernière page atteinte = livre lu)
   useEffect(() => { if (i >= 0 && total > 0) recordProgress(id || "", i, total); }, [i, total, id]);
-// Étape 2 : dernière page atteinte + parent connecté -> on enregistre "livre_lu" dans Supabase (1x par livre)
+  // Dernière page atteinte (1x par livre, grâce à loggedRef) :
+  //  - logProgress("livre_lu") -> Supabase, seulement si parent connecté (Espace Parents)
+  //  - bumpCounter("livres_lus") -> compteur public, pour TOUT LE MONDE (anonymes inclus)
   useEffect(() => {
     if (total > 0 && i === total - 1 && loggedRef.current !== (id || "")) {
       loggedRef.current = id || "";
       logProgress("livre_lu", id || "");
+      bumpCounter("livres_lus");
     }
   }, [i, total, id]);
   const go = useCallback((d: number) => {
