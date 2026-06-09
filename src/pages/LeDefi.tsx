@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Puzzle, ArrowLeft, Maximize2, Minimize2 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+import { logProgress } from "../lib/progress";
 
 export default function LeDefi() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -16,6 +17,21 @@ export default function LeDefi() {
       frameRef.current?.contentWindow?.postMessage({ type: "pati-config", url: SB_URL, key: SB_KEY }, "*");
     }
   };
+
+  // Écoute les messages du jeu (iframe) : chaque préfecture bien placée -> progression de l'enfant actif.
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (frameRef.current && e.source !== frameRef.current.contentWindow) return;
+      const d = e.data;
+      if (d && d.type === "pati-progress" && d.kind === "prefecture" && d.ref) {
+        logProgress("prefecture_trouvee", String(d.ref));
+      } if (d && d.type === "pati-progress" && d.kind === "defi" && typeof d.seconds === "number") {
+        logProgress("defi_fini", undefined, d.seconds);
+      }
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
 
   const enter = () => {
     setFs(true);

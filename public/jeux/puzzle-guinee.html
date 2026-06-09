@@ -328,6 +328,7 @@ function attachDrag(p){
 function snap(p){p.dx=0;p.dy=0;setT(p);p.placed=true;p.el.classList.add('placed','pop');
  p.path.style.fill=p.color;setTimeout(()=>p.el.classList.remove('pop'),420);
  game.placedCount++;document.getElementById('placed').textContent=game.placedCount;
+ try{parent.postMessage({type:'pati-progress',kind:'prefecture',ref:p.data&&p.data.name},'*');}catch(e){}
  updateLeft();raiseUnplaced();
  if(!game.pieces.some(p=>p._parked&&!p.placed)){mapViewBox();removeTray();}
  if(game.placedCount===game.pieces.length)finish();}
@@ -418,6 +419,7 @@ function resetTimer(){clearInterval(game.timer);const te=document.getElementById
 async function finish(){clearInterval(game.timer);mapViewBox();removeTray();const wasStopped=game.stopped;finsInc();track('defi_termine',{stopped:wasStopped});game.started=false;game.stopped=false;
  const sb=document.getElementById('stopBtn');if(sb){sb.textContent='Stopper le chrono';sb.classList.remove('on');}
  const sec=Math.round((Date.now()-game.startTime)/1000);const ts=fmt(sec);game.lastTime=wasStopped?'—':ts;
+ if(!wasStopped){try{parent.postMessage({type:'pati-progress',kind:'defi',seconds:sec},'*');}catch(e){}}
  const te=document.getElementById('time');if(!wasStopped)te.textContent=ts;te.classList.remove('low');
  document.getElementById('timeLbl').textContent=wasStopped?'arrêté':'temps';
  document.getElementById('winTime').textContent=wasStopped?'—':ts;

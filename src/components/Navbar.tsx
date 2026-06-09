@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Headphones, HelpCircle, Heart, Menu, X, Download, Puzzle, Users } from "lucide-react";
+import { Headphones, Heart, Menu, X, Download, Puzzle, Users, UserCircle } from "lucide-react";
 import LowBandwidthToggle from "./LowBandwidthToggle";
 
 export default function Navbar() {
@@ -33,11 +33,11 @@ export default function Navbar() {
             >
               <Download size={16} />Installer l'appli
             </Link>
-            <Link to="/assistance" className={`navbar-link flex items-center gap-1.5 ${active("/assistance") ? "text-white bg-white/10" : ""}`}>
-              <HelpCircle size={16} />Assistance
-            </Link>
             <Link to="/atelier" className={`navbar-link flex items-center gap-1.5 ${active("/atelier") ? "text-white bg-white/10" : ""}`}>
               <Users size={16} />L'Atelier
+            </Link>
+            <Link to="/compte" className={`navbar-link flex items-center gap-1.5 ${active("/compte") ? "text-white bg-white/10" : ""}`}>
+              <UserCircle size={16} />Mon compte
             </Link>
             <LowBandwidthToggle />
           </div>
@@ -84,18 +84,18 @@ export default function Navbar() {
             <Download size={18} />Installer l'appli
           </Link>
           <Link
-            to="/assistance"
-            className={`navbar-link block py-3 flex items-center gap-2 ${active("/assistance") ? "text-[#F5C518]" : ""}`}
-            onClick={() => setOpen(false)}
-          >
-            <HelpCircle size={18} />Assistance
-          </Link>
-          <Link
             to="/atelier"
             className={`navbar-link block py-3 flex items-center gap-2 ${active("/atelier") ? "text-[#F5C518]" : ""}`}
             onClick={() => setOpen(false)}
           >
             <Users size={18} />L'Atelier
+          </Link>
+          <Link
+            to="/compte"
+            className={`navbar-link block py-3 flex items-center gap-2 ${active("/compte") ? "text-[#F5C518]" : ""}`}
+            onClick={() => setOpen(false)}
+          >
+            <UserCircle size={18} />Mon compte
           </Link>
           <LowBandwidthToggle compact />
           <div className="mt-3 pt-3 border-t border-white/20">

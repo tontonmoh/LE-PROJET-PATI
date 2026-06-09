@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 import Stub from "./pages/Stub";
 import { LiteProvider } from "./lite/LiteContext";
 import InstallPati from "./components/InstallPati";
-
+import { AuthProvider } from "./auth/AuthContext";
+import WhoIsReading from "./components/WhoIsReading";
 // Pages chargées à la demande (code-splitting par route)
 const BintaDiallo = lazy(() => import("./pages/BintaDiallo"));
 const LivreDetail = lazy(() => import("./pages/LivreDetail"));
@@ -39,7 +40,7 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const SimplePage = lazy(() => import("./pages/SimplePage"));
 const Contes = lazy(() => import("./pages/Contes"));
 const Atelier = lazy(() => import("./pages/Atelier"));
-
+const ParentDashboard = lazy(() => import("./pages/ParentDashboard"));
 const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
 function PageLoader() {
@@ -60,7 +61,7 @@ export default function App() {
   }, [location]);
 
   return (
-    <LiteProvider>
+    <AuthProvider><LiteProvider>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<Layout />}>
@@ -117,11 +118,12 @@ export default function App() {
             ))}
 
             <Route path="/atelier" element={<Atelier />} />
+            <Route path="/parent" element={<ParentDashboard />} />
             <Route path="*" element={<Stub title="Page introuvable" />} />
           </Route>
         </Routes>
       </Suspense>
-      <InstallPati />
-    </LiteProvider>
+      <InstallPati /> <WhoIsReading />
+    </LiteProvider></AuthProvider>
   );
 }

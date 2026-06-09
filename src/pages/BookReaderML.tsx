@@ -6,6 +6,7 @@ import { getBlurb } from "../data/blurbs";
 import { getBook } from "../data/books";
 import { track } from "../lib/track";
 import { recordProgress, resumePage } from "../lib/reading";
+import { logProgress } from "../lib/progress";
 import { TAADIDI } from "../data/series/taadidi";
 
 export default function BookReaderML() {
@@ -14,7 +15,7 @@ export default function BookReaderML() {
   const reader = READERS[id || ""];
   const [lang, setLang] = useState(reader ? reader.langs[0] : "fr");
   const [i, setI] = useState(-1); // -1 = couverture
-
+  const loggedRef = useRef("");
   const book = reader?.books[lang];
   const taglineMap = getBlurb(id || "")?.tagline as Record<string, string> | undefined;
   const tagline = taglineMap?.[lang];
@@ -38,7 +39,13 @@ export default function BookReaderML() {
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [i]);
   // Mémoriser la progression locale (dernière page atteinte = livre lu)
   useEffect(() => { if (i >= 0 && total > 0) recordProgress(id || "", i, total); }, [i, total, id]);
-
+// Étape 2 : dernière page atteinte + parent connecté -> on enregistre "livre_lu" dans Supabase (1x par livre)
+  useEffect(() => {
+    if (total > 0 && i === total - 1 && loggedRef.current !== (id || "")) {
+      loggedRef.current = id || "";
+      logProgress("livre_lu", id || "");
+    }
+  }, [i, total, id]);
   const go = useCallback((d: number) => {
     setI((prev) => Math.max(-1, Math.min(total - 1, prev + d)));
   }, [total]);
