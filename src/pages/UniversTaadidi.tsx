@@ -186,6 +186,60 @@ export default function UniversTaadidi() {
       <TaadidiLignee />
 
       <div className="max-w-5xl mx-auto px-6 py-14">
+        {/* ===== LES ÉPISODES (par phase) ===== */}
+        <h2 className="text-2xl md:text-3xl text-[#0D2B1A] mt-14 mb-1" style={{ fontFamily: DISPLAY }}>Les épisodes</h2>
+        <p className="text-[#3a4a42] font-semibold mb-7">{liveCount} en ligne · saga prévue de 28. Lis ceux qui sont prêts.</p>
+
+        <div className="space-y-8">
+          {PHASES.map((p, i) => {
+            const inPhase = eps.filter((e) => e.numero >= p.range[0] && e.numero <= p.range[1]);
+            return (
+              <div key={p.n}>
+                <div className="flex items-center gap-2.5 mb-4">
+                  <MoonPhase idx={i} />
+                  <h3 className="font-display font-bold text-[#0D2B1A]">{p.lune} <span className="text-[#8a9389] font-semibold text-sm">· {p.etape}</span></h3>
+                </div>
+
+                {inPhase.length === 0 ? (
+                  <div className="rounded-[1.25rem] border-2 border-dashed border-[#0D2B1A]/12 p-5 bg-[#0D2B1A]/[0.015] flex items-center gap-3">
+                    <Hourglass size={18} className="text-[#0D2B1A]/35" />
+                    <p className="text-[#0D2B1A]/45 font-semibold text-sm">
+                      Bientôt{p.pivot ? <> — dont l'épisode <span className="font-display font-bold">« {p.pivot} »</span></> : null}.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {inPhase.map((ep) => {
+                      const num = String(ep.numero).padStart(2, "0");
+                      if (ep.statut === "live") {
+                        return (
+                          <div key={ep.numero} className="bg-white rounded-[1.5rem] shadow-kid p-6 flex flex-col">
+                            <div className="font-display font-bold text-4xl mb-3" style={{ color: ACCENT }}>{num}</div>
+                            <h4 className="font-display font-bold text-lg text-[#0D2B1A] mb-2 leading-snug">{ep.titre.fr}</h4>
+                            <p className="text-[#5a6b62] font-semibold text-sm mb-5 flex-1">{ep.teaser?.fr}</p>
+                            <Link to={`/livre/taadidi-${ep.numero}/lire`} className="btn-kid text-white shadow-kid self-start" style={{ background: ACCENT }}>
+                              <BookOpen size={18} /> Lire
+                            </Link>
+                          </div>
+                        );
+                      }
+                      return (
+                        <div key={ep.numero} className="rounded-[1.5rem] border-2 border-dashed border-[#0D2B1A]/15 p-6 flex flex-col items-start bg-[#0D2B1A]/[0.02]">
+                          <div className="font-display font-bold text-4xl mb-3 text-[#0D2B1A]/25">{num}</div>
+                          <div className="flex items-center gap-2 font-display font-semibold text-sm text-[#0D2B1A]/45 mb-2">
+                            <Hourglass size={16} /> Bientôt
+                          </div>
+                          <p className="text-[#0D2B1A]/40 font-semibold text-sm flex-1">{ep.teaser?.fr ?? "Un nouveau tour de Taadidi se prépare…"}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
         {/* ===== L'ARC — KIKÉ → SOGUÉ ===== */}
         <h2 className="text-2xl md:text-3xl text-[#0D2B1A] mb-1" style={{ fontFamily: DISPLAY }}>L'arc de Taadidi</h2>
         <p className="text-[#3a4a42] font-semibold mb-7 max-w-2xl">
@@ -247,60 +301,6 @@ export default function UniversTaadidi() {
             <Sparkles size={22} className="text-[#0D2B1A]/30 mb-2" />
             <p className="text-[#0D2B1A]/45 font-display font-semibold text-sm">Les sœurs, l'épouse…<br/>à venir au fil de la saga</p>
           </div>
-        </div>
-
-        {/* ===== LES ÉPISODES (par phase) ===== */}
-        <h2 className="text-2xl md:text-3xl text-[#0D2B1A] mt-14 mb-1" style={{ fontFamily: DISPLAY }}>Les épisodes</h2>
-        <p className="text-[#3a4a42] font-semibold mb-7">{liveCount} en ligne · saga prévue de 28. Lis ceux qui sont prêts.</p>
-
-        <div className="space-y-8">
-          {PHASES.map((p, i) => {
-            const inPhase = eps.filter((e) => e.numero >= p.range[0] && e.numero <= p.range[1]);
-            return (
-              <div key={p.n}>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <MoonPhase idx={i} />
-                  <h3 className="font-display font-bold text-[#0D2B1A]">{p.lune} <span className="text-[#8a9389] font-semibold text-sm">· {p.etape}</span></h3>
-                </div>
-
-                {inPhase.length === 0 ? (
-                  <div className="rounded-[1.25rem] border-2 border-dashed border-[#0D2B1A]/12 p-5 bg-[#0D2B1A]/[0.015] flex items-center gap-3">
-                    <Hourglass size={18} className="text-[#0D2B1A]/35" />
-                    <p className="text-[#0D2B1A]/45 font-semibold text-sm">
-                      Bientôt{p.pivot ? <> — dont l'épisode <span className="font-display font-bold">« {p.pivot} »</span></> : null}.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {inPhase.map((ep) => {
-                      const num = String(ep.numero).padStart(2, "0");
-                      if (ep.statut === "live") {
-                        return (
-                          <div key={ep.numero} className="bg-white rounded-[1.5rem] shadow-kid p-6 flex flex-col">
-                            <div className="font-display font-bold text-4xl mb-3" style={{ color: ACCENT }}>{num}</div>
-                            <h4 className="font-display font-bold text-lg text-[#0D2B1A] mb-2 leading-snug">{ep.titre.fr}</h4>
-                            <p className="text-[#5a6b62] font-semibold text-sm mb-5 flex-1">{ep.teaser?.fr}</p>
-                            <Link to={`/livre/taadidi-${ep.numero}/lire`} className="btn-kid text-white shadow-kid self-start" style={{ background: ACCENT }}>
-                              <BookOpen size={18} /> Lire
-                            </Link>
-                          </div>
-                        );
-                      }
-                      return (
-                        <div key={ep.numero} className="rounded-[1.5rem] border-2 border-dashed border-[#0D2B1A]/15 p-6 flex flex-col items-start bg-[#0D2B1A]/[0.02]">
-                          <div className="font-display font-bold text-4xl mb-3 text-[#0D2B1A]/25">{num}</div>
-                          <div className="flex items-center gap-2 font-display font-semibold text-sm text-[#0D2B1A]/45 mb-2">
-                            <Hourglass size={16} /> Bientôt
-                          </div>
-                          <p className="text-[#0D2B1A]/40 font-semibold text-sm flex-1">{ep.teaser?.fr ?? "Un nouveau tour de Taadidi se prépare…"}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            );
-          })}
         </div>
 
         {/* ===== JOUER ===== */}
