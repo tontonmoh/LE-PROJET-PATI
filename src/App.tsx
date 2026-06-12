@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Stub from "./pages/Stub";
@@ -7,13 +7,15 @@ import { LiteProvider } from "./lite/LiteContext";
 import InstallPati from "./components/InstallPati";
 import { AuthProvider } from "./auth/AuthContext";
 import WhoIsReading from "./components/WhoIsReading";
+import AccountTypeGate from "./components/AccountTypeGate";
+import EpisodeGabarit from "./components/EpisodeGabarit";
 // Pages chargées à la demande (code-splitting par route)
 const BintaDiallo = lazy(() => import("./pages/BintaDiallo"));
 const LivreDetail = lazy(() => import("./pages/LivreDetail"));
 const BookReader = lazy(() => import("./pages/BookReader"));
 const BookQuiz = lazy(() => import("./pages/BookQuiz"));
 const BookReaderML = lazy(() => import("./pages/BookReaderML"));
-const SerieTaadidi = lazy(() => import("./pages/SerieTaadidi"));
+const UniversTaadidi = lazy(() => import("./pages/UniversTaadidi"));
 const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
@@ -28,6 +30,7 @@ const ClubsPati = lazy(() => import("./pages/ClubsPati"));
 const AtelierSolidaire = lazy(() => import("./pages/AtelierSolidaire"));
 const Sobela = lazy(() => import("./pages/Sobela"));
 const ImpactReport = lazy(() => import("./pages/ImpactReport"));
+const Presse = lazy(() => import("./pages/Presse"));
 const Contribuer = lazy(() => import("./pages/Contribuer"));
 const Collaboration = lazy(() => import("./pages/Collaboration"));
 const AppliMobile = lazy(() => import("./pages/AppliMobile"));
@@ -41,7 +44,7 @@ const SimplePage = lazy(() => import("./pages/SimplePage"));
 const Contes = lazy(() => import("./pages/Contes"));
 const Atelier = lazy(() => import("./pages/Atelier"));
 const ParentDashboard = lazy(() => import("./pages/ParentDashboard"));
-const SIMPLE = ["a-propos", "partenaires", "presse", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
+const SIMPLE = ["a-propos", "partenaires", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
 function PageLoader() {
   return (
@@ -74,7 +77,9 @@ export default function App() {
             <Route path="/livre/:id" element={<LivreDetail />} />
             <Route path="/livre/:id/texte" element={<BookReader />} />
             <Route path="/livre/:id/quiz" element={<BookQuiz />} />
-            <Route path="/serie/taadidi" element={<SerieTaadidi />} />
+            <Route path="/univers/taadidi" element={<UniversTaadidi />} />
+            <Route path="/gabarit-test" element={<EpisodeGabarit />} />
+            <Route path="/serie/taadidi" element={<Navigate to="/univers/taadidi" replace />} />
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
@@ -94,6 +99,7 @@ export default function App() {
             <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />
+            <Route path="/presse" element={<Presse />} />
             <Route path="/contribuer" element={<Contribuer />} />
             <Route path="/collaboration" element={<Collaboration />} />
             <Route path="/appli-mobile" element={<AppliMobile />} />
@@ -123,7 +129,7 @@ export default function App() {
           </Route>
         </Routes>
       </Suspense>
-      <InstallPati /> <WhoIsReading />
+      <InstallPati /> <WhoIsReading /> <AccountTypeGate />
     </LiteProvider></AuthProvider>
   );
 }

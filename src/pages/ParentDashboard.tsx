@@ -10,6 +10,8 @@ import type { ChildProfile } from "../lib/profiles";
 import GuineeMap from "../components/GuineeMap";
 import { PREFECTURE_COUNT } from "../data/guinee-map";
 import { generateMonthlyReport } from "../lib/monthlyReport";
+import { getAccountType } from "../lib/accountType";
+import type { AccountType } from "../lib/accountType";
 
 type Ev = { type: string; ref: string | null; value: number | null; profile_id: string | null; created_at: string };
 
@@ -27,6 +29,31 @@ function fmtTime(sec: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
+// Libellés selon le type de compte
+function labelsFor(mode: AccountType) {
+  if (mode === "moi")
+    return {
+      espace: "Mon espace",
+      unite: "moi",
+      whoTitle: "",
+      whoHint: "",
+    };
+  if (mode === "ecole")
+    return {
+      espace: "Espace Enseignant",
+      unite: "élève",
+      whoTitle: "Quel élève utilise PATI en ce moment ?",
+      whoHint: "Choisis un avatar avant de lire ou jouer : la progression sera comptée pour cet élève.",
+    };
+  return {
+    espace: "Espace Parents",
+    unite: "enfant",
+    whoTitle: "Qui utilise PATI en ce moment ?",
+    whoHint: "Choisis un avatar avant de lire ou jouer : la progression sera comptée pour cet enfant.",
+  };
+}
+
+// Mini-courbe des temps du Defi (sans librairie). values = secondes, du plus ANCIEN au plus RECENT.
 function TimeSparkline({ values }: { values: number[] }) {
   if (values.length < 2) return null;
   const w = 260, h = 60, pad = 8;
@@ -59,6 +86,53 @@ function statsFor(events: Ev[]) {
   return { nbLivres: livres.length, titres, nbQuiz: quiz.length, moy, prefSet, nbPref: prefSet.size, nbDefi: defi.length, best, last, series };
 }
 
+// Corps de statistiques réutilisable (profil enfant/élève OU solo « moi »)
+function StatsBody({ s }: { s: ReturnType<typeof statsFor> }) {
+  const complet = s.nbPref >= PREFECTURE_COUNT;
+  return (
+    <>
+      <div className="flex flex-wrap gap-x-6 gap-y-3 mb-4">
+        <div className="flex items-center gap-2"><BookOpen className="text-[#0F6E56]" size={20} /><div><div className="font-display font-bold text-2xl text-[#0F6E56]">{s.nbLivres}</div><p className="text-[#5a6b62] font-semibold text-xs">livres lus</p></div></div>
+        <div className="flex items-center gap-2"><Award className="text-[#E8532D]" size={20} /><div><div className="font-display font-bold text-2xl text-[#E8532D]">{s.moy != null ? s.moy + "%" : "-"}</div><p className="text-[#5a6b62] font-semibold text-xs">quiz (moy.)</p></div></div>
+        <div className="flex items-center gap-2"><MapPin className="text-[#3FB6E8]" size={20} /><div><div className="font-display font-bold text-2xl text-[#3FB6E8]">{s.nbPref}<span className="text-sm text-[#8a9389]">/{PREFECTURE_COUNT}</span></div><p className="text-[#5a6b62] font-semibold text-xs">prefectures</p></div></div>
+      </div>
+
+      <div className="rounded-xl bg-[#FBF6EA] p-3 mb-4">
+        <div className="flex items-center gap-2 mb-2"><Timer className="text-[#0F6E56]" size={18} /><span className="font-display font-bold text-sm text-[#0D2B1A]">Defi de la carte — temps</span></div>
+        {s.nbDefi > 0 ? (
+          <>
+            <div className="flex items-end gap-6 mb-1">
+              <div><div className="font-display font-bold text-3xl text-[#0F6E56]">{fmtTime(s.best as number)}</div><p className="text-[#5a6b62] font-semibold text-xs">meilleur temps</p></div>
+              <div><div className="font-display font-bold text-xl text-[#0D2B1A]">{fmtTime(s.last as number)}</div><p className="text-[#5a6b62] font-semibold text-xs">dernier · {s.nbDefi} partie{s.nbDefi > 1 ? "s" : ""}</p></div>
+            </div>
+            <TimeSparkline values={s.series} />
+            {s.series.length >= 2
+              ? <p className="text-[#8a9389] font-semibold text-[11px] mt-1">Plus la courbe descend, plus on va vite. Objectif : battre son temps chaque semaine.</p>
+              : <p className="text-[#8a9389] font-semibold text-[11px] mt-1">Encore une partie et la courbe de progression apparaitra.</p>}
+          </>
+        ) : (
+          <p className="text-[#8a9389] font-semibold text-sm">Pas encore de partie chronometree. Lance le Defi pour fixer un premier temps a battre.</p>
+        )}
+      </div>
+
+      {s.titres.length > 0 && <ul className="text-[#3a4a42] font-semibold text-sm space-y-0.5 mb-3">{s.titres.map((t, k) => <li key={k}>- {t}</li>)}</ul>}
+      {s.nbLivres === 0 && s.nbQuiz === 0 && s.nbPref === 0 && s.nbDefi === 0 && <p className="text-[#8a9389] font-semibold text-sm mb-3">Pas encore d'activite.</p>}
+
+      <div className="mt-1">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-[#5a6b62] font-semibold text-xs">Carte de la Guinee</span>
+          {complet
+            ? <span className="text-[#0F6E56] font-display font-bold text-xs">Toute la Guinee cartographiee !</span>
+            : s.nbPref > 0 && <span className="text-[#8a9389] font-semibold text-xs">en cours</span>}
+        </div>
+        <div className="rounded-xl bg-[#FBF6EA] p-2">
+          <GuineeMap discovered={s.prefSet} />
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function ParentDashboard() {
   const { user, loading } = useAuth();
   const [profiles, setProfiles] = useState<ChildProfile[]>([]);
@@ -82,17 +156,47 @@ export default function ParentDashboard() {
     return (
       <Center>
         <UserCircle className="text-[#0F6E56] mx-auto mb-4" size={56} />
-        <h1 className="text-2xl text-[#0D2B1A] mb-3">Espace Parents</h1>
-        <p className="text-[#3a4a42] font-semibold mb-6">Connecte-toi pour suivre la progression de tes enfants.</p>
+        <h1 className="text-2xl text-[#0D2B1A] mb-3">Mon espace PATI</h1>
+        <p className="text-[#3a4a42] font-semibold mb-6">Connecte-toi pour suivre tes lectures et ta progression.</p>
         <Link to="/connexion" className="btn-kid bg-[#0F6E56] text-white">Se connecter</Link>
       </Center>
     );
   }
 
-  const used = profiles.map((p) => p.avatar);
-  const libres = AVATARS.filter((a) => !used.includes(a));
+  const mode: AccountType = getAccountType(user) ?? "parent";
+  const L = labelsFor(mode);
   const prenom = (user.user_metadata?.prenom as string) || "";
   const nonAttribue = events.filter((e) => !e.profile_id);
+
+  // ===== Mode SOLO « moi » : pas de profils enfants, une seule carte « Mes lectures » =====
+  if (mode === "moi") {
+    const s = statsFor(events); // toute l'activité du compte
+    return (
+      <>
+        <section className="bg-[#0D2B1A] text-white">
+          <div className="max-w-4xl mx-auto px-6 py-10">
+            <p className="font-display font-semibold text-[#FFC93C] mb-1">{L.espace}</p>
+            <h1 className="font-display font-bold text-3xl md:text-4xl">{prenom ? "Bonjour " + prenom : "Bonjour"}</h1>
+          </div>
+        </section>
+        <section className="bg-[#FFF6E7] min-h-[60vh]">
+          <div className="max-w-4xl mx-auto px-6 py-8">
+            <div className="card-kid p-6">
+              <div className="flex items-center gap-3 mb-4"><BookOpen className="text-[#0F6E56]" size={24} /><span className="font-display font-bold text-[#0D2B1A]">Mes lectures</span></div>
+              <StatsBody s={s} />
+            </div>
+            <p className="text-[#8a9389] font-semibold text-sm mt-4 text-center">
+              Vous suivez vos propres lectures. Pour suivre un enfant ou une classe, changez de type dans <Link to="/compte" className="text-[#0F6E56] underline">Mon compte</Link>.
+            </p>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  // ===== Mode PARENT / ÉCOLE : profils (enfants ou élèves) =====
+  const used = profiles.map((p) => p.avatar);
+  const libres = AVATARS.filter((a) => !used.includes(a));
 
   async function pickAvatar(a: string) { await createProfile(a, profiles.length); setAdding(false); refresh(); }
   async function remove(id: string) {
@@ -103,11 +207,13 @@ export default function ParentDashboard() {
   }
   function choose(id: string) { const n = activeId === id ? null : id; setActiveProfileId(n); setActive(n); }
 
+  const uniteCap = L.unite.charAt(0).toUpperCase() + L.unite.slice(1);
+
   return (
     <>
       <section className="bg-[#0D2B1A] text-white">
         <div className="max-w-4xl mx-auto px-6 py-10">
-          <p className="font-display font-semibold text-[#FFC93C] mb-1">Espace Parents</p>
+          <p className="font-display font-semibold text-[#FFC93C] mb-1">{L.espace}</p>
           <h1 className="font-display font-bold text-3xl md:text-4xl">{prenom ? "Bonjour " + prenom : "Bonjour"}</h1>
         </div>
       </section>
@@ -116,8 +222,8 @@ export default function ParentDashboard() {
         <div className="max-w-4xl mx-auto px-6 py-8">
 
           <div className="card-kid p-6 mb-6">
-            <h2 className="font-display font-bold text-lg text-[#0D2B1A] mb-1">Qui utilise PATI en ce moment ?</h2>
-            <p className="text-[#5a6b62] font-semibold text-sm mb-4">Choisis un avatar avant de lire ou jouer : la progression sera comptee pour cet enfant.</p>
+            <h2 className="font-display font-bold text-lg text-[#0D2B1A] mb-1">{L.whoTitle}</h2>
+            <p className="text-[#5a6b62] font-semibold text-sm mb-4">{L.whoHint}</p>
             <div className="flex flex-wrap gap-3">
               {profiles.map((p) => (
                 <button key={p.id} onClick={() => choose(p.id)}
@@ -132,7 +238,7 @@ export default function ParentDashboard() {
             </div>
             {adding && (
               <div className="mt-4">
-                <p className="text-[#5a6b62] font-semibold text-sm mb-2">Choisis un avatar pour ce nouvel enfant :</p>
+                <p className="text-[#5a6b62] font-semibold text-sm mb-2">Choisis un avatar pour ce nouvel {L.unite} :</p>
                 <div className="flex flex-wrap gap-2">
                   {libres.map((a) => (
                     <button key={a} onClick={() => pickAvatar(a)} className="w-12 h-12 rounded-xl bg-white shadow-kid text-2xl flex items-center justify-center hover:ring-2 hover:ring-[#FFC93C]">{a}</button>
@@ -142,7 +248,7 @@ export default function ParentDashboard() {
             )}
             {activeId
               ? <p className="text-[#0F6E56] font-semibold text-sm mt-4">Actif : {profiles.find((p) => p.id === activeId)?.avatar} — la lecture et les quiz seront comptes ici.</p>
-              : profiles.length > 0 && <p className="text-[#8a9389] font-semibold text-sm mt-4">Aucun enfant selectionne : l'activite ne sera pas attribuee.</p>}
+              : profiles.length > 0 && <p className="text-[#8a9389] font-semibold text-sm mt-4">Aucun {L.unite} selectionne : l'activite ne sera pas attribuee.</p>}
           </div>
 
           {profiles.length > 0 && (
@@ -154,54 +260,15 @@ export default function ParentDashboard() {
           )}
 
           {profiles.length === 0 ? (
-            <p className="text-[#5a6b62] font-semibold text-center py-6">Ajoute un premier enfant (avatar) ci-dessus pour suivre sa progression.</p>
+            <p className="text-[#5a6b62] font-semibold text-center py-6">Ajoute un premier {L.unite} (avatar) ci-dessus pour suivre sa progression.</p>
           ) : (
             <div className="grid gap-5 sm:grid-cols-2">
               {profiles.map((p, idx) => {
                 const s = statsFor(events.filter((e) => e.profile_id === p.id));
-                const complet = s.nbPref >= PREFECTURE_COUNT;
                 return (
                   <div key={p.id} className="card-kid p-6">
-                    <div className="flex items-center gap-3 mb-4"><span className="text-3xl">{p.avatar}</span><span className="font-display font-bold text-[#0D2B1A]">Enfant {idx + 1}</span></div>
-
-                    <div className="flex flex-wrap gap-x-6 gap-y-3 mb-4">
-                      <div className="flex items-center gap-2"><BookOpen className="text-[#0F6E56]" size={20} /><div><div className="font-display font-bold text-2xl text-[#0F6E56]">{s.nbLivres}</div><p className="text-[#5a6b62] font-semibold text-xs">livres lus</p></div></div>
-                      <div className="flex items-center gap-2"><Award className="text-[#E8532D]" size={20} /><div><div className="font-display font-bold text-2xl text-[#E8532D]">{s.moy != null ? s.moy + "%" : "-"}</div><p className="text-[#5a6b62] font-semibold text-xs">quiz (moy.)</p></div></div>
-                      <div className="flex items-center gap-2"><MapPin className="text-[#3FB6E8]" size={20} /><div><div className="font-display font-bold text-2xl text-[#3FB6E8]">{s.nbPref}<span className="text-sm text-[#8a9389]">/{PREFECTURE_COUNT}</span></div><p className="text-[#5a6b62] font-semibold text-xs">prefectures</p></div></div>
-                    </div>
-
-                    <div className="rounded-xl bg-[#FBF6EA] p-3 mb-4">
-                      <div className="flex items-center gap-2 mb-2"><Timer className="text-[#0F6E56]" size={18} /><span className="font-display font-bold text-sm text-[#0D2B1A]">Defi de la carte — temps</span></div>
-                      {s.nbDefi > 0 ? (
-                        <>
-                          <div className="flex items-end gap-6 mb-1">
-                            <div><div className="font-display font-bold text-3xl text-[#0F6E56]">{fmtTime(s.best as number)}</div><p className="text-[#5a6b62] font-semibold text-xs">meilleur temps</p></div>
-                            <div><div className="font-display font-bold text-xl text-[#0D2B1A]">{fmtTime(s.last as number)}</div><p className="text-[#5a6b62] font-semibold text-xs">dernier · {s.nbDefi} partie{s.nbDefi > 1 ? "s" : ""}</p></div>
-                          </div>
-                          <TimeSparkline values={s.series} />
-                          {s.series.length >= 2
-                            ? <p className="text-[#8a9389] font-semibold text-[11px] mt-1">Plus la courbe descend, plus il/elle va vite. Objectif : battre son temps chaque semaine.</p>
-                            : <p className="text-[#8a9389] font-semibold text-[11px] mt-1">Encore une partie et la courbe de progression apparaitra.</p>}
-                        </>
-                      ) : (
-                        <p className="text-[#8a9389] font-semibold text-sm">Pas encore de partie chronometree. Lance le Defi pour fixer un premier temps a battre.</p>
-                      )}
-                    </div>
-
-                    {s.titres.length > 0 && <ul className="text-[#3a4a42] font-semibold text-sm space-y-0.5 mb-3">{s.titres.map((t, k) => <li key={k}>- {t}</li>)}</ul>}
-                    {s.nbLivres === 0 && s.nbQuiz === 0 && s.nbPref === 0 && s.nbDefi === 0 && <p className="text-[#8a9389] font-semibold text-sm mb-3">Pas encore d'activite.</p>}
-
-                    <div className="mt-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[#5a6b62] font-semibold text-xs">Carte de la Guinee</span>
-                        {complet
-                          ? <span className="text-[#0F6E56] font-display font-bold text-xs">Toute la Guinee cartographiee !</span>
-                          : s.nbPref > 0 && <span className="text-[#8a9389] font-semibold text-xs">en cours</span>}
-                      </div>
-                      <div className="rounded-xl bg-[#FBF6EA] p-2">
-                        <GuineeMap discovered={s.prefSet} />
-                      </div>
-                    </div>
+                    <div className="flex items-center gap-3 mb-4"><span className="text-3xl">{p.avatar}</span><span className="font-display font-bold text-[#0D2B1A]">{uniteCap} {idx + 1}</span></div>
+                    <StatsBody s={s} />
                   </div>
                 );
               })}
@@ -210,7 +277,7 @@ export default function ParentDashboard() {
 
           {nonAttribue.length > 0 && (
             <div className="card-kid p-5 mt-6">
-              <p className="text-[#5a6b62] font-semibold text-sm">Activite non attribuee a un enfant : {statsFor(nonAttribue).nbLivres} livre(s), {statsFor(nonAttribue).nbQuiz} quiz, {statsFor(nonAttribue).nbPref} prefecture(s), {statsFor(nonAttribue).nbDefi} partie(s) de Defi. Selectionne un avatar avant de jouer pour qu'elle soit comptee a la bonne personne.</p>
+              <p className="text-[#5a6b62] font-semibold text-sm">Activite non attribuee a un {L.unite} : {statsFor(nonAttribue).nbLivres} livre(s), {statsFor(nonAttribue).nbQuiz} quiz, {statsFor(nonAttribue).nbPref} prefecture(s), {statsFor(nonAttribue).nbDefi} partie(s) de Defi. Selectionne un avatar avant de jouer pour qu'elle soit comptee a la bonne personne.</p>
             </div>
           )}
         </div>

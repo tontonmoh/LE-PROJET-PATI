@@ -1,4 +1,5 @@
-import { Heart, ShieldCheck, Clock, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Heart, ShieldCheck, Clock, BookOpen, ArrowRight } from "lucide-react";
 
 const POINTS = [
   { icon: BookOpen, t: "Lire ensemble", d: "Quelques minutes par jour suffisent. Lisez à voix haute, écoutez l'audio, laissez l'enfant tourner les pages." },
@@ -26,6 +27,13 @@ export default function EspaceParents() {
               <p className="text-sm text-[#5a6b62] font-semibold leading-relaxed">{p.d}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <p className="text-[#3a4a42] font-semibold mb-4">Déjà un compte ? Suivez la progression de votre enfant.</p>
+          <Link to="/parent" className="btn-kid bg-[#0F6E56] text-white inline-flex items-center gap-2">
+            Accéder à mon Espace Parents <ArrowRight size={18} />
+          </Link>
         </div>
       </section>
     </div>

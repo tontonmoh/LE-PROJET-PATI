@@ -30,7 +30,8 @@ export default function Footer() {
             <Link to="/a-propos" className="pf-link">À propos</Link>
             <a href={SOCIAL.websiteAtelier} target="_blank" rel="noopener noreferrer" className="pf-link">L'Atelier Solidaire</a>
             <Link to="/partenaires" className="pf-link">Partenaires</Link>
-            <Link to="/presse" className="pf-link">Presse &amp; médias<span className="pf-badge pf-badge-soon">Bientôt</span></Link>
+            <Link to="/impact" className="pf-link">Impact &amp; transparence</Link>
+            <Link to="/presse" className="pf-link">Presse &amp; médias</Link>
             <Link to="/collaboration" className="pf-link">Offres de collaboration</Link>
             <Link to="/personnalisation" className="pf-link">Créations personnalisées</Link>
             <div className="pf-divider" />
@@ -74,7 +75,7 @@ export default function Footer() {
             <div className="pf-col-title"><Users size={13} /> Communautés</div>
             <Link to="/espace-conteurs" className="pf-link">Espace conteurs<span className="pf-badge pf-badge-new">Nouveau</span></Link>
             <Link to="/espace-enseignants" className="pf-link">Espace enseignants</Link>
-            <Link to="/espace-parents" className="pf-link">Espace parents</Link>
+            <Link to="/parent" className="pf-link">Espace Parents</Link>
             <Link to="/espace-artistes" className="pf-link">Espace artistes &amp; animateurs<span className="pf-badge pf-badge-soon">Bientôt</span></Link>
             <Link to="/clubs" className="pf-link">Clubs PATI — écoles</Link>
             <Link to="/developpeurs" className="pf-link">Développeurs &amp; API<span className="pf-badge pf-badge-soon">Bientôt</span></Link>

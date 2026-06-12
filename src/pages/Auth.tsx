@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserCircle, LogIn, UserPlus, LogOut } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
+import { getAccountType, setAccountType } from "../lib/accountType";
+import type { AccountType } from "../lib/accountType";
 
 export default function Auth({ mode }: { mode: "connexion" | "inscription" | "compte" }) {
   const { user, loading, signUpPhone, signInPhone, signOut } = useAuth();
@@ -11,8 +13,19 @@ export default function Auth({ mode }: { mode: "connexion" | "inscription" | "co
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [savingType, setSavingType] = useState(false);
 
   if (mode === "compte") {
+    const type = user ? getAccountType(user) : null;
+    const espaceLabel = type === "moi" ? "Mon espace" : type === "ecole" ? "Espace Enseignant" : "Espace Parents";
+    const TYPES: [AccountType, string][] = [["moi", "Moi-même"], ["parent", "Mon/mes enfant(s)"], ["ecole", "Ma classe"]];
+
+    async function changeType(t: AccountType) {
+      setSavingType(true);
+      await setAccountType(t);
+      setSavingType(false);
+    }
+
     return (
       <section className="bg-[#FFF6E7] min-h-[60vh] flex items-center">
         <div className="max-w-md mx-auto px-6 py-20 text-center">
@@ -26,10 +39,22 @@ export default function Auth({ mode }: { mode: "connexion" | "inscription" | "co
                 Connecte : {(user.user_metadata?.prenom as string) || "-"} - {(user.user_metadata?.phone as string) || ""}
               </p>
               <div className="flex gap-3 justify-center">
-                <Link to="/parent" className="btn-kid bg-[#0F6E56] text-white">Espace Parents</Link>
+                <Link to="/parent" className="btn-kid bg-[#0F6E56] text-white">{espaceLabel}</Link>
                 <button onClick={() => signOut()} className="btn-kid bg-white text-[#0D2B1A] shadow-kid">
                   <LogOut size={18} /> Se deconnecter
                 </button>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-[#e7e0cf]">
+                <p className="text-[#5a6b62] font-semibold text-sm mb-3">Vous utilisez PATI pour :</p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {TYPES.map(([t, lab]) => (
+                    <button key={t} disabled={savingType} onClick={() => changeType(t)}
+                      className={`px-4 py-2 rounded-full font-display font-semibold text-sm transition-colors disabled:opacity-60 ${type === t ? "bg-[#0F6E56] text-white" : "bg-white text-[#0D2B1A] shadow-kid"}`}>
+                      {lab}
+                    </button>
+                  ))}
+                </div>
               </div>
             </>
           ) : (
@@ -70,7 +95,7 @@ export default function Auth({ mode }: { mode: "connexion" | "inscription" | "co
           </div>
           <div className="space-y-3">
             {!isLogin && (
-              <input value={prenom} onChange={(e) => setPrenom(e.target.value)} placeholder="Votre prenom (parent)"
+              <input value={prenom} onChange={(e) => setPrenom(e.target.value)} placeholder="Votre prenom"
                 className="w-full bg-[#FFF6E7] rounded-2xl px-4 py-3 font-semibold text-[#0D2B1A] placeholder:text-[#5a6b62] outline-none focus:ring-2 focus:ring-[#FFC93C]" />
             )}
             <input value={phone} onChange={(e) => setPhone(e.target.value)} inputMode="tel" placeholder="Numero WhatsApp (ex. 620 00 00 00)"

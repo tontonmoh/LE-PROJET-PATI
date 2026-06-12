@@ -4,7 +4,7 @@
 // Versions AR/ZH = drafts à faire relire par des natifs. Noms propres invariants (Seny, Fodé, Moussa, Nana, Taadidi, Woyika).
 // Ajouter un épisode = passer statut 'soon' -> 'live' + remplir reader. Rien d'autre.
 export type Lang = "fr" | "en" | "ar" | "zh";
-type RSection = { title: string; paragraphs: string[] };
+type RSection = { title: string; paragraphs: string[]; image?: string };
 type RBook = { lang: Lang; dir: "ltr" | "rtl"; label: string; bookTitle: string; sections: RSection[] };
 export type Reader = Partial<Record<Lang, RBook>>;
 export type Episode = {
@@ -12,6 +12,10 @@ export type Episode = {
   titre: Record<Lang, string>;
   teaser?: Record<Lang, string>;
   statut: "live" | "soon";
+  cover?: string;     // planche resserrée — vignette pour la carte de l'épisode
+  planche?: string;   // planche plein-cadre — fond du gabarit, présent pendant la lecture
+  cote?: "gauche" | "droite"; // côté de la carte de lecture (toujours opposé au sujet)
+  bande?: "verticale" | "horizontale"; // forme de la carte : bande latérale fine, ou légende basse
   reader?: Reader;
 };
 
@@ -27,20 +31,24 @@ export const TAADIDI = {
     "Taadidi, un garçon trop malin pour son village, transforme chaque problème en bon tour — jusqu'au jour où sa ruse se retourne contre lui.",
   accent: TAADIDI_ACCENT,
   badge: "Pati Aventure · 10–12 ans",
-  cover: "/images/taadidi-couverture.webp",
+  cover: "/images/taadidi/taadidi-couverture.png",
   provenance: "D'après le patrimoine immatériel de la basse côte, transmis par Kini Bangaly.",
   episodes: [
     {
       numero: 1, statut: "live",
+      planche: "/images/taadidi/ep1-planche.png",
+      cover: "/images/taadidi/ep1-cover.png",
+      cote: "gauche",
+      bande: "verticale",
       titre: { fr: "Le tas de néré", en: "The Pile of Néré", ar: "كومة النيري", zh: "那堆 néré" },
       teaser: { fr: "Trois gourmands, un grand arbre à néré… et une naissance que personne n'attendait.", en: "Three gluttons, a great néré tree… and a birth no one saw coming.", ar: "ثلاثة نهِمين، وشجرة نيري كبيرة… وولادةٌ لم يتوقّعها أحد.", zh: "三个馋鬼，一棵大 néré 树……还有一场谁也没料到的诞生。" },
       reader: {
         fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Le tas de néré", sections: [
-          { title: "Trois gourmands", paragraphs: [
+          { title: "Trois gourmands", image: "/images/taadidi/ep1-p1.png", paragraphs: [
             "Il était une fois trois gourmands, chassés chacun de sa famille, dans trois villages différents.",
             "Ils se rencontrèrent à un carrefour. « Pourquoi t'a-t-on chassé ? » demanda le premier. Les autres se regardèrent… et comprirent : ils étaient pareils ! Et ils furent tout contents — à plusieurs, on trouve toujours mieux à manger.",
             "Seny, Fodé et Moussa, c'étaient leurs noms." ] },
-          { title: "L'arbre à néré", paragraphs: [
+          { title: "L'arbre à néré", image: "/images/taadidi/ep1-p2.png", paragraphs: [
             "Ils découvrirent un grand arbre à néré, chargé de fruits. On envoya le plus jeune grimper ; les autres ramasseraient en bas, pour que rien ne s'écrase ni ne se salisse.",
             "« C'est parce que je suis le plus petit que vous m'envoyez travailler pendant que vous mangez tranquilles ? » râla Seny.",
             "« Mais non ! Il faut bien que quelqu'un monte. »",
@@ -49,7 +57,7 @@ export const TAADIDI = {
             "Mais le néré est si bon — comme l'arachide, peut-on vraiment le travailler sans y goûter ? Chacun croyant que l'autre ne voyait rien, et tous deux sûrs que Seny ne les voyait pas d'en haut, ils cédèrent.",
             "Là-haut, Seny n'était pas tranquille. À chaque bonne poignée, il comptait, pour recompter une fois en bas. Soudain il vit Moussa remuer la bouche et Fodé s'essuyer les lèvres. Furieux, il ferma le poing — et, au lieu de descendre par le tronc, il sauta pour mieux frapper…",
             "Les deux compères s'écartèrent d'un même mouvement. Et Seny s'écrasa, la tête la première, sur la roche. Fini." ] },
-          { title: "Fodé et la chanson", paragraphs: [
+          { title: "Fodé et la chanson", image: "/images/taadidi/ep1-p3.png", paragraphs: [
             "Les deux survivants étaient tristes… et, en secret, contents : à deux, cela faisait plus de néré pour chacun.",
             "Moussa avait une idée derrière la tête. « Le néré est bon à croquer, mais meilleur encore en nectar. Il nous faut de l'eau : va en chercher. »",
             "« Tu ne vas pas me faire le coup à moi aussi ? Je n'irai pas. »",
@@ -57,11 +65,11 @@ export const TAADIDI = {
             "« D'accord. Mais tu ne touches plus à rien — et à mon retour, gare à toi si ta bouche sent le néré. »",
             "Fodé partit à reculons, surveillant Moussa, en chantonnant : « Si tu prends, je vois… ne prends pas, je te vois… »",
             "Le néré était doux, la chanson l'emportait, et il marchait toujours à reculons… si bien qu'il dégringola du haut de la falaise. Bam." ] },
-          { title: "Moussa et le lion", paragraphs: [
+          { title: "Moussa et le lion", image: "/images/taadidi/ep1-p4.png", paragraphs: [
             "Moussa, ravi d'avoir le magot pour lui seul, décida d'aller chercher l'eau lui-même : ainsi, personne ne lui volerait son tas.",
             "En chemin, il vit une antilope qui courait en boitant. « Comme ce gibier serait meilleur que du simple néré ! » se dit-il. Et il courut, courut derrière l'antilope…",
             "…jusqu'à se retrouver nez à nez avec un lion. Grrrrr." ] },
-          { title: "Le tas de néré", paragraphs: [
+          { title: "Le tas de néré", image: "/images/taadidi/ep1-p5.png", paragraphs: [
             "Le néré resta donc là, en tas, à attendre.",
             "Un jour, une femme enceinte passa par là et tomba dessus. Elle en mangea, et en mangea — de son troisième mois à son neuvième.",
             "Puis vint l'heure. Seule, loin de tout, elle sentit le travail avancer tout seul. L'enfant naquit… mais ne pleura pas.",
@@ -175,19 +183,23 @@ export const TAADIDI = {
     },
     {
       numero: 2, statut: "live",
+      planche: "/images/taadidi/ep2-planche.png",
+      cover: "/images/taadidi/ep2-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
       titre: { fr: "Taadidi gagne son nom", en: "Taadidi Earns His Name", ar: "Taadidi يكسب اسمه", zh: "Taadidi 赢得他的名字" },
       teaser: { fr: "Le nouveau-né parle — et lance au père un duel de ruse pour gagner son nom.", en: "The newborn speaks — and challenges the father to a battle of wits to earn his name.", ar: "المولود يتكلّم — ويتحدّى أباه في مبارزة دهاءٍ ليكسب اسمه.", zh: "新生儿开口了——还向父亲发起一场智斗，去赢得自己的名字。" },
       reader: {
         fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Taadidi gagne son nom", sections: [
-          { title: "La voix", paragraphs: [
+          { title: "La voix", image: "/images/taadidi/ep2-p1.png", paragraphs: [
             "« — Woyika ! » La voix venait d'en bas, du nouveau-né. « Pourquoi une mère mettrait-elle au monde un être aussi précieux que moi… sinon pour l'envoyer porter ses messages ? Je suis là. Fais un vœu, mère, et tu seras exaucée. »",
             "La femme — elle s'appelait Nana — en resta bouche bée.",
             "« Eh bien… puisque c'est ainsi : va, mon fils. Ton père est au champ, juste derrière la colline. »" ] },
-          { title: "La commission au père", paragraphs: [
+          { title: "La commission au père", image: "/images/taadidi/ep2-p2.png", paragraphs: [
             "« Papa ! Papa ! Mère m'envoie te dire qu'elle a accouché. »",
             "Le père, incrédule, refusa de se laisser berner par pareille effronterie.",
             "« Petit du champ, retourne lui dire que j'ai bien compris. Et tiens : sous le lit, dans l'eau, il y a une noix de cola. Qu'elle laboure la terre devant la porte de la case, qu'elle y plante cette noix — et que celle-ci germe, grandisse, se couvre de feuilles et donne ses fruits. Ce sont CES noix qu'on enverra à la famille pour annoncer ta naissance, et qui orneront la calebasse de ton baptême… dans une semaine. »" ] },
-          { title: "Le grain de riz", paragraphs: [
+          { title: "Le grain de riz", image: "/images/taadidi/ep2-p3.png", paragraphs: [
             "L'enfant rapporta la commission. Sa mère fondit en larmes : « Comment réaliser un tel miracle ? Je tiens à peine debout ! »",
             "« Encore une fois, mère, à quoi bon pleurer ? Tu as désormais un missionnaire. Donne-moi un grain de riz. »",
             "Et déjà il avait filé.",
@@ -195,7 +207,7 @@ export const TAADIDI = {
             "« Un grain de riz, pour quoi faire ? »",
             "« Fais vite : mère te l'envoie pour que tu le plantes aujourd'hui même, que tu travailles tard, moissonnes, récoltes, passes au pilon… Ainsi, sûrement, les colas trouveront leur place sur le pain blanc préparé grâce à ce riz. »",
             "Le père sentit qu'il avait perdu cette manche." ] },
-          { title: "La tête rasée", paragraphs: [
+          { title: "La tête rasée", image: "/images/taadidi/ep2-p4.png", paragraphs: [
             "Ce bébé trop malin agaçait déjà tout le village, qui avait commencé à le surnommer — mi-fier, mi-excédé — Taadidi.",
             "La veille du baptême, le père voulut sa revanche. Il crut tenir une colle imparable.",
             "« Taadidi ! Où est ta maman ? »",
