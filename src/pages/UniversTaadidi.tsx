@@ -98,9 +98,17 @@ const PHASES: { n: number; lune: string; range: [number, number]; etape: string;
 
 const PERSONNAGES: { nom: string; trait: string; mot: string; tone: string; img?: string }[] = [
   { nom: "Taadidi", trait: "Le rusé. Né missionnaire de sa mère ; il déjoue la force par l'intelligence.", mot: "D'accord… mais à une condition.", tone: ACCENT, img: "/images/taadidi/taadidi-age3-ado.png" },
+  { nom: "Nana", trait: "La mère. Moquée dix ans parce qu'elle « ne fait que des filles » — alors qu'elle est la championne des épreuves des femmes.", mot: "Adeyaaa… mon fils, mon missionnaire.", tone: MANGROVE },
+  { nom: "Sana", trait: "Le père. Champion des moissons, il croit qu'on gagne au muscle — jusqu'à ce que son fils lui ouvre les yeux.", mot: "Prouve-le, alors.", tone: LAGUNE },
+  { nom: "Lima", trait: "L'aînée. Celle qui chante pour relever les cœurs, et décroche sa place d'infirmière à la seule force du travail.", mot: "Je n'ai pas besoin qu'on me fasse de cadeau.", tone: MANGROVE_DEEP },
+  { nom: "Tofan", trait: "La beauté — et la tête. Elle ne monte pas sur l'estrade pour son visage, mais avec un projet pour son village.", mot: "Reconnais-moi pour ce que j'ai dans la tête.", tone: ACCENT },
+  { nom: "Fanyi", trait: "La bonté même — et maîtresse d'école. Douce, mais redoutable : c'est elle qui mène le jeu et qui choisit.", mot: "Tu veux te faire pardonner ? Prouve-le.", tone: MANGROVE },
+  { nom: "Adama", trait: "L'amie de Tofan et Fanyi. Longtemps, on ne l'a jugée que sur son visage. Un seul, lui, a vu qui elle était vraiment.", mot: "Cette voix… je l'aurais reconnue entre mille.", tone: LAGUNE },
+  { nom: "Kaly", trait: "Le jumeau doux. Le premier des fils de Bakala que la bonté ait gagné.", mot: "Tu es la Miss de mon univers.", tone: MANGROVE },
+  { nom: "Kala", trait: "Le jumeau dur. De l'ennemi juré au plus fidèle des amis — il a appris à voir plus loin que le bout de son nez.", mot: "C'est surtout pour celles qui ont une tête bien faite.", tone: MANGROVE_DEEP },
+  { nom: "Bakala", trait: "Le rival. Jaloux du père de Taadidi, il multiplie les pièges — et chacun se retourne contre lui.", mot: "Encore lui. Toujours lui.", tone: "#9c6b3f" },
+  { nom: "Sayon", trait: "Le dernier dur. Le seul que la bonté n'a pas encore gagné — celui qu'il faudra convaincre jusqu'au bout.", mot: "Moi, on ne me retourne pas comme les autres.", tone: "#7d5a46" },
   { nom: "Sogué", trait: "Le soleil. La fille qu'il nomme la source — celle qu'il porte et protège.", mot: "Le soleil ne parle pas : il se lève.", tone: ACCENT, img: "/images/taadidi/taadidi-sogue.png" },
-  { nom: "Nana", trait: "La mère. De celle qui pleure à celle qui agit — sa force s'éveille au fil des épisodes.", mot: "Adeyaaa… mon fils, mon missionnaire.", tone: MANGROVE },
-  { nom: "Le père", trait: "L'épreuve. Il pose les défis impossibles — et c'est de cette friction que naît le nom.", mot: "Prouve-le, alors.", tone: LAGUNE },
 ];
 
 function MoonPhase({ idx }: { idx: number }) {
@@ -174,7 +182,7 @@ export default function UniversTaadidi() {
               style={{ background: "#FFF6E7", border: `1px solid ${GOLD}66`, boxShadow: "0 22px 55px rgba(0,0,0,.35)" }}>
               <img
                 src="/images/taadidi/taadidi-hero-pere-sogue.png"
-                alt="Taadidi, l'enfant rusé, court avec le peigne"
+                alt="Taadidi devenu père, et Sogué — le soleil"
                 className="w-full rounded-[1.1rem]"
                 onError={(e) => { const c = e.currentTarget.closest("div") as HTMLElement | null; if (c) c.style.display = "none"; }}
               />
@@ -239,39 +247,6 @@ export default function UniversTaadidi() {
             );
           })}
         </div>
-
-        {/* ===== L'ARC — KIKÉ → SOGUÉ ===== */}
-        <h2 className="text-2xl md:text-3xl text-[#0D2B1A] mb-1" style={{ fontFamily: DISPLAY }}>L'arc de Taadidi</h2>
-        <p className="text-[#3a4a42] font-semibold mb-7 max-w-2xl">
-          Une saga de 28 épisodes — un cycle de lune. De la naissance à la paternité, Taadidi éveille la force des
-          femmes autour de lui, jusqu'à nommer sa fille « le soleil ».
-        </p>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          {PHASES.map((p, i) => (
-            <div key={p.n} className="rounded-[1.25rem] p-5 border-2 flex flex-col"
-              style={{ borderColor: `${MANGROVE}22`, background: "#fff" }}>
-              <div className="flex items-center gap-3 mb-3">
-                <MoonPhase idx={i} />
-                <div className="font-display font-bold text-[#0D2B1A] leading-tight">
-                  {p.lune}
-                  <span className="block text-xs font-semibold text-[#8a9389]">ép. {p.range[0]}–{p.range[1]}</span>
-                </div>
-              </div>
-              <div className="font-display font-semibold text-sm mb-1" style={{ color: ACCENT }}>{p.etape}</div>
-              <p className="text-[#5a6b62] font-semibold text-sm flex-1">{p.note}</p>
-              {p.pivot && (
-                <div className="mt-3 inline-flex items-center gap-1.5 self-start font-display font-bold text-sm rounded-full px-3 py-1"
-                  style={{ background: `${GOLD}26`, color: "#8a5a0c" }}>
-                  {p.pivot === "Sogué" ? <Sun size={14} /> : <Moon size={14} />} {p.pivot}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-[#8a9389] font-semibold italic mb-2">
-          « Kiké » — en soussou : la lune, le mois, le miroir, le regard. Un mot que la série n'explique pas : elle le fait comprendre.
-        </p>
 
         {/* ===== PERSONNAGES ===== */}
         <h2 className="text-2xl md:text-3xl text-[#0D2B1A] mt-14 mb-1" style={{ fontFamily: DISPLAY }}>Personnages</h2>

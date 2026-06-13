@@ -78,19 +78,26 @@ export default function BookReaderML() {
   const cover = i < 0;
   const scene = cover ? null : book.sections[i];
 
-  // Série Taadidi = livre illustré en double page : illustration | texte, côté alterné page à page.
-  // Une planche par page si la section a son image ; sinon repli sur la planche de l'épisode.
+  // Tous les livres = livre illustré en double page : illustration | texte, côté alterné page à page.
+  // Une image par page si la section a la sienne ; sinon repli (planche d'épisode pour Taadidi,
+  // couverture du livre pour le reste du catalogue).
   const serieEp = isSerie
     ? TAADIDI.episodes.find((e) => e.numero === parseInt((id || "").replace("taadidi-", ""), 10))
     : undefined;
   const planche = serieEp?.planche;
   const cote = serieEp?.cote ?? "gauche";
-  const split = isSerie && !!planche;
+
+  // Image de repli de la « case illustration » :
+  //  - série Taadidi : la planche de l'épisode (ou la couverture de la série) ;
+  //  - tout autre livre du catalogue : sa couverture (books.ts).
+  // Dès qu'une image de repli existe, le livre passe en double page illustration | texte.
+  const fallbackImg = isSerie ? (planche || TAADIDI.cover) : getBook(id || "")?.cover;
+  const split = !!fallbackImg;
 
   const sectionImg = !cover
     ? (reader.books.fr?.sections[i]?.image || reader.books[reader.langs[0]]?.sections[i]?.image)
     : undefined;
-  const pageImg = cover ? (planche || TAADIDI.cover) : (sectionImg || planche);
+  const pageImg = cover ? fallbackImg : (sectionImg || fallbackImg);
   const pageIdx = cover ? 0 : i;
   const imgLeft = (pageIdx % 2 === 0) === (cote === "gauche"); // alterne à chaque page
 
