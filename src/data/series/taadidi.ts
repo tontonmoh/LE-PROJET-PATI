@@ -2293,5 +2293,587 @@ export const TAADIDI = {
         ] },
       },
     },
+    {
+      numero: 22, statut: "live",
+      planche: "/images/taadidi/ep22-planche.png",
+      cover: "/images/taadidi/ep22-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "C'était toi", "en": "It Was You", "ar": "كنتَ أنت", "zh": "是你"},
+      teaser: {"fr": "Troublé par le regard de cette femme au point d'eau, Taadidi remonte le vallon pour l'aborder. Il croit connaître Ada, l'amie de ses sœurs. Mais Adama, elle, vient de comprendre quelque chose qu'il ignore encore — et elle va lui dire.", "en": "Troubled by this woman's look at the water point, Taadidi climbs back up the valley to speak to her. He thinks he knows Ada, his sisters' friend. But Adama has just understood something he doesn't yet know — and she is going to tell him.", "ar": "مضطربًا من نظرة تلك المرأة عند نقطة الماء، يصعد Taadidi الوادي لمجابهتها. يظنّ أنّه يعرف Ada، صديقة أختيه. لكنّ Adama للتوّ أدركت شيئًا لا يعلمه هو بعد — وستخبره.", "zh": "被取水点那个女人的眼神触动，Taadidi 折回山谷去找她。他以为认得 Ada，姐姐们的朋友。可 Adama 刚刚明白了一件他还不知道的事——她要告诉他。"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "C'était toi", sections: [
+          { title: "Le vallon", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Troublé par ce qu'il avait lu dans le regard de cette femme, Taadidi remonta le vallon en trois grandes enjambées pour l'aborder. Il la regardait d'un œil tout neuf. Il se souvenait à peine d'elle : une fille du village, partie autrefois épouser Alya, le fils du chef du village voisin." ] },
+          { title: "Le garçon", paragraphs: [
+            "Son enfant somnolait, blotti contre elle. « Et… comment s'appelle-t-elle ? » demanda Taadidi, un peu gauche. « Ce n'est pas une fille, répondit Adama. C'est un garçon. » Et tandis qu'elle parlait, son cœur, à elle, battait la plus grande chamade. Car elle savait déjà quelque chose que lui ignorait encore." ] },
+          { title: "« Me reconnais-tu ? »", paragraphs: [
+            "Elle releva les yeux vers lui. « Me reconnais-tu ? » demanda-t-elle. Taadidi sourit. « Bien sûr. Tu es Ada. L'amie de mes sœurs, Tofan et Fanyi. » Adama hocha la tête, doucement. Oui. Mais ce n'était pas tout à fait ça qu'elle voulait dire." ] },
+          { title: "Ce qu'il ne savait pas", paragraphs: [
+            "Car Taadidi connaissait Ada, l'amie des jumelles, oui. Mais il ignorait l'autre chose. Il ignorait que la voix qu'il avait prêtée, un jour, derrière l'école, pour sauver une fille sans se montrer… cette fille, c'était elle. Adama, elle, venait tout juste de le comprendre — là, en l'entendant chanter sur son pont." ] },
+          { title: "« La voix, c'était toi »", paragraphs: [
+            "Alors Adama prit son courage à deux mains. « Taadidi. Il y a des années, derrière l'école, une fille a été sauvée par une voix. Une voix qui chantait, cachée. Une voix qui l'a crue quand personne d'autre ne l'aurait crue. » Elle s'arrêta, la gorge serrée. « Cette voix… c'était la tienne. Et cette fille… c'était moi. »" ] },
+          { title: "Deux qui se voient enfin", paragraphs: [
+            "Taadidi resta figé. Les souvenirs lui revinrent d'un coup — le coin désert, les deux grands, la peur de la fille, son propre chant pour les faire fuir. Tout ce temps, il n'avait jamais su qui il avait sauvé. Et c'était elle. Adama. Là, devant lui. Pour la première fois, ils se regardèrent vraiment — non plus comme l'amie des sœurs et le petit frère, mais comme deux personnes qui partageaient un secret. Et peut-être bien davantage." ] },
+          { title: "L'ombre", paragraphs: [
+            "Mais dans la joie de Taadidi, soudain, quelque chose se figea. Une fille sauvée de deux garçons, derrière l'école. Et Adama, partie épouser Alya. Alya… Un nom remonta lentement, comme une eau trouble. Et si l'un de ces deux garçons, ce jour-là, avait été…" ] },
+          { title: "Deux histoires", paragraphs: [
+            "Le conteur posa la main sur son tambour. Ce jour-là, au bord de l'eau, une étincelle s'était allumée — belle, douce, attendue depuis si longtemps. Mais une vieille ombre, elle aussi, venait de remuer. Et désormais, mes enfants, deux histoires allaient marcher côte à côte : une histoire d'amour… et une histoire de justice. Mais ça, c'est pour demain." ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "It Was You", sections: [
+          { title: "The Valley", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. Troubled by what he had read in this woman's eyes, Taadidi climbed back up the valley in three great strides to speak to her. He was looking at her with fresh eyes. He barely remembered her: a girl from the village, who had once gone away to marry Alya, the son of the chief of the neighbouring village." ] },
+          { title: "The Boy", paragraphs: [
+            "Her child was dozing, nestled against her. \"And… what is her name?\" Taadidi asked, a little awkwardly. \"It's not a girl,\" Adama replied. \"It's a boy.\" And as she spoke, her own heart was hammering louder than it had ever hammered. For she already knew something that he did not yet know." ] },
+          { title: "\"Do You Recognise Me?\"", paragraphs: [
+            "She raised her eyes to him. \"Do you recognise me?\" she asked. Taadidi smiled. \"Of course. You're Ada. My sisters' friend, Tofan and Fanyi's.\" Adama nodded, gently. Yes. But that wasn't quite what she meant." ] },
+          { title: "What He Didn't Know", paragraphs: [
+            "For Taadidi knew Ada, the twins' friend, yes. But he didn't know the other thing. He didn't know that the voice he had lent, one day, behind the school, to save a girl without showing himself… that girl was her. Adama had just understood it — there, hearing him sing on his bridge." ] },
+          { title: "\"The Voice Was You\"", paragraphs: [
+            "Then Adama took her courage in both hands. \"Taadidi. Years ago, behind the school, a girl was saved by a voice. A voice that sang, hidden. A voice that believed her when no one else would have.\" She stopped, throat tight. \"That voice… was yours. And that girl… was me.\"" ] },
+          { title: "Two Who Finally See Each Other", paragraphs: [
+            "Taadidi stood frozen. The memories came rushing back — the deserted corner, the two older boys, the girl's fear, his own singing to drive them away. All this time, he had never known who he had saved. And it was her. Adama. There, before him. For the first time, they looked at each other truly — no longer as the sisters' friend and the little brother, but as two people sharing a secret. And perhaps much more than that." ] },
+          { title: "The Shadow", paragraphs: [
+            "But in Taadidi's joy, suddenly, something froze. A girl saved from two boys, behind the school. And Adama, gone to marry Alya. Alya… A name rose slowly, like troubled water. What if one of those two boys, that day, had been…" ] },
+          { title: "Two Stories", paragraphs: [
+            "The storyteller laid his hand on his drum. That day, at the water's edge, a spark had lit — beautiful, gentle, waited for so long. But an old shadow, too, had just stirred. And from now on, my children, two stories would walk side by side: a love story… and a story of justice. But that will be for tomorrow." ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "كنتَ أنت", sections: [
+          { title: "الوادي", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. مضطربًا ممّا قرأه في نظرة تلك المرأة، صعد Taadidi الوادي بثلاث خطوات واسعة ليكلّمها. كان ينظر إليها بعينٍ جديدة كلّيًّا. بالكاد تذكّرها: فتاةٌ من القرية، رحلت ذات يوم لتتزوّج Alya، ابن رئيس القرية المجاورة." ] },
+          { title: "الولد", paragraphs: [
+            "كان طفلها يغفو، مضمومًا إليها. «وما اسمها؟» سأل Taadidi، في شيءٍ من ارتباك. «إنّه ليس فتاة، أجابت Adama. إنّه ولد.» وبينما كانت تتكلّم، كان قلبها هي يخفق أشدّ خفقان. إذ كانت تعلم شيئًا لا يعلمه هو بعد." ] },
+          { title: "«أتعرفني؟»", paragraphs: [
+            "رفعت عينيها إليه. «أتعرفني؟» سألت. ابتسم Taadidi. «بالطبع. أنتِ Ada. صديقة أختيَّ Tofan وFanyi.» أومأت Adama برأسها، برفق. نعم. لكنّ ذلك لم يكن تمامًا ما أرادت قوله." ] },
+          { title: "ما كان يجهله", paragraphs: [
+            "إذ كان Taadidi يعرف Ada، صديقة التوأمتين، نعم. لكنّه كان يجهل الشيء الآخر. كان يجهل أنّ الصوت الذي أعاره، يومًا ما، خلف المدرسة، لينقذ فتاةً دون أن يظهر… تلك الفتاة كانت هي. وقد فهمت Adama ذلك للتوّ — هناك، حين سمعته يغنّي على جسره." ] },
+          { title: "«الصوت كان صوتك»", paragraphs: [
+            "فجمعت Adama شجاعتها. «Taadidi. قبل سنوات، خلف المدرسة، أُنقذت فتاةٌ بصوت. صوتٌ كان يغنّي، مختبئًا. صوتٌ صدّقها حين ما كان أحدٌ سيصدّقها.» توقّفت، وقد أمسك الغصّةُ بحلقها. «ذلك الصوت… كان صوتك. وتلك الفتاة… كنتُ أنا.»" ] },
+          { title: "اثنان يريان بعضهما أخيرًا", paragraphs: [
+            "بقي Taadidi مشلولًا. عادت إليه الذكريات دفعةً واحدة — الركن الخالي، الشابّان الكبيران، خوف الفتاة، غناؤه هو ليُهربهما. طوال هذا الوقت، لم يعرف يومًا من أنقذ. وكانت هي. Adama. هناك، أمامه. لأوّل مرّة، نظرا بعضهما نظرةً حقيقيّة — لا بوصفهما صديقة الأختين والأخ الصغير، بل بوصفهما شخصَين يتقاسمان سرًّا. وربّما أكثر بكثير." ] },
+          { title: "الظلّ", paragraphs: [
+            "لكن في فرحة Taadidi، فجأةً، تجمّد شيء. فتاةٌ أُنقذت من شابّين، خلف المدرسة. وAdama رحلت لتتزوّج Alya. Alya… عاد الاسم يرتفع رويدًا، كماءٍ عكر. وإن كان أحدُ ذينك الشابّين، يومئذٍ، هو…" ] },
+          { title: "قصّتان", paragraphs: [
+            "وضع الحكواتي يده على طبله. في ذلك اليوم، على ضفّة الماء، أُشعلت شرارة — جميلة، حنون، منتظرة منذ زمنٍ طويل. لكنّ ظلًّا قديمًا، هو أيضًا، تحرّك للتوّ. ومن الآن فصاعدًا، يا أطفالي، ستسير قصّتان جنبًا إلى جنب: قصّة حبٍّ… وقصّة عدالة. لكن ذلك، يكون في الغد." ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "是你", sections: [
+          { title: "山谷", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。被那个女人眼神里读到的东西触动，Taadidi 三步并作两步走回山谷去找她。他用一种全新的眼光打量着她。他几乎不记得她了：村里的一个姑娘，当年嫁去了邻村酋长的儿子 Alya 那里。" ] },
+          { title: "那个孩子", paragraphs: [
+            "她的孩子靠着她昏昏欲睡。「那……她叫什么名字？」Taadidi 有些笨拙地问道。「不是女孩，」Adama 回答。「是男孩。」她说话的时候，自己的心正猛烈地跳着。因为她已经知道了一件他还不知道的事。" ] },
+          { title: "「你认得我吗？」", paragraphs: [
+            "她抬起眼望向他。「你认得我吗？」她问。Taadidi 笑了。「当然。你是 Ada。我姐姐 Tofan 和 Fanyi 的朋友。」Adama 轻轻地点了点头。是的。可那并不完全是她想问的。" ] },
+          { title: "他不知道的事", paragraphs: [
+            "Taadidi 认识 Ada，认识那对双胞胎的朋友，这没错。可他不知道另一件事。他不知道，他当年在学校后面出借的那个声音，为了救一个姑娘而藏身歌唱的那个声音……那个姑娘，就是她。Adama 刚刚明白了这一切——就在这里，听到他在桥上唱歌的那一刻。" ] },
+          { title: "「那个声音，是你」", paragraphs: [
+            "于是 Adama 鼓起了勇气。「Taadidi。多年以前，在学校后面，一个姑娘被一个声音救了。一个躲着唱歌的声音。一个信了她的声音，那时换了别人都不会信。」她停下来，喉咙哽住了。「那个声音……是你的。而那个姑娘……是我。」" ] },
+          { title: "两个终于看见彼此的人", paragraphs: [
+            "Taadidi 僵在那里。记忆一下子涌回来——那个僻静的角落，两个大个子，那女孩的恐惧，他自己唱歌把他们赶走。这么多年，他从来不知道自己救了谁。而那个人，就是她。Adama。就在他面前。头一次，他们真正地看见了彼此——不再是姐姐们的朋友和小弟弟，而是两个共同守着一个秘密的人。也许，远不止于此。" ] },
+          { title: "那道阴影", paragraphs: [
+            "可就在 Taadidi 的喜悦里，忽然，有什么东西凝住了。一个姑娘在学校后面被两个大个子围住，得救了。而 Adama，后来嫁给了 Alya。Alya……那个名字像浑浊的水一样慢慢浮上来。如果那两个大个子里，有一个，就是……" ] },
+          { title: "两个故事", paragraphs: [
+            "讲故事的人把手按在鼓上。那一天，在水边，一颗火星被点燃了——美丽，温柔，等待了那么久。可一道旧日的阴影，也刚刚动了。从今往后，我的孩子们，两个故事要并肩而行：一个爱情故事……和一个关于公道的故事。可那，是明天的事了。" ] },
+        ] },
+      },
+    },
+    {
+      numero: 23, statut: "live",
+      planche: "/images/taadidi/ep23-planche.png",
+      cover: "/images/taadidi/ep23-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "La vérité", "en": "The Truth", "ar": "الحقيقة", "zh": "真相"},
+      teaser: {"fr": "Adama raconte tout à Taadidi — le mariage forcé, les années dures, le courage de partir. Et le nom d'Alya, qui rouvre tout. Taadidi veut se battre ; Adama redirige : ce n'est pas sa force qu'elle veut — c'est la vérité entendue.", "en": "Adama tells Taadidi everything — the forced marriage, the hard years, the courage to leave. And the name Alya, which reopens everything. Taadidi wants to fight; Adama redirects: it's not his strength she wants — it's the truth heard.", "ar": "تحكي Adama لـTaadidi كلّ شيء — الزواج القسريّ، السنوات الصعبة، شجاعة الرحيل. واسم Alya الذي يفتح كلّ شيء من جديد. يريد Taadidi أن يتقاتل؛ Adama تعيد التوجيه: ليست قوّته ما تريد — بل الحقيقة مسموعة.", "zh": "Adama 把一切都告诉了 Taadidi——被迫的婚姻、艰难的岁月、鼓起勇气离开。还有 Alya 这个名字，把一切都重新揭开。Taadidi 想去打架；Adama 纠正了他：她要的不是他的拳头——是真相被听见。"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "La vérité", sections: [
+          { title: "Les jours d'après", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Après ce jour au bord de l'eau, Taadidi et Adama se revirent souvent. Il bâtissait ses ponts ; elle venait puiser, son petit garçon sur la hanche. Ils parlaient. De tout, de rien. Et chaque jour, l'étincelle grandissait. Mais Taadidi sentait bien qu'Adama portait, au fond d'elle, une ombre dont elle ne parlait jamais." ] },
+          { title: "Ce qu'Adama portait", paragraphs: [
+            "Il ne la pressa pas. On ne force pas une porte ; on attend qu'elle s'ouvre. Et un jour, doucement, Adama décida de parler. « Tu m'as raconté ta voix, dit-elle. Laisse-moi te raconter mon histoire. » Taadidi s'assit près d'elle, et il écouta." ] },
+          { title: "Le récit d'Adama", paragraphs: [
+            "Adama raconta. Comment, à quinze ans, on l'avait mariée de force, loin, à un homme qu'elle n'avait pas choisi. Comment ces années avaient été dures, si dures. Et comment, un jour, elle avait trouvé le courage de partir, de reprendre son enfant et de rentrer au village, la tête haute, malgré tout ce qu'on dirait. Taadidi l'écoutait, le cœur serré. Quel courage il fallait pour tenir debout après cela." ] },
+          { title: "Le nom", paragraphs: [
+            "« Et cet homme, demanda Taadidi tout bas, qui était-ce ? » Adama le regarda. « Alya. Le fils du chef du village voisin. Celui à qui mon père avait été forcé de me promettre. »" ] },
+          { title: "L'eau trouble", paragraphs: [
+            "Alya. Ce nom remonta en Taadidi comme une eau trouble. Et soudain, tout se recolla. Le coin désert, derrière l'école. Les deux grands qui avaient cerné une fille. Sa propre voix, cachée, pour les faire fuir. L'un de ces deux-là… c'était Alya. Et la fille qu'il avait sauvée ce jour-là… c'était Adama. Celui qui l'avait harcelée était devenu celui qu'on l'avait forcée à épouser." ] },
+          { title: "Sa justice, à elle", paragraphs: [
+            "Taadidi sentit la colère monter, brûlante. Ses poings se serrèrent. Mais Adama posa une main sur son bras. « Non, dit-elle. Je ne veux pas que tu te battes. Ce que je veux, ce n'est pas ta force. C'est que la vérité soit enfin entendue. » Et Taadidi comprit : cette histoire était la sienne, à elle. Lui ne ferait que marcher à ses côtés." ] },
+          { title: "L'ombre s'est levée", paragraphs: [
+            "« Mais qui m'écoutera ? souffla Adama. Babadi était si puissant… » Alors Taadidi lui apprit ce qu'elle ignorait peut-être encore. Babadi, le vieux chef qui couvrait tout, n'était plus. Il était mort. Et avec lui s'était levée l'ombre qui, pendant des années, avait fait taire les voix. Pour la première fois, on pourrait parler." ] },
+          { title: "Ce qui ne peut rester caché", paragraphs: [
+            "Le conteur posa la main sur son tambour. Mes enfants, certaines choses qu'on enterre ne restent pas enterrées pour toujours. Ce soir-là, Adama et Taadidi se turent longtemps, côte à côte, au bord de l'eau. Tant de mal avait été tu, excusé, laissé impuni. Mais une question, désormais, brûlait dans le cœur d'Adama. Et demain, mes enfants, elle devrait y répondre." ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "The Truth", sections: [
+          { title: "The Days After", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. After that day at the water's edge, Taadidi and Adama saw each other often. He was building his bridges; she came to draw water, her little boy on her hip. They talked. About everything and nothing. And each day, the spark grew. But Taadidi could feel that Adama carried, deep inside her, a shadow she never spoke of." ] },
+          { title: "What Adama Carried", paragraphs: [
+            "He didn't press her. You don't force a door open; you wait for it to open itself. And one day, gently, Adama decided to speak. \"You told me about your voice,\" she said. \"Let me tell you my story.\" Taadidi sat down beside her, and he listened." ] },
+          { title: "Adama's Story", paragraphs: [
+            "Adama told her story. How, at fifteen, she had been married off by force, far away, to a man she had not chosen. How those years had been hard, so hard. And how, one day, she had found the courage to leave, to take back her child and return to the village, head high, in spite of everything people would say. Taadidi listened, his heart tight. What courage it must take to stand upright after all that." ] },
+          { title: "The Name", paragraphs: [
+            "\"And that man,\" Taadidi asked quietly, \"who was he?\" Adama looked at him. \"Alya. The son of the chief of the neighbouring village. The one my father had been forced to promise me to.\"" ] },
+          { title: "Troubled Water", paragraphs: [
+            "Alya. The name rose in Taadidi like troubled water. And suddenly, everything fell back into place. The deserted corner, behind the school. The two older boys who had cornered a girl. His own voice, hidden, to drive them away. One of those two… was Alya. And the girl he had saved that day… was Adama. The one who had harassed her had become the one she had been forced to marry." ] },
+          { title: "Her Justice", paragraphs: [
+            "Taadidi felt the anger rise, burning. His fists clenched. But Adama laid a hand on his arm. \"No,\" she said. \"I don't want you to fight. What I want isn't your strength. I want the truth to be heard at last.\" And Taadidi understood: this story was hers. He would only walk at her side." ] },
+          { title: "The Shadow Has Lifted", paragraphs: [
+            "\"But who will listen to me?\" Adama whispered. \"Babadi was so powerful…\" Then Taadidi told her what she perhaps did not yet know. Babadi, the old chief who covered everything up, was gone. He had died. And with him, the shadow that for years had silenced voices had lifted. For the first time, people would be able to speak." ] },
+          { title: "What Cannot Stay Hidden", paragraphs: [
+            "The storyteller laid his hand on his drum. My children, some things that are buried do not stay buried forever. That evening, Adama and Taadidi were silent for a long time, side by side, at the water's edge. So much harm had been hushed, excused, left unpunished. But a question now burned in Adama's heart. And tomorrow, my children, she would have to answer it." ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "الحقيقة", sections: [
+          { title: "الأيّام التالية", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. بعد ذلك اليوم على ضفّة الماء، تقابل Taadidi وAdama كثيرًا. كان يبني جسوره؛ وكانت تأتي تستقي، وابنها الصغير على خاصرتها. تكلّما. عن كلّ شيء وعن لا شيء. وكلّ يوم، كانت الشرارة تكبر. لكنّ Taadidi كان يحسّ جيّدًا أنّ Adama تحمل، في أعماقها، ظلًّا لم تكن تتكلّم عنه أبدًا." ] },
+          { title: "ما كانت Adama تحمل", paragraphs: [
+            "لم يضغط عليها. لا تكسر بابًا غصبًا؛ تنتظر أن يفتح. ذات يومٍ، بهدوء، قرّرت Adama أن تتكلّم. «لقد حكيتَ لي عن صوتك، قالت. دعني أحكي لك قصّتي.» جلس Taadidi بجانبها، وأنصت." ] },
+          { title: "قصّة Adama", paragraphs: [
+            "حكت Adama. كيف، في الخامسة عشرة، زوّجوها قسرًا، بعيدًا، لرجلٍ لم تختره. كيف كانت تلك السنوات قاسية، قاسيةً جدًّا. وكيف، يومًا ما، وجدت الشجاعة لتغادر، تستعيد طفلها وتعود إلى القرية، ورأسها مرفوع، رغم كلّ ما قد يُقال. كان Taadidi يصغي، وقلبه ينقبض. يا لها من شجاعة تلزم للوقوف بعد كلّ ذلك." ] },
+          { title: "الاسم", paragraphs: [
+            "«وهذا الرجل، سأل Taadidi بصوتٍ خافت، من كان؟» نظرت إليه Adama. «Alya. ابن رئيس القرية المجاورة. الذي أُجبر أبي على أن يعدني له.»" ] },
+          { title: "الماء العكر", paragraphs: [
+            "Alya. عاد الاسم في Taadidi كماءٍ عكر. وفجأةً، تلاءمت كلّ القطع. الركن الخالي، خلف المدرسة. الشابّان الكبيران اللذان أحاطا بفتاة. صوته هو، مختبئًا، ليُهربهما. أحد هذين... كان Alya. والفتاة التي أنقذها ذلك اليوم... كانت Adama. من حرشها صار من أُجبرت على الزواج به." ] },
+          { title: "عدالتها هي", paragraphs: [
+            "شعر Taadidi بالغضب يرتفع، محرقًا. تشبّكت قبضتاه. لكنّ Adama وضعت يدها على ذراعه. «لا، قالت. لا أريدك أن تتقاتل. ما أريده ليس قوّتك. بل أن تُسمَع الحقيقة أخيرًا.» وفهم Taadidi: هذه القصّة كانت قصّتها هي. لن يفعل هو سوى أن يسير إلى جانبها." ] },
+          { title: "رُفع الظلّ", paragraphs: [
+            "«لكن من سيستمع إليّ؟ همست Adama. كان Babadi قوّيًّا جدًّا…» فأخبرها Taadidi بما ربّما كانت لا تعلمه بعد. Babadi، الرئيس العجوز الذي كان يغطّي كلّ شيء، لم يعد موجودًا. كان قد مات. وبرحيله رُفع الظلّ الذي أسكت الأصوات سنواتٍ طويلة. لأوّل مرّة، يمكن الكلام." ] },
+          { title: "ما لا يبقى مدفونًا", paragraphs: [
+            "وضع الحكواتي يده على طبله. يا أطفالي، بعض الأشياء التي تُدفن لا تبقى مدفونةً للأبد. في تلك الأمسية، صمت Adama وTaadidi طويلًا، جنبًا إلى جنب، على ضفّة الماء. كثيرٌ من الأذى كان قد كُتم، وتُعذّر به، وتُرك دون عقاب. لكنّ سؤالًا صار يحرق قلب Adama من الآن. وغدًا، يا أطفالي، ستضطرّ إلى الإجابة عنه." ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "真相", sections: [
+          { title: "此后的日子", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。水边那天之后，Taadidi 和 Adama 常常见面。他建着他的桥；她来打水，小儿子搂在胯上。他们聊天。什么都聊。每一天，那颗火星都在长大。可 Taadidi 清楚地感觉到，Adama 心底深处藏着一道阴影，从来不提。" ] },
+          { title: "Adama 背负的", paragraphs: [
+            "他没有追问。门不是强迫撬开的；等它自己开。一天，Adama 轻轻地决定开口。「你告诉了我你的声音，」她说。「让我来告诉你我的故事。」Taadidi 在她身边坐下，听着。" ] },
+          { title: "Adama 的故事", paragraphs: [
+            "Adama 讲起来了。十五岁那年，她被强嫁给了远方一个她没有选过的人。那些岁月有多难，有多难。然后有一天，她找到了勇气，带着孩子离开，回到村子，昂着头，不管别人怎么说。Taadidi 心里揪着听完。要在那一切之后还站得住，得有多大的勇气。" ] },
+          { title: "那个名字", paragraphs: [
+            "「那个人，」Taadidi 轻声问道，「是谁？」Adama 看着他。「Alya。邻村酋长的儿子。我父亲被逼着把我许给他的那个人。」" ] },
+          { title: "浑浊的水", paragraphs: [
+            "Alya。这个名字在 Taadidi 心里像浑浊的水一样浮上来。猛然间，一切都拼上了。学校后面那个僻静的角落。两个大个子把一个女孩围住。他自己藏着唱歌，把他们赶走。那两个人里的一个……是 Alya。而他那天救的那个姑娘……是 Adama。曾经骚扰她的那个人，成了她被迫嫁给的那个人。" ] },
+          { title: "她自己的公道", paragraphs: [
+            "Taadidi 感到怒火腾地烧起来。他的拳头握紧了。可 Adama 把一只手放在他臂上。「不，」她说。「我不要你去打架。我要的不是你的力气。我要的是真相终于被人听见。」Taadidi 明白了：这个故事是她的。他只是走在她身旁。" ] },
+          { title: "阴影散了", paragraphs: [
+            "「可谁会听我说？」Adama 低声道。「Babadi 那么有势力……」于是 Taadidi 告诉了她一件她或许还不知道的事。那个遮掩一切的老酋长 Babadi，已经不在了。他死了。随着他，多年来让人噤声的那道阴影散了。头一回，人们可以开口说话了。" ] },
+          { title: "埋不住的东西", paragraphs: [
+            "讲故事的人把手按在鼓上。我的孩子们，有些被埋下去的东西，不会永远埋着。那天晚上，Adama 和 Taadidi 在水边并肩沉默了很久。那么多的伤害被压下去、被开脱、被放过。可如今，有一个问题在 Adama 心里燃烧。明天，我的孩子们，她将不得不回答它。" ] },
+        ] },
+      },
+    },
+    {
+      numero: 24, statut: "live",
+      planche: "/images/taadidi/ep24-planche.png",
+      cover: "/images/taadidi/ep24-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "Bâtir quelque chose", "en": "Building Something", "ar": "بناء شيء", "zh": "建起一些东西"},
+      teaser: {"fr": "Adama regarde ses amies réussir et décide de bâtir elle aussi — une association pour protéger les femmes. Taadidi ouvre ses chantiers aux femmes vulnérables. Adama n'est pas une victime : elle est une actrice du changement.", "en": "Adama watches her friends succeed and decides to build something too — an association to protect women. Taadidi opens his building sites to vulnerable women. Adama is not a victim: she is an agent of change.", "ar": "ترى Adama صديقاتها ينجحن وتقرّر أن تبني هي أيضًا — جمعيّةً لحماية المرأة. Taadidi يفتح مواقع بنائه للنساء الضعيفات. Adama ليست ضحيّة: هي فاعلة للتغيير.", "zh": "Adama 望着朋友们各有成就，决定自己也要建起一些东西——一个保护妇女的互助社。Taadidi 向弱势妇女开放他的工地。Adama 不是受害者：她是变革的行动者。"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Bâtir quelque chose", sections: [
+          { title: "Adama regarde ses amies", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Autour d'Adama, ses amies montaient, chacune à sa façon. Lima soignait les malades. Tofan portait son grand projet jusqu'au pays tout entier. Fanyi faisait la classe aux enfants. Et Adama, un jour, en les regardant, se posa une question." ] },
+          { title: "La question d'Adama", paragraphs: [
+            "« Vais-je faire des allers-retours au marigot toute ma vie ? » Elle aimait prendre soin de son fils et de sa maison, oh oui. Mais, au fond d'elle, elle avait toujours cru qu'elle aussi bâtirait quelque chose. Comme ses amies. Comme Taadidi. Quelque chose qui compterait." ] },
+          { title: "L'idée d'Adama", paragraphs: [
+            "Alors elle vint trouver Taadidi. « J'ai pensé à monter une association, dit-elle. Et… je ne t'ai pas raconté toute mon histoire. Je voudrais la raconter à tout le monde. En faire un exemple, pour qu'aucune autre femme ne tombe dans le piège qui a failli me prendre ma vie. Trop de femmes souffrent en silence, Taadidi. Trop. »" ] },
+          { title: "Ni pitié, ni victime", paragraphs: [
+            "Taadidi la regarda. Et savez-vous ce qu'il ressentit ? Pas de la pitié. Non. De l'admiration. Une admiration immense. Car devant lui se tenait une grande dame qui refusait de se voir en victime, et qui choisissait, à la place, d'être une actrice du changement. « Tu es la personne la plus courageuse que je connaisse », pensa-t-il." ] },
+          { title: "La promesse", paragraphs: [
+            "« Je serai là, lui dit-il simplement. À chaque pas. » Et il le pensait de tout son cœur." ] },
+          { title: "Le vrai piège", paragraphs: [
+            "Adama réfléchit tout haut. « Tu sais ce qui retient tant de femmes prisonnières ? Ce n'est pas seulement la peur. C'est le manque. Pas de travail, pas d'argent à elles. Alors elles restent, parce qu'elles n'ont nulle part où aller. » Et là, une idée traversa Taadidi." ] },
+          { title: "Les chantiers", paragraphs: [
+            "« Alors voilà ce que je propose, dit-il. Sur mes chantiers, il y a de la place. Que ces femmes viennent ! Elles peuvent bâtir aussi bien que quiconque. Et le plus beau ? Mes ponts, je les construis au bord des marigots — là, justement, où les enfants adorent jouer. Les mamans travailleront, et leurs petits joueront tout près. » Adama sourit. C'était exactement ça." ] },
+          { title: "Deux bâtisseurs", paragraphs: [
+            "Le conteur posa la main sur son tambour. Et voilà, mes enfants, comment, ce jour-là, deux bâtisseurs se tinrent côte à côte : l'un dressait des ponts de pierre par-dessus l'eau ; l'autre allait dresser un abri pour celles qu'on avait trop longtemps fait taire. Mais pour cela, Adama devrait d'abord faire la chose la plus difficile de toutes : se tenir debout, devant tout le monde, et raconter. Et ça, mes enfants, c'est pour demain." ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "Building Something", sections: [
+          { title: "Adama Watches Her Friends", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. Around Adama, her friends were rising, each in her own way. Lima was caring for the sick. Tofan was carrying her great project across the whole country. Fanyi was teaching the children. And Adama, one day, watching them, asked herself a question." ] },
+          { title: "Adama's Question", paragraphs: [
+            "\"Am I going to be making trips to the water point all my life?\" She loved caring for her son and her home, oh yes. But, deep inside, she had always believed that she too would build something. Like her friends. Like Taadidi. Something that would matter." ] },
+          { title: "Adama's Idea", paragraphs: [
+            "Then she went to find Taadidi. \"I've been thinking about starting an association,\" she said. \"And… I haven't told you my whole story. I'd like to tell everyone. To make it an example, so that no other woman falls into the trap that nearly took my life. Too many women suffer in silence, Taadidi. Too many.\"" ] },
+          { title: "Neither Pity, nor Victim", paragraphs: [
+            "Taadidi looked at her. And do you know what he felt? Not pity. No. Admiration. Immense admiration. For before him stood a great woman who refused to see herself as a victim, and who chose, instead, to be an agent of change. \"You are the most courageous person I know,\" he thought." ] },
+          { title: "The Promise", paragraphs: [
+            "\"I'll be there,\" he told her simply. \"At every step.\" And he meant it with all his heart." ] },
+          { title: "The Real Trap", paragraphs: [
+            "\"You know what keeps so many women trapped?\" Adama thought aloud. \"It isn't only fear. It's lack. No work, no money of their own. So they stay, because they have nowhere to go.\" And at that moment, an idea came to Taadidi." ] },
+          { title: "The Building Sites", paragraphs: [
+            "\"Then here is what I propose,\" he said. \"On my building sites, there is room. Let these women come! They can build just as well as anyone. And the finest part? My bridges, I build them by the water points — right where children love to play. The mothers will work, and their little ones will play nearby.\" Adama smiled. That was exactly it." ] },
+          { title: "Two Builders", paragraphs: [
+            "The storyteller laid his hand on his drum. And that, my children, is how, that day, two builders stood side by side: one was raising stone bridges over the water; the other was going to raise a shelter for those who had been silenced too long. But for that, Adama would first have to do the most difficult thing of all: stand up, before everyone, and tell her story. And that, my children, will be for tomorrow." ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "بناء شيء", sections: [
+          { title: "Adama تنظر إلى صديقاتها", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. من حول Adama، كانت صديقاتها يصعدن، كلٌّ على طريقتها. Lima تداوي المرضى. Tofan تحمل مشروعها الكبير إلى البلد كلّه. Fanyi تُعلّم الأطفال. وAdama، ذات يوم، وهي تنظر إليهنّ، طرحت على نفسها سؤالًا." ] },
+          { title: "سؤال Adama", paragraphs: [
+            "«هل سأقضي حياتي في التردّد على المجرى؟» كانت تحبّ العناية بابنها وبيتها، أجل. لكنّها، في أعماقها، كانت دائمًا تؤمن أنّها هي أيضًا ستبني شيئًا. كصديقاتها. كـTaadidi. شيئًا يُحسب." ] },
+          { title: "فكرة Adama", paragraphs: [
+            "فذهبت تجد Taadidi. «فكّرتُ في إنشاء جمعيّة، قالت. و… لم أحكِ لك قصّتي كلّها. أودّ أن أحكيها للجميع. أن أجعلها نموذجًا، كي لا تقع امرأةٌ أخرى في الفخّ الذي كاد يأخذ حياتي. كثيرٌ جدًّا من النساء يعانين في صمت، Taadidi. كثيرٌ جدًّا.»" ] },
+          { title: "لا شفقة، ولا ضحيّة", paragraphs: [
+            "نظر Taadidi إليها. وأتدرون ما شعر به؟ ليس الشفقة. لا. الإعجاب. إعجابٌ بالغ. إذ كانت أمامه سيّدةٌ عظيمة ترفض أن ترى نفسها ضحيّة، وتختار عوضًا عن ذلك أن تكون فاعلةً للتغيير. «أنتِ أشجع إنسانٍ أعرفه»، فكّر." ] },
+          { title: "الوعد", paragraphs: [
+            "«سأكون هنا، قال لها ببساطة. في كلّ خطوة.» وكان يعني ذلك بكلّ قلبه." ] },
+          { title: "الفخّ الحقيقيّ", paragraphs: [
+            "فكّرت Adama بصوتٍ عالٍ. «أتدري ما الذي يبقي كثيرًا من النساء أسيرات؟ ليست الخوف وحده. بل الحاجة. لا عمل، لا مال لهنّ. فيبقين، لأنّ لا مكان آخر يذهبن إليه.» وهناك، خطرت لـTaadidi فكرة." ] },
+          { title: "المواقع", paragraphs: [
+            "«إذًا هذا ما أقترحه، قال. على مواقعي، ثمّة مكان. لتأتِ هؤلاء النساء! يمكنهنّ البناء بقدر ما يستطيع أيّ أحد. والأجمل؟ جسوري، أبنيها على ضفاف المجاري — هناك بالضبط، حيث يحبّ الأطفال اللعب. الأمّهات سيعملن، وصغارهنّ سيلعبون قريبًا منهنّ.» ابتسمت Adama. كان ذلك بالضبط ما تريد." ] },
+          { title: "بنّاءان", paragraphs: [
+            "وضع الحكواتي يده على طبله. وهكذا، يا أطفالي، في ذلك اليوم، وقف بنّاءان جنبًا إلى جنب: أحدهما يرفع جسور الحجارة فوق الماء؛ والأخرى ستُشيّد ملجأً لمن صُمِّتن طويلًا. لكن لذلك، كان على Adama أن تفعل أوّلًا أصعب شيء من كلّ شيء: أن تقف، أمام الجميع، وتحكي. وذلك، يا أطفالي، سيكون في الغد." ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "建起一些东西", sections: [
+          { title: "Adama 望着她的朋友们", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。在 Adama 周围，她的朋友们各自往上走，各走各的路。Lima 照料病人。Tofan 把她的大方案带到了整个国家。Fanyi 给孩子们上课。Adama 有一天望着她们，问了自己一个问题。" ] },
+          { title: "Adama 的问题", paragraphs: [
+            "「难道我要一辈子来来回回打水吗？」她爱照料儿子和家，那是真的。可在她心底，她一直相信自己也会建起一些东西。像她的朋友们那样。像 Taadidi 那样。一些真正重要的东西。" ] },
+          { title: "Adama 的主意", paragraphs: [
+            "于是她去找 Taadidi。「我想过要成立一个互助社，」她说。「还有……我没有把我的故事全告诉你。我想告诉所有人。让它成为一个例子，让再没有任何女人掉进那个差点要了我的命的陷阱。太多女人在沉默中受苦，Taadidi。太多了。」" ] },
+          { title: "既不是怜悯，也不是受害者", paragraphs: [
+            "Taadidi 看着她。你们知道他感受到了什么吗？不是怜悯。不是。是敬佩。巨大的敬佩。因为他面前站着一位伟大的女性，她拒绝把自己看作受害者，而是选择成为变革的行动者。「你是我认识的最勇敢的人，」他心想。" ] },
+          { title: "承诺", paragraphs: [
+            "「我会在，」他只是简单地对她说。「每一步。」他是打心底这么想的。" ] },
+          { title: "真正的陷阱", paragraphs: [
+            "Adama 大声地想着。「你知道是什么把那么多女人困住了吗？不只是恐惧。是匮乏。没有工作，没有自己的钱。于是她们留下来，因为无处可去。」就在那一刻，Taadidi 想到了一个主意。" ] },
+          { title: "工地", paragraphs: [
+            "「那我提议这个，」他说。「我的工地上，有地方。让这些女人来吧！她们造得跟任何人一样好。最美的是什么？我的桥，都是在水边造的——正好是孩子们最爱玩耍的地方。妈妈们干活，她们的孩子就在旁边玩。」Adama 笑了。就是这个。" ] },
+          { title: "两个建造者", paragraphs: [
+            "讲故事的人把手按在鼓上。这就是，我的孩子们，那一天，两个建造者并肩而立的样子：一个在水上架起石桥；另一个要为那些被压了太久声音的人建起一处遮蔽所。可为此，Adama 首先要做那件最难的事：站在所有人面前，开口讲述。而那，我的孩子们，是明天的事了。" ] },
+        ] },
+      },
+    },
+    {
+      numero: 25, statut: "live",
+      planche: "/images/taadidi/ep25-planche.png",
+      cover: "/images/taadidi/ep25-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "Sous le néribily", "en": "Under the Néribily", "ar": "تحت النيريبيلي", "zh": "在 néribily 树下"},
+      teaser: {"fr": "Ce jour-là, tout le village se rassemble sous le grand fromager. Adama se lève, raconte tout, et appelle les femmes à se lever. Le village qui ne l'avait pas crue voit enfin la vérité. Et sous l'arbre à palabres, le silence de plusieurs années se brise.", "en": "That day, the whole village gathers under the great kapok tree. Adama stands up, tells everything, and calls the women to rise. The village that had not believed her finally sees the truth. And under the palaver tree, a silence of several years is broken.", "ar": "في ذلك اليوم، يتجمّع القرية كلّها تحت فرنجيبانة الكبيرة. تقوم Adama، تحكي كلّ شيء، وتدعو النساء للنهوض. القرية التي لم تصدّقها ترى الحقيقة أخيرًا. وتحت شجرة الكلام، ينكسر صمتُ سنواتٍ عديدة.", "zh": "那一天，全村人聚在大木棉树下。Adama 站起来，讲述一切，呼唤女人们也站起来。曾经不相信她的村子终于看见了真相。而在言谈树下，多年的沉默破碎了。"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Sous le néribily", sections: [
+          { title: "Le grand arbre", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Ce jour-là, tout le village se rassembla sous le grand néribily — le fromager, l'arbre à palabres, celui sous lequel, depuis toujours, on dit les choses importantes. Et sous ses immenses branches, une femme allait dire la chose la plus difficile de toutes." ] },
+          { title: "Debout", paragraphs: [
+            "Adama se leva. Devant elle, il y avait tout le village — ce même village qui, autrefois, ne l'avait pas crue. Son cœur cognait fort. Mais elle n'était pas seule : Taadidi était là, et Kala, et Lima, et les jumelles. Elle prit une grande inspiration, et elle commença." ] },
+          { title: "Adama raconte", paragraphs: [
+            "Elle raconta tout. La promesse qu'on avait faite sans elle. Le mariage forcé, à quinze ans. Les années de silence, loin des siens. Et le courage qu'il avait fallu, un matin, pour partir. Elle ne cacha rien de ce qu'on lui avait pris. Sa voix tremblait, mais elle ne s'arrêta pas. Sous le néribily, on n'entendait plus qu'elle." ] },
+          { title: "Les larmes", paragraphs: [
+            "À un moment, son petit garçon, dans ses bras, se mit à pleurer. Elle le serra contre elle et continua. Et alors, dans l'assemblée, quelque chose se passa. Des larmes se mirent à couler. Sur le visage des femmes. Sur le visage des hommes, aussi. Le village entier, pour la première fois, sentait ce qu'Adama avait porté seule." ] },
+          { title: "Le village voit enfin", paragraphs: [
+            "Et ce jour-là, mes enfants, le village qui s'était laissé aveugler par un beau visage, le village qui avait dit « quelle chance », le village qui n'avait pas voulu croire — ce village-là vit enfin. Il vit la vérité. Et le vieux silence, celui qui protégeait les puissants, se brisa d'un coup, comme une calebasse qui tombe." ] },
+          { title: "Ce qui devra répondre", paragraphs: [
+            "Car Babadi n'était plus là pour couvrir les siens. Désormais, ce qui avait été fait ne pourrait plus se cacher — ni derrière un joli visage, ni derrière le nom d'un chef. Devant tout le village réuni, la vérité était dite. Et ce qui est dit à voix haute, mes enfants, ne peut plus rester impuni." ] },
+          { title: "La main tendue", paragraphs: [
+            "Adama releva la tête, et sa voix se raffermit. « Si vous aussi, dit-elle, vous taisez une injustice — prenez mes mots comme une main tendue, et venez nous rejoindre. Il est temps. Il est temps que nos vies soient plus justes. »" ] },
+          { title: "L'abri se lève", paragraphs: [
+            "Alors, mes enfants, il se passa une chose magnifique. Une femme se leva dans l'assemblée. Puis une autre. Puis une autre encore. Elles s'avançaient vers Adama, la main tendue à leur tour. Sous le grand néribily, ce jour-là, un silence de plusieurs années fut rompu — et un abri se leva pour toutes celles qu'on avait fait taire. Le conteur sourit : il restait pourtant une dernière histoire à raconter. La plus douce de toutes." ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "Under the Néribily", sections: [
+          { title: "The Great Tree", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. That day, the whole village gathered under the great néribily — the kapok tree, the palaver tree, the one under which, since always, the important things are said. And beneath its vast branches, a woman was going to say the most difficult thing of all." ] },
+          { title: "Standing Up", paragraphs: [
+            "Adama rose. Before her stood the whole village — that same village which, once, had not believed her. Her heart was beating hard. But she was not alone: Taadidi was there, and Kala, and Lima, and the twins. She took a deep breath, and she began." ] },
+          { title: "Adama Tells Her Story", paragraphs: [
+            "She told everything. The promise that had been made without her. The forced marriage, at fifteen. The years of silence, far from her own people. And the courage it had taken, one morning, to leave. She hid nothing of what had been taken from her. Her voice trembled, but she did not stop. Under the néribily, only her voice could be heard." ] },
+          { title: "The Tears", paragraphs: [
+            "At a certain moment, her little boy in her arms began to cry. She held him close and went on. And then, in the assembly, something happened. Tears began to flow. On the faces of the women. On the faces of the men, too. The whole village, for the first time, felt what Adama had carried alone." ] },
+          { title: "The Village Finally Sees", paragraphs: [
+            "And that day, my children, the village that had let itself be blinded by a beautiful face, the village that had said \"how lucky\", the village that had refused to believe — that village, at last, saw. It saw the truth. And the old silence, the one that protected the powerful, broke all at once, like a calabash that falls." ] },
+          { title: "What Must Now Answer", paragraphs: [
+            "For Babadi was no longer there to cover for his own. From now on, what had been done could no longer hide — not behind a pretty face, not behind a chief's name. Before the whole village assembled, the truth was spoken. And what is spoken aloud, my children, can no longer go unpunished." ] },
+          { title: "The Outstretched Hand", paragraphs: [
+            "\"If you too,\" she said, \"are keeping an injustice silent — take my words as an outstretched hand, and come join us. It is time. It is time for our lives to be more just.\"" ] },
+          { title: "A Shelter Rises", paragraphs: [
+            "Then, my children, a magnificent thing happened. A woman rose in the assembly. Then another. Then another still. They moved toward Adama, their own hands outstretched. Under the great néribily, that day, a silence of several years was broken — and a shelter rose for all those who had been silenced. The storyteller smiled: and yet one last story remained to be told. The sweetest of all." ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "تحت النيريبيلي", sections: [
+          { title: "الشجرة الكبيرة", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. في ذلك اليوم، تجمّع القرية كلّها تحت النيريبيلي الكبير — القطن الحريري، شجرة الكلام، التي تحتها دائمًا تُقال الأشياء المهمّة. وتحت أغصانها الشاسعة، امرأةٌ كانت على وشك أن تقول أصعب شيء من كلّ شيء." ] },
+          { title: "واقفة", paragraphs: [
+            "وقفت Adama. أمامها كان القرية كلّها — هذا القرية ذاته الذي لم يصدّقها في ما مضى. كان قلبها يخفق بشدّة. لكنّها لم تكن وحدها: كان Taadidi هناك، وKala، وLima، والتوأمتان. أخذت نفسًا عميقًا، وبدأت." ] },
+          { title: "Adama تحكي", paragraphs: [
+            "حكت كلّ شيء. الوعد الذي أُعطي بدونها. الزواج القسريّ، في الخامسة عشرة. سنوات الصمت، بعيدًا عن ذويها. والشجاعة التي لزمت، ذات صباح، للمغادرة. لم تخفِ شيئًا ممّا أُخذ منها. كان صوتها يرتجف، لكنّها لم تتوقّف. تحت النيريبيلي، لم يُسمَع سوى صوتها." ] },
+          { title: "الدموع", paragraphs: [
+            "في لحظة، بدأ طفلها الصغير في ذراعيها يبكي. ضمّته إليها واستمرّت. وعندئذٍ، في التجمّع، حدث شيء. بدأت دموعٌ تجري. على وجوه النساء. وعلى وجوه الرجال أيضًا. القرية كلّها، لأوّل مرّة، تحسّ ما حملته Adama وحدها." ] },
+          { title: "القرية يرى أخيرًا", paragraphs: [
+            "وفي ذلك اليوم، يا أطفالي، القرية الذي تركت وجهًا جميلًا يعميه، القرية الذي قال «يا لها من حظّ»، القرية الذي لم يرد أن يصدّق — ذلك القرية رأى أخيرًا. رأى الحقيقة. والصمت القديم، الذي كان يحمي الأقوياء، انكسر دفعةً واحدة، كقرعةٍ تسقط." ] },
+          { title: "ما يجب أن يُجيب", paragraphs: [
+            "إذ لم يعد Babadi هناك يغطّي على أبنائه. من الآن فصاعدًا، لن يستطيع ما صنعه الاختباء — لا خلف وجهٍ جميل، ولا خلف اسم رئيس. أمام القرية كلّها مجتمعة، قيلت الحقيقة. وما يُقال بصوتٍ عالٍ، يا أطفالي، لا يمكنه أن يظلّ بلا عقاب." ] },
+          { title: "اليد الممدودة", paragraphs: [
+            "رفعت Adama رأسها، واستقرّ صوتها. «إن كنتنّ أنتنّ أيضًا، قالت، تكتمن ظلمًا — فخذن كلماتي كيدٍ ممدودة، وتعالين إلينا. لقد حان الوقت. لقد حان الوقت أن تكون حياتنا أكثر عدلًا.»" ] },
+          { title: "الملجأ يقوم", paragraphs: [
+            "وعندئذٍ، يا أطفالي، حدث شيءٌ رائع. وقفت امرأةٌ في التجمّع. ثمّ أخرى. ثمّ أخرى بعدها. كنّ يتقدّمن نحو Adama، وأيديهنّ ممدودةٌ بدورهنّ. تحت النيريبيلي الكبير، في ذلك اليوم، انكسر صمتُ عدّة سنوات — وقام ملجأٌ لكلّ من صُمِّتن. ابتسم الحكواتي: كانت ثمّة قصّةٌ أخيرة تبقّت لتُروى. أعذبُ القصص جميعًا." ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "在 néribily 树下", sections: [
+          { title: "那棵大树", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。那一天，全村人聚到了那棵大 néribily 树下——那棵木棉树，言谈树，自古以来人们在树下说重要事情的地方。在它巨大的枝桠下，一个女人要说出那件最难说出口的事。" ] },
+          { title: "站起来", paragraphs: [
+            "Adama 站了起来。她面前是整个村子——就是那个从前不相信她的村子。她的心跳得很响。但她不是一个人：Taadidi 在，Kala 在，Lima 在，那对双胞胎也在。她深吸一口气，开口了。" ] },
+          { title: "Adama 讲述", paragraphs: [
+            "她把一切都说了。那个没有她就做出的承诺。十五岁时的强迫婚姻。在远方沉默度过的那些年。还有某个早晨，鼓起勇气离开所需要的力气。她没有隐瞒任何被夺走的东西。她的声音在颤抖，但她没有停。néribily 树下，只听得见她的声音。" ] },
+          { title: "眼泪", paragraphs: [
+            "有一刻，她怀里的小男孩哭了起来。她把他紧紧搂住，继续说下去。就在这时，人群里发生了一件事。眼泪流下来了。从女人们脸上流下来。也从男人们脸上流下来。全村人，第一次，感受到了 Adama 一个人背负的那些。" ] },
+          { title: "村子终于看见了", paragraphs: [
+            "而那一天，我的孩子们，曾经被一张漂亮脸蛋蒙住了眼的村子，说过「多幸运啊」的村子，不肯相信的村子——那个村子，终于看见了。它看见了真相。多年来保护强权者的那道旧日沉默，一下子碎了，像一只落地的葫芦。" ] },
+          { title: "要给出答案的事", paragraphs: [
+            "Babadi 已经不在了，无法再遮护他的人。从今以后，做下的事再也无处藏身——既藏不进一张漂亮脸蛋后面，也藏不进一个酋长的名字后面。在聚在一起的全村人面前，真相说出来了。而大声说出来的事情，我的孩子们，再也不能不受惩处。" ] },
+          { title: "伸出的手", paragraphs: [
+            "Adama 抬起头，声音稳了下来。「如果你们也在，」她说，「压着一桩不公正——就把我的话当成一只伸出的手，来加入我们吧。是时候了。是时候让我们的生活更公正了。」" ] },
+          { title: "遮蔽所升起", paragraphs: [
+            "于是，我的孩子们，发生了一件美好的事。一个女人在人群里站了起来。又一个。再一个。她们走向 Adama，伸出了各自的手。大 néribily 树下，那一天，多年的沉默破碎了——一处遮蔽所，为所有被压了声音的人升起来了。讲故事的人笑了：可还有最后一个故事要讲。所有故事里最甜的那个。" ] },
+        ] },
+      },
+    },
+    {
+      numero: 26, statut: "live",
+      planche: "/images/taadidi/ep26-planche.png",
+      cover: "/images/taadidi/ep26-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "Le choix d'Adama", "en": "Adama's Choice", "ar": "اختيار Adama", "zh": "Adama 的选择"},
+      teaser: {"fr": "Les saisons passent, Taadidi et Adama se rapprochent. Il l'aime — et aime son fils. Le soir où il le lui dit, pour la première fois de sa vie, on lui pose la question. Le choix est le sien.", "en": "The seasons pass; Taadidi and Adama draw closer. He loves her — and loves her son. The evening he tells her, for the first time in her life, she is asked. The choice is hers.", "ar": "تمرّ المواسم، ويتقرّب Taadidi وAdama من بعضهما. يحبّها — ويحبّ ابنها. وليلة يقول لها ذلك، لأوّل مرّة في حياتها، يُسألُ رأيها. الاختيار اختيارها.", "zh": "季节流逝，Taadidi 和 Adama 越走越近。他爱她——也爱她的儿子。那个夜晚他开口说了，她生平第一次被人问到。这个选择，是她自己的。"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Le choix d'Adama", sections: [
+          { title: "Les saisons passent", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Les saisons passèrent. L'association d'Adama grandissait ; des femmes venaient de partout, travaillaient, gagnaient leur vie, relevaient la tête. Le village guérissait, doucement. Et au milieu de tout cela, Taadidi et Adama se rapprochaient — pour de bon, cette fois, et au grand jour." ] },
+          { title: "Le petit garçon", paragraphs: [
+            "Sur les chantiers, au bord des marigots, le petit garçon d'Adama suivait Taadidi partout. Il lui tendait les outils, riait de ses chansons, s'endormait parfois sur son épaule. Et Taadidi, sans même y penser, s'était mis à l'aimer comme s'il était son propre fils." ] },
+          { title: "Ce que Taadidi voulait", paragraphs: [
+            "Un soir, Taadidi sut exactement ce qu'il voulait. Pas seulement Adama. Adama et son petit garçon. Les deux. Pour toujours. Il alla la trouver, le cœur battant." ] },
+          { title: "La demande", paragraphs: [
+            "« Adama, dit-il. Je ne veux pas seulement t'épouser. Ton fils, je veux qu'il soit le mien, lui aussi. Permets-moi de demander ta main, et d'unir nos familles. » Il ne s'agenouilla pas. Il se tint simplement devant elle, droit et sincère, comme on se tient devant quelqu'un qu'on respecte de toute son âme." ] },
+          { title: "Pour la première fois", paragraphs: [
+            "Adama le regarda longtemps. À quinze ans, on l'avait donnée sans même lui demander son avis. Aujourd'hui, pour la première fois de toute sa vie, on lui posait la question. Le choix était le sien. Rien qu'à elle. À travers ses larmes, elle sourit. « Oui », dit-elle. Et ce oui-là, enfin, c'était le sien." ] },
+          { title: "« Mon fils »", paragraphs: [
+            "Alors Taadidi se tourna vers le petit garçon qui jouait à leurs pieds. Il le souleva bien haut dans ses bras, et l'enfant éclata de rire. « Et toi, lui dit Taadidi, tu seras mon fils. » Le petit qui n'avait jamais eu de père en aurait un. Un père qui l'avait choisi." ] },
+          { title: "Deux qui se choisissent", paragraphs: [
+            "Le conteur sourit. Mes enfants, le village avait connu tant d'unions arrangées, promises, forcées. Mais celle-ci ne ressemblait à aucune autre. Car celle-ci, personne ne l'avait décidée à leur place. Deux personnes s'étaient vues vraiment, puis s'étaient choisies. Et il n'y a pas, sur cette terre, de lien plus solide que celui-là." ] },
+          { title: "La plus douce des histoires", paragraphs: [
+            "Ainsi, celle qu'on avait donnée de force allait, cette fois, se donner librement. Et celui qui avait sauvé une inconnue, un jour, derrière une école, allait bâtir avec elle la plus belle de ses constructions : une famille. Il ne restait plus qu'à célébrer. Et un mariage à Kiribounyi, mes enfants... ça, il faut le voir ! Mais ce sera pour demain." ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "Adama's Choice", sections: [
+          { title: "The Seasons Pass", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. The seasons passed. Adama's association was growing; women came from everywhere, worked, earned their living, held their heads high. The village was healing, slowly. And in the midst of all this, Taadidi and Adama were drawing closer — for good, this time, and in the open." ] },
+          { title: "The Little Boy", paragraphs: [
+            "On the building sites, by the water's edge, Adama's little boy followed Taadidi everywhere. He handed him tools, laughed at his songs, sometimes fell asleep on his shoulder. And Taadidi, without even thinking about it, had come to love him as if he were his own son." ] },
+          { title: "What Taadidi Wanted", paragraphs: [
+            "One evening, Taadidi knew exactly what he wanted. Not just Adama. Adama and her little boy. Both of them. Forever. He went to find her, his heart beating fast." ] },
+          { title: "The Proposal", paragraphs: [
+            "\"Adama,\" he said. \"I don't only want to marry you. Your son — I want him to be mine too. Allow me to ask for your hand, and to unite our families.\" He did not kneel. He simply stood before her, straight and sincere, the way one stands before someone one respects with all one's soul." ] },
+          { title: "For the First Time", paragraphs: [
+            "Adama looked at him for a long moment. At fifteen, she had been given away without anyone asking her opinion. Today, for the first time in her entire life, she was being asked. The choice was hers. Hers alone. Through her tears, she smiled. \"Yes,\" she said. And that yes, at last, was hers." ] },
+          { title: "\"My Son\"", paragraphs: [
+            "Then Taadidi turned to the little boy who was playing at their feet. He lifted him high in his arms, and the child burst out laughing. \"And you,\" Taadidi told him, \"you will be my son.\" The little one who had never had a father would have one. A father who had chosen him." ] },
+          { title: "Two Who Choose Each Other", paragraphs: [
+            "The storyteller smiled. My children, the village had known so many arranged unions, promised, forced. But this one resembled no other. For this one, no one had decided in their place. Two people had truly seen each other, and then had chosen each other. And there is no bond, on this earth, stronger than that." ] },
+          { title: "The Sweetest of Stories", paragraphs: [
+            "So she who had been given by force would, this time, give herself freely. And he who had once saved a stranger, one day, behind a school, was going to build with her the finest of his constructions: a family. There was nothing left to do but celebrate. And a wedding at Kiribounyi, my children... that, you have to see! But that will be for tomorrow." ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "اختيار Adama", sections: [
+          { title: "تمرّ المواسم", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. مرّت المواسم. كانت جمعية Adama تكبر؛ النساء يأتين من كلّ مكان، يعملن، يكسبن رزقهنّ، ويرفعن رؤوسهنّ. كانت القرية تتعافى، رويدًا رويدًا. وفي خضمّ كلّ ذلك، كان Taadidi وAdama يتقرّبان من بعضهما — هذه المرّة بجدٍّ، وعلى الملأ." ] },
+          { title: "الطفل الصغير", paragraphs: [
+            "على المواقع، وعلى ضفاف المجاري، كان طفل Adama الصغير يتبع Taadidi في كلّ مكان. كان يمدّ إليه الأدوات، ويضحك من أغانيه، وأحيانًا يغفو على كتفه. وكان Taadidi، دون أن يفكّر، قد صار يحبّه كأنّه ابنه هو." ] },
+          { title: "ما أراده Taadidi", paragraphs: [
+            "ذات مساء، عرف Taadidi بالضبط ما يريد. ليس Adama وحدها. Adama وابنها الصغير. كلاهما. إلى الأبد. ذهب ليجدها، وقلبه يخفق." ] },
+          { title: "الطلب", paragraphs: [
+            "«Adama، قال. لا أريد أن أتزوّجك فحسب. ابنك، أريده أن يكون ابني هو أيضًا. اسمحي لي أن أطلب يدك، وأن نجمع عائلتَينا.» لم يجثُ على ركبتيه. وقف ببساطة أمامها، منتصبًا صادقًا، كما يقف المرء أمام من يحترمه بكلّ روحه." ] },
+          { title: "لأوّل مرّة", paragraphs: [
+            "نظرت إليه Adama طويلًا. في الخامسة عشرة، أُعطيت دون أن يسألها أحد. اليوم، لأوّل مرّة في حياتها كلّها، يُسألُ رأيها. الاختيار اختيارها. لها وحدها. من خلال دموعها، ابتسمت. «نعم»، قالت. وذلك النعم، أخيرًا، كان نعمها." ] },
+          { title: "«ابني»", paragraphs: [
+            "ثمّ التفت Taadidi إلى الطفل الصغير الذي يلعب عند قدميهما. رفعه عاليًا بين ذراعيه، فانفجر الطفل ضاحكًا. «وأنت، قال له Taadidi، ستكون ابني.» الصغير الذي لم يكن له أبٌ من قبلُ سيُولَد له أبٌ. أبٌ اختاره." ] },
+          { title: "اثنان يختاران بعضهما", paragraphs: [
+            "ابتسم الحكواتي. يا أطفالي، عرفت القرية كثيرًا من العقود المرتَّبة، الموعودة، المفروضة. لكنّ هذا الزواج لم يُشبه سواه. لأنّ هذا، لم يقرّره أحدٌ عنهما. شخصان رأى أحدهما الآخر حقًّا، ثمّ اختارا بعضهما. وما من رابطٍ في هذه الدنيا أمتن من ذلك." ] },
+          { title: "أعذب القصص", paragraphs: [
+            "وهكذا، التي أُعطيت قسرًا ستعطي نفسها هذه المرّة بحرّية. وذاك الذي أنقذ غريبةً، يومًا ما، خلف مدرسة، سيبني معها أجمل ما بنى: أسرة. لم يبقَ إلّا الاحتفال. وعرسٌ في Kiribounyi، يا أطفالي... لا بدّ أن تروه! لكنّ ذلك سيكون في الغد." ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "Adama 的选择", sections: [
+          { title: "季节流逝", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。季节流逝。Adama 的互助社越来越壮大；妇女们从四面八方赶来，做工，挣钱，抬起头来。村子在慢慢愈合。而在这一切中间，Taadidi 和 Adama 越走越近——这一回，是真的，是在光天化日之下。" ] },
+          { title: "那个小男孩", paragraphs: [
+            "在工地上，在水边，Adama 的小男孩跟着 Taadidi 到处跑。他递工具，被歌声逗笑，有时靠在 Taadidi 肩上睡着了。而 Taadidi，不知不觉，已经把他爱得像自己亲生的儿子。" ] },
+          { title: "Taadidi 想要的", paragraphs: [
+            "一天傍晚，Taadidi 清清楚楚知道了自己想要什么。不只是 Adama。是 Adama 和她的小男孩。两个人。永远。他去找她，心跳得厉害。" ] },
+          { title: "提亲", paragraphs: [
+            "「Adama，」他说。「我不只是想娶你。你的儿子，我也想让他成为我的儿子。请允许我向你提亲，让我们两家结成一家。」他没有跪下。他只是站在她面前，挺直，真诚，就像站在一个你打心底里敬重的人面前那样。" ] },
+          { title: "头一次", paragraphs: [
+            "Adama 望了他很久。十五岁那年，她被人给了出去，没有人问过她一句。今天，她生平头一回，被人问到了。这个选择是她自己的。只属于她。她透过泪水笑了。「好，」她说。而这个「好」，终于，是她自己的。" ] },
+          { title: "「我的儿子」", paragraphs: [
+            "Taadidi 转向在他们脚边玩耍的小男孩。他把孩子高高举起，孩子咯咯笑出声来。「而你，」Taadidi 对他说，「你会是我的儿子。」这个从来没有父亲的小孩，要有父亲了。一个选择了他的父亲。" ] },
+          { title: "两个互相选择的人", paragraphs: [
+            "讲故事的人笑了。我的孩子们，这村子见过太多安排好的、许下的、强迫的婚事。可这一桩和那些都不一样。因为这一桩，没有人替他们做主。两个人真正看见了彼此，然后互相选择了对方。而这世上，没有比这更牢靠的纽带了。" ] },
+          { title: "最甜的故事", paragraphs: [
+            "就这样，曾被人强行给出去的人，这一回，要自己把自己交出去。而那个有一天在学校后面救下一个陌生姑娘的人，要和她一起建造他这辈子最美的工程：一个家。剩下的，就是庆祝了。而在 Kiribounyi 办一场婚礼，我的孩子们……那，可要亲眼见才行！可那是明天的故事了。" ] },
+        ] },
+      },
+    },
+    {
+      numero: 27, statut: "live",
+      planche: "/images/taadidi/ep27-planche.png",
+      cover: "/images/taadidi/ep27-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "Le grand jour", "en": "The Great Day", "ar": "اليوم الكبير", "zh": "大日子"},
+      teaser: {"fr": "Kiribounyi ouvre ses portes. Investisseurs, ingénieurs, entrepreneurs arrivent du pays entier. Nana présente la coopérative kenda, Adama son association, Taadidi ses ponts, Tofan son projet des plaines. Et dans la salle : Bakala et Sana, main dans la main.", "en": "Kiribounyi opens its doors. Investors, engineers, entrepreneurs arrive from across the country. Nana presents the kenda cooperative, Adama her association, Taadidi his bridges, Tofan her plains project. And in the room: Bakala and Sana, hand in hand.", "ar": "Kiribounyi تفتح أبوابها. يصل مستثمرون ومهندسون ورجال أعمال من أنحاء البلاد كلّها. Nana تقدّم تعاونية الـkenda، وAdama جمعيّتها، وTaadidi جسوره، وTofan مشروع السهول. وفي القاعة: Bakala وSana، يدًا في يد.", "zh": "Kiribounyi 打开大门。投资者、工程师、企业家从全国各地赶来。Nana 介绍 kenda 合作社，Adama 介绍她的互助社，Taadidi 介绍他的桥，Tofan 介绍她的平原方案。而在会场里：Bakala 和 Sana，手握着手。"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Le grand jour", sections: [
+          { title: "Lima revient vite", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Un jour, tout Nakiry apprit une nouvelle : le village de Kiribounyi ouvrait ses portes. Des entrepreneurs, des investisseurs, des ingénieurs venaient du pays entier pour écouter ce que ce petit village avait à montrer. Et ce matin-là, Lima l'infirmière arriva depuis la préfecture. Elle sourit en descendant de son véhicule. Quarante-cinq minutes de route. Jadis, il lui en avait fallu près de deux heures. Grâce aux ponts de Taadidi, le village était devenu proche. Tout allait changer ce jour-là." ] },
+          { title: "Nana et Makhadi à la barre", paragraphs: [
+            "Sous le grand néribily, les présentations commencèrent. D'abord, Nana se leva — celle qu'on avait moquée dix ans, celle qui ne faisait « que des filles ». Avec Makhadi à ses côtés, elle présenta la coopérative du kenda Neribounyi. Cent femmes au travail. Des emplois. De l'argent qui restait au village. Des investisseurs se penchèrent en avant, intéressés." ] },
+          { title: "Adama parle", paragraphs: [
+            "Puis Adama prit la parole. Elle parla des femmes qui restent prisonnières, faute d'une autre route. Elle parla de son association, née sous le néribily. Et de tous les chantiers, au bord de l'eau, où ces femmes gagnaient désormais leur vie. « Nous avons compris, dit-elle, que la vraie liberté passe par l'argent qu'on gagne soi-même. »" ] },
+          { title: "Taadidi présente ses ponts", paragraphs: [
+            "Alors Taadidi se leva, tranquille. Il présenta ses ouvrages de franchissement — chacun construit avec une technique durable, écologique, que nul n'avait vu faire avant. Des ponts qui ne s'écroulent pas, qui protègent l'eau, qui durent. Il avait un plan : en couvrir tout le Nakiry. Et des ingénieurs, intrigués, lui posèrent mille questions." ] },
+          { title: "Tofan, la promotrice", paragraphs: [
+            "Mais la présentation principale, ce fut celle de Tofan. Elle monta sur l'estrade vêtue de son indigo, les épis de riz à sa poitrine. Elle avait passé un certificat en marketing et vente — elle allait être la promotrice officielle de sa terre. Elle parla des plaines, du kenda, de l'infrastructure nouvelle, de ce que le village pouvait devenir. Et, comme toujours, elle le dit avec ce qu'elle avait dans la tête." ] },
+          { title: "Les concurrentes venues voir", paragraphs: [
+            "Et savez-vous qui était dans la salle ? Les autres candidates à la couronne nationale. Ses concurrentes, venues de partout pour voir ce qui motivait cette passion, cette flamme dans la voix de Tofan quand elle parlait de sa terre. Et ce jour-là, elles comprirent : ce n'était pas un joli visage qui parlait. C'était une femme qui construisait." ] },
+          { title: "Les deux vieux ennemis", paragraphs: [
+            "Mais le plus beau spectacle, mes enfants, c'était au fond de l'assemblée. Bakala et Sana — les deux vieux ennemis, ceux qui s'étaient haïs pendant des années — se tenaient côte à côte, main dans la main, à applaudir. Kala, le fils de Bakala, était là aussi, fier de sa meilleure amie Tofan. Et Fanyi, la maîtresse d'école, rayonnante de voir Kaly si fier." ] },
+          { title: "Ce qu'on a bâti ensemble", paragraphs: [
+            "Le conteur sourit, voyant tout cela d'en haut. Ce n'était pas un héros qui avait sauvé son village. C'était un village entier qui, avec un jeune garçon aux locks, avait décidé de bâtir quelque chose. Chacun sa pierre, chacun sa brique. Lima revenue en quarante-cinq minutes ; Nana à la barre d'une économie ; Adama la voix de celles qu'on avait fait taire ; Taadidi les ponts qui duraient ; Tofan les rêves qui montaient. Et ce qu'on vit ce jour-là sous le néribily, ce n'était pas le triomphe d'un seul — c'était celui de tous. Mais le plus beau, mes enfants, c'était encore à venir." ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "The Great Day", sections: [
+          { title: "Lima Arrives Quickly", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. One day, all of Nakiry learned the news: the village of Kiribounyi was opening its doors. Entrepreneurs, investors, engineers came from across the whole country to hear what this small village had to show. And that morning, Lima the nurse arrived from the prefecture. She smiled as she stepped out of her vehicle. Forty-five minutes on the road. Once, it had taken her nearly two hours. Thanks to Taadidi's bridges, the village had become close. Everything was going to change that day." ] },
+          { title: "Nana and Makhadi at the Helm", paragraphs: [
+            "Under the great néribily, the presentations began. First, Nana rose — the one who had been mocked for ten years, the one who \"only made girls\". With Makhadi at her side, she presented the Neribounyi kenda cooperative. A hundred women at work. Jobs. Money that stayed in the village. Investors leaned forward, interested." ] },
+          { title: "Adama Speaks", paragraphs: [
+            "Then Adama took the floor. She spoke of the women who remain trapped, for lack of another road. She spoke of her association, born under the néribily. And of all the building sites, by the water, where these women were now earning their living. \"We understood,\" she said, \"that true freedom comes through money you earn yourself.\"" ] },
+          { title: "Taadidi Presents His Bridges", paragraphs: [
+            "Then Taadidi rose, calm. He presented his crossing structures — each built with a sustainable, ecological technique that no one had ever seen before. Bridges that don't collapse, that protect the water, that last. He had a plan: to cover all of Nakiry with them. And engineers, intrigued, asked him a thousand questions." ] },
+          { title: "Tofan, the Promoter", paragraphs: [
+            "But the main presentation was Tofan's. She climbed onto the stage dressed in her indigo, ears of rice on her chest. She had earned a certificate in marketing and sales — she was going to be the official promoter of her land. She spoke of the plains, of the kenda, of the new infrastructure, of what the village could become. And, as always, she said it with what she had in her head." ] },
+          { title: "The Rival Candidates Who Came to See", paragraphs: [
+            "And do you know who was in the room? The other candidates for the national crown. Her rivals, come from everywhere to see what drove this passion, this flame in Tofan's voice when she spoke of her land. And that day, they understood: it was not a pretty face speaking. It was a woman who was building." ] },
+          { title: "The Two Old Enemies", paragraphs: [
+            "But the finest sight, my children, was at the back of the assembly. Bakala and Sana — the two old enemies, those who had hated each other for years — stood side by side, hand in hand, applauding. Kala, Bakala's son, was there too, proud of his best friend Tofan. And Fanyi, the schoolteacher, radiant at seeing Kaly so proud." ] },
+          { title: "What We Built Together", paragraphs: [
+            "The storyteller smiled, looking at all this from above. It was not a hero who had saved his village. It was a whole village that, together with a young boy with locks, had decided to build something. Each his stone, each her brick. Lima back in forty-five minutes; Nana at the helm of an economy; Adama the voice of those who had been silenced; Taadidi the bridges that endured; Tofan the dreams that were rising. And what was seen that day under the néribily was not the triumph of one — it was the triumph of all. But the finest of all, my children, was still to come." ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "اليوم الكبير", sections: [
+          { title: "Lima تصل سريعًا", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. ذات يوم، علم Nakiry كلّها بخبر: قرية Kiribounyi تفتح أبوابها. جاء رجال أعمال ومستثمرون ومهندسون من البلد كلّه لسماع ما لهذه القرية الصغيرة من عرض. وفي ذلك الصباح، وصلت Lima الممرّضة من المحافظة. ابتسمت حين نزلت من سيّارتها. خمسٌ وأربعون دقيقةً على الطريق. كانت تحتاج في ما مضى قرابة ساعتين. بفضل جسور Taadidi، صار القرية قريبًا. كلّ شيء كان سيتغيّر في ذلك اليوم." ] },
+          { title: "Nana ومخادي على الرأس", paragraphs: [
+            "تحت النيريبيلي الكبير، بدأت العروض. أوّلًا وقفت Nana — التي سخروا منها عشر سنوات، تلك التي لا تنجب «سوى البنات». مع Makhadi إلى جانبها، قدّمت تعاونية kenda Neribounyi. مئة امرأةٍ في العمل. وظائف. مالٌ يبقى في القرية. انحنى المستثمرون إلى الأمام، مهتمّين." ] },
+          { title: "Adama تتكلّم", paragraphs: [
+            "ثمّ أخذت Adama الكلمة. تكلّمت عن النساء اللواتي يبقين أسيرات، لعدم وجود طريقٍ أخرى. تكلّمت عن جمعيّتها، التي وُلدت تحت النيريبيلي. وعن كلّ المواقع، على ضفاف الماء، حيث بتن يكسبن رزقهنّ. «أدركنا، قالت، أنّ الحرّية الحقيقيّة تمرّ بالمال الذي تكسبه المرأة بنفسها.»" ] },
+          { title: "Taadidi يقدّم جسوره", paragraphs: [
+            "ثمّ وقف Taadidi، هادئًا. قدّم منشآت العبور — كلٌّ منها مبنيٌّ بتقنيّةٍ مستدامة، بيئيّة، لم يكن أحدٌ قد رآها من قبل. جسورٌ لا تنهار، تحمي الماء، وتدوم. كان لديه خطّة: تغطية Nakiry كلّها بها. ومهندسون، بالغو الفضول، طرحوا عليه ألف سؤال." ] },
+          { title: "Tofan، المروّجة", paragraphs: [
+            "لكنّ العرض الرئيسيّ كان عرض Tofan. صعدت إلى المنصّة مرتديةً إنديغوها، وسنابل الأرزّ على صدرها. كانت قد حصلت على شهادةٍ في التسويق والمبيعات — ستكون المروّجة الرسمية لأرضها. تكلّمت عن السهول، وعن الـkenda، وعن البنية التحتية الجديدة، وعمّا يمكن أن يصبح عليه القرية. وكما دائمًا، قالته بما في رأسها." ] },
+          { title: "المنافسات جئن لترى", paragraphs: [
+            "وأتدرون من كان في القاعة؟ المترشّحات الأخريات للتاج الوطنيّ. منافساتها، اللواتي جئن من كلّ مكان ليرين ما يحرّك هذا الشغف، هذه الجذوة في صوت Tofan حين تتكلّم عن أرضها. وفي ذلك اليوم، أدركن: ليس وجهًا جميلًا هو من يتكلّم. بل امرأةٌ تبني." ] },
+          { title: "العدوّان القديمان", paragraphs: [
+            "لكنّ أجمل مشهد، يا أطفالي، كان في آخر التجمّع. Bakala وSana — العدوّان القديمان، اللذان تكارها سنواتٍ طويلة — كانا يقفان جنبًا إلى جنب، يدًا في يد، يصفّقان. وكان Kala، ابن Bakala، هناك أيضًا، فخورًا بصديقته الأعزّ Tofan. وFanyi، المعلّمة، مشرقةً برؤية Kaly فخورًا." ] },
+          { title: "ما بنيناه معًا", paragraphs: [
+            "ابتسم الحكواتي، ناظرًا إلى كلّ ذلك من الأعلى. لم يكن بطلٌ واحد هو من أنقذ قريته. كان القرية كلّها الذي، مع فتًى صغير ذي جدائل، قرّر أن يبني شيئًا. كلٌّ بحجره، كلٌّ بقرميدته. Lima عادت في خمسٍ وأربعين دقيقة؛ Nana على رأس اقتصاد؛ Adama صوت من صُمِّتن؛ Taadidi الجسور التي تدوم؛ Tofan الأحلام الصاعدة. وما رُئي في ذلك اليوم تحت النيريبيلي لم يكن انتصار فردٍ واحد — بل انتصار الجميع. لكنّ الأجمل، يا أطفالي، كان لا يزال آتيًا." ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "大日子", sections: [
+          { title: "Lima 很快到了", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。有一天，整个 Nakiry 都知道了这个消息：Kiribounyi 村敞开了大门。企业家、投资者、工程师从全国各地赶来，听这个小村子有什么要展示的。那天早上，护士 Lima 从县里赶到了。她从车上下来，面带微笑。四十五分钟的路程。从前，她需要将近两个小时。多亏了 Taadidi 的桥，村子变近了。那一天，一切都要改变。" ] },
+          { title: "Nana 和 Makhadi 当家", paragraphs: [
+            "在大 néribily 树下，展示开始了。第一个站起来的是 Nana——被嘲笑了十年的那个人，「只会生女儿」的那个人。她和 Makhadi 并肩，介绍了 Neribounyi kenda 合作社。一百个妇女在劳作。有了活干。钱留在了村里。投资者们身体前倾，来了兴致。" ] },
+          { title: "Adama 发言", paragraphs: [
+            "然后 Adama 发言了。她谈到那些因为无路可走而留在困境里的妇女。她谈到在 néribily 树下诞生的互助社。还有那些水边的工地，那里的妇女如今自己挣钱养活自己。「我们明白了，」她说，「真正的自由，要靠自己挣来的钱。」" ] },
+          { title: "Taadidi 介绍他的桥", paragraphs: [
+            "然后 Taadidi 平静地站了起来。他介绍了他的跨河工程——每一座都用从没人见过的可持续、生态工法建造的。不会垮的桥，保护水源的桥，能撑久的桥。他有个计划：把整个 Nakiry 都铺满这样的桥。工程师们来了兴趣，问了他上千个问题。" ] },
+          { title: "Tofan，推广人", paragraphs: [
+            "可最主要的展示是 Tofan 的。她穿着靛蓝色的礼服，胸前别着稻穗，走上台去。她考了一张市场营销与销售的证书——她要做自己土地的官方推广人。她谈平原、谈 kenda、谈新基础设施、谈这个村子能成为什么。一如既往地，她用脑子里装着的东西说话。" ] },
+          { title: "前来观看的对手们", paragraphs: [
+            "你们知道台下坐着谁吗？全国那顶王冠的其他候选人。她的对手们，从四面八方赶来，想看看是什么驱动了这种热情、让 Tofan 谈起自己土地时声音里带着那团火。那一天，她们明白了：说话的不是一张漂亮脸蛋。是一个正在建造的女人。" ] },
+          { title: "两个老对头", paragraphs: [
+            "可最美的一幕，我的孩子们，在会场最后排。Bakala 和 Sana——两个老对头，多年来彼此憎恶的人——并肩而立，手握着手，鼓着掌。Bakala 的儿子 Kala 也在那里，为最好的朋友 Tofan 骄傲着。还有女教师 Fanyi，看着 Kaly 那么骄傲，她的脸上一片光亮。" ] },
+          { title: "我们一起建起的", paragraphs: [
+            "讲故事的人从上面望着这一切，笑了。不是一个英雄拯救了他的村子。是一整个村子，和一个留着脏辫的年轻男孩一起，决定建起一些东西。各人一块石头，各人一块砖。Lima 四十五分钟回来了；Nana 当了一个经济体的当家；Adama 是那些被压了声音的人的声音；Taadidi 是撑得住的桥；Tofan 是升起的梦。而那天在 néribily 树下看见的，不是一个人的胜利——是所有人的胜利。可最美的，我的孩子们，还在后面。" ] },
+        ] },
+      },
+    },
+    {
+      numero: 28, statut: "live",
+      planche: "/images/taadidi/ep28-planche.png",
+      cover: "/images/taadidi/ep28-cover.png",
+      cote: "gauche",
+      bande: "horizontale",
+      titre: {"fr": "Sogué nènè", "en": "Sogué nènè", "ar": "Sogué nènè", "zh": "Sogué nènè"},
+      teaser: {"fr": "Trois ans plus tard. Kiribounyi prospère. Makhadi refuse de concurrencer Nana : « Il y a une cheffe, c'est toi. » Nana, celle qu'on a moquée dix ans, devient Cheffe. Au même instant, au dispensaire, naît Sogué nènè — la fille aux cheveux lumineux comme un soleil. Kiké… Sogué. WOYIKA !", "en": "Three years later. Kiribounyi thrives. Makhadi refuses to compete with Nana: \"There is one chief, and it's you.\" Nana, the one mocked for ten years, becomes Chief. At that same moment, in the dispensary, Sogué nènè is born — the girl whose hair shines like a sun. Kiké… Sogué. WOYIKA!", "ar": "بعد ثلاث سنوات. Kiribounyi تزدهر. Makhadi ترفض منافسة Nana: «هناك رئيسة واحدة، وأنتِ هي.» Nana، التي سخروا منها عشر سنوات، تصير رئيسة. في الوقت ذاته، في المستوصف، تُولَد Sogué nènè — الفتاة ذات الشعر المضيء كالشمس. Kiké… Sogué. WOYIKA!", "zh": "三年以后。Kiribounyi 欣欣向荣。Makhadi 拒绝和 Nana 竞争：「只有一个村长，那就是你。」Nana，被嘲笑了十年的那个人，成了村长。就在同一刻，在诊疗所里，Sogué nènè 出生了——那个头发明亮如太阳的女孩。Kiké……Sogué。WOYIKA！"},
+      reader: {
+        fr: { lang: "fr", dir: "ltr", label: "Français", bookTitle: "Sogué nènè", sections: [
+          { title: "Trois ans plus tard", paragraphs: [
+            "Écoutez la suite, enfants de Kiribounyi. Trois ans avaient passé. Le village s'était envolé — les chantiers de Taadidi couvraient tout Nakiry, la coopérative de Nana avait grandi bien au-delà des plaines, et les femmes de l'association d'Adama travaillaient partout, relevées, gagnantes. Mais un jour, une nouvelle question se posa : qui allait être le chef du village ?" ] },
+          { title: "La concurrence menace", paragraphs: [
+            "Bakala et Sana, les deux vieux patriarches, n'étaient plus trop en forme. Il fallait un successeur. Et soudain, la fadenya revint rôder — la jalousie d'autrefois. Car Makhadi et Nana auraient pu réclamer, rivaliser, se battre pour le titre." ] },
+          { title: "Makhadi refuse", paragraphs: [
+            "Mais Makhadi vint trouver Nana sous le néribily. Et ce qu'elle dit fit taire la concurrence avant même qu'elle ne naisse. « Non, dit Makhadi. Il n'y a pas de match à mes yeux. C'est toi la Cheffe. »" ] },
+          { title: "Pourquoi Nana", paragraphs: [
+            "« Tu m'as sauvé la vie, autrefois, continua Makhadi. Et tes enfants — ta vision — ont remis ce village en orbite. Tu m'as donné des responsabilités avec la coopérative, et chaque jour elle grandit. Non, Nana. Il y a une chef du village, et c'est toi. »" ] },
+          { title: "Nana devient Cheffe", paragraphs: [
+            "Et ainsi, celle qu'on avait moquée dix ans — « elle ne fait que des filles ! » — devint la Cheffe de Kiribounyi. Celle qui gardait les savoirs de sa grand-mère. Celle qui avait opéré l'économie du kenda. Celle qui voyait juste. Celle qui bâtissait sans orgueil." ] },
+          { title: "Le griot crie", paragraphs: [
+            "Le jour de l'annonce, sous le grand néribily, le griot poussa un cri qui ébranla le village : « Un nouveau soleil s'est levé sur notre terre ! SOGUÉ ! »" ] },
+          { title: "La fille de Taadidi", paragraphs: [
+            "À ce même instant — savez-vous où était Taadidi ? Au dispensaire, à côté de sa femme Adama, qui venait de mettre au monde une fille. Une fille aux cheveux lumineux comme un soleil. Taadidi regarda ce soleil au bord de son enfant, et il répéta les mots du griot : « Sogué nènè. »" ] },
+          { title: "Le sommet", paragraphs: [
+            "« Comment trouves-tu ce nom ? » demanda-t-il à Adama, le cœur débordant. Et Adama, qui avait porté tant d'ombres et bâti tant de lumière, sourit. « C'est parfait », dit-elle. Et la petite Sogué nènè éternua de toute sa force — comme si elle criait oui à la vie. Les parents sourirent. Le cycle était fermé. De la lune au soleil. De l'enfant au père. Du silence au cri de victoire. Et Kiribounyi, pour la première fois, était libre. WOYIKA !" ] },
+        ] },
+        en: { lang: "en", dir: "ltr", label: "English", bookTitle: "Sogué nènè", sections: [
+          { title: "Three Years Later", paragraphs: [
+            "Listen to what came next, children of Kiribounyi. Three years had passed. The village had taken flight — Taadidi's building sites covered all of Nakiry, Nana's cooperative had grown far beyond the plains, and the women of Adama's association were working everywhere, lifted up, victorious. But one day, a new question arose: who was going to be chief of the village?" ] },
+          { title: "A Rivalry Threatens", paragraphs: [
+            "Bakala and Sana, the two old patriarchs, were no longer in the best shape. A successor was needed. And suddenly, fadenya came prowling back — the jealousy of old. For Makhadi and Nana could have claimed, competed, fought for the title." ] },
+          { title: "Makhadi Refuses", paragraphs: [
+            "\"But Makhadi came to find Nana under the néribily. And what she said silenced the rivalry before it was even born. \"No,\" said Makhadi. \"There is no contest in my eyes. You are the Chief.\"" ] },
+          { title: "Why Nana", paragraphs: [
+            "\"You once saved my life,\" Makhadi went on. \"And your children — your vision — have put this village back in orbit. You gave me responsibilities with the cooperative, and every day it grows. No, Nana. There is one chief of this village, and it is you.\"" ] },
+          { title: "Nana Becomes Chief", paragraphs: [
+            "And so she who had been mocked for ten years — \"she only makes girls!\" — became Chief of Kiribounyi. The one who kept her grandmother's knowledge. The one who had set the kenda economy in motion. The one who saw clearly. The one who built without pride." ] },
+          { title: "The Griot Cries Out", paragraphs: [
+            "The day of the announcement, under the great néribily, the griot let out a cry that shook the village: \"A new sun has risen on our land! SOGUÉ!\"" ] },
+          { title: "Taadidi's Daughter", paragraphs: [
+            "At that very moment — do you know where Taadidi was? At the dispensary, beside his wife Adama, who had just brought a girl into the world. A girl whose hair shone like a sun. Taadidi looked at that sun at the edge of his child, and he repeated the griot's words: \"Sogué nènè.\"" ] },
+          { title: "The Summit", paragraphs: [
+            "\"What do you think of the name?\" he asked Adama, his heart overflowing. And Adama, who had carried so many shadows and built so much light, smiled. \"It's perfect,\" she said. And little Sogué nènè sneezed with all her might — as if crying yes to life. The parents smiled. The cycle was closed. From the moon to the sun. From the child to the father. From silence to the cry of victory. And Kiribounyi, for the first time, was free. WOYIKA!" ] },
+        ] },
+        ar: { lang: "ar", dir: "rtl", label: "العربية", bookTitle: "Sogué nènè", sections: [
+          { title: "بعد ثلاث سنوات", paragraphs: [
+            "اسمعوا التتمّة، يا أطفال Kiribounyi. مرّت ثلاث سنوات. انطلق القرية — مواقع Taadidi تغطّي Nakiry كلّها، وتعاونية Nana نمت إلى أبعد بكثير من السهول، ونساء جمعية Adama يعملن في كلّ مكان، رافعاتٍ رؤوسهنّ، فائزات. لكن ذات يوم، نشأ سؤالٌ جديد: من سيكون رئيس القرية؟" ] },
+          { title: "المنافسة تتهدّد", paragraphs: [
+            "لم يعد Bakala وSana، البطريركان العجوزان، في أحسن حال. كان ثمّة حاجةٌ لخلف. وفجأةً، عادت الفاديانيا تتربّص — غيرةُ الزمن الغابر. إذ كان بإمكان Makhadi وNana أن تطالبا، وتتنافسا، وتتصارعا على اللقب." ] },
+          { title: "Makhadi ترفض", paragraphs: [
+            "لكنّ Makhadi جاءت تجد Nana تحت النيريبيلي. وما قالته أسكت المنافسة قبل أن تُولَد حتّى. «لا، قالت Makhadi. لا منافسة في نظري. أنتِ الرئيسة.»" ] },
+          { title: "لماذا Nana", paragraphs: [
+            "«أنقذتِ حياتي ذات يوم، واصلت Makhadi. وأبناؤكِ — رؤيتكِ — أعادا هذا القرية إلى مساره. أعطيتِني مسؤوليّاتٍ مع التعاونية، وكلّ يومٍ تكبر. لا، Nana. هناك رئيسةٌ للقرية، وأنتِ هي.»" ] },
+          { title: "Nana تصير رئيسة", paragraphs: [
+            "وهكذا، التي سخروا منها عشر سنوات — «لا تنجب إلّا البنات!» — صارت رئيسةَ Kiribounyi. تلك التي تحفظ علوم جدّتها. التي أدارت اقتصاد الـkenda. التي كانت ترى صائبًا. التي تبني بلا غرور." ] },
+          { title: "الغريّو يصرخ", paragraphs: [
+            "يوم الإعلان، تحت النيريبيلي الكبير، انطلق صرخةٌ من الغريّو هزّت القرية: «شمسٌ جديدة أشرقت على أرضنا! SOGUÉ!»" ] },
+          { title: "ابنة Taadidi", paragraphs: [
+            "في ذلك الوقت ذاته — أتعرفون أين كان Taadidi؟ في المستوصف، إلى جانب زوجته Adama، التي كانت قد أنجبت للتوّ فتاة. فتاةً بشعرٍ مضيءٍ كالشمس. نظر Taadidi إلى هذه الشمس على حافّة طفله، وردّد كلمات الغريّو: «Sogué nènè.»" ] },
+          { title: "القمّة", paragraphs: [
+            "«ما رأيكِ في هذا الاسم؟» سأل Adama، وقلبه يفيض. وAdama، التي حملت كثيرًا من الظلال وبنت كثيرًا من النور، ابتسمت. «إنّه مثاليّ»، قالت. وعطست الصغيرة Sogué nènè بكلّ ما فيها — كأنّها تصرخ نعم للحياة. ابتسم الوالدان. أُغلق الدائرة. من القمر إلى الشمس. من الطفل إلى الأب. من الصمت إلى صرخة النصر. وكانت Kiribounyi، لأوّل مرّة، حرّة. WOYIKA!" ] },
+        ] },
+        zh: { lang: "zh", dir: "ltr", label: "中文", bookTitle: "Sogué nènè", sections: [
+          { title: "三年以后", paragraphs: [
+            "再听下去，Kiribounyi 的孩子们。三年过去了。村子腾飞了——Taadidi 的工地铺满了整个 Nakiry，Nana 的合作社早已延伸到平原之外，Adama 互助社的妇女们到处在干活，昂着头，胜利了。可有一天，一个新问题出现了：谁来当村长？" ] },
+          { title: "竞争威胁着", paragraphs: [
+            "Bakala 和 Sana，两个老族长，体力不比当年了。需要一个继承人。转眼间，fadenya 又溜回来了——昔日的嫉妒。因为 Makhadi 和 Nana 本可以争，本可以对立，本可以为这个头衔打架。" ] },
+          { title: "Makhadi 拒绝", paragraphs: [
+            "可 Makhadi 来到 néribily 树下找到 Nana。她说的那句话，在竞争尚未诞生之前就把它压下去了。「不，」Makhadi 说。「在我眼里，没什么好比的。你是村长。」" ] },
+          { title: "为什么是 Nana", paragraphs: [
+            "「你有一次救了我的命，」Makhadi 接着说。「还有你的孩子们——你的眼光——让这个村子重新起飞了。你给了我合作社里的职责，每一天它都在壮大。不，Nana。这个村子有一个村长，那就是你。」" ] },
+          { title: "Nana 成了村长", paragraphs: [
+            "于是，那个被嘲笑了十年——「她只会生女儿！」——的人，成了 Kiribounyi 的村长。那个守着祖母智慧的人。那个让 kenda 经济运转起来的人。那个看得准的人。那个不骄傲地建造的人。" ] },
+          { title: "格里奥高喊", paragraphs: [
+            "宣布的那天，大 néribily 树下，格里奥喊出了一声震动全村的声音：「一轮新的太阳在我们的土地上升起了！SOGUÉ！」" ] },
+          { title: "Taadidi 的女儿", paragraphs: [
+            "就在那同一刻——你们知道 Taadidi 在哪儿吗？在诊疗所里，妻子 Adama 身边，她刚刚生下了一个女儿。一个头发亮得像太阳的女孩。Taadidi 望着孩子头旁那道阳光，重复了格里奥的话：「Sogué nènè。」" ] },
+          { title: "顶点", paragraphs: [
+            "「你觉得这个名字怎么样？」他问 Adama，心里溢满了。而 Adama，那个背负过那么多阴影、建造出那么多光的人，笑了。「太好了，」她说。小小的 Sogué nènè 用尽全力打了个喷嚏——好像在对生命大喊「是的」。父母俩都笑了。循环关闭了。从月亮到太阳。从孩子到父亲。从沉默到胜利的呐喊。而 Kiribounyi，有史以来第一次，自由了。WOYIKA！" ] },
+        ] },
+      },
+    },
+
   ] as Episode[],
 };
