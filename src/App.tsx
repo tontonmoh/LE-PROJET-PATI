@@ -69,7 +69,7 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-
+            <Route path="/session/:code/scores" element={<SessionScores />} />
             <Route path="/binta-diallo" element={<BintaDiallo />} />
             <Route path="/livre/:id/lire" element={<BookReaderML />} />
             <Route path="/catalogue" element={<Catalogue />} />
@@ -84,22 +84,25 @@ export default function App() {
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
             <Route path="/audio/:id" element={<AudioBibliotheque />} />
-
+            <Route path="/session/new" element={<SessionNew />} />
             <Route path="/decouvrir-son-genie" element={<DecouvrirTonGenie />} />
             <Route path="/orientation" element={<DecouvrirTonGenie />} />
             <Route path="/orientation/questionnaire" element={<BilanSimandou />} />
             <Route path="/challenge" element={<ChallengePati />} />
-
+            <Route path="/session/:code" element={<SessionPlay />} />
             <Route path="/espace-conteurs" element={<EspaceConteurs />} />
             <Route path="/espace-enseignants" element={<EspaceEnseignants />} />
             <Route path="/espace-parents" element={<EspaceParents />} />
             <Route path="/espace-artistes" element={<EspaceArtistes />} />
             <Route path="/clubs" element={<ClubsPati />} />
-
+            <Route path="/session/:code" element={<SessionPlay />} />
             <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />
             <Route path="/presse" element={<Presse />} />
+            <Route path="/session/new"          element={<SessionNew />} />
+            <Route path="/session/:code"        element={<SessionPlay />} />
+            <Route path="/session/:code/scores" element={<SessionScores />} />
             <Route path="/contribuer" element={<Contribuer />} />
             <Route path="/collaboration" element={<Collaboration />} />
             <Route path="/appli-mobile" element={<AppliMobile />} />
