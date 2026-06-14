@@ -17,6 +17,9 @@ import { FENDANI_ML } from "./fendani-ml";
 import { COLA_ML } from "./cola-ml";
 import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
 import { NABY_ML } from "./naby-ml";
+import { PETIT_SORY_ML } from "./petit-sory-ml";
+import { KANDIA_ML } from "./kandia-ml";
+import { PROCES_IA_ML } from "./proces-ia-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
 import g2040Tome1 from "./g2040-tome1";
@@ -135,6 +138,9 @@ export const READERS: Record<string, MLReader> = {
   "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
   "chimpanzes-bossou": { ...fromLaye(CHIMPO_ML), accent: "#3F7D5A" },
   "naby-coleah": { ...fromLaye(NABY_ML), accent: "#C8102E" },
+  "petit-sory": { ...fromLaye(PETIT_SORY_ML), accent: "#1F6E52" },
+  "kandia-passe-futur": { ...fromLaye(KANDIA_ML), accent: "#2C6FB0" },
+  "proces-ia": { ...fromLaye(PROCES_IA_ML), accent: "#C8841E" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
   "g2040-foret-et-fer": { ...fromG2040(g2040Tome1), accent: "#18402A" },

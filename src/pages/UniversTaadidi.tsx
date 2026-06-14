@@ -634,6 +634,20 @@ function TabApropos() {
         </div>
       </div>
       <div>
+        <h3 className="font-display font-bold text-lg text-[#0D2B1A] mb-4">Quiz de la saga</h3>
+        <Link to="/univers/taadidi/quiz"
+          className="flex items-center gap-4 bg-white rounded-[1.5rem] shadow-kid p-5 hover:opacity-95 transition">
+          <span className="inline-flex w-11 h-11 rounded-2xl items-center justify-center shrink-0"
+            style={{ background: `${GOLD}22` }}>
+            <span className="text-xl">🏆</span>
+          </span>
+          <span>
+            <span className="block font-display font-bold text-[#0D2B1A] text-sm">Tenter le quiz</span>
+            <span className="block text-[#5a6b62] font-semibold text-xs mt-0.5">15 questions sur les 28 épisodes. Tu connais vraiment Taadidi&nbsp;?</span>
+          </span>
+        </Link>
+      </div>
+      <div>
         <h3 className="font-display font-bold text-lg text-[#0D2B1A] mb-4">Créé avec</h3>
         <div className="bg-white rounded-[1.5rem] shadow-kid p-6 space-y-4">
           <p className="flex items-start gap-3 text-[#3a4a42] font-semibold text-sm">
