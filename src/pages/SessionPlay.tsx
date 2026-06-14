@@ -17,7 +17,7 @@ const GAME_SRC: Record<string, string> = {
   "corridor":      "/jeux/corridor.html",
 };
 
-type Phase = "loading" | "join" | "playing" | "done" | "notfound" | "closed";
+type Phase = "loading" | "ready" | "playing" | "done" | "notfound" | "closed";
 
 export default function SessionPlay() {
   const { code = "" } = useParams();
@@ -25,7 +25,7 @@ export default function SessionPlay() {
 
   const [phase, setPhase]     = useState<Phase>("loading");
   const [session, setSession] = useState<Session | null>(null);
-  const [pseudo, setPseudo]   = useState("");
+  const [pseudo, setPseudo]   = useState<string>("");      // récupéré DU JEU à la fin
   const [rank, setRank]       = useState<number | null>(null);
   const [timeMs, setTimeMs]   = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -45,7 +45,7 @@ export default function SessionPlay() {
         if (!alive) return;
         if (!s) { setPhase("notfound"); return; }
         setSession(s);
-        setPhase(s.closed_at ? "closed" : "join");
+        setPhase(s.closed_at ? "closed" : "ready");
       })
       .catch(() => alive && setPhase("notfound"));
     return () => { alive = false; };
@@ -58,14 +58,16 @@ export default function SessionPlay() {
     }
   };
 
-  // ── Écoute la fin de partie du jeu → poste le temps dans la session ──────
+  // ── Écoute la fin de partie du jeu → poste le temps + surnom (du jeu) ────
   useEffect(() => {
     if (phase !== "playing" || !session) return;
     const onMsg = async (e: MessageEvent) => {
       if (frameRef.current && e.source !== frameRef.current.contentWindow) return;
       const d = e.data;
       if (d && d.type === "pati-progress" && d.kind === "defi" && typeof d.seconds === "number") {
-        const ms = Math.round(d.seconds * 1000);
+        const ms   = Math.round(d.seconds * 1000);
+        const name = (typeof d.name === "string" && d.name.trim()) ? d.name.trim() : "Anonyme";
+        setPseudo(name);
         setTimeMs(ms);
         setSubmitting(true);
         try {
@@ -73,7 +75,7 @@ export default function SessionPlay() {
             code: upper,
             livre_slug: session.livre_slug,
             jeu: session.jeu,
-            pseudo: pseudo || "Anonyme",
+            pseudo: name,
             time_ms: ms,
           });
           setRank(r);
@@ -86,7 +88,7 @@ export default function SessionPlay() {
     };
     window.addEventListener("message", onMsg);
     return () => window.removeEventListener("message", onMsg);
-  }, [phase, session, pseudo, upper]);
+  }, [phase, session, upper]);
 
   // ── Plein écran ──────────────────────────────────────────────────────────
   const enter = () => {
@@ -145,10 +147,9 @@ export default function SessionPlay() {
   }
 
   // ════════════════════════════════════════════════════════════════════════
-  // JOIN — saisie du prénom
+  // READY — petit accueil avant de lancer le jeu (le prénom se saisit DANS le jeu)
   // ════════════════════════════════════════════════════════════════════════
-  if (phase === "join") {
-    const valid = pseudo.trim().length >= 1;
+  if (phase === "ready") {
     return (
       <CenterCard>
         <div className="inline-flex items-center gap-2 font-display font-semibold text-sm px-4 py-1.5 rounded-full mb-4"
@@ -156,20 +157,13 @@ export default function SessionPlay() {
           <Users size={15} /> Session {upper}
         </div>
         <h1 className="font-display font-bold text-2xl text-[#0D2B1A] mb-1">{session?.label || "Le Défi PATI"}</h1>
-        <p className="text-[#5a6b62] font-semibold mb-6">Entre ton prénom pour entrer dans le classement.</p>
-        <input
-          value={pseudo}
-          onChange={(e) => setPseudo(e.target.value)}
-          onKeyDown={(e) => { if (e.key === "Enter" && valid) setPhase("playing"); }}
-          maxLength={24}
-          autoFocus
-          placeholder="Ton prénom"
-          className="w-full rounded-2xl border-2 border-[#0D2B1A]/10 bg-white px-4 py-3 font-semibold text-[#0D2B1A] outline-none focus:border-[#C8841E] text-center mb-4"
-        />
-        <button onClick={() => valid && setPhase("playing")} disabled={!valid}
-          className="w-full btn-kid text-white shadow-kid justify-center disabled:opacity-50"
+        <p className="text-[#5a6b62] font-semibold mb-6">
+          Reconstruis la Guinée le plus vite possible. Tu choisiras ton surnom au début du jeu — ton temps rejoint le classement dès que tu finis.
+        </p>
+        <button onClick={() => setPhase("playing")}
+          className="w-full btn-kid text-white shadow-kid justify-center"
           style={{ background: ACCENT }}>
-          <Sparkles size={18} /> C'est parti&nbsp;!
+          <Sparkles size={18} /> Entrer dans le défi&nbsp;!
         </button>
       </CenterCard>
     );
@@ -211,7 +205,7 @@ export default function SessionPlay() {
   }
 
   // ════════════════════════════════════════════════════════════════════════
-  // PLAYING — iframe du jeu
+  // PLAYING — iframe du jeu (le joueur saisit son surnom ICI, dans le jeu)
   // ════════════════════════════════════════════════════════════════════════
   const src = GAME_SRC[session?.livre_slug ?? ""] ?? "/jeux/puzzle-guinee.html";
 
@@ -222,9 +216,9 @@ export default function SessionPlay() {
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 font-display font-bold text-sm px-3 py-1 rounded-full"
               style={{ background: `${ACCENT}15`, color: ACCENT }}>
-              <Users size={14} /> {upper}
+              <Users size={14} /> Session {upper}
             </span>
-            <h1 className="text-xl md:text-2xl text-[#0D2B1A] font-display font-bold">{pseudo}</h1>
+            <h1 className="text-xl md:text-2xl text-[#0D2B1A] font-display font-bold">{session?.label || "Le Défi PATI"}</h1>
           </div>
           <div className="flex items-center gap-4">
             <button onClick={enter} className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline">
@@ -236,7 +230,7 @@ export default function SessionPlay() {
           </div>
         </div>
         <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4 text-sm">
-          Place les 34 préfectures le plus vite possible. Ton temps est envoyé au classement dès que tu finis.
+          Entre ton surnom dans le jeu, puis place les 34 préfectures. Ton temps rejoint le classement <b>{upper}</b> dès que tu finis.
         </p>
       </section>
 
