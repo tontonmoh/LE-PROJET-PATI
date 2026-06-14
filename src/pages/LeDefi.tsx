@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Puzzle, ArrowLeft, Maximize2, Minimize2 } from "lucide-react";
+import { Puzzle, ArrowLeft, Maximize2, Minimize2, Users } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { logProgress } from "../lib/progress";
 
@@ -73,7 +73,28 @@ export default function LeDefi() {
             <Link to="/" className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Accueil</Link>
           </div>
         </div>
-        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-5">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
+        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
+
+        {/* ── Bandeau : lancer un défi de groupe ── */}
+        <Link
+          to="/session/new"
+          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mb-5 transition-colors"
+          style={{ background: "#143D2E" }}
+        >
+          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0" style={{ background: "rgba(255,201,60,0.15)" }}>
+            <Users size={20} style={{ color: "#FFC93C" }} />
+          </span>
+          <span className="flex-1">
+            <span className="block font-display font-bold text-white text-sm sm:text-base">Défi de groupe&nbsp;?</span>
+            <span className="block text-white/65 font-semibold text-xs sm:text-sm">
+              Classe, forum, concert… Crée une session, projette le QR code, et vois qui finit le premier — en direct.
+            </span>
+          </span>
+          <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
+            style={{ background: "#C8841E", color: "white" }}>
+            Lancer →
+          </span>
+        </Link>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
