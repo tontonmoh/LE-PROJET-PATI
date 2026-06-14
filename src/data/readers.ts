@@ -20,6 +20,7 @@ import { NABY_ML } from "./naby-ml";
 import { PETIT_SORY_ML } from "./petit-sory-ml";
 import { KANDIA_ML } from "./kandia-ml";
 import { PROCES_IA_ML } from "./proces-ia-ml";
+import { SEPT_KM_ML } from "./sept-kilometres-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
 import g2040Tome1 from "./g2040-tome1";
@@ -141,6 +142,7 @@ export const READERS: Record<string, MLReader> = {
   "petit-sory": { ...fromLaye(PETIT_SORY_ML), accent: "#1F6E52" },
   "kandia-passe-futur": { ...fromLaye(KANDIA_ML), accent: "#2C6FB0" },
   "proces-ia": { ...fromLaye(PROCES_IA_ML), accent: "#C8841E" },
+  "sept-kilometres": { ...fromLaye(SEPT_KM_ML), accent: "#C2410C" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
   "g2040-foret-et-fer": { ...fromG2040(g2040Tome1), accent: "#18402A" },

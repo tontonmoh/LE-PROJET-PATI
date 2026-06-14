@@ -26,7 +26,7 @@ type Card = {
 };
 
 const bookCard = (b: (typeof BOOKS)[number]): Card => ({
-  slug: b.slug, title: b.title, description: b.description, cover: b.cover, comingSoon: b.comingSoon,
+  slug: b.slug, title: b.title, description: b.description, cover: b.cover, comingSoon: b.comingSoon, to: b.to,
 });
 const serieCard = (s: (typeof SERIES)[number]): Card => ({
   slug: s.slug, title: s.title, description: s.description, cover: s.cover,
