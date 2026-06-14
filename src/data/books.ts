@@ -23,6 +23,15 @@ export type Book = {
 
 export const BOOKS: Book[] = [
   {
+    slug: "naby-coleah",
+    band: "Aventure",
+    title: "Naby — L'enfant de Coléah",
+    description: "Un enfant de Coléah qui vendait de l'eau devient champion d'Europe — et revient pour les siens.",
+    cover: "/images/naby/naby-couverture.png",
+    keywords: ["naby", "keita", "coléah", "football", "syli", "liverpool", "nga marie", "kébé", "rêve", "transmission", "unicef", "Pati Aventure"],
+    nouveau: true,
+  },
+  {
     slug: "rever-plus-grand",
     band: "Passage",
     title: "Rêver plus grand que mon père",
