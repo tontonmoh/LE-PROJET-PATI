@@ -27,7 +27,7 @@ export const BOOKS: Book[] = [
     band: "Aventure",
     title: "Naby — L'enfant de Coléah",
     description: "Un enfant de Coléah qui vendait de l'eau devient champion d'Europe — et revient pour les siens.",
-    cover: "/images/naby/naby-couverture.png",
+    cover: "/images/naby/naby-couverture.webp",
     keywords: ["naby", "keita", "coléah", "football", "syli", "liverpool", "nga marie", "kébé", "rêve", "transmission", "unicef", "Pati Aventure"],
     nouveau: true,
   },
