@@ -16,6 +16,7 @@ import { REVER_ML } from "./rever-ml";
 import { FENDANI_ML } from "./fendani-ml";
 import { COLA_ML } from "./cola-ml";
 import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
+import { NABY_ML } from "./naby-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
 import g2040Tome1 from "./g2040-tome1";
@@ -133,6 +134,7 @@ export const READERS: Record<string, MLReader> = {
   "fendani": { ...fromLaye(FENDANI_ML), accent: "#A23B72" },
   "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
   "chimpanzes-bossou": { ...fromLaye(CHIMPO_ML), accent: "#3F7D5A" },
+  "naby-coleah": { ...fromLaye(NABY_ML), accent: "#C8102E" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
   "g2040-foret-et-fer": { ...fromG2040(g2040Tome1), accent: "#18402A" },
