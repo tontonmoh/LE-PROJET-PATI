@@ -17,6 +17,7 @@ const BookQuiz = lazy(() => import("./pages/BookQuiz"));
 const BookReaderML = lazy(() => import("./pages/BookReaderML"));
 const UniversTaadidi = lazy(() => import("./pages/UniversTaadidi"));
 const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
+const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
 const DecouvrirTonGenie = lazy(() => import("./pages/DecouvrirTonGenie"));
@@ -89,6 +90,7 @@ export default function App() {
             <Route path="/gabarit-test" element={<EpisodeGabarit />} />
             <Route path="/serie/taadidi" element={<Navigate to="/univers/taadidi" replace />} />
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />
+            <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
             <Route path="/audio/:id" element={<AudioBibliotheque />} />

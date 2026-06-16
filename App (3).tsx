@@ -17,6 +17,7 @@ const BookQuiz = lazy(() => import("./pages/BookQuiz"));
 const BookReaderML = lazy(() => import("./pages/BookReaderML"));
 const UniversTaadidi = lazy(() => import("./pages/UniversTaadidi"));
 const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
+const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
 const DecouvrirTonGenie = lazy(() => import("./pages/DecouvrirTonGenie"));
@@ -48,6 +49,8 @@ const Contes = lazy(() => import("./pages/Contes"));
 const Atelier = lazy(() => import("./pages/Atelier"));
 const ParentDashboard = lazy(() => import("./pages/ParentDashboard"));
 const TaadidiQuiz = lazy(() => import("./pages/TaadidiQuiz"));
+const Momes = lazy(() => import("./pages/Momes"));
+const Imagier = lazy(() => import("./pages/Imagier"));
 const SIMPLE = ["a-propos", "partenaires", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
 function PageLoader() {
@@ -82,9 +85,12 @@ export default function App() {
             <Route path="/livre/:id/quiz" element={<BookQuiz />} />
             <Route path="/univers/taadidi" element={<UniversTaadidi />} />
             <Route path="/univers/taadidi/quiz" element={<TaadidiQuiz />} />
+            <Route path="/momes" element={<Momes />} />
+            <Route path="/imagier" element={<Imagier />} />
             <Route path="/gabarit-test" element={<EpisodeGabarit />} />
             <Route path="/serie/taadidi" element={<Navigate to="/univers/taadidi" replace />} />
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />
+            <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
             <Route path="/audio/:id" element={<AudioBibliotheque />} />

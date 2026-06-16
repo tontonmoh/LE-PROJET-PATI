@@ -9,10 +9,11 @@ import { recordProgress, resumePage } from "../lib/reading";
 import { logProgress } from "../lib/progress";
 import { bumpCounter } from "../lib/publicStats";
 import { TAADIDI } from "../data/series/taadidi";
+import { POINT_ZERO } from "../data/point-zero";
 
 export default function BookReaderML() {
   const { id } = useParams();
-  const isSerie = (id || "").startsWith("taadidi-");
+  const isSerie = (id || "").startsWith("taadidi-") || (id || "").startsWith("point-zero-") || (id || "").startsWith("g2040-");
   const reader = READERS[id || ""];
   const [lang, setLang] = useState(reader ? reader.langs[0] : "fr");
   const [i, setI] = useState(-1); // -1 = couverture
@@ -78,33 +79,63 @@ export default function BookReaderML() {
   const cover = i < 0;
   const scene = cover ? null : book.sections[i];
 
-  // Tous les livres = livre illustré en double page : illustration | texte, côté alterné page à page.
-  // Une image par page si la section a la sienne ; sinon repli (planche d'épisode pour Taadidi,
-  // couverture du livre pour le reste du catalogue).
-  const serieEp = isSerie
+  // Tous les livres du catalogue = mode split (50/50 illustration | texte)
+  // Charger l'info de la série (si applicable)
+  const serieEp = (id || "").startsWith("taadidi-")
     ? TAADIDI.episodes.find((e) => e.numero === parseInt((id || "").replace("taadidi-", ""), 10))
     : undefined;
+  const pzTome = (id || "").startsWith("point-zero-")
+    ? POINT_ZERO.tomes.find((t) => t.numero === parseInt((id || "").replace("point-zero-t", ""), 10))
+    : undefined;
+
   const planche = serieEp?.planche;
   const cote = serieEp?.cote ?? "gauche";
 
-  // Image de repli de la « case illustration » :
-  //  - série Taadidi : la planche de l'épisode (ou la couverture de la série) ;
-  //  - tout autre livre du catalogue : sa couverture (books.ts).
-  // Dès qu'une image de repli existe, le livre passe en double page illustration | texte.
-  const fallbackImg = isSerie ? (planche || TAADIDI.cover) : getBook(id || "")?.cover;
-  const split = !!fallbackImg;
+  // Alternance RANDOM seeded par index
+  const randomLayout = (idx: number) => {
+    return idx % 2 === 0 ? "left" : "right";
+  };
+
+  // Image de base : couverture du livre
+  let baseImg = getBook(id || "")?.cover;
+  
+  // Surcharger si c'est une série avec image spécifique
+  if (serieEp && planche) {
+    baseImg = planche;
+  } else if (serieEp && !planche) {
+    baseImg = TAADIDI.cover;
+  } else if (pzTome && pzTome.cover) {
+    baseImg = pzTome.cover;
+  }
+  
+  // Le split s'applique à TOUS les livres
+  const split = true;
 
   const sectionImg = !cover
     ? (reader.books.fr?.sections[i]?.image || reader.books[reader.langs[0]]?.sections[i]?.image)
     : undefined;
-  const pageImg = cover ? fallbackImg : (sectionImg || fallbackImg);
+  const pageImg = cover ? baseImg : (sectionImg || baseImg);
   const pageIdx = cover ? 0 : i;
-  const imgLeft = (pageIdx % 2 === 0) === (cote === "gauche"); // alterne à chaque page
+  
+  // Layout alternant : Taadidi = séquentiel (original), autres séries = random seeded par index
+  let imgLeft = false;
+  if (serieEp) {
+    // Taadidi : alternance séquentielle
+    imgLeft = (pageIdx % 2 === 0) === (cote === "gauche");
+  } else if (!cover) {
+    // Autres séries (Point Zéro, G2040) : random seeded par index
+    imgLeft = randomLayout(i) === "left";
+  }
 
   const inner = (
     <>
       <div className="flex items-center justify-between mb-4">
-        <Link to={isSerie ? "/serie/taadidi" : `/livre/${id}`} className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline">
+        <Link to={
+          (id || "").startsWith("taadidi-") ? "/serie/taadidi" :
+          (id || "").startsWith("point-zero-") ? "/serie/point-zero" :
+          (id || "").startsWith("g2040-") ? "/serie/generation-2040" :
+          `/livre/${id}`
+        } className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline">
           <ArrowLeft size={18} /> {isSerie ? "Retour à la série" : "Retour au livre"}
         </Link>
         {!cover && <span className="font-display font-semibold text-[#5a6b62] text-sm">{i + 1} / {total}</span>}
@@ -130,16 +161,29 @@ export default function BookReaderML() {
 
       {/* Page du livre */}
       <article dir={rtl ? "rtl" : "ltr"}
-        className={split ? "" : "rounded-[1.75rem] border-8 border-white shadow-kid px-7 py-9 md:px-10 md:py-12 min-h-[55vh]"}
-        style={split ? undefined : { background: "#FFFDF6" }}>
+        className={(!cover && split) ? "" : "rounded-[1.75rem] border-8 border-white shadow-kid px-7 py-9 md:px-10 md:py-12 min-h-[55vh]"}
+        style={(!cover && split) ? undefined : { background: "#FFFDF6" }}>
         {cover ? (
-          <div className="text-center py-10">
-            <div className="w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{ background: `${accent}22` }}>
-              <BookOpen size={32} style={{ color: accent }} />
+          <div className="w-full">
+            {/* Couverture en mode paysage (plein écran) */}
+            {baseImg && (
+              <img 
+                src={baseImg} 
+                alt={book.title}
+                loading="lazy"
+                className="w-full rounded-2xl shadow-lg mb-8"
+                style={{ maxHeight: "60vh", objectFit: "cover" }}
+              />
+            )}
+            {/* Infos texte sous la couverture */}
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{ background: `${accent}22` }}>
+                <BookOpen size={32} style={{ color: accent }} />
+              </div>
+              <h1 className="font-display font-bold text-3xl md:text-4xl text-[#0D2B1A] mb-3">{book.title}</h1>
+              {book.subtitle && <p className={readerClass} style={{ fontSize: "1.05rem", color: "#5a6b62" }}>{book.subtitle}</p>}
+              {tagline && <p className={readerClass} style={{ fontSize: "1rem", color: accent, marginTop: "0.75rem", fontStyle: "italic" }}>{tagline}</p>}
             </div>
-            <h1 className="font-display font-bold text-3xl md:text-4xl text-[#0D2B1A] mb-3">{book.title}</h1>
-            {book.subtitle && <p className={readerClass} style={{ fontSize: "1.05rem", color: "#5a6b62" }}>{book.subtitle}</p>}
-            {tagline && <p className={readerClass} style={{ fontSize: "1rem", color: accent, marginTop: "0.75rem", fontStyle: "italic" }}>{tagline}</p>}
           </div>
         ) : (
           <>
@@ -167,16 +211,36 @@ export default function BookReaderML() {
             {cover ? "Commencer" : "Suivant"} <ChevronRight size={18} />
           </button>
         ) : isSerie ? (() => {
-          const num = parseInt((id || "").replace("taadidi-", ""), 10);
-          const next = num + 1;
-          if (READERS["taadidi-" + next]) return (
-            <Link to={`/livre/taadidi-${next}/lire`} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>Continuer · Épisode {next} <ChevronRight size={18} /></Link>
-          );
-          if (TAADIDI.episodes.some((e) => e.numero === next)) return (
-            <Link to="/serie/taadidi" className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-6"><Hourglass size={16} /> Bientôt · Épisode {next}</Link>
-          );
+          // Logique de navigation pour toutes les séries
+          if ((id || "").startsWith("taadidi-")) {
+            const num = parseInt((id || "").replace("taadidi-", ""), 10);
+            const next = num + 1;
+            if (READERS["taadidi-" + next]) return (
+              <Link to={`/livre/taadidi-${next}/lire`} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>Continuer · Épisode {next} <ChevronRight size={18} /></Link>
+            );
+            if (TAADIDI.episodes.some((e) => e.numero === next)) return (
+              <Link to="/serie/taadidi" className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-6"><Hourglass size={16} /> Bientôt · Épisode {next}</Link>
+            );
+            return (
+              <Link to="/serie/taadidi" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
+            );
+          } else if ((id || "").startsWith("point-zero-")) {
+            const num = parseInt((id || "").replace("point-zero-t", ""), 10);
+            const next = num + 1;
+            const nextTome = POINT_ZERO.tomes.find((t) => t.numero === next);
+            if (nextTome && nextTome.statut === "live" && nextTome.to) return (
+              <Link to={nextTome.to} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>Continuer · Tome {next} <ChevronRight size={18} /></Link>
+            );
+            if (nextTome && nextTome.statut === "soon") return (
+              <Link to="/serie/point-zero" className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-6"><Hourglass size={16} /> Bientôt · Tome {next}</Link>
+            );
+            return (
+              <Link to="/serie/point-zero" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
+            );
+          }
+          // G2040 et autres : retour à la série
           return (
-            <Link to="/serie/taadidi" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
+            <Link to="/catalogue" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour au catalogue</Link>
           );
         })() : (
           <Link to={`/livre/${id}/quiz`} className="btn-kid bg-[#0F6E56] text-white text-sm py-2.5 px-6"><Sparkles size={16} /> Quiz</Link>

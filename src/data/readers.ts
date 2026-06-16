@@ -21,6 +21,10 @@ import { PETIT_SORY_ML } from "./petit-sory-ml";
 import { KANDIA_ML } from "./kandia-ml";
 import { PROCES_IA_ML } from "./proces-ia-ml";
 import { SEPT_KM_ML } from "./sept-kilometres-ml";
+import { POINT_ZERO_T0_ML } from "./point-zero-t0-ml";
+import { POINT_ZERO_T1_ML } from "./point-zero-t1-ml";
+import { POINT_ZERO_T2_ML } from "./point-zero-t2-ml";
+import { POINT_ZERO_T3_ML } from "./point-zero-t3-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
 import g2040Tome1 from "./g2040-tome1";
@@ -143,6 +147,10 @@ export const READERS: Record<string, MLReader> = {
   "kandia-passe-futur": { ...fromLaye(KANDIA_ML), accent: "#2C6FB0" },
   "proces-ia": { ...fromLaye(PROCES_IA_ML), accent: "#C8841E" },
   "sept-kilometres": { ...fromLaye(SEPT_KM_ML), accent: "#C2410C" },
+  "point-zero-t0": { ...fromLaye(POINT_ZERO_T0_ML), accent: "#1A2A4A" },
+  "point-zero-t1": { ...fromLaye(POINT_ZERO_T1_ML), accent: "#1A2A4A" },
+  "point-zero-t2": { ...fromLaye(POINT_ZERO_T2_ML), accent: "#1A2A4A" },
+  "point-zero-t3": { ...fromLaye(POINT_ZERO_T3_ML), accent: "#1A2A4A" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
   "g2040-foret-et-fer": { ...fromG2040(g2040Tome1), accent: "#18402A" },

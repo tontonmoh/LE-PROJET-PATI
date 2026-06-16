@@ -16,6 +16,17 @@ export type SeriesItem = {
 
 export const SERIES: SeriesItem[] = [
   {
+    slug: "point-zero",
+    title: "Le Point Zéro",
+    description: "Une étoile-femme tombée par amour, brisée en mille éclats aux quatre coins du monde — et deux enfants qui partent les reconstituer.",
+    cover: "/images/point-zero/point-zero-t0-couverture.webp",
+    band: "Aventure",
+    to: "/serie/point-zero",
+    auteur: "Mohamed Doumbouya",
+    episodes: { total: 7, live: 1 },
+    episodeSlugs: ["point-zero-t0"],
+  },
+  {
     slug: "generation-2040",
     title: "Génération 2040",
     description: "Le jour où une classe de Boffa découvre qu'elle connaît le monde entier — sauf son propre pays.",
