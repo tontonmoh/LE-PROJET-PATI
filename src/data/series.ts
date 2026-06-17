@@ -16,6 +16,17 @@ export type SeriesItem = {
 
 export const SERIES: SeriesItem[] = [
   {
+    slug: "koumanthio",
+    title: "Koumanthio, enfant de troupe",
+    description: "À Labé, une enfant première au CEPE descend à Conakry pour le Prytanée — un camp qui porte le nom de son aïeul, le roi qui n'a pas voulu plier. Elle porte ce nom comme un secret.",
+    cover: "/images/koumanthio/koumanthio-t1-couverture.webp",
+    band: "Aventure",
+    to: "/serie/koumanthio",
+    auteur: "Mohamed Doumbouya",
+    episodes: { total: 3, live: 1 },
+    episodeSlugs: ["koumanthio-t1"],
+  },
+  {
     slug: "point-zero",
     title: "Le Point Zéro",
     description: "Une étoile-femme tombée par amour, brisée en mille éclats aux quatre coins du monde — et deux enfants qui partent les reconstituer.",
@@ -23,8 +34,8 @@ export const SERIES: SeriesItem[] = [
     band: "Aventure",
     to: "/serie/point-zero",
     auteur: "Mohamed Doumbouya",
-    episodes: { total: 7, live: 1 },
-    episodeSlugs: ["point-zero-t0"],
+    episodes: { total: 7, live: 7 },
+    episodeSlugs: ["point-zero-t0", "point-zero-t1", "point-zero-t2", "point-zero-t3", "point-zero-t4", "point-zero-t5", "point-zero-t6"],
   },
   {
     slug: "generation-2040",

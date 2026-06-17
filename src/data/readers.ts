@@ -2,6 +2,7 @@
 // Normalise les différents formats sources vers une structure commune,
 // consommée par le lecteur générique BookReaderML.
 import { CHATEAU, CHATEAU_LANGS } from "./chateau-ml";
+import { KOUMANTHIO_T1_ML } from "./koumanthio-t1-ml";
 import { LAYE_ML } from "./laye-ml";
 import { DMBA_ML } from "./dmba-ml";
 import { BINTA_ML } from "./binta-ml";
@@ -28,6 +29,7 @@ import { POINT_ZERO_T2_ML } from "./point-zero-t2-ml";
 import { POINT_ZERO_T3_ML } from "./point-zero-t3-ml";
 import { POINT_ZERO_T4_ML } from "./point-zero-t4-ml";
 import { POINT_ZERO_T5_ML } from "./point-zero-t5-ml";
+import { POINT_ZERO_T6_ML } from "./point-zero-t6-ml";
 import { CASSEROLES_ML } from "./casseroles-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
@@ -131,6 +133,7 @@ function fromG2040(livre: any): { langs: string[]; books: Record<string, MLBook>
 }
 
 export const READERS: Record<string, MLReader> = {
+  "koumanthio-t1": { ...fromLaye(KOUMANTHIO_T1_ML), accent: "#2E4A6B" },
   "chateau-eau": { ...fromChateau(CHATEAU), accent: "#3FB6E8" },
   "laye-kouroussa": { ...fromLaye(LAYE_ML), accent: "#0F6E56" },
   "sacree-dmba": { ...fromLaye(DMBA_ML), accent: "#FF6B4A" },
@@ -158,6 +161,7 @@ export const READERS: Record<string, MLReader> = {
   "point-zero-t3": { ...fromLaye(POINT_ZERO_T3_ML), accent: "#1A2A4A" },
   "point-zero-t4": { ...fromLaye(POINT_ZERO_T4_ML), accent: "#1A2A4A" },
   "point-zero-t5": { ...fromLaye(POINT_ZERO_T5_ML), accent: "#1A2A4A" },
+  "point-zero-t6": { ...fromLaye(POINT_ZERO_T6_ML), accent: "#1A2A4A" },
   "casseroles": { ...fromLaye(CASSEROLES_ML), accent: "#3B5C8A" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },

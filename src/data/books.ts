@@ -24,6 +24,15 @@ export type Book = {
 
 export const BOOKS: Book[] = [
   {
+    slug: "koumanthio-t1",
+    band: "Aventure",
+    title: "Koumanthio, enfant de troupe — L'arrivée",
+    description: "Première au CEPE à Labé, Koumanthio descend à Conakry passer le test du Prytanée — un camp qui porte le nom de son aïeul. Tome 1 de la série.",
+    cover: "/images/koumanthio/koumanthio-t1-couverture.webp",
+    keywords: ["Koumanthio", "Diallo", "Labé", "Fouta", "Pati", "Prytanée", "Alpha Yaya Diallo", "Simandou Academy", "Conakry", "enfant de troupe", "CEPE", "Sèdjro", "transmission", "dignité", "série", "Pati Aventure"],
+    nouveau: true,
+  },
+  {
     slug: "jour-du-marche",
     band: "Découverte",
     title: "Le jour du marché",

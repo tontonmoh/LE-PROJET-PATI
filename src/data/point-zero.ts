@@ -28,7 +28,7 @@ export const POINT_ZERO = {
     { numero: 3, titre: "Le mystère des îles perdues", sousTitre: "L'est extrême", lieu: "île du Pacifique", statut: "live", to: "/livre/point-zero-t3/lire", cover: "/images/point-zero/point-zero-t3-couverture.webp", coverLandscape: "/images/point-zero/point-zero-t3-couverture.webp" },
     { numero: 4, titre: "La lumière rebelle", sousTitre: "Le royaume astral", lieu: "Kibanyi", statut: "live", to: "/livre/point-zero-t4/lire", cover: "/images/point-zero/point-zero-t4-couverture.webp", coverLandscape: "/images/point-zero/point-zero-t4-couverture.webp" },
     { numero: 5, titre: "L'éclat changé en or", sousTitre: "L'or", lieu: "La terre des eaux", statut: "live", to: "/livre/point-zero-t5/lire", cover: "/images/point-zero/point-zero-t5-couverture.webp", coverLandscape: "/images/point-zero/point-zero-t5-couverture.webp" },
-    { numero: 6, titre: "Le cœur enfoui", sousTitre: "Le retour", lieu: "Guinée · Simandou", statut: "soon" },
+    { numero: 6, titre: "Le cœur enfoui", sousTitre: "Le retour", lieu: "Guinée · le point zéro", statut: "live", to: "/livre/point-zero-t6/lire", cover: "/images/point-zero/point-zero-t6-couverture.webp", coverLandscape: "/images/point-zero/point-zero-t6-couverture.webp" },
   ] as PZTome[],
   
   // Helpers pour le comptage
