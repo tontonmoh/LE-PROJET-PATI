@@ -16,6 +16,7 @@ import { REVER_ML } from "./rever-ml";
 import { FENDANI_ML } from "./fendani-ml";
 import { COLA_ML } from "./cola-ml";
 import { CHIMPO_ML } from "./chimpanzes-bossou-ml";
+import { JOUR_DU_MARCHE_ML } from "./jour-du-marche-ml";
 import { NABY_ML } from "./naby-ml";
 import { PETIT_SORY_ML } from "./petit-sory-ml";
 import { KANDIA_ML } from "./kandia-ml";
@@ -25,6 +26,9 @@ import { POINT_ZERO_T0_ML } from "./point-zero-t0-ml";
 import { POINT_ZERO_T1_ML } from "./point-zero-t1-ml";
 import { POINT_ZERO_T2_ML } from "./point-zero-t2-ml";
 import { POINT_ZERO_T3_ML } from "./point-zero-t3-ml";
+import { POINT_ZERO_T4_ML } from "./point-zero-t4-ml";
+import { POINT_ZERO_T5_ML } from "./point-zero-t5-ml";
+import { CASSEROLES_ML } from "./casseroles-ml";
 import * as MAITRE_ML from "./maitre-ecole-ml";
 import g2040Tome0 from "./g2040-tome0";
 import g2040Tome1 from "./g2040-tome1";
@@ -142,6 +146,7 @@ export const READERS: Record<string, MLReader> = {
   "fendani": { ...fromLaye(FENDANI_ML), accent: "#A23B72" },
   "secret-cola": { ...fromLaye(COLA_ML), accent: "#B23A1E" },
   "chimpanzes-bossou": { ...fromLaye(CHIMPO_ML), accent: "#3F7D5A" },
+  "jour-du-marche": { ...fromLaye(JOUR_DU_MARCHE_ML), accent: "#3F7D5A" },
   "naby-coleah": { ...fromLaye(NABY_ML), accent: "#C8102E" },
   "petit-sory": { ...fromLaye(PETIT_SORY_ML), accent: "#1F6E52" },
   "kandia-passe-futur": { ...fromLaye(KANDIA_ML), accent: "#2C6FB0" },
@@ -151,6 +156,9 @@ export const READERS: Record<string, MLReader> = {
   "point-zero-t1": { ...fromLaye(POINT_ZERO_T1_ML), accent: "#1A2A4A" },
   "point-zero-t2": { ...fromLaye(POINT_ZERO_T2_ML), accent: "#1A2A4A" },
   "point-zero-t3": { ...fromLaye(POINT_ZERO_T3_ML), accent: "#1A2A4A" },
+  "point-zero-t4": { ...fromLaye(POINT_ZERO_T4_ML), accent: "#1A2A4A" },
+  "point-zero-t5": { ...fromLaye(POINT_ZERO_T5_ML), accent: "#1A2A4A" },
+  "casseroles": { ...fromLaye(CASSEROLES_ML), accent: "#3B5C8A" },
   "maitre-ecole": { ...fromAligned(MAITRE_ML), accent: "#B47A1B" },
   "g2040-tome0": { ...fromG2040(g2040Tome0), accent: "#18402A" },
   "g2040-foret-et-fer": { ...fromG2040(g2040Tome1), accent: "#18402A" },

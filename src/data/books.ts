@@ -24,6 +24,24 @@ export type Book = {
 
 export const BOOKS: Book[] = [
   {
+    slug: "jour-du-marche",
+    band: "Découverte",
+    title: "Le jour du marché",
+    description: "Pour les tout-petits : Sira va au marché toute seule. Elle marchande, compte ses pièces, et découvre que tout ce qu'on mange a fait un long voyage.",
+    cover: "/images/jour-du-marche-couverture.webp",
+    keywords: ["marché", "Sira", "Habib", "tomates", "poisson", "riz", "Fouta", "Boulbinet", "Boffa", "marchander", "compter", "voyage des aliments", "vivre-ensemble", "égalité filles-garçons", "tout-petits", "Pati Découverte"],
+    nouveau: true,
+  },
+  {
+    slug: "casseroles",
+    band: "Passage",
+    title: "La guerre des casseroles",
+    description: "La nuit où le courant s'en alla : les ustensiles de la cuisine se disputent le pouvoir — jusqu'à ce que la vieille Daba rappelle d'où vient le grain de riz.",
+    cover: "/images/casseroles-couverture.webp",
+    keywords: ["casseroles", "daba", "tradition", "modernité", "délestage", "frigo", "marmite", "fable", "cuisine", "terre", "agriculture", "mémoire", "Pati Passage"],
+    nouveau: true,
+  },
+  {
     slug: "imagier-nko",
     band: "Mômes",
     title: "L'écriture N'Ko",
