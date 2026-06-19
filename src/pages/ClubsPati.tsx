@@ -3,9 +3,9 @@ import { BookOpen, PenTool, Landmark, Share2, Mic, FileText, Palette, Drama, Tro
 
 const ACTIVITES = [
   { icon: BookOpen, color: "#0F6E56", t: "Lecture & Découverte", d: "Lire ensemble les histoires PATI, les commenter, les partager. Chaque club reçoit un kit de lecture adapté à son niveau.", to: "/catalogue", cta: "Explorer le catalogue" },
-  { icon: PenTool, color: "#FF6B4A", t: "Expression & Création", d: "Écrire, illustrer, raconter ses propres histoires inspirées du patrimoine guinéen. Les meilleures créations sont publiées sur la plateforme." },
-  { icon: Landmark, color: "#1F7A8C", t: "Culture & Patrimoine", d: "Explorer les cultures guinéennes, les traditions, les figures historiques. Sorties, rencontres avec des aînés, documentation." },
-  { icon: Share2, color: "#C8841E", t: "Engagement & Partage", d: "Partager avec la communauté, sensibiliser les autres enfants, organiser des événements de lecture dans son quartier." },
+  { icon: PenTool, color: "#FF6B4A", t: "Expression & Création", d: "Écrire, illustrer, raconter ses propres histoires inspirées du patrimoine guinéen. Les meilleures créations sont publiées sur la plateforme.", to: "/proposer-creation", cta: "Proposer une création de mon club" },
+  { icon: Landmark, color: "#1F7A8C", t: "Culture & Patrimoine", d: "Explorer les cultures guinéennes par la pratique : musique (kora, balafon, tam-tam), peinture, sculpture, slam, théâtre, conte. Sorties et rencontres avec des aînés.", to: "/culture-patrimoine", cta: "Voir les ateliers" },
+  { icon: Share2, color: "#C8841E", t: "Engagement & Partage", d: "Partager avec la communauté, sensibiliser les autres enfants, organiser des événements de lecture dans son quartier.", to: "/proposer-activite", cta: "Proposer une activité pour mon quartier" },
   { icon: Cpu, color: "#7A5CFF", t: "Atelier IA & création numérique", d: "Découvrir et utiliser l'intelligence artificielle de façon responsable pour créer : écrire, illustrer, imaginer. Une initiation aux outils de demain, au service du patrimoine guinéen.", to: "/atelier-ia", cta: "Découvrir l'atelier IA" },
   { icon: Compass, color: "#9B59B6", t: "Connaissance de soi & orientation", d: "Des sessions pour mieux se connaître et explorer les métiers d'avenir, avec le test « Découvre ton génie » et un accompagnement vers les opportunités de Simandou 2040.", to: "/decouvrir-son-genie", cta: "Faire le test" },
 ];

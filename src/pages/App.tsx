@@ -30,6 +30,9 @@ const EspaceParents = lazy(() => import("./pages/EspaceParents"));
 const EspaceArtistes = lazy(() => import("./pages/EspaceArtistes"));
 const ClubsPati = lazy(() => import("./pages/ClubsPati"));
 const AtelierIA = lazy(() => import("./pages/AtelierIA"));
+const CulturePatrimoine = lazy(() => import("./pages/CulturePatrimoine"));
+const ProposerCreation = lazy(() => import("./pages/ProposerCreation"));
+const ProposerActivite = lazy(() => import("./pages/ProposerActivite"));
 const AtelierSolidaire = lazy(() => import("./pages/AtelierSolidaire"));
 const Sobela = lazy(() => import("./pages/Sobela"));
 const ImpactReport = lazy(() => import("./pages/ImpactReport"));
@@ -107,6 +110,9 @@ export default function App() {
             <Route path="/espace-artistes" element={<EspaceArtistes />} />
             <Route path="/clubs" element={<ClubsPati />} />
             <Route path="/atelier-ia" element={<AtelierIA />} />
+            <Route path="/culture-patrimoine" element={<CulturePatrimoine />} />
+            <Route path="/proposer-creation" element={<ProposerCreation />} />
+            <Route path="/proposer-activite" element={<ProposerActivite />} />
             <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />

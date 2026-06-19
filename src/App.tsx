@@ -19,6 +19,7 @@ const UniversTaadidi = lazy(() => import("./pages/UniversTaadidi"));
 const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
 const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const SerieResistance = lazy(() => import("./pages/SerieResistance"));
+const MansayaPage = lazy(() => import("./pages/MansayaPage"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
 const DecouvrirTonGenie = lazy(() => import("./pages/DecouvrirTonGenie"));
@@ -30,6 +31,9 @@ const EspaceParents = lazy(() => import("./pages/EspaceParents"));
 const EspaceArtistes = lazy(() => import("./pages/EspaceArtistes"));
 const ClubsPati = lazy(() => import("./pages/ClubsPati"));
 const AtelierIA = lazy(() => import("./pages/AtelierIA"));
+const CulturePatrimoine = lazy(() => import("./pages/CulturePatrimoine"));
+const ProposerCreation = lazy(() => import("./pages/ProposerCreation"));
+const ProposerActivite = lazy(() => import("./pages/ProposerActivite"));
 const AtelierSolidaire = lazy(() => import("./pages/AtelierSolidaire"));
 const Sobela = lazy(() => import("./pages/Sobela"));
 const ImpactReport = lazy(() => import("./pages/ImpactReport"));
@@ -94,6 +98,7 @@ export default function App() {
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />
             <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/serie/resistance" element={<SerieResistance />} />
+            <Route path="/mansaya" element={<MansayaPage />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
             <Route path="/audio/:id" element={<AudioBibliotheque />} />
@@ -107,6 +112,9 @@ export default function App() {
             <Route path="/espace-artistes" element={<EspaceArtistes />} />
             <Route path="/clubs" element={<ClubsPati />} />
             <Route path="/atelier-ia" element={<AtelierIA />} />
+            <Route path="/culture-patrimoine" element={<CulturePatrimoine />} />
+            <Route path="/proposer-creation" element={<ProposerCreation />} />
+            <Route path="/proposer-activite" element={<ProposerActivite />} />
             <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />

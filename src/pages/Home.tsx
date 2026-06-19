@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Star, BookOpen, Trophy, PenTool, Landmark, Share2, Cpu, Compass, Gift, Headphones, Film, Layers } from "lucide-react";
+import { Sparkles, Star, BookOpen, Trophy, PenTool, Landmark, Share2, Cpu, Compass, Gift, Headphones, Film, Layers , Crown } from "lucide-react";
 import { SOCIAL } from "../data/site";
 import { BOOKS } from "../data/books";
 import { SERIES } from "../data/series";
@@ -45,6 +45,20 @@ export default function Home() {
         </div>
         <p className="text-[#3a4a42] font-semibold mb-5">Des sagas en épisodes, à suivre.</p>
         <BookSlider books={SERIES.map((s) => ({ slug: s.slug, title: s.title, description: s.description, cover: s.cover, kind: "serie" as const, to: s.to, episodes: s.episodes }))} />
+      </section>
+
+      {/* MANSAYA — L'encyclopédie royale */}
+      <section className="max-w-6xl mx-auto px-6 pt-10">
+        <div className="rounded-[2rem] px-8 py-9 md:px-12 md:py-11 shadow-kid" style={{ background: "linear-gradient(135deg, #BA7517 0%, #C8841E 100%)" }}>
+          <div className="md:flex items-center justify-between gap-6">
+            <div className="text-white md:max-w-[64%]">
+              <h2 className="font-display font-bold tracking-tight leading-none text-5xl md:text-7xl mb-1">MANSAYA</h2>
+              <div className="inline-flex items-center gap-2 text-sm md:text-base font-display font-semibold bg-white/20 px-3 py-1 rounded-full mb-4"><Crown size={16} /> L'encyclopédie royale</div>
+              <p className="text-white/90 font-semibold leading-relaxed">Ghana, Sosso, Mali, Songhaï… Suis Fanta à travers l'histoire, fais tes choix et débloque les secrets des rois mandingues.</p>
+            </div>
+            <Link to="/mansaya" className="btn-kid bg-white text-[#5a3608] shrink-0 mt-4 md:mt-0"><Crown size={18} /> Commencer l'aventure</Link>
+          </div>
+        </div>
       </section>
 
       {/* Nos livres — rangées par âge */}
