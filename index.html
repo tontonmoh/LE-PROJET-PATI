@@ -17,6 +17,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <!-- Formulaire fantôme Netlify : détecté au build pour activer Netlify Forms. Invisible. -->
+    <form name="club-pati" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="ecole" />
+      <input type="text" name="ville" />
+      <input type="text" name="responsable" />
+      <input type="email" name="email" />
+      <input type="text" name="telephone" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
