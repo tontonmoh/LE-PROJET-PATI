@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, Star, BookOpen, Trophy, PenTool, Landmark, Share2, Cpu, Compass, Gift, Headphones, Film, Layers } from "lucide-react";
 import { SOCIAL } from "../data/site";
@@ -6,7 +7,29 @@ import { SERIES } from "../data/series";
 import BookSlider from "../components/BookSlider";
 import FeaturedHero from "../components/FeaturedHero";
 
+// Mélange de Fisher-Yates (ordre frais à chaque visite).
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+// Les nouveautés restent en tête ; tout le reste passe en avant à tour de rôle.
+function nouveautesPuisMelange<T extends { nouveau?: boolean }>(list: T[]): T[] {
+  const neufs = list.filter((b) => b.nouveau);
+  const autres = shuffle(list.filter((b) => !b.nouveau));
+  return [...neufs, ...autres];
+}
+
 export default function Home() {
+  // Calculé une fois par visite (pas à chaque re-render) → pas de saut de cartes pendant le scroll.
+  const livresParBande = useMemo(() => {
+    const out: Record<string, typeof BOOKS> = {};
+    for (const band of ["Mômes", "Découverte", "Aventure", "Passage"]) {
+      out[band] = nouveautesPuisMelange(BOOKS.filter((b) => b.band === band));
+    }
+    return out;
+  }, []);
+
   return (
     <div className="bg-[#FFF6E7]">
       <FeaturedHero />
@@ -40,7 +63,7 @@ export default function Home() {
           { key: "Aventure", label: "Pati Aventure", age: "10–12 ans" },
           { key: "Passage", label: "Pati Passage", age: "13–15 ans" },
         ].map((band) => {
-          const list = BOOKS.filter((b) => b.band === band.key);
+          const list = livresParBande[band.key] || [];
           if (!list.length) return null;
           return (
             <div key={band.key} className="mb-8">

@@ -1,0 +1,233 @@
+// Série « RÉSISTANCE » — Épisode 5 : « Le dernier roi »
+// Pati Passage (13-15). Figure : Samory Touré (origine = mère Sokhona captive ; forge ses fusils ;
+// 20 ans de guerre ; reddition digne de Guélémou 1898 ; exil Gabon †1900).
+// Oubliée : Sokhona (mère de Samory). L'épisode S'ARRÊTE SUR LA CHUTE (« ils ont tous perdu »).
+// Section 0 : esclavage / islamisation forcée / razzias écartés ; la mère est VICTIME, dignité intacte.
+// FR + EN + AR + ZH. (AR/ZH : relecture locuteur natif recommandée avant production.)
+
+import type { Lang } from "./series/taadidi";
+
+type RSection = { title: string; paragraphs: string[]; image?: string };
+type RBook = { lang: Lang; dir: "ltr" | "rtl"; label: string; bookTitle: string; sections: RSection[] };
+
+export const RESISTANCE_T5_ML: Partial<Record<Lang, RBook>> = {
+  fr: {
+    lang: "fr", dir: "ltr", label: "Français",
+    bookTitle: "Résistance — Le dernier roi",
+    sections: [
+    { title: "1 — Le centre de la carte", image: "/images/resistance/res-t5-01.webp", paragraphs: [
+        "Le studio, veille du spectacle de fin d'année. Partout, des mois de travail : dessins d'Ama, story-boards, et au mur, la carte de la Guinée — la côte, le Fouta, la forêt, toutes remplies. Au milieu, une grande zone restée blanche. Le marqueur est dans la main de Fanta, plus dans celle de Salif. Salif est assis en retrait, presque spectateur.",
+        "— Il ne reste que le centre. Le plus gros, dit Fanta devant la zone vide.",
+        "— Samory Touré. « Sa capture, en 1898, achève la conquête. » C'est lui, le dernier, lit Hugo.",
+        "— Le dernier ? Attends. La forêt qu'on a filmée — Zégbéla, Kissi Kaba — elle tient jusqu'en 1912. Et le Wali de Goumba meurt en 1911. Après Samory. De treize ans, fait remarquer Théo.",
+        "— … Exact, relit Hugo, qui se reprend. C'est ce que répètent les livres : « Samory tombe, tout s'arrête. » Mais c'est faux. La résistance ne meurt pas avec lui.",
+        "— Alors c'était quoi, « le dernier » ? demande Ama.",
+        "— Le dernier grand royaume, comprend Fanta, lentement. La dernière armée capable de tenir tête. Après lui, plus d'État pour résister — juste des villages, des saints, des hommes seuls, qui s'éteignent un par un. C'est ça, notre film.",
+        "Ils se tournent vers Salif. D'habitude, c'est lui qui lance. Il ne bouge pas.",
+        "— C'est votre film. Le dernier. Faites-le bien.",
+        "Fanta repose le marqueur, ouvre le dossier. Sur l'écran, un nom, une date, une carte immense.",
+    ] },
+    { title: "2 — Sept ans, sept mois, sept jours", image: "/images/resistance/res-t5-02.webp", paragraphs: [
+        "Un village du sud-est, vers 1848. Le calme — puis un raid. Des cavaliers, de la poussière. Et, emmenée dans la cohue, enchaînée, une femme qui se retourne une dernière fois vers sa maison.",
+        "« Avant l'empire, avant les fusils, avant tout : un garçon, et sa mère. Elle s'appelait Sokhona. Un jour, des hommes l'ont prise dans un raid, et l'ont réduite en esclavage. »",
+        "Un adolescent court derrière la colonne, s'arrête, impuissant. Il n'a rien — pas d'or, pas d'armée. Rien qu'une chose à offrir : lui-même.",
+        "« Le garçon n'avait pas de quoi la racheter. Alors il a donné la seule chose qu'il possédait : sa propre liberté. Il s'est livré à ceux qui tenaient sa mère, pour qu'elle, un jour, soit libre. Et pendant des années, captif parmi eux, il a appris une seule chose, jusqu'à la maîtriser mieux que personne — la guerre. »",
+        "Le temps passe sur le visage du garçon qui devient un homme, les armes à la main. Puis : une route, au petit matin. Une femme libérée qui marche — et, à côté d'elle, lui, libre aussi, enfin.",
+        "« Sept ans, sept mois, sept jours, dit la tradition. Sept ans de servitude, pour en sortir sa mère. Le plus grand roi que cette terre ait porté a commencé comme ça : un enfant qui a donné sa liberté pour celle de sa maman. »",
+    ] },
+    { title: "3 — Les forgerons", image: "/images/resistance/res-t5-03.webp", paragraphs: [
+        "Des terres malinké, des chefferies dispersées. L'homme — Samory, désormais — passe de l'une à l'autre ; elles se rangent derrière lui. Une bannière. Une capitale qui s'élève : Bissandougou.",
+        "« Libre, il n'est pas rentré se reposer. Les Malinké, héritiers du grand Mali, vivaient éparpillés, sans chef. Lui les a rassemblés, par la parole et par les armes, et il s'est fait Almamy — chef des croyants. Un empire est né : le Wassoulou. »",
+        "Une armée défile : uniformes jaunes, rangs par quatre, en silence. Puis, l'image-clé — une forge. Des marteaux, du feu, des hommes penchés sur des canons de fusils.",
+        "« Et il a compris une chose que personne n'avait osé : pour ne pas dépendre des armes des autres, il fallait les fabriquer soi-même. Dans ses forges, ses artisans ont appris à faire des fusils — jusqu'à des fusils qui tiraient dix coups, copiés sur ceux des Anglais. »",
+        "Gros plan : un forgeron tend un fusil neuf, encore chaud, à un soldat. Le soldat l'épaule.",
+        "« Un royaume d'Afrique qui forgeait ses propres fusils à répétition, il y a cent quarante ans. Pendant que d'autres attendaient qu'on veuille bien leur en vendre, lui, il les faisait. »",
+    ] },
+    { title: "4 — Vingt ans, et le dernier matin", image: "/images/resistance/res-t5-04.webp", paragraphs: [
+        "Une plaine près d'un fleuve. Deux armées. Le choc. La fumée.",
+        "« Quand les colonnes sont venues, il ne les a pas laissées faire. Vingt ans. Vingt ans de guerre. La première grande bataille, au bord du Niger, il l'a tenue. »",
+        "Les colonnes avancent quand même ; une capitale brûle. Puis un choix terrible : Samory, devant son peuple, ordonne — et c'est sa propre terre qu'on incendie derrière eux, tandis qu'une marée humaine s'ébranle vers l'est.",
+        "« Mais ils étaient plus nombreux, mieux ravitaillés. Alors il a fait le choix le plus dur : plutôt que de livrer son peuple, il a brûlé sa propre terre pour ne rien laisser à l'envahisseur, et il a emmené tout un peuple vers l'est, en marchant, en se battant, pendant des années. »",
+        "Une carte, le soir. Des lumières s'éteignent une à une, tout autour de lui.",
+        "« Et autour de lui, les grands royaumes tombaient l'un après l'autre. La côte, déjà soumise. Le Fouta, brisé. Et les derniers empires qui auraient pu lui prêter main-forte — au nord, à l'est — s'effondraient à leur tour. Le Wassoulou restait le dernier grand État debout. Et Samory, seul devant tout. »",
+        "Guélémou, à l'aube. Un campement endormi. Un homme âgé, assis, lit le Coran. Des soldats surgissent, l'encerclent. Ses gardes portent la main aux armes — il lève une main, lentement : non.",
+        "« Le 29 septembre 1898, au petit matin, on l'a surpris à Guélémou, alors qu'il lisait le Coran. Ses hommes ont voulu se battre. Il leur a ordonné de ne pas tirer — pour qu'on ne les massacre pas. Le dernier roi se rendait debout, sans faire mourir les siens pour rien. »",
+        "Un bateau, un fleuve inconnu, une cabane d'exil. Un vieil homme qui regarde au loin. Fondu.",
+        "« On l'a déporté très loin, au Gabon. Il y est mort, en exil, deux ans plus tard. Et ce matin-là, à Guélémou, ce n'est pas seulement un homme qu'on avait pris : c'était le dernier grand royaume. Ailleurs, dans la forêt, dans les zaouïas, quelques-uns résistaient encore, seuls, pour quelques années. Mais le temps des rois était fini. »",
+    ] },
+    { title: "5 — Ils ont tous perdu", image: "/images/resistance/res-t5-05.webp", paragraphs: [
+        "La classe, silencieuse. L'écran s'éteint. Personne ne bouge. Ils ont filmé cinq histoires — et les cinq finissent de la même façon : par une chute.",
+        "— Ils ont tous perdu, dit Ama à voix basse.",
+        "Un silence. Personne ne la contredit. Personne ne trouve quoi dire.",
+        "Fanta regarde la carte au mur — pleine, maintenant : la côte, le Fouta, la foi, la forêt, le centre. Tout un pays. Et pas un seul de ces hommes n'a tenu.",
+        "Salif, dans son coin, ne dit rien. Il ne range même pas ses affaires. Il les regarde encaisser — et il les laisse. Il sait qu'il faut passer par là.",
+        "Dehors, la nuit est tombée. Personne ne s'en va. Noir.",
+    ] },
+    ],
+  },
+
+  en: {
+    lang: "en", dir: "ltr", label: "English",
+    bookTitle: "Resistance — The Last King",
+    sections: [
+    { title: "1 — The Centre of the Map", image: "/images/resistance/res-t5-01.webp", paragraphs: [
+        "The studio, the eve of the end-of-year show. Everywhere, months of work: Ama's drawings, storyboards, and on the wall, the map of Guinea — the coast, the Fouta, the forest, all filled in. In the middle, a large zone left blank. The marker is in Fanta's hand, no longer in Salif's. Salif sits apart, almost a spectator.",
+        "\"Only the centre is left. The biggest,\" says Fanta before the empty zone.",
+        "\"Samory Touré. 'His capture, in 1898, completes the conquest.' He's the last one,\" reads Hugo.",
+        "\"The last? Wait. The forest we filmed — Zégbéla, Kissi Kaba — it holds out until 1912. And the Wali of Goumba dies in 1911. After Samory. By thirteen years,\" Théo points out.",
+        "\"… Exactly,\" Hugo rereads, correcting himself. \"That's what the books repeat: 'Samory falls, everything stops.' But it's false. Resistance does not die with him.\"",
+        "\"So what was 'the last'?\" asks Ama.",
+        "\"The last great kingdom,\" Fanta understands, slowly. \"The last army able to stand up to them. After him, no more state to resist — just villages, saints, lone men, going out one by one. That's our film.\"",
+        "They turn to Salif. Usually, it is he who sets things off. He does not move.",
+        "\"It's your film. The last one. Make it well.\"",
+        "Fanta sets down the marker, opens the file. On the screen, a name, a date, an immense map.",
+    ] },
+    { title: "2 — Seven Years, Seven Months, Seven Days", image: "/images/resistance/res-t5-02.webp", paragraphs: [
+        "A village in the south-east, around 1848. Calm — then a raid. Horsemen, dust. And, dragged off in the tumult, in chains, a woman who turns one last time toward her home.",
+        "\"Before the empire, before the rifles, before everything: a boy, and his mother. Her name was Sokhona. One day, men took her in a raid, and reduced her to slavery.\"",
+        "A teenager runs after the column, stops, powerless. He has nothing — no gold, no army. Nothing but one thing to offer: himself.",
+        "\"The boy had nothing to buy her back with. So he gave the only thing he possessed: his own freedom. He handed himself over to those who held his mother, so that she, one day, might be free. And for years, captive among them, he learned one single thing, until he mastered it better than anyone — war.\"",
+        "Time passes over the face of the boy becoming a man, weapons in hand. Then: a road, at first light. A freed woman walking — and, beside her, he, free too, at last.",
+        "\"Seven years, seven months, seven days, says the tradition. Seven years of servitude, to get his mother out. The greatest king this land has borne began like that: a child who gave his freedom for his mother's.\"",
+    ] },
+    { title: "3 — The Blacksmiths", image: "/images/resistance/res-t5-03.webp", paragraphs: [
+        "Malinké lands, scattered chieftaincies. The man — Samory now — moves from one to another; they fall in behind him. A banner. A capital rising: Bissandougou.",
+        "\"Free, he did not go back to rest. The Malinké, heirs of the great Mali, lived scattered, without a chief. He gathered them, by the word and by arms, and made himself Almamy — leader of the believers. An empire was born: the Wassoulou.\"",
+        "An army parades: yellow uniforms, ranks of four, in silence. Then, the key image — a forge. Hammers, fire, men bent over rifle barrels.",
+        "\"And he understood something no one had dared: to not depend on the weapons of others, you had to make them yourself. In his forges, his craftsmen learned to make rifles — even rifles that fired ten shots, copied from the English.\"",
+        "Close-up: a blacksmith holds out a new rifle, still warm, to a soldier. The soldier shoulders it.",
+        "\"An African kingdom that forged its own repeating rifles, a hundred and forty years ago. While others waited for someone to be willing to sell them some, he made them.\"",
+    ] },
+    { title: "4 — Twenty Years, and the Last Morning", image: "/images/resistance/res-t5-04.webp", paragraphs: [
+        "A plain near a river. Two armies. The clash. The smoke.",
+        "\"When the columns came, he did not let them do as they pleased. Twenty years. Twenty years of war. The first great battle, on the bank of the Niger, he held it.\"",
+        "The columns advance anyway; a capital burns. Then a terrible choice: Samory, before his people, gives the order — and it is his own land that is set ablaze behind them, while a human tide moves off toward the east.",
+        "\"But they were more numerous, better supplied. So he made the hardest choice: rather than hand over his people, he burned his own land to leave nothing to the invader, and he led a whole people toward the east, marching, fighting, for years.\"",
+        "A map, in the evening. Lights go out one by one, all around him.",
+        "\"And around him, the great kingdoms fell one after another. The coast, already subdued. The Fouta, broken. And the last empires that might have lent him a hand — to the north, to the east — collapsed in their turn. The Wassoulou remained the last great state standing. And Samory, alone before everything.\"",
+        "Guélémou, at dawn. A sleeping camp. An old man, seated, reads the Quran. Soldiers burst in, surround him. His guards reach for their weapons — he raises a hand, slowly: no.",
+        "\"On the 29th of September 1898, at first light, they took him by surprise at Guélémou, as he was reading the Quran. His men wanted to fight. He ordered them not to fire — so that they would not be massacred. The last king surrendered standing, without letting his people die for nothing.\"",
+        "A boat, an unknown river, a hut of exile. An old man looking into the distance. Fade.",
+        "\"They deported him very far, to Gabon. He died there, in exile, two years later. And that morning, at Guélémou, it was not only a man they had taken: it was the last great kingdom. Elsewhere, in the forest, in the zawiyas, a few still resisted, alone, for a few years. But the time of kings was over.\"",
+    ] },
+    { title: "5 — They All Lost", image: "/images/resistance/res-t5-05.webp", paragraphs: [
+        "The class, silent. The screen goes dark. No one moves. They have filmed five stories — and the five end the same way: in a fall.",
+        "\"They all lost,\" Ama says in a low voice.",
+        "A silence. No one contradicts her. No one finds anything to say.",
+        "Fanta looks at the map on the wall — full now: the coast, the Fouta, the faith, the forest, the centre. A whole country. And not one of these men held out.",
+        "Salif, in his corner, says nothing. He does not even pack his things. He watches them take the blow — and he lets them. He knows you have to pass through this.",
+        "Outside, night has fallen. No one leaves. Black.",
+    ] },
+    ],
+  },
+
+  ar: {
+    lang: "ar", dir: "rtl", label: "العربية",
+    bookTitle: "المقاومة — الملك الأخير",
+    sections: [
+    { title: "1 — مركز الخريطة", image: "/images/resistance/res-t5-01.webp", paragraphs: [
+        "الورشة، عشيّة حفل نهاية العام. في كلّ مكان، شهور من العمل: رسوم آما، لوحات قصصيّة، وعلى الجدار، خريطة غينيا — الساحل، الفوتا، الغابة، كلّها ممتلئة. في الوسط، منطقةٌ كبيرة بقيت بيضاء. القلم في يد فانتا، لا في يد سليف. يجلس سليف منزويًا، شبه مُشاهد.",
+        "— لم يبقَ سوى الوسط. الأكبر، تقول فانتا أمام المنطقة الفارغة.",
+        "— ساموري توري. «أَسْرُه، في 1898، يُتمّ الغزو.» إنه هو، الأخير، يقرأ هوغو.",
+        "— الأخير؟ مهلًا. الغابة التي صوّرناها — زيغبيلا، كيسي كابا — تصمد حتى 1912. ووليّ غومبا يموت في 1911. بعد ساموري. بثلاث عشرة سنة، يلاحظ ثيو.",
+        "— … بالضبط، يُعيد هوغو القراءة، مصحّحًا نفسه. هذا ما تكرّره الكتب: «ساموري يسقط، كلّ شيء يتوقّف.» لكنه خطأ. المقاومة لا تموت معه.",
+        "— إذن ماذا كان «الأخير»؟ تسأل آما.",
+        "— آخر مملكة كبرى، تفهم فانتا، ببطء. آخر جيشٍ قادر على الصمود. بعده، لا دولة لتقاوم — مجرّد قرًى، وأولياء، ورجالٍ وحيدين، ينطفئون واحدًا تلو الآخر. هذا هو فيلمنا.",
+        "يلتفتون نحو سليف. عادةً، هو من يُطلق. لا يتحرّك.",
+        "— إنه فيلمكم. الأخير. أتقنوه.",
+        "تُعيد فانتا القلم، تفتح الملفّ. على الشاشة، اسم، تاريخ، خريطةٌ هائلة.",
+    ] },
+    { title: "2 — سبع سنوات، سبعة أشهر، سبعة أيّام", image: "/images/resistance/res-t5-02.webp", paragraphs: [
+        "قريةٌ في الجنوب الشرقيّ، نحو 1848. الهدوء — ثم غارة. فرسان، غبار. وفي خضمّ الزحام، مكبّلةً بالسلاسل، امرأةٌ تلتفت مرّةً أخيرة نحو بيتها.",
+        "«قبل الإمبراطوريّة، قبل البنادق، قبل كلّ شيء: صبيّ، وأمّه. كان اسمها سوخونا. ذات يوم، أخذها رجالٌ في غارة، واستعبدوها.»",
+        "مراهقٌ يركض خلف القافلة، يتوقّف، عاجزًا. لا يملك شيئًا — لا ذهبًا، لا جيشًا. لا شيء يقدّمه سوى شيءٍ واحد: نفسه.",
+        "«لم يكن لدى الصبيّ ما يفتديها به. فأعطى الشيء الوحيد الذي يملكه: حرّيّته هو. سلّم نفسه لمن يحتجزون أمّه، كي تكون هي، يومًا ما، حرّة. وسنواتٍ، أسيرًا بينهم، تعلّم شيئًا واحدًا، حتى أتقنه أكثر من أيّ أحد — الحرب.»",
+        "يمرّ الزمن على وجه الصبيّ الذي يصير رجلًا، والسلاح في يده. ثم: طريق، عند الفجر. امرأةٌ مُحرَّرة تمشي — وإلى جانبها، هو، حرٌّ أيضًا، أخيرًا.",
+        "«سبع سنوات، سبعة أشهر، سبعة أيّام، تقول الرواية. سبع سنوات من العبوديّة، لإخراج أمّه. أعظم ملكٍ حملته هذه الأرض بدأ هكذا: طفلٌ أعطى حرّيّته من أجل حرّيّة أمّه.»",
+    ] },
+    { title: "3 — الحدّادون", image: "/images/resistance/res-t5-03.webp", paragraphs: [
+        "أراضٍ مالينكيّة، مشيخاتٌ متفرّقة. الرجل — ساموري، الآن — ينتقل من واحدةٍ إلى أخرى؛ تصطفّ خلفه. رايةٌ. عاصمةٌ تنهض: بيساندوغو.",
+        "«حرًّا، لم يعد ليستريح. المالينكي، ورثة مالي العظيمة، كانوا يعيشون متفرّقين، بلا زعيم. هو جمعهم، بالكلمة وبالسلاح، وجعل نفسه إمامًا — زعيم المؤمنين. وُلِدت إمبراطوريّة: الواسولو.»",
+        "جيشٌ يستعرض: بزّاتٌ صفراء، صفوفٌ من أربعة، في صمت. ثم، الصورة المفتاح — مصهر. مطارق، نار، رجالٌ منحنون على سبطانات بنادق.",
+        "«وفهم شيئًا لم يجرؤ عليه أحد: كي لا يعتمد على أسلحة الآخرين، كان عليه أن يصنعها بنفسه. في مصاهره، تعلّم حرفيّوه صنع البنادق — حتى بنادق تُطلِق عشر طلقات، منقولةٌ عن بنادق الإنجليز.»",
+        "لقطةٌ مقرّبة: حدّادٌ يمدّ بندقيّةً جديدة، ما زالت ساخنة، لجنديّ. يُسنِدها الجنديّ إلى كتفه.",
+        "«مملكةٌ أفريقيّة كانت تصهر بنادقها المتكرّرة بنفسها، قبل مئةٍ وأربعين سنة. بينما كان آخرون ينتظرون أن يُرضى ببيعها لهم، هو، كان يصنعها.»",
+    ] },
+    { title: "4 — عشرون سنة، والصباح الأخير", image: "/images/resistance/res-t5-04.webp", paragraphs: [
+        "سهلٌ قرب نهر. جيشان. الصدمة. الدخان.",
+        "«حين جاءت القوافل، لم يتركها تفعل ما تشاء. عشرون سنة. عشرون سنة من الحرب. أوّل معركةٍ كبرى، عند ضفّة النيجر، صمد فيها.»",
+        "تتقدّم القوافل رغم ذلك؛ تحترق عاصمة. ثم خيارٌ رهيب: ساموري، أمام شعبه، يأمر — وأرضه هو ما يُحرَق خلفهم، بينما يتحرّك مدٌّ بشريّ نحو الشرق.",
+        "«لكنهم كانوا أكثر عددًا، وأفضل تموينًا. فاتّخذ الخيار الأصعب: بدل أن يُسلّم شعبه، أحرق أرضه هو كي لا يترك شيئًا للغازي، وقاد شعبًا بأكمله نحو الشرق، يمشي، يقاتل، سنواتٍ طويلة.»",
+        "خريطة، مساءً. تنطفئ أضواءٌ واحدًا تلو الآخر، من حوله.",
+        "«ومن حوله، كانت الممالك الكبرى تسقط واحدةً تلو الأخرى. الساحل، خاضعٌ سلفًا. الفوتا، محطّم. وآخر الإمبراطوريّات التي كان يمكن أن تمدّ له يد العون — في الشمال، في الشرق — تنهار بدورها. بقي الواسولو آخر دولةٍ كبرى صامدة. وساموري، وحده في مواجهة كلّ شيء.»",
+        "غيليمو، عند الفجر. مخيّمٌ نائم. رجلٌ مسنّ، جالسًا، يقرأ القرآن. يندفع جنود، يحيطون به. يمدّ حرّاسه أيديهم إلى السلاح — يرفع يدًا، ببطء: لا.",
+        "«في التاسع والعشرين من سبتمبر 1898، عند الفجر، باغتوه في غيليمو، وهو يقرأ القرآن. أراد رجاله أن يقاتلوا. أمرهم ألّا يُطلقوا النار — كي لا يُذبَحوا. كان الملك الأخير يستسلم واقفًا، دون أن يُميت أهله عبثًا.»",
+        "قارب، نهرٌ مجهول، كوخ منفى. رجلٌ عجوز ينظر إلى البعيد. تلاشٍ.",
+        "«رحّلوه بعيدًا جدًّا، إلى الغابون. مات هناك، في المنفى، بعد سنتين. وذلك الصباح، في غيليمو، لم يكن رجلًا فقط ما أُخِذ: كانت آخر مملكةٍ كبرى. في أماكن أخرى، في الغابة، في الزوايا، كان بعضهم ما زالوا يقاومون، وحيدين، لسنواتٍ قليلة. لكنّ زمن الملوك كان قد انتهى.»",
+    ] },
+    { title: "5 — خسروا جميعًا", image: "/images/resistance/res-t5-05.webp", paragraphs: [
+        "الصفّ، صامت. تنطفئ الشاشة. لا أحد يتحرّك. صوّروا خمس حكايات — والخمس تنتهي بالطريقة ذاتها: بسقوط.",
+        "— خسروا جميعًا، تقول آما بصوتٍ خفيض.",
+        "صمت. لا أحد يناقضها. لا أحد يجد ما يقوله.",
+        "تنظر فانتا إلى الخريطة على الجدار — ممتلئةً الآن: الساحل، الفوتا، الإيمان، الغابة، الوسط. بلدٌ بأكمله. ولا واحدٌ من هؤلاء الرجال صمد.",
+        "سليف، في ركنه، لا يقول شيئًا. لا يجمع حتى أغراضه. ينظر إليهم يتلقّون الضربة — ويتركهم. يعلم أنّ لا بدّ من المرور بهذا.",
+        "في الخارج، حلّ الليل. لا أحد يرحل. سواد.",
+    ] },
+    ],
+  },
+
+  zh: {
+    lang: "zh", dir: "ltr", label: "中文",
+    bookTitle: "抵抗 — 最后的国王",
+    sections: [
+    { title: "1 — 地图的中心", image: "/images/resistance/res-t5-01.webp", paragraphs: [
+        "工作室，年终演出的前夜。到处是几个月的劳作：阿玛的画、分镜，还有墙上那幅几内亚地图——海岸、富塔、森林，全填满了。正中间，一大片留白的区域。马克笔在法塔手里，不再在萨利夫手里。萨利夫坐在一旁，几乎像个观众。",
+        "——只剩下中心了。最大的那块，法塔站在那片空白前说。",
+        "——萨摩里·杜尔。「1898年他的被俘，完成了征服。」就是他，最后一个，雨果念道。",
+        "——最后一个？等等。我们拍的那片森林——泽格贝拉、基西·卡巴——它坚持到了1912年。而古姆巴的瓦利死于1911年。在萨摩里之后。晚了十三年，泰奥指出。",
+        "——……没错，雨果重读，纠正自己。书上反复说的是：「萨摩里一倒，一切就结束了。」但这是错的。抵抗并没有随他而死。",
+        "——那「最后一个」是什么意思？阿玛问。",
+        "——最后一个大王国，法塔缓缓地明白过来。最后一支能够抗衡的军队。在他之后，再没有国家来抵抗——只剩村庄、圣人、孤独的人，一个接一个地熄灭。这就是我们的片子。",
+        "他们转向萨利夫。平常，是他来起头。他没有动。",
+        "——这是你们的片子。最后一部。把它做好。",
+        "法塔放下马克笔，打开文件夹。屏幕上，一个名字，一个日期，一幅浩大的地图。",
+    ] },
+    { title: "2 — 七年，七个月，七天", image: "/images/resistance/res-t5-02.webp", paragraphs: [
+        "东南方的一个村庄，约1848年。平静——然后是一场劫掠。骑兵，尘土。而在混乱中被拖走的、戴着锁链的，是一个女人，她最后一次回头望向自己的家。",
+        "「在帝国之前，在枪支之前，在一切之前：一个男孩，和他的母亲。她的名字叫索霍娜。一天，一些人在劫掠中抓走了她，把她变成了奴隶。」",
+        "一个少年追在纵队后面，停住，无能为力。他什么都没有——没有金子，没有军队。能献出的只有一样东西：他自己。",
+        "「男孩没有什么可以把她赎回来。于是他献出了自己拥有的唯一一样东西：他自己的自由。他把自己交给了扣押他母亲的人，好让她，有一天，能够自由。而许多年里，作为他们中间的俘虏，他只学了一样东西，直到比谁都精通——战争。」",
+        "时间在男孩成长为男人的脸上流过，武器握在手中。然后：一条路，在天刚亮时。一个被释放的女人在走——而在她身旁，是他，也自由了，终于。",
+        "「七年，七个月，七天，传说这样讲。七年的奴役，为了把母亲救出来。这片土地所孕育的最伟大的国王，是这样开始的：一个为母亲的自由献出自己自由的孩子。」",
+    ] },
+    { title: "3 — 铁匠们", image: "/images/resistance/res-t5-03.webp", paragraphs: [
+        "马林凯人的土地，散落的酋邦。这个人——如今是萨摩里——从一个走到另一个；它们归到他身后。一面旗帜。一座崛起的都城：比桑杜古。",
+        "「重获自由后，他没有回去歇息。马林凯人，伟大马里的后裔，散居各处，没有首领。他把他们聚拢起来，靠言语，也靠刀枪，并自立为伊玛目——信士的首领。一个帝国诞生了：瓦苏卢。」",
+        "一支军队列队而过：黄色军服，四人一排，鸦雀无声。然后，是那个关键的画面——一座锻炉。铁锤，火焰，俯身于枪管之上的人们。",
+        "「而他明白了一件没有人敢想的事：为了不依赖别人的武器，必须自己造。在他的锻炉里，他的工匠学会了造枪——甚至能打十发的枪，仿照英国人的造。」",
+        "特写：一个铁匠把一支还发烫的新枪递给一名士兵。士兵把它抵在肩上。",
+        "「一个自己锻造连发枪的非洲王国，在一百四十年前。当别人还在等着有人肯卖给他们时，他，自己造。」",
+    ] },
+    { title: "4 — 二十年，和最后一个清晨", image: "/images/resistance/res-t5-04.webp", paragraphs: [
+        "一片靠河的平原。两支军队。冲撞。硝烟。",
+        "「当纵队来时，他没有任由它们摆布。二十年。二十年的战争。第一场大战，在尼日尔河畔，他守住了。」",
+        "纵队仍然推进；一座都城燃烧。然后是一个可怕的抉择：萨摩里，在他的人民面前，下了令——而被烧的，是他们身后他自己的土地，与此同时，一股人潮朝东方涌动。",
+        "「但他们人更多，补给更足。于是他做出了最艰难的抉择：与其交出他的人民，他烧掉自己的土地，好不给入侵者留下任何东西，并带着整整一个民族朝东方而去，一路行军，一路作战，许多年。」",
+        "一幅地图，在夜里。灯火一盏接一盏熄灭，在他四周。",
+        "「而在他周围，那些大王国一个接一个地倒下。海岸，早已臣服。富塔，被击碎。而那些本可以助他一臂之力的最后几个帝国——在北方、在东方——也相继崩塌。瓦苏卢成了最后一个屹立的大国。而萨摩里，独自面对一切。」",
+        "盖莱穆，黎明时分。一座沉睡的营地。一个上了年纪的人，坐着，读《古兰经》。士兵们冲了进来，包围了他。他的卫兵伸手去拿武器——他缓缓抬起一只手：不。",
+        "「1898年9月29日，天刚亮，他们在盖莱穆出其不意地抓住了他，那时他正在读《古兰经》。他的人想要战斗。他命令他们不要开枪——好让他们不被屠杀。最后的国王站着投降，没有让他的人白白送命。」",
+        "一条船，一条陌生的河，一间流放的小屋。一个老人望向远方。渐隐。",
+        "「他们把他流放到很远，到加蓬。他死在那里，流放中，两年之后。而那个清晨，在盖莱穆，他们抓走的不只是一个人：那是最后一个大王国。在别的地方，在森林里，在扎维耶里，还有一些人仍在抵抗，孤独地，再坚持几年。但国王的时代，结束了。」",
+    ] },
+    { title: "5 — 他们全都输了", image: "/images/resistance/res-t5-05.webp", paragraphs: [
+        "教室，一片寂静。屏幕暗下去。没有人动。他们拍了五个故事——而这五个，结局都一样：以陨落收场。",
+        "——他们全都输了，阿玛低声说。",
+        "一阵沉默。没有人反驳她。没有人找得出话来说。",
+        "法塔看着墙上的地图——如今填满了：海岸、富塔、信仰、森林、中心。一整个国家。而这些人里，没有一个守住了。",
+        "萨利夫，在他的角落里，什么也没说。他甚至没有收拾东西。他看着他们承受这一击——而他由着他们。他知道，这一关非过不可。",
+        "外面，夜幕已经降临。没有人离开。黑。",
+    ] },
+    ],
+  },
+};

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BookOpen, Layers, User, ArrowDownAZ } from "lucide-react";
+import { BookOpen, Layers, User, ArrowDownAZ, Compass, Sparkles, Shuffle } from "lucide-react";
 import { BOOKS } from "../data/books";
 import { SERIES } from "../data/series";
 import { getCredits } from "../data/credits";
@@ -12,8 +12,9 @@ const BANDS = [
   { key: "Passage", label: "Pati Passage", age: "13–15 ans" },
 ];
 
-type Mode = "age" | "auteur" | "az";
+type Mode = "themes" | "age" | "auteur" | "az";
 const MODES: { key: Mode; label: string; icon: typeof Layers }[] = [
+  { key: "themes", label: "Explorer", icon: Compass },
   { key: "age", label: "Par âge", icon: Layers },
   { key: "auteur", label: "Par auteur", icon: User },
   { key: "az", label: "A–Z", icon: ArrowDownAZ },
@@ -33,8 +34,88 @@ const serieCard = (s: (typeof SERIES)[number]): Card => ({
   kind: "serie", to: s.to, episodes: s.episodes,
 });
 
+/* ── Entrées unifiées (livre + série) avec un "blob" de recherche pour les thèmes ── */
+type Entry = { card: Card; blob: string; nouveau: boolean; isSerie: boolean };
+
+const ENTRIES: Entry[] = [
+  ...BOOKS.map((b) => ({
+    card: bookCard(b),
+    blob: `${b.title} ${b.description} ${((b as { keywords?: string[] }).keywords || []).join(" ")}`.toLowerCase(),
+    nouveau: !!(b as { nouveau?: boolean }).nouveau,
+    isSerie: false,
+  })),
+  ...SERIES.map((s) => ({
+    card: serieCard(s),
+    blob: `${s.title} ${s.description}`.toLowerCase(),
+    nouveau: !!(s as { nouveau?: boolean }).nouveau,
+    isSerie: true,
+  })),
+];
+
+/* ── Rangées thématiques : se peuplent toutes seules depuis les mots-clés.
+      Une rangée vide ne s'affiche pas. Un même livre peut vivre dans plusieurs rangées. ── */
+const THEMES: { key: string; emoji: string; label: string; note: string; tokens: string[] }[] = [
+  {
+    key: "heros", emoji: "🦁", label: "Héros & figures vraies", note: "Des vies réelles, racontées pour grandir.",
+    tokens: ["naby", "sékou touré", "sekou toure", "takana", "jeanne martin", "fodéba", "fodeba", "hafia",
+      "électroman", "electroman", "château d'eau", "chateau", "ibrahima", "biographie", "koumanthio",
+      "lydie", "fodé momo", "mory kanté", "petit-sory", "petit sory", "empereur", "soundiata", "rêver", "rever plus grand"],
+  },
+  {
+    key: "resistance", emoji: "✊", label: "La Guinée qui résiste", note: "Le courage de dire non, hier et aujourd'hui.",
+    tokens: ["résistance", "resistance", "samory", "alpha yaya", "dinah salifou", "bôkar", "bocar biro",
+      "kissi kaba", "zégbéla", "zegbela", "oumar tall", "wali", "1958", "indépendance", "independance", "colonisation", "nalous"],
+  },
+  {
+    key: "contes", emoji: "🌳", label: "Contes & sagesse", note: "Fables, secrets et leçons d'autrefois.",
+    tokens: ["conte", "fable", "sagesse", "cola", "fendani", "marmite", "forêt", "foret", "secret", "tradition", "masque"],
+  },
+  {
+    key: "apprendre", emoji: "🔬", label: "Découvrir le vrai monde", note: "Sciences, nature et vie de tous les jours.",
+    tokens: ["documentaire", "chimpanzés", "chimpanzes", "primates", "science", "nature", "eau", "boffa", "macenta",
+      "marché", "marche", "compter", "aliments", "environnement", "préfecture", "prefecture", "paradis", "simandou", "odd"],
+  },
+  {
+    key: "arts", emoji: "🎵", label: "Arts, musique & culture", note: "Chants, instruments et création.",
+    tokens: ["musique", "reggae", "takana", "kora", "danse", "maître d'école", "maitre d'ecole", "fodéba", "chant", "art", "bembeya"],
+  },
+  {
+    key: "ville", emoji: "🏙️", label: "Villes & citoyenneté", note: "Vivre ensemble, ici, dans nos quartiers.",
+    tokens: ["conakry", "ville", "propre", "citoyen", "quartier", "marché", "coléah", "coleah", "kindia", "boffa"],
+  },
+  {
+    key: "imagiers", emoji: "🔤", label: "Imagiers & premiers mots", note: "Pour les tout-petits : lettres, couleurs, animaux.",
+    tokens: ["imagier", "n'ko", "nko", "adlam", "koré", "kore", "alphabet", "couleurs", "animaux", "corps", "fruits", "premiers mots", "mômes", "momes"],
+  },
+];
+
+/* ── PRNG déterministe (mulberry32) → mélange stable sur la semaine, varié d'une semaine à l'autre ── */
+function seeded(seed: number) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function shuffleSeeded<T>(arr: T[], seed: number): T[] {
+  const a = [...arr]; const rnd = seeded(seed);
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+const WEEK = Math.floor(Date.now() / 6048e5); // change chaque semaine
+
+const matchTheme = (tokens: string[], cap = 12): Card[] =>
+  ENTRIES.filter((e) => tokens.some((t) => e.blob.includes(t))).slice(0, cap).map((e) => e.card);
+
 export default function Catalogue() {
-  const [mode, setMode] = useState<Mode>("age");
+  const [mode, setMode] = useState<Mode>("themes");
+
+  /* Rangées dérivées */
+  const nouveautes = ENTRIES.filter((e) => e.nouveau).map((e) => e.card);
+  const seriesCards = SERIES.map(serieCard);
+  // « À redécouvrir » : on pioche parmi les livres NON nouveaux, mélange hebdo, 8 titres.
+  const redecouvrir = shuffleSeeded(ENTRIES.filter((e) => !e.nouveau && !e.isSerie), WEEK).slice(0, 8).map((e) => e.card);
 
   const byAuthor = () => {
     const groups: Record<string, Card[]> = {};
@@ -44,6 +125,19 @@ export default function Catalogue() {
   };
 
   const azList: Card[] = [...BOOKS.map(bookCard), ...SERIES.map(serieCard)].sort((a, b) => a.title.localeCompare(b.title, "fr"));
+
+  const Row = ({ emoji, label, note, books }: { emoji?: string; label: string; note?: string; books: Card[] }) => {
+    if (!books.length) return null;
+    return (
+      <div className="mb-10">
+        <div className="flex items-baseline gap-2 mb-1">
+          <h2 className="font-display font-semibold text-[#0D2B1A] text-xl md:text-2xl">{emoji ? `${emoji} ` : ""}{label}</h2>
+        </div>
+        {note && <p className="text-sm font-semibold text-[#5a6b62] mb-4">{note}</p>}
+        <BookGrid books={books} />
+      </div>
+    );
+  };
 
   return (
     <div className="bg-[#FFF6E7] min-h-[60vh]">
@@ -62,6 +156,18 @@ export default function Catalogue() {
             );
           })}
         </div>
+
+        {/* ── EXPLORER : rangées thématiques + rotation (le mode découverte) ── */}
+        {mode === "themes" && (
+          <>
+            <Row emoji="✨" label="Nouveautés" note="Tout juste arrivé dans la bibliothèque." books={nouveautes} />
+            <Row emoji="📚" label="Nos séries" note="Des sagas à suivre, épisode après épisode." books={seriesCards} />
+            <Row emoji="🔄" label="À redécouvrir" note="Des trésors du catalogue, remis en lumière chaque semaine." books={redecouvrir} />
+            {THEMES.map((t) => (
+              <Row key={t.key} emoji={t.emoji} label={t.label} note={t.note} books={matchTheme(t.tokens)} />
+            ))}
+          </>
+        )}
 
         {mode === "age" && BANDS.map((band) => {
           const list: Card[] = [

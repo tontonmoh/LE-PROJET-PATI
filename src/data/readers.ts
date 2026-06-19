@@ -2,7 +2,13 @@
 // Normalise les différents formats sources vers une structure commune,
 // consommée par le lecteur générique BookReaderML.
 import { CHATEAU, CHATEAU_LANGS } from "./chateau-ml";
-import { KOUMANTHIO_T1_ML } from "./koumanthio-t1-ml";
+import { RESISTANCE_T1_ML } from "./resistance-t1-ml";
+import { RESISTANCE_T2_ML } from "./resistance-t2-ml";
+import { RESISTANCE_T3_ML } from "./resistance-t3-ml";
+import { RESISTANCE_T4_ML } from "./resistance-t4-ml";
+import { RESISTANCE_T5_ML } from "./resistance-t5-ml";
+import { RESISTANCE_T6_ML } from "./resistance-t6-ml";
+import { KOUMANTHIO_ML } from "./koumanthio-ml";
 import { LAYE_ML } from "./laye-ml";
 import { DMBA_ML } from "./dmba-ml";
 import { BINTA_ML } from "./binta-ml";
@@ -133,7 +139,13 @@ function fromG2040(livre: any): { langs: string[]; books: Record<string, MLBook>
 }
 
 export const READERS: Record<string, MLReader> = {
-  "koumanthio-t1": { ...fromLaye(KOUMANTHIO_T1_ML), accent: "#2E4A6B" },
+  "resistance-t1": { ...fromLaye(RESISTANCE_T1_ML), accent: "#1B2A4A" },
+  "resistance-t2": { ...fromLaye(RESISTANCE_T2_ML), accent: "#1B2A4A" },
+  "resistance-t3": { ...fromLaye(RESISTANCE_T3_ML), accent: "#1B2A4A" },
+  "resistance-t4": { ...fromLaye(RESISTANCE_T4_ML), accent: "#1B2A4A" },
+  "resistance-t5": { ...fromLaye(RESISTANCE_T5_ML), accent: "#1B2A4A" },
+  "resistance-t6": { ...fromLaye(RESISTANCE_T6_ML), accent: "#1B2A4A" },
+  "koumanthio": { ...fromLaye(KOUMANTHIO_ML), accent: "#2E4A6B" },
   "chateau-eau": { ...fromChateau(CHATEAU), accent: "#3FB6E8" },
   "laye-kouroussa": { ...fromLaye(LAYE_ML), accent: "#0F6E56" },
   "sacree-dmba": { ...fromLaye(DMBA_ML), accent: "#FF6B4A" },

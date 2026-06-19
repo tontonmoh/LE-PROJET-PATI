@@ -1,0 +1,410 @@
+// « KOUMANTHIO, ENFANT DE TROUPE » — livre unique, Pati Passage (10-12 / tendance haute).
+// 14 doubles-pages. Héroïne : Koumanthio Diallo, de Labé (Fouta), élevée par Pati.
+// Arc : le Prytanée au pays (Camp Alpha Yaya Diallo / Simandou Academy), la lettre de l'aïeul,
+// et le choix de devenir grande SANS quitter son pays.
+// NB : la lettre d'Alpha Yaya (DP11) est une création fictive, présentée comme lettre de famille
+// — jamais donnée pour un document authentique. Prénoms et noms provisoires.
+// FR + EN + AR + ZH. (AR/ZH : relecture locuteur natif recommandée avant production.)
+
+import type { Lang } from "./series/taadidi";
+
+type RSection = { title: string; paragraphs: string[]; image?: string };
+type RBook = { lang: Lang; dir: "ltr" | "rtl"; label: string; bookTitle: string; sections: RSection[] };
+
+export const KOUMANTHIO_ML: Partial<Record<Lang, RBook>> = {
+  fr: {
+    lang: "fr", dir: "ltr", label: "Français",
+    bookTitle: "Koumanthio, enfant de troupe",
+    sections: [
+    { title: "Le rêve de Labé", image: "/images/koumanthio/koumanthio-01.webp", paragraphs: [
+        "À Labé, dans les hautes collines du Fouta, Koumanthio avait un rêve trop grand pour une si petite fille. Elle voulait monter. Servir. Devenir quelqu'un — pas pour elle, pour les siens.",
+        "Sa famille n'était pas riche. Mais Koumanthio était première partout : à l'école, on disait qu'elle avait « la tête solide ».",
+        "Le soir, elle regardait les avions très haut dans le ciel, et se demandait où ils allaient — et si, un jour, elle irait quelque part, elle aussi.",
+    ] },
+    { title: "L'ancienne règle", image: "/images/koumanthio/koumanthio-02.webp", paragraphs: [
+        "Autrefois, pour un enfant comme elle, un grand rêve n'avait qu'une seule porte — et elle était loin.",
+        "— Avant, dit un jour Pati, ceux qui voulaient devenir grands et qui en avaient les moyens partaient. De l'autre côté de la mer. Et ceux qui n'avaient pas les moyens… ceux-là rangeaient leur rêve dans un tiroir.",
+        "Pati pensait à un cousin parti des années plus tôt « pour réussir ». On ne l'avait jamais revu.",
+        "Koumanthio écoutait, et son rêve, dans sa poitrine, se faisait tout petit.",
+    ] },
+    { title: "La porte qui s'ouvre", image: "/images/koumanthio/koumanthio-03.webp", paragraphs: [
+        "Et puis une nouvelle courut jusque dans les collines : il existait désormais une école. Une vraie. Au pays. Une école qui prenait les meilleurs — riches ou pauvres — et les formait ici, sans qu'ils aient à partir.",
+        "Pour y entrer, il fallait être parmi les premiers au CEPE.",
+        "Koumanthio travailla comme jamais. Quand les résultats tombèrent, son nom était tout en haut : elle était présélectionnée pour descendre à Conakry, et passer le test du Prytanée.",
+        "Pour la première fois, le rêve avait une porte. Et la porte était à la maison.",
+    ] },
+    { title: "Pati et le paquet", image: "/images/koumanthio/koumanthio-04.webp", paragraphs: [
+        "La veille du départ, Pati prépara le petit sac. Elle y mit un foulard, un sachet de fonio, et une chose enveloppée dans un vieux linge.",
+        "— Qu'est-ce que c'est, Pati ?",
+        "— Une vieille lettre de famille, dit la grand-mère. Très vieille. Tu ne l'ouvriras pas maintenant. Tu l'ouvriras le jour où tu ne sauras plus quoi faire. Ce jour-là seulement.",
+        "Koumanthio rangea le paquet tout au fond de son sac, et n'y pensa plus.",
+    ] },
+    { title: "La grille", image: "/images/koumanthio/koumanthio-05.webp", paragraphs: [
+        "Conakry était bruyante, chaude, immense. Au bout du chemin se dressait une grille, et au-dessus, des lettres de fer :",
+        "CAMP ALPHA YAYA DIALLO.",
+        "À côté, un panneau plus neuf : Établissement du programme Simandou Academy.",
+        "— Alpha Yaya, murmura Koumanthio.",
+        "Pati lui avait raconté : un roi de Labé, autrefois, un homme qui n'avait pas voulu plier. Elle ne savait pas encore tout ce que ce nom avait à voir avec elle. Elle leva la tête, et elle entra.",
+    ] },
+    { title: "La chance saisie", image: "/images/koumanthio/koumanthio-06.webp", paragraphs: [
+        "Le test dura deux jours. Les présélectionnés de tout le pays étaient là — des enfants des villes, des villages, de partout.",
+        "Koumanthio respira, et travailla, comme elle savait faire.",
+        "Quand la liste finale parut, son nom y était. Elle était admise.",
+        "Une fille de Labé, sans fortune, venait d'entrer dans l'une des plus belles écoles du pays. Sans partir. Sans rien devoir à personne d'autre qu'à son travail.",
+    ] },
+    { title: "La vie", image: "/images/koumanthio/koumanthio-07.webp", paragraphs: [
+        "La vie au camp était droite et dure : le clairon avant le jour, le lit au carré, le pas qui claque.",
+        "Mais des enfants restent des enfants. Au quartier libre, il y avait Sèdjro le Béninois qui riait trop fort, une bande venue de partout, et un jeu de mains de Labé que Koumanthio leur apprit — clac, clac-clac, clac — qui, le soir, devenait le jeu de tout le monde.",
+        "Elle était fatiguée, souvent. Mais elle était à sa place. Et elle montait.",
+    ] },
+    { title: "Karim part", image: "/images/koumanthio/koumanthio-08.webp", paragraphs: [
+        "Il y avait aussi Karim, dont le père était « quelqu'un d'important ». Un matin, il annonça :",
+        "— Moi, je m'en vais. Mon père m'envoie étudier à l'étranger. Là-bas, c'est mieux.",
+        "Quelques-uns l'enviaient. Partir, après tout, c'était l'ancien rêve — celui des familles qui en avaient les moyens.",
+        "Koumanthio le regarda plier ses affaires, et ne dit rien. Elle, elle n'avait jamais eu ce choix-là.",
+        "Du moins, le croyait-elle.",
+    ] },
+    { title: "La lettre de l'oncle", image: "/images/koumanthio/koumanthio-09.webp", paragraphs: [
+        "Quelques semaines plus tard, une lettre arriva — pour elle.",
+        "Un oncle, parti depuis longtemps « réussir » de l'autre côté de la mer, avait entendu parler de la petite qui était première partout. Il proposait de la faire venir, chez lui. « Ici, écrivait-il, elle aura tout. Les meilleures écoles. Un avenir. »",
+        "À Labé, la famille n'en revenait pas. Une chance pareille ! Partir, comme les enfants des grands ! Même Pati se tut longtemps.",
+        "Et soudain, Koumanthio, elle aussi, eut un choix.",
+    ] },
+    { title: "Le doute", image: "/images/koumanthio/koumanthio-10.webp", paragraphs: [
+        "Alors le doute entra en elle et ne la lâcha plus.",
+        "Partir, c'était enfin avoir ce que les riches avaient toujours eu. C'était l'oncle, la mer, « tout ». Qui refuse une chose pareille ?",
+        "Mais rester… rester, c'était quoi, au juste ? Sa petite école au pays, contre le grand large ?",
+        "Elle ne savait plus. Le soir, elle n'arrivait plus à dormir. Et c'est là — le jour où elle ne savait plus quoi faire — qu'elle se souvint du paquet.",
+    ] },
+    { title: "La lettre", image: "/images/koumanthio/koumanthio-11.webp", paragraphs: [
+        "Le paquet de Pati ne contenait qu'une feuille, jaunie, plus vieille que tout ce que Koumanthio avait jamais touché. En haut, une écriture penchée :",
+        "« À ma mère, Koumanthio. »",
+        "C'était une lettre de l'aïeul. Du roi. Écrite, disait Pati, dans la terre lointaine où on l'avait emmené — et jamais arrivée jusqu'à elle.",
+        "Koumanthio lut, le cœur battant :",
+        "« Mère, on m'a arraché à notre terre, et je sais à présent que je n'y reviendrai pas vivant. Ce sable n'est pas le mien. Le vent, ici, ne porte pas l'odeur de nos collines. On peut me prendre le pays ; on ne peut pas me prendre le manque du pays.",
+        "Ne pleure pas trop. Mais souviens-toi de ceci, et dis-le à ceux qui viendront après moi : le plus grand des malheurs, ce n'est pas de rester petit chez soi. C'est de devenir grand ailleurs, loin de tout ce que l'on aime.",
+        "Si un jour un enfant de notre sang peut devenir grand sans qu'on l'oblige à partir — alors je n'aurai pas tout perdu.",
+        "Ton fils, qui regarde chaque soir du côté de la maison. »",
+    ] },
+    { title: "Le choix", image: "/images/koumanthio/koumanthio-12.webp", paragraphs: [
+        "Koumanthio replia la lettre, et longtemps ne bougea plus.",
+        "Elle comprit, enfin. L'aïeul, on l'avait forcé à partir ; il était devenu grand au loin, et il en était mort de chagrin. Lui n'avait pas eu le choix.",
+        "Elle, elle l'avait.",
+        "Rester, ce n'était pas se contenter de moins. C'était faire exactement ce que le roi, du fond de son exil, avait espéré pour ceux de son sang : devenir grande ici. Au pays. Sans qu'on l'y force, et sans qu'on la force à partir.",
+        "Au matin, elle écrivit deux lettres.",
+    ] },
+    { title: "L'oncle, sans jugement", image: "/images/koumanthio/koumanthio-13.webp", paragraphs: [
+        "La première était pour l'oncle.",
+        "Elle le remerciait du fond du cœur. Elle n'oubliait pas qu'à son époque à lui, partir avait été la seule porte ; qu'il était parti par courage, pas par fuite ; et qu'elle était fière de lui.",
+        "« Mais moi, écrivit-elle, j'ai une porte qu'on n'avait pas avant. Elle est ici. Je vais la prendre. »",
+        "Là-bas, l'oncle lut la lettre deux fois. Puis il sourit, tout seul, et répondit une seule ligne :",
+        "« Alors deviens grande chez toi, petite. Et rends le pays fier. »",
+    ] },
+    { title: "Grandir ici", image: "/images/koumanthio/koumanthio-14.webp", paragraphs: [
+        "La seconde lettre était pour Pati. Koumanthio n'y disait que trois mots :",
+        "J'ai compris. Je reste.",
+        "Les années passèrent. Koumanthio monta, comme elle l'avait rêvé — au pays, dans le camp qui portait le nom de son aïeul. Celui qu'on avait arraché à cette terre veillait, d'une certaine façon, sur celle qui avait choisi d'y rester.",
+        "Et quelque part, dans les collines de Labé, une très vieille femme gardait contre son cœur une lettre qui avait enfin trouvé sa Koumanthio.",
+        "On peut rêver grand. On peut devenir quelqu'un.",
+        "Sans jamais quitter son pays.",
+    ] },
+    ],
+  },
+
+  en: {
+    lang: "en", dir: "ltr", label: "English",
+    bookTitle: "Koumanthio, Child of the Troop",
+    sections: [
+    { title: "The Dream of Labé", image: "/images/koumanthio/koumanthio-01.webp", paragraphs: [
+        "In Labé, in the high hills of the Fouta, Koumanthio had a dream too big for such a little girl. She wanted to rise. To serve. To become someone — not for herself, for her own people.",
+        "Her family was not rich. But Koumanthio was first in everything: at school, they said she had \"a solid head.\"",
+        "In the evening, she watched the planes very high in the sky, and wondered where they were going — and whether, one day, she too would go somewhere.",
+    ] },
+    { title: "The Old Rule", image: "/images/koumanthio/koumanthio-02.webp", paragraphs: [
+        "In the old days, for a child like her, a great dream had only one door — and it was far away.",
+        "\"Before,\" Pati said one day, \"those who wanted to become great and who had the means left. To the other side of the sea. And those who did not have the means… those ones put their dream away in a drawer.\"",
+        "Pati was thinking of a cousin who had left years earlier \"to succeed.\" He had never been seen again.",
+        "Koumanthio listened, and her dream, in her chest, grew very small.",
+    ] },
+    { title: "The Door That Opens", image: "/images/koumanthio/koumanthio-03.webp", paragraphs: [
+        "And then a piece of news ran all the way up into the hills: there was now a school. A real one. In the country. A school that took the best — rich or poor — and trained them here, without their having to leave.",
+        "To get in, you had to be among the top in the CEPE.",
+        "Koumanthio worked as never before. When the results came, her name was right at the top: she was preselected to go down to Conakry, and sit the entrance test of the Prytanée.",
+        "For the first time, the dream had a door. And the door was at home.",
+    ] },
+    { title: "Pati and the Package", image: "/images/koumanthio/koumanthio-04.webp", paragraphs: [
+        "On the eve of the departure, Pati prepared the little bag. She put in a headscarf, a small pouch of fonio, and a thing wrapped in an old cloth.",
+        "\"What is it, Pati?\"",
+        "\"An old family letter,\" said the grandmother. \"Very old. You will not open it now. You will open it on the day you no longer know what to do. That day only.\"",
+        "Koumanthio tucked the package right at the bottom of her bag, and thought no more of it.",
+    ] },
+    { title: "The Gate", image: "/images/koumanthio/koumanthio-05.webp", paragraphs: [
+        "Conakry was noisy, hot, immense. At the end of the way rose a gate, and above it, letters of iron:",
+        "CAMP ALPHA YAYA DIALLO.",
+        "Beside it, a newer sign: Establishment of the Simandou Academy programme.",
+        "\"Alpha Yaya,\" murmured Koumanthio.",
+        "Pati had told her: a king of Labé, long ago, a man who would not bend. She did not yet know all that this name had to do with her. She raised her head, and she went in.",
+    ] },
+    { title: "The Chance Seized", image: "/images/koumanthio/koumanthio-06.webp", paragraphs: [
+        "The test lasted two days. The preselected from all over the country were there — children from the towns, the villages, from everywhere.",
+        "Koumanthio breathed, and worked, as she knew how to do.",
+        "When the final list appeared, her name was on it. She was admitted.",
+        "A girl from Labé, without fortune, had just entered one of the finest schools in the country. Without leaving. Owing nothing to anyone but her own work.",
+    ] },
+    { title: "Life", image: "/images/koumanthio/koumanthio-07.webp", paragraphs: [
+        "Life at the camp was straight and hard: the bugle before daybreak, the bed squared, the step that snaps.",
+        "But children remain children. In free time, there was Sèdjro the Beninese who laughed too loudly, a band come from everywhere, and a clapping game from Labé that Koumanthio taught them — clap, clap-clap, clap — which, in the evening, became everyone's game.",
+        "She was tired, often. But she was in her place. And she was rising.",
+    ] },
+    { title: "Karim Leaves", image: "/images/koumanthio/koumanthio-08.webp", paragraphs: [
+        "There was also Karim, whose father was \"someone important.\" One morning, he announced:",
+        "\"Me, I'm leaving. My father is sending me to study abroad. Over there, it's better.\"",
+        "A few envied him. To leave, after all, was the old dream — that of families who had the means.",
+        "Koumanthio watched him fold his things, and said nothing. She, she had never had that choice.",
+        "Or so she believed.",
+    ] },
+    { title: "The Uncle's Letter", image: "/images/koumanthio/koumanthio-09.webp", paragraphs: [
+        "A few weeks later, a letter arrived — for her.",
+        "An uncle, gone a long time ago \"to succeed\" on the other side of the sea, had heard of the little one who was first in everything. He offered to bring her over, to his home. \"Here,\" he wrote, \"she will have everything. The best schools. A future.\"",
+        "In Labé, the family could not believe it. Such a chance! To leave, like the children of the great! Even Pati was silent for a long while.",
+        "And suddenly, Koumanthio too had a choice.",
+    ] },
+    { title: "The Doubt", image: "/images/koumanthio/koumanthio-10.webp", paragraphs: [
+        "Then doubt entered her and would not let go.",
+        "To leave was finally to have what the rich had always had. It was the uncle, the sea, \"everything.\" Who refuses such a thing?",
+        "But to stay… to stay, what was that, exactly? Her little school in the country, against the wide open world?",
+        "She no longer knew. In the evening, she could no longer sleep. And it was there — on the day she no longer knew what to do — that she remembered the package.",
+    ] },
+    { title: "The Letter", image: "/images/koumanthio/koumanthio-11.webp", paragraphs: [
+        "Pati's package held only a sheet, yellowed, older than anything Koumanthio had ever touched. At the top, a slanting hand:",
+        "\"To my mother, Koumanthio.\"",
+        "It was a letter from the forefather. From the king. Written, Pati said, in the distant land where he had been taken — and never arrived as far as her.",
+        "Koumanthio read, her heart pounding:",
+        "\"Mother, I was torn from our land, and I know now that I shall not return to it alive. This sand is not mine. The wind, here, does not carry the smell of our hills. They can take the country from me; they cannot take from me the missing of the country.",
+        "Do not weep too much. But remember this, and tell it to those who will come after me: the greatest of misfortunes is not to stay small at home. It is to become great elsewhere, far from all that one loves.",
+        "If one day a child of our blood can become great without being forced to leave — then I shall not have lost everything.",
+        "Your son, who looks each evening toward home.\"",
+    ] },
+    { title: "The Choice", image: "/images/koumanthio/koumanthio-12.webp", paragraphs: [
+        "Koumanthio folded the letter again, and for a long time did not move.",
+        "She understood, at last. The forefather had been forced to leave; he had become great far away, and had died of grief from it. He had not had the choice.",
+        "She, she had it.",
+        "To stay was not to settle for less. It was to do exactly what the king, from the depths of his exile, had hoped for those of his blood: to become great here. In the country. Without being forced to, and without being forced to leave.",
+        "In the morning, she wrote two letters.",
+    ] },
+    { title: "The Uncle, Without Judgement", image: "/images/koumanthio/koumanthio-13.webp", paragraphs: [
+        "The first was for the uncle.",
+        "She thanked him from the bottom of her heart. She did not forget that in his own time, leaving had been the only door; that he had left out of courage, not out of flight; and that she was proud of him.",
+        "\"But I,\" she wrote, \"have a door that did not exist before. It is here. I am going to take it.\"",
+        "Over there, the uncle read the letter twice. Then he smiled, all alone, and answered a single line:",
+        "\"Then become great at home, little one. And make the country proud.\"",
+    ] },
+    { title: "To Grow Up Here", image: "/images/koumanthio/koumanthio-14.webp", paragraphs: [
+        "The second letter was for Pati. Koumanthio said only three words in it:",
+        "I understood. I am staying.",
+        "The years passed. Koumanthio rose, as she had dreamed — in the country, in the camp that bore the name of her forefather. The one who had been torn from this land watched, in a way, over the one who had chosen to stay on it.",
+        "And somewhere, in the hills of Labé, a very old woman kept against her heart a letter that had finally found its Koumanthio.",
+        "One can dream big. One can become someone.",
+        "Without ever leaving one's country.",
+    ] },
+    ],
+  },
+
+  ar: {
+    lang: "ar", dir: "rtl", label: "العربية",
+    bookTitle: "كومانثيو، ابنة الكتيبة",
+    sections: [
+    { title: "حلم لابي", image: "/images/koumanthio/koumanthio-01.webp", paragraphs: [
+        "في لابي، في تلال الفوتا العالية، كان لكومانثيو حلمٌ أكبر من أن يسع فتاةً بهذا الصِّغَر. أرادت أن ترتقي. أن تخدم. أن تصير شخصًا — لا لنفسها، بل لأهلها.",
+        "لم تكن عائلتها غنيّة. لكنّ كومانثيو كانت الأولى في كلّ شيء: في المدرسة، كانوا يقولون إنّ لها «رأسًا متينًا».",
+        "في المساء، كانت تنظر إلى الطائرات عاليًا جدًّا في السماء، وتتساءل إلى أين تذهب — وهل ستذهب هي أيضًا، يومًا ما، إلى مكانٍ ما.",
+    ] },
+    { title: "القاعدة القديمة", image: "/images/koumanthio/koumanthio-02.webp", paragraphs: [
+        "فيما مضى، لطفلٍ مثلها، لم يكن لحلمٍ كبيرٍ سوى بابٍ واحد — وكان بعيدًا.",
+        "— من قبل، قالت باتي ذات يوم، مَن أرادوا أن يصيروا كبارًا وكان لديهم القدرة، كانوا يرحلون. إلى الجانب الآخر من البحر. أمّا مَن لم تكن لديهم القدرة… فأولئك كانوا يضعون حلمهم في درج.",
+        "كانت باتي تفكّر في ابن عمٍّ رحل قبل سنوات «كي ينجح». لم يُرَ بعدها أبدًا.",
+        "كانت كومانثيو تُصغي، وحلمها، في صدرها، يصير صغيرًا جدًّا.",
+    ] },
+    { title: "الباب الذي ينفتح", image: "/images/koumanthio/koumanthio-03.webp", paragraphs: [
+        "ثم سرى خبرٌ حتى التلال: صار هناك مدرسة. مدرسةٌ حقيقيّة. في البلد. مدرسة تأخذ الأفضل — أغنياءَ أو فقراء — وتُكوّنهم هنا، دون أن يضطرّوا إلى الرحيل.",
+        "للدخول إليها، كان لا بدّ أن تكون بين الأوائل في الشهادة الابتدائيّة.",
+        "عملت كومانثيو كما لم تعمل قطّ. حين صدرت النتائج، كان اسمها في القمّة: انتُقيت مبدئيًّا للنزول إلى كوناكري، ولاجتياز اختبار البريتانيه.",
+        "للمرّة الأولى، كان للحلم باب. وكان الباب في البيت.",
+    ] },
+    { title: "باتي والصُّرّة", image: "/images/koumanthio/koumanthio-04.webp", paragraphs: [
+        "عشيّة الرحيل، هيّأت باتي الكيس الصغير. وضعت فيه منديلًا، وكيسًا صغيرًا من الفونيو، وشيئًا ملفوفًا في قماشٍ عتيق.",
+        "— ما هذا، يا باتي؟",
+        "— رسالة عائلةٍ قديمة، قالت الجدّة. قديمةٌ جدًّا. لن تفتحيها الآن. ستفتحينها يوم لا تعودين تعرفين ماذا تفعلين. ذلك اليوم فقط.",
+        "وضعت كومانثيو الصُّرّة في أعماق كيسها، ولم تعد تفكّر فيها.",
+    ] },
+    { title: "البوّابة", image: "/images/koumanthio/koumanthio-05.webp", paragraphs: [
+        "كانت كوناكري صاخبةً، حارّةً، هائلة. في آخر الطريق انتصبت بوّابة، وفوقها حروفٌ من حديد:",
+        "معسكر ألفا يايا ديالو.",
+        "إلى جانبها، لافتةٌ أحدث: مؤسّسة برنامج سيماندو أكاديمي.",
+        "— ألفا يايا، همست كومانثيو.",
+        "كانت باتي قد روت لها: ملكٌ من لابي، فيما مضى، رجلٌ أبى أن ينحني. لم تكن تعرف بعد كلّ ما لهذا الاسم بها من صلة. رفعت رأسها، ودخلت.",
+    ] },
+    { title: "الفرصة المُنتهَزة", image: "/images/koumanthio/koumanthio-06.webp", paragraphs: [
+        "دام الاختبار يومين. كان المنتقَون مبدئيًّا من كلّ البلد هناك — أطفالٌ من المدن، من القرى، من كلّ مكان.",
+        "تنفّست كومانثيو، وعملت، كما تُحسن.",
+        "حين صدرت القائمة الأخيرة، كان اسمها فيها. قُبِلت.",
+        "فتاةٌ من لابي، بلا ثروة، دخلت للتوّ إحدى أجمل مدارس البلد. دون أن ترحل. دون أن تَدين بشيءٍ لأحدٍ سوى لعملها.",
+    ] },
+    { title: "الحياة", image: "/images/koumanthio/koumanthio-07.webp", paragraphs: [
+        "كانت الحياة في المعسكر مستقيمةً وقاسية: البوق قبل النهار، السرير المرتّب، الخطوة التي تَقرع.",
+        "لكنّ الأطفال يبقَون أطفالًا. في وقت الفراغ، كان هناك سيدجرو البنينيّ الذي يضحك بصوتٍ عالٍ أكثر من اللازم، وعصبةٌ جاءت من كلّ مكان، ولعبة أيدٍ من لابي علّمتها كومانثيو لهم — كلاك، كلاك-كلاك، كلاك — صارت، في المساء، لعبة الجميع.",
+        "كانت متعبةً، غالبًا. لكنها كانت في مكانها. وكانت ترتقي.",
+    ] },
+    { title: "كريم يرحل", image: "/images/koumanthio/koumanthio-08.webp", paragraphs: [
+        "كان هناك أيضًا كريم، الذي كان أبوه «شخصًا مهمًّا». ذات صباح، أعلن:",
+        "— أنا، سأرحل. أبي يُرسلني للدراسة في الخارج. هناك، أفضل.",
+        "حسده بعضهم. فالرحيل، في النهاية، كان الحلم القديم — حلم العائلات التي لديها القدرة.",
+        "نظرت كومانثيو إليه يطوي أغراضه، ولم تقل شيئًا. هي، لم يكن لها قطّ ذلك الخيار.",
+        "أو هكذا كانت تظنّ.",
+    ] },
+    { title: "رسالة العمّ", image: "/images/koumanthio/koumanthio-09.webp", paragraphs: [
+        "بعد أسابيع قليلة، وصلت رسالة — لها.",
+        "عمٌّ، رحل منذ زمنٍ طويل «كي ينجح» في الجانب الآخر من البحر، سمع عن الصغيرة التي كانت الأولى في كلّ شيء. اقترح أن يُحضِرها إليه. «هنا، كتب، سيكون لها كلّ شيء. أفضل المدارس. مستقبل.»",
+        "في لابي، لم تصدّق العائلة. فرصةٌ كهذه! الرحيل، كأبناء الكبار! حتى باتي صمتت طويلًا.",
+        "وفجأةً، صار لكومانثيو، هي أيضًا، خيار.",
+    ] },
+    { title: "الشكّ", image: "/images/koumanthio/koumanthio-10.webp", paragraphs: [
+        "عندها دخلها الشكّ ولم يتركها.",
+        "الرحيل كان أخيرًا أن تنال ما ناله الأغنياء دائمًا. كان العمّ، والبحر، و«كلّ شيء». مَن يرفض أمرًا كهذا؟",
+        "لكنّ البقاء… البقاء، ما هو بالضبط؟ مدرستها الصغيرة في البلد، في مقابل البحر الواسع؟",
+        "لم تعد تعرف. في المساء، لم تعد تقوى على النوم. وهناك — يوم لم تعد تعرف ماذا تفعل — تذكّرت الصُّرّة.",
+    ] },
+    { title: "الرسالة", image: "/images/koumanthio/koumanthio-11.webp", paragraphs: [
+        "لم تحتوِ صُرّة باتي سوى ورقةٍ واحدة، صفراء، أقدم من كلّ ما لمسته كومانثيو يومًا. في الأعلى، خطٌّ مائل:",
+        "«إلى أمّي، كومانثيو.»",
+        "كانت رسالةً من الجدّ. من الملك. كُتِبت، كما قالت باتي، في الأرض البعيدة التي حُمِل إليها — ولم تصل إليها قطّ.",
+        "قرأت كومانثيو، وقلبها يخفق:",
+        "«أمّاه، انتُزِعتُ من أرضنا، وأعلم الآن أنّي لن أعود إليها حيًّا. هذا الرمل ليس رملي. والريح، هنا، لا تحمل رائحة تلالنا. يمكنهم أن يأخذوا منّي البلد؛ لكن لا يمكنهم أن يأخذوا منّي الحنين إلى البلد.",
+        "لا تبكي كثيرًا. لكن تذكّري هذا، وقوليه لمن سيأتون بعدي: أعظم المصائب ليس أن تبقى صغيرًا في بلدك. بل أن تصير كبيرًا في مكانٍ آخر، بعيدًا عن كلّ ما تحبّ.",
+        "إن استطاع يومًا طفلٌ من دمنا أن يصير كبيرًا دون أن يُجبَر على الرحيل — فلن أكون قد خسرتُ كلّ شيء.",
+        "ابنك، الذي ينظر كلّ مساءٍ صوب البيت.»",
+    ] },
+    { title: "الخيار", image: "/images/koumanthio/koumanthio-12.webp", paragraphs: [
+        "أعادت كومانثيو طيّ الرسالة، ولم تتحرّك طويلًا.",
+        "فهمت، أخيرًا. الجدّ، أُجبِر على الرحيل؛ صار كبيرًا في البعيد، ومات من الحزن. هو لم يكن له خيار.",
+        "أمّا هي، فكان لها.",
+        "البقاء لم يكن أن ترضى بالأقلّ. بل أن تفعل تمامًا ما رجاه الملك، من أعماق منفاه، لأبناء دمه: أن تصير كبيرةً هنا. في البلد. دون أن تُجبَر عليه، ودون أن تُجبَر على الرحيل.",
+        "في الصباح، كتبت رسالتين.",
+    ] },
+    { title: "العمّ، دون حُكم", image: "/images/koumanthio/koumanthio-13.webp", paragraphs: [
+        "الأولى كانت للعمّ.",
+        "شكرته من أعماق قلبها. لم تنسَ أنّ الرحيل، في زمنه هو، كان الباب الوحيد؛ وأنه رحل شجاعةً، لا هربًا؛ وأنها فخورةٌ به.",
+        "«أمّا أنا، كتبت، فلديّ بابٌ لم يكن موجودًا من قبل. إنه هنا. سآخذه.»",
+        "هناك، قرأ العمّ الرسالة مرّتين. ثم ابتسم، وحده، وردّ بسطرٍ واحد:",
+        "«إذن صيري كبيرةً في بلدك، يا صغيرة. واجعلي البلد فخورًا.»",
+    ] },
+    { title: "أن نكبر هنا", image: "/images/koumanthio/koumanthio-14.webp", paragraphs: [
+        "الرسالة الثانية كانت لباتي. لم تقل فيها كومانثيو سوى ثلاث كلمات:",
+        "فهمتُ. سأبقى.",
+        "مرّت السنون. ارتقت كومانثيو، كما حلمت — في البلد، في المعسكر الذي يحمل اسم جدّها. ذاك الذي انتُزِع من هذه الأرض كان يسهر، على نحوٍ ما، على مَن اختارت أن تبقى فيها.",
+        "وفي مكانٍ ما، في تلال لابي، كانت عجوزٌ طاعنةٌ في السنّ تحتضن رسالةً وجدت أخيرًا كومانثيو الخاصّة بها.",
+        "يمكن أن نحلم كبيرًا. يمكن أن نصير شخصًا.",
+        "دون أن نغادر بلدنا أبدًا.",
+    ] },
+    ],
+  },
+
+  zh: {
+    lang: "zh", dir: "ltr", label: "中文",
+    bookTitle: "库曼蒂奥，军营之女",
+    sections: [
+    { title: "拉贝的梦", image: "/images/koumanthio/koumanthio-01.webp", paragraphs: [
+        "在拉贝，在富塔的高高山岭里，库曼蒂奥怀着一个对这么小的女孩来说太大的梦。她想往上走。想去服务。想成为一个人物——不是为自己，是为她的亲人。",
+        "她家并不富裕。但库曼蒂奥事事拔尖：在学校里，人们说她有「一颗结实的脑袋」。",
+        "晚上，她望着天空高处的飞机，想着它们要去哪里——想着有一天，她是不是也能去到某个地方。",
+    ] },
+    { title: "旧规矩", image: "/images/koumanthio/koumanthio-02.webp", paragraphs: [
+        "从前，对一个像她这样的孩子，一个大梦只有一道门——而那道门在很远的地方。",
+        "——从前哪，帕提有一天说，那些想出人头地、又有条件的人，就走了。去海的那一边。而那些没有条件的……那些人，就把梦收进抽屉里。",
+        "帕提想起一个多年前为「成功」而离开的表亲。从此再没见过他。",
+        "库曼蒂奥听着，她胸中的梦，变得很小很小。",
+    ] },
+    { title: "敞开的门", image: "/images/koumanthio/koumanthio-03.webp", paragraphs: [
+        "后来，一个消息一路传进了山里：如今有了一所学校。一所真正的学校。在自己国家。一所招收最优秀者——无论贫富——并在这里培养他们、不必远走的学校。",
+        "要进去，得在小学毕业证书考试中名列前茅。",
+        "库曼蒂奥前所未有地用功。成绩出来时，她的名字就在最顶上：她被预选下到科纳克里，去参加军校的入学考试。",
+        "第一次，梦有了一道门。而这道门，就在家门口。",
+    ] },
+    { title: "帕提和那个包", image: "/images/koumanthio/koumanthio-04.webp", paragraphs: [
+        "出发前一晚，帕提准备了小包袱。她放进一条头巾、一小袋福尼奥，还有一样用旧布裹着的东西。",
+        "——这是什么，帕提？",
+        "——一封很旧的家书，奶奶说。很旧很旧。你现在先别打开。等到你不知道该怎么办的那一天，你才打开。只有那一天。",
+        "库曼蒂奥把那个包塞进包袱最底下，就再没去想它。",
+    ] },
+    { title: "大门", image: "/images/koumanthio/koumanthio-05.webp", paragraphs: [
+        "科纳克里喧闹、炎热、庞大。路的尽头矗立着一道大门，门上方是铁铸的字母：",
+        "阿尔法·亚亚·迪亚洛军营。",
+        "门旁，一块更新的牌子：西曼杜学院项目机构。",
+        "——阿尔法·亚亚，库曼蒂奥喃喃道。",
+        "帕提对她讲过：从前拉贝的一位国王，一个不肯低头的人。她还不知道这个名字与她有多深的关系。她抬起头，走了进去。",
+    ] },
+    { title: "抓住的机会", image: "/images/koumanthio/koumanthio-06.webp", paragraphs: [
+        "考试持续了两天。全国被预选上的人都在那里——城里的、村里的、从各地来的孩子。",
+        "库曼蒂奥吸了口气，照着她拿手的样子答题。",
+        "最后的名单出来时，她的名字在上面。她被录取了。",
+        "一个来自拉贝、没有家财的女孩，刚刚进了全国最好的学校之一。没有远走。除了自己的努力，不欠任何人什么。",
+    ] },
+    { title: "生活", image: "/images/koumanthio/koumanthio-07.webp", paragraphs: [
+        "军营里的生活笔直而艰苦：天亮前的号角，叠得方正的床，踏得脆响的步子。",
+        "但孩子终究是孩子。自由活动时间里，有笑得太响的贝宁人塞德乔，有从各地聚来的一伙人，还有库曼蒂奥教他们的、一个拉贝的拍手游戏——啪，啪啪，啪——到了晚上，成了所有人的游戏。",
+        "她常常很累。但她在自己的位置上。而且她在往上走。",
+    ] },
+    { title: "卡里姆走了", image: "/images/koumanthio/koumanthio-08.webp", paragraphs: [
+        "还有卡里姆，他父亲是「重要人物」。一天早上，他宣布：",
+        "——我呀，我要走了。我父亲送我去国外读书。在那边，更好。",
+        "有几个人羡慕他。出走，毕竟，是那个旧梦——是那些有条件的家庭的梦。",
+        "库曼蒂奥看着他收拾东西，什么也没说。她，从来没有过那样的选择。",
+        "至少，她是这么以为的。",
+    ] },
+    { title: "舅舅的信", image: "/images/koumanthio/koumanthio-09.webp", paragraphs: [
+        "几周后，一封信来了——是给她的。",
+        "一位很久以前去海那边「闯出名堂」的舅舅，听说了那个事事拔尖的小姑娘。他提议把她接到自己身边。「在这里，他写道，她会拥有一切。最好的学校。一个前程。」",
+        "在拉贝，全家都不敢相信。这样的好机会！像那些大人物的孩子一样出走！连帕提都沉默了好久。",
+        "忽然，库曼蒂奥，她也有了一个选择。",
+    ] },
+    { title: "疑惑", image: "/images/koumanthio/koumanthio-10.webp", paragraphs: [
+        "于是疑惑钻进了她心里，再也不肯放开。",
+        "出走，是终于能拥有富人一直拥有的东西。是舅舅、是大海、是「一切」。谁会拒绝这样的事？",
+        "可留下……留下，究竟算什么？她在自己国家的小学校，对上那片辽阔的远方？",
+        "她不知道了。晚上，她再也睡不着。就在那时——在她不知道该怎么办的那一天——她想起了那个包。",
+    ] },
+    { title: "那封信", image: "/images/koumanthio/koumanthio-11.webp", paragraphs: [
+        "帕提的包里只有一页纸，泛黄，比库曼蒂奥摸过的任何东西都旧。最上方，一行倾斜的字：",
+        "「致我的母亲，库曼蒂奥。」",
+        "那是先祖的信。是国王的信。据帕提说，写于他被带去的那片遥远土地——却从未抵达她手中。",
+        "库曼蒂奥读着，心怦怦直跳：",
+        "「母亲，我被人从我们的土地上夺走，如今我知道，我不会活着回去了。这片沙不是我的。这里的风，不带着我们山岭的气息。他们能夺走我的国家；却夺不走我对国家的思念。",
+        "别哭得太多。但请记住这句话，并把它讲给在我之后到来的人：最大的不幸，不是留在自己国家做一个小人物。而是在别处成为大人物，远离你所爱的一切。",
+        "倘若有一天，我们血脉里的一个孩子，能够不被迫离开就成为大人物——那么，我便不算失去了一切。",
+        "你的儿子，每晚都望向家的方向。」",
+    ] },
+    { title: "选择", image: "/images/koumanthio/koumanthio-12.webp", paragraphs: [
+        "库曼蒂奥把信重新叠好，久久没有动。",
+        "她终于明白了。先祖，是被迫离开的；他在远方成了大人物，却为此忧伤而死。他没有选择。",
+        "而她，有。",
+        "留下，不是甘于更少。而是去做国王在流放的深处、为他血脉里的人所期盼的那件事：在这里成为大人物。在自己国家。不被迫留下，也不被迫离开。",
+        "早晨，她写了两封信。",
+    ] },
+    { title: "对舅舅，不带评判", image: "/images/koumanthio/koumanthio-13.webp", paragraphs: [
+        "第一封是给舅舅的。",
+        "她从心底感谢他。她没有忘记，在他那个年代，出走是唯一的一道门；他是出于勇气离开的，不是逃避；她为他骄傲。",
+        "「但我，她写道，有一道从前没有的门。它就在这里。我要走这道门。」",
+        "在那边，舅舅把信读了两遍。然后，他独自微笑，回了一行字：",
+        "「那就在自己家里成为大人物吧，小家伙。让国家为你骄傲。」",
+    ] },
+    { title: "在这里长大", image: "/images/koumanthio/koumanthio-14.webp", paragraphs: [
+        "第二封信是给帕提的。库曼蒂奥在里面只写了几个字：",
+        "我懂了。我留下。",
+        "岁月流逝。库曼蒂奥往上走了，正如她梦想的那样——在自己国家，在那座以她先祖之名命名的军营里。那个曾被从这片土地上夺走的人，以某种方式，守望着选择留在这片土地上的人。",
+        "而在某个地方，在拉贝的山岭间，一位非常年迈的妇人把一封信贴在心口——那封信，终于找到了属于它的库曼蒂奥。",
+        "人可以怀大梦。人可以成为一个人物。",
+        "而无需离开自己的国家。",
+    ] },
+    ],
+  },
+};

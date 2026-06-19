@@ -12,19 +12,21 @@ export type SeriesItem = {
   auteur: string;
   episodes: { total: number; live: number };
   episodeSlugs: string[]; // slugs des épisodes EN LIGNE (pour le badge « Nouvel épisode »)
+  nouveau?: boolean; // badge « nouveau » sur la vignette de série
 };
 
 export const SERIES: SeriesItem[] = [
   {
-    slug: "koumanthio",
-    title: "Koumanthio, enfant de troupe",
-    description: "À Labé, une enfant première au CEPE descend à Conakry pour le Prytanée — un camp qui porte le nom de son aïeul, le roi qui n'a pas voulu plier. Elle porte ce nom comme un secret.",
-    cover: "/images/koumanthio/koumanthio-t1-couverture.webp",
-    band: "Aventure",
-    to: "/serie/koumanthio",
+    slug: "resistance",
+    title: "Résistance",
+    description: "Six figures de la résistance guinéenne à la pénétration coloniale — Samory, Alpha Yaya, Dinah Salifou, Bocar Biro et les autres. Le courage de dire non, et le prix de la dignité.",
+    cover: "/images/resistance/resistance-couverture.webp",
+    band: "Passage",
+    to: "/serie/resistance",
     auteur: "Mohamed Doumbouya",
-    episodes: { total: 3, live: 1 },
-    episodeSlugs: ["koumanthio-t1"],
+    episodes: { total: 6, live: 6 },
+    episodeSlugs: ["resistance-t1", "resistance-t2", "resistance-t3", "resistance-t4", "resistance-t5", "resistance-t6"],
+    nouveau: true,
   },
   {
     slug: "point-zero",
