@@ -1,11 +1,9 @@
 // ════════════════════════════════════════════════════════════════
 //  MANSAYA — Page-route
 //  ----------------------------------------------------------------
-//  Affiche la grille des empires disponibles. Quand on en choisit
-//  un, lance sa quête. Un bouton « retour » revient à la grille.
-//
-//  La grille se construit automatiquement à partir du registre
-//  `quests` : ajoute un empire dans les données, il apparaît ici.
+//  Affiche la grille des empires disponibles.
+//  Quand on choisit un empire, lance sa quête.
+//  Un bouton « retour » revient à la grille.
 //
 //  À brancher dans le routeur de App.tsx, ex :
 //    <Route path="/mansaya" element={<MansayaPage />} />
@@ -50,11 +48,11 @@ export default function MansayaPage() {
             marginTop: 8,
           }}
         >
-          L’encyclopédie royale
+          L'encyclopédie royale
         </div>
         <p style={{ fontSize: 14, color: 'var(--color-text-secondary, #5F5E5A)', marginTop: 10 }}>
-          Suis Fanta à travers les grands empires d’Afrique. Fais tes choix,
-          débloque l’histoire.
+          Suis Fanta à travers les grands empires d'Afrique. Fais tes choix,
+          débloque l'histoire.
         </p>
       </header>
 
@@ -79,45 +77,50 @@ export default function MansayaPage() {
           <MansayaQuete slug={active} />
         </div>
       ) : (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: 12,
-          }}
-        >
-          {ORDER.filter((e) => quests[e.slug]).map((e) => {
-            const q = quests[e.slug];
-            return (
-              <button
-                key={e.slug}
-                onClick={() => setActive(e.slug)}
-                style={{
-                  textAlign: 'left',
-                  border: '0.5px solid var(--color-border-tertiary, rgba(0,0,0,0.15))',
-                  borderRadius: 12,
-                  padding: '1rem 1.25rem',
-                  background: 'var(--color-background-primary, #fff)',
-                  cursor: 'pointer',
-                  fontFamily: 'inherit',
-                  color: 'inherit',
-                }}
-              >
-                <div style={{ fontSize: 26, color: '#BA7517', marginBottom: 8 }}>
-                  <i className={`ti ${e.icon}`} aria-hidden="true" />
-                </div>
-                <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 2 }}>{q.empire}</div>
-                <div style={{ fontSize: 13, color: 'var(--color-text-secondary, #5F5E5A)', marginBottom: 8 }}>
-                  {q.subtitle}
-                </div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-tertiary, #888780)' }}>
-                  <i className="ti ti-clock" aria-hidden="true" /> {e.period} ·{' '}
-                  {q.totalFacts} faits à débloquer
-                </div>
-              </button>
-            );
-          })}
-        </div>
+        <>
+          {/* ═══════════════════════════════════════════════════════════ */}
+          {/* GRILLE EMPIRES */}
+          {/* ═══════════════════════════════════════════════════════════ */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: 12,
+            }}
+          >
+            {ORDER.filter((e) => quests[e.slug]).map((e) => {
+              const q = quests[e.slug];
+              return (
+                <button
+                  key={e.slug}
+                  onClick={() => setActive(e.slug)}
+                  style={{
+                    textAlign: 'left',
+                    border: '0.5px solid var(--color-border-tertiary, rgba(0,0,0,0.15))',
+                    borderRadius: 12,
+                    padding: '1rem 1.25rem',
+                    background: 'var(--color-background-primary, #fff)',
+                    cursor: 'pointer',
+                    fontFamily: 'inherit',
+                    color: 'inherit',
+                  }}
+                >
+                  <div style={{ fontSize: 26, color: '#BA7517', marginBottom: 8 }}>
+                    <i className={`ti ${e.icon}`} aria-hidden="true" />
+                  </div>
+                  <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 2 }}>{q.empire}</div>
+                  <div style={{ fontSize: 13, color: 'var(--color-text-secondary, #5F5E5A)', marginBottom: 8 }}>
+                    {q.subtitle}
+                  </div>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-tertiary, #888780)' }}>
+                    <i className="ti ti-clock" aria-hidden="true" /> {e.period} ·{' '}
+                    {q.totalFacts} faits à débloquer
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </>
       )}
     </div>
   );

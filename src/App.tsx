@@ -9,6 +9,7 @@ import { AuthProvider } from "./auth/AuthContext";
 import WhoIsReading from "./components/WhoIsReading";
 import AccountTypeGate from "./components/AccountTypeGate";
 import EpisodeGabarit from "./components/EpisodeGabarit";
+import CharteViewer from "./components/CharteViewer";
 // Pages chargées à la demande (code-splitting par route)
 const BintaDiallo = lazy(() => import("./pages/BintaDiallo"));
 const LivreDetail = lazy(() => import("./pages/LivreDetail"));
@@ -99,6 +100,7 @@ export default function App() {
             <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/serie/resistance" element={<SerieResistance />} />
             <Route path="/mansaya" element={<MansayaPage />} />
+            <Route path="/charte" element={<CharteViewer />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
             <Route path="/audio/:id" element={<AudioBibliotheque />} />

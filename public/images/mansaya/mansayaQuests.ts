@@ -227,6 +227,10 @@ const ghana: Quest = {
         id: 'g1',
         title: 'La naissance du Ghana',
         body: 'Au VIIIe siècle, le peuple soninké se rassemble entre le Niger et le Sénégal. Un chef, Kaya Magan Cissé, rallie les tribus : c’est le premier grand empire d’Afrique de l’Ouest.',
+
+        image: '/images/mansaya/g1.jpg',
+
+        caption: 'La naissance de l’empire du Ghana : Kaya Magan Cissé rassemble les Soninké.',
       },
       text: 'Me voici 400 ans avant le Mali, entre le Niger et le Sénégal. Un peuple, les Soninké, vient de fonder le premier grand empire de la région. On l’appelle le Ghana. Mais attention — « Ghana » n’est pas le nom du pays ! Veux-tu savoir ce que ça veut dire, ou découvrir d’où vient sa richesse ?',
       choices: [
@@ -240,6 +244,10 @@ const ghana: Quest = {
         id: 'g2',
         title: 'Un titre, pas un pays',
         body: '« Ghana » est le titre du souverain, signifiant « guerrier ». Le territoire, lui, portait d’autres noms. Comme un roi porte une couronne, un Ghana porte un titre de puissance.',
+
+        image: '/images/mansaya/g2.jpg',
+
+        caption: '« Ghana » était le titre du roi-guerrier, pas le nom du pays.',
       },
       text: 'Surprise : « Ghana » est le titre du roi, pas du territoire ! Ça veut dire « guerrier ». Les voyageurs arabes ont retenu ce mot et l’ont collé à tout l’empire. Maintenant, suis-moi vers ce qui faisait sa vraie force…',
       choices: [
@@ -252,6 +260,10 @@ const ghana: Quest = {
         id: 'g3',
         title: 'L’or contre le sel',
         body: 'Le Ghana détenait des mines d’or convoitées. Au marché de Koumbi Saleh, on échangeait l’or contre le sel apporté par les caravanes du Sahara — un sel aussi précieux que l’or au Sahel.',
+
+        image: '/images/mansaya/g3.jpg',
+
+        caption: 'Au marché, l’or (gold) du Ghana s’échange contre le sel (salt) du Sahara.',
       },
       text: 'Le secret du Ghana, c’est l’or — des mines que personne d’autre ne possède. Les marchands traversent le Sahara pour l’acheter, et apportent en échange du sel, aussi précieux que l’or ici. Les rois contrôlent ce commerce d’une main de fer. Comment gardent-ils tant de pouvoir ?',
       choices: [
@@ -265,6 +277,10 @@ const ghana: Quest = {
         id: 'g4',
         title: 'Koumbi Saleh, la ville du silence',
         body: 'Les voyageurs arabes nommaient la capitale Koumbi Saleh « la ville du silence » : on y interdisait le bruit près du palais royal. L’historien Ibn Haukal la décrit au Xe siècle.',
+
+        image: '/images/mansaya/g4.jpg',
+
+        caption: 'Koumbi Saleh, capitale du Ghana, surnommée « la ville du silence ».',
       },
       text: 'Voici Koumbi Saleh, la capitale. On la surnomme « la ville du silence » : près du palais, le bruit est interdit, par respect pour le roi ! L’historien arabe Ibn Haukal l’a décrite au Xe siècle. C’est une cité immense pour l’époque, avec déjà des mosquées. Justement — parlons de religion.',
       choices: [
@@ -277,6 +293,10 @@ const ghana: Quest = {
         id: 'g5',
         title: 'Deux mondes qui cohabitent',
         body: 'Avec les caravanes arrive l’islam. L’élite du Ghana se convertit peu à peu, mais reste syncrétique : les rois prient à la mosquée et consultent les traditions anciennes. Les deux coexistent.',
+
+        image: '/images/mansaya/g5.jpg',
+
+        caption: 'Au Ghana, islam et traditions ancestrales coexistent en harmonie.',
       },
       text: 'Avec les marchands arabes arrive une nouvelle religion : l’islam. Les rois étaient animistes — ils croyaient que les esprits habitent les arbres et les rivières. Peu à peu l’élite se convertit, car l’islam apporte l’écriture et les comptables, utiles au commerce. Mais ils ne renoncent jamais aux traditions : ils mêlent les deux. Et puis, un jour, la fin arrive…',
       choices: [
@@ -289,6 +309,10 @@ const ghana: Quest = {
         id: 'g6',
         title: 'La chute… et l’or qui migre',
         body: 'À la fin du XIe siècle, les Almoravides venus du Maroc envahissent le Ghana et prennent Koumbi Saleh. L’empire s’effondre — mais l’or ne disparaît pas : le commerce migre vers le sud, où naîtront le Sosso puis le Mali.',
+
+        image: '/images/mansaya/g6.jpg',
+
+        caption: 'Le Ghana tombe, mais l’or et le commerce migrent vers le sud.',
       },
       text: 'À la fin du XIe siècle, les Almoravides, des guerriers musulmans venus du Maroc, envahissent le Ghana et prennent Koumbi Saleh. L’empire s’écroule. Mais l’or, lui, ne disparaît jamais : il migre vers le sud. Là naîtra bientôt un nouveau royaume — le Sosso — puis le plus grand de tous, le Mali. Tu as percé tous les secrets du Ghana !',
       choices: [
@@ -436,6 +460,10 @@ const songhai: Quest = {
         id: 'h1',
         title: 'Sonni Ali Ber, le conquérant',
         body: 'À partir de 1464, Sonni Ali Ber transforme le petit royaume songhaï en empire. Il reprend Tombouctou puis Djenné au Mali affaibli — la tradition dit qu’il ne perdit jamais une bataille.',
+
+        image: '/images/mansaya/h1.jpg',
+
+        caption: 'Sonni Ali Ber, le conquérant qui bâtit l’empire Songhaï.',
       },
       text: 'Voici Sonni Ali Ber, « le grand guerrier ». À partir de 1464, il regarde le Mali affaibli et se dit : pourquoi pas nous ? Il conquiert Tombouctou, puis Djenné. On raconte qu’il ne perd jamais une bataille. Et il a une arme secrète… veux-tu la connaître ?',
       choices: [
@@ -448,6 +476,10 @@ const songhai: Quest = {
         id: 'h2',
         title: 'La maîtrise du Niger',
         body: 'Sonni Ali construit une flotte de pirogues de guerre et attaque les villes par le fleuve autant que par la terre. Cette double offensive fait du Songhaï la première puissance ouest-africaine.',
+
+        image: '/images/mansaya/h2.jpg',
+
+        caption: 'La flotte de pirogues de guerre, arme secrète du Songhaï sur le Niger.',
       },
       text: 'Son arme, c’est le fleuve ! Sonni Ali bâtit une flotte de pirogues de guerre. Pendant que tu défends ta porte nord, son armée surgit par le Niger. Génial, non ? Le Songhaï devient la plus grande puissance de la région. Mais Sonni Ali avait un rapport étrange à l’islam…',
       choices: [
@@ -460,6 +492,10 @@ const songhai: Quest = {
         id: 'h3',
         title: 'Un musulman contesté',
         body: 'Sonni Ali était musulman mais refusait d’imposer l’islam et restait attaché aux traditions. Les savants de Tombouctou lui reprochèrent son manque de zèle religieux.',
+
+        image: '/images/mansaya/h3.jpg',
+
+        caption: 'Sonni Ali, musulman contesté, entre islam et traditions.',
       },
       text: 'Sonni Ali est musulman, mais il refuse de forcer l’islam et reste proche des traditions. Les savants de Tombouctou s’en plaignent. Quand il meurt en 1492, c’est presque un divorce entre le roi et les religieux. Et c’est là qu’un autre homme va tout changer…',
       choices: [
@@ -472,6 +508,10 @@ const songhai: Quest = {
         id: 'h4',
         title: 'Askia Muhammad, le réformateur',
         body: 'En 1493, Askia Muhammad Ture prend le pouvoir bien qu’il ne soit pas de sang royal. Génie organisateur, il fait du Songhaï un véritable empire musulman, divisé en provinces avec des gouverneurs.',
+
+        image: '/images/mansaya/h4.jpg',
+
+        caption: 'Askia Muhammad, le réformateur, organise l’empire Songhaï.',
       },
       text: 'Voici Askia Muhammad. Il prend le pouvoir en 1493 — alors qu’il n’est même pas de sang royal ! Mais c’est un génie de l’organisation. Il divise l’empire en provinces, nomme des gouverneurs, crée une vraie administration. Et il fait quelque chose que tu as déjà vu avec un grand roi du Mali…',
       choices: [
@@ -485,6 +525,10 @@ const songhai: Quest = {
         id: 'h5',
         title: 'Le pèlerinage d’Askia (1496)',
         body: 'Comme Mansa Moussa deux siècles plus tôt, Askia Muhammad part à La Mecque en 1496. Il revient avec des savants, des juges et des architectes, et impose la justice islamique dans tout l’empire.',
+
+        image: '/images/mansaya/h5.jpg',
+
+        caption: 'Le pèlerinage d’Askia à La Mecque (1496).',
       },
       text: 'Comme Mansa Moussa avant lui, Askia part à La Mecque en 1496. Il revient avec des savants, des juges, des architectes. Il impose la justice islamique partout. Le Songhaï devient un empire musulman puissant et organisé. Et son joyau, c’est une ville extraordinaire…',
       choices: [
@@ -497,6 +541,10 @@ const songhai: Quest = {
         id: 'h6',
         title: 'Tombouctou, capitale du savoir',
         body: 'Sous Askia, Tombouctou devient un centre intellectuel rivalisant avec Le Caire. Des savants comme Ahmed Baba y écrivent des centaines de livres, accumulés en milliers de manuscrits.',
+
+        image: '/images/mansaya/h6.jpg',
+
+        caption: 'Tombouctou, capitale du savoir, et ses milliers de manuscrits.',
       },
       text: 'Tombouctou ! Sous Askia, elle rivalise avec Le Caire. Ses universités, sa mosquée de Sankoré, ses bibliothèques de milliers de manuscrits. Le savant Ahmed Baba y écrit des centaines de livres, tous copiés à la main. Mais aucun empire ne dure toujours. Veux-tu voir comment le Songhaï tombe ?',
       choices: [
@@ -509,6 +557,10 @@ const songhai: Quest = {
         id: 'h7',
         title: 'Tondibi 1591 et les manuscrits sauvés',
         body: 'En 1591, à Tondibi, une petite armée marocaine équipée d’armes à feu écrase le Songhaï affaibli par les guerres de succession. L’empire s’effondre — mais les habitants cachent les manuscrits de Tombouctou, dont beaucoup ont survécu jusqu’à aujourd’hui.',
+
+        image: '/images/mansaya/h7.jpg',
+
+        caption: 'Tondibi (1591) : l’empire tombe, mais les manuscrits sont sauvés.',
       },
       text: 'En 1591, le sultan du Maroc envoie une petite armée — mais elle a des armes à feu. À Tondibi, les mousquets écrasent les arcs et les lances du Songhaï, déjà affaibli par ses guerres de succession. L’empire tombe. Mais les habitants cachent les manuscrits dans leurs caves, et beaucoup ont traversé les siècles. Le savoir, lui, a survécu. Tu as reconstitué toute l’histoire du Songhaï !',
       choices: [
