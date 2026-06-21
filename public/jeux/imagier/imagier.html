@@ -85,6 +85,28 @@
   .win .again{background:var(--accent); color:#fff;}
   .win .home{background:var(--gold); color:var(--green);}
 
+  /* ===== Fête de fin de manche ===== */
+  .win .big{ position:relative; }
+  #dancer{ width:120px; height:140px; display:block; margin:0 auto; }
+  #dancer .body{ transform-origin:50% 60%; animation:dance .6s ease-in-out infinite; }
+  #dancer .armL{ transform-origin:34px 66px; animation:armL .6s ease-in-out infinite; }
+  #dancer .armR{ transform-origin:86px 66px; animation:armR .6s ease-in-out infinite; }
+  #dancer .legL{ transform-origin:52px 104px; animation:legL .6s ease-in-out infinite; }
+  #dancer .legR{ transform-origin:68px 104px; animation:legR .6s ease-in-out infinite; }
+  #dancer .ray{ transform-origin:60px 56px; animation:spin 6s linear infinite; }
+  @keyframes dance{0%,100%{transform:translateY(0) rotate(-4deg)}25%{transform:translateY(-10px) rotate(0deg)}50%{transform:translateY(0) rotate(4deg)}75%{transform:translateY(-10px) rotate(0deg)}}
+  @keyframes armL{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-40deg)}}
+  @keyframes armR{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(40deg)}}
+  @keyframes legL{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(10deg)}}
+  @keyframes legR{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-10deg)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){ #dancer *{animation:none!important} }
+
+  .theme-card.surprise{ color:#fff; }
+  #confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:50; }
+  .conf{ position:absolute; top:-16px; width:11px; height:16px; border-radius:2px; opacity:.95; will-change:transform; animation:fall linear forwards; }
+  @keyframes fall{ to{ transform:translateY(112vh) rotate(720deg); } }
+
   .hidden{display:none!important;}
 </style>
 </head>
@@ -170,13 +192,41 @@
 
   <!-- VICTOIRE -->
   <section id="win" class="win hidden">
-    <div class="big">🎉</div>
+    <div class="big">
+      <svg id="dancer" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g class="body">
+          <!-- rayons du soleil -->
+          <g class="ray" fill="#FFC93C">
+            <path d="M60 8 l5 14 -10 0 z"/><path d="M60 104 l5 -14 -10 0 z"/>
+            <path d="M12 56 l14 5 0 -10 z"/><path d="M108 56 l-14 5 0 -10 z"/>
+            <path d="M26 22 l12 7 -7 7 z"/><path d="M94 22 l-12 7 7 7 z"/>
+            <path d="M26 90 l12 -7 -7 -7 z"/><path d="M94 90 l-12 -7 7 -7 z"/>
+          </g>
+          <!-- bras -->
+          <rect class="armL" x="30" y="62" width="9" height="34" rx="4.5" fill="#C8841E"/>
+          <rect class="armR" x="81" y="62" width="9" height="34" rx="4.5" fill="#C8841E"/>
+          <!-- jambes -->
+          <rect class="legL" x="48" y="98" width="9" height="34" rx="4.5" fill="#C8841E"/>
+          <rect class="legR" x="63" y="98" width="9" height="34" rx="4.5" fill="#C8841E"/>
+          <!-- tête soleil -->
+          <circle cx="60" cy="56" r="30" fill="#FFD64D" stroke="#E8A11C" stroke-width="3"/>
+          <circle cx="50" cy="52" r="4.5" fill="#0D2B1A"/>
+          <circle cx="70" cy="52" r="4.5" fill="#0D2B1A"/>
+          <path d="M48 64 Q60 76 72 64" stroke="#0D2B1A" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="42" cy="64" r="4" fill="#F2926B" opacity=".6"/>
+          <circle cx="78" cy="64" r="4" fill="#F2926B" opacity=".6"/>
+        </g>
+      </svg>
+    </div>
     <h2 id="winTitle">Bravo&nbsp;!</h2>
     <div id="winTime" class="time hidden">0:00</div>
     <p id="winMsg" class="msg"></p>
     <button class="again" onclick="replaySame()">↻ Recommencer</button>
     <button class="home" onclick="goHome()">⌂ Autre thème</button>
   </section>
+
+  <div id="confetti"></div>
+
 
 </div>
 
@@ -215,8 +265,106 @@
       b.onclick=()=>chooseMode(t);
       list.appendChild(b);
     });
+    // ----- Carte SURPRISE : pioche aléatoire dans tous les thèmes, en mode Solo -----
+    if(surprisePool().length >= 3){
+      const b=document.createElement("button");
+      b.className="theme-card surprise"; b.style.background="#7A4FBF";
+      b.innerHTML=`<span class="em">🎲</span>Surprise`;
+      b.onclick=()=>startSurprise();
+      list.appendChild(b);
+    }
   }
-  function show(id){ ["home","modeScreen","game","soloGame","win"].forEach(s=>$("#"+s).classList.toggle("hidden", s!==id)); }
+
+  // ----- MODE SURPRISE -----
+  // Agrège les paires "objet↔mot" de tous les thèmes normaux (on exclut les alphabets),
+  // en pioche ~20 et lance directement le mode Solo (une image à la fois).
+  const SURPRISE_SIZE = 20;
+  function surprisePool(){
+    const pool=[];
+    THEMES.forEach(t=>{
+      if(t.type==="alphabet" || t.type==="alphabet-img") return; // pas les lettres
+      if(!Array.isArray(t.paires)) return;
+      t.paires.forEach(p=>{ if(p && p.fr && p.img) pool.push(p); });
+    });
+    // dédoublonne par mot FR (un même objet présent dans 2 thèmes n'apparaît qu'une fois)
+    const seen=new Set(), uniq=[];
+    pool.forEach(p=>{ const k=p.fr.toLowerCase(); if(!seen.has(k)){ seen.add(k); uniq.push(p); } });
+    return uniq;
+  }
+  window.startSurprise = ()=>{
+    const picked = shuffle(surprisePool()).slice(0, SURPRISE_SIZE);
+    theme = { id:"surprise", emoji:"🎲", titre:"Surprise", couleur:"#7A4FBF", paires:picked };
+    startSolo();
+  };
+  function show(id){ ["home","modeScreen","game","soloGame","win"].forEach(s=>$("#"+s).classList.toggle("hidden", s!==id)); if(id==="win") celebrate(); }
+
+  // ===== Fête de fin de manche : confettis + musique + applaudissements + "Bravo !" =====
+  function celebrate(){
+    rainConfetti();
+    try{ partyMusic(); }catch(e){}
+    try{ clapping(); }catch(e){}
+    setTimeout(()=>{ try{
+      if("speechSynthesis" in window){
+        speechSynthesis.cancel();
+        const u=new SpeechSynthesisUtterance("Bravo !");
+        u.lang="fr-FR"; u.rate=.9; u.pitch=1.25; u.volume=1;
+        speechSynthesis.speak(u);
+      }
+    }catch(e){} }, 650);
+  }
+
+  function rainConfetti(){
+    const box=$("#confetti"); if(!box) return; box.innerHTML="";
+    const colors=["#FFC93C","#C8841E","#1F6E52","#E0533D","#3FB6E8","#FFD64D"];
+    const N=46;
+    for(let i=0;i<N;i++){
+      const c=document.createElement("div"); c.className="conf";
+      c.style.left=(Math.random()*100)+"vw";
+      c.style.background=colors[i%colors.length];
+      c.style.animationDuration=(2.2+Math.random()*1.8)+"s";
+      c.style.animationDelay=(Math.random()*0.5)+"s";
+      c.style.transform="rotate("+(Math.random()*360)+"deg)";
+      if(Math.random()<.5){ c.style.borderRadius="50%"; c.style.width="10px"; c.style.height="10px"; }
+      box.appendChild(c);
+    }
+    setTimeout(()=>{ box.innerHTML=""; }, 4600);
+  }
+
+  let _actx=null;
+  function actx(){ if(!_actx){ const AC=window.AudioContext||window.webkitAudioContext; _actx=new AC(); } if(_actx.state==="suspended") _actx.resume(); return _actx; }
+
+  function partyMusic(){
+    const ac=actx(), now=ac.currentTime;
+    const notes=[523.25,659.25,783.99,1046.50,783.99,1046.50];
+    const dur=0.16;
+    notes.forEach((f,i)=>{
+      const t=now+i*dur;
+      const o=ac.createOscillator(), g=ac.createGain();
+      o.type="triangle"; o.frequency.value=f;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(.28,t+0.02);
+      g.gain.exponentialRampToValueAtTime(.001,t+dur*0.95);
+      o.connect(g).connect(ac.destination);
+      o.start(t); o.stop(t+dur);
+    });
+  }
+
+  function clapping(){
+    const ac=actx(), start=ac.currentTime+0.05;
+    const N=14;
+    for(let i=0;i<N;i++){
+      const t=start+ i*0.085 + Math.random()*0.04;
+      const len=0.05;
+      const buf=ac.createBuffer(1, Math.floor(ac.sampleRate*len), ac.sampleRate);
+      const d=buf.getChannelData(0);
+      for(let j=0;j<d.length;j++){ d[j]=(Math.random()*2-1)*(1-j/d.length); }
+      const src=ac.createBufferSource(); src.buffer=buf;
+      const bp=ac.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=1600+Math.random()*900; bp.Q.value=.8;
+      const g=ac.createGain(); g.gain.value=.16+Math.random()*.12;
+      src.connect(bp).connect(g).connect(ac.destination);
+      src.start(t);
+    }
+  }
 
   // ---------- choix du mode ----------
   function chooseMode(t){
@@ -504,7 +652,7 @@
   window.replaySame = ()=>{
     if(mode==="script") startScript();
     else if(mode==="alpha") startAlpha(alphaVariant);
-    else if(mode==="solo") startSolo();
+    else if(mode==="solo"){ if(theme && theme.id==="surprise") startSurprise(); else startSolo(); }
     else startDefi();
   };
   window.quit = ()=>{ clearInterval(timerId); show("home"); };
