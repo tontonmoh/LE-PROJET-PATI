@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Ticker from "./Ticker";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { getEncycloTheme } from "../data/encycloThemes";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -15,8 +16,9 @@ function ScrollToTop() {
 export default function Layout() {
   const { pathname } = useLocation();
   const focus = pathname === "/defi";
+  const theme = getEncycloTheme(pathname);
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ background: theme.tint }}>
       <ScrollToTop />
       {!focus && <Ticker />}
       {!focus && <Navbar />}

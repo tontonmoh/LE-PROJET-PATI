@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Headphones, Heart, Menu, X, Download, Puzzle, Users, UserCircle } from "lucide-react";
 import LowBandwidthToggle from "./LowBandwidthToggle";
+import { getEncycloTheme } from "../data/encycloThemes";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const loc = useLocation();
   const active = (p: string) => loc.pathname === p || loc.pathname.startsWith(p + "/");
+  const theme = getEncycloTheme(loc.pathname);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" style={theme.navbar ? { background: theme.navbar } : undefined}>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-28">
           <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -61,7 +63,7 @@ export default function Navbar() {
 
       {/* Menu mobile */}
       {open && (
-        <div className="md:hidden bg-[#0A4D3C] border-t border-white/10 px-4 pb-4">
+        <div className="md:hidden border-t border-white/10 px-4 pb-4" style={{ background: theme.navbarDark }}>
           <Link
             to="/ecouter-les-contes"
             className={`navbar-link block py-3 mt-2 flex items-center gap-2 text-[#FFC93C] ${active("/ecouter-les-contes") ? "bg-[#FFC93C]/15" : ""}`}

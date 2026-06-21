@@ -16,17 +16,28 @@ export default function FoutaPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#e8dcc8] to-[#d4c4a8]">
-      {/* Hero Section */}
-      <div className="text-center py-12 px-4 bg-gradient-to-r from-[#8b6f47] to-[#6f5838] text-white">
-        <h1 className="text-5xl md:text-6xl font-bold mb-4">
-          FOUTA THÉOCRATIQUE
-        </h1>
-        <p className="text-xl text-[#f0e6d2] max-w-2xl mx-auto">
-          1725–1896 · Une confédération peule islamique à 9 diwés
-        </p>
-        <p className="text-sm text-[#f0e6d2] mt-4">
-          Découvre les 9 provinces et leurs rôles politiques fascinants
-        </p>
+      {/* Hero Section — cover illustrée + voile */}
+      <div
+        className="relative px-4 py-20 md:py-28 text-center text-white overflow-hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(74,54,24,0.35) 0%, rgba(74,54,24,0.55) 55%, rgba(111,88,56,0.92) 100%), url('/images/fouta/fouta-cover.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center 35%",
+        }}
+      >
+        <div className="relative max-w-3xl mx-auto">
+          <h1 className="font-bold tracking-tight leading-none text-5xl md:text-7xl mb-4 drop-shadow-lg">
+            FOUTA THÉOCRATIQUE
+          </h1>
+          <div className="inline-flex items-center gap-2 text-sm md:text-base font-semibold bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full mb-4">
+            1725–1896 · Une confédération peule à 9 diwés
+          </div>
+          <p className="text-base md:text-lg text-[#f5ecdb] max-w-2xl mx-auto drop-shadow">
+            Suis un jeune berger peul à travers le massif du Fouta-Djalon et découvre
+            comment neuf provinces gouvernaient ensemble, voix après voix.
+          </p>
+        </div>
       </div>
 
       {/* Contenu Principal */}

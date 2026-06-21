@@ -18,7 +18,21 @@ interface LightboxState {
   fact?: FoutaFact;
 }
 
+const DIWAL_META: Record<string, { icon: string; from: string; to: string }> = {
+  'timbo':        { icon: '👑', from: '#d4a574', to: '#8b6f47' },
+  'fougoumba':    { icon: '🕌', from: '#c9a574', to: '#6f5838' },
+  'labe':         { icon: '⚔️', from: '#b8703a', to: '#6f3818' },
+  'bhouriya':     { icon: '✨', from: '#caa94a', to: '#8b6f1f' },
+  'timbi-touni':  { icon: '📖', from: '#9d8574', to: '#5d4a38' },
+  'kebali':       { icon: '📋', from: '#8d9574', to: '#4a5838' },
+  'kollade':      { icon: '🛡️', from: '#7d9584', to: '#385848' },
+  'koin':         { icon: '🐴', from: '#6d85a4', to: '#384a6f' },
+  'fode-hadji':   { icon: '🛤️', from: '#a4795d', to: '#6f4a38' },
+};
+
 export default function FoutaQuete({ diwal, onClose }: FoutaQueteProps) {
+  const meta = DIWAL_META[diwal.id] || { icon: '📜', from: '#c9a574', to: '#8b6f47' };
+  const heroFact = diwal.facts[0];
   const [version, setVersion] = useState<'enfant' | 'adulte'>('adulte');
   const [lightbox, setLightbox] = useState<LightboxState>({ isOpen: false });
 
@@ -86,10 +100,38 @@ export default function FoutaQuete({ diwal, onClose }: FoutaQueteProps) {
         </div>
       </div>
 
-      {/* Contenu du texte */}
-      <div className="max-w-4xl mx-auto mb-12 bg-white rounded-lg p-8 shadow-md">
-        <div className="prose prose-lg max-w-none">
-          <p className="text-[#333] leading-relaxed whitespace-pre-wrap">
+      {/* Contenu du texte — mise en page illustrée 2 colonnes */}
+      <div className="max-w-5xl mx-auto mb-12 grid md:grid-cols-[300px_1fr] gap-6 items-start">
+        {/* Vignette héro du diwal (sticky en desktop) */}
+        <div className="md:sticky md:top-6">
+          <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[3/4] bg-gray-200">
+            {/* fallback coloré toujours présent dessous */}
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ background: `linear-gradient(150deg, ${meta.from} 0%, ${meta.to} 100%)` }}
+            >
+              <span className="text-7xl opacity-90">{meta.icon}</span>
+            </div>
+            {/* image héro si disponible */}
+            {heroFact && (
+              <img
+                src={heroFact.imageUrl}
+                alt={diwal.name}
+                className="absolute inset-0 w-full h-full object-cover z-10"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
+            )}
+            {/* bandeau nom en bas */}
+            <div className="absolute inset-x-0 bottom-0 z-20 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <p className="text-white font-bold text-lg leading-none">{diwal.name}</p>
+              <p className="text-white/80 text-xs mt-1">{diwal.years}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Le récit */}
+        <div className="bg-white rounded-2xl p-8 shadow-md">
+          <p className="text-[#333] leading-relaxed whitespace-pre-wrap text-[1.02rem]">
             {version === 'enfant' ? diwal.versions.enfant : diwal.versions.adulte}
           </p>
         </div>
