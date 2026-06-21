@@ -23,7 +23,7 @@ export default function CharteViewer() {
   return (
     <div className="charte-viewer">
       <header className="charte-header">
-        <h1>La Charte de Kurukan Fuga</h1>
+        <h1>Charte du Mandén</h1>
         <p className="charte-subtitle">1236 — Les 44 principes fondateurs de l'Empire du Mali</p>
         <p className="charte-source">
           Collectée à Kankan, Guinée (1998) · UNESCO Patrimoine Immatériel · 2009

@@ -61,6 +61,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FOUTA — L'encyclopédie théocratique */}
+      <section className="max-w-6xl mx-auto px-6 pt-6">
+        <div className="rounded-[2rem] px-8 py-9 md:px-12 md:py-11 shadow-kid" style={{ background: "linear-gradient(135deg, #6f5838 0%, #8b6f47 100%)" }}>
+          <div className="md:flex items-center justify-between gap-6">
+            <div className="text-white md:max-w-[64%]">
+              <h2 className="font-display font-bold tracking-tight leading-none text-5xl md:text-7xl mb-1">FOUTA</h2>
+              <div className="inline-flex items-center gap-2 text-sm md:text-base font-display font-semibold bg-white/20 px-3 py-1 rounded-full mb-4"><Landmark size={16} /> L'encyclopédie théocratique</div>
+              <p className="text-white/90 font-semibold leading-relaxed">1725–1896. Suis un jeune berger peul à travers les 9 diwés du Fouta-Djalon, et découvre comment neuf provinces gouvernaient ensemble une confédération.</p>
+            </div>
+            <Link to="/fouta" className="btn-kid bg-white text-[#4a3618] shrink-0 mt-4 md:mt-0"><Landmark size={18} /> Explorer les 9 diwés</Link>
+          </div>
+        </div>
+      </section>
+
       {/* Nos livres — rangées par âge */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">

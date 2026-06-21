@@ -1,6 +1,7 @@
 // Registre des SÉRIES pour le catalogue : une série = UN item (jamais un épisode).
 // La fiche-série vit déjà sur /serie/<slug> ; ici on ne décrit que la vignette.
 import { TAADIDI } from "./series/taadidi";
+import { KURUKAN } from "./series/kurukanFuga";
 
 export type SeriesItem = {
   slug: string;
@@ -16,6 +17,23 @@ export type SeriesItem = {
 };
 
 export const SERIES: SeriesItem[] = [
+  {
+    slug: KURUKAN.id,
+    title: KURUKAN.titre,
+    description: KURUKAN.pitch,
+    cover: KURUKAN.cover,
+    band: "Passage",
+    to: "/serie/kurukan-fuga",
+    auteur: "Mohamed Doumbouya",
+    episodes: {
+      total: KURUKAN.episodes.length,
+      live: KURUKAN.episodes.filter((e) => e.statut === "live").length,
+    },
+    episodeSlugs: KURUKAN.episodes
+      .filter((e) => e.statut === "live")
+      .map((e) => `kurukan-fuga-${e.numero}`),
+    nouveau: true,
+  },
   {
     slug: "resistance",
     title: "Résistance",

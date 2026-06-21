@@ -79,6 +79,48 @@ export default function MansayaPage() {
       ) : (
         <>
           {/* ═══════════════════════════════════════════════════════════ */}
+          {/* TEASER : CHARTE DU MANDÉN */}
+          {/* ═══════════════════════════════════════════════════════════ */}
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #2C3E7F 0%, #1a2557 100%)',
+              borderRadius: 12,
+              padding: '1.5rem',
+              marginBottom: '2rem',
+              color: '#F5E6D3',
+              border: '2px solid #D4AF37',
+            }}
+          >
+            <div style={{ fontSize: 28, marginBottom: 10 }}>📜</div>
+            <h2 style={{ fontSize: 18, fontWeight: 600, margin: '0 0 8px 0', color: '#D4AF37' }}>
+              Charte du Mandén
+            </h2>
+            <p style={{ fontSize: 13, margin: '0 0 12px 0', lineHeight: 1.6, opacity: 0.9 }}>
+              Découvrez les <strong>44 principes fondateurs</strong> de l'Empire du Mali (1236).
+              La première constitution écrite d'Afrique de l'Ouest.
+            </p>
+            <a
+              href="/charte"
+              style={{
+                display: 'inline-block',
+                background: '#D4AF37',
+                color: '#2C3E7F',
+                padding: '0.75rem 1.5rem',
+                borderRadius: 8,
+                textDecoration: 'none',
+                fontWeight: 600,
+                fontSize: 13,
+                transition: 'transform 0.2s',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
+              Lire les 44 articles →
+            </a>
+          </div>
+
+          {/* ═══════════════════════════════════════════════════════════ */}
           {/* GRILLE EMPIRES */}
           {/* ═══════════════════════════════════════════════════════════ */}
           <div

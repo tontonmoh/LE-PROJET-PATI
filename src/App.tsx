@@ -20,6 +20,8 @@ const UniversTaadidi = lazy(() => import("./pages/UniversTaadidi"));
 const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
 const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const SerieResistance = lazy(() => import("./pages/SerieResistance"));
+const SerieKurukan = lazy(() => import("./pages/SerieKurukan"));
+const FoutaPage = lazy(() => import("./pages/FoutaPage"));
 const MansayaPage = lazy(() => import("./pages/MansayaPage"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
@@ -99,7 +101,9 @@ export default function App() {
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />
             <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/serie/resistance" element={<SerieResistance />} />
+            <Route path="/serie/kurukan-fuga" element={<SerieKurukan />} />
             <Route path="/mansaya" element={<MansayaPage />} />
+            <Route path="/fouta" element={<FoutaPage />} />
             <Route path="/charte" element={<CharteViewer />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />

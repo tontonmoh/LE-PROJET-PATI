@@ -9,11 +9,12 @@ import { recordProgress, resumePage } from "../lib/reading";
 import { logProgress } from "../lib/progress";
 import { bumpCounter } from "../lib/publicStats";
 import { TAADIDI } from "../data/series/taadidi";
+import { KURUKAN } from "../data/series/kurukanFuga";
 import { POINT_ZERO } from "../data/point-zero";
 
 export default function BookReaderML() {
   const { id } = useParams();
-  const isSerie = (id || "").startsWith("taadidi-") || (id || "").startsWith("point-zero-") || (id || "").startsWith("g2040-");
+  const isSerie = (id || "").startsWith("taadidi-") || (id || "").startsWith("point-zero-") || (id || "").startsWith("g2040-") || (id || "").startsWith("kurukan-fuga-");
   const reader = READERS[id || ""];
   const [lang, setLang] = useState(reader ? reader.langs[0] : "fr");
   const [i, setI] = useState(-1); // -1 = couverture
@@ -83,6 +84,8 @@ export default function BookReaderML() {
   // Charger l'info de la série (si applicable)
   const serieEp = (id || "").startsWith("taadidi-")
     ? TAADIDI.episodes.find((e) => e.numero === parseInt((id || "").replace("taadidi-", ""), 10))
+    : (id || "").startsWith("kurukan-fuga-")
+    ? KURUKAN.episodes.find((e) => e.numero === parseInt((id || "").replace("kurukan-fuga-", ""), 10))
     : undefined;
   const pzTome = (id || "").startsWith("point-zero-")
     ? POINT_ZERO.tomes.find((t) => t.numero === parseInt((id || "").replace("point-zero-t", ""), 10))
@@ -134,6 +137,7 @@ export default function BookReaderML() {
           (id || "").startsWith("taadidi-") ? "/serie/taadidi" :
           (id || "").startsWith("point-zero-") ? "/serie/point-zero" :
           (id || "").startsWith("g2040-") ? "/serie/generation-2040" :
+          (id || "").startsWith("kurukan-fuga-") ? "/serie/kurukan-fuga" :
           `/livre/${id}`
         } className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline">
           <ArrowLeft size={18} /> {isSerie ? "Retour à la série" : "Retour au livre"}
@@ -236,6 +240,18 @@ export default function BookReaderML() {
             );
             return (
               <Link to="/serie/point-zero" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
+            );
+          } else if ((id || "").startsWith("kurukan-fuga-")) {
+            const num = parseInt((id || "").replace("kurukan-fuga-", ""), 10);
+            const next = num + 1;
+            if (READERS["kurukan-fuga-" + next]) return (
+              <Link to={`/livre/kurukan-fuga-${next}/lire`} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>Continuer · Épisode {next} <ChevronRight size={18} /></Link>
+            );
+            if (KURUKAN.episodes.some((e) => e.numero === next)) return (
+              <Link to="/serie/kurukan-fuga" className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-6"><Hourglass size={16} /> Bientôt · Épisode {next}</Link>
+            );
+            return (
+              <Link to="/serie/kurukan-fuga" className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}><ArrowLeft size={16} /> Retour à la série</Link>
             );
           }
           // G2040 et autres : retour à la série

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Headphones, Heart, Menu, X, Download, Puzzle, Users, UserCircle, BookOpen } from "lucide-react";
+import { Headphones, Heart, Menu, X, Download, Puzzle, Users, UserCircle } from "lucide-react";
 import LowBandwidthToggle from "./LowBandwidthToggle";
 
 export default function Navbar() {
@@ -23,12 +23,6 @@ export default function Navbar() {
               className={`navbar-link flex items-center gap-1.5 text-[#FFC93C] hover:bg-[#FFC93C]/15 ${active("/ecouter-les-contes") ? "bg-[#FFC93C]/20" : ""}`}
             >
               <Headphones size={16} />Contes
-            </Link>
-            <Link
-              to="/charte"
-              className={`navbar-link flex items-center gap-1.5 text-[#D4AF37] hover:bg-[#D4AF37]/15 ${active("/charte") ? "bg-[#D4AF37]/20" : ""}`}
-            >
-              <BookOpen size={16} />La Charte
             </Link>
             <Link to="/defi" className={`navbar-link flex items-center gap-1.5 ${active("/defi") ? "text-white bg-white/10" : ""}`}>
               <Puzzle size={16} />Le Défi
@@ -74,13 +68,6 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           >
             <Headphones size={18} />Contes
-          </Link>
-          <Link
-            to="/charte"
-            className={`navbar-link block py-3 flex items-center gap-2 text-[#D4AF37] ${active("/charte") ? "bg-[#D4AF37]/15" : ""}`}
-            onClick={() => setOpen(false)}
-          >
-            <BookOpen size={18} />La Charte
           </Link>
           <Link
             to="/defi"

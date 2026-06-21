@@ -51,6 +51,7 @@ import g2040Tome9 from "./g2040-tome9";
 import g2040Tome10 from "./g2040-tome10";
 import g2040Tome11 from "./g2040-tome11";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
+import { KURUKAN, KURUKAN_ACCENT } from "./series/kurukanFuga";
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
@@ -194,6 +195,13 @@ export const READERS: Record<string, MLReader> = {
 for (const ep of TAADIDI.episodes) {
   if (ep.statut === "live" && ep.reader) {
     READERS["taadidi-" + ep.numero] = { ...fromLaye(ep.reader), accent: TAADIDI_ACCENT };
+  }
+}
+
+// Épisodes 'live' de la série Kurukan Fuga -> lecteur générique, ids "kurukan-fuga-<n>"
+for (const ep of KURUKAN.episodes) {
+  if (ep.statut === "live" && ep.reader) {
+    READERS["kurukan-fuga-" + ep.numero] = { ...fromLaye(ep.reader), accent: KURUKAN_ACCENT };
   }
 }
 
