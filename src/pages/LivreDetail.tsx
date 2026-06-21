@@ -9,6 +9,7 @@ import { getLivret } from "../data/fendani-livret";
 import { getProjet } from "../data/chateau-projet";
 import { getBlurb } from "../data/blurbs";
 import { SOCIAL } from "../data/site";
+import ShareButtons from "../components/ShareButtons";
 
 export default function LivreDetail() {
   const { id } = useParams();
@@ -113,6 +114,11 @@ export default function LivreDetail() {
                 )}
               </div>
             )}
+
+            {/* Partage */}
+            <div className="mt-6">
+              <ShareButtons title={book.title} />
+            </div>
 
             {/* Extrait audio */}
             {book.audio && (

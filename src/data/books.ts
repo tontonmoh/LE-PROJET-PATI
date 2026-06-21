@@ -104,6 +104,11 @@ export const BOOKS: Book[] = [
     keywords: ["casseroles", "daba", "tradition", "modernité", "délestage", "frigo", "marmite", "fable", "cuisine", "terre", "agriculture", "mémoire", "Pati Passage"],
     nouveau: true,
   },
+  /* ════════════════════════════════════════════════════════════════
+     DÉBRANCHÉS le 21/06/2026 — Alphabets Pati Mômes (N'Ko, Adlam, Koré Sèbèli)
+     Pour les réafficher dans le catalogue : décommenter ce bloc.
+     (Les thèmes /imagier?theme=nko|adlam|kore-sebeli restent accessibles
+      par URL directe ; seules les vignettes catalogue sont masquées.)
   {
     slug: "imagier-nko",
     band: "Mômes",
@@ -134,6 +139,7 @@ export const BOOKS: Book[] = [
     keywords: ["koré sèbèli", "kore sebeli", "wakara", "écriture", "bangoura", "soussou", "soso", "patrimoine", "Pati Mômes"],
     nouveau: true,
   },
+  ════════════════════════════════════════════════════════════════ */
   {
     slug: "imagier-alphabet",
     band: "Mômes",
