@@ -32,10 +32,27 @@ export interface GameQuestion {
   event: string;
   date: string;        // Format affichable, ex. "29 septembre 1898"
   year: number;        // Année principale pour tri chronologique et placement frise
+  iso?: string;        // OPTIONNEL — clé de tri fine au format YYYY-MM-DD.
+                       // OBLIGATOIRE pour toute entrée dont l'année est partagée
+                       // avec une autre entrée du même pool (ex. 1958, 2010, 2021).
+                       // Sans iso, le tri retombe sur year (1ᵉʳ janvier de l'année).
   place: string;
   archiveSource: string;
   status: 'verified' | 'to-confirm';
   note?: string;
+}
+
+// ----------------------------------------------------------------------------
+// Fonction utilitaire de tri chronologique fin
+// ----------------------------------------------------------------------------
+// Utilise `iso` (YYYY-MM-DD) si présent, sinon retombe sur `year` (1er janvier).
+// Garantit un ordre déterministe même quand plusieurs entrées partagent une année.
+export function sortKey(q: GameQuestion): number {
+  if (q.iso) {
+    const t = Date.parse(q.iso);
+    if (!Number.isNaN(t)) return t;
+  }
+  return Date.parse(`${q.year}-01-01`);
 }
 
 // ----------------------------------------------------------------------------
@@ -47,7 +64,7 @@ const patrimoine: GameQuestion[] = [
     id: 'PAT-D-01',
     category: 'patrimoine', difficulty: 'decouverte', era: 'mali',
     event: 'Bataille de Kirina — Soundiata Keïta défait Soumaoro Kanté',
-    date: '1235', year: 1235,
+    date: '1235', year: 1235, iso: '1235-01-01',
     place: 'Kirina, plaine du Manden',
     archiveSource: 'Tradition orale Djeli (UNESCO PCI)',
     status: 'verified',
@@ -114,7 +131,7 @@ const patrimoine: GameQuestion[] = [
     id: 'PAT-D-09',
     category: 'patrimoine', difficulty: 'decouverte', era: 'mali',
     event: 'Couronnement de Soundiata Keïta comme Mansa du Mali',
-    date: '1235', year: 1235,
+    date: '1235', year: 1235, iso: '1235-06-01',
     place: 'Kaaba (Kangaba), Manden',
     archiveSource: 'Tradition orale Djeli / récit du Mansa Jigi',
     status: 'to-confirm',
@@ -235,7 +252,7 @@ const politique: GameQuestion[] = [
     id: 'POL-D-01',
     category: 'politique', difficulty: 'decouverte', era: 'republique',
     event: 'Discours de Sékou Touré devant le Général de Gaulle',
-    date: '25 août 1958', year: 1958,
+    date: '25 août 1958', year: 1958, iso: '1958-08-25',
     place: 'Conakry, Assemblée Territoriale',
     archiveSource: 'Archives présidentielles / INA',
     status: 'verified',
@@ -245,7 +262,7 @@ const politique: GameQuestion[] = [
     id: 'POL-D-02',
     category: 'politique', difficulty: 'decouverte', era: 'republique',
     event: 'Proclamation de l\'indépendance de la Guinée',
-    date: '2 octobre 1958', year: 1958,
+    date: '2 octobre 1958', year: 1958, iso: '1958-10-02',
     place: 'Conakry',
     archiveSource: 'Journal Officiel de la République de Guinée',
     status: 'verified',
@@ -254,7 +271,7 @@ const politique: GameQuestion[] = [
     id: 'POL-D-03',
     category: 'politique', difficulty: 'decouverte', era: 'republique',
     event: 'Admission de la Guinée à l\'Organisation des Nations Unies',
-    date: '12 décembre 1958', year: 1958,
+    date: '12 décembre 1958', year: 1958, iso: '1958-12-12',
     place: 'New York, Siège de l\'ONU',
     archiveSource: 'Archives ONU',
     status: 'verified',
@@ -263,7 +280,7 @@ const politique: GameQuestion[] = [
     id: 'POL-D-04',
     category: 'politique', difficulty: 'decouverte', era: 'republique',
     event: 'Création de l\'armée nationale guinéenne',
-    date: '1ᵉʳ novembre 1958', year: 1958,
+    date: '1ᵉʳ novembre 1958', year: 1958, iso: '1958-11-01',
     place: 'Conakry',
     archiveSource: 'Ordonnance N°23 du 16 décembre 1958',
     status: 'verified',
@@ -283,7 +300,7 @@ const politique: GameQuestion[] = [
     id: 'POL-C-01',
     category: 'politique', difficulty: 'citoyen', era: 'republique',
     event: 'Coalition des 4 partis politiques guinéens pour le NON (PDG, DSG, BAG, Indépendants de Habib Tall)',
-    date: 'septembre 1958', year: 1958,
+    date: 'septembre 1958', year: 1958, iso: '1958-09-14',
     place: 'Guinée française',
     archiveSource: 'Maitron / André Lewin Sékou Touré',
     status: 'verified',
@@ -312,7 +329,7 @@ const politique: GameQuestion[] = [
     id: 'POL-C-04',
     category: 'politique', difficulty: 'citoyen', era: 'republique',
     event: 'Jeanne Martin Cissé première femme à présider le Conseil de sécurité de l\'ONU',
-    date: 'novembre 1972', year: 1972,
+    date: 'novembre 1972', year: 1972, iso: '1972-11-01',
     place: 'New York, Siège de l\'ONU',
     archiveSource: 'Archives ONU (un.org/securitycouncil)',
     status: 'verified',
@@ -321,7 +338,7 @@ const politique: GameQuestion[] = [
     id: 'POL-C-05',
     category: 'politique', difficulty: 'citoyen', era: 'republique',
     event: 'Remplacement du franc guinéen par le syli',
-    date: '2 octobre 1972', year: 1972,
+    date: '2 octobre 1972', year: 1972, iso: '1972-10-02',
     place: 'Conakry',
     archiveSource: 'BCRG',
     status: 'verified',
@@ -371,7 +388,7 @@ const politique: GameQuestion[] = [
     id: 'POL-A-02',
     category: 'politique', difficulty: 'archiviste', era: 'republique',
     event: 'Massacre du stade de Conakry — répression de la manifestation contre Dadis Camara',
-    date: '28 septembre 2009', year: 2009,
+    date: '28 septembre 2009', year: 2009, iso: '2009-09-28',
     place: 'Stade du 28-Septembre, Conakry',
     archiveSource: 'Rapport ONU / Cour pénale internationale',
     status: 'verified',
@@ -381,7 +398,7 @@ const politique: GameQuestion[] = [
     id: 'POL-A-03',
     category: 'politique', difficulty: 'archiviste', era: 'republique',
     event: 'Accords de Ouagadougou — feuille de route de la transition post-Dadis',
-    date: '15 janvier 2010', year: 2010,
+    date: '15 janvier 2010', year: 2010, iso: '2010-01-15',
     place: 'Ouagadougou, Burkina Faso',
     archiveSource: 'Archives CEDEAO',
     status: 'to-confirm',
@@ -473,7 +490,7 @@ const culturel: GameQuestion[] = [
     id: 'CUL-D-09',
     category: 'culturel', difficulty: 'decouverte', era: 'republique',
     event: 'Adoption de l\'hymne national « Liberté »',
-    date: '2 octobre 1958', year: 1958,
+    date: '2 octobre 1958', year: 1958, iso: '1958-10-02',
     place: 'Conakry',
     archiveSource: 'Constitution du 10 novembre 1958, article 1',
     status: 'verified',
@@ -800,7 +817,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-D-01',
     category: 'constitutionnel', difficulty: 'decouverte', era: 'republique',
     event: 'Référendum constitutionnel français — la Guinée vote NON',
-    date: '28 septembre 1958', year: 1958,
+    date: '28 septembre 1958', year: 1958, iso: '1958-09-28',
     place: 'Guinée française',
     archiveSource: 'Archives électorales / INA',
     status: 'verified',
@@ -810,7 +827,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-D-02',
     category: 'constitutionnel', difficulty: 'decouverte', era: 'republique',
     event: 'Adoption de la 1ʳᵉ Constitution de la République de Guinée',
-    date: '10 novembre 1958', year: 1958,
+    date: '10 novembre 1958', year: 1958, iso: '1958-11-10',
     place: 'Conakry (Assemblée nationale)',
     archiveSource: 'Loi n°4/AN/58 — Journal Officiel',
     status: 'verified',
@@ -839,7 +856,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-D-05',
     category: 'constitutionnel', difficulty: 'decouverte', era: 'republique',
     event: 'Prise du pouvoir par l\'armée — le CNRD dirigé par Mamadi Doumbouya',
-    date: '5 septembre 2021', year: 2021,
+    date: '5 septembre 2021', year: 2021, iso: '2021-09-05',
     place: 'Conakry',
     archiveSource: 'Archives CNRD',
     status: 'verified',
@@ -848,7 +865,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-D-06',
     category: 'constitutionnel', difficulty: 'decouverte', era: 'republique',
     event: 'Prestation de serment de Mamadi Doumbouya, président élu',
-    date: '17 janvier 2026', year: 2026,
+    date: '17 janvier 2026', year: 2026, iso: '2026-01-17',
     place: 'Conakry',
     archiveSource: 'Cour suprême',
     status: 'verified',
@@ -888,7 +905,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-C-05',
     category: 'constitutionnel', difficulty: 'citoyen', era: 'republique',
     event: 'Prise du pouvoir par l\'armée — le CNDD dirigé par Moussa Dadis Camara',
-    date: '23 décembre 2008', year: 2008,
+    date: '23 décembre 2008', year: 2008, iso: '2008-12-23',
     place: 'Conakry',
     archiveSource: 'Archives présidentielles / presse',
     status: 'verified',
@@ -897,7 +914,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-C-06',
     category: 'constitutionnel', difficulty: 'citoyen', era: 'republique',
     event: 'Promulgation de la Constitution révisée par le général Sékouba Konaté',
-    date: '7 mai 2010', year: 2010,
+    date: '7 mai 2010', year: 2010, iso: '2010-05-07',
     place: 'Conakry',
     archiveSource: 'Digithèque MJP / Journal Officiel',
     status: 'verified',
@@ -907,7 +924,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-C-07',
     category: 'constitutionnel', difficulty: 'citoyen', era: 'republique',
     event: 'Investiture d\'Alpha Condé — 1ʳᵉ alternance démocratique',
-    date: '21 décembre 2010', year: 2010,
+    date: '21 décembre 2010', year: 2010, iso: '2010-12-21',
     place: 'Palais du Peuple, Conakry',
     archiveSource: 'Cour constitutionnelle / Journal Officiel',
     status: 'verified',
@@ -917,7 +934,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-C-08',
     category: 'constitutionnel', difficulty: 'citoyen', era: 'republique',
     event: 'Adoption par référendum de la Constitution de 2020',
-    date: '22 mars 2020', year: 2020,
+    date: '22 mars 2020', year: 2020, iso: '2020-03-22',
     place: 'Guinée',
     archiveSource: 'CENI / Journal Officiel',
     status: 'verified',
@@ -927,7 +944,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-C-09',
     category: 'constitutionnel', difficulty: 'citoyen', era: 'republique',
     event: 'Concertations nationales inclusives — dialogue avec les forces vives avant la Charte',
-    date: '14-23 septembre 2021', year: 2021,
+    date: '14-23 septembre 2021', year: 2021, iso: '2021-09-23',
     place: 'Palais du Peuple, Conakry',
     archiveSource: 'Archives CNRD / Wikipédia / Mosaïqueguinée',
     status: 'verified',
@@ -948,7 +965,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-A-02',
     category: 'constitutionnel', difficulty: 'archiviste', era: 'republique',
     event: 'Promulgation de la Charte de la Transition par le CNRD',
-    date: '27 septembre 2021', year: 2021,
+    date: '27 septembre 2021', year: 2021, iso: '2021-09-27',
     place: 'Conakry',
     archiveSource: 'Journal Officiel',
     status: 'verified',
@@ -958,7 +975,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-A-03',
     category: 'constitutionnel', difficulty: 'archiviste', era: 'republique',
     event: 'Investiture du colonel Mamadi Doumbouya, Président de la Transition',
-    date: '1ᵉʳ octobre 2021', year: 2021,
+    date: '1ᵉʳ octobre 2021', year: 2021, iso: '2021-10-01',
     place: 'Palais des Nations, Conakry',
     archiveSource: 'Cour suprême',
     status: 'verified',
@@ -967,7 +984,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-A-04',
     category: 'constitutionnel', difficulty: 'archiviste', era: 'republique',
     event: 'Référendum constitutionnel — adoption de la Constitution Doumbouya',
-    date: '21 septembre 2025', year: 2025,
+    date: '21 septembre 2025', year: 2025, iso: '2025-09-21',
     place: 'Guinée',
     archiveSource: 'CENI',
     status: 'verified',
@@ -977,7 +994,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-A-05',
     category: 'constitutionnel', difficulty: 'archiviste', era: 'republique',
     event: 'Élection présidentielle — Mamadi Doumbouya président élu',
-    date: '28 décembre 2025', year: 2025,
+    date: '28 décembre 2025', year: 2025, iso: '2025-12-28',
     place: 'Guinée',
     archiveSource: 'CENI',
     status: 'verified',
@@ -987,7 +1004,7 @@ const constitutionnel: GameQuestion[] = [
     id: 'CON-A-06',
     category: 'constitutionnel', difficulty: 'archiviste', era: 'republique',
     event: 'Proclamation des résultats par la Cour suprême',
-    date: '4 janvier 2026', year: 2026,
+    date: '4 janvier 2026', year: 2026, iso: '2026-01-04',
     place: 'Conakry',
     archiveSource: 'Cour suprême',
     status: 'verified',
