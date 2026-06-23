@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   BUREAU_ASSEMBLEE,
   CIRCONSCRIPTIONS,
@@ -16,6 +16,11 @@ const C = {
   paper: '#f4eeda',
   paperDeep: '#e7dcc0',
   line: '#cdbf9c',
+  // Accents secondaires pour le menu des jeux (chaleur)
+  terracotta: '#c9622e',
+  terraDeep: '#9c4a20',
+  leather: '#7c4a1c',
+  leatherDeep: '#5c3812',
 };
 
 // Normalisation pour la recherche (insensible casse / accents / apostrophes)
@@ -27,22 +32,6 @@ const norm = (s: string) =>
     .replace(/['’\s\-_.]/g, '');
 
 export default function Senag() {
-  const mapRef = useRef<HTMLDivElement>(null);
-
-  // Chargement inline de la carte décorative (Guinée + carré symbolique Conakry)
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/maps/gn-conakry-senag.svg')
-      .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`SVG ${r.status}`))))
-      .then((svg) => {
-        if (!cancelled && mapRef.current) mapRef.current.innerHTML = svg;
-      })
-      .catch((err) => console.warn('SeNAG hero map:', err));
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   return (
     <main
       style={{
@@ -60,16 +49,12 @@ export default function Senag() {
             « Archives de l'État et Gouvernance publique : préserver la mémoire nationale »
           </p>
           <p style={{ color: C.inkSoft, margin: 0 }}>25&nbsp;–&nbsp;30 juin 2026 · Lac Gbassikolo, Conakry</p>
-          <div
-            ref={mapRef}
-            style={{ maxWidth: 620, margin: '24px auto 0' }}
-            role="img"
-            aria-label="Carte de la Guinée — Conakry mise en avant"
-          />
           <div style={{ position: 'absolute', left: 0, right: 0, bottom: -6, height: 2, background: C.gold }} />
         </section>
 
-        <SectionPuzzle />
+        <SectionJeux />
+        <PullQuote />
+        <BigStats />
         <SectionRegistre60 />
         <SectionCroix />
 
@@ -90,56 +75,234 @@ export default function Senag() {
   );
 }
 
-/* ============ SECTION 1 — PUZZLE ============ */
-function SectionPuzzle() {
-  const [embed, setEmbed] = useState(false);
+/* ============ SECTION 1 — MENU DES JEUX SENAG ============ */
+function SectionJeux() {
+  const [embedded, setEmbedded] = useState<string | null>(null);
+
+  const JEUX = [
+    {
+      id: 'compagnons',
+      titre: 'Puzzle Compagnons',
+      tagline: 'Place les 34 figures de 1957 sur leur circonscription d\'origine.',
+      meta: '34 pièces · drag-and-drop · chrono',
+      url: '/jeux/compagnons/compagnons.html',
+      session: '/session-compagnons/new',
+      statut: 'actif' as const,
+      external: true as const,
+      accent: C.gold,
+      accentDeep: C.goldDeep,
+      glyph: '★',
+    },
+    {
+      id: 'train',
+      titre: 'Train Guinée',
+      tagline: 'Remets en ordre les événements marquants — du royaume Soso à l\'investiture du président Doumbouya.',
+      meta: '56 événements · 7 ères · chronologie',
+      url: '/senag/jeu',
+      session: '',
+      statut: 'actif' as const,
+      external: false as const,
+      accent: C.terracotta,
+      accentDeep: C.terraDeep,
+      glyph: '🚂',
+    },
+    {
+      id: 'primo',
+      titre: 'PriMo\'',
+      tagline: 'Replace les 17 Premiers ministres de la Guinée dans l\'ordre, de Béavogui à Bah Oury.',
+      meta: '17 PM · chronologie · 1972 → 2026',
+      url: '/senag/primo',
+      session: '',
+      statut: 'actif' as const,
+      external: false as const,
+      accent: C.leather,
+      accentDeep: C.leatherDeep,
+      glyph: '🏛',
+    },
+  ];
+
   return (
     <section style={{ padding: '48px 0', borderBottom: `1px solid ${C.line}` }}>
-      <SectionTitle eyebrow="Jeu de mémoire" title="La Carte des Compagnons" />
-      <p style={{ color: C.inkSoft, lineHeight: 1.7, maxWidth: 720, margin: '0 auto 24px', textAlign: 'center' }}>
-        Place chaque Compagnon sur sa circonscription d'origine — les 60 conseillers territoriaux
-        élus le 31 mars 1957, devenus députés constituants le 2 octobre 1958, complétés par les
-        bénéficiaires de la Croix du Compagnon de l'Indépendance.
+      <SectionTitle eyebrow="Jeux de mémoire" title="Joue avec l'histoire" />
+      <p style={{ color: C.inkSoft, lineHeight: 1.7, maxWidth: 720, margin: '0 auto 32px', textAlign: 'center' }}>
+        Trois jeux pour traverser la mémoire guinéenne — depuis les royaumes médiévaux jusqu'à la République
+        d'aujourd'hui. Le premier est jouable, les autres arrivent pour la SeNAG.
       </p>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
-        <a
-          href="/jeux/compagnons/compagnons.html"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-block',
-            padding: '14px 24px',
-            background: C.ink,
-            color: C.paper,
-            textDecoration: 'none',
-            fontWeight: 700,
-            fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
-            border: `2px solid ${C.ink}`,
-            boxShadow: `3px 3px 0 ${C.gold}`,
-            letterSpacing: '0.04em',
-          }}
-        >
-          Jouer en plein écran →
-        </a>
-        <button
-          onClick={() => setEmbed((v) => !v)}
-          style={{
-            padding: '14px 24px',
-            background: 'transparent',
-            color: C.ink,
-            border: `2px solid ${C.ink}`,
-            fontWeight: 600,
-            fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
-            cursor: 'pointer',
-            boxShadow: `3px 3px 0 ${C.ink}`,
-            letterSpacing: '0.04em',
-          }}
-        >
-          {embed ? 'Masquer le jeu' : 'Jouer ici'}
-        </button>
+
+      {/* ── Grille des 3 cartes ── */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 18,
+          marginBottom: 28,
+        }}
+      >
+        {JEUX.map((j) => {
+          const actif = j.statut === 'actif';
+          return (
+            <article
+              key={j.id}
+              style={{
+                background: '#fff',
+                border: `2px solid ${C.ink}`,
+                boxShadow: actif ? `5px 5px 0 ${j.accent}` : `3px 3px 0 ${C.line}`,
+                padding: 20,
+                display: 'flex',
+                flexDirection: 'column',
+                opacity: actif ? 1 : 0.92,
+                position: 'relative',
+              }}
+            >
+              {/* Filet d'accent en haut */}
+              <div
+                style={{
+                  position: 'absolute', top: 0, left: 0, right: 0, height: 4,
+                  background: j.accent,
+                }}
+              />
+
+              {/* Badge statut */}
+              <div
+                style={{
+                  display: 'inline-block',
+                  alignSelf: 'flex-start',
+                  background: actif ? j.accent : C.paperDeep,
+                  color: actif ? '#fff' : C.inkSoft,
+                  padding: '3px 10px',
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: '0.18em',
+                  fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                  textTransform: 'uppercase',
+                  marginTop: 8,
+                  marginBottom: 14,
+                }}
+              >
+                {actif ? 'Disponible' : 'Bientôt'}
+              </div>
+
+              {/* Glyphe + titre */}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
+                <span style={{ fontSize: 28, color: j.accent, lineHeight: 1 }}>{j.glyph}</span>
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: 22,
+                    fontWeight: 800,
+                    color: C.ink,
+                    lineHeight: 1.15,
+                  }}
+                >
+                  {j.titre}
+                </h3>
+              </div>
+
+              <p style={{ color: C.inkSoft, fontSize: 14, lineHeight: 1.55, margin: '0 0 14px', flex: 1 }}>
+                {j.tagline}
+              </p>
+
+              <p
+                style={{
+                  fontSize: 11,
+                  color: j.accentDeep,
+                  fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                  fontWeight: 600,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  margin: '0 0 16px',
+                }}
+              >
+                {j.meta}
+              </p>
+
+              {/* CTA */}
+              {actif ? (
+                j.external ? (
+                  // Jeu HTML externe (Puzzle Compagnons) : plein écran (new tab) + iframe inline
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <a
+                      href={j.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        flex: '1 1 auto',
+                        textAlign: 'center',
+                        padding: '10px 14px',
+                        background: C.ink,
+                        color: C.paper,
+                        textDecoration: 'none',
+                        fontWeight: 700,
+                        fontSize: 13,
+                        fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                        letterSpacing: '0.04em',
+                        border: `2px solid ${C.ink}`,
+                      }}
+                    >
+                      Jouer plein écran →
+                    </a>
+                    <button
+                      onClick={() => setEmbedded(embedded === j.id ? null : j.id)}
+                      style={{
+                        flex: '1 1 auto',
+                        padding: '10px 14px',
+                        background: 'transparent',
+                        color: C.ink,
+                        border: `2px solid ${C.ink}`,
+                        fontWeight: 700,
+                        fontSize: 13,
+                        fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                        letterSpacing: '0.04em',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {embedded === j.id ? 'Masquer' : 'Jouer ici'}
+                    </button>
+                  </div>
+                ) : (
+                  // Jeu React interne (Train, PriMo') : navigation simple vers la route
+                  <a
+                    href={j.url}
+                    style={{
+                      display: 'block',
+                      textAlign: 'center',
+                      padding: '10px 14px',
+                      background: C.ink,
+                      color: C.paper,
+                      textDecoration: 'none',
+                      fontWeight: 700,
+                      fontSize: 13,
+                      fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                      letterSpacing: '0.04em',
+                      border: `2px solid ${C.ink}`,
+                    }}
+                  >
+                    Jouer →
+                  </a>
+                )
+              ) : (
+                <div
+                  style={{
+                    padding: '10px 14px',
+                    background: C.paperDeep,
+                    color: C.inkSoft,
+                    border: `2px dashed ${C.line}`,
+                    textAlign: 'center',
+                    fontWeight: 700,
+                    fontSize: 13,
+                    fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  À venir pour la SeNAG
+                </div>
+              )}
+            </article>
+          );
+        })}
       </div>
 
-      {/* ── Bandeau : Lancer une session de groupe ── */}
+      {/* ── Bandeau session de groupe (lié à Puzzle Compagnons) ── */}
       <a
         href="/session-compagnons/new"
         style={{
@@ -158,17 +321,9 @@ function SectionPuzzle() {
       >
         <span
           style={{
-            display: 'inline-flex',
-            width: 44,
-            height: 44,
-            borderRadius: '50%',
-            background: C.gold,
-            color: C.ink,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-            fontWeight: 700,
-            fontSize: 22,
+            display: 'inline-flex', width: 44, height: 44, borderRadius: '50%',
+            background: C.gold, color: C.ink, alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0, fontWeight: 700, fontSize: 22,
             fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
           }}
         >
@@ -176,37 +331,133 @@ function SectionPuzzle() {
         </span>
         <span style={{ flex: 1 }}>
           <span style={{ display: 'block', fontWeight: 700, fontSize: 15, fontFamily: '"Gill Sans","Futura",system-ui,sans-serif', letterSpacing: '0.04em' }}>
-            Défi de groupe — classe, atelier, institution
+            Défi de groupe — Puzzle Compagnons
           </span>
           <span style={{ display: 'block', fontSize: 13, opacity: 0.75, marginTop: 2 }}>
-            Crée une session, projette le QR code, mesure qui replace les Compagnons le plus vite.
+            Classe, atelier, institution : crée une session, projette le QR code, mesure qui replace les Compagnons le plus vite.
           </span>
         </span>
         <span
           style={{
-            background: C.gold,
-            color: C.ink,
-            padding: '6px 14px',
-            fontWeight: 700,
-            fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
-            fontSize: 13,
-            letterSpacing: '0.04em',
-            flexShrink: 0,
+            background: C.gold, color: C.ink, padding: '6px 14px', fontWeight: 700,
+            fontFamily: '"Gill Sans","Futura",system-ui,sans-serif', fontSize: 13,
+            letterSpacing: '0.04em', flexShrink: 0,
           }}
         >
           LANCER →
         </span>
       </a>
 
-      {embed && (
-        <div style={{ background: '#fff', border: `2px solid ${C.ink}`, boxShadow: `6px 6px 0 ${C.gold}`, overflow: 'hidden' }}>
+      {/* ── Iframe du jeu sélectionné ── */}
+      {embedded && (
+        <div style={{ background: '#fff', border: `2px solid ${C.ink}`, boxShadow: `6px 6px 0 ${C.gold}`, overflow: 'hidden', marginTop: 20 }}>
           <iframe
-            src="/jeux/compagnons/compagnons.html"
-            title="La Carte des Compagnons — jeu de mémoire SENAG"
+            src={JEUX.find((j) => j.id === embedded)?.url || ''}
+            title={JEUX.find((j) => j.id === embedded)?.titre || ''}
             style={{ width: '100%', height: '90vh', border: 0, display: 'block' }}
           />
         </div>
       )}
+    </section>
+  );
+}
+
+/* ============ CITATION CENTRALE (warmth) ============ */
+function PullQuote() {
+  return (
+    <section style={{ padding: '56px 16px', textAlign: 'center', borderBottom: `1px solid ${C.line}` }}>
+      <div
+        style={{
+          fontSize: 36,
+          color: C.gold,
+          fontFamily: 'Georgia, serif',
+          lineHeight: 1,
+          marginBottom: 12,
+        }}
+        aria-hidden
+      >
+        ❝
+      </div>
+      <blockquote
+        style={{
+          fontFamily: '"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif',
+          fontSize: 'clamp(20px, 3.2vw, 28px)',
+          fontStyle: 'italic',
+          lineHeight: 1.5,
+          color: C.ink,
+          maxWidth: 760,
+          margin: '0 auto',
+        }}
+      >
+        … Or il n'y a pas de dignité sans liberté&nbsp;: nous préférons la pauvreté
+        dans la liberté à l'opulence dans l'esclavage.
+      </blockquote>
+      <p
+        style={{
+          marginTop: 18,
+          fontSize: 13,
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          color: C.goldDeep,
+          fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+          fontWeight: 700,
+        }}
+      >
+        Ahmed Sékou Touré · Conakry, 25 août 1958
+      </p>
+    </section>
+  );
+}
+
+/* ============ COMPTEURS VISUELS (warmth) ============ */
+function BigStats() {
+  const stats = [
+    { num: '60', label: 'Compagnons de l\'Indépendance', sub: 'élus le 31 mars 1957' },
+    { num: '453', label: 'Dépositaires de la Croix', sub: 'décrets de 1959-1960' },
+    { num: '28.09.1958', label: 'Le NON au référendum', sub: '1 134 324 oui à la République', isDate: true },
+  ];
+
+  return (
+    <section style={{ padding: '48px 0', borderBottom: `1px solid ${C.line}` }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: 24,
+          textAlign: 'center',
+        }}
+      >
+        {stats.map((s, i) => (
+          <div key={i}>
+            <div
+              style={{
+                fontSize: s.isDate ? 'clamp(22px, 4vw, 32px)' : 'clamp(48px, 8vw, 72px)',
+                fontWeight: 800,
+                color: C.gold,
+                lineHeight: 1,
+                fontFamily: '"Iowan Old Style","Palatino Linotype",Georgia,serif',
+                marginBottom: 6,
+              }}
+            >
+              {s.num}
+            </div>
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 700,
+                color: C.ink,
+                fontFamily: '"Gill Sans","Futura",system-ui,sans-serif',
+                letterSpacing: '0.04em',
+              }}
+            >
+              {s.label}
+            </div>
+            <div style={{ fontSize: 12, color: C.inkSoft, fontStyle: 'italic', marginTop: 4 }}>
+              {s.sub}
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -225,6 +476,13 @@ function SectionRegistre60() {
       />
       {open && (
         <>
+          <p style={{ color: C.inkSoft, lineHeight: 1.75, fontSize: 15, marginBottom: 24, fontStyle: 'italic', maxWidth: 720 }}>
+            Le 31 mars 1957, 60 conseillers territoriaux sont élus dans 26 circonscriptions
+            de l'Assemblée territoriale de Guinée française. Le 2 octobre 1958 — au lendemain
+            du « NON » — ils deviennent les députés constituants de la République de Guinée.
+            Voici leurs noms.
+          </p>
+
           <h3 style={subhead}>Bureau de l'Assemblée nationale constituante</h3>
           <div style={tableWrap}>
             <table style={table}>
@@ -320,6 +578,14 @@ function SectionCroix() {
       />
       {open && (
         <>
+          <p style={{ color: C.ink, lineHeight: 1.75, fontSize: 15, marginBottom: 16, maxWidth: 720 }}>
+            Les Décrets <strong>N°227 et N°228/PG</strong> du 1<sup>er</sup> octobre 1959, complétés
+            par celui du 2 octobre 1960, instituent la <em>Croix du Compagnon de l'Indépendance</em>
+            et désignent <strong>{CROIX_META.total}</strong> dépositaires : militants du PDG-RDA,
+            syndicalistes, instituteurs, anciens combattants, jeunes du RDA, femmes des marchés,
+            anonymes du <strong>NON</strong> du 28 septembre 1958. Une mémoire populaire de
+            l'indépendance.
+          </p>
           <p style={{ color: C.inkSoft, lineHeight: 1.7, marginBottom: 16, fontSize: 14, fontStyle: 'italic' }}>
             {CROIX_META.avertissement}
           </p>
