@@ -41,6 +41,7 @@ const AtelierSolidaire = lazy(() => import("./pages/AtelierSolidaire"));
 const Sobela = lazy(() => import("./pages/Sobela"));
 const ImpactReport = lazy(() => import("./pages/ImpactReport"));
 const Presse = lazy(() => import("./pages/Presse"));
+const Senag = lazy(() => import("./pages/Senag"));
 const Contribuer = lazy(() => import("./pages/Contribuer"));
 const Collaboration = lazy(() => import("./pages/Collaboration"));
 const AppliMobile = lazy(() => import("./pages/AppliMobile"));
@@ -49,6 +50,9 @@ const LeDefi = lazy(() => import("./pages/LeDefi"));
 const SessionNew = lazy(() => import("./pages/SessionNew"));
 const SessionPlay = lazy(() => import("./pages/SessionPlay"));
 const SessionScores = lazy(() => import("./pages/SessionScores"));
+const SessionCompagnonsNew = lazy(() => import("./pages/SessionCompagnonsNew"));
+const SessionCompagnonsPlay = lazy(() => import("./pages/SessionCompagnonsPlay"));
+const SessionCompagnonsScores = lazy(() => import("./pages/SessionCompagnonsScores"));
 const AccesPati = lazy(() => import("./pages/AccesPati"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Langue = lazy(() => import("./pages/Langue"));
@@ -125,11 +129,15 @@ export default function App() {
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />
             <Route path="/presse" element={<Presse />} />
+            <Route path="/senag" element={<Senag />} />
 
             {/* ── Mode Session (classement contextuel) ── */}
             <Route path="/session/new"          element={<SessionNew />} />
             <Route path="/session/:code/scores" element={<SessionScores />} />
             <Route path="/session/:code"        element={<SessionPlay />} />
+            <Route path="/session-compagnons/new"          element={<SessionCompagnonsNew />} />
+            <Route path="/session-compagnons/:code/scores" element={<SessionCompagnonsScores />} />
+            <Route path="/session-compagnons/:code"        element={<SessionCompagnonsPlay />} />
 
             <Route path="/contribuer" element={<Contribuer />} />
             <Route path="/collaboration" element={<Collaboration />} />
