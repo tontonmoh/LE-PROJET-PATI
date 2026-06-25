@@ -47,6 +47,7 @@ const Collaboration = lazy(() => import("./pages/Collaboration"));
 const AppliMobile = lazy(() => import("./pages/AppliMobile"));
 const Personnalisation = lazy(() => import("./pages/Personnalisation"));
 const LeDefi = lazy(() => import("./pages/LeDefi"));
+const DefiClassement = lazy(() => import("./pages/DefiClassement"));
 const SessionNew = lazy(() => import("./pages/SessionNew"));
 const SessionPlay = lazy(() => import("./pages/SessionPlay"));
 const SessionScores = lazy(() => import("./pages/SessionScores"));
@@ -147,6 +148,7 @@ export default function App() {
             <Route path="/collaboration" element={<Collaboration />} />
             <Route path="/appli-mobile" element={<AppliMobile />} />
             <Route path="/personnalisation" element={<Personnalisation />} />
+            <Route path="/defi/classement" element={<DefiClassement />} />
             <Route path="/defi" element={<LeDefi />} />
             <Route path="/assistance" element={<FAQ />} />
 

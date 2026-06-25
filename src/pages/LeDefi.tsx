@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Puzzle, ArrowLeft, Maximize2, Minimize2, Users } from "lucide-react";
+import { Puzzle, ArrowLeft, Maximize2, Minimize2, Users, Star } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { logProgress } from "../lib/progress";
 
@@ -78,7 +78,7 @@ export default function LeDefi() {
         {/* ── Bandeau : lancer un défi de groupe ── */}
         <Link
           to="/session/new"
-          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mb-5 transition-colors"
+          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mb-3 transition-colors"
           style={{ background: "#143D2E" }}
         >
           <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0" style={{ background: "rgba(255,201,60,0.15)" }}>
@@ -93,6 +93,28 @@ export default function LeDefi() {
           <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
             style={{ background: "#C8841E", color: "white" }}>
             Lancer →
+          </span>
+        </Link>
+
+        {/* ── Bandeau : Hall of Fame ── */}
+        <Link
+          to="/defi/classement"
+          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mb-5 transition-colors"
+          style={{ background: "rgba(255,201,60,0.08)", border: "1px solid rgba(255,201,60,0.25)" }}
+        >
+          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0"
+            style={{ background: "rgba(255,201,60,0.18)" }}>
+            <Star size={20} style={{ color: "#FFC93C" }} />
+          </span>
+          <span className="flex-1">
+            <span className="block font-display font-bold text-[#0D2B1A] text-sm sm:text-base">Hall of Fame</span>
+            <span className="block text-[#3a4a42] font-semibold text-xs sm:text-sm">
+              Classement général de tous les joueurs — vitesse + régularité, toutes sessions confondues.
+            </span>
+          </span>
+          <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
+            style={{ background: "#FFC93C", color: "#0D2B1A" }}>
+            Voir →
           </span>
         </Link>
       </section>

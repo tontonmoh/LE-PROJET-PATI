@@ -237,3 +237,125 @@ export async function getGameStats(livre_slug: string): Promise<{
   if (error) throw error;
   return (data as ReturnType<typeof getGameStats> extends Promise<infer T> ? T : never) ?? null;
 }
+
+// ════════════════════════════════════════════════════════════════════════════
+// HALL OF FAME — classement général cross-sessions, par pseudo, points composite
+// ════════════════════════════════════════════════════════════════════════════
+
+export type HallOfFamePeriod = "all" | "30d" | "season";
+
+export interface HallOfFameEntry {
+  pseudo: string;
+  best_time_ms: number;
+  sessions_count: number;
+  parties_count: number;
+  last_played: string;
+  points: number;
+}
+
+/**
+ * Calcule les points composite d'un joueur :
+ *   floor(60000 / best_time_ms) * 10  +  sessions_count * 20
+ * Récompense la vitesse (meilleur temps) ET la régularité (nb sessions jouées).
+ */
+export function computeHallOfFamePoints(best_time_ms: number, sessions_count: number): number {
+  if (!best_time_ms || best_time_ms <= 0) return 0;
+  return Math.floor(60000 / best_time_ms) * 10 + sessions_count * 20;
+}
+
+/**
+ * Hall of Fame général : agrège les scores par pseudo sur tous les codes-sessions
+ * d'un livre, sur une période donnée. Trié par points composite décroissants.
+ *
+ * Le groupage est fait côté JS (Supabase REST ne fait pas le GROUP BY simplement).
+ * Limite la requête à 5000 lignes brutes par défaut — largement suffisant pour le
+ * Défi PATI au volume actuel. Si tu dépasses, créer une RPC SQL.
+ *
+ * @param period - "all" (tout l'historique), "30d" (30 derniers jours), "season" (mois en cours)
+ * @param livre_slug - slug du livre/jeu (par défaut "puzzle-guinee")
+ * @param limit - nombre max d'entrées retournées (par défaut 200)
+ */
+export async function getHallOfFame(
+  period: HallOfFamePeriod = "all",
+  livre_slug = "puzzle-guinee",
+  limit = 200,
+): Promise<HallOfFameEntry[]> {
+  // Filtre période
+  let sinceIso: string | null = null;
+  const now = new Date();
+  if (period === "30d") {
+    const since = new Date(now);
+    since.setDate(since.getDate() - 30);
+    sinceIso = since.toISOString();
+  } else if (period === "season") {
+    // Saison = mois calendaire en cours
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    sinceIso = start.toISOString();
+  }
+
+  // Récupère les scores bruts (jusqu'à 5000 lignes pour le groupage)
+  let q = supabase
+    .from("pati_session_scores")
+    .select("pseudo, time_ms, session_code, finished_at")
+    .eq("livre_slug", livre_slug)
+    .order("time_ms", { ascending: true })
+    .limit(5000);
+
+  if (sinceIso) q = q.gte("finished_at", sinceIso);
+
+  const { data, error } = await q;
+  if (error) throw error;
+
+  // Groupage par pseudo (côté JS)
+  type Acc = {
+    pseudo: string;
+    best_time_ms: number;
+    sessions: Set<string>;
+    parties_count: number;
+    last_played: string;
+  };
+  const map = new Map<string, Acc>();
+
+  for (const row of (data ?? []) as Array<{
+    pseudo: string;
+    time_ms: number;
+    session_code: string;
+    finished_at: string;
+  }>) {
+    const p = (row.pseudo ?? "").trim();
+    if (!p) continue;
+    const existing = map.get(p);
+    if (!existing) {
+      map.set(p, {
+        pseudo: p,
+        best_time_ms: row.time_ms,
+        sessions: new Set([row.session_code]),
+        parties_count: 1,
+        last_played: row.finished_at,
+      });
+    } else {
+      if (row.time_ms < existing.best_time_ms) existing.best_time_ms = row.time_ms;
+      existing.sessions.add(row.session_code);
+      existing.parties_count += 1;
+      if (row.finished_at > existing.last_played) existing.last_played = row.finished_at;
+    }
+  }
+
+  // Conversion → tableau d'entrées avec points calculés
+  const entries: HallOfFameEntry[] = Array.from(map.values()).map((e) => ({
+    pseudo: e.pseudo,
+    best_time_ms: e.best_time_ms,
+    sessions_count: e.sessions.size,
+    parties_count: e.parties_count,
+    last_played: e.last_played,
+    points: computeHallOfFamePoints(e.best_time_ms, e.sessions.size),
+  }));
+
+  // Tri par points composite décroissants ; tie-break sur best_time_ms ascendant
+  entries.sort((a, b) => {
+    if (b.points !== a.points) return b.points - a.points;
+    return a.best_time_ms - b.best_time_ms;
+  });
+
+  return entries.slice(0, limit);
+}
