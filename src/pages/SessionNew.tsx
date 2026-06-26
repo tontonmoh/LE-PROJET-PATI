@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, Music, ArrowRight,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -15,11 +16,65 @@ const CREAM  = "#FFF6E7";
 const DISPLAY = "'Fraunces', Georgia, serif";
 
 // ── Catalogue des jeux/livres jouables en session ───────────────────────────
-// (slug = livre_slug côté Supabase ; route = page qui lance le jeu)
-const JEUX = [
-  { slug: "puzzle-guinee", jeu: "defi",   label: "Le Défi — Puzzle de la Guinée" },
-  { slug: "corridor",      jeu: "defi",   label: "Le Corridor — TransGuinéen" },
-  // ajoute ici les quiz/jeux Taadidi quand ils sont jouables en défi
+// 5 cartes au total : 2 Pati + 3 SENAG. Entrée unique pour tous les défis collectifs.
+//
+// Champs :
+//   slug / jeu       → métadonnées Supabase (table pati_sessions)
+//   playPrefix       → racine de la page de jeu (la QR pointe ici)
+//   withCodeInPath   → true → /session-xxx/CODE  |  false → /senag/xxx?session=CODE
+//   hasLiveScores    → true → bouton "classement live" actif (sinon "bientôt")
+//
+// ⚠ À VÉRIFIER côté Moh : les slugs/jeu des 3 jeux SENAG doivent matcher
+// ce qu'utilise SessionCompagnonsNew (existant) et ce que les pages
+// SenagJeu/SenagPrimo enregistreront en phase 2. Si SessionCompagnonsNew
+// crée des sessions avec un autre slug que "compagnons", ajuste ici.
+type JeuSection = "pati" | "senag";
+type Jeu = {
+  id: string;
+  slug: string;
+  jeu: string;
+  label: string;
+  section: JeuSection;
+  icon: typeof Users;
+  accent: string;
+  playPrefix: string;
+  withCodeInPath: boolean;
+  hasLiveScores: boolean;
+};
+
+const JEUX: Jeu[] = [
+  // ── Pati ────────────────────────────────────────────────────────────────
+  {
+    id: "puzzle-guinee", slug: "puzzle-guinee", jeu: "defi",
+    label: "Le Défi — Puzzle de la Guinée",
+    section: "pati", icon: MapIcon, accent: "#C8841E",
+    playPrefix: "/session", withCodeInPath: true, hasLiveScores: true,
+  },
+  {
+    id: "corridor", slug: "corridor", jeu: "defi",
+    label: "Le Corridor — TransGuinéen",
+    section: "pati", icon: Mountain, accent: "#C8841E",
+    playPrefix: "/session", withCodeInPath: true, hasLiveScores: true,
+  },
+  // ── SENAG ───────────────────────────────────────────────────────────────
+  {
+    id: "compagnons", slug: "compagnons", jeu: "puzzle",
+    label: "Puzzle des Compagnons",
+    section: "senag", icon: Star, accent: "#C9A227",
+    playPrefix: "/session-compagnons", withCodeInPath: true, hasLiveScores: true,
+  },
+  {
+    id: "train", slug: "train-memoire", jeu: "chronologie",
+    label: "Train de la Mémoire",
+    section: "senag", icon: TrainFront, accent: "#A8442C",
+    playPrefix: "/senag/jeu", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "primo", slug: "primo", jeu: "chronologie-pm",
+    label: "PriMo' — Les Premiers Ministres",
+    section: "senag", icon: Landmark, accent: "#6B4423",
+    playPrefix: "/senag/primo", withCodeInPath: false, hasLiveScores: false,
+  },
 ];
 
 const TYPES: { id: SessionType; label: string; icon: typeof Users; ex: string }[] = [
@@ -28,10 +83,29 @@ const TYPES: { id: SessionType; label: string; icon: typeof Users; ex: string }[
   { id: "concert", label: "Concert", icon: Music,         ex: "QR projeté à l'écran" },
 ];
 
-export default function SessionNew() {
-  const navigate = useNavigate();
+// ── Helpers URLs (per-jeu) ──────────────────────────────────────────────────
+function buildPlayPath(j: Jeu, code: string): string {
+  return j.withCodeInPath ? `${j.playPrefix}/${code}` : `${j.playPrefix}?session=${code}`;
+}
+function buildJoinUrl(baseUrl: string, j: Jeu, code: string): string {
+  return `${baseUrl}${buildPlayPath(j, code)}`;
+}
+function buildScoresPath(j: Jeu, code: string): string | null {
+  return j.hasLiveScores ? `${j.playPrefix}/${code}/scores` : null;
+}
 
-  const [jeuIdx, setJeuIdx]   = useState(0);
+export default function SessionNew() {
+  const [searchParams] = useSearchParams();
+
+  // Pré-sélection via ?game=<id> (utilisé par les redirects /session-compagnons/new etc.)
+  const initialIdx = (() => {
+    const g = searchParams.get("game");
+    if (!g) return 0;
+    const i = JEUX.findIndex((j) => j.id === g);
+    return i >= 0 ? i : 0;
+  })();
+
+  const [jeuIdx, setJeuIdx]   = useState(initialIdx);
   const [type, setType]       = useState<SessionType>("classe");
   const [label, setLabel]     = useState("");
   const [contact, setContact] = useState("");
@@ -43,7 +117,7 @@ export default function SessionNew() {
 
   const jeu     = JEUX[jeuIdx];
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://projetpati.com";
-  const joinUrl = code ? `${baseUrl}/session/${code}` : "";
+  const joinUrl = code ? buildJoinUrl(baseUrl, jeu, code) : "";
 
   const create = async () => {
     setCreating(true);
@@ -52,12 +126,12 @@ export default function SessionNew() {
       const s = await createSession({
         livre_slug: jeu.slug,
         jeu: jeu.jeu,
-        label: label.trim() || null as unknown as string,
+        label: label.trim() || (null as unknown as string),
         type,
         created_by: contact.trim() || undefined,
       });
       setCode(s.code);
-    } catch (e) {
+    } catch {
       setError("La session n'a pas pu être créée. Réessaie dans un instant.");
     } finally {
       setCreating(false);
@@ -73,9 +147,12 @@ export default function SessionNew() {
   };
 
   // ════════════════════════════════════════════════════════════════════════
-  // ÉCRAN 2 — Session créée : QR + code à projeter
+  // ÉCRAN 2 — Session créée
   // ════════════════════════════════════════════════════════════════════════
   if (code) {
+    const scoresPath = buildScoresPath(jeu, code);
+    const playPath = buildPlayPath(jeu, code);
+
     return (
       <div className="min-h-screen" style={{ background: GREEN }}>
         <div className="max-w-3xl mx-auto px-6 py-10">
@@ -93,12 +170,11 @@ export default function SessionNew() {
             </h1>
           </div>
 
-          {/* QR géant + code */}
           <div className="rounded-[2rem] p-8 md:p-10 text-center" style={{ background: CREAM }}>
             <p className="font-display font-semibold text-[#5a6b62] mb-1">Scanne pour rejoindre</p>
 
             <div className="inline-flex p-5 bg-white rounded-[1.5rem] shadow-lg my-4"
-              style={{ border: `3px solid ${ACCENT}` }}>
+              style={{ border: `3px solid ${jeu.accent}` }}>
               <QRCodeSVG
                 value={joinUrl}
                 size={260}
@@ -109,7 +185,6 @@ export default function SessionNew() {
               />
             </div>
 
-            {/* Code en grand pour saisie manuelle */}
             <div className="mb-2">
               <p className="text-[#8a9389] text-sm font-semibold mb-1">ou entre le code</p>
               <p className="font-display font-bold tracking-[0.25em]"
@@ -118,22 +193,27 @@ export default function SessionNew() {
               </p>
             </div>
 
-            {/* Lien copiable */}
             <button onClick={copyLink}
               className="inline-flex items-center gap-2 font-semibold text-sm px-4 py-2 rounded-full transition-colors"
-              style={{ background: copied ? `${GREEN}12` : `${ACCENT}15`, color: copied ? GREEN : ACCENT }}>
+              style={{ background: copied ? `${GREEN}12` : `${jeu.accent}15`, color: copied ? GREEN : jeu.accent }}>
               {copied ? <><Check size={15} /> Lien copié</> : <><Copy size={15} /> Copier le lien</>}
             </button>
           </div>
 
-          {/* Actions animateur */}
           <div className="grid sm:grid-cols-2 gap-3 mt-6">
-            <Link to={`/session/${code}/scores`}
-              className="flex items-center justify-center gap-2 font-display font-bold text-white rounded-2xl px-6 py-4 shadow-kid transition-transform hover:scale-[1.02]"
-              style={{ background: ACCENT }}>
-              <Users size={20} /> Voir le classement live <ArrowRight size={18} />
-            </Link>
-            <Link to={`/session/${code}`}
+            {scoresPath ? (
+              <Link to={scoresPath}
+                className="flex items-center justify-center gap-2 font-display font-bold text-white rounded-2xl px-6 py-4 shadow-kid transition-transform hover:scale-[1.02]"
+                style={{ background: jeu.accent }}>
+                <Users size={20} /> Voir le classement live <ArrowRight size={18} />
+              </Link>
+            ) : (
+              <div className="flex items-center justify-center gap-2 font-display font-semibold rounded-2xl px-6 py-4 text-center border-2 border-dashed"
+                style={{ borderColor: `${GOLD}55`, color: GOLD, background: "transparent" }}>
+                <Sparkles size={18} /> Classement live bientôt
+              </div>
+            )}
+            <Link to={playPath}
               className="flex items-center justify-center gap-2 font-display font-bold rounded-2xl px-6 py-4 transition-colors"
               style={{ background: GOLD, color: GREEN }}>
               <QrCode size={20} /> Tester côté joueur
@@ -149,8 +229,30 @@ export default function SessionNew() {
   }
 
   // ════════════════════════════════════════════════════════════════════════
-  // ÉCRAN 1 — Configuration de la session
+  // ÉCRAN 1 — Configuration
   // ════════════════════════════════════════════════════════════════════════
+  const jeuxPati  = JEUX.map((j, i) => ({ j, i })).filter(({ j }) => j.section === "pati");
+  const jeuxSenag = JEUX.map((j, i) => ({ j, i })).filter(({ j }) => j.section === "senag");
+
+  const renderJeuButton = (j: Jeu, i: number) => {
+    const Icon = j.icon;
+    const active = jeuIdx === i;
+    return (
+      <button key={j.id} onClick={() => setJeuIdx(i)}
+        className="flex items-center gap-3 rounded-2xl px-4 py-3 text-left transition-colors border-2"
+        style={{
+          background: active ? `${j.accent}12` : "white",
+          borderColor: active ? j.accent : "transparent",
+        }}>
+        <span className="inline-flex w-9 h-9 rounded-xl items-center justify-center shrink-0"
+          style={{ background: active ? j.accent : `${GREEN}0d` }}>
+          <Icon size={18} style={{ color: active ? "white" : "#8a9389" }} />
+        </span>
+        <span className="font-semibold text-[#0D2B1A] text-sm">{j.label}</span>
+      </button>
+    );
+  };
+
   return (
     <div className="min-h-screen" style={{ background: CREAM }}>
       <div className="max-w-2xl mx-auto px-6 py-10">
@@ -171,24 +273,26 @@ export default function SessionNew() {
           Crée une partie, projette le QR code, et regarde qui finit le premier — que vous soyez 30 ou 300.
         </p>
 
-        {/* 1. Choix du jeu */}
+        {/* 1. Choix du jeu — 2 sections (Pati / SENAG) */}
         <div className="mb-6">
           <label className="block font-display font-bold text-[#0D2B1A] mb-2">Quel jeu&nbsp;?</label>
-          <div className="flex flex-col gap-2">
-            {JEUX.map((j, i) => (
-              <button key={j.slug} onClick={() => setJeuIdx(i)}
-                className="flex items-center gap-3 rounded-2xl px-4 py-3 text-left transition-colors border-2"
-                style={{
-                  background: jeuIdx === i ? `${ACCENT}12` : "white",
-                  borderColor: jeuIdx === i ? ACCENT : "transparent",
-                }}>
-                <span className="inline-flex w-9 h-9 rounded-xl items-center justify-center shrink-0"
-                  style={{ background: jeuIdx === i ? ACCENT : `${GREEN}0d` }}>
-                  <QrCode size={18} style={{ color: jeuIdx === i ? "white" : "#8a9389" }} />
-                </span>
-                <span className="font-semibold text-[#0D2B1A] text-sm">{j.label}</span>
-              </button>
-            ))}
+
+          <div className="mb-4">
+            <p className="text-[11px] font-display font-bold uppercase tracking-[0.18em] text-[#8a9389] mb-2">
+              Pati
+            </p>
+            <div className="flex flex-col gap-2">
+              {jeuxPati.map(({ j, i }) => renderJeuButton(j, i))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-display font-bold uppercase tracking-[0.18em] text-[#8a9389] mb-2">
+              SENAG — Mémoire nationale
+            </p>
+            <div className="flex flex-col gap-2">
+              {jeuxSenag.map(({ j, i }) => renderJeuButton(j, i))}
+            </div>
           </div>
         </div>
 
@@ -215,7 +319,7 @@ export default function SessionNew() {
           </div>
         </div>
 
-        {/* 3. Label (optionnel) */}
+        {/* 3. Label optionnel */}
         <div className="mb-6">
           <label className="block font-display font-bold text-[#0D2B1A] mb-2">
             Nom de la partie <span className="text-[#8a9389] font-semibold text-sm">(optionnel)</span>
@@ -229,7 +333,7 @@ export default function SessionNew() {
           />
         </div>
 
-        {/* 4. Contact animateur (optionnel) */}
+        {/* 4. Contact animateur optionnel */}
         <div className="mb-8">
           <label className="block font-display font-bold text-[#0D2B1A] mb-2">
             Ton contact <span className="text-[#8a9389] font-semibold text-sm">(optionnel — pour retrouver tes sessions)</span>
@@ -249,7 +353,7 @@ export default function SessionNew() {
 
         <button onClick={create} disabled={creating}
           className="w-full flex items-center justify-center gap-2 font-display font-bold text-white rounded-2xl px-6 py-4 shadow-kid transition-transform hover:scale-[1.01] disabled:opacity-60"
-          style={{ background: ACCENT }}>
+          style={{ background: jeu.accent }}>
           {creating ? <><Loader2 size={20} className="animate-spin" /> Création…</> : <><QrCode size={20} /> Créer la session &amp; le QR code</>}
         </button>
       </div>
