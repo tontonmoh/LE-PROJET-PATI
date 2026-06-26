@@ -23,6 +23,7 @@ const SerieResistance = lazy(() => import("./pages/SerieResistance"));
 const SerieKurukan = lazy(() => import("./pages/SerieKurukan"));
 const FoutaPage = lazy(() => import("./pages/FoutaPage"));
 const MansayaPage = lazy(() => import("./pages/MansayaPage"));
+const HoroyaPage = lazy(() => import("./pages/HoroyaPage"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
 const DecouvrirTonGenie = lazy(() => import("./pages/DecouvrirTonGenie"));
@@ -111,6 +112,7 @@ export default function App() {
             <Route path="/serie/kurukan-fuga" element={<SerieKurukan />} />
             <Route path="/mansaya" element={<MansayaPage />} />
             <Route path="/fouta" element={<FoutaPage />} />
+            <Route path="/horoya" element={<HoroyaPage />} />
             <Route path="/charte" element={<CharteViewer />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
