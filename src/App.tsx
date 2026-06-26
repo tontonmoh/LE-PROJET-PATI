@@ -138,7 +138,7 @@ export default function App() {
             <Route path="/session/new"          element={<SessionNew />} />
             <Route path="/session/:code/scores" element={<SessionScores />} />
             <Route path="/session/:code"        element={<SessionPlay />} />
-            <Route path="/session-compagnons/new"          element={<SessionCompagnonsNew />} />
+            <Route path="/session-compagnons/new"          element={<Navigate to="/session/new?game=compagnons" replace />} />
             <Route path="/session-compagnons/:code/scores" element={<SessionCompagnonsScores />} />
             <Route path="/session-compagnons/:code"        element={<SessionCompagnonsPlay />} />
             <Route path="/senag/jeu"   element={<SenagJeu />} />
