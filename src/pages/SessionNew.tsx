@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, Music, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -74,6 +74,12 @@ const JEUX: Jeu[] = [
     label: "PriMo' — Les Premiers Ministres",
     section: "senag", icon: Landmark, accent: "#6B4423",
     playPrefix: "/senag/primo", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "quiz", slug: "quiz-senag", jeu: "quiz",
+    label: "25 questions pour la mémoire",
+    section: "senag", icon: ScrollText, accent: "#4A4416",
+    playPrefix: "/senag/quiz", withCodeInPath: false, hasLiveScores: false,
   },
 ];
 

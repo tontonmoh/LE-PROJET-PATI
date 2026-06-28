@@ -59,6 +59,7 @@ const SessionCompagnonsPlay = lazy(() => import("./pages/SessionCompagnonsPlay")
 const SessionCompagnonsScores = lazy(() => import("./pages/SessionCompagnonsScores"));
 const SenagJeu = lazy(() => import("./pages/SenagJeu"));
 const SenagPrimo = lazy(() => import("./pages/SenagPrimo"));
+const SenagQuiz = lazy(() => import("./pages/SenagQuiz"));
 const AccesPati = lazy(() => import("./pages/AccesPati"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Langue = lazy(() => import("./pages/Langue"));
@@ -149,6 +150,7 @@ export default function App() {
             <Route path="/session-compagnons/:code"        element={<SessionCompagnonsPlay />} />
             <Route path="/senag/jeu"   element={<SenagJeu />} />
             <Route path="/senag/primo" element={<SenagPrimo />} />
+            <Route path="/senag/quiz"  element={<SenagQuiz />} />
 
             <Route path="/contribuer" element={<Contribuer />} />
             <Route path="/collaboration" element={<Collaboration />} />
