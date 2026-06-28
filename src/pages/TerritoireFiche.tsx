@@ -96,6 +96,40 @@ export default function TerritoireFiche() {
       {/* ─── Sections riches (affichées seulement si data présente) ─── */}
       <div className="max-w-4xl mx-auto px-4 py-10 md:py-14 space-y-10">
 
+        {/* Sous-préfectures (préfectures uniquement ; absent pour les communes de Conakry) */}
+        {territoire.sousPrefectures && territoire.sousPrefectures.length > 0 && (
+          <Section
+            titre={`Les ${territoire.sousPrefectures.length} sous-préfectures`}
+            couleur={couleur}
+          >
+            <p className="text-[#3D2410] mb-4 text-sm leading-relaxed">
+              La préfecture de {territoire.nom} regroupe{' '}
+              {territoire.sousPrefectures.length} sous-préfectures, dont son chef-lieu{' '}
+              <span className="font-semibold">{territoire.carteIdentite.chefLieu}</span>.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {territoire.sousPrefectures.map((sp) => {
+                const estChefLieu =
+                  sp === territoire.carteIdentite.chefLieu ||
+                  sp === `${territoire.carteIdentite.chefLieu} Centre`;
+                return (
+                  <span
+                    key={sp}
+                    className="rounded-full px-3 py-1.5 text-sm font-medium border"
+                    style={{
+                      backgroundColor: estChefLieu ? couleur.fond : '#FFF9F0',
+                      color: estChefLieu ? '#FFFFFF' : '#3D2410',
+                      borderColor: couleur.bord,
+                    }}
+                  >
+                    {sp}
+                  </span>
+                );
+              })}
+            </div>
+          </Section>
+        )}
+
         {/* Mascotte */}
         {territoire.mascotte && (
           <Section titre="La mascotte" couleur={couleur}>
