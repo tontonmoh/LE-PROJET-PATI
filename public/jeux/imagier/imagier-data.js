@@ -8,7 +8,7 @@
    - fr     : le mot en français (affiché sur l'étiquette)
    - sou    : le mot en langue nationale (soussou par défaut ; optionnel)
               ⚠️ PLACEHOLDER — à faire relire par un locuteur avant diffusion.
-   - img    : pour le prototype = un EMOJI. Plus tard = "/jeux/imagier/img/<fichier>.webp"
+   - img    : pour le prototype = un EMOJI. Plus tard = "/jeux/imagier/svg/<fichier>.svg" OU "/jeux/imagier/img/<fichier>.webp"
    - audio  : (optionnel) "/jeux/imagier/audio/<fichier>.mp3" — vraie voix.
               Si absent → repli synthèse vocale du navigateur.
 
@@ -147,6 +147,29 @@ window.IMAGIER_THEMES = [
       { maj: "X", min: "x", mot: "Xylophone", img: "🎶" },
       { maj: "Y", min: "y", mot: "Yaourt",   img: "🥛" },
       { maj: "Z", min: "z", mot: "Zèbre",    img: "🦓" },
+    ],
+  },
+  {
+    id: "cuisine",
+    titre: "La Cuisine",
+    emoji: "🍳",
+    couleur: "#C97450",
+    paires: [
+      { fr: "Mortier",  sou: "Mortiyé",  img: "/jeux/imagier/svg/cuisine-01-mortier.svg", audio: "" },
+      { fr: "Pilon",    sou: "Piloŋ",    img: "/jeux/imagier/svg/cuisine-02-pilon.svg", audio: "" },
+      { fr: "Calebasse", sou: "Kambisa", img: "/jeux/imagier/svg/cuisine-03-calebasse.svg", audio: "" },
+      { fr: "Marmite",  sou: "Marimité", img: "/jeux/imagier/svg/cuisine-04-marmite.svg", audio: "" },
+      { fr: "Louche",   sou: "Luʃé",     img: "/jeux/imagier/svg/cuisine-05-louche.svg", audio: "" },
+      { fr: "Foyer",    sou: "Fóyé",     img: "/jeux/imagier/svg/cuisine-06-foyer.svg", audio: "" },
+      { fr: "Plat",     sou: "Plá",      img: "/jeux/imagier/svg/cuisine-07-plat.svg", audio: "" },
+      { fr: "Bidon",    sou: "Bidoŋ",    img: "/jeux/imagier/svg/cuisine-08-bidon.svg", audio: "" },
+      { fr: "Couteau",  sou: "Kuté",     img: "/jeux/imagier/svg/cuisine-09-couteau.svg", audio: "" },
+      { fr: "Passoire", sou: "Pasúré",   img: "/jeux/imagier/svg/cuisine-10-passoire.svg", audio: "" },
+      { fr: "Panier",   sou: "Paní",     img: "/jeux/imagier/svg/cuisine-11-panier.svg", audio: "" },
+      { fr: "Théière",  sou: "Tiré",     img: "/jeux/imagier/svg/cuisine-12-theiere.svg", audio: "" },
+      { fr: "Bouteille", sou: "Butéy",   img: "/jeux/imagier/svg/cuisine-13-bouteille.svg", audio: "" },
+      { fr: "Tamis",    sou: "Tamí",     img: "/jeux/imagier/svg/cuisine-14-tamis.svg", audio: "" },
+      { fr: "Cuillère", sou: "Kiiré",    img: "/jeux/imagier/svg/cuisine-15-cuillere.svg", audio: "" },
     ],
   },
 ];

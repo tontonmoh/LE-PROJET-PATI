@@ -1,0 +1,177 @@
+<!-- 15 Icônes Cuisine — Pati Mômes (SVG inline)
+     Style : géométrique simple, couleurs Pati (terra cotta #C97450, or #FFD56B, vert kaki #5D7C5C, bleu #2A7A8C)
+     Chaque icône : 100x100 viewBox, facilement redimensionnable -->
+
+<!-- 1. MORTIER -->
+<svg id="icone-mortier" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <ellipse cx="50" cy="40" rx="35" ry="15" fill="#C97450" stroke="#8B5A3C" stroke-width="2"/>
+  <path d="M 15 40 Q 15 70 50 75 Q 85 70 85 40" fill="#C97450" stroke="#8B5A3C" stroke-width="2"/>
+  <ellipse cx="50" cy="75" rx="35" ry="10" fill="#A0644A" stroke="#8B5A3C" stroke-width="2"/>
+</svg>
+
+<!-- 2. PILON -->
+<svg id="icone-pilon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <rect x="40" y="15" width="20" height="60" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2" rx="3"/>
+  <circle cx="50" cy="80" r="15" fill="#A0644A" stroke="#5D3A1F" stroke-width="2"/>
+</svg>
+
+<!-- 3. CALEBASSE -->
+<svg id="icone-calebasse" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <circle cx="50" cy="50" r="35" fill="#D4A574" stroke="#8B7355" stroke-width="2"/>
+  <path d="M 35 50 L 45 40 L 55 50 L 45 60 Z" fill="#5D7C5C" stroke="#3D5C3C" stroke-width="1"/>
+  <path d="M 55 30 L 65 40 L 55 50 L 65 60 Z" fill="#5D7C5C" stroke="#3D5C3C" stroke-width="1"/>
+  <path d="M 45 70 L 55 80 L 65 70 L 55 60 Z" fill="#5D7C5C" stroke="#3D5C3C" stroke-width="1"/>
+</svg>
+
+<!-- 4. MARMITE -->
+<svg id="icone-marmite" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <ellipse cx="50" cy="35" rx="32" ry="10" fill="#FFD56B" stroke="#D4A63F" stroke-width="2"/>
+  <path d="M 18 35 L 20 75 Q 50 80 80 75 L 82 35" fill="#C97450" stroke="#8B5A3C" stroke-width="2"/>
+  <ellipse cx="50" cy="75" rx="30" ry="8" fill="#A0644A" stroke="#8B5A3C" stroke-width="2"/>
+  <!-- Anse -->
+  <path d="M 25 50 Q 15 45 20 35" fill="none" stroke="#C97450" stroke-width="3" stroke-linecap="round"/>
+  <!-- Couvercle -->
+  <ellipse cx="50" cy="25" rx="28" ry="7" fill="#FFD56B" stroke="#D4A63F" stroke-width="2"/>
+  <circle cx="50" cy="22" r="3" fill="#D4A63F"/>
+</svg>
+
+<!-- 5. LOUCHE -->
+<svg id="icone-louche" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <circle cx="30" cy="35" r="18" fill="none" stroke="#8B5A3C" stroke-width="3"/>
+  <path d="M 45 45 L 80 80" stroke="#8B5A3C" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="30" cy="35" r="12" fill="#C97450"/>
+</svg>
+
+<!-- 6. FOYER (brasero) -->
+<svg id="icone-foyer" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <!-- Brasero -->
+  <path d="M 25 50 L 30 80 L 70 80 L 75 50 Q 50 55 25 50" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2"/>
+  <rect x="25" y="50" width="50" height="2" fill="#5D3A1F"/>
+  <!-- Flammes -->
+  <polygon points="40,50 35,35 45,45" fill="#FFD56B"/>
+  <polygon points="50,50 45,30 55,45" fill="#FF9500"/>
+  <polygon points="60,50 55,35 65,45" fill="#FFD56B"/>
+</svg>
+
+<!-- 7. PLAT (assiette) -->
+<svg id="icone-plat" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <circle cx="50" cy="50" r="38" fill="none" stroke="#C97450" stroke-width="3"/>
+  <circle cx="50" cy="50" r="30" fill="#FFF6E7" stroke="#C97450" stroke-width="2"/>
+  <!-- Décor -->
+  <path d="M 35 50 L 65 50" stroke="#5D7C5C" stroke-width="1"/>
+  <path d="M 50 35 L 50 65" stroke="#5D7C5C" stroke-width="1"/>
+  <circle cx="50" cy="50" r="8" fill="none" stroke="#5D7C5C" stroke-width="1"/>
+</svg>
+
+<!-- 8. BIDON -->
+<svg id="icone-bidon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <rect x="30" y="15" width="40" height="55" fill="#A0A0A0" stroke="#4D4D4D" stroke-width="2" rx="3"/>
+  <rect x="35" y="20" width="30" height="3" fill="#D4D4D4"/>
+  <!-- Poignée -->
+  <path d="M 35 30 Q 20 45 35 60" fill="none" stroke="#4D4D4D" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="50" cy="70" rx="20" ry="8" fill="#4D4D4D" stroke="#2D2D2D" stroke-width="1"/>
+</svg>
+
+<!-- 9. COUTEAU -->
+<svg id="icone-couteau" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <!-- Lame -->
+  <polygon points="45,15 50,80 55,80 60,15" fill="#C0C0C0" stroke="#808080" stroke-width="1.5"/>
+  <!-- Manche -->
+  <rect x="40" y="70" width="20" height="25" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2" rx="2"/>
+</svg>
+
+<!-- 10. PASSOIRE (tamis à trous) -->
+<svg id="icone-passoire" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <ellipse cx="50" cy="40" rx="30" ry="25" fill="none" stroke="#A0A0A0" stroke-width="3"/>
+  <!-- Trous -->
+  <circle cx="35" cy="30" r="3" fill="#A0A0A0"/>
+  <circle cx="50" cy="25" r="3" fill="#A0A0A0"/>
+  <circle cx="65" cy="30" r="3" fill="#A0A0A0"/>
+  <circle cx="40" cy="45" r="3" fill="#A0A0A0"/>
+  <circle cx="50" cy="50" r="3" fill="#A0A0A0"/>
+  <circle cx="60" cy="45" r="3" fill="#A0A0A0"/>
+  <!-- Manche -->
+  <rect x="42" y="60" width="16" height="30" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2" rx="2"/>
+</svg>
+
+<!-- 11. PANIER (tressé) -->
+<svg id="icone-panier" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <!-- Panier -->
+  <path d="M 25 40 L 30 75 L 70 75 L 75 40 Q 50 45 25 40" fill="#D4A574" stroke="#8B7355" stroke-width="2"/>
+  <!-- Tressage (lignes parallèles) -->
+  <line x1="35" y1="40" x2="37" y2="75" stroke="#8B7355" stroke-width="1"/>
+  <line x1="45" y1="40" x2="47" y2="75" stroke="#8B7355" stroke-width="1"/>
+  <line x1="55" y1="40" x2="57" y2="75" stroke="#8B7355" stroke-width="1"/>
+  <line x1="65" y1="40" x2="63" y2="75" stroke="#8B7355" stroke-width="1"/>
+  <!-- Anse -->
+  <path d="M 35 40 Q 50 20 65 40" fill="none" stroke="#8B7355" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
+<!-- 12. THÉIÈRE -->
+<svg id="icone-theiere" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <!-- Corps -->
+  <circle cx="50" cy="50" r="28" fill="#C97450" stroke="#8B5A3C" stroke-width="2"/>
+  <!-- Bec verseur -->
+  <path d="M 75 50 L 85 45 L 85 55 Z" fill="#C97450" stroke="#8B5A3C" stroke-width="1.5"/>
+  <!-- Anse -->
+  <path d="M 30 45 Q 15 50 25 65" fill="none" stroke="#C97450" stroke-width="3" stroke-linecap="round"/>
+  <!-- Couvercle -->
+  <ellipse cx="50" cy="30" rx="20" ry="8" fill="#FFD56B" stroke="#D4A63F" stroke-width="1.5"/>
+  <circle cx="50" cy="26" r="2.5" fill="#D4A63F"/>
+</svg>
+
+<!-- 13. BOUTEILLE -->
+<svg id="icone-bouteille" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <!-- Goulot -->
+  <rect x="45" y="15" width="10" height="12" fill="#5D9C6D" stroke="#3D7C4D" stroke-width="1"/>
+  <!-- Col -->
+  <path d="M 42 27 L 45 35 L 55 35 L 58 27" fill="#5D9C6D" stroke="#3D7C4D" stroke-width="1.5"/>
+  <!-- Ventre -->
+  <path d="M 35 35 Q 30 50 35 65 L 65 65 Q 70 50 65 35" fill="#5D9C6D" stroke="#3D7C4D" stroke-width="2"/>
+  <!-- Base -->
+  <ellipse cx="50" cy="65" rx="16" ry="6" fill="#3D7C4D" stroke="#2D5C3D" stroke-width="1.5"/>
+  <!-- Reflet -->
+  <rect x="38" y="40" width="3" height="18" fill="#9FCC9F" opacity="0.6"/>
+</svg>
+
+<!-- 14. TAMIS (crible fin) -->
+<svg id="icone-tamis" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <ellipse cx="50" cy="40" rx="32" ry="28" fill="none" stroke="#A0A0A0" stroke-width="2"/>
+  <!-- Maille fine (petits carrés) -->
+  <g stroke="#C0C0C0" stroke-width="0.8" opacity="0.7">
+    <rect x="28" y="18" width="4" height="4"/>
+    <rect x="36" y="18" width="4" height="4"/>
+    <rect x="44" y="18" width="4" height="4"/>
+    <rect x="52" y="18" width="4" height="4"/>
+    <rect x="60" y="18" width="4" height="4"/>
+    <rect x="68" y="18" width="4" height="4"/>
+    <rect x="28" y="26" width="4" height="4"/>
+    <rect x="44" y="26" width="4" height="4"/>
+    <rect x="60" y="26" width="4" height="4"/>
+    <rect x="32" y="50" width="4" height="4"/>
+    <rect x="50" y="50" width="4" height="4"/>
+    <rect x="68" y="50" width="4" height="4"/>
+  </g>
+  <!-- Manche -->
+  <rect x="42" y="65" width="16" height="25" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2" rx="2"/>
+</svg>
+
+<!-- 15. CUILLÈRE -->
+<svg id="icone-cuillere" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="icone-cuisine">
+  <!-- Cuillère (ovale) -->
+  <ellipse cx="35" cy="35" rx="16" ry="20" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2"/>
+  <!-- Manche (droit) -->
+  <rect x="45" y="28" width="8" height="50" fill="#8B5A3C" stroke="#5D3A1F" stroke-width="2" rx="2"/>
+  <!-- Détail -->
+  <ellipse cx="35" cy="35" rx="10" ry="12" fill="#A0644A" opacity="0.5"/>
+</svg>
+
+<style>
+.icone-cuisine {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin: 10px;
+}
+</style>
+
