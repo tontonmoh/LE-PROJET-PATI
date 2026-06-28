@@ -75,48 +75,19 @@ export default function LeDefi() {
         </div>
         <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
 
-        {/* ── Bandeau : lancer un défi de groupe ── */}
-        <Link
-          to="/session/new"
-          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mb-3 transition-colors"
-          style={{ background: "#143D2E" }}
+        {/* ── Bandeau campagne : Le 1000e Bâtisseur ── */}
+        <div
+          className="rounded-2xl px-4 py-3 mb-4 flex items-center gap-3"
+          style={{ background: "linear-gradient(180deg,#FFE08A,#FFC93C)", color: "#0D2B1A" }}
         >
-          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0" style={{ background: "rgba(255,201,60,0.15)" }}>
-            <Users size={20} style={{ color: "#FFC93C" }} />
-          </span>
+          <span className="text-2xl shrink-0" aria-hidden="true">🏆</span>
           <span className="flex-1">
-            <span className="block font-display font-bold text-white text-sm sm:text-base">Défi de groupe&nbsp;?</span>
-            <span className="block text-white/65 font-semibold text-xs sm:text-sm">
-              Classe, forum, concert… Crée une session, projette le QR code, et vois qui finit le premier — en direct.
+            <span className="block font-display font-bold text-sm sm:text-base">Sois le 1000ᵉ Bâtisseur de la Guinée&nbsp;!</span>
+            <span className="block font-semibold text-xs sm:text-sm" style={{ color: "#3D2410" }}>
+              Le/la 1000ᵉ à terminer la carte gagne le livre <strong>BAABATA</strong> dédicacé, à son nom. Chaque partie est une chance&nbsp;— rejoue&nbsp;! Partage ta carte avec <strong>#JeConstruisLaGuinée</strong>.
             </span>
           </span>
-          <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
-            style={{ background: "#C8841E", color: "white" }}>
-            Lancer →
-          </span>
-        </Link>
-
-        {/* ── Bandeau : Hall of Fame ── */}
-        <Link
-          to="/defi/classement"
-          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mb-5 transition-colors"
-          style={{ background: "rgba(255,201,60,0.08)", border: "1px solid rgba(255,201,60,0.25)" }}
-        >
-          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0"
-            style={{ background: "rgba(255,201,60,0.18)" }}>
-            <Star size={20} style={{ color: "#FFC93C" }} />
-          </span>
-          <span className="flex-1">
-            <span className="block font-display font-bold text-[#0D2B1A] text-sm sm:text-base">Hall of Fame</span>
-            <span className="block text-[#3a4a42] font-semibold text-xs sm:text-sm">
-              Classement général de tous les joueurs — vitesse + régularité, toutes sessions confondues.
-            </span>
-          </span>
-          <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
-            style={{ background: "#FFC93C", color: "#0D2B1A" }}>
-            Voir →
-          </span>
-        </Link>
+        </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
@@ -147,7 +118,50 @@ export default function LeDefi() {
             </button>
           )}
         </div>
-        <p className="text-center text-xs text-[#8a9389] font-semibold mt-3">Astuce&nbsp;: passe en plein écran pour des pièces plus grandes. Jouable au doigt sur mobile. Le classement est pour l'instant propre à ton appareil.</p>
+        <p className="text-center text-xs text-[#8a9389] font-semibold mt-3">Astuce&nbsp;: passe en plein écran pour des pièces plus grandes. Jouable au doigt sur mobile. Ton temps entre au classement mondial du Hall of Fame&nbsp;!</p>
+
+        {/* ── Bandeau : lancer un défi de groupe ── */}
+        <Link
+          to="/session/new"
+          className="group flex items-center gap-3 rounded-2xl px-4 py-3 mt-6 mb-3 transition-colors"
+          style={{ background: "#143D2E" }}
+        >
+          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0" style={{ background: "rgba(255,201,60,0.15)" }}>
+            <Users size={20} style={{ color: "#FFC93C" }} />
+          </span>
+          <span className="flex-1">
+            <span className="block font-display font-bold text-white text-sm sm:text-base">Défi de groupe&nbsp;?</span>
+            <span className="block text-white/65 font-semibold text-xs sm:text-sm">
+              Classe, forum, concert… Crée une session, projette le QR code, et vois qui finit le premier — en direct.
+            </span>
+          </span>
+          <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
+            style={{ background: "#C8841E", color: "white" }}>
+            Lancer →
+          </span>
+        </Link>
+
+        {/* ── Bandeau : Hall of Fame ── */}
+        <Link
+          to="/defi/classement"
+          className="group flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors"
+          style={{ background: "rgba(255,201,60,0.08)", border: "1px solid rgba(255,201,60,0.25)" }}
+        >
+          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center shrink-0"
+            style={{ background: "rgba(255,201,60,0.18)" }}>
+            <Star size={20} style={{ color: "#FFC93C" }} />
+          </span>
+          <span className="flex-1">
+            <span className="block font-display font-bold text-[#0D2B1A] text-sm sm:text-base">Hall of Fame</span>
+            <span className="block text-[#3a4a42] font-semibold text-xs sm:text-sm">
+              Classement général de tous les joueurs — vitesse + régularité, toutes sessions confondues.
+            </span>
+          </span>
+          <span className="font-display font-bold text-sm shrink-0 px-3 py-1.5 rounded-full transition-transform group-hover:translate-x-0.5"
+            style={{ background: "#FFC93C", color: "#0D2B1A" }}>
+            Voir →
+          </span>
+        </Link>
       </section>
     </div>
   );

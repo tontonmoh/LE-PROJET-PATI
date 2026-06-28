@@ -502,7 +502,7 @@ function toast(msg){let t=document.getElementById('toast');
 function shareResult(){
  const PLAY_URL='https://projetpati.com/defi';
  const exploit=(game.lastTime&&game.lastTime!=='—')?`en ${game.lastTime} `:'';
- const text=`${game.player} a reconstitué la carte de la Guinée ${exploit}sur le Défi PATI ! Sauras-tu faire mieux ? Joue ici : ${PLAY_URL} #ProjetPati #PATI`;
+ const text=`${game.player} a reconstitué la carte de la Guinée ${exploit}sur le Défi PATI ! Sauras-tu faire mieux ? Joue ici : ${PLAY_URL} #JeConstruisLaGuinée #ProjetPati #PATI`;
  buildCard().toBlob(async(blob)=>{
   const file=new File([blob],'defi-guinee.png',{type:'image/png'});
   try{
@@ -672,7 +672,7 @@ window.addEventListener('message',function(e){var d=e&&e.data;if(!d)return;
 function buildShareText(){
   const PLAY_URL='https://projetpati.com/defi';
   const exploit=(game.lastTime&&game.lastTime!=='—')?`en ${game.lastTime} `:'';
-  return `🇬🇳 ${game.player||'Moi'} a reconstitué la carte de la Guinée ${exploit}sur le Défi PATI ! Sauras-tu faire mieux ? Joue ici : ${PLAY_URL} #ProjetPati #PATI`;
+  return `🇬🇳 ${game.player||'Moi'} a reconstitué la carte de la Guinée ${exploit}sur le Défi PATI ! Sauras-tu faire mieux ? Joue ici : ${PLAY_URL} #JeConstruisLaGuinée #ProjetPati #PATI`;
 }
 function showShareNetworks(){
   const texte=buildShareText();
@@ -681,14 +681,47 @@ function showShareNetworks(){
   if(existing) existing.remove();
   const modal=document.createElement('div');
   modal.id='partage-modal';
-  modal.style.cssText='position:fixed;inset:0;display:grid;place-items:center;padding:20px;z-index:100;background:rgba(10,8,5,.84);backdrop-filter:blur(6px);';
+  modal.style.cssText='position:fixed;inset:0;display:grid;place-items:center;padding:18px;z-index:100;background:rgba(10,8,5,.86);backdrop-filter:blur(6px);';
   const sheet=document.createElement('div');
-  sheet.style.cssText="width:min(440px,94vw);max-height:92vh;overflow-y:auto;background:linear-gradient(180deg,#201c15,#15110b);border:1px solid #1E4A35;border-radius:20px;padding:24px 22px;text-align:center;box-shadow:0 40px 80px -28px #000;color:#FFF6E7;font-family:'Nunito',system-ui,sans-serif;";
+  sheet.style.cssText="width:min(420px,94vw);max-height:94vh;overflow-y:auto;background:linear-gradient(180deg,#201c15,#15110b);border:1px solid #1E4A35;border-radius:20px;padding:20px;text-align:center;box-shadow:0 40px 80px -28px #000;color:#FFF6E7;font-family:'Nunito',system-ui,sans-serif;";
   const title=document.createElement('h3');
-  title.style.cssText="font-family:'Fredoka',serif;font-weight:900;font-size:23px;margin:0 0 16px;color:#FFF6E7;";
+  title.style.cssText="font-family:'Fredoka',serif;font-weight:900;font-size:21px;margin:0 0 14px;color:#FFF6E7;";
   title.textContent='Partager mon résultat';
+
+  /* Aperçu de la carte-image générée (la vraie image partageable) */
+  const previewImg=document.createElement('img');
+  previewImg.style.cssText='width:100%;border-radius:14px;border:1px solid #1E4A35;display:block;margin-bottom:14px;background:#0D2B1A;';
+  previewImg.alt='Ma carte de la Guinée complétée';
+  let cardBlob=null;
+  try{
+    buildCard().toBlob(function(blob){
+      cardBlob=blob;
+      previewImg.src=URL.createObjectURL(blob);
+    },'image/png');
+  }catch(e){}
+
+  /* Bouton principal : télécharger l'image */
+  const dlBtn=document.createElement('button');
+  dlBtn.style.cssText="width:100%;padding:13px;border-radius:12px;background:linear-gradient(180deg,#FFD968,#FFC93C);color:#0D2B1A;border:none;font-weight:800;font-size:14px;cursor:pointer;margin-bottom:6px;font-family:'Fredoka',serif;";
+  dlBtn.textContent='⬇  Télécharger ma carte';
+  dlBtn.onclick=function(){
+    if(!cardBlob){return;}
+    const u=URL.createObjectURL(cardBlob);
+    const a=document.createElement('a');a.href=u;a.download='ma-carte-guinee-defi-pati.png';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(u),1500);
+    try{navigator.clipboard.writeText(texte+' '+url);}catch(e){}
+    dlBtn.textContent='✓ Image téléchargée — texte copié';
+    setTimeout(()=>{dlBtn.textContent='⬇  Télécharger ma carte';},2800);
+  };
+
+  const hint=document.createElement('p');
+  hint.style.cssText='font-size:11px;color:#9DBBA9;margin:8px 0 14px;line-height:1.4;';
+  hint.textContent='Télécharge ta carte, puis joins-la à ton message sur le réseau de ton choix 👇';
+
+  /* Réseaux (texte + lien) */
   const grid=document.createElement('div');
-  grid.style.cssText='display:grid;grid-template-columns:repeat(2,1fr);gap:10px;';
+  grid.style.cssText='display:grid;grid-template-columns:repeat(2,1fr);gap:9px;';
   const t=encodeURIComponent(texte), u=encodeURIComponent(url);
   const networks=[
     {name:'WhatsApp',color:'#25D366',url:`https://wa.me/?text=${t}%20${u}`},
@@ -696,37 +729,32 @@ function showShareNetworks(){
     {name:'X',color:'#000000',url:`https://twitter.com/intent/tweet?text=${t}&url=${u}`},
     {name:'Telegram',color:'#26A5E4',url:`https://t.me/share/url?url=${u}&text=${t}`},
   ];
-  networks.forEach(net=>{
+  networks.forEach(function(net){
     const btn=document.createElement('a');
     btn.href=net.url;btn.target='_blank';btn.rel='noopener noreferrer';
-    btn.style.cssText=`display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:12px;background:${net.color};color:#fff;text-decoration:none;font-weight:600;font-size:13px;transition:.16s;cursor:pointer;`;
+    btn.style.cssText=`display:flex;align-items:center;justify-content:center;padding:11px;border-radius:11px;background:${net.color};color:#fff;text-decoration:none;font-weight:600;font-size:13px;cursor:pointer;`;
     btn.textContent=net.name;
-    btn.onmouseover=()=>btn.style.opacity='.9';
-    btn.onmouseout=()=>btn.style.opacity='1';
     grid.appendChild(btn);
   });
+
   const copyBtn=document.createElement('button');
-  copyBtn.style.cssText='grid-column:1/-1;margin-top:12px;padding:12px 14px;background:#0E3E47;color:#fff;border:1px solid #1E4A35;border-radius:12px;font-weight:600;font-size:13px;cursor:pointer;transition:.16s;';
-  copyBtn.textContent='📋 Copier le lien';
-  copyBtn.onclick=async()=>{
-    try{await navigator.clipboard.writeText(`${texte} ${url}`);copyBtn.textContent='✓ Copié !';setTimeout(()=>{copyBtn.textContent='📋 Copier le lien';},2500);}catch(e){}
+  copyBtn.style.cssText='width:100%;margin-top:10px;padding:11px;background:#0E3E47;color:#fff;border:1px solid #1E4A35;border-radius:11px;font-weight:600;font-size:13px;cursor:pointer;';
+  copyBtn.textContent='📋 Copier le texte + le lien';
+  copyBtn.onclick=async function(){
+    try{await navigator.clipboard.writeText(texte+' '+url);copyBtn.textContent='✓ Copié !';setTimeout(()=>{copyBtn.textContent='📋 Copier le texte + le lien';},2500);}catch(e){}
   };
-  copyBtn.onmouseover=()=>copyBtn.style.background='#1A5E3A';
-  copyBtn.onmouseout=()=>copyBtn.style.background='#0E3E47';
-  const imgBtn=document.createElement('button');
-  imgBtn.style.cssText='grid-column:1/-1;margin-top:8px;padding:12px 14px;background:transparent;color:#9DBBA9;border:1px solid #1E4A35;border-radius:12px;font-weight:600;font-size:13px;cursor:pointer;transition:.16s;';
-  imgBtn.textContent='🖼️ Télécharger l\'image résultat';
-  imgBtn.onclick=()=>{modal.remove();shareResult();};
-  imgBtn.onmouseover=()=>imgBtn.style.color='#FFF6E7';
-  imgBtn.onmouseout=()=>imgBtn.style.color='#9DBBA9';
-  const preview=document.createElement('p');
-  preview.style.cssText='font-size:10px;margin-top:16px;padding-top:12px;border-top:1px solid #1E4A35;color:#9DBBA9;font-style:italic;line-height:1.4;';
-  preview.textContent=texte.substring(0,100)+(texte.length>100?'…':'');
-  sheet.appendChild(title);sheet.appendChild(grid);sheet.appendChild(copyBtn);sheet.appendChild(imgBtn);sheet.appendChild(preview);
+
+  sheet.appendChild(title);
+  sheet.appendChild(previewImg);
+  sheet.appendChild(dlBtn);
+  sheet.appendChild(hint);
+  sheet.appendChild(grid);
+  sheet.appendChild(copyBtn);
   modal.appendChild(sheet);
-  modal.onclick=(e)=>{if(e.target===modal)modal.remove();};
+  modal.onclick=function(e){if(e.target===modal)modal.remove();};
   document.body.appendChild(modal);
 }
+
 /* Routeur de partage : mobile = carte-image native (shareResult) ; desktop = popover réseaux */
 function smartShare(){
   // Vrai mobile = écran étroit + pointeur grossier (doigt). Safari Mac a navigator.share
