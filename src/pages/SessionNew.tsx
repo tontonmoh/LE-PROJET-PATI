@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
-  GraduationCap, MessageSquare, Music, ArrowRight,
+  GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
   Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
@@ -16,7 +16,8 @@ const CREAM  = "#FFF6E7";
 const DISPLAY = "'Fraunces', Georgia, serif";
 
 // ── Catalogue des jeux/livres jouables en session ───────────────────────────
-// 5 cartes au total : 2 Pati + 3 SENAG. Entrée unique pour tous les défis collectifs.
+// 6 cartes au total : 2 Pati + 4 SENAG. Entrée unique pour TOUS les modes :
+// solo (joueur seul), classe (1 prof + 30 élèves), forum (stand/atelier).
 //
 // Champs :
 //   slug / jeu       → métadonnées Supabase (table pati_sessions)
@@ -83,10 +84,15 @@ const JEUX: Jeu[] = [
   },
 ];
 
-const TYPES: { id: SessionType; label: string; icon: typeof Users; ex: string }[] = [
-  { id: "classe",  label: "Classe",  icon: GraduationCap, ex: "30 élèves, une école" },
-  { id: "forum",   label: "Forum",   icon: MessageSquare, ex: "Un stand, un atelier" },
-  { id: "concert", label: "Concert", icon: Music,         ex: "QR projeté à l'écran" },
+// Le mode "solo" élargit SessionType localement jusqu'à ce que
+// lib/session.ts (et la contrainte CHECK Supabase si elle existe) acceptent
+// la valeur "solo".  Voir les prérequis dans la réponse de Claude.
+type Contexte = SessionType | "solo";
+
+const TYPES: { id: Contexte; label: string; icon: typeof Users; ex: string }[] = [
+  { id: "solo",   label: "Solo",   icon: UserRound,     ex: "Je joue tout seul" },
+  { id: "classe", label: "Classe", icon: GraduationCap, ex: "30 élèves, une école" },
+  { id: "forum",  label: "Forum",  icon: MessageSquare, ex: "Un stand, un atelier" },
 ];
 
 // ── Helpers URLs (per-jeu) ──────────────────────────────────────────────────
@@ -102,6 +108,7 @@ function buildScoresPath(j: Jeu, code: string): string | null {
 
 export default function SessionNew() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   // Pré-sélection via ?game=<id> (utilisé par les redirects /session-compagnons/new etc.)
   const initialIdx = (() => {
@@ -112,7 +119,7 @@ export default function SessionNew() {
   })();
 
   const [jeuIdx, setJeuIdx]   = useState(initialIdx);
-  const [type, setType]       = useState<SessionType>("classe");
+  const [type, setType]       = useState<Contexte>("solo");
   const [label, setLabel]     = useState("");
   const [contact, setContact] = useState("");
 
@@ -122,6 +129,7 @@ export default function SessionNew() {
   const [copied, setCopied]     = useState(false);
 
   const jeu     = JEUX[jeuIdx];
+  const isSolo  = type === "solo";
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://projetpati.com";
   const joinUrl = code ? buildJoinUrl(baseUrl, jeu, code) : "";
 
@@ -133,12 +141,21 @@ export default function SessionNew() {
         livre_slug: jeu.slug,
         jeu: jeu.jeu,
         label: label.trim() || (null as unknown as string),
-        type,
+        type: type as SessionType, // cast : lib/session.ts doit accepter "solo"
         created_by: contact.trim() || undefined,
       });
+      if (isSolo) {
+        // Solo : on saute l'écran QR et on file direct sur le jeu.
+        // Le score se loggue côté page de jeu dans pati_session_scores comme
+        // pour les sessions de groupe → même Hall of Fame.
+        navigate(buildPlayPath(jeu, s.code));
+        return;
+      }
       setCode(s.code);
     } catch {
-      setError("La session n'a pas pu être créée. Réessaie dans un instant.");
+      setError(isSolo
+        ? "La partie n'a pas pu démarrer. Réessaie dans un instant."
+        : "La session n'a pas pu être créée. Réessaie dans un instant.");
     } finally {
       setCreating(false);
     }
@@ -153,7 +170,7 @@ export default function SessionNew() {
   };
 
   // ════════════════════════════════════════════════════════════════════════
-  // ÉCRAN 2 — Session créée
+  // ÉCRAN 2 — Session créée (uniquement pour les sessions de groupe)
   // ════════════════════════════════════════════════════════════════════════
   if (code) {
     const scoresPath = buildScoresPath(jeu, code);
@@ -269,14 +286,14 @@ export default function SessionNew() {
 
         <div className="inline-flex items-center gap-2 font-display font-semibold text-sm px-4 py-1.5 rounded-full mb-4"
           style={{ background: `${ACCENT}18`, color: ACCENT }}>
-          <Sparkles size={15} /> Mode Session
+          <Sparkles size={15} /> Mode Défi
         </div>
         <h1 className="font-bold text-[#0D2B1A] leading-tight mb-2"
           style={{ fontFamily: DISPLAY, fontSize: "clamp(1.8rem,6vw,2.6rem)" }}>
-          Lance un défi collectif
+          Lance ta partie
         </h1>
         <p className="text-[#5a6b62] font-semibold mb-8">
-          Crée une partie, projette le QR code, et regarde qui finit le premier — que vous soyez 30 ou 300.
+          Joue en solo, ou crée un défi pour ta classe ou ton événement — jusqu'à 300 joueurs.
         </p>
 
         {/* 1. Choix du jeu — 2 sections (Pati / SENAG) */}
@@ -325,24 +342,28 @@ export default function SessionNew() {
           </div>
         </div>
 
-        {/* 3. Label optionnel */}
-        <div className="mb-6">
-          <label className="block font-display font-bold text-[#0D2B1A] mb-2">
-            Nom de la partie <span className="text-[#8a9389] font-semibold text-sm">(optionnel)</span>
-          </label>
-          <input
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
-            maxLength={60}
-            placeholder="Classe CM2 · École Alpha · Conakry"
-            className="w-full rounded-2xl border-2 border-[#0D2B1A]/10 bg-white px-4 py-3 font-semibold text-[#0D2B1A] outline-none focus:border-[#C8841E]"
-          />
-        </div>
+        {/* 3. Label optionnel — masqué en mode Solo (pas de groupe à nommer) */}
+        {!isSolo && (
+          <div className="mb-6">
+            <label className="block font-display font-bold text-[#0D2B1A] mb-2">
+              Nom de la partie <span className="text-[#8a9389] font-semibold text-sm">(optionnel)</span>
+            </label>
+            <input
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              maxLength={60}
+              placeholder="Classe CM2 · École Alpha · Conakry"
+              className="w-full rounded-2xl border-2 border-[#0D2B1A]/10 bg-white px-4 py-3 font-semibold text-[#0D2B1A] outline-none focus:border-[#C8841E]"
+            />
+          </div>
+        )}
 
-        {/* 4. Contact animateur optionnel */}
+        {/* 4. Contact joueur / animateur optionnel */}
         <div className="mb-8">
           <label className="block font-display font-bold text-[#0D2B1A] mb-2">
-            Ton contact <span className="text-[#8a9389] font-semibold text-sm">(optionnel — pour retrouver tes sessions)</span>
+            Ton contact <span className="text-[#8a9389] font-semibold text-sm">
+              {isSolo ? "(optionnel — pour retrouver tes scores)" : "(optionnel — pour retrouver tes sessions)"}
+            </span>
           </label>
           <input
             value={contact}
@@ -360,7 +381,13 @@ export default function SessionNew() {
         <button onClick={create} disabled={creating}
           className="w-full flex items-center justify-center gap-2 font-display font-bold text-white rounded-2xl px-6 py-4 shadow-kid transition-transform hover:scale-[1.01] disabled:opacity-60"
           style={{ background: jeu.accent }}>
-          {creating ? <><Loader2 size={20} className="animate-spin" /> Création…</> : <><QrCode size={20} /> Créer la session &amp; le QR code</>}
+          {creating ? (
+            <><Loader2 size={20} className="animate-spin" /> {isSolo ? "Préparation…" : "Création…"}</>
+          ) : isSolo ? (
+            <><Play size={20} /> Jouer maintenant</>
+          ) : (
+            <><QrCode size={20} /> Créer la session &amp; le QR code</>
+          )}
         </button>
       </div>
     </div>

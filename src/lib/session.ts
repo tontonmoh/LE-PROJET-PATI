@@ -17,7 +17,7 @@ const SUPABASE_KEY = "sb_publishable_gaOQLiWvGUeSwOozZlPPGQ_e6ii9upC";
 export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ─── Types ───────────────────────────────────────────────────────────────────
-export type SessionType = "classe" | "forum" | "concert" | "solo";
+export type SessionType = "solo"| "classe" | "forum" | "concert"  ;
 
 export interface Session {
   code: string;

@@ -20,12 +20,6 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "Français",
     bookTitle: "Le Point Zéro — La nuit où l'étoile se donna",
     sections: [
-    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
-        "Il y a, sur la Terre, un point d'où l'on a mesuré le monde entier.",
-        "Un seul. Là où la ligne qui sépare le haut du bas croise celle qui sépare le levant du couchant. Les savants l'appellent le point zéro. Il est posé sur la mer, au large de la Guinée, à l'endroit exact où l'eau et le ciel se touchent sans qu'on puisse dire où finit l'un, où commence l'autre.",
-        "Personne n'y habite. On ne peut pas. Mais quelqu'un le garde.",
-        "Son nom est Kamara. En langue mandingue, cela veut dire : celui qui veille.",
-    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "La pirogue accosta Kassa au moment où le soleil touchait l'eau. Le sable, sous mes pieds nus, était rouge. Rouge comme une braise qu'on aurait éteinte la veille et qui garderait, dessous, un peu de feu.",
         "Mon père avait un chantier sur l'île. Nous étions venus en famille, mes trois sœurs et moi. Elles voulaient la plage. Moi, je voulais autre chose.",
@@ -185,12 +179,6 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "English",
     bookTitle: "Point Zero — The Night the Star Gave Herself",
     sections: [
-    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
-        "There is, on Earth, one point from which the whole world has been measured.",
-        "Only one. Where the line that separates up from down crosses the one that separates east from west. The learned call it the point zero. It rests upon the sea, off the coast of Guinea, at the exact spot where water and sky touch without one being able to say where one ends and the other begins.",
-        "No one lives there. One cannot. But someone keeps it.",
-        "His name is Kamara. In the Manding tongue, it means: the one who watches.",
-    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "The pirogue reached Kassa just as the sun was touching the water. The sand, beneath my bare feet, was red. Red like an ember put out the night before, still keeping, underneath, a little fire.",
         "My father had a worksite on the island. We had come as a family, my three sisters and I. They wanted the beach. I wanted something else.",
@@ -350,12 +338,6 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "العربية",
     bookTitle: "النقطة صفر — الليلة التي وهبت فيها النجمة نفسها",
     sections: [
-    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
-        "هناك، على الأرض، نقطةٌ واحدة قِيس منها العالم كلّه.",
-        "واحدةٌ فقط. حيث يتقاطع الخطّ الذي يفصل الأعلى عن الأسفل مع الخطّ الذي يفصل المشرق عن المغرب. يسمّيها العلماء النقطة صفر. تستقرّ على البحر، قبالة سواحل غينيا، في المكان الذي يتلامس فيه الماء والسماء بالضبط، دون أن يستطيع أحد أن يقول أين ينتهي أحدهما وأين يبدأ الآخر.",
-        "لا يسكنها أحد. لا يمكن ذلك. لكنّ أحدًا يحرسها.",
-        "اسمه كامارا. في اللغة المَندِنْغيّة، يعني: مَن يحرس.",
-    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "رست الزورق على كاسا في اللحظة التي لامس فيها الشمسُ الماء. كان الرمل، تحت قدميّ الحافيتين، أحمر. أحمر كجمرةٍ أُطفئت في الليلة السابقة، وتحتها لا يزال شيءٌ من نار.",
         "كان لأبي ورشةٌ على الجزيرة. أتينا أُسرةً، أخواتي الثلاث وأنا. أردن الشاطئ. أمّا أنا، فأردتُ شيئًا آخر.",
@@ -515,12 +497,6 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "中文",
     bookTitle: "零点 — 星辰献身的那一夜",
     sections: [
-    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
-        "在地球上，有一个点，整个世界都是从那里丈量出来的。",
-        "只有一个。在分隔上下的那条线与分隔东西的那条线相交之处。学者们称它为零点。它坐落在海上，在几内亚外海，正是水与天相触之处——没有人能说清何处是其一的尽头，何处是另一的开端。",
-        "没有人住在那里。住不了。但有人守着它。",
-        "他的名字叫卡马拉。在曼丁语里，意思是：守望的人。",
-    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "独木舟靠上卡萨岛时，太阳正触到水面。我赤脚下的沙，是红的。红得像前一夜熄灭的炭火，底下还藏着一点火。",
         "我父亲在岛上有个工地。我们一家来的，我和三个姐妹。她们想去海滩。而我，想要别的。",
