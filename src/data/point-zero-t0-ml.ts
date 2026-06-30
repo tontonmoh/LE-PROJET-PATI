@@ -20,6 +20,11 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "Français",
     bookTitle: "Le Point Zéro — La nuit où l'étoile se donna",
     sections: [
+    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
+        "Le Point Zéro",
+        "Tome 0",
+        "La nuit où l'étoile se donna",
+    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "La pirogue accosta Kassa au moment où le soleil touchait l'eau. Le sable, sous mes pieds nus, était rouge. Rouge comme une braise qu'on aurait éteinte la veille et qui garderait, dessous, un peu de feu.",
         "Mon père avait un chantier sur l'île. Nous étions venus en famille, mes trois sœurs et moi. Elles voulaient la plage. Moi, je voulais autre chose.",
@@ -79,17 +84,15 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "L'Ouest", image: "/images/point-zero/pz0-10.webp", paragraphs: [
         "La marque de l'ouest était sur la plage, face au large, là où le courant vous prend si vous vous baignez sans connaître. Je demandai au pêcheur qui la gardait si c'était un danger.",
         "— Non, dit-il. Un appel. Quelque chose qui veut dire : viens voir.",
-        "Je scannai la marque. L'endroit où elle pointait se trouvait à des milliers de kilomètres, au-delà de l'Atlantique, sur le continent voisin. Un pays qui portait aussi le nom de notre pays.",
-        "Le pêcheur regarda la flèche.",
-        "— Combien de Guinée y a-t-il sur Terre ? demanda-t-il, perplexe.",
-        "— Au moins quatre, murmura-je. Et voilà la première.",
+        "Je scannai la marque. L'endroit où elle pointait se trouvait à des milliers de kilomètres, au-delà de l'Atlantique, sur le continent voisin.",
+        "Le pêcheur regarda la flèche. Longtemps. Il ne dit rien.",
     ] },
     { title: "Le Sud", image: "/images/point-zero/pz0-11.webp", paragraphs: [
         "La marque du sud se trouvait dans un petit lagon, caché par les racines aériennes des palétuviers. Bangaly connaissait le chemin, et il me le montra sans parler.",
         "L'eau était très claire. Et très vieille. On sentait, dans ce lagon, qu'aucune saison n'y passait vraiment. Juste le temps qui s'éternisait.",
         "— Il y a un crocodile, ici, me dit-il. Très vieux. Plus vieux que le bois des anciens. Je crois qu'il attend quelque chose.",
         "Nous pûmes scanner la marque depuis la terre. Elle pointait vers une île, très proche de nous, juste de l'autre côté du golfe. Un lieu où, disait Bangaly, les collobes rouges n'existaient que là au monde.",
-        "— Le sud, dis-je. Toujours le sud. Comme si tous les mystères de Guinée étaient dans les quatre directions.",
+        "— Et le voyage continue, dis-je.",
     ] },
     { title: "L'Est", image: "/images/point-zero/pz0-12.webp", paragraphs: [
         "La marque de l'est était la plus loin, sur l'autre île, là où se dressaient de vieux murs gris. Un lieu où l'on enfermait les hommes, autrefois. Personne n'y allait plus.",
@@ -106,9 +109,9 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     ] },
     { title: "", image: "/images/point-zero/pz0-20.webp", paragraphs: [
         "La flèche partit vers l'est. L'est extrême. Si loin que, sur la carte, elle semblait faire le tour de la Terre pour y arriver.",
-        "— C'est où, ça ? demanda-je.",
-        "Bangaly lut sur l'écran : une grande île, à l'autre bout du monde, qui portait pourtant le mot Guinée, comme nous.",
-        "— L'éclat le plus loin, murmura-je en ressortant à la lumière. Gardé par le lieu le plus sombre. Bien sûr. On cache toujours au plus profond ce qu'on a de plus précieux.",
+        "— C'est où, ça ?",
+        "Bangaly lut sur l'écran : une grande île, à l'autre bout du monde.",
+        "— L'éclat le plus loin, dis-je en ressortant à la lumière. Gardé par le lieu le plus sombre. Bien sûr. On cache toujours au plus profond ce qu'on a de plus précieux.",
         "Nous avons respiré longtemps, dehors, sous le soleil.",
     ] },
     { title: "Le Nord", image: "/images/point-zero/pz0-21.webp", paragraphs: [
@@ -124,7 +127,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "— C'est D'mba, dit la vieille femme, et sa voix se fit douce. La Mère. Celle qui donne et qui ne reprend jamais.",
     ] },
     { title: "", image: "/images/point-zero/pz0-23.webp", paragraphs: [
-        "La marque était à ses pieds. Nous nous agenouillâmes, scannâmes à deux, le souffle court. La flèche montra le nord — la Guinée voisine, la plus proche des sœurs.",
+        "La marque était à ses pieds. Nous nous agenouillâmes, scannâmes à deux, le souffle court. La flèche montra le nord — tout près, la plus proche des sœurs.",
         "Mais aucun de nous deux ne regardait plus la flèche. Nous regardions le visage de bois, qui semblait, dans la pénombre, nous regarder aussi.",
         "— Merci, dit la vieille femme.",
         "Et elle nous laissa partir.",
@@ -133,12 +136,12 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "Au coucher du soleil, nous avons gravi ensemble l'escalier du phare de Tamara. Marche après marche, en colimaçon, jusqu'à ce que le vent nous prenne le visage.",
         "Tout en haut, le monde s'ouvrait. La mer de tous les côtés. Et Kamara, assis près de la grande lampe qui allait bientôt s'allumer, qui nous attendait.",
         "— Alors, dit-il. Racontez-moi ce que le phare vous a montré.",
-        "Je posai ma carte sur le sol de pierre. Et j'y plantai les quatre points.",
+        "Je posai ma carte sur le sol de pierre. J'y plantai les quatre points. Puis je rouvris l'application — celle qui lit le nom des lieux. À chaque point, je touchai. Un nom s'afficha.",
     ] },
     { title: "", image: "/images/point-zero/pz0-25.webp", paragraphs: [
-        "Quatre points. Aux quatre coins du monde. Je les regardai, et d'un coup tout se renversa dans ma tête, comme un seau qu'on vide.",
-        "— Ce sont toutes des Guinée, dis-je. Toutes. Celle du nord. Celle du golfe. Celle du bout du monde qui porte notre nom. Et celle de l'ouest, qui le porte presque.",
-        "— Notre nom, dit Bangaly. Jeté aux quatre coins de la Terre. Pourquoi un nom se brise-t-il en morceaux ?",
+        "Quatre noms. Aux quatre coins du monde. Je les lus, et d'un coup tout se renversa dans ma tête, comme un seau qu'on vide.",
+        "— Ce sont toutes des Guinée, dis-je. Toutes. Celle du nord. Celle du golfe. Celle du bout du monde qui porte notre nom. Et à l'ouest, La Guyane — j'ai toujours trouvé qu'il y avait une ressemblance entre ces noms.",
+        "— Notre nom, dit Bangaly. Jeté aux quatre coins de la Terre. Y a-t-il un autre nom comme ça, que portent plusieurs pays ?",
         "Kamara se laissa glisser au sol, parmi nous, comme un grand-père au milieu de ses petits-enfants. La lampe, derrière lui, s'alluma. Et sa voix changea.",
         "— Parce que ce nom n'est pas né sur la Terre, dit-il. Asseyez-vous. Je vais vous dire ce que ce phare garde depuis qu'on l'a bâti.",
     ] },
@@ -179,6 +182,11 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "English",
     bookTitle: "Point Zero — The Night the Star Gave Herself",
     sections: [
+    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
+        "Point Zero",
+        "Book 0",
+        "The Night the Star Gave Herself",
+    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "The pirogue reached Kassa just as the sun was touching the water. The sand, beneath my bare feet, was red. Red like an ember put out the night before, still keeping, underneath, a little fire.",
         "My father had a worksite on the island. We had come as a family, my three sisters and I. They wanted the beach. I wanted something else.",
@@ -238,17 +246,15 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz0-10.webp", paragraphs: [
         "The western mark was on the beach, facing the open sea, where the current takes you if you bathe without knowing. I asked the fisherman who kept it whether it was a danger.",
         "— No, he said. A call. Something that means: come and see.",
-        "I scanned the mark. The place it pointed to was thousands of kilometres away, beyond the Atlantic, on the neighbouring continent. A country that also bore the name of our country.",
-        "The fisherman looked at the arrow.",
-        "— How many Guineas are there on Earth? he asked, puzzled.",
-        "— At least four, I murmured. And here is the first.",
+        "I scanned the mark. The place it pointed to was thousands of kilometres away, beyond the Atlantic, on the neighbouring continent.",
+        "The fisherman looked at the arrow. For a long time. He said nothing.",
     ] },
     { title: "", image: "/images/point-zero/pz0-11.webp", paragraphs: [
         "The southern mark lay in a small lagoon, hidden by the aerial roots of the mangroves. Bangaly knew the way, and he showed it to me without a word.",
         "The water was very clear. And very old. You felt, in that lagoon, that no season ever really passed through it. Only time, dragging on forever.",
         "— There's a crocodile here, he told me. Very old. Older than the wood of the ancestors. I think it's waiting for something.",
         "We were able to scan the mark from the land. It pointed toward an island, very close to us, just across the gulf. A place where, Bangaly said, the red colobus existed nowhere else in the world.",
-        "— The south, I said. Always the south. As if all the mysteries of Guinea lay in the four directions.",
+        "— And the journey goes on, I said.",
     ] },
     { title: "", image: "/images/point-zero/pz0-12.webp", paragraphs: [
         "The eastern mark was the farthest, on the other island, where old grey walls stood. A place where men were once shut away. No one went there anymore.",
@@ -266,7 +272,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz0-20.webp", paragraphs: [
         "The arrow set off toward the east. The far east. So far that, on the map, it seemed to go round the Earth to get there.",
         "— Where is that? I asked.",
-        "Bangaly read on the screen: a great island, at the other end of the world, that bore the word Guinea nonetheless, like us.",
+        "Bangaly read on the screen: a great island, at the other end of the world.",
         "— The farthest shard, I murmured as I came back into the light. Kept by the darkest place. Of course. We always hide what is most precious in the deepest place.",
         "We breathed a long time, outside, under the sun.",
     ] },
@@ -283,7 +289,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "— This is D'mba, said the old woman, and her voice grew gentle. The Mother. She who gives and never takes back.",
     ] },
     { title: "", image: "/images/point-zero/pz0-23.webp", paragraphs: [
-        "The mark was at her feet. We knelt, scanned together, our breath short. The arrow showed the north — the neighbouring Guinea, the nearest of the sisters.",
+        "The mark was at her feet. We knelt, scanned together, our breath short. The arrow showed the north — close by, the nearest of the sisters.",
         "But neither of us was looking at the arrow anymore. We were looking at the wooden face, which seemed, in the half-light, to be looking at us too.",
         "— Thank you, said the old woman.",
         "And she let us go.",
@@ -292,12 +298,12 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "At sunset, we climbed together the stairway of the Tamara lighthouse. Step after step, spiralling, until the wind took our faces.",
         "At the very top, the world opened. The sea on every side. And Kamara, seated near the great lamp that would soon be lit, waiting for us.",
         "— So, he said. Tell me what the lighthouse showed you.",
-        "I laid my map on the stone floor. And I planted the four points on it.",
+        "I laid my map on the stone floor. I planted the four points on it. Then I opened the app again — the one that reads the names of places. At each point, I tapped. A name appeared.",
     ] },
     { title: "", image: "/images/point-zero/pz0-25.webp", paragraphs: [
-        "Four points. At the four corners of the world. I looked at them, and all at once everything turned over in my head, like a bucket being emptied.",
-        "— They are all Guineas, I said. All of them. The one in the north. The one on the gulf. The one at the end of the world that bears our name. And the one in the west, that almost bears it.",
-        "— Our name, said Bangaly. Cast to the four corners of the Earth. Why does a name break into pieces?",
+        "Four names. At the four corners of the world. I read them, and all at once everything turned over in my head, like a bucket being emptied.",
+        "— They are all Guineas, I said. All of them. The one in the north. The one on the gulf. The one at the end of the world that bears our name. And in the west, Guyana — I always thought there was a likeness between those names.",
+        "— Our name, said Bangaly. Cast to the four corners of the Earth. Is there any other name like this, borne by several countries?",
         "Kamara let himself slide to the floor, among us, like a grandfather amid his grandchildren. The lamp, behind him, lit up. And his voice changed.",
         "— Because that name was not born on Earth, he said. Sit down. I am going to tell you what this lighthouse has kept since it was built.",
     ] },
@@ -338,6 +344,11 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "العربية",
     bookTitle: "النقطة صفر — الليلة التي وهبت فيها النجمة نفسها",
     sections: [
+    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
+        "النقطة صفر",
+        "الجزء صفر",
+        "الليلة التي وهبت فيها النجمة نفسها",
+    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "رست الزورق على كاسا في اللحظة التي لامس فيها الشمسُ الماء. كان الرمل، تحت قدميّ الحافيتين، أحمر. أحمر كجمرةٍ أُطفئت في الليلة السابقة، وتحتها لا يزال شيءٌ من نار.",
         "كان لأبي ورشةٌ على الجزيرة. أتينا أُسرةً، أخواتي الثلاث وأنا. أردن الشاطئ. أمّا أنا، فأردتُ شيئًا آخر.",
@@ -397,17 +408,15 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz0-10.webp", paragraphs: [
         "كانت علامة الغرب على الشاطئ، مواجهةً عرض البحر، حيث يأخذك التيّار إن سبحتَ دون معرفة. سألتُ الصيّاد الذي يحرسها إن كانت خطرًا.",
         "— لا، قال. نداء. شيءٌ يعني: تعالَ وانظر.",
-        "مسحتُ العلامة. المكان الذي تشير إليه كان على بُعد آلاف الكيلومترات، خلف الأطلسي، على القارّة المجاورة. بلدٌ يحمل أيضًا اسم بلدنا.",
-        "نظر الصيّاد إلى السهم.",
-        "— كم غينيا على الأرض؟ سأل، حائرًا.",
-        "— أربع على الأقلّ، همستُ. وها هي الأولى.",
+        "مسحتُ العلامة. المكان الذي تشير إليه كان على بُعد آلاف الكيلومترات، خلف الأطلسي، على القارّة المجاورة.",
+        "نظر الصيّاد إلى السهم. طويلًا. لم يقل شيئًا.",
     ] },
     { title: "", image: "/images/point-zero/pz0-11.webp", paragraphs: [
         "كانت علامة الجنوب في بحيرةٍ صغيرة، تخفيها الجذور الهوائيّة لأشجار المانغروف. كان بانغالي يعرف الطريق، وأراني إيّاه دون كلام.",
         "كان الماء صافيًا جدًّا. وقديمًا جدًّا. كان المرء يشعر، في تلك البحيرة، أنّ لا فصلًا يمرّ بها حقًّا. فقط الزمن يتمطّى بلا نهاية.",
         "— هناك تمساح، هنا، قال لي. عجوزٌ جدًّا. أقدم من خشب الأسلاف. أظنّه ينتظر شيئًا.",
         "تمكّنّا من مسح العلامة من اليابسة. كانت تشير نحو جزيرة، قريبةٍ جدًّا منّا، على الجانب الآخر من الخليج فحسب. مكانٌ، كما قال بانغالي، لا توجد فيه قرود الكولوبوس الحمراء إلا هناك في العالم.",
-        "— الجنوب، قلتُ. دائمًا الجنوب. كأنّ كلّ أسرار غينيا في الاتجاهات الأربعة.",
+        "— والرحلة تستمرّ، قلتُ.",
     ] },
     { title: "", image: "/images/point-zero/pz0-12.webp", paragraphs: [
         "كانت علامة الشرق هي الأبعد، على الجزيرة الأخرى، حيث تنتصب جدرانٌ رماديّة عتيقة. مكانٌ كان يُحبَس فيه البشر، فيما مضى. لم يعد يذهب إليه أحد.",
@@ -425,7 +434,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz0-20.webp", paragraphs: [
         "انطلق السهم نحو الشرق. الشرق الأقصى. بعيدًا حتى بدا، على الخريطة، يدور حول الأرض ليصل إليه.",
         "— أين هذا؟ سألتُ.",
-        "قرأ بانغالي على الشاشة: جزيرةٌ كبيرة، في الطرف الآخر من العالم، تحمل مع ذلك كلمة غينيا، مثلنا.",
+        "قرأ بانغالي على الشاشة: جزيرةٌ كبيرة، في الطرف الآخر من العالم.",
         "— الشظيّة الأبعد، همستُ وأنا أخرج إلى الضوء. يحرسها أحلك مكان. بالطبع. نُخفي دائمًا في الأعمق ما هو أثمن ما لدينا.",
         "تنفّسنا طويلًا، في الخارج، تحت الشمس.",
     ] },
@@ -442,7 +451,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "— هذه دامبا، قالت العجوز، ورقّ صوتها. الأمّ. التي تعطي ولا تستردّ أبدًا.",
     ] },
     { title: "", image: "/images/point-zero/pz0-23.webp", paragraphs: [
-        "كانت العلامة عند قدميها. ركعنا، مسحنا معًا، وأنفاسنا قصيرة. أشار السهم نحو الشمال — غينيا المجاورة، أقرب الأخوات.",
+        "كانت العلامة عند قدميها. ركعنا، مسحنا معًا، وأنفاسنا قصيرة. أشار السهم نحو الشمال — قريبٌ جدًّا، أقرب الأخوات.",
         "لكن لم يعد أيٌّ منّا ينظر إلى السهم. كنّا ننظر إلى الوجه الخشبيّ، الذي بدا، في العتمة، ينظر إلينا أيضًا.",
         "— شكرًا، قالت العجوز.",
         "وتركتنا نمضي.",
@@ -451,12 +460,12 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "عند غروب الشمس، صعدنا معًا سُلّم منارة تامارا. درجةً بعد درجة، حلزونيًّا، حتى أخذت الريح وجهينا.",
         "في القمّة، انفتح العالم. البحر من كلّ الجهات. وكامارا، جالسًا قرب المصباح الكبير الذي سيُضاء قريبًا، ينتظرنا.",
         "— إذن، قال. احكيا لي ما أراكما إيّاه المنارة.",
-        "وضعتُ خريطتي على الأرض الحجريّة. وغرستُ فيها النقاط الأربع.",
+        "وضعتُ خريطتي على الأرض الحجريّة. غرستُ فيها النقاط الأربع. ثم أعدتُ فتح التطبيق — ذاك الذي يقرأ أسماء الأماكن. عند كلّ نقطة، لمستُ. ظهر اسم.",
     ] },
     { title: "", image: "/images/point-zero/pz0-25.webp", paragraphs: [
-        "أربع نقاط. في أركان العالم الأربعة. نظرتُ إليها، وفجأةً انقلب كلّ شيءٍ في رأسي، كدلوٍ يُفرَغ.",
-        "— كلّها غينيا، قلتُ. كلّها. تلك الشماليّة. تلك التي على الخليج. تلك التي في آخر العالم وتحمل اسمنا. وتلك الغربيّة، التي تكاد تحمله.",
-        "— اسمنا، قال بانغالي. مُلقًى في أركان الأرض الأربعة. لماذا يتكسّر اسمٌ إلى قطع؟",
+        "أربعة أسماء. في أركان العالم الأربعة. قرأتُها، وفجأةً انقلب كلّ شيءٍ في رأسي، كدلوٍ يُفرَغ.",
+        "— كلّها غينيا، قلتُ. كلّها. تلك الشماليّة. تلك التي على الخليج. تلك التي في آخر العالم وتحمل اسمنا. وفي الغرب، غويانا — لطالما رأيتُ أنّ ثمّة شَبَهًا بين هذه الأسماء.",
+        "— اسمنا، قال بانغالي. مُلقًى في أركان الأرض الأربعة. هل ثمّة اسمٌ آخر كهذا، تحمله عدّة بلدان؟",
         "ترك كامارا نفسه ينزلق إلى الأرض، بيننا، كجدٍّ بين أحفاده. المصباح، خلفه، اشتعل. وتغيّر صوته.",
         "— لأنّ هذا الاسم لم يُولد على الأرض، قال. اجلسا. سأقول لكما ما تحفظه هذه المنارة منذ أن بُنيت.",
     ] },
@@ -497,6 +506,11 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     label: "中文",
     bookTitle: "零点 — 星辰献身的那一夜",
     sections: [
+    { title: "", image: "/images/point-zero/pz0-01.webp", paragraphs: [
+        "零点",
+        "第零卷",
+        "星辰献身的那一夜",
+    ] },
     { title: "", image: "/images/point-zero/pz0-02.webp", paragraphs: [
         "独木舟靠上卡萨岛时，太阳正触到水面。我赤脚下的沙，是红的。红得像前一夜熄灭的炭火，底下还藏着一点火。",
         "我父亲在岛上有个工地。我们一家来的，我和三个姐妹。她们想去海滩。而我，想要别的。",
@@ -556,17 +570,15 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz0-10.webp", paragraphs: [
         "西方的刻痕在海滩上，面朝外海，那里水流会卷走不知深浅就下水的人。我问守着它的渔夫，那是不是危险。",
         "——不，他说。是一声召唤。一个意思是「来看看」的东西。",
-        "我扫描了那刻痕。它指向的地方在数千公里之外，越过大西洋，在邻近的大陆上。一个也叫着我们国家名字的国家。",
-        "渔夫看着那箭头。",
-        "——地球上有多少个几内亚？他困惑地问。",
-        "——至少四个，我轻声说。而这，是第一个。",
+        "我扫描了那刻痕。它指向的地方在数千公里之外，越过大西洋，在邻近的大陆上。",
+        "渔夫看着那箭头。看了很久。他什么也没说。",
     ] },
     { title: "", image: "/images/point-zero/pz0-11.webp", paragraphs: [
         "南方的刻痕在一片小泻湖里，被红树的气根藏着。班加利认得路，他没说话就带我去了。",
         "水很清。也很老。在那片泻湖里，你能感到没有哪个季节真正经过这里。只有时间，无尽地拖延着。",
         "——这里有一条鳄鱼，他对我说。很老。比祖辈的木头还老。我想它在等什么。",
         "我们能从陆地上扫描那刻痕。它指向一座岛，离我们很近，就在海湾对岸。班加利说，那是一个地方，红疣猴在全世界只存在于那里。",
-        "——南方，我说。总是南方。仿佛几内亚所有的奥秘都在这四个方向里。",
+        "——旅程还在继续，我说。",
     ] },
     { title: "", image: "/images/point-zero/pz0-12.webp", paragraphs: [
         "东方的刻痕最远，在另一座岛上，那里立着灰色的古墙。一个从前关押人的地方。再没有人去那里了。",
@@ -584,7 +596,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz0-20.webp", paragraphs: [
         "箭头指向东方。极东。远得在地图上，它仿佛要绕地球一圈才能抵达。",
         "——那是哪儿？我问。",
-        "班加利在屏幕上读到：一座大岛，在世界的另一端，却也和我们一样，带着「几内亚」这个词。",
+        "班加利在屏幕上读到：一座大岛，在世界的另一端。",
         "——最远的那片碎光，我走回光亮里时喃喃道。由最黑暗的地方守着。当然了。我们总是把最珍贵的东西藏在最深处。",
         "我们在外面，阳光下，久久地呼吸。",
     ] },
@@ -601,7 +613,7 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "——这是丹巴，老妇人说，她的声音变得温柔。母亲。给予而从不收回的那一位。",
     ] },
     { title: "", image: "/images/point-zero/pz0-23.webp", paragraphs: [
-        "刻痕在她脚下。我们跪下，一起扫描，气息短促。箭头指向北方——邻近的几内亚，姐妹中最近的一个。",
+        "刻痕在她脚下。我们跪下，一起扫描，气息短促。箭头指向北方——近在咫尺，姐妹中最近的一个。",
         "但我们俩都不再看那箭头了。我们看着那张木头的脸，它在幽暗中，仿佛也在看着我们。",
         "——谢谢你们，老妇人说。",
         "然后她让我们走了。",
@@ -610,12 +622,12 @@ export const POINT_ZERO_T0_ML: Partial<Record<Lang, RBook>> = {
         "日落时分，我们一起登上塔马拉灯塔的楼梯。一级又一级，盘旋而上，直到风扑上我们的脸。",
         "在最高处，世界敞开了。四面都是海。卡马拉，坐在那盏即将点亮的大灯旁，等着我们。",
         "——那么，他说。给我讲讲灯塔给你们看了什么。",
-        "我把地图铺在石头地面上。在上面，钉下那四个点。",
+        "我把地图铺在石头地面上。在上面，钉下那四个点。然后我重新打开那个应用——能读出地点名称的那个。我在每一个点上轻轻一触。一个名字浮现出来。",
     ] },
     { title: "", image: "/images/point-zero/pz0-25.webp", paragraphs: [
-        "四个点。在世界的四个角落。我看着它们，忽然，我脑子里一切都翻了过来，像一只被倒空的桶。",
-        "——它们全是几内亚，我说。全都是。北方的那个。海湾上的那个。世界尽头那个带着我们名字的。还有西方那个，几乎带着我们的名字。",
-        "——我们的名字，班加利说。被抛到地球的四个角落。一个名字为什么会碎成几块？",
+        "四个名字。在世界的四个角落。我读着它们，忽然，我脑子里一切都翻了过来，像一只被倒空的桶。",
+        "——它们全是几内亚，我说。全都是。北方的那个。海湾上的那个。世界尽头那个带着我们名字的。还有在西方，圭亚那——我一直觉得，这些名字之间有种相似。",
+        "——我们的名字，班加利说。被抛到地球的四个角落。还有别的名字像这样，被几个国家共同承载吗？",
         "卡马拉让自己滑坐到地上，在我们中间，像一个坐在孙辈中间的祖父。他身后的灯，亮了。他的声音变了。",
         "——因为这个名字不是在地球上诞生的，他说。坐下。我来告诉你们，这座灯塔自建成以来守着什么。",
     ] },
