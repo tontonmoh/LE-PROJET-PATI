@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>LaGuinè378 — Le défi des sous-préfectures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Base */
+    --bg: #FFF6DD;
+    --paper: #FFFEFA;
+    --ink: #2B1F14;
+    --ink-soft: #6E5B44;
+    --rule: #E9DDBC;
+    --rule-soft: #F4EBCF;
+
+    /* Feedback */
+    --leaf: #2EB86A;
+    --sienna: #E23E24;
+    --ochre: #F9B233;
+    --ochre-deep: #D4901D;
+
+    /* Terrains — one color per scope */
+    --c-all: #7B3FBF;
+    --c-basse: #1F76B8;
+    --c-moyenne: #D4732A;
+    --c-haute: #F9B233;
+    --c-forestiere: #147246;
+    --c-adm_boke: #B85A1A;
+    --c-adm_kindia: #6BAA43;
+    --c-adm_labe: #5B4EBD;
+    --c-adm_mamou: #E8A83A;
+    --c-adm_faranah: #2E9AA7;
+    --c-adm_kankan: #C79B2A;
+    --c-adm_nzerekore: #1E5F3E;
+    --c-adm_conakry: #2B5FB8;
+
+    /* Active terrain (set dynamically) */
+    --terrain: var(--c-all);
+    --terrain-soft: rgba(123, 63, 191, 0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Fredoka', system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 20% 8%, rgba(249,178,51,0.10), transparent 40%),
+      radial-gradient(circle at 90% 82%, rgba(46,154,167,0.08), transparent 50%);
+  }
+  body.fs-on {
+    max-width: 900px;
+  }
+  body.fs-on .brand-mark { font-size: 52px; }
+  body.fs-on .card .name { font-size: clamp(36px, 6vw, 56px); }
+
+  .screen {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    padding: 18px 0 24px;
+  }
+  .screen.active { display: flex; }
+
+  /* -------- MENU -------- */
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .brand-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 42px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+    line-height: 1;
+  }
+  .brand-mark em {
+    font-style: italic;
+    color: var(--c-forestiere);
+    font-variation-settings: "opsz" 144;
+  }
+  .brand-mark .three {
+    color: var(--c-adm_boke);
+    font-style: italic;
+  }
+  .brand-tag {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    padding: 3px 8px;
+    background: var(--ochre);
+    color: var(--ink);
+    border-radius: 20px;
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    margin-bottom: 22px;
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 24;
+  }
+
+  .meta-panel {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 26px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .meta-panel .label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .meta-panel .value {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--ink);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-variation-settings: "opsz" 144;
+  }
+  .meta-panel .value .of {
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .meta-panel .value .ok {
+    color: var(--leaf);
+  }
+  .meta-bar {
+    margin-top: 10px;
+    height: 8px;
+    background: var(--rule-soft);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .meta-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--c-basse), var(--c-moyenne), var(--c-haute), var(--c-forestiere));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .meta-note {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .section-label {
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before, .section-label::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: var(--rule);
+    border-radius: 1px;
+  }
+  .section-label span {
+    padding: 0 4px;
+  }
+
+  .options {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .options.grid-1 { grid-template-columns: 1fr; }
+  .options.grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .options.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .scope-tile {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: transform 0.08s, box-shadow 0.08s;
+    font-family: 'Fredoka', sans-serif;
+    text-align: left;
+    line-height: 1.15;
+    box-shadow: 2px 2px 0 var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .scope-tile:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .scope-tile:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  .scope-tile .dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--tile-color);
+    border: 2px solid var(--ink);
+    flex-shrink: 0;
+  }
+  .scope-tile .info {
+    flex: 1;
+    min-width: 0;
+  }
+  .scope-tile .name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .scope-tile .stat {
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .scope-tile.selected {
+    background: var(--tile-color);
+  }
+  .scope-tile.selected .name,
+  .scope-tile.selected .stat {
+    color: white;
+  }
+  .scope-tile.selected .dot {
+    background: white;
+  }
+  .scope-tile.complete {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--tile-color),
+      var(--tile-color) 8px,
+      color-mix(in srgb, var(--tile-color) 80%, white) 8px,
+      color-mix(in srgb, var(--tile-color) 80%, white) 16px
+    );
+  }
+  .scope-tile.complete .name,
+  .scope-tile.complete .stat {
+    color: white;
+  }
+  .scope-tile.complete::after {
+    content: "★";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: white;
+    font-size: 16px;
+  }
+
+  .scope-tile.all-tile {
+    padding: 16px;
+  }
+  .scope-tile.all-tile .name { font-size: 16px; }
+  .scope-tile.all-tile .dot { width: 26px; height: 26px; }
+
+  .count-tile {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 12px 6px;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 0 var(--ink);
+    transition: transform 0.08s, box-shadow 0.08s;
+    font-variation-settings: "opsz" 144;
+  }
+  .count-tile:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .count-tile:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  .count-tile.selected {
+    background: var(--terrain);
+    color: white;
+  }
+  .count-tile:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+
+  .primary-btn {
+    background: var(--terrain);
+    color: white;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    margin-top: 18px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.08s, box-shadow 0.08s;
+  }
+  .primary-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .primary-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+  .primary-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: var(--rule);
+    color: var(--ink-soft);
+    box-shadow: 2px 2px 0 var(--rule);
+  }
+
+  .reset-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .reset-btn {
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 6px 10px;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+  }
+  .reset-btn:hover { color: var(--sienna); text-decoration-color: var(--sienna); }
+
+  /* -------- GAME -------- */
+
+  #game { padding: 12px 0; }
+
+  .hud {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 2px 2px 0 var(--ink);
+    margin-bottom: 14px;
+  }
+  .hud-chrono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--terrain);
+    font-variant-numeric: tabular-nums;
+  }
+  .hud-scope {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+  }
+  .hud-progress {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    background: var(--terrain);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+  }
+
+  .quit-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  .quit-btn {
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 12px;
+  }
+  .quit-btn:hover { color: var(--sienna); }
+
+  .card-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 16px;
+    min-height: 130px;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    padding: 22px 24px 22px;
+    box-shadow: 4px 4px 0 var(--terrain);
+    text-align: center;
+    max-width: 100%;
+    position: relative;
+    transform: rotate(-1deg);
+    animation: cardEnter 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  }
+  .card::before {
+    content: "SOUS-PRÉFECTURE";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    color: white;
+    background: var(--terrain);
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .card .name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 8vw, 44px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-top: 8px;
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 144;
+  }
+  .card.wrong {
+    animation: cardShake 0.4s;
+    border-color: var(--sienna);
+    box-shadow: 4px 4px 0 var(--sienna);
+  }
+  .card.right {
+    border-color: var(--leaf);
+    box-shadow: 4px 4px 0 var(--leaf);
+  }
+  .card.right::after {
+    content: "✓";
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    font-size: 24px;
+    color: var(--leaf);
+    font-weight: 900;
+  }
+
+  @keyframes cardEnter {
+    from { opacity: 0; transform: rotate(-1deg) translateY(-8px) scale(0.94); }
+    to { opacity: 1; transform: rotate(-1deg) translateY(0) scale(1); }
+  }
+  @keyframes cardShake {
+    0%, 100% { transform: rotate(-1deg) translateX(0); }
+    20% { transform: rotate(-1deg) translateX(-6px); }
+    40% { transform: rotate(-1deg) translateX(6px); }
+    60% { transform: rotate(-1deg) translateX(-4px); }
+    80% { transform: rotate(-1deg) translateX(4px); }
+  }
+
+  .prompt {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 8px 0 14px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+  }
+  .prompt strong {
+    color: var(--terrain);
+    font-weight: 700;
+  }
+
+  .pref-grid {
+    display: grid;
+    gap: 8px;
+    padding-bottom: 20px;
+  }
+  .pref {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 12px 8px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.15;
+    box-shadow: 2px 2px 0 var(--ink);
+    transition: transform 0.06s, box-shadow 0.06s, background 0.1s;
+  }
+  .pref:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .pref:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  .pref.flash-wrong {
+    background: var(--sienna);
+    color: white;
+    animation: prefFlash 0.4s;
+  }
+  .pref.flash-right {
+    background: var(--leaf);
+    color: white;
+    animation: prefFlash 0.4s;
+  }
+  @keyframes prefFlash {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  .penalty-flash {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sienna);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    z-index: 100;
+    animation: penaltyFly 1s forwards;
+    pointer-events: none;
+    border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  @keyframes penaltyFly {
+    0% { opacity: 0; transform: translate(-50%, 10px); }
+    20% { opacity: 1; transform: translate(-50%, 0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -16px); }
+  }
+
+  /* -------- WIN -------- */
+
+  .win-header {
+    text-align: center;
+    padding: 36px 0 16px;
+  }
+  .win-header .accolade {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: white;
+    background: var(--terrain);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .win-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 40px;
+    color: var(--ink);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .win-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .win-stat {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .win-stat .label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .win-stat .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--terrain);
+    font-variant-numeric: tabular-nums;
+  }
+  .win-stat .sub {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .win-meta {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .win-meta .label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .win-meta .value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+  .win-meta .value .discovered {
+    color: var(--leaf);
+  }
+  .win-meta .newly {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12px;
+    color: var(--ochre-deep);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .win-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .secondary-btn {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.08s, box-shadow 0.08s;
+  }
+  .secondary-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .secondary-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+
+  /* -------- RESPONSIVE PREF GRID -------- */
+  @media (min-width: 480px) {
+    .pref-grid.tight { grid-template-columns: repeat(3, 1fr); }
+    .pref-grid.medium { grid-template-columns: repeat(4, 1fr); }
+    .pref-grid.wide { grid-template-columns: repeat(5, 1fr); }
+    .pref-grid.national { grid-template-columns: repeat(5, 1fr); }
+  }
+  @media (max-width: 479px) {
+    .pref-grid.tight { grid-template-columns: repeat(2, 1fr); }
+    .pref-grid.medium { grid-template-columns: repeat(3, 1fr); }
+    .pref-grid.wide { grid-template-columns: repeat(3, 1fr); }
+    .pref-grid.national { grid-template-columns: repeat(3, 1fr); }
+    .pref { font-size: 12px; padding: 10px 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MENU ============ -->
+<section id="menu" class="screen active">
+  <div class="brand">
+    <span class="brand-mark">La<em>Guin</em>è<span class="three">378</span></span>
+    <span class="brand-tag">Sprint</span>
+  </div>
+  <p class="subtitle">
+    Chaque sous-préfecture n'apparaît qu'une fois. Complète les 378 et tu connais la Guinée sur le bout des doigts.
+  </p>
+
+  <div class="meta-panel">
+    <div class="label">
+      <span>Mon parcours</span>
+      <span id="metaPercent">0%</span>
+    </div>
+    <div class="value">
+      <span class="ok" id="metaCounter">0</span>
+      <span class="of">/ 378</span>
+    </div>
+    <div class="meta-bar"><div class="meta-bar-fill" id="metaBarFill" style="width:0%"></div></div>
+    <div class="meta-note" id="metaNote">Base v1 · 349 sous-préf. répertoriées, les 29 restantes seront ajoutées.</div>
+  </div>
+
+  <div class="section-label"><span>Toute la Guinée</span></div>
+  <div class="options grid-1" id="scopeAll"></div>
+
+  <div class="section-label"><span>Régions naturelles</span></div>
+  <div class="options grid-2" id="scopeNat"></div>
+
+  <div class="section-label"><span>Régions administratives</span></div>
+  <div class="options grid-2" id="scopeAdm"></div>
+
+  <div class="section-label"><span>Combien de sous-préf. ?</span></div>
+  <div class="options grid-4" id="countOptions"></div>
+
+  <button class="primary-btn" id="startBtn" disabled>Commencer le sprint</button>
+
+  <div class="reset-row">
+    <button class="reset-btn" id="resetBtn">Réinitialiser mon parcours</button>
+  </div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <div class="hud">
+    <div class="hud-chrono" id="chrono">0.0s</div>
+    <div class="hud-scope" id="hudScope"></div>
+    <div class="hud-progress"><span id="progNow">0</span>/<span id="progTotal">0</span></div>
+  </div>
+  <div class="quit-row">
+    <button class="quit-btn" id="quitBtn">← Abandonner</button>
+  </div>
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="name" id="cardName">—</div>
+    </div>
+  </div>
+  <div class="prompt">Elle appartient à quelle <strong>préfecture</strong> ?</div>
+  <div class="pref-grid" id="prefGrid"></div>
+</section>
+
+<!-- ============ WIN ============ -->
+<section id="win" class="screen">
+  <div class="win-header">
+    <div class="accolade" id="winAccolade">Défi accompli</div>
+    <h2 id="winTitle">Bravo !</h2>
+  </div>
+
+  <div class="win-stats">
+    <div class="win-stat">
+      <div class="label">Temps</div>
+      <div class="value" id="winTime">—</div>
+      <div class="sub" id="winPace">—</div>
+    </div>
+    <div class="win-stat">
+      <div class="label">Erreurs</div>
+      <div class="value" id="winErrors">—</div>
+      <div class="sub" id="winAccuracy">—</div>
+    </div>
+  </div>
+
+  <div class="win-meta">
+    <div class="label">Mon parcours</div>
+    <div class="value"><span class="discovered" id="winMetaCount">0</span> / 378</div>
+    <div class="newly" id="winNewly"></div>
+  </div>
+
+  <div class="win-actions">
+    <button class="primary-btn" id="againBtn">Encore un sprint</button>
+    <button class="secondary-btn" id="backBtn">Changer de terrain</button>
+  </div>
+</section>
+
+<script>
+const DATA = [
+  // === CONAKRY ===
+  ["Kaloum","Conakry","conakry","basse"],
+  ["Dixinn","Conakry","conakry","basse"],
+  ["Matam","Conakry","conakry","basse"],
+  ["Ratoma","Conakry","conakry","basse"],
+  ["Matoto","Conakry","conakry","basse"],
+  ["Kassa","Conakry","conakry","basse"],
+
+  // === BASSE-GUINÉE / BOKÉ ===
+  ["Boffa-Centre","Boffa","boke","basse"],
+  ["Colia","Boffa","boke","basse"],
+  ["Douprou","Boffa","boke","basse"],
+  ["Koba-Tatema","Boffa","boke","basse"],
+  ["Lisso","Boffa","boke","basse"],
+  ["Mankountan","Boffa","boke","basse"],
+  ["Tamita","Boffa","boke","basse"],
+  ["Tougnifili","Boffa","boke","basse"],
+  ["Bintimodiya","Boké","boke","basse"],
+  ["Boké-Centre","Boké","boke","basse"],
+  ["Dabiss","Boké","boke","basse"],
+  ["Kamsar","Boké","boke","basse"],
+  ["Kanfarandé","Boké","boke","basse"],
+  ["Kolaboui","Boké","boke","basse"],
+  ["Malapouyah","Boké","boke","basse"],
+  ["Sangarédi","Boké","boke","basse"],
+  ["Sansalé","Boké","boke","basse"],
+  ["Tanéné","Boké","boke","basse"],
+  ["Baguinet","Fria","boke","basse"],
+  ["Banguingny","Fria","boke","basse"],
+  ["Fria-Centre","Fria","boke","basse"],
+  ["Tormelin","Fria","boke","basse"],
+
+  // === BASSE-GUINÉE / KINDIA ===
+  ["Coyah-Centre","Coyah","kindia","basse"],
+  ["Kouriya","Coyah","kindia","basse"],
+  ["Manéah","Coyah","kindia","basse"],
+  ["Wonkifong","Coyah","kindia","basse"],
+  ["Badi","Dubréka","kindia","basse"],
+  ["Dubréka-Centre","Dubréka","kindia","basse"],
+  ["Falessadé","Dubréka","kindia","basse"],
+  ["Khorira","Dubréka","kindia","basse"],
+  ["Ouassou","Dubréka","kindia","basse"],
+  ["Tanéné","Dubréka","kindia","basse"],
+  ["Tondon","Dubréka","kindia","basse"],
+  ["Alassoya","Forécariah","kindia","basse"],
+  ["Benty","Forécariah","kindia","basse"],
+  ["Farmoriah","Forécariah","kindia","basse"],
+  ["Forécariah-Centre","Forécariah","kindia","basse"],
+  ["Kaback","Forécariah","kindia","basse"],
+  ["Kakossa","Forécariah","kindia","basse"],
+  ["Kallia","Forécariah","kindia","basse"],
+  ["Maférinyah","Forécariah","kindia","basse"],
+  ["Moussayah","Forécariah","kindia","basse"],
+  ["Sikhourou","Forécariah","kindia","basse"],
+  ["Bangouyah","Kindia","kindia","basse"],
+  ["Damankanyah","Kindia","kindia","basse"],
+  ["Friguiagbé","Kindia","kindia","basse"],
+  ["Kindia-Centre","Kindia","kindia","basse"],
+  ["Kolenté","Kindia","kindia","basse"],
+  ["Lynsan","Kindia","kindia","basse"],
+  ["Madina Oula","Kindia","kindia","basse"],
+  ["Mambiya","Kindia","kindia","basse"],
+  ["Molota","Kindia","kindia","basse"],
+  ["Samayah","Kindia","kindia","basse"],
+  ["Souguéta","Kindia","kindia","basse"],
+  ["Bourouwal","Télimélé","kindia","basse"],
+  ["Daramagnaky","Télimélé","kindia","basse"],
+  ["Gougoudjé","Télimélé","kindia","basse"],
+  ["Koba","Télimélé","kindia","basse"],
+  ["Kollet","Télimélé","kindia","basse"],
+  ["Konsotamy","Télimélé","kindia","basse"],
+  ["Missira","Télimélé","kindia","basse"],
+  ["Santou","Télimélé","kindia","basse"],
+  ["Sarékaly","Télimélé","kindia","basse"],
+  ["Sinta","Télimélé","kindia","basse"],
+  ["Sogolon","Télimélé","kindia","basse"],
+  ["Tarihoyé","Télimélé","kindia","basse"],
+  ["Télimélé-Centre","Télimélé","kindia","basse"],
+  ["Thionthian","Télimélé","kindia","basse"],
+
+  // === MOYENNE-GUINÉE / BOKÉ (Fouta) ===
+  ["Foulamory","Gaoual","boke","moyenne"],
+  ["Gaoual-Centre","Gaoual","boke","moyenne"],
+  ["Kakony","Gaoual","boke","moyenne"],
+  ["Koumbia","Gaoual","boke","moyenne"],
+  ["Kounsitel","Gaoual","boke","moyenne"],
+  ["Malanta","Gaoual","boke","moyenne"],
+  ["Touba","Gaoual","boke","moyenne"],
+  ["Wendou M'bour","Gaoual","boke","moyenne"],
+  ["Guingan","Koundara","boke","moyenne"],
+  ["Kamaby","Koundara","boke","moyenne"],
+  ["Koundara-Centre","Koundara","boke","moyenne"],
+  ["Sambaïlo","Koundara","boke","moyenne"],
+  ["Saréboïdo","Koundara","boke","moyenne"],
+  ["Termessé","Koundara","boke","moyenne"],
+  ["Youkounkoun","Koundara","boke","moyenne"],
+
+  // === MOYENNE-GUINÉE / LABÉ ===
+  ["Fafaya","Koubia","labe","moyenne"],
+  ["Gadha Woundou","Koubia","labe","moyenne"],
+  ["Koubia-Centre","Koubia","labe","moyenne"],
+  ["Matakaou","Koubia","labe","moyenne"],
+  ["Missira","Koubia","labe","moyenne"],
+  ["Pilimini","Koubia","labe","moyenne"],
+  ["Dalein","Labé","labe","moyenne"],
+  ["Daralabé","Labé","labe","moyenne"],
+  ["Diari","Labé","labe","moyenne"],
+  ["Dionfo","Labé","labe","moyenne"],
+  ["Garambé","Labé","labe","moyenne"],
+  ["Hafia","Labé","labe","moyenne"],
+  ["Kaalan","Labé","labe","moyenne"],
+  ["Kouramangui","Labé","labe","moyenne"],
+  ["Labé-Centre","Labé","labe","moyenne"],
+  ["Noussy","Labé","labe","moyenne"],
+  ["Popodara","Labé","labe","moyenne"],
+  ["Sannoun","Labé","labe","moyenne"],
+  ["Taranbaly","Labé","labe","moyenne"],
+  ["Tountouroun","Labé","labe","moyenne"],
+  ["Balaya","Lélouma","labe","moyenne"],
+  ["Djountou","Lélouma","labe","moyenne"],
+  ["Hérico","Lélouma","labe","moyenne"],
+  ["Korbé","Lélouma","labe","moyenne"],
+  ["Lafou","Lélouma","labe","moyenne"],
+  ["Lélouma-Centre","Lélouma","labe","moyenne"],
+  ["Linsansaran","Lélouma","labe","moyenne"],
+  ["Manda","Lélouma","labe","moyenne"],
+  ["Parawol","Lélouma","labe","moyenne"],
+  ["Sagalé","Lélouma","labe","moyenne"],
+  ["Tyanguel-Bori","Lélouma","labe","moyenne"],
+  ["Balaki","Mali","labe","moyenne"],
+  ["Donghol Sigon","Mali","labe","moyenne"],
+  ["Dougountouny","Mali","labe","moyenne"],
+  ["Fougou","Mali","labe","moyenne"],
+  ["Gayah","Mali","labe","moyenne"],
+  ["Hidayatou","Mali","labe","moyenne"],
+  ["Lebekere","Mali","labe","moyenne"],
+  ["Madina Wora","Mali","labe","moyenne"],
+  ["Mali-Centre","Mali","labe","moyenne"],
+  ["Salambandé","Mali","labe","moyenne"],
+  ["Télire","Mali","labe","moyenne"],
+  ["Touba","Mali","labe","moyenne"],
+  ["Yembéreng","Mali","labe","moyenne"],
+  ["Fatako","Tougué","labe","moyenne"],
+  ["Fello Koundoua","Tougué","labe","moyenne"],
+  ["Kansangui","Tougué","labe","moyenne"],
+  ["Kolangui","Tougué","labe","moyenne"],
+  ["Kollet","Tougué","labe","moyenne"],
+  ["Konah","Tougué","labe","moyenne"],
+  ["Kouratongo","Tougué","labe","moyenne"],
+  ["Koyin","Tougué","labe","moyenne"],
+  ["Tangaly","Tougué","labe","moyenne"],
+  ["Tougué-Centre","Tougué","labe","moyenne"],
+
+  // === MOYENNE-GUINÉE / MAMOU ===
+  ["Bodié","Dalaba","mamou","moyenne"],
+  ["Dalaba-Centre","Dalaba","mamou","moyenne"],
+  ["Ditinn","Dalaba","mamou","moyenne"],
+  ["Kaalan","Dalaba","mamou","moyenne"],
+  ["Kankalabé","Dalaba","mamou","moyenne"],
+  ["Kébali","Dalaba","mamou","moyenne"],
+  ["Koba","Dalaba","mamou","moyenne"],
+  ["Mafara","Dalaba","mamou","moyenne"],
+  ["Mitty","Dalaba","mamou","moyenne"],
+  ["Mombéyah","Dalaba","mamou","moyenne"],
+  ["Bouliwel","Mamou","mamou","moyenne"],
+  ["Dounet","Mamou","mamou","moyenne"],
+  ["Gongoret","Mamou","mamou","moyenne"],
+  ["Kegneko","Mamou","mamou","moyenne"],
+  ["Konkouré","Mamou","mamou","moyenne"],
+  ["Mamou-Centre","Mamou","mamou","moyenne"],
+  ["Nyagara","Mamou","mamou","moyenne"],
+  ["Ouré-Kaba","Mamou","mamou","moyenne"],
+  ["Poredaka","Mamou","mamou","moyenne"],
+  ["Saramoussaya","Mamou","mamou","moyenne"],
+  ["Soyah","Mamou","mamou","moyenne"],
+  ["Téguéréya","Mamou","mamou","moyenne"],
+  ["Timbo","Mamou","mamou","moyenne"],
+  ["Tolo","Mamou","mamou","moyenne"],
+  ["Bantignel","Pita","mamou","moyenne"],
+  ["Bourouwal Tappe","Pita","mamou","moyenne"],
+  ["Dongol Touma","Pita","mamou","moyenne"],
+  ["Gongoré","Pita","mamou","moyenne"],
+  ["Ley-Miro","Pita","mamou","moyenne"],
+  ["Maci","Pita","mamou","moyenne"],
+  ["Ninguelandé","Pita","mamou","moyenne"],
+  ["Pita-Centre","Pita","mamou","moyenne"],
+  ["Sangareah","Pita","mamou","moyenne"],
+  ["Sintaly","Pita","mamou","moyenne"],
+  ["Timbi-Madina","Pita","mamou","moyenne"],
+  ["Timbi-Touny","Pita","mamou","moyenne"],
+
+  // === HAUTE-GUINÉE / FARANAH ===
+  ["Arfamoussaya","Dabola","faranah","haute"],
+  ["Banko","Dabola","faranah","haute"],
+  ["Bissikrima","Dabola","faranah","haute"],
+  ["Dabola-Centre","Dabola","faranah","haute"],
+  ["Dogomet","Dabola","faranah","haute"],
+  ["Kankama","Dabola","faranah","haute"],
+  ["Kindoye","Dabola","faranah","haute"],
+  ["Konindou","Dabola","faranah","haute"],
+  ["N'Dema","Dabola","faranah","haute"],
+  ["Banora","Dinguiraye","faranah","haute"],
+  ["Dialakoro","Dinguiraye","faranah","haute"],
+  ["Diatifèré","Dinguiraye","faranah","haute"],
+  ["Dinguiraye-Centre","Dinguiraye","faranah","haute"],
+  ["Gagnakali","Dinguiraye","faranah","haute"],
+  ["Kalinko","Dinguiraye","faranah","haute"],
+  ["Lansanya","Dinguiraye","faranah","haute"],
+  ["Selouma","Dinguiraye","faranah","haute"],
+  ["Ballaya","Faranah","faranah","haute"],
+  ["Bambaya","Faranah","faranah","haute"],
+  ["Bantoun","Faranah","faranah","haute"],
+  ["Banian","Faranah","faranah","haute"],
+  ["Beindou","Faranah","faranah","haute"],
+  ["Dantiliy","Faranah","faranah","haute"],
+  ["Faranah-Centre","Faranah","faranah","haute"],
+  ["Gnaleah","Faranah","faranah","haute"],
+  ["Heremakonon","Faranah","faranah","haute"],
+  ["Kobikoro","Faranah","faranah","haute"],
+  ["Maréla","Faranah","faranah","haute"],
+  ["Passayah","Faranah","faranah","haute"],
+  ["Sandeniah","Faranah","faranah","haute"],
+  ["Songoyah","Faranah","faranah","haute"],
+  ["Tindo","Faranah","faranah","haute"],
+  ["Tiro","Faranah","faranah","haute"],
+  ["Albadariah","Kissidougou","faranah","haute"],
+  ["Banama","Kissidougou","faranah","haute"],
+  ["Bardou","Kissidougou","faranah","haute"],
+  ["Beindou","Kissidougou","faranah","haute"],
+  ["Fermessadou","Kissidougou","faranah","haute"],
+  ["Firawa","Kissidougou","faranah","haute"],
+  ["Gbangbadou","Kissidougou","faranah","haute"],
+  ["Kissidougou-Centre","Kissidougou","faranah","haute"],
+  ["Koundiatou","Kissidougou","faranah","haute"],
+  ["Manfran","Kissidougou","faranah","haute"],
+  ["Sangardo","Kissidougou","faranah","haute"],
+  ["Yendé-Millimou","Kissidougou","faranah","haute"],
+  ["Yombiro","Kissidougou","faranah","haute"],
+
+  // === HAUTE-GUINÉE / KANKAN ===
+  ["Balandougou","Kankan","kankan","haute"],
+  ["Baté-Nafadji","Kankan","kankan","haute"],
+  ["Boula","Kankan","kankan","haute"],
+  ["Gberedou-Baranama","Kankan","kankan","haute"],
+  ["Kankan-Centre","Kankan","kankan","haute"],
+  ["Karifamoriyah","Kankan","kankan","haute"],
+  ["Koumban","Kankan","kankan","haute"],
+  ["Mamouroudou","Kankan","kankan","haute"],
+  ["Missamana","Kankan","kankan","haute"],
+  ["Moribayah","Kankan","kankan","haute"],
+  ["Sabadou-Baranama","Kankan","kankan","haute"],
+  ["Tinti-Oulen","Kankan","kankan","haute"],
+  ["Tokounou","Kankan","kankan","haute"],
+  ["Banankoro","Kérouané","kankan","haute"],
+  ["Damaro","Kérouané","kankan","haute"],
+  ["Kérouané-Centre","Kérouané","kankan","haute"],
+  ["Komodou","Kérouané","kankan","haute"],
+  ["Kounsankoro","Kérouané","kankan","haute"],
+  ["Linko","Kérouané","kankan","haute"],
+  ["Sibiribaro","Kérouané","kankan","haute"],
+  ["Soromaya","Kérouané","kankan","haute"],
+  ["Babila","Kouroussa","kankan","haute"],
+  ["Balato","Kouroussa","kankan","haute"],
+  ["Banfélé","Kouroussa","kankan","haute"],
+  ["Baro","Kouroussa","kankan","haute"],
+  ["Cisséla","Kouroussa","kankan","haute"],
+  ["Douako","Kouroussa","kankan","haute"],
+  ["Doura","Kouroussa","kankan","haute"],
+  ["Kiniéro","Kouroussa","kankan","haute"],
+  ["Komola-Koura","Kouroussa","kankan","haute"],
+  ["Koumana","Kouroussa","kankan","haute"],
+  ["Kouroussa-Centre","Kouroussa","kankan","haute"],
+  ["Sanguiana","Kouroussa","kankan","haute"],
+  ["Balandougouba","Mandiana","kankan","haute"],
+  ["Dialakoro","Mandiana","kankan","haute"],
+  ["Faralako","Mandiana","kankan","haute"],
+  ["Kantoumanina","Mandiana","kankan","haute"],
+  ["Kiniéran","Mandiana","kankan","haute"],
+  ["Kondianakoro","Mandiana","kankan","haute"],
+  ["Koundian","Mandiana","kankan","haute"],
+  ["Mandiana-Centre","Mandiana","kankan","haute"],
+  ["Morodou","Mandiana","kankan","haute"],
+  ["Niantania","Mandiana","kankan","haute"],
+  ["Saladou","Mandiana","kankan","haute"],
+  ["Sansando","Mandiana","kankan","haute"],
+  ["Bankon","Siguiri","kankan","haute"],
+  ["Doko","Siguiri","kankan","haute"],
+  ["Franwalia","Siguiri","kankan","haute"],
+  ["Kiniébakoura","Siguiri","kankan","haute"],
+  ["Kintinian","Siguiri","kankan","haute"],
+  ["Maléa","Siguiri","kankan","haute"],
+  ["Naboun","Siguiri","kankan","haute"],
+  ["Niagassola","Siguiri","kankan","haute"],
+  ["Niandankoro","Siguiri","kankan","haute"],
+  ["Norassoba","Siguiri","kankan","haute"],
+  ["Nounkounkan","Siguiri","kankan","haute"],
+  ["Siguiri-Centre","Siguiri","kankan","haute"],
+  ["Siguirini","Siguiri","kankan","haute"],
+
+  // === FORESTIÈRE / N'ZÉRÉKORÉ ===
+  ["Beyla-Centre","Beyla","nzerekore","forestiere"],
+  ["Boola","Beyla","nzerekore","forestiere"],
+  ["Diarraguéréla","Beyla","nzerekore","forestiere"],
+  ["Diassadou","Beyla","nzerekore","forestiere"],
+  ["Fouala","Beyla","nzerekore","forestiere"],
+  ["Gbackédou","Beyla","nzerekore","forestiere"],
+  ["Gbéssoba","Beyla","nzerekore","forestiere"],
+  ["Karala","Beyla","nzerekore","forestiere"],
+  ["Koumandou","Beyla","nzerekore","forestiere"],
+  ["Moussadou","Beyla","nzerekore","forestiere"],
+  ["Nionsomoridou","Beyla","nzerekore","forestiere"],
+  ["Samana","Beyla","nzerekore","forestiere"],
+  ["Sinko","Beyla","nzerekore","forestiere"],
+  ["Sokourala","Beyla","nzerekore","forestiere"],
+  ["Bolodou","Guéckédou","nzerekore","forestiere"],
+  ["Fangamadou","Guéckédou","nzerekore","forestiere"],
+  ["Guéckédou-Centre","Guéckédou","nzerekore","forestiere"],
+  ["Guéndembou","Guéckédou","nzerekore","forestiere"],
+  ["Kassadou","Guéckédou","nzerekore","forestiere"],
+  ["Koundou","Guéckédou","nzerekore","forestiere"],
+  ["Nongoa","Guéckédou","nzerekore","forestiere"],
+  ["Ouendé-Kénéma","Guéckédou","nzerekore","forestiere"],
+  ["Tékoulo","Guéckédou","nzerekore","forestiere"],
+  ["Termessadou Djibo","Guéckédou","nzerekore","forestiere"],
+  ["Bossou","Lola","nzerekore","forestiere"],
+  ["Foumbadou","Lola","nzerekore","forestiere"],
+  ["Gama Berema","Lola","nzerekore","forestiere"],
+  ["Guéassou","Lola","nzerekore","forestiere"],
+  ["Kokota","Lola","nzerekore","forestiere"],
+  ["Lainé","Lola","nzerekore","forestiere"],
+  ["Lola-Centre","Lola","nzerekore","forestiere"],
+  ["N'Zoo","Lola","nzerekore","forestiere"],
+  ["Tounkarata","Lola","nzerekore","forestiere"],
+  ["Balizia","Macenta","nzerekore","forestiere"],
+  ["Binikala","Macenta","nzerekore","forestiere"],
+  ["Bofossou","Macenta","nzerekore","forestiere"],
+  ["Daro","Macenta","nzerekore","forestiere"],
+  ["Fassankoni","Macenta","nzerekore","forestiere"],
+  ["Kouankan","Macenta","nzerekore","forestiere"],
+  ["Koyama","Macenta","nzerekore","forestiere"],
+  ["Macenta-Centre","Macenta","nzerekore","forestiere"],
+  ["N'Zébéla","Macenta","nzerekore","forestiere"],
+  ["Orémaï","Macenta","nzerekore","forestiere"],
+  ["Panziazou","Macenta","nzerekore","forestiere"],
+  ["Sengbédou","Macenta","nzerekore","forestiere"],
+  ["Sérédou","Macenta","nzerekore","forestiere"],
+  ["Vasérédou","Macenta","nzerekore","forestiere"],
+  ["Watanka","Macenta","nzerekore","forestiere"],
+  ["Bounouma","N'Zérékoré","nzerekore","forestiere"],
+  ["Gouécké","N'Zérékoré","nzerekore","forestiere"],
+  ["Kobéla","N'Zérékoré","nzerekore","forestiere"],
+  ["Koropara","N'Zérékoré","nzerekore","forestiere"],
+  ["Koulé","N'Zérékoré","nzerekore","forestiere"],
+  ["N'Zérékoré-Centre","N'Zérékoré","nzerekore","forestiere"],
+  ["Palé","N'Zérékoré","nzerekore","forestiere"],
+  ["Samoé","N'Zérékoré","nzerekore","forestiere"],
+  ["Soulouma","N'Zérékoré","nzerekore","forestiere"],
+  ["Womey","N'Zérékoré","nzerekore","forestiere"],
+  ["Yalenzou","N'Zérékoré","nzerekore","forestiere"],
+  ["Banié","Yomou","nzerekore","forestiere"],
+  ["Bheta","Yomou","nzerekore","forestiere"],
+  ["Bignamou","Yomou","nzerekore","forestiere"],
+  ["Bowé","Yomou","nzerekore","forestiere"],
+  ["Diécké","Yomou","nzerekore","forestiere"],
+  ["Péla","Yomou","nzerekore","forestiere"],
+  ["Yomou-Centre","Yomou","nzerekore","forestiere"]
+];
+
+// ============ SCOPES ============
+const SCOPES = [
+  { id: "all", label: "Toute la Guinée", type: "all", color: "#7B3FBF" },
+  { id: "basse", label: "Basse-Guinée", type: "nat", key: "basse", color: "#1F76B8" },
+  { id: "moyenne", label: "Moyenne-Guinée (Fouta)", type: "nat", key: "moyenne", color: "#D4732A" },
+  { id: "haute", label: "Haute-Guinée", type: "nat", key: "haute", color: "#F9B233" },
+  { id: "forestiere", label: "Guinée Forestière", type: "nat", key: "forestiere", color: "#147246" },
+  { id: "adm_boke", label: "Région Boké", type: "adm", key: "boke", color: "#B85A1A" },
+  { id: "adm_kindia", label: "Région Kindia", type: "adm", key: "kindia", color: "#6BAA43" },
+  { id: "adm_labe", label: "Région Labé", type: "adm", key: "labe", color: "#5B4EBD" },
+  { id: "adm_mamou", label: "Région Mamou", type: "adm", key: "mamou", color: "#E8A83A" },
+  { id: "adm_faranah", label: "Région Faranah", type: "adm", key: "faranah", color: "#2E9AA7" },
+  { id: "adm_kankan", label: "Région Kankan", type: "adm", key: "kankan", color: "#C79B2A" },
+  { id: "adm_nzerekore", label: "Région N'Zérékoré", type: "adm", key: "nzerekore", color: "#1E5F3E" },
+  { id: "adm_conakry", label: "Conakry", type: "adm", key: "conakry", color: "#2B5FB8" }
+];
+
+function scopeById(id) { return SCOPES.find(s => s.id === id); }
+
+// ============ STATE ============
+const state = {
+  scope: null,        // scope id
+  target: null,       // 10 | 20 | 30 | 50 | -1 (toutes restantes)
+  deck: [],
+  index: 0,
+  correct: 0,
+  errors: 0,
+  startedAt: null,
+  penalty: 0,
+  chronoTimer: null,
+  scopePrefs: [],
+  newlyDiscovered: []
+};
+
+// ============ META (localStorage) ============
+const META_KEY = "laguine378.encountered";
+const TOTAL_TARGET = 378;
+
+function loadEncountered() {
+  try {
+    const raw = localStorage.getItem(META_KEY);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch(e) { return new Set(); }
+}
+function saveEncountered(set) {
+  try { localStorage.setItem(META_KEY, JSON.stringify([...set])); } catch(e) {}
+}
+function metaCount() { return loadEncountered().size; }
+
+function refreshMetaCounter() {
+  const c = metaCount();
+  document.getElementById("metaCounter").textContent = c;
+  const pct = Math.round((c / TOTAL_TARGET) * 100);
+  document.getElementById("metaPercent").textContent = pct + "%";
+  document.getElementById("metaBarFill").style.width = Math.min(pct, 100) + "%";
+}
+
+// ============ HELPERS ============
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Full pool for a scope (before exclusion of guessed)
+function poolFor(scopeId) {
+  const scope = scopeById(scopeId);
+  if (!scope || scope.type === "all") return DATA;
+  if (scope.type === "nat") return DATA.filter(row => row[3] === scope.key);
+  if (scope.type === "adm") return DATA.filter(row => row[2] === scope.key);
+  return DATA;
+}
+
+function prefsFor(scopeId) {
+  const pool = poolFor(scopeId);
+  const set = new Set(pool.map(row => row[1]));
+  return [...set].sort((a, b) => a.localeCompare(b, "fr"));
+}
+
+// Merge homonyms → [{ name, validPrefs: Set }]
+function mergeByName(arr) {
+  const map = new Map();
+  for (const [sp, pref] of arr) {
+    if (!map.has(sp)) map.set(sp, { name: sp, validPrefs: new Set([pref]) });
+    else map.get(sp).validPrefs.add(pref);
+  }
+  return [...map.values()];
+}
+
+// How many unique names in scope
+function scopeUniqueSize(scopeId) {
+  return mergeByName(poolFor(scopeId)).length;
+}
+
+// How many unique names remain (not yet guessed) in scope
+function scopeRemainingSize(scopeId) {
+  const encountered = loadEncountered();
+  return mergeByName(poolFor(scopeId)).filter(e => !encountered.has(e.name)).length;
+}
+
+// Available count options given the scope
+function availableCounts(scopeId) {
+  const remaining = scopeRemainingSize(scopeId);
+  const options = [10, 20, 30, 50].filter(n => n <= remaining);
+  // If remaining but < 10, offer "toutes"
+  if (remaining > 0 && remaining < 10) {
+    return [{ n: -1, label: "Toutes (" + remaining + ")", target: remaining }];
+  }
+  return options.map(n => ({ n, label: String(n), target: n }));
+}
+
+// ============ MENU RENDERING ============
+function renderScopes() {
+  const encountered = loadEncountered();
+  const groups = {
+    all: document.getElementById("scopeAll"),
+    nat: document.getElementById("scopeNat"),
+    adm: document.getElementById("scopeAdm")
+  };
+  Object.values(groups).forEach(g => g.innerHTML = "");
+
+  SCOPES.forEach(scope => {
+    const pool = mergeByName(poolFor(scope.id));
+    const total = pool.length;
+    const found = pool.filter(e => encountered.has(e.name)).length;
+    const remaining = total - found;
+
+    const tile = document.createElement("button");
+    tile.className = "scope-tile" + (scope.id === "all" ? " all-tile" : "");
+    tile.style.setProperty("--tile-color", scope.color);
+    tile.dataset.scope = scope.id;
+    tile.innerHTML = `
+      <div class="dot"></div>
+      <div class="info">
+        <span class="name">${scope.label}</span>
+        <div class="stat">${found} / ${total} découvertes · ${remaining} restantes</div>
+      </div>
+    `;
+    if (remaining === 0 && total > 0) {
+      tile.classList.add("complete");
+      tile.disabled = true;
+    } else {
+      tile.addEventListener("click", () => selectScope(scope.id));
+    }
+    (groups[scope.type] || groups.all).appendChild(tile);
+  });
+}
+
+function renderCounts() {
+  const container = document.getElementById("countOptions");
+  container.innerHTML = "";
+  if (!state.scope) {
+    // Placeholder disabled buttons
+    [10, 20, 30, 50].forEach(n => {
+      const b = document.createElement("button");
+      b.className = "count-tile";
+      b.disabled = true;
+      b.textContent = n;
+      container.appendChild(b);
+    });
+    return;
+  }
+  const opts = availableCounts(state.scope);
+  if (opts.length === 0) {
+    const msg = document.createElement("div");
+    msg.style.cssText = "grid-column: 1/-1; text-align:center; padding: 14px; color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic;";
+    msg.textContent = "Terrain complété ! Choisis un autre terrain ou réinitialise ton parcours.";
+    container.appendChild(msg);
+    return;
+  }
+  opts.forEach(opt => {
+    const b = document.createElement("button");
+    b.className = "count-tile";
+    b.dataset.target = opt.target;
+    b.dataset.n = opt.n;
+    b.textContent = opt.label;
+    b.addEventListener("click", () => selectCount(opt.target, b));
+    container.appendChild(b);
+  });
+}
+
+function applyTerrainColor(scopeId) {
+  const scope = scopeById(scopeId);
+  if (!scope) return;
+  document.documentElement.style.setProperty("--terrain", scope.color);
+  // Soft version for backgrounds
+  document.documentElement.style.setProperty("--terrain-soft", scope.color + "22");
+}
+
+function selectScope(scopeId) {
+  state.scope = scopeId;
+  state.target = null;
+  document.querySelectorAll(".scope-tile").forEach(el => {
+    el.classList.toggle("selected", el.dataset.scope === scopeId);
+  });
+  applyTerrainColor(scopeId);
+  renderCounts();
+  refreshStartBtn();
+}
+
+function selectCount(target, btnEl) {
+  state.target = target;
+  document.querySelectorAll(".count-tile").forEach(el => el.classList.remove("selected"));
+  if (btnEl) btnEl.classList.add("selected");
+  refreshStartBtn();
+}
+
+function refreshStartBtn() {
+  document.getElementById("startBtn").disabled = !(state.scope && state.target);
+}
+
+// ============ GAME LOGIC ============
+function startGame() {
+  const scope = scopeById(state.scope);
+  applyTerrainColor(state.scope);
+  const encountered = loadEncountered();
+
+  // Build the deck: entries in scope not yet encountered
+  const remainingEntries = mergeByName(poolFor(state.scope)).filter(e => !encountered.has(e.name));
+  const shuffled = shuffle(remainingEntries);
+  state.deck = shuffled.slice(0, state.target);
+  state.scopePrefs = prefsFor(state.scope);
+  state.index = 0;
+  state.correct = 0;
+  state.errors = 0;
+  state.penalty = 0;
+  state.newlyDiscovered = [];
+  state.startedAt = performance.now();
+
+  document.getElementById("hudScope").textContent = scope.label;
+  document.getElementById("progTotal").textContent = state.deck.length;
+  document.getElementById("progNow").textContent = "0";
+
+  renderPrefGrid();
+  showCard();
+  startChrono();
+  switchScreen("game");
+}
+
+function renderPrefGrid() {
+  const grid = document.getElementById("prefGrid");
+  const n = state.scopePrefs.length;
+  grid.className = "pref-grid";
+  if (n <= 5) grid.classList.add("tight");
+  else if (n <= 8) grid.classList.add("medium");
+  else if (n <= 12) grid.classList.add("wide");
+  else grid.classList.add("national");
+
+  grid.innerHTML = "";
+  state.scopePrefs.forEach(pref => {
+    const btn = document.createElement("button");
+    btn.className = "pref";
+    btn.textContent = pref;
+    btn.dataset.pref = pref;
+    btn.addEventListener("click", () => handlePrefTap(btn, pref));
+    grid.appendChild(btn);
+  });
+}
+
+function currentCard() { return state.deck[state.index]; }
+
+let acceptingInput = true;
+
+function showCard() {
+  const entry = currentCard();
+  const card = document.getElementById("card");
+  const nameEl = document.getElementById("cardName");
+  nameEl.textContent = entry.name;
+  card.classList.remove("wrong", "right");
+  card.style.transform = `rotate(${state.index % 2 === 0 ? -1 : 1}deg)`;
+  acceptingInput = true;
+}
+
+function handlePrefTap(btn, pref) {
+  if (!acceptingInput) return;
+  const entry = currentCard();
+
+  if (entry.validPrefs.has(pref)) {
+    state.correct++;
+    btn.classList.add("flash-right");
+    document.getElementById("card").classList.add("right");
+    acceptingInput = false;
+    const enc = loadEncountered();
+    if (!enc.has(entry.name)) {
+      enc.add(entry.name);
+      state.newlyDiscovered.push(entry.name);
+      saveEncountered(enc);
+    }
+    // Notifie le parent (React wrapper via logProgress) — chaque sous-préf trouvée
+    try {
+      window.parent.postMessage({
+        type: "pati-progress",
+        kind: "sous-prefecture",
+        ref: entry.name
+      }, "*");
+    } catch(e) {}
+    setTimeout(() => {
+      btn.classList.remove("flash-right");
+      state.index++;
+      document.getElementById("progNow").textContent = state.correct;
+      if (state.correct >= state.deck.length || state.index >= state.deck.length) {
+        finishGame();
+      } else {
+        showCard();
+      }
+    }, 420);
+  } else {
+    state.errors++;
+    state.penalty += 2000;
+    btn.classList.add("flash-wrong");
+    document.getElementById("card").classList.add("wrong");
+    flashPenalty("+2s");
+    setTimeout(() => {
+      btn.classList.remove("flash-wrong");
+      document.getElementById("card").classList.remove("wrong");
+    }, 420);
+  }
+}
+
+function flashPenalty(text) {
+  const el = document.createElement("div");
+  el.className = "penalty-flash";
+  el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1000);
+}
+
+// ============ CHRONO ============
+function startChrono() {
+  const chronoEl = document.getElementById("chrono");
+  const tick = () => {
+    const now = performance.now();
+    const elapsed = (now - state.startedAt + state.penalty) / 1000;
+    chronoEl.textContent = elapsed.toFixed(1) + "s";
+  };
+  tick();
+  state.chronoTimer = setInterval(tick, 100);
+}
+function stopChrono() {
+  if (state.chronoTimer) clearInterval(state.chronoTimer);
+  state.chronoTimer = null;
+}
+
+// ============ FINISH ============
+function finishGame() {
+  stopChrono();
+  const totalMs = (performance.now() - state.startedAt) + state.penalty;
+  const totalSec = totalMs / 1000;
+  const pacePerCard = totalSec / Math.max(state.correct, 1);
+
+  document.getElementById("winTime").textContent = totalSec.toFixed(1) + "s";
+  document.getElementById("winPace").textContent = pacePerCard.toFixed(1) + "s / sous-préf.";
+  document.getElementById("winErrors").textContent = state.errors;
+  const accuracy = state.correct > 0
+    ? Math.round((state.correct / (state.correct + state.errors)) * 100)
+    : 0;
+  document.getElementById("winAccuracy").textContent = accuracy + "% de précision";
+  document.getElementById("winMetaCount").textContent = metaCount();
+  const newly = state.newlyDiscovered.length;
+  const newlyEl = document.getElementById("winNewly");
+  if (newly > 0) {
+    newlyEl.textContent = `+${newly} nouvelle${newly > 1 ? "s" : ""} découverte${newly > 1 ? "s" : ""} · elles ne reviendront plus`;
+  } else {
+    newlyEl.textContent = "";
+  }
+
+  const title = document.getElementById("winTitle");
+  if (state.errors === 0) title.textContent = "Sans faute !";
+  else if (accuracy >= 80) title.textContent = "Bien joué !";
+  else if (accuracy >= 50) title.textContent = "Pas mal.";
+  else title.textContent = "À réessayer.";
+
+  switchScreen("win");
+
+  try {
+    window.parent.postMessage({
+      type: "pati-progress",
+      kind: "laguine378-sprint",
+      scope: state.scope,
+      target: state.target,
+      correct: state.correct,
+      errors: state.errors,
+      seconds: totalSec
+    }, "*");
+  } catch(e) {}
+}
+
+// Écoute les messages du parent (React wrapper) — plein écran, config Supabase future
+window.addEventListener("message", (e) => {
+  const d = e.data;
+  if (!d || typeof d !== "object") return;
+  if (d.type === "pati-fs") {
+    document.body.classList.toggle("fs-on", !!d.on);
+  }
+  // pati-config (Supabase) : ignoré en v1 — le jeu tourne en localStorage
+});
+
+// ============ SCREENS ============
+function switchScreen(name) {
+  document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
+  document.getElementById(name).classList.add("active");
+  if (name === "menu") {
+    refreshMetaCounter();
+    renderScopes();
+    // If a scope was selected before, keep it; else clear counts
+    if (state.scope) renderCounts(); else renderCounts();
+  }
+}
+
+// ============ RESET ============
+function resetProgress() {
+  if (!confirm("Effacer toutes tes sous-préfectures découvertes ? Cette action ne peut pas être annulée.")) return;
+  try { localStorage.removeItem(META_KEY); } catch(e) {}
+  state.scope = null;
+  state.target = null;
+  document.querySelectorAll(".scope-tile").forEach(el => el.classList.remove("selected"));
+  document.documentElement.style.setProperty("--terrain", "#7B3FBF");
+  refreshMetaCounter();
+  renderScopes();
+  renderCounts();
+  refreshStartBtn();
+}
+
+// ============ INIT ============
+document.addEventListener("DOMContentLoaded", () => {
+  refreshMetaCounter();
+  renderScopes();
+  renderCounts();
+
+  document.getElementById("startBtn").addEventListener("click", () => {
+    if (state.scope && state.target) startGame();
+  });
+  document.getElementById("quitBtn").addEventListener("click", () => {
+    stopChrono();
+    state.scope = null;
+    state.target = null;
+    document.documentElement.style.setProperty("--terrain", "#7B3FBF");
+    switchScreen("menu");
+  });
+  document.getElementById("againBtn").addEventListener("click", () => {
+    // Re-check remaining pool: if enough, restart same setup; else back to menu
+    if (state.scope && scopeRemainingSize(state.scope) >= state.target) {
+      startGame();
+    } else {
+      switchScreen("menu");
+      // Refresh counts as pool likely changed
+      if (state.scope) renderCounts();
+    }
+  });
+  document.getElementById("backBtn").addEventListener("click", () => {
+    state.scope = null;
+    state.target = null;
+    document.documentElement.style.setProperty("--terrain", "#7B3FBF");
+    switchScreen("menu");
+  });
+  document.getElementById("resetBtn").addEventListener("click", resetProgress);
+});
+</script>
+</body>
+</html>

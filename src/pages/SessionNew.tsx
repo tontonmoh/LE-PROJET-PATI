@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -50,6 +50,12 @@ const JEUX: Jeu[] = [
     label: "Le Défi — Puzzle de la Guinée",
     section: "pati", icon: MapIcon, accent: "#C8841E",
     playPrefix: "/session", withCodeInPath: true, hasLiveScores: true,
+  },
+  {
+    id: "laguine378", slug: "laguine378", jeu: "matching-sous-pref",
+    label: "LaGuinè378 — Les sous-préfectures",
+    section: "pati", icon: MapPin, accent: "#7B3FBF",
+    playPrefix: "/laguine378", withCodeInPath: false, hasLiveScores: false,
   },
   {
     id: "corridor", slug: "corridor", jeu: "defi",
