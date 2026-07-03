@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -56,6 +56,12 @@ const JEUX: Jeu[] = [
     label: "LaGuinè378 — Les sous-préfectures",
     section: "pati", icon: MapPin, accent: "#7B3FBF",
     playPrefix: "/laguine378", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "konakri", slug: "konakri", jeu: "matching-quartier",
+    label: "Konakri — Les quartiers",
+    section: "pati", icon: Building2, accent: "#7B3FBF",
+    playPrefix: "/konakri", withCodeInPath: false, hasLiveScores: false,
   },
   {
     id: "corridor", slug: "corridor", jeu: "defi",

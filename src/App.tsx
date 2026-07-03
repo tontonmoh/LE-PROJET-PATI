@@ -53,6 +53,7 @@ const AppliMobile = lazy(() => import("./pages/AppliMobile"));
 const Personnalisation = lazy(() => import("./pages/Personnalisation"));
 const LeDefi = lazy(() => import("./pages/LeDefi"));
 const LaGuine378 = lazy(() => import("./pages/LaGuine378"));
+const Konakri = lazy(() => import("./pages/Konakri"));
 const DefiClassement = lazy(() => import("./pages/DefiClassement"));
 const SessionNew = lazy(() => import("./pages/SessionNew"));
 const SessionPlay = lazy(() => import("./pages/SessionPlay"));
@@ -164,6 +165,7 @@ export default function App() {
             <Route path="/defi/classement" element={<DefiClassement />} />
             <Route path="/defi" element={<LeDefi />} />
             <Route path="/laguine378" element={<LaGuine378 />} />
+            <Route path="/konakri" element={<Konakri />} />
             <Route path="/assistance" element={<FAQ />} />
 
             <Route path="/abonnement" element={<AccesPati />} />

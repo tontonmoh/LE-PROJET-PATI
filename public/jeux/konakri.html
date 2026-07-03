@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Konakri — Le défi des quartiers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Neutrals — softer & more modern */
+    --bg: #FBF5E4;
+    --bg-2: #FFFCF1;
+    --paper: #FFFFFF;
+    --ink: #1E1815;
+    --ink-2: #4A413A;
+    --ink-3: #8A7E6E;
+    --line: #EDE4CB;
+    --line-soft: #F5EEDA;
+
+    /* Feedback */
+    --leaf: #22C55E;
+    --leaf-soft: #DCFCE7;
+    --sienna: #EF4444;
+    --sienna-soft: #FEE2E2;
+    --gold: #F59E0B;
+    --gold-soft: #FEF3C7;
+
+    /* Terrains */
+    --c-all: #7B3FBF;
+    --c-basse: #2563EB;
+    --c-moyenne: #EA580C;
+    --c-haute: #F59E0B;
+    --c-forestiere: #059669;
+    --c-adm_boke: #C2410C;
+    --c-adm_kindia: #65A30D;
+    --c-adm_labe: #6366F1;
+    --c-adm_mamou: #D97706;
+    --c-adm_faranah: #0891B2;
+    --c-adm_kankan: #CA8A04;
+    --c-adm_nzerekore: #047857;
+    --c-adm_conakry: #1D4ED8;
+
+    /* Terrain glow (dynamic) */
+    --terrain: var(--c-all);
+    --terrain-glow: rgba(123, 63, 191, 0.28);
+    --terrain-tint: rgba(123, 63, 191, 0.08);
+
+    /* Shadow layers */
+    --shadow-sm: 0 1px 2px rgba(30, 24, 21, 0.04), 0 2px 6px rgba(30, 24, 21, 0.04);
+    --shadow-md: 0 2px 6px rgba(30, 24, 21, 0.05), 0 8px 20px rgba(30, 24, 21, 0.06);
+    --shadow-lg: 0 4px 12px rgba(30, 24, 21, 0.06), 0 16px 40px rgba(30, 24, 21, 0.08);
+    --shadow-terrain: 0 4px 20px var(--terrain-glow), 0 2px 6px rgba(30, 24, 21, 0.04);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.2, 0.9, 0.3, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Fredoka', system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: env(safe-area-inset-top) 18px env(safe-area-inset-bottom);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 15% -5%, rgba(245, 158, 11, 0.10), transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(37, 99, 235, 0.06), transparent 42%),
+      radial-gradient(circle at 50% 100%, rgba(5, 150, 105, 0.06), transparent 50%);
+    position: relative;
+  }
+
+  /* Confetti canvas */
+  #confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
+  }
+
+  .screen {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px 0 28px;
+  }
+  .screen.active { display: flex; animation: screenIn 0.3s var(--ease-out); }
+  @keyframes screenIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════ HERO ═══════════════ */
+  .hero {
+    padding: 8px 0 10px;
+  }
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(38px, 10vw, 52px);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    font-variation-settings: "opsz" 144;
+    color: var(--ink);
+  }
+  .brand .accent {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--c-forestiere), var(--c-moyenne));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .brand .three {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--c-adm_boke), var(--c-haute));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tag {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 700;
+    padding: 5px 11px;
+    background: var(--gold-soft);
+    color: var(--ink);
+    border-radius: 999px;
+  }
+  .tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 28;
+    max-width: 480px;
+  }
+
+  /* ═══════════════ META PROGRESS PANEL ═══════════════ */
+  .parcours {
+    margin: 24px 0 32px;
+    background: var(--paper);
+    border-radius: 20px;
+    padding: 20px 22px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+  }
+  .parcours::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--c-basse), var(--c-moyenne), var(--c-haute), var(--c-forestiere));
+    border-radius: 3px 3px 0 0;
+  }
+  .parcours-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .parcours-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .parcours-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--c-forestiere);
+    font-variant-numeric: tabular-nums;
+  }
+  .parcours-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 42px;
+    color: var(--ink);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 14px;
+  }
+  .parcours-number .found { color: var(--c-forestiere); }
+  .parcours-number .of {
+    font-size: 20px;
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+  .parcours-bar {
+    height: 10px;
+    background: var(--line-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .parcours-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--c-basse), var(--c-moyenne) 40%, var(--c-haute) 65%, var(--c-forestiere));
+    border-radius: 999px;
+    transition: width 0.9s var(--ease-out);
+    position: relative;
+  }
+  .parcours-bar-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 3s infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+  .parcours-note {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* ═══════════════ SECTIONS ═══════════════ */
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 24px 0 14px;
+    font-variation-settings: "opsz" 48;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::before {
+    content: "";
+    width: 6px;
+    height: 22px;
+    background: var(--terrain);
+    border-radius: 3px;
+    transition: background 0.3s;
+  }
+
+  /* ═══════════════ SCOPE TILES ═══════════════ */
+  .scopes {
+    display: grid;
+    gap: 10px;
+  }
+  .scopes.one { grid-template-columns: 1fr; }
+  .scopes.two { grid-template-columns: repeat(2, 1fr); }
+
+  .scope {
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    text-align: left;
+    transition: all 0.2s var(--ease-out);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--line);
+  }
+  .scope:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--tile-color);
+  }
+  .scope:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+  .scope-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--tile-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: inset 0 -2px 6px rgba(0,0,0,0.15), 0 4px 10px var(--tile-color-glow);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+  }
+  .scope-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .scope-name {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.15;
+  }
+  .scope-stat {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-top: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .scope-stat .found {
+    color: var(--tile-color);
+    font-weight: 700;
+  }
+  .scope.selected {
+    border-color: var(--tile-color);
+    background: linear-gradient(135deg, var(--paper) 0%, var(--tile-tint) 100%);
+    box-shadow: 0 4px 20px var(--tile-color-glow), var(--shadow-sm);
+  }
+  .scope.selected .scope-name { color: var(--tile-color); }
+  .scope.selected::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--tile-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--tile-tint);
+  }
+  .scope.complete {
+    background: linear-gradient(135deg, var(--tile-color) 0%, color-mix(in srgb, var(--tile-color) 75%, black) 100%);
+    color: white;
+    border-color: transparent;
+  }
+  .scope.complete .scope-name,
+  .scope.complete .scope-stat,
+  .scope.complete .scope-stat .found { color: white; }
+  .scope.complete .scope-mark { background: rgba(255,255,255,0.2); }
+  .scope.complete::after {
+    content: "★";
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    color: white;
+    font-size: 18px;
+  }
+  .scope.big {
+    padding: 18px 20px;
+  }
+  .scope.big .scope-name { font-size: 17px; }
+  .scope.big .scope-mark { width: 48px; height: 48px; font-size: 17px; }
+
+  /* ═══════════════ COUNT PILLS ═══════════════ */
+  .counts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .count {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 6px;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease-out);
+    font-variation-settings: "opsz" 144;
+  }
+  .count:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .count.selected {
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 85%, black));
+    color: white;
+    border-color: transparent;
+    box-shadow: var(--shadow-terrain);
+    transform: translateY(-1px);
+  }
+  .count:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: var(--line-soft);
+  }
+  .count-none {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 18px;
+    background: var(--gold-soft);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    border-radius: 14px;
+    font-weight: 600;
+  }
+
+  /* ═══════════════ CTA ═══════════════ */
+  .cta {
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 82%, black));
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 18px 28px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    margin-top: 22px;
+    box-shadow: var(--shadow-terrain);
+    transition: all 0.2s var(--ease-out);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .cta:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--terrain-glow), var(--shadow-md);
+  }
+  .cta:active:not(:disabled) { transform: translateY(0); }
+  .cta:disabled {
+    background: var(--line);
+    color: var(--ink-3);
+    cursor: not-allowed;
+    box-shadow: var(--shadow-sm);
+  }
+  .cta-arrow {
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+  .cta:hover .cta-arrow { transform: translateX(4px); }
+
+  .reset-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+  }
+  .reset-btn {
+    background: transparent;
+    border: none;
+    color: var(--ink-3);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12.5px;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .reset-btn:hover {
+    color: var(--sienna);
+    background: var(--sienna-soft);
+  }
+
+  /* ═══════════════ GAME SCREEN ═══════════════ */
+  #game { padding: 14px 0 20px; }
+
+  .hud {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--paper);
+    border-radius: 18px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 14px;
+  }
+  .chrono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--terrain);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    text-shadow: 0 2px 12px var(--terrain-glow);
+    transition: color 0.3s;
+  }
+  .chrono-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .scope-name-hud {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 600;
+    font-family: 'Fredoka', sans-serif;
+    line-height: 1.2;
+  }
+  .progress-hud {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    background: var(--terrain);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .quit-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .quit-btn {
+    background: transparent;
+    border: none;
+    color: var(--ink-3);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12.5px;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 999px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .quit-btn:hover { color: var(--sienna); background: var(--sienna-soft); }
+
+  /* Card stage & combo */
+  .card-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0 20px;
+    min-height: 160px;
+    position: relative;
+  }
+
+  .combo {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    background: linear-gradient(135deg, var(--gold), #F97316);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.5);
+    opacity: 0;
+    transform: scale(0.5) rotate(-8deg);
+    transition: all 0.3s var(--ease-bounce);
+    font-variation-settings: "opsz" 144;
+    pointer-events: none;
+  }
+  .combo.show {
+    opacity: 1;
+    transform: scale(1) rotate(-4deg);
+  }
+  .combo .x { font-size: 14px; opacity: 0.85; margin-right: 2px; }
+  @keyframes comboPop {
+    0% { transform: scale(1) rotate(-4deg); }
+    50% { transform: scale(1.2) rotate(-8deg); }
+    100% { transform: scale(1) rotate(-4deg); }
+  }
+  .combo.pop { animation: comboPop 0.4s var(--ease-bounce); }
+
+  .card {
+    background: var(--paper);
+    border-radius: 20px;
+    padding: 26px 30px 26px;
+    box-shadow: var(--shadow-terrain), var(--shadow-md);
+    text-align: center;
+    max-width: 100%;
+    position: relative;
+    transform: rotate(-1.2deg);
+    animation: cardEnter 0.35s var(--ease-bounce);
+    border: 1px solid var(--line);
+  }
+  .card::before {
+    content: "QUARTIER";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    color: white;
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 80%, black));
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px var(--terrain-glow);
+  }
+  .card .name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(30px, 9vw, 46px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-top: 8px;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+  }
+  .card.wrong {
+    animation: cardShake 0.45s var(--ease-out);
+    box-shadow: 0 4px 30px rgba(239, 68, 68, 0.35), var(--shadow-md);
+    border-color: var(--sienna);
+  }
+  .card.right {
+    box-shadow: 0 4px 30px rgba(34, 197, 94, 0.35), var(--shadow-md);
+    border-color: var(--leaf);
+  }
+  .card.right::after {
+    content: "✓";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
+    color: var(--leaf);
+    font-weight: 900;
+    animation: checkPop 0.4s var(--ease-bounce);
+  }
+  .card.wrong::after {
+    content: "✗";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
+    color: var(--sienna);
+    font-weight: 900;
+    animation: checkPop 0.4s var(--ease-bounce);
+  }
+  @keyframes checkPop {
+    0% { transform: scale(0) rotate(-45deg); }
+    60% { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0); }
+  }
+
+  @keyframes cardEnter {
+    0% { opacity: 0; transform: rotate(-1.2deg) translateY(-14px) scale(0.9); }
+    60% { opacity: 1; transform: rotate(0deg) translateY(4px) scale(1.02); }
+    100% { transform: rotate(-1.2deg) translateY(0) scale(1); }
+  }
+  @keyframes cardShake {
+    0%, 100% { transform: rotate(-1.2deg) translateX(0); }
+    20% { transform: rotate(-1.2deg) translateX(-8px); }
+    40% { transform: rotate(-1.2deg) translateX(8px); }
+    60% { transform: rotate(-1.2deg) translateX(-5px); }
+    80% { transform: rotate(-1.2deg) translateX(5px); }
+  }
+
+  .prompt {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    margin: 12px 0 16px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+  }
+  .prompt strong {
+    color: var(--terrain);
+    font-weight: 700;
+  }
+
+  /* ═══════════════ PREFECTURE GRID ═══════════════ */
+  .pref-grid {
+    display: grid;
+    gap: 10px;
+    padding-bottom: 20px;
+  }
+  .pref {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 8px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.15;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s var(--ease-out);
+  }
+  .pref:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--terrain);
+  }
+  .pref:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+  .pref.flash-wrong {
+    background: linear-gradient(135deg, var(--sienna), #DC2626);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+    animation: prefFlash 0.4s var(--ease-bounce);
+  }
+  .pref.flash-right {
+    background: linear-gradient(135deg, var(--leaf), #16A34A);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+    animation: prefFlash 0.4s var(--ease-bounce);
+  }
+  @keyframes prefFlash {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  /* ═══════════════ WIN SCREEN ═══════════════ */
+  .win-hero {
+    text-align: center;
+    padding: 48px 0 24px;
+  }
+  .win-accolade {
+    display: inline-block;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 80%, black));
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-terrain);
+  }
+  .win-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 12vw, 60px);
+    color: var(--ink);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144;
+    line-height: 1;
+  }
+
+  .win-score-hero {
+    text-align: center;
+    margin: 24px 0 20px;
+    padding: 24px 20px;
+    background: linear-gradient(135deg, var(--paper) 0%, var(--terrain-tint) 100%);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+  }
+  .win-score-hero .label {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .win-score-hero .value {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 18vw, 88px);
+    color: var(--terrain);
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+  }
+  .win-score-hero .of {
+    color: var(--ink-3);
+    font-size: 0.5em;
+  }
+  .win-score-hero .sub {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  .win-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .win-stat {
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .win-stat .label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .win-stat .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .win-stat .sub {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .win-meta {
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .win-meta .label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .win-meta .value {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+  .win-meta .discovered { color: var(--c-forestiere); }
+  .win-meta .newly {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 12.5px;
+    color: var(--gold);
+    margin-top: 4px;
+    font-weight: 700;
+  }
+
+  .win-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .secondary {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 15px 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease-out);
+  }
+  .secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Responsive pref grid */
+  @media (min-width: 480px) {
+    .pref-grid.tight { grid-template-columns: repeat(3, 1fr); }
+    .pref-grid.medium { grid-template-columns: repeat(4, 1fr); }
+    .pref-grid.wide { grid-template-columns: repeat(5, 1fr); }
+    .pref-grid.national { grid-template-columns: repeat(5, 1fr); }
+  }
+  @media (max-width: 479px) {
+    .pref-grid.tight { grid-template-columns: repeat(2, 1fr); }
+    .pref-grid.medium { grid-template-columns: repeat(3, 1fr); }
+    .pref-grid.wide { grid-template-columns: repeat(3, 1fr); }
+    .pref-grid.national { grid-template-columns: repeat(3, 1fr); }
+    .pref { font-size: 12.5px; padding: 12px 4px; }
+    .scopes.two { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- ============ MENU ============ -->
+<section id="menu" class="screen active">
+  <div class="hero">
+    <div class="brand-row">
+      <div class="brand"><span class="accent">Kona</span><span class="three">kri</span></div>
+      <span class="tag">Sprint</span>
+    </div>
+    <p class="tagline">
+      Rattache chaque quartier à sa commune. Le plus vite possible. Chaque trouvaille ne revient plus.
+    </p>
+  </div>
+
+  <div class="parcours">
+    <div class="parcours-head">
+      <span class="parcours-label">Mon parcours</span>
+      <span class="parcours-pct" id="metaPct">0%</span>
+    </div>
+    <div class="parcours-number">
+      <span class="found" id="metaCount">0</span>
+      <span class="of">/ 150</span>
+    </div>
+    <div class="parcours-bar">
+      <div class="parcours-bar-fill" id="metaBar" style="width:0%"></div>
+    </div>
+    <div class="parcours-note" id="metaNote">Base v1 · 148 quartiers répertoriés sur ~150. Kagbelen et Sanoyah à compléter à mesure des arrêtés officiels.</div>
+  </div>
+
+  <div class="section-title">Tout Konakri</div>
+  <div class="scopes one" id="scopeAll"></div>
+
+  <div class="scopes two" id="scopeNat" style="display:none"></div>
+  <div class="scopes two" id="scopeAdm" style="display:none"></div>
+
+  <div class="section-title">Combien de quartiers ?</div>
+  <div class="counts" id="counts"></div>
+
+  <button class="cta" id="startBtn" disabled>
+    Commencer le sprint <span class="cta-arrow">→</span>
+  </button>
+
+  <div class="reset-row">
+    <button class="reset-btn" id="resetBtn">Réinitialiser mon parcours</button>
+  </div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <div class="hud">
+    <div>
+      <div class="chrono" id="chrono">0.0s</div>
+      <div class="chrono-label">Chrono</div>
+    </div>
+    <div class="scope-name-hud" id="hudScope"></div>
+    <div class="progress-hud"><span id="progNow">0</span>/<span id="progTotal">0</span></div>
+  </div>
+  <div class="quit-row">
+    <button class="quit-btn" id="quitBtn">← Abandonner</button>
+  </div>
+  <div class="card-stage">
+    <div class="combo" id="combo"><span class="x">×</span><span id="comboNum">3</span></div>
+    <div class="card" id="card">
+      <div class="name" id="cardName">—</div>
+    </div>
+  </div>
+  <div class="prompt">Il appartient à quelle <strong>commune</strong> ?</div>
+  <div class="pref-grid" id="prefGrid"></div>
+</section>
+
+<!-- ============ WIN ============ -->
+<section id="win" class="screen">
+  <div class="win-hero">
+    <div class="win-accolade" id="winAccolade">Défi accompli</div>
+    <h2 class="win-title" id="winTitle">Bravo !</h2>
+  </div>
+
+  <div class="win-score-hero">
+    <div class="label">Score</div>
+    <div class="value">
+      <span id="winScoreN">0</span><span class="of">/<span id="winScoreT">0</span></span>
+    </div>
+    <div class="sub" id="winAccuracy">— % de bonnes réponses</div>
+  </div>
+
+  <div class="win-stats">
+    <div class="win-stat">
+      <div class="label">Temps</div>
+      <div class="value" id="winTime">—</div>
+      <div class="sub" id="winPace">—</div>
+    </div>
+    <div class="win-stat">
+      <div class="label">Meilleur combo</div>
+      <div class="value" id="winCombo">×0</div>
+      <div class="sub">Sans faute d'affilée</div>
+    </div>
+  </div>
+
+  <div class="win-meta">
+    <div class="label">Mon parcours</div>
+    <div class="value"><span class="discovered" id="winMetaCount">0</span> / 150</div>
+    <div class="newly" id="winNewly"></div>
+  </div>
+
+  <div class="win-actions">
+    <button class="cta" id="againBtn">Encore un sprint <span class="cta-arrow">→</span></button>
+    <button class="secondary" id="backBtn">Changer de terrain</button>
+  </div>
+</section>
+
+<script>
+console.log("Konakri v3 — rename standalone");
+
+const DATA = [
+  // === CENTRE + ÎLES ===
+  // KALOUM (11)
+  ["Almamiyah 1","Kaloum","centre-iles"],
+  ["Almamiyah 2","Kaloum","centre-iles"],
+  ["Boulbinet","Kaloum","centre-iles"],
+  ["Coronthie 1","Kaloum","centre-iles"],
+  ["Coronthie 2","Kaloum","centre-iles"],
+  ["Kouléwondy","Kaloum","centre-iles"],
+  ["Manquepas","Kaloum","centre-iles"],
+  ["Sandervalia","Kaloum","centre-iles"],
+  ["Sans Fil","Kaloum","centre-iles"],
+  ["Téminètaye","Kaloum","centre-iles"],
+  ["Tombo","Kaloum","centre-iles"],
+  // DIXINN (17)
+  ["Belle-vue école","Dixinn","centre-iles"],
+  ["Belle-vue marché","Dixinn","centre-iles"],
+  ["Camayenne","Dixinn","centre-iles"],
+  ["Cameroun","Dixinn","centre-iles"],
+  ["Dixinn Cité 1","Dixinn","centre-iles"],
+  ["Dixinn Cité 2","Dixinn","centre-iles"],
+  ["Dixinn Gare","Dixinn","centre-iles"],
+  ["Dixinn Gare Rails","Dixinn","centre-iles"],
+  ["Dixinn Mosquée","Dixinn","centre-iles"],
+  ["Dixinn Port","Dixinn","centre-iles"],
+  ["Hafia 1","Dixinn","centre-iles"],
+  ["Hafia 2","Dixinn","centre-iles"],
+  ["Hafia Minière","Dixinn","centre-iles"],
+  ["Hafia Mosquée","Dixinn","centre-iles"],
+  ["Kénien","Dixinn","centre-iles"],
+  ["Landréah","Dixinn","centre-iles"],
+  ["Minière Cité","Dixinn","centre-iles"],
+  // MATAM (20)
+  ["Boussoura","Matam","centre-iles"],
+  ["Bonfi","Matam","centre-iles"],
+  ["Bonfi Marché","Matam","centre-iles"],
+  ["Carrière","Matam","centre-iles"],
+  ["Coléah Centre","Matam","centre-iles"],
+  ["Coléah Cité","Matam","centre-iles"],
+  ["Domino","Matam","centre-iles"],
+  ["Hermakonon","Matam","centre-iles"],
+  ["Imprimerie","Matam","centre-iles"],
+  ["Lanséboudji","Matam","centre-iles"],
+  ["Madina Centre","Matam","centre-iles"],
+  ["Madina Cité","Matam","centre-iles"],
+  ["Madina École","Matam","centre-iles"],
+  ["Madina Marché","Matam","centre-iles"],
+  ["Madina Mosquée","Matam","centre-iles"],
+  ["Mafanco","Matam","centre-iles"],
+  ["Mafanco Centre","Matam","centre-iles"],
+  ["Matam","Matam","centre-iles"],
+  ["Matam Lido","Matam","centre-iles"],
+  ["Touguiwondy","Matam","centre-iles"],
+  // KASSA (5)
+  ["Fotoba","Kassa","centre-iles"],
+  ["Roume","Kassa","centre-iles"],
+  ["Kassa Centre","Kassa","centre-iles"],
+  ["Boom","Kassa","centre-iles"],
+  ["Rogbané","Kassa","centre-iles"],
+
+  // === NORD-OUEST ===
+  // RATOMA (9)
+  ["Taouyah","Ratoma","nord-ouest"],
+  ["Ratoma Dispensaire","Ratoma","nord-ouest"],
+  ["Ratoma Centre","Ratoma","nord-ouest"],
+  ["Kaporo Rails","Ratoma","nord-ouest"],
+  ["Hamdallaye 1","Ratoma","nord-ouest"],
+  ["Hamdallaye 2","Ratoma","nord-ouest"],
+  ["Koloma Soloprimo","Ratoma","nord-ouest"],
+  ["Kipé","Ratoma","nord-ouest"],
+  ["Kaporo Centre","Ratoma","nord-ouest"],
+  // LAMBANYI (14)
+  ["Nongo Centre","Lambanyi","nord-ouest"],
+  ["Nongo Taady","Lambanyi","nord-ouest"],
+  ["Lambanyi","Lambanyi","nord-ouest"],
+  ["Yembeya","Lambanyi","nord-ouest"],
+  ["Waréah","Lambanyi","nord-ouest"],
+  ["Simbaya Gare","Lambanyi","nord-ouest"],
+  ["Yattaya Centre","Lambanyi","nord-ouest"],
+  ["Nassouroulaye","Lambanyi","nord-ouest"],
+  ["Bantounka 1","Lambanyi","nord-ouest"],
+  ["Bantounka 2","Lambanyi","nord-ouest"],
+  ["Soumambossia","Lambanyi","nord-ouest"],
+  ["Wanindara","Lambanyi","nord-ouest"],
+  ["Wanindara Rails","Lambanyi","nord-ouest"],
+  ["Kinifi","Lambanyi","nord-ouest"],
+  // SONFONIA (7)
+  ["Kobayah","Sonfonia","nord-ouest"],
+  ["Yattaya Fossidet","Sonfonia","nord-ouest"],
+  ["Yattaya Centre","Sonfonia","nord-ouest"],
+  ["Sonfonia Gare 1","Sonfonia","nord-ouest"],
+  ["Sonfonia Gare 2","Sonfonia","nord-ouest"],
+  ["Sonfonia Centre 1","Sonfonia","nord-ouest"],
+  ["Sonfonia Centre 2","Sonfonia","nord-ouest"],
+
+  // === EST ===
+  // MATOTO (12)
+  ["Matoto Centre","Matoto","est"],
+  ["Simbaya 2","Matoto","est"],
+  ["Simbaya École","Matoto","est"],
+  ["Matoto Marché","Matoto","est"],
+  ["Matoto Khabitaya","Matoto","est"],
+  ["Sangoyah Mosquée","Matoto","est"],
+  ["Sangoyah Marché","Matoto","est"],
+  ["Kissosso","Matoto","est"],
+  ["Kissosso Plateau","Matoto","est"],
+  ["Marché Enco 5","Matoto","est"],
+  ["Wanindara Dispensaire","Matoto","est"],
+  ["Wanindara Marché","Matoto","est"],
+  // GBESSIA (26)
+  ["Dabondy 1","Gbessia","est"],
+  ["Dabondy 2","Gbessia","est"],
+  ["Dabondy 3","Gbessia","est"],
+  ["Dabondy École","Gbessia","est"],
+  ["Dabondy Rails","Gbessia","est"],
+  ["Gbessia Cité 1","Gbessia","est"],
+  ["Gbessia Cité 2","Gbessia","est"],
+  ["Gbessia Cité 3","Gbessia","est"],
+  ["Gbessia École","Gbessia","est"],
+  ["Gbessia Centre","Gbessia","est"],
+  ["Gbessia Port 1","Gbessia","est"],
+  ["Gbessia Port 2","Gbessia","est"],
+  ["Dar-Es-Salam","Gbessia","est"],
+  ["Cité de l'Air","Gbessia","est"],
+  ["Béhanzin","Gbessia","est"],
+  ["Tanènè Marché","Gbessia","est"],
+  ["Tanènè Mosquée","Gbessia","est"],
+  ["Yimbaya École","Gbessia","est"],
+  ["Yimbaya Permanence","Gbessia","est"],
+  ["Yimbaya Port","Gbessia","est"],
+  ["Hamdallaye Mosquée","Gbessia","est"],
+  ["Yimbaya Tannerie","Gbessia","est"],
+  ["Simbaya 1","Gbessia","est"],
+  ["Koloma 1","Gbessia","est"],
+  ["Koloma 2","Gbessia","est"],
+  ["Nassouroulaye","Gbessia","est"],
+  // TOMBOLIA (7)
+  ["Enta Marché","Tombolia","est"],
+  ["Enta Fassa","Tombolia","est"],
+  ["Tombolia","Tombolia","est"],
+  ["Tombolia Plateau","Tombolia","est"],
+  ["Dabompa Village","Tombolia","est"],
+  ["Dabompa Plateau","Tombolia","est"],
+  ["Lansanayah","Tombolia","est"],
+
+  // === PÉRIPHÉRIE ===
+  // KAGBELEN (3 partiels)
+  ["Kagbélen Plateau","Kagbelen","peripherie"],
+  ["Kénendé","Kagbelen","peripherie"],
+  ["Nèguèyah","Kagbelen","peripherie"],
+  // SANOYAH (5 partiels)
+  ["Sanoyah Km 36","Sanoyah","peripherie"],
+  ["Fassia Centre","Sanoyah","peripherie"],
+  ["Sanoyah Textiles","Sanoyah","peripherie"],
+  ["Lamaniyah","Sanoyah","peripherie"],
+  ["Kao Sory","Sanoyah","peripherie"],
+  // MANÉAH (12)
+  ["Hermakönö","Manéah","peripherie"],
+  ["Bambaya","Manéah","peripherie"],
+  ["Kassögna","Manéah","peripherie"],
+  ["Kakoulima","Manéah","peripherie"],
+  ["Sömbè","Manéah","peripherie"],
+  ["Tanènè 1","Manéah","peripherie"],
+  ["Tanènè 2","Manéah","peripherie"],
+  ["Bentouraya Plateau","Manéah","peripherie"],
+  ["Bentouraya Village","Manéah","peripherie"],
+  ["Friguiyadi Nord","Manéah","peripherie"],
+  ["Friguiyadi Village","Manéah","peripherie"],
+  ["Gomboya Nord","Manéah","peripherie"]
+];
+
+// ============ SCOPES ============
+const SCOPES = [
+  { id: "all", label: "Tout Konakri", type: "all", color: "#7B3FBF", mark: "CKY" }
+];
+
+function scopeById(id) { return SCOPES.find(s => s.id === id); }
+
+// ============ STATE ============
+const state = {
+  scope: null,
+  target: null,
+  deck: [],
+  index: 0,
+  correct: 0,
+  errors: 0,
+  startedAt: null,
+  chronoTimer: null,
+  scopePrefs: [],
+  newlyDiscovered: [],
+  streak: 0,
+  bestStreak: 0
+};
+
+// ============ META (localStorage) ============
+const META_KEY = "konakri.encountered";
+const TOTAL_TARGET = 150;
+
+function loadEncountered() {
+  try {
+    const raw = localStorage.getItem(META_KEY);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch(e) { return new Set(); }
+}
+function saveEncountered(set) {
+  try { localStorage.setItem(META_KEY, JSON.stringify([...set])); } catch(e) {}
+}
+function metaCount() { return loadEncountered().size; }
+
+function animateMetaCounter(oldCount, newCount) {
+  const countEl = document.getElementById("metaCount");
+  const pctEl = document.getElementById("metaPct");
+  const barEl = document.getElementById("metaBar");
+  const duration = 800;
+  const start = performance.now();
+  const step = (t) => {
+    const elapsed = t - start;
+    const p = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const cur = Math.round(oldCount + (newCount - oldCount) * eased);
+    countEl.textContent = cur;
+    const pct = Math.round((cur / TOTAL_TARGET) * 100);
+    pctEl.textContent = pct + "%";
+    barEl.style.width = Math.min(pct, 100) + "%";
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function refreshMetaCounter(animated) {
+  const c = metaCount();
+  if (animated) {
+    const old = parseInt(document.getElementById("metaCount").textContent) || 0;
+    animateMetaCounter(old, c);
+  } else {
+    document.getElementById("metaCount").textContent = c;
+    const pct = Math.round((c / TOTAL_TARGET) * 100);
+    document.getElementById("metaPct").textContent = pct + "%";
+    document.getElementById("metaBar").style.width = Math.min(pct, 100) + "%";
+  }
+}
+
+// ============ HELPERS ============
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function poolFor(scopeId) {
+  const scope = scopeById(scopeId);
+  if (!scope || scope.type === "all") return DATA;
+  if (scope.type === "zone") return DATA.filter(row => row[2] === scope.key);
+  return DATA;
+}
+function prefsFor(scopeId) {
+  const set = new Set(poolFor(scopeId).map(row => row[1]));
+  return [...set].sort((a, b) => a.localeCompare(b, "fr"));
+}
+function mergeByName(arr) {
+  const map = new Map();
+  for (const [sp, pref] of arr) {
+    if (!map.has(sp)) map.set(sp, { name: sp, validPrefs: new Set([pref]) });
+    else map.get(sp).validPrefs.add(pref);
+  }
+  return [...map.values()];
+}
+function scopeRemainingSize(scopeId) {
+  const encountered = loadEncountered();
+  return mergeByName(poolFor(scopeId)).filter(e => !encountered.has(e.name)).length;
+}
+function availableCounts(scopeId) {
+  const remaining = scopeRemainingSize(scopeId);
+  const options = [10, 20, 30, 50].filter(n => n <= remaining);
+  if (remaining > 0 && remaining < 10) {
+    return [{ n: -1, label: "Toutes (" + remaining + ")", target: remaining }];
+  }
+  return options.map(n => ({ n, label: String(n), target: n }));
+}
+
+// Convert hex color to rgba string with given alpha
+function hexToRgba(hex, alpha) {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.substr(0, 2), 16);
+  const g = parseInt(h.substr(2, 2), 16);
+  const b = parseInt(h.substr(4, 2), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+// ============ MENU RENDERING ============
+function renderScopes() {
+  const encountered = loadEncountered();
+  const groups = {
+    all: document.getElementById("scopeAll"),
+    zone: document.getElementById("scopeNat"),
+    adm: document.getElementById("scopeAdm")
+  };
+  Object.values(groups).forEach(g => g.innerHTML = "");
+
+  SCOPES.forEach(scope => {
+    const pool = mergeByName(poolFor(scope.id));
+    const total = pool.length;
+    const found = pool.filter(e => encountered.has(e.name)).length;
+    const remaining = total - found;
+
+    const tile = document.createElement("button");
+    tile.className = "scope" + (scope.id === "all" ? " big" : "");
+    tile.style.setProperty("--tile-color", scope.color);
+    tile.style.setProperty("--tile-color-glow", hexToRgba(scope.color, 0.35));
+    tile.style.setProperty("--tile-tint", hexToRgba(scope.color, 0.10));
+    tile.dataset.scope = scope.id;
+    tile.innerHTML = `
+      <div class="scope-mark">${scope.mark}</div>
+      <div class="scope-info">
+        <span class="scope-name">${scope.label}</span>
+        <div class="scope-stat"><span class="found">${found}</span> / ${total} découvertes · ${remaining} restantes</div>
+      </div>
+    `;
+    if (remaining === 0 && total > 0) {
+      tile.classList.add("complete");
+      tile.disabled = true;
+    } else {
+      tile.addEventListener("click", () => selectScope(scope.id));
+    }
+    (groups[scope.type] || groups.all).appendChild(tile);
+  });
+}
+
+function renderCounts() {
+  const container = document.getElementById("counts");
+  container.innerHTML = "";
+  if (!state.scope) {
+    [10, 20, 30, 50].forEach(n => {
+      const b = document.createElement("button");
+      b.className = "count";
+      b.disabled = true;
+      b.textContent = n;
+      container.appendChild(b);
+    });
+    return;
+  }
+  const opts = availableCounts(state.scope);
+  if (opts.length === 0) {
+    const msg = document.createElement("div");
+    msg.className = "count-none";
+    msg.textContent = "Zone complétée ! Choisis une autre zone ou réinitialise ton parcours.";
+    container.appendChild(msg);
+    return;
+  }
+  opts.forEach(opt => {
+    const b = document.createElement("button");
+    b.className = "count";
+    b.dataset.target = opt.target;
+    b.textContent = opt.label;
+    b.addEventListener("click", () => selectCount(opt.target, b));
+    container.appendChild(b);
+  });
+}
+
+function applyTerrainColor(scopeId) {
+  const scope = scopeById(scopeId);
+  if (!scope) return;
+  const root = document.documentElement;
+  root.style.setProperty("--terrain", scope.color);
+  root.style.setProperty("--terrain-glow", hexToRgba(scope.color, 0.28));
+  root.style.setProperty("--terrain-tint", hexToRgba(scope.color, 0.08));
+}
+
+function selectScope(scopeId) {
+  state.scope = scopeId;
+  state.target = null;
+  document.querySelectorAll(".scope").forEach(el => {
+    el.classList.toggle("selected", el.dataset.scope === scopeId);
+  });
+  applyTerrainColor(scopeId);
+  renderCounts();
+  refreshStartBtn();
+}
+function selectCount(target, btnEl) {
+  state.target = target;
+  document.querySelectorAll(".count").forEach(el => el.classList.remove("selected"));
+  if (btnEl) btnEl.classList.add("selected");
+  refreshStartBtn();
+}
+function refreshStartBtn() {
+  document.getElementById("startBtn").disabled = !(state.scope && state.target);
+}
+
+// ============ GAME LOGIC ============
+function startGame() {
+  applyTerrainColor(state.scope);
+  const encountered = loadEncountered();
+  const remainingEntries = mergeByName(poolFor(state.scope)).filter(e => !encountered.has(e.name));
+  const shuffled = shuffle(remainingEntries);
+  state.deck = shuffled.slice(0, state.target);
+  state.scopePrefs = prefsFor(state.scope);
+  state.index = 0;
+  state.correct = 0;
+  state.errors = 0;
+  state.newlyDiscovered = [];
+  state.streak = 0;
+  state.bestStreak = 0;
+  state.startedAt = performance.now();
+
+  document.getElementById("hudScope").textContent = scopeById(state.scope).label;
+  document.getElementById("progTotal").textContent = state.deck.length;
+  document.getElementById("progNow").textContent = "0";
+  hideCombo();
+
+  renderPrefGrid();
+  showCard();
+  startChrono();
+  switchScreen("game");
+}
+
+function renderPrefGrid() {
+  const grid = document.getElementById("prefGrid");
+  const n = state.scopePrefs.length;
+  grid.className = "pref-grid";
+  if (n <= 5) grid.classList.add("tight");
+  else if (n <= 8) grid.classList.add("medium");
+  else if (n <= 12) grid.classList.add("wide");
+  else grid.classList.add("national");
+  grid.innerHTML = "";
+  state.scopePrefs.forEach(pref => {
+    const btn = document.createElement("button");
+    btn.className = "pref";
+    btn.textContent = pref;
+    btn.dataset.pref = pref;
+    btn.addEventListener("click", () => handlePrefTap(btn, pref));
+    grid.appendChild(btn);
+  });
+}
+
+function currentCard() { return state.deck[state.index]; }
+let acceptingInput = true;
+
+function showCard() {
+  const entry = currentCard();
+  const card = document.getElementById("card");
+  card.classList.remove("wrong", "right");
+  document.getElementById("cardName").textContent = entry.name;
+  card.style.transform = `rotate(${state.index % 2 === 0 ? -1.2 : 1.2}deg)`;
+  acceptingInput = true;
+}
+
+function showCombo(n) {
+  const el = document.getElementById("combo");
+  document.getElementById("comboNum").textContent = n;
+  el.classList.add("show");
+  el.classList.remove("pop");
+  void el.offsetWidth;  // reflow to restart animation
+  el.classList.add("pop");
+  vibrate(30);
+}
+function hideCombo() {
+  const el = document.getElementById("combo");
+  el.classList.remove("show", "pop");
+}
+
+function vibrate(ms) {
+  if (navigator.vibrate) try { navigator.vibrate(ms); } catch(e) {}
+}
+
+function handlePrefTap(btn, pref) {
+  if (!acceptingInput) return;
+  const entry = currentCard();
+
+  if (entry.validPrefs.has(pref)) {
+    state.correct++;
+    state.streak++;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+    btn.classList.add("flash-right");
+    document.getElementById("card").classList.add("right");
+    acceptingInput = false;
+    vibrate(15);
+
+    const enc = loadEncountered();
+    if (!enc.has(entry.name)) {
+      enc.add(entry.name);
+      state.newlyDiscovered.push(entry.name);
+      saveEncountered(enc);
+    }
+
+    if (state.streak >= 3) showCombo(state.streak);
+
+    try {
+      window.parent.postMessage({
+        type: "pati-progress",
+        kind: "quartier",
+        ref: entry.name
+      }, "*");
+    } catch(e) {}
+
+    setTimeout(() => {
+      btn.classList.remove("flash-right");
+      state.index++;
+      document.getElementById("progNow").textContent = state.index;
+      if (state.index >= state.deck.length) {
+        finishGame();
+      } else {
+        showCard();
+      }
+    }, 420);
+  } else {
+    state.errors++;
+    state.streak = 0;
+    hideCombo();
+    btn.classList.add("flash-wrong");
+    document.getElementById("card").classList.add("wrong");
+    acceptingInput = false;
+    vibrate([20, 40, 20]);
+
+    setTimeout(() => {
+      btn.classList.remove("flash-wrong");
+      state.index++;
+      document.getElementById("progNow").textContent = state.index;
+      if (state.index >= state.deck.length) {
+        finishGame();
+      } else {
+        showCard();
+      }
+    }, 420);
+  }
+}
+
+// ============ CHRONO ============
+function startChrono() {
+  const chronoEl = document.getElementById("chrono");
+  const tick = () => {
+    const elapsed = (performance.now() - state.startedAt) / 1000;
+    chronoEl.textContent = elapsed.toFixed(1) + "s";
+  };
+  tick();
+  state.chronoTimer = setInterval(tick, 100);
+}
+function stopChrono() {
+  if (state.chronoTimer) clearInterval(state.chronoTimer);
+  state.chronoTimer = null;
+}
+
+// ============ CONFETTI ============
+function launchConfetti(intensity) {
+  const canvas = document.getElementById("confetti");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext("2d");
+  const colors = ["#F59E0B", "#22C55E", "#2563EB", "#EA580C", "#7B3FBF", "#059669"];
+  const count = intensity || 90;
+  const particles = [];
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight * 0.35;
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: cx + (Math.random() - 0.5) * 60,
+      y: cy,
+      vx: (Math.random() - 0.5) * 14,
+      vy: -Math.random() * 16 - 6,
+      color: colors[i % colors.length],
+      size: Math.random() * 8 + 5,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.35,
+      shape: Math.random() > 0.5 ? "rect" : "circle"
+    });
+  }
+  let frames = 0;
+  const max = 180;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.42;
+      p.vx *= 0.995;
+      p.angle += p.spin;
+      const alpha = Math.max(0, 1 - frames / max);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      if (p.shape === "rect") {
+        ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.6);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+    frames++;
+    if (frames < max) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  draw();
+}
+
+// ============ FINISH ============
+function finishGame() {
+  stopChrono();
+  hideCombo();
+  const totalSec = (performance.now() - state.startedAt) / 1000;
+  const cardsSeen = state.deck.length;
+  const pacePerCard = totalSec / Math.max(cardsSeen, 1);
+
+  document.getElementById("winScoreN").textContent = state.correct;
+  document.getElementById("winScoreT").textContent = cardsSeen;
+  const accuracy = cardsSeen > 0 ? Math.round((state.correct / cardsSeen) * 100) : 0;
+  document.getElementById("winAccuracy").textContent = accuracy + " % de bonnes réponses";
+  document.getElementById("winTime").textContent = totalSec.toFixed(1) + "s";
+  document.getElementById("winPace").textContent = pacePerCard.toFixed(1) + "s / carte";
+  document.getElementById("winCombo").textContent = "×" + state.bestStreak;
+
+  const newly = state.newlyDiscovered.length;
+  const newlyEl = document.getElementById("winNewly");
+  if (newly > 0) {
+    newlyEl.textContent = `+${newly} nouvelle${newly > 1 ? "s" : ""} découverte${newly > 1 ? "s" : ""} · elles ne reviendront plus`;
+  } else {
+    newlyEl.textContent = "";
+  }
+
+  const title = document.getElementById("winTitle");
+  const accolade = document.getElementById("winAccolade");
+  if (state.errors === 0 && state.correct === cardsSeen) {
+    title.textContent = "Sans faute !";
+    accolade.textContent = "Perfection";
+  } else if (accuracy >= 90) {
+    title.textContent = "Excellent !";
+    accolade.textContent = "Défi accompli";
+  } else if (accuracy >= 70) {
+    title.textContent = "Bien joué !";
+    accolade.textContent = "Défi accompli";
+  } else if (accuracy >= 50) {
+    title.textContent = "Pas mal.";
+    accolade.textContent = "Défi accompli";
+  } else {
+    title.textContent = "À réessayer.";
+    accolade.textContent = "Défi terminé";
+  }
+
+  switchScreen("win");
+
+  // Meta counter animation on the win screen — animate discovery count
+  const oldCount = metaCount() - newly;
+  const winMetaEl = document.getElementById("winMetaCount");
+  const dur = 800;
+  const start = performance.now();
+  const stepMeta = (t) => {
+    const p = Math.min((t - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    winMetaEl.textContent = Math.round(oldCount + newly * eased);
+    if (p < 1) requestAnimationFrame(stepMeta);
+  };
+  requestAnimationFrame(stepMeta);
+
+  // Confetti calibrated by score
+  if (accuracy >= 80) launchConfetti(120);
+  else if (accuracy >= 50) launchConfetti(60);
+  else launchConfetti(30);
+
+  try {
+    window.parent.postMessage({
+      type: "pati-progress",
+      kind: "konakri-sprint",
+      scope: state.scope,
+      target: state.target,
+      correct: state.correct,
+      errors: state.errors,
+      bestStreak: state.bestStreak,
+      seconds: totalSec
+    }, "*");
+  } catch(e) {}
+}
+
+// ============ SCREENS ============
+function switchScreen(name) {
+  document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
+  document.getElementById(name).classList.add("active");
+  if (name === "menu") {
+    refreshMetaCounter();
+    renderScopes();
+    renderCounts();
+  }
+}
+
+// ============ RESET ============
+function resetProgress() {
+  if (!confirm("Effacer tous tes quartiers découverts ? Cette action ne peut pas être annulée.")) return;
+  try { localStorage.removeItem(META_KEY); } catch(e) {}
+  state.target = null;
+  document.querySelectorAll(".scope").forEach(el => el.classList.remove("selected"));
+  refreshMetaCounter();
+  renderScopes();
+  selectScope("all");
+  renderCounts();
+  refreshStartBtn();
+}
+
+// ============ PARENT MESSAGES ============
+window.addEventListener("message", (e) => {
+  const d = e.data;
+  if (!d || typeof d !== "object") return;
+  if (d.type === "pati-fs") {
+    document.body.classList.toggle("fs-on", !!d.on);
+  }
+});
+
+// ============ INIT ============
+document.addEventListener("DOMContentLoaded", () => {
+  refreshMetaCounter();
+  renderScopes();
+  // Un seul terrain : auto-sélection pour que l'utilisateur passe direct au nombre
+  selectScope("all");
+  renderCounts();
+
+  document.getElementById("startBtn").addEventListener("click", () => {
+    if (state.scope && state.target) startGame();
+  });
+  document.getElementById("quitBtn").addEventListener("click", () => {
+    stopChrono();
+    hideCombo();
+    state.target = null;
+    switchScreen("menu");
+    selectScope("all");
+  });
+  document.getElementById("againBtn").addEventListener("click", () => {
+    if (state.scope && scopeRemainingSize(state.scope) >= state.target) {
+      startGame();
+    } else {
+      switchScreen("menu");
+      selectScope("all");
+    }
+  });
+  document.getElementById("backBtn").addEventListener("click", () => {
+    state.target = null;
+    switchScreen("menu");
+    selectScope("all");
+  });
+  document.getElementById("resetBtn").addEventListener("click", resetProgress);
+});
+</script>
+</body>
+</html>
