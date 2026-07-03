@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0D2B1A">
+<title>IWDI LAGUINÈ — Conquête des Régions</title>
+<style>
+  :root {
+    --bg-page: #FFF6E7;
+    --ink: #0D2B1A;
+    --ink-soft: #3a4a42;
+    --ink-mute: #8a9389;
+    --accent: #C8841E;
+    --gold: #FFC93C;
+    --green-deep: #143D2E;
+    --green-mid: #0F6E56;
+    --bg-blue: #4FB4E5;
+    --mg-blue: #262B6E;
+    --hg-brown: #6B3410;
+    --gf-green: #1A6D3C;
+    --orange: #F39227;
+    --red: #dc2626;
+    --shadow-sm: 0 2px 6px rgba(0,0,0,.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.15);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,.2);
+    --radius: 12px;
+    --cards-path: './iwdi-cartes';
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-page);
+    color: var(--ink);
+    font-size: 14px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; font-size: inherit; }
+  #app { display: flex; flex-direction: column; height: 100vh; max-width: 600px; margin: 0 auto; position: relative; }
+  .hidden { display: none !important; }
+
+  /* ============ HOME ============ */
+  #home {
+    height: 100%;
+    background: linear-gradient(160deg, var(--accent) 0%, #8f5a10 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 20px;
+    text-align: center;
+    background-image:
+      linear-gradient(160deg, rgba(200,132,30,.92), rgba(143,90,16,.98)),
+      url('./iwdi-cartes/dos.png');
+    background-size: cover;
+    background-position: center;
+  }
+  .home-top { padding-top: 20px; }
+  .brand-logo {
+    font-family: 'Georgia', serif;
+    font-size: 68px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1;
+    text-shadow: 3px 3px 0 rgba(0,0,0,.2);
+    color: #fff;
+  }
+  .brand-tag {
+    font-size: 18px;
+    letter-spacing: 6px;
+    margin-top: 6px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .brand-sub {
+    font-size: 11px;
+    opacity: .8;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .home-setup { width: 100%; max-width: 360px; }
+  .home-setup h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    opacity: .85;
+    font-weight: 700;
+  }
+  .mode-row, .btn-row {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .mode-row { grid-template-columns: 1fr 1fr; }
+  .btn-row { grid-template-columns: repeat(4, 1fr); }
+  .btn-mode, .btn-count {
+    padding: 12px 4px;
+    background: rgba(255,255,255,.18);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    letter-spacing: 1px;
+    transition: all .15s;
+  }
+  .btn-count { font-size: 17px; }
+  .btn-mode.active, .btn-count.active {
+    background: #fff;
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+  .btn-play {
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    margin-top: 10px;
+  }
+  .btn-play:active { transform: scale(.98); }
+  .btn-secondary {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,.5);
+    margin-top: 8px;
+  }
+  .home-footer {
+    font-size: 10px;
+    opacity: .7;
+    padding-bottom: 8px;
+  }
+
+  /* ============ GAME ============ */
+  #game { flex: 1; display: none; flex-direction: column; height: 100%; overflow: hidden; }
+  #game.active { display: flex; }
+
+  .top-bar {
+    background: var(--green-deep);
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .top-bar-title { font-weight: 900; letter-spacing: 1px; color: var(--gold); }
+  .top-bar-actions { display: flex; gap: 6px; }
+  .top-bar-btn {
+    background: rgba(255,255,255,.15);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .top-bar-btn:active { background: rgba(255,255,255,.3); }
+
+  .opponents {
+    padding: 6px 8px;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.06), transparent);
+    scrollbar-width: none;
+  }
+  .opponents::-webkit-scrollbar { display: none; }
+  .opp {
+    flex-shrink: 0;
+    min-width: 100px;
+    background: #fff;
+    border: 1.5px solid rgba(0,0,0,.1);
+    border-radius: 10px;
+    padding: 6px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+  .opp.active-turn {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold), var(--shadow-md);
+  }
+  .opp-name {
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  .opp-hand {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    height: 26px;
+    align-items: center;
+  }
+  .mini-back {
+    width: 15px;
+    height: 22px;
+    border-radius: 2px;
+    background-image: url('./iwdi-cartes/dos.png');
+    background-size: cover;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  }
+  .opp-count {
+    font-size: 10px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+    font-weight: 700;
+  }
+  .opp-count.stolen { color: var(--red); font-weight: 900; }
+  .opp-sofa {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    z-index: 2;
+    letter-spacing: .5px;
+  }
+
+  .board {
+    flex: 1;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .piles {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .pile-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .pile {
+    width: 70px;
+    height: 105px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0,0,0,.05);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.7);
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .pile-pioche {
+    background-image: url('./iwdi-cartes/dos.png');
+    cursor: pointer;
+  }
+  .pile-pioche.actionable {
+    animation: pulse-draw 1.5s infinite;
+  }
+  @keyframes pulse-draw {
+    0%, 100% { box-shadow: var(--shadow-md); transform: scale(1); }
+    50% { box-shadow: 0 0 0 6px rgba(255,201,60,.5), var(--shadow-md); transform: scale(1.04); }
+  }
+  .pile-defausse {
+    background-color: rgba(0,0,0,.08);
+    background-image: none;
+    color: var(--ink-mute);
+    border: 2px dashed rgba(0,0,0,.15);
+  }
+  .pile-defausse.has-cards {
+    background-color: transparent;
+    border: none;
+  }
+  .pile-label {
+    font-size: 10px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .tracker {
+    background: rgba(255,255,255,.9);
+    border-radius: 10px;
+    padding: 6px 8px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 340px;
+    box-shadow: var(--shadow-sm);
+  }
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .track.bg { background: var(--bg-blue); }
+  .track.mg { background: var(--mg-blue); }
+  .track.hg { background: var(--hg-brown); }
+  .track.gf { background: var(--gf-green); }
+  .track.close {
+    animation: glow 1.2s infinite;
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  @keyframes glow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  .track strong { font-size: 13px; }
+
+  .log {
+    max-height: 90px;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 11px;
+    line-height: 1.5;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: var(--shadow-sm);
+    scrollbar-width: thin;
+  }
+  .log-line { color: var(--ink-soft); margin-bottom: 2px; }
+  .log-line.own { color: var(--green-mid); font-weight: 700; }
+  .log-line.event { color: var(--accent); font-weight: 700; }
+  .log-line.attack { color: var(--red); font-weight: 700; }
+  .log-line.win { color: var(--gold); font-weight: 900; background: var(--ink); padding: 2px 6px; border-radius: 4px; }
+
+  /* ============ HAND ============ */
+  .hand-area {
+    flex-shrink: 0;
+    padding: 6px 8px 10px;
+    background: linear-gradient(0deg, rgba(0,0,0,.08), transparent);
+  }
+  .hand-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 0 4px;
+    gap: 6px;
+  }
+  .hand-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+  .hand-btns { display: flex; gap: 6px; }
+  .btn-action {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow-sm);
+    text-transform: uppercase;
+  }
+  .btn-action.victory { background: var(--gold); color: var(--ink); }
+  .btn-action.end { background: var(--ink-mute); color: #fff; }
+  .btn-action.end.can-end { background: var(--green-mid); }
+  .btn-action:disabled { opacity: .35; }
+
+  .hand {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: flex-end;
+    min-height: 130px;
+    overflow-x: auto;
+    padding: 0 4px;
+    scrollbar-width: none;
+  }
+  .hand::-webkit-scrollbar { display: none; }
+
+  /* ============ CARDS ============ */
+  .card {
+    width: 62px;
+    height: 92px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-sm);
+    background-size: cover;
+    background-position: center;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: transform .15s, box-shadow .15s;
+    overflow: hidden;
+  }
+  .card.selected {
+    transform: translateY(-14px);
+    box-shadow: var(--shadow-lg);
+    outline: 3px solid var(--gold);
+    z-index: 5;
+  }
+  .card.playable::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 3px rgba(255,201,60,.7);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  .card.big { width: 130px; height: 195px; border-radius: 12px; }
+  .card.med { width: 78px; height: 116px; }
+  .card.mini { width: 44px; height: 66px; border-radius: 4px; }
+  .card:active { transform: scale(.97); }
+  .card.selected:active { transform: translateY(-12px) scale(.97); }
+
+  /* Placeholder si image manquante */
+  .card::before {
+    content: attr(data-name);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0,0,0,.3);
+    font-size: 10px;
+    font-weight: 700;
+    z-index: -1;
+  }
+
+  /* ============ MODAL ============ */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .backdrop.active { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+  }
+  .modal h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--accent);
+    font-weight: 900;
+  }
+  .modal p { margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
+  .modal-choices { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+  .modal-choice {
+    padding: 12px;
+    background: var(--bg-page);
+    border: 2px solid rgba(0,0,0,.08);
+    border-radius: 8px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all .15s;
+  }
+  .modal-choice:hover { border-color: var(--accent); }
+  .modal-choice:active { background: var(--accent); color: #fff; }
+  .modal-choice.compact {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .modal-close, .modal-confirm {
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-top: 6px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .modal-close { background: #e5e5e5; color: var(--ink); }
+  .modal-confirm { background: var(--accent); color: #fff; }
+  .modal-confirm:disabled { opacity: .4; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 6px;
+    margin: 12px 0;
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 4px;
+  }
+  .card-grid .card { width: 100%; height: 90px; }
+
+  .peek-block {
+    background: var(--bg-page);
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .peek-title {
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .peek-cards { display: flex; gap: 3px; flex-wrap: wrap; }
+
+  .victory {
+    text-align: center;
+  }
+  .victory h3 {
+    font-size: 26px;
+    margin-bottom: 8px;
+    color: var(--gold);
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+  .victory-cards {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  .rules { font-size: 12px; line-height: 1.6; }
+  .rules h4 { color: var(--accent); margin: 12px 0 4px; font-size: 13px; font-weight: 900; }
+  .rules ul { padding-left: 20px; }
+  .rules li { margin-bottom: 4px; }
+  .rules ol { padding-left: 20px; }
+
+  /* ============ TOAST ============ */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-height: 700px) {
+    .card { width: 54px; height: 82px; }
+    .pile { width: 60px; height: 90px; }
+    .hand { min-height: 110px; }
+    .log { max-height: 60px; }
+    .brand-logo { font-size: 56px; }
+  }
+  @media (min-width: 500px) {
+    .card { width: 68px; height: 102px; }
+    .hand { min-height: 140px; }
+  }
+
+  /* Info ‘iframe mode’ = plein écran embed */
+  body.iframe-mode .top-bar { display: none; }
+  body.iframe-mode #app { max-width: 100%; }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============ HOME ============ -->
+  <div id="home">
+    <div class="home-top">
+      <div class="brand-logo">IWDI</div>
+      <div class="brand-tag">LAGUINÈ</div>
+      <div class="brand-sub">« La Guinée, mon origine »</div>
+    </div>
+    <div class="home-setup">
+      <h2>MODE</h2>
+      <div class="mode-row">
+        <button class="btn-mode active" data-mode="solo">SOLO vs BOT</button>
+        <button class="btn-mode" data-mode="hotseat">HOT-SEAT</button>
+      </div>
+      <h2 id="players-label">NOMBRE DE BOTS</h2>
+      <div class="btn-row" id="players-row">
+        <button class="btn-count active" data-count="1">1</button>
+        <button class="btn-count" data-count="2">2</button>
+        <button class="btn-count" data-count="3">3</button>
+        <button class="btn-count" data-count="4">4</button>
+      </div>
+      <button class="btn-play" onclick="startGame()">COMMENCER</button>
+      <button class="btn-secondary" onclick="showRules()">RÈGLES DU JEU</button>
+    </div>
+    <div class="home-footer">L'Atelier Solidaire — Prototype v2</div>
+  </div>
+
+  <!-- ============ GAME ============ -->
+  <div id="game">
+    <div class="top-bar">
+      <div class="top-bar-title">IWDI LAGUINÈ</div>
+      <div class="top-bar-actions">
+        <button class="top-bar-btn" onclick="showRules()">Règles</button>
+        <button class="top-bar-btn" onclick="quitGame()">Quitter</button>
+      </div>
+    </div>
+    <div class="opponents" id="opponents"></div>
+    <div class="board">
+      <div class="piles">
+        <div class="pile-wrap">
+          <div class="pile pile-pioche" id="pioche" onclick="playerDraw()"></div>
+          <div class="pile-label"><span id="pioche-count">50</span> cartes</div>
+        </div>
+        <div class="pile-wrap">
+          <div class="pile pile-defausse" id="defausse">—</div>
+          <div class="pile-label">Défausse</div>
+        </div>
+      </div>
+      <div class="tracker" id="tracker"></div>
+      <div class="log" id="log"></div>
+    </div>
+    <div class="hand-area">
+      <div class="hand-header">
+        <div class="hand-label" id="hand-label">Ta main</div>
+        <div class="hand-btns">
+          <button class="btn-action end" id="btn-end" onclick="endTurn()">Fin de tour</button>
+          <button class="btn-action victory" id="btn-win" onclick="tryVictory()">Clamer victoire</button>
+        </div>
+      </div>
+      <div class="hand" id="hand"></div>
+    </div>
+  </div>
+
+  <div class="backdrop" id="backdrop"><div class="modal" id="modal"></div></div>
+</div>
+
+<script>
+/* ============================================================
+   DATA — DECK COMPLET DES 50 CARTES
+   Chaque carte a un `img` qui pointe vers son fichier PNG.
+   ============================================================ */
+
+const REGIONS = {
+  BG: { name: 'Basse Guinée', color: 'bg', hex: '#4FB4E5' },
+  MG: { name: 'Moyenne Guinée', color: 'mg', hex: '#262B6E' },
+  HG: { name: 'Haute Guinée', color: 'hg', hex: '#6B3410' },
+  GF: { name: 'Guinée Forestière', color: 'gf', hex: '#1A6D3C' }
+};
+
+// slug → correspond au nom du fichier PNG dans iwdi-cartes/
+const PREFECTURES = [
+  // BG (7)
+  { slug: 'bg-forecariah', name: 'FORÉCARIAH', region: 'BG', area: 4384 },
+  { slug: 'bg-fria',       name: 'FRIA',       region: 'BG', area: 2016 },
+  { slug: 'bg-boffa',      name: 'BOFFA',      region: 'BG', area: 6003 },
+  { slug: 'bg-kindia',     name: 'KINDIA',     region: 'BG', area: 9648 },
+  { slug: 'bg-boke',       name: 'BOKÉ',       region: 'BG', area: 11124 },
+  { slug: 'bg-coyah',      name: 'COYAH',      region: 'BG', area: 1275 },
+  { slug: 'bg-dubreka',    name: 'DUBRÉKA',    region: 'BG', area: 4350 },
+  // MG (10)
+  { slug: 'mg-koundara',   name: 'KOUNDARA',   region: 'MG', area: 5238 },
+  { slug: 'mg-labe',       name: 'LABÉ',       region: 'MG', area: 2242 },
+  { slug: 'mg-mamou',      name: 'MAMOU',      region: 'MG', area: 9108 },
+  { slug: 'mg-pita',       name: 'PITA',       region: 'MG', area: 4638 },
+  { slug: 'mg-dalaba',     name: 'DALABA',     region: 'MG', area: 3328 },
+  { slug: 'mg-mali',       name: 'MALI',       region: 'MG', area: 8802 },
+  { slug: 'mg-tougue',     name: 'TOUGUÉ',     region: 'MG', area: 3825 },
+  { slug: 'mg-lelouma',    name: 'LELOUMA',    region: 'MG', area: 4275 },
+  { slug: 'mg-koubia',     name: 'KOUBIA',     region: 'MG', area: 3725 },
+  { slug: 'mg-gaoual',     name: 'GAOUAL',     region: 'MG', area: 7758 },
+  // HG (7)
+  { slug: 'hg-kankan',     name: 'KANKAN',     region: 'HG', area: 19750 },
+  { slug: 'hg-dabola',     name: 'DABOLA',     region: 'HG', area: 6350 },
+  { slug: 'hg-siguiri',    name: 'SIGUIRI',    region: 'HG', area: 18500 },
+  { slug: 'hg-kouroussa',  name: 'KOUROUSSA',  region: 'HG', area: 14050 },
+  { slug: 'hg-mandiana',   name: 'MANDIANA',   region: 'HG', area: 12825 },
+  { slug: 'hg-kerouane',   name: 'KÉROUANÉ',   region: 'HG', area: 7020 },
+  { slug: 'hg-faranah',    name: 'FARANAH',    region: 'HG', area: 12966 },
+  // GF (6)
+  { slug: 'gf-nzerekore',  name: 'N’ZÉRÉKORÉ', region: 'GF', area: 3632 },
+  { slug: 'gf-lola',       name: 'LOLA',       region: 'GF', area: 4688 },
+  { slug: 'gf-gueckedou',  name: 'GUÉCKÉDOU',  region: 'GF', area: 4750 },
+  { slug: 'gf-beyla',      name: 'BEYLA',      region: 'GF', area: 13612 },
+  { slug: 'gf-macenta',    name: 'MACENTA',    region: 'GF', area: 7056 },
+  { slug: 'gf-yomou',      name: 'YOMOU',      region: 'GF', area: 3920 }
+];
+
+const FRONTIERS = [
+  { slug: 'fr-telimele',    name: 'TÉLIMÉLÉ',    regions: ['BG', 'MG'], area: 9216 },
+  { slug: 'fr-dinguiraye',  name: 'DINGUIRAYE',  regions: ['MG', 'HG'], area: 7965 },
+  { slug: 'fr-kissidougou', name: 'KISSIDOUGOU', regions: ['HG', 'GF'], area: 8300 }
+];
+
+const JOKER = { slug: 'joker-conakry', name: 'CONAKRY', area: 450, isJoker: true };
+
+const STRATEGIES = [
+  { slug: 'str-loumo', name: 'LOUMO', effect: 'loumo', qty: 5,
+    desc: 'Reclassement : échange 1 ou 2 de tes cartes contre le même nombre pioché.' },
+  { slug: 'str-syli',  name: 'SYLI',  effect: 'syli',  qty: 4,
+    desc: 'Achat ciblé : force un adversaire à te vendre une carte d’une région (bloqué par SOFA).' },
+  { slug: 'str-sofa',  name: 'SOFA',  effect: 'sofa',  qty: 4,
+    desc: 'Protection : tant qu’il est en main (visible), tu es immunisé contre le vol.' },
+  { slug: 'str-kpawo', name: 'KPAWO', effect: 'kpawo', qty: 2,
+    desc: 'Chaos : tous les joueurs passent leur main à leur voisin de droite.' },
+  { slug: 'str-nimba', name: 'NIMBA', effect: 'nimba', qty: 1,
+    desc: 'Vision + grand échange : révèle toutes les mains, échange jusqu’à 3 cartes, pioche 1.' }
+];
+
+const CARDS_PATH = './iwdi-cartes';
+function img(slug) { return `${CARDS_PATH}/${slug}.png`; }
+
+/* ============================================================
+   ETAT DU JEU
+   ============================================================ */
+
+let setupMode = 'solo';
+let setupCount = 1;
+let state = null;
+let gameStartTime = null;
+let loumoSel = [];
+
+function buildDeck() {
+  const deck = [];
+  let id = 0;
+  PREFECTURES.forEach(p => deck.push({ ...p, id: ++id, type: 'pref' }));
+  FRONTIERS.forEach(f => deck.push({ ...f, id: ++id, type: 'frontier' }));
+  deck.push({ ...JOKER, id: ++id, type: 'joker' });
+  STRATEGIES.forEach(s => {
+    for (let i = 0; i < s.qty; i++) deck.push({ ...s, id: ++id, type: 'strategy' });
+  });
+  return deck;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function initGame() {
+  const nbHumans = setupMode === 'solo' ? 1 : setupCount;
+  const nbBots = setupMode === 'solo' ? setupCount : 0;
+  const players = [];
+  for (let i = 0; i < nbHumans; i++) {
+    players.push({
+      id: i,
+      name: setupMode === 'hotseat' ? `Joueur ${i+1}` : 'Toi',
+      isBot: false,
+      hand: [],
+      lastCardsDiff: 0,
+    });
+  }
+  for (let i = 0; i < nbBots; i++) {
+    players.push({
+      id: nbHumans + i,
+      name: `Bot ${i+1}`,
+      isBot: true,
+      hand: [],
+      lastCardsDiff: 0,
+    });
+  }
+  const deck = shuffle(buildDeck());
+  players.forEach(p => { for (let i = 0; i < 5; i++) p.hand.push(deck.shift()); });
+
+  state = {
+    players,
+    deck,
+    discard: [],
+    currentIdx: 0,
+    phase: 'draw',      // 'draw' | 'action' | 'end'
+    hasPlayedAction: false,
+    log: [],
+    selectedId: null,
+    turn: 1,
+  };
+  gameStartTime = Date.now();
+  addLog('event', `— Partie commencée : ${players.length} joueur(s) —`);
+  addLog('event', `Au tour de ${players[0].name}`);
+  postProgress({ kind: 'iwdi-start', players: players.length, mode: setupMode });
+}
+
+/* ============================================================
+   MOTEUR
+   ============================================================ */
+
+function currentPlayer() { return state.players[state.currentIdx]; }
+
+function hasSofa(p) { return p.hand.some(c => c.effect === 'sofa'); }
+
+function drawCards(p, n = 1) {
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    if (state.deck.length === 0) {
+      if (state.discard.length === 0) break;
+      state.deck = shuffle(state.discard);
+      state.discard = [];
+      addLog('event', 'La défausse est remélangée dans la pioche');
+    }
+    const c = state.deck.shift();
+    p.hand.push(c);
+    out.push(c);
+  }
+  return out;
+}
+
+function removeFromHand(p, ids) {
+  const removed = [];
+  ids.forEach(id => {
+    const i = p.hand.findIndex(c => c.id === id);
+    if (i >= 0) removed.push(...p.hand.splice(i, 1));
+  });
+  return removed;
+}
+
+function discard(cards, toBottom = false) {
+  cards.forEach(c => {
+    if (toBottom) state.deck.push(c);
+    else state.discard.unshift(c);
+  });
+}
+
+function countPossibilities(p) {
+  const hand = p.hand.filter(c => c.type === 'pref' || c.type === 'frontier' || c.type === 'joker');
+  const jokers = hand.filter(c => c.type === 'joker').length;
+  const result = {};
+  for (const r of ['BG','MG','HG','GF']) {
+    const pures = hand.filter(c => c.type === 'pref' && c.region === r).length;
+    const fronts = hand.filter(c => c.type === 'frontier' && c.regions.includes(r)).length;
+    result[r] = pures + fronts + jokers;
+  }
+  return result;
+}
+
+function checkVictory(p) {
+  const hand = p.hand.filter(c => c.type === 'pref' || c.type === 'frontier' || c.type === 'joker');
+  if (hand.length < 5) return null;
+  const jokers = hand.filter(c => c.type === 'joker');
+  const nonJoker = hand.filter(c => c.type !== 'joker');
+  for (const r of ['BG','MG','HG','GF']) {
+    const cands = nonJoker.filter(c =>
+      (c.type === 'pref' && c.region === r) ||
+      (c.type === 'frontier' && c.regions.includes(r))
+    );
+    const needed = 5 - jokers.length;
+    if (cands.length >= needed) {
+      return { region: r, cards: [...cands.slice(0, needed), ...jokers.slice(0, 5 - needed)] };
+    }
+  }
+  return null;
+}
+
+/* ============================================================
+   ACTIONS — TOUR DE JEU
+   ============================================================ */
+
+function playerDraw() {
+  const p = currentPlayer();
+  if (p.isBot || state.phase !== 'draw') return;
+  const drawn = drawCards(p, 1);
+  if (drawn.length === 0) {
+    addLog('event', 'Pioche épuisée !');
+    return;
+  }
+  addLog('own', `Tu pioches : ${drawn[0].name}`);
+  state.phase = 'action';
+  render();
+}
+
+function selectCard(id) {
+  const p = currentPlayer();
+  if (p.isBot) return;
+  const card = p.hand.find(c => c.id === id);
+  if (!card) return;
+
+  // En mode loumo selection, on utilise la logique dédiée
+  if (loumoSel !== null && Array.isArray(loumoSel) && loumoSelActive) {
+    if (loumoSel.includes(id)) loumoSel = loumoSel.filter(x => x !== id);
+    else if (loumoSel.length < 2) loumoSel.push(id);
+    render();
+    return;
+  }
+
+  state.selectedId = state.selectedId === id ? null : id;
+  if (card.type === 'strategy' && state.phase === 'action' && !state.hasPlayedAction && card.effect !== 'sofa') {
+    showCardAction(p, card);
+  } else if (card.type === 'strategy' && card.effect === 'sofa') {
+    // SOFA : ne se joue pas. Info uniquement
+    toast('SOFA se garde en main pour te protéger (révélée aux adversaires).');
+    state.selectedId = null;
+  } else {
+    render();
+  }
+}
+
+function showCardAction(player, card) {
+  const canPlay = state.phase === 'action' && !state.hasPlayedAction;
+  showModal({
+    title: card.name,
+    body: `<p>${card.desc}</p>`,
+    choices: [
+      ...(canPlay ? [{ label: '▶ JOUER CETTE CARTE', accent: true, onClick: () => {
+        hideModal();
+        state.selectedId = null;
+        switch (card.effect) {
+          case 'loumo': startLoumo(player, card); break;
+          case 'syli':  startSyli(player, card);  break;
+          case 'kpawo': doKpawo(player, card);    break;
+          case 'nimba': startNimba(player, card); break;
+        }
+      }}] : []),
+      { label: 'Fermer', onClick: () => { hideModal(); state.selectedId = null; render(); } }
+    ]
+  });
+}
+
+/* ---- LOUMO ---- */
+let loumoSelActive = false;
+function startLoumo(player, card) {
+  loumoSelActive = true;
+  loumoSel = [];
+  const others = player.hand.filter(c => c.id !== card.id);
+  showModal({
+    title: 'LOUMO — Reclassement',
+    body: `<p>Choisis <b>1 ou 2 cartes</b> à échanger contre le sommet de la pioche.</p>`,
+    body2: renderChoiceGrid(others, { multi: true, min: 1, max: 2,
+      onConfirm: (sel) => {
+        // On enlève : la carte LOUMO + les cartes sélectionnées
+        const toRemove = [card.id, ...sel.map(c => c.id)];
+        const removed = removeFromHand(player, toRemove);
+        const loumoCard = removed.find(c => c.effect === 'loumo');
+        const exchanged = removed.filter(c => c.effect !== 'loumo');
+        // La carte stratégie va en défausse
+        discard([loumoCard]);
+        // Les cartes échangées vont SOUS la pioche
+        discard(exchanged, true);
+        // On pioche autant que d'échangées
+        drawCards(player, exchanged.length);
+        addLog('own', `${player.name} joue LOUMO — échange ${exchanged.length} carte(s)`);
+        state.hasPlayedAction = true;
+        loumoSelActive = false;
+        loumoSel = [];
+        hideModal();
+        render();
+      }
+    }),
+    hideBaseBody: false,
+  });
+}
+
+/* ---- SYLI ---- */
+function startSyli(player, card) {
+  const opps = state.players.filter(p => p.id !== player.id && p.hand.length > 0);
+  if (opps.length === 0) {
+    // On défausse quand même
+    removeFromHand(player, [card.id]);
+    discard([card]);
+    state.hasPlayedAction = true;
+    render();
+    return;
+  }
+  showModal({
+    title: 'SYLI — Achat ciblé',
+    body: `<p>Choisis un adversaire :</p>`,
+    choices: opps.map(op => ({
+      label: `${op.name} <span style="opacity:.6">(${op.hand.length} cartes${hasSofa(op) ? ' — 🛡 SOFA' : ''})</span>`,
+      onClick: () => syliPickRegion(player, card, op)
+    })).concat([{ label: 'Annuler', onClick: hideModal }])
+  });
+}
+
+function syliPickRegion(player, card, target) {
+  if (hasSofa(target)) {
+    // Le SOFA bloque : la carte SYLI est perdue quand même (elle a été jouée)
+    showModal({
+      title: '🛡 SOFA bloque',
+      body: `<p>${target.name} porte un SOFA. Ton SYLI est perdu.</p>`,
+      choices: [{ label: 'OK', onClick: () => {
+        removeFromHand(player, [card.id]);
+        discard([card]);
+        addLog('attack', `${player.name} tente SYLI sur ${target.name} — bloqué par SOFA`);
+        state.hasPlayedAction = true;
+        hideModal();
+        render();
+      }}]
+    });
+    return;
+  }
+  showModal({
+    title: `SYLI → ${target.name}`,
+    body: `<p>Force ${target.name} à te vendre une carte de quelle région ?</p>`,
+    choices: [
+      { label: `<span style="display:inline-block;width:12px;height:12px;background:${REGIONS.BG.hex};margin-right:6px;vertical-align:middle;border-radius:2px"></span> Basse Guinée`, onClick: () => execSyli(player, card, target, 'BG') },
+      { label: `<span style="display:inline-block;width:12px;height:12px;background:${REGIONS.MG.hex};margin-right:6px;vertical-align:middle;border-radius:2px"></span> Moyenne Guinée`, onClick: () => execSyli(player, card, target, 'MG') },
+      { label: `<span style="display:inline-block;width:12px;height:12px;background:${REGIONS.HG.hex};margin-right:6px;vertical-align:middle;border-radius:2px"></span> Haute Guinée`, onClick: () => execSyli(player, card, target, 'HG') },
+      { label: `<span style="display:inline-block;width:12px;height:12px;background:${REGIONS.GF.hex};margin-right:6px;vertical-align:middle;border-radius:2px"></span> Guinée Forestière`, onClick: () => execSyli(player, card, target, 'GF') }
+    ]
+  });
+}
+
+function execSyli(player, card, target, region) {
+  const valid = target.hand.filter(c =>
+    (c.type === 'pref' && c.region === region) ||
+    (c.type === 'frontier' && c.regions.includes(region))
+  );
+  // Défausser le SYLI dans tous les cas
+  removeFromHand(player, [card.id]);
+  discard([card]);
+  state.hasPlayedAction = true;
+
+  if (valid.length === 0) {
+    showModal({
+      title: 'SYLI — sans effet',
+      body: `<p>${target.name} n'a aucune carte de ${REGIONS[region].name}. Ton SYLI est perdu.</p>`,
+      choices: [{ label: 'OK', onClick: () => {
+        addLog('attack', `${player.name} SYLI ${target.name} (${region}) — rien à voler`);
+        hideModal();
+        render();
+      }}]
+    });
+    return;
+  }
+  // La cible perd une carte (choisie au hasard, elle est forcée)
+  const chosen = valid[Math.floor(Math.random() * valid.length)];
+  removeFromHand(target, [chosen.id]);
+  player.hand.push(chosen);
+  target.lastCardsDiff = -1;
+  addLog('attack', `${player.name} SYLI ${target.name} et prend ${chosen.name}`);
+  hideModal();
+  render();
+}
+
+/* ---- KPAWO ---- */
+function doKpawo(player, card) {
+  // 1. Défausser d'abord la carte KPAWO du joueur qui la joue
+  removeFromHand(player, [card.id]);
+  discard([card]);
+  // 2. Rotation des mains vers la droite (= joueur suivant reçoit ta main)
+  const hands = state.players.map(p => p.hand);
+  const n = state.players.length;
+  state.players.forEach((p, i) => {
+    p.hand = hands[(i - 1 + n) % n];  // reçoit la main de son voisin de gauche
+  });
+  addLog('event', `💥 ${player.name} joue KPAWO — les mains tournent !`);
+  state.hasPlayedAction = true;
+  render();
+}
+
+/* ---- NIMBA ---- */
+function startNimba(player, card) {
+  const opps = state.players.filter(p => p.id !== player.id);
+  showModal({
+    title: 'NIMBA — Vision',
+    body: `<p>Tu vois toutes les mains adverses. Tu peux échanger 1 carte avec jusqu'à 3 adversaires, puis piocher 1.</p>`,
+    body2: renderPeekBlock(opps),
+    choices: [
+      { label: 'Passer → défausser NIMBA et piocher 1', accent: true, onClick: () => finalizeNimba(player, card, 0) },
+      ...opps.slice(0, 3).map(op => ({
+        label: `Échanger avec ${op.name}`,
+        onClick: () => nimbaSwap(player, card, op, [])
+      }))
+    ]
+  });
+}
+
+function nimbaSwap(player, card, target, done) {
+  const others = player.hand.filter(c => c.id !== card.id);
+  showModal({
+    title: `NIMBA — Ta carte à donner à ${target.name}`,
+    body: '<p>Choisis :</p>',
+    body2: renderChoiceGrid(others, { multi: false, onSelect: (mine) => {
+      showModal({
+        title: `NIMBA — Carte de ${target.name} à prendre`,
+        body: '<p>Choisis :</p>',
+        body2: renderChoiceGrid(target.hand, { multi: false, onSelect: (theirs) => {
+          removeFromHand(player, [mine.id]);
+          removeFromHand(target, [theirs.id]);
+          player.hand.push(theirs);
+          target.hand.push(mine);
+          addLog('event', `NIMBA : ${player.name} ↔ ${target.name}`);
+          const newDone = [...done, target.id];
+          const remaining = state.players.filter(p =>
+            p.id !== player.id && !newDone.includes(p.id)
+          ).slice(0, 3 - newDone.length);
+          if (remaining.length === 0 || newDone.length >= 3) {
+            finalizeNimba(player, card, newDone.length);
+          } else {
+            showModal({
+              title: 'NIMBA — Continuer ?',
+              body: `<p>${newDone.length} échange(s) effectué(s).</p>`,
+              choices: [
+                { label: 'Terminer → défausser + piocher 1', accent: true, onClick: () => finalizeNimba(player, card, newDone.length) },
+                ...remaining.map(op => ({
+                  label: `Échanger avec ${op.name}`,
+                  onClick: () => nimbaSwap(player, card, op, newDone)
+                }))
+              ]
+            });
+          }
+        }})
+      });
+    }})
+  });
+}
+
+function finalizeNimba(player, card, nbSwaps) {
+  removeFromHand(player, [card.id]);
+  discard([card]);
+  drawCards(player, 1);
+  state.deck = shuffle(state.deck);
+  addLog('own', `${player.name} finalise NIMBA — ${nbSwaps} échange(s), pioche 1, remélange`);
+  state.hasPlayedAction = true;
+  hideModal();
+  render();
+}
+
+/* ============================================================
+   FIN DE TOUR
+   ============================================================ */
+
+function endTurn() {
+  const p = currentPlayer();
+  if (p.isBot) return;
+  if (state.phase === 'draw') return;
+  if (p.hand.length > 5) {
+    // Défausse forcée
+    const excess = p.hand.length - 5;
+    showModal({
+      title: `Défausse ${excess} carte(s)`,
+      body: `<p>Ta main dépasse 5. Choisis ${excess} carte(s) à mettre sous la pioche.</p>`,
+      body2: renderChoiceGrid(p.hand, { multi: true, min: excess, max: excess,
+        onConfirm: (sel) => {
+          const removed = removeFromHand(p, sel.map(c => c.id));
+          discard(removed, true);
+          addLog('event', `${p.name} défausse ${excess} carte(s)`);
+          hideModal();
+          nextPlayer();
+        }
+      })
+    });
+    return;
+  }
+  nextPlayer();
+}
+
+function nextPlayer() {
+  // Reset stolen marker
+  state.players.forEach(p => { p.lastCardsDiff = 0; });
+  state.currentIdx = (state.currentIdx + 1) % state.players.length;
+  state.phase = 'draw';
+  state.hasPlayedAction = false;
+  state.selectedId = null;
+  state.turn++;
+  addLog('event', `— Au tour de ${currentPlayer().name} —`);
+  render();
+  scheduleBotTurn();
+}
+
+function tryVictory() {
+  const p = currentPlayer();
+  if (p.isBot) return;
+  const v = checkVictory(p);
+  if (!v) {
+    toast('Pas encore 5 cartes d’une même région (joker + frontières compris).');
+    return;
+  }
+  declareVictory(p, v);
+}
+
+function declareVictory(p, v) {
+  addLog('win', `🏆 ${p.name} remporte ${REGIONS[v.region].name} !`);
+  render();
+  const seconds = Math.round((Date.now() - gameStartTime) / 1000);
+  postProgress({ kind: 'iwdi-victory', region: v.region, player: p.name, seconds, isHuman: !p.isBot });
+  postProgress({ kind: 'iwdi-fini', seconds });
+  showModal({
+    title: `🏆 ${p.name} gagne !`,
+    body: `<div class="victory"><p>Collection <b>${REGIONS[v.region].name}</b> complétée en ${seconds}s</p>` +
+          `<div class="victory-cards">${v.cards.map(c =>
+            `<div class="card med" data-name="${c.name}" style="background-image:url('${img(c.slug)}')"></div>`
+          ).join('')}</div></div>`,
+    choices: [
+      { label: 'Rejouer', accent: true, onClick: () => { hideModal(); initGame(); render(); scheduleBotTurn(); } },
+      { label: 'Menu principal', onClick: quitGame }
+    ]
+  });
+}
+
+/* ============================================================
+   IA DU BOT
+   ============================================================ */
+
+function scheduleBotTurn() {
+  const p = currentPlayer();
+  if (!p.isBot) return;
+  setTimeout(botPlay, 900);
+}
+
+function botTargetRegion(bot) {
+  const c = countPossibilities(bot);
+  let best = 'BG', max = -1;
+  Object.keys(c).forEach(r => { if (c[r] > max) { max = c[r]; best = r; }});
+  return { region: best, count: max };
+}
+
+function botCardScore(card, targetRegion) {
+  if (card.type === 'strategy') {
+    const priorities = { sofa: 6, syli: 7, nimba: 9, loumo: 4, kpawo: 3 };
+    return priorities[card.effect] || 4;
+  }
+  if (card.type === 'joker') return 10;
+  if (card.type === 'pref' && card.region === targetRegion) return 8;
+  if (card.type === 'frontier' && card.regions.includes(targetRegion)) return 7;
+  return 1;
+}
+
+function botPlay() {
+  const p = currentPlayer();
+  if (!p.isBot) return;
+  // 1. Pioche
+  const drawn = drawCards(p, 1);
+  if (drawn.length > 0) {
+    addLog('event', `${p.name} pioche`);
+    state.phase = 'action';
+    render();
+  }
+  setTimeout(() => {
+    // Victoire ?
+    const v = checkVictory(p);
+    if (v) { declareVictory(p, v); return; }
+    // Décide action
+    botDecideAction(p);
+  }, 700);
+}
+
+function botDecideAction(bot) {
+  const target = botTargetRegion(bot);
+  const strats = bot.hand.filter(c => c.type === 'strategy');
+  const useless = bot.hand.filter(c =>
+    (c.type === 'pref' && c.region !== target.region) ||
+    (c.type === 'frontier' && !c.regions.includes(target.region))
+  );
+
+  // LOUMO si beaucoup de non-cibles
+  const loumo = strats.find(c => c.effect === 'loumo');
+  if (loumo && useless.length >= 2 && target.count < 5) {
+    const toExchange = useless.slice(0, Math.min(2, useless.length));
+    const removed = removeFromHand(bot, [loumo.id, ...toExchange.map(c => c.id)]);
+    discard([removed.find(c => c.effect === 'loumo')]);
+    discard(removed.filter(c => c.effect !== 'loumo'), true);
+    drawCards(bot, toExchange.length);
+    addLog('event', `${bot.name} joue LOUMO — échange ${toExchange.length}`);
+    state.hasPlayedAction = true;
+    render();
+    setTimeout(() => botFinish(bot), 800);
+    return;
+  }
+
+  // SYLI si proche de la victoire (3+ dans la cible)
+  const syli = strats.find(c => c.effect === 'syli');
+  if (syli && target.count >= 3 && target.count < 5) {
+    const opps = state.players.filter(p => p.id !== bot.id && !hasSofa(p) && p.hand.length > 0);
+    for (const op of opps) {
+      const valid = op.hand.filter(c =>
+        (c.type === 'pref' && c.region === target.region) ||
+        (c.type === 'frontier' && c.regions.includes(target.region))
+      );
+      if (valid.length > 0) {
+        const stolen = valid[0];
+        removeFromHand(op, [stolen.id]);
+        op.lastCardsDiff = -1;
+        bot.hand.push(stolen);
+        removeFromHand(bot, [syli.id]);
+        discard([syli]);
+        addLog('attack', `${bot.name} SYLI ${op.name} et prend ${stolen.name}`);
+        state.hasPlayedAction = true;
+        render();
+        setTimeout(() => botFinish(bot), 800);
+        return;
+      }
+    }
+  }
+
+  // KPAWO si main mauvaise
+  const kpawo = strats.find(c => c.effect === 'kpawo');
+  if (kpawo && target.count < 2 && Math.random() < 0.6) {
+    doKpawo(bot, kpawo);
+    setTimeout(() => botFinish(bot), 800);
+    return;
+  }
+
+  botFinish(bot);
+}
+
+function botFinish(bot) {
+  const v = checkVictory(bot);
+  if (v) { declareVictory(bot, v); return; }
+  if (bot.hand.length > 5) {
+    const target = botTargetRegion(bot).region;
+    const scored = bot.hand.map(c => ({ c, s: botCardScore(c, target) }))
+      .sort((a, b) => a.s - b.s);
+    const excess = bot.hand.length - 5;
+    const toDrop = scored.slice(0, excess).map(x => x.c);
+    const removed = removeFromHand(bot, toDrop.map(c => c.id));
+    discard(removed, true);
+    addLog('event', `${bot.name} défausse ${excess} carte(s)`);
+  }
+  setTimeout(() => {
+    nextPlayer();
+  }, 700);
+}
+
+/* ============================================================
+   RENDU
+   ============================================================ */
+
+function renderCard(c, opts = {}) {
+  const size = opts.size || '';
+  const cls = 'card ' + size;
+  const src = img(c.slug);
+  const sel = opts.selected ? ' selected' : '';
+  const play = opts.playable ? ' playable' : '';
+  return `<div class="${cls}${sel}${play}" data-name="${c.name}" style="background-image:url('${src}')" ${opts.onClick ? `onclick="${opts.onClick}"` : ''}></div>`;
+}
+
+function renderHand() {
+  const p = currentPlayer();
+  if (p.isBot) return `<div style="color:var(--ink-mute);padding:20px;text-align:center"><em>${p.name} joue…</em></div>`;
+  return p.hand.map(c => {
+    const selected = state.selectedId === c.id || (loumoSelActive && loumoSel.includes(c.id));
+    const playable = state.phase === 'action' && !state.hasPlayedAction && c.type === 'strategy' && c.effect !== 'sofa';
+    return `<div class="card${selected ? ' selected' : ''}${playable ? ' playable' : ''}" data-name="${c.name}" style="background-image:url('${img(c.slug)}')" onclick="selectCard(${c.id})"></div>`;
+  }).join('');
+}
+
+function renderOpponents() {
+  const p = currentPlayer();
+  return state.players.map(op => {
+    if (op.id === p.id && !p.isBot) return '';    // en solo/hotseat le tour actif est en bas
+    const active = op.id === state.currentIdx ? 'active-turn' : '';
+    const sofa = hasSofa(op) ? '<div class="opp-sofa">🛡 SOFA</div>' : '';
+    const count = op.hand.length;
+    const countCls = op.lastCardsDiff < 0 ? 'stolen' : '';
+    return `
+      <div class="opp ${active}">
+        ${sofa}
+        <div class="opp-name">${op.name}</div>
+        <div class="opp-hand">
+          ${op.hand.map(() => '<div class="mini-back"></div>').join('')}
+        </div>
+        <div class="opp-count ${countCls}">${count} carte${count > 1 ? 's' : ''}${op.lastCardsDiff < 0 ? ' (–1 volée)' : ''}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderTracker() {
+  const p = currentPlayer();
+  if (p.isBot) return '';
+  const counts = countPossibilities(p);
+  return Object.keys(counts).map(r => {
+    const close = counts[r] >= 5 ? 'close' : '';
+    return `<div class="track ${REGIONS[r].color} ${close}">${r} : <strong>${counts[r]}</strong>/5</div>`;
+  }).join('');
+}
+
+function render() {
+  if (!state) return;
+  const p = currentPlayer();
+  document.getElementById('pioche-count').textContent = state.deck.length;
+  document.getElementById('pioche').classList.toggle('actionable', !p.isBot && state.phase === 'draw');
+
+  const def = document.getElementById('defausse');
+  if (state.discard.length > 0) {
+    const top = state.discard[0];
+    def.classList.add('has-cards');
+    def.style.backgroundImage = `url('${img(top.slug)}')`;
+    def.innerHTML = '';
+  } else {
+    def.classList.remove('has-cards');
+    def.style.backgroundImage = '';
+    def.innerHTML = '—';
+  }
+
+  document.getElementById('opponents').innerHTML = renderOpponents();
+  document.getElementById('hand').innerHTML = renderHand();
+  document.getElementById('hand-label').textContent = p.isBot ? `Tour de ${p.name}` : `${p.name} — ${p.hand.length} carte${p.hand.length > 1 ? 's' : ''}`;
+  document.getElementById('tracker').innerHTML = renderTracker();
+
+  const btnEnd = document.getElementById('btn-end');
+  const btnWin = document.getElementById('btn-win');
+  if (p.isBot) {
+    btnEnd.style.display = 'none';
+    btnWin.style.display = 'none';
+  } else {
+    btnEnd.style.display = state.phase === 'action' ? 'inline-block' : 'none';
+    btnEnd.classList.toggle('can-end', p.hand.length <= 5);
+    btnWin.style.display = state.phase === 'action' ? 'inline-block' : 'none';
+  }
+
+  // Log
+  const logEl = document.getElementById('log');
+  logEl.innerHTML = state.log.slice(-8).map(l => `<div class="log-line ${l.type}">${l.text}</div>`).join('');
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+
+function showModal({ title, body, body2, choices, hideBaseBody }) {
+  const bd = document.getElementById('backdrop');
+  const mo = document.getElementById('modal');
+  mo.innerHTML = `
+    <h3>${title}</h3>
+    ${body && !hideBaseBody ? body : ''}
+    ${body2 || ''}
+    ${choices ? `<div class="modal-choices">${choices.map((c, i) =>
+      `<button class="modal-choice${c.accent ? ' modal-confirm' : ''}" data-idx="${i}">${c.label}</button>`
+    ).join('')}</div>` : ''}
+  `;
+  if (choices) {
+    mo.querySelectorAll('.modal-choice, .modal-confirm').forEach(btn => {
+      const idx = parseInt(btn.dataset.idx);
+      if (!isNaN(idx)) btn.onclick = choices[idx].onClick;
+    });
+  }
+  bd.classList.add('active');
+}
+
+function hideModal() { document.getElementById('backdrop').classList.remove('active'); }
+
+function toast(msg) {
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2400);
+}
+
+function renderChoiceGrid(cards, opts = {}) {
+  const { onSelect, onConfirm, multi = false, min = 1, max = 5 } = opts;
+  let selectedIds = [];
+  const gridId = 'grid-' + Date.now();
+  setTimeout(() => {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.querySelectorAll('.card').forEach(el => {
+      el.onclick = () => {
+        const id = parseInt(el.dataset.cardId);
+        const card = cards.find(c => c.id === id);
+        if (!multi) { if (onSelect) onSelect(card); return; }
+        if (selectedIds.includes(id)) {
+          selectedIds = selectedIds.filter(x => x !== id);
+          el.classList.remove('selected');
+        } else if (selectedIds.length < max) {
+          selectedIds.push(id);
+          el.classList.add('selected');
+        }
+        const cnt = document.getElementById(gridId + '-cnt');
+        if (cnt) cnt.textContent = `${selectedIds.length}/${max === min ? max : `${min}-${max}`}`;
+        const btn = document.getElementById(gridId + '-conf');
+        if (btn) btn.disabled = selectedIds.length < min || selectedIds.length > max;
+      };
+    });
+    const btn = document.getElementById(gridId + '-conf');
+    if (btn && onConfirm) {
+      btn.onclick = () => onConfirm(cards.filter(c => selectedIds.includes(c.id)));
+    }
+  }, 40);
+  return `
+    <div id="${gridId}" class="card-grid">
+      ${cards.map(c => `<div class="card" data-card-id="${c.id}" data-name="${c.name}" style="background-image:url('${img(c.slug)}')"></div>`).join('')}
+    </div>
+    ${multi ? `<div style="text-align:center;margin:8px 0;font-size:12px;color:var(--ink-mute)">Sélection : <span id="${gridId}-cnt">0/${max === min ? max : `${min}-${max}`}</span></div>
+    <button class="modal-confirm" id="${gridId}-conf" disabled>CONFIRMER</button>` : ''}
+  `;
+}
+
+function renderPeekBlock(opps) {
+  return opps.map(op => `
+    <div class="peek-block">
+      <div class="peek-title">
+        <span>${op.name}</span>
+        <span>${op.hand.length} cartes${hasSofa(op) ? ' 🛡' : ''}</span>
+      </div>
+      <div class="peek-cards">
+        ${op.hand.map(c => `<div class="card mini" data-name="${c.name}" style="background-image:url('${img(c.slug)}')"></div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function showRules() {
+  showModal({
+    title: 'IWDI LAGUINÈ — Règles',
+    body: `<div class="rules">
+      <p><em>« La Guinée, mon origine » — jeu de collection rapide.</em></p>
+      <h4>🎯 Objectif</h4>
+      <p>Être le premier à révéler 5 cartes Préfecture d'une même Région administrative.</p>
+      <h4>🗺 4 régions</h4>
+      <ul>
+        <li>🟦 Basse Guinée (7 pures + Télimélé)</li>
+        <li>🟪 Moyenne Guinée (10 pures + Télimélé + Dinguiraye)</li>
+        <li>🟫 Haute Guinée (7 pures + Dinguiraye + Kissidougou)</li>
+        <li>🟩 Guinée Forestière (6 pures + Kissidougou)</li>
+      </ul>
+      <h4>🃏 Cartes spéciales</h4>
+      <ul>
+        <li><b>Conakry (joker)</b> — remplace n'importe quelle préfecture</li>
+        <li><b>Frontières</b> — comptent pour l'une OU l'autre de leurs 2 régions</li>
+      </ul>
+      <h4>⚔️ Stratégies</h4>
+      <ul>
+        <li><b>NIMBA</b> — voir toutes les mains, échanger ≤3 cartes, piocher 1</li>
+        <li><b>KPAWO</b> — tout le monde passe sa main à droite</li>
+        <li><b>SYLI</b> — force à te donner une carte (bloqué par SOFA)</li>
+        <li><b>SOFA</b> — protection anti-vol (révélée)</li>
+        <li><b>LOUMO</b> — échange 1-2 cartes contre la pioche</li>
+      </ul>
+      <h4>▶ Un tour</h4>
+      <ol>
+        <li>Pioche 1 carte</li>
+        <li>Joue 1 stratégie (optionnel)</li>
+        <li>Clame victoire si tu as 5 même région</li>
+        <li>Défausse l'excédent (≤ 5 en fin de tour)</li>
+      </ol>
+    </div>`,
+    choices: [{ label: 'Fermer', onClick: hideModal }]
+  });
+}
+
+/* ============================================================
+   COMMUNICATION IFRAME <-> PARENT REACT
+   ============================================================ */
+
+let supabaseCfg = null;
+let inFrame = false;
+
+window.addEventListener('message', (e) => {
+  const d = e.data;
+  if (!d || !d.type) return;
+  if (d.type === 'pati-config') {
+    supabaseCfg = { url: d.url, key: d.key };
+    inFrame = true;
+  } else if (d.type === 'pati-fs') {
+    document.body.classList.toggle('iframe-mode', d.on);
+  }
+});
+
+// Émet à chaque événement digne d'être tracké côté parent (progression, victoire, partie finie)
+function postProgress(payload) {
+  const msg = { type: 'pati-progress', jeu: 'iwdi-laguine', ...payload };
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage(msg, '*');
+    }
+  } catch (err) {}
+}
+
+/* ============================================================
+   HOME — SETUP
+   ============================================================ */
+
+function startGame() {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('game').classList.add('active');
+  initGame();
+  render();
+  scheduleBotTurn();
+}
+
+function quitGame() {
+  hideModal();
+  document.getElementById('game').classList.remove('active');
+  document.getElementById('home').style.display = 'flex';
+  state = null;
+}
+
+function addLog(type, text) {
+  if (!state) return;
+  state.log.push({ type, text });
+  if (state.log.length > 50) state.log.shift();
+}
+
+document.querySelectorAll('.btn-mode').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.btn-mode').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    setupMode = btn.dataset.mode;
+    const row = document.getElementById('players-row');
+    if (setupMode === 'hotseat') {
+      document.getElementById('players-label').textContent = 'NOMBRE DE JOUEURS';
+      row.innerHTML = [2,3,4,5].map(n => `<button class="btn-count${n===2?' active':''}" data-count="${n}">${n}</button>`).join('');
+      setupCount = 2;
+    } else {
+      document.getElementById('players-label').textContent = 'NOMBRE DE BOTS';
+      row.innerHTML = [1,2,3,4].map(n => `<button class="btn-count${n===1?' active':''}" data-count="${n}">${n}</button>`).join('');
+      setupCount = 1;
+    }
+    attachCountHandlers();
+  };
+});
+
+function attachCountHandlers() {
+  document.querySelectorAll('.btn-count').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.btn-count').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      setupCount = parseInt(btn.dataset.count);
+    };
+  });
+}
+attachCountHandlers();
+
+</script>
+</body>
+</html>

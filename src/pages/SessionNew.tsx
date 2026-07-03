@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -62,6 +62,18 @@ const JEUX: Jeu[] = [
     label: "Konakri — Les quartiers",
     section: "pati", icon: Building2, accent: "#7B3FBF",
     playPrefix: "/konakri", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "belle-guinee", slug: "belle-guinee", jeu: "carte-tresors",
+    label: "Belle Guinée — La carte aux trésors",
+    section: "pati", icon: Gem, accent: "#C8841E",
+    playPrefix: "/belle-guinee", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "iwdi", slug: "iwdi", jeu: "cartes-strategie",
+    label: "IWDI LAGUINÈ — Conquête des Régions",
+    section: "pati", icon: Layers, accent: "#C8841E",
+    playPrefix: "/iwdi", withCodeInPath: false, hasLiveScores: false,
   },
   {
     id: "corridor", slug: "corridor", jeu: "defi",

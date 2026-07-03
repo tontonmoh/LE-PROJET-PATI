@@ -9,6 +9,7 @@ import { AuthProvider } from "./auth/AuthContext";
 import WhoIsReading from "./components/WhoIsReading";
 import AccountTypeGate from "./components/AccountTypeGate";
 import EpisodeGabarit from "./components/EpisodeGabarit";
+import CharteViewer from "./components/CharteViewer";
 // Pages chargées à la demande (code-splitting par route)
 const BintaDiallo = lazy(() => import("./pages/BintaDiallo"));
 const LivreDetail = lazy(() => import("./pages/LivreDetail"));
@@ -19,6 +20,12 @@ const UniversTaadidi = lazy(() => import("./pages/UniversTaadidi"));
 const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
 const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const SerieResistance = lazy(() => import("./pages/SerieResistance"));
+const SerieKurukan = lazy(() => import("./pages/SerieKurukan"));
+const FoutaPage = lazy(() => import("./pages/FoutaPage"));
+const MansayaPage = lazy(() => import("./pages/MansayaPage"));
+const HoroyaPage = lazy(() => import("./pages/HoroyaPage"));
+const GuinePage = lazy(() => import("./pages/GuinePage"));
+const TerritoireFiche = lazy(() => import("./pages/TerritoireFiche"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
 const DecouvrirTonGenie = lazy(() => import("./pages/DecouvrirTonGenie"));
@@ -36,15 +43,29 @@ const ProposerActivite = lazy(() => import("./pages/ProposerActivite"));
 const AtelierSolidaire = lazy(() => import("./pages/AtelierSolidaire"));
 const Sobela = lazy(() => import("./pages/Sobela"));
 const ImpactReport = lazy(() => import("./pages/ImpactReport"));
+const TopTen = lazy(() => import("./pages/TopTen"));
+const Stats = lazy(() => import("./pages/Stats"));
 const Presse = lazy(() => import("./pages/Presse"));
+const Senag = lazy(() => import("./pages/Senag"));
 const Contribuer = lazy(() => import("./pages/Contribuer"));
 const Collaboration = lazy(() => import("./pages/Collaboration"));
 const AppliMobile = lazy(() => import("./pages/AppliMobile"));
 const Personnalisation = lazy(() => import("./pages/Personnalisation"));
 const LeDefi = lazy(() => import("./pages/LeDefi"));
+const IwdiLaguine = lazy(() => import("./pages/IwdiLaguine"));
+const LaGuine378 = lazy(() => import("./pages/LaGuine378"));
+const Konakri = lazy(() => import("./pages/Konakri"));
+const BelleGuinee = lazy(() => import("./pages/BelleGuinee"));
+const DefiClassement = lazy(() => import("./pages/DefiClassement"));
 const SessionNew = lazy(() => import("./pages/SessionNew"));
 const SessionPlay = lazy(() => import("./pages/SessionPlay"));
 const SessionScores = lazy(() => import("./pages/SessionScores"));
+const SessionCompagnonsNew = lazy(() => import("./pages/SessionCompagnonsNew"));
+const SessionCompagnonsPlay = lazy(() => import("./pages/SessionCompagnonsPlay"));
+const SessionCompagnonsScores = lazy(() => import("./pages/SessionCompagnonsScores"));
+const SenagJeu = lazy(() => import("./pages/SenagJeu"));
+const SenagPrimo = lazy(() => import("./pages/SenagPrimo"));
+const SenagQuiz = lazy(() => import("./pages/SenagQuiz"));
 const AccesPati = lazy(() => import("./pages/AccesPati"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Langue = lazy(() => import("./pages/Langue"));
@@ -97,6 +118,13 @@ export default function App() {
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />
             <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/serie/resistance" element={<SerieResistance />} />
+            <Route path="/serie/kurukan-fuga" element={<SerieKurukan />} />
+            <Route path="/mansaya" element={<MansayaPage />} />
+            <Route path="/fouta" element={<FoutaPage />} />
+            <Route path="/horoya" element={<HoroyaPage />} />
+            <Route path="/guine" element={<GuinePage />} />
+            <Route path="/guine/:slug" element={<TerritoireFiche />} />
+            <Route path="/charte" element={<CharteViewer />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
             <Route path="/audio/:id" element={<AudioBibliotheque />} />
@@ -116,18 +144,32 @@ export default function App() {
             <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />
+            <Route path="/top-10" element={<TopTen />} />
+            <Route path="/stats" element={<Stats />} />
             <Route path="/presse" element={<Presse />} />
+            <Route path="/senag" element={<Senag />} />
 
             {/* ── Mode Session (classement contextuel) ── */}
             <Route path="/session/new"          element={<SessionNew />} />
             <Route path="/session/:code/scores" element={<SessionScores />} />
             <Route path="/session/:code"        element={<SessionPlay />} />
+            <Route path="/session-compagnons/new"          element={<Navigate to="/session/new?game=compagnons" replace />} />
+            <Route path="/session-compagnons/:code/scores" element={<SessionCompagnonsScores />} />
+            <Route path="/session-compagnons/:code"        element={<SessionCompagnonsPlay />} />
+            <Route path="/senag/jeu"   element={<SenagJeu />} />
+            <Route path="/senag/primo" element={<SenagPrimo />} />
+            <Route path="/senag/quiz"  element={<SenagQuiz />} />
 
             <Route path="/contribuer" element={<Contribuer />} />
             <Route path="/collaboration" element={<Collaboration />} />
             <Route path="/appli-mobile" element={<AppliMobile />} />
             <Route path="/personnalisation" element={<Personnalisation />} />
+            <Route path="/defi/classement" element={<DefiClassement />} />
             <Route path="/defi" element={<LeDefi />} />
+            <Route path="/iwdi" element={<IwdiLaguine />} />
+            <Route path="/laguine378" element={<LaGuine378 />} />
+            <Route path="/konakri" element={<Konakri />} />
+            <Route path="/belle-guinee" element={<BelleGuinee />} />
             <Route path="/assistance" element={<FAQ />} />
 
             <Route path="/abonnement" element={<AccesPati />} />
