@@ -839,14 +839,14 @@
 
   <div class="win-stats">
     <div class="win-stat">
+      <div class="label">Score</div>
+      <div class="value" id="winScore">—</div>
+      <div class="sub" id="winAccuracy">—</div>
+    </div>
+    <div class="win-stat">
       <div class="label">Temps</div>
       <div class="value" id="winTime">—</div>
       <div class="sub" id="winPace">—</div>
-    </div>
-    <div class="win-stat">
-      <div class="label">Erreurs</div>
-      <div class="value" id="winErrors">—</div>
-      <div class="sub" id="winAccuracy">—</div>
     </div>
   </div>
 
@@ -1534,8 +1534,8 @@ function handlePrefTap(btn, pref) {
     setTimeout(() => {
       btn.classList.remove("flash-right");
       state.index++;
-      document.getElementById("progNow").textContent = state.correct;
-      if (state.correct >= state.deck.length || state.index >= state.deck.length) {
+      document.getElementById("progNow").textContent = state.index;
+      if (state.index >= state.deck.length) {
         finishGame();
       } else {
         showCard();
@@ -1543,13 +1543,20 @@ function handlePrefTap(btn, pref) {
     }, 420);
   } else {
     state.errors++;
-    state.penalty += 2000;
     btn.classList.add("flash-wrong");
     document.getElementById("card").classList.add("wrong");
-    flashPenalty("+2s");
+    acceptingInput = false;
     setTimeout(() => {
       btn.classList.remove("flash-wrong");
-      document.getElementById("card").classList.remove("wrong");
+      state.index++;
+      document.getElementById("progNow").textContent = state.index;
+      // La sous-préf ratée n'est PAS ajoutée à encountered — elle pourra revenir dans un prochain sprint.
+      // On avance sur la carte suivante ou on termine si on a épuisé le deck.
+      if (state.index >= state.deck.length) {
+        finishGame();
+      } else {
+        showCard();
+      }
     }, 420);
   }
 }
@@ -1583,15 +1590,16 @@ function finishGame() {
   stopChrono();
   const totalMs = (performance.now() - state.startedAt) + state.penalty;
   const totalSec = totalMs / 1000;
-  const pacePerCard = totalSec / Math.max(state.correct, 1);
+  const cardsSeen = state.deck.length;
+  const pacePerCard = totalSec / Math.max(cardsSeen, 1);
 
   document.getElementById("winTime").textContent = totalSec.toFixed(1) + "s";
   document.getElementById("winPace").textContent = pacePerCard.toFixed(1) + "s / sous-préf.";
-  document.getElementById("winErrors").textContent = state.errors;
-  const accuracy = state.correct > 0
-    ? Math.round((state.correct / (state.correct + state.errors)) * 100)
+  document.getElementById("winScore").textContent = state.correct + " / " + cardsSeen;
+  const accuracy = cardsSeen > 0
+    ? Math.round((state.correct / cardsSeen) * 100)
     : 0;
-  document.getElementById("winAccuracy").textContent = accuracy + "% de précision";
+  document.getElementById("winAccuracy").textContent = accuracy + "% de bonnes réponses";
   document.getElementById("winMetaCount").textContent = metaCount();
   const newly = state.newlyDiscovered.length;
   const newlyEl = document.getElementById("winNewly");
@@ -1602,7 +1610,7 @@ function finishGame() {
   }
 
   const title = document.getElementById("winTitle");
-  if (state.errors === 0) title.textContent = "Sans faute !";
+  if (state.errors === 0 && state.correct === cardsSeen) title.textContent = "Sans faute !";
   else if (accuracy >= 80) title.textContent = "Bien joué !";
   else if (accuracy >= 50) title.textContent = "Pas mal.";
   else title.textContent = "À réessayer.";
