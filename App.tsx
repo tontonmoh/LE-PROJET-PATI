@@ -53,7 +53,6 @@ const AppliMobile = lazy(() => import("./pages/AppliMobile"));
 const Personnalisation = lazy(() => import("./pages/Personnalisation"));
 const LeDefi = lazy(() => import("./pages/LeDefi"));
 const IwdiLaguine = lazy(() => import("./pages/IwdiLaguine"));
-const IwdiSessionPlay = lazy(() => import("./pages/IwdiSessionPlay"));
 const LaGuine378 = lazy(() => import("./pages/LaGuine378"));
 const Konakri = lazy(() => import("./pages/Konakri"));
 const BelleGuinee = lazy(() => import("./pages/BelleGuinee"));
@@ -168,7 +167,6 @@ export default function App() {
             <Route path="/defi/classement" element={<DefiClassement />} />
             <Route path="/defi" element={<LeDefi />} />
             <Route path="/iwdi" element={<IwdiLaguine />} />
-            <Route path="/iwdi/:code" element={<IwdiSessionPlay />} />
             <Route path="/laguine378" element={<LaGuine378 />} />
             <Route path="/konakri" element={<Konakri />} />
             <Route path="/belle-guinee" element={<BelleGuinee />} />

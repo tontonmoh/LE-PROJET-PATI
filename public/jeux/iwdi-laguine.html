@@ -39,7 +39,7 @@
     user-select: none;
   }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; font-size: inherit; }
-  #app { display: flex; flex-direction: column; height: 100vh; max-width: 600px; margin: 0 auto; position: relative; }
+  #app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; max-width: 600px; margin: 0 auto; position: relative; }
   .hidden { display: none !important; }
 
   /* ============ HOME ============ */
@@ -364,8 +364,10 @@
   /* ============ HAND ============ */
   .hand-area {
     flex-shrink: 0;
-    padding: 6px 8px 10px;
+    padding: 6px 8px 0;
     background: linear-gradient(0deg, rgba(0,0,0,.08), transparent);
+    position: relative;
+    z-index: 10;
   }
   .hand-header {
     display: flex;
@@ -383,6 +385,52 @@
     color: var(--ink-soft);
   }
   .hand-btns { display: flex; gap: 6px; }
+
+  .actions-bar {
+    display: flex !important;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 12px 4px calc(10px + env(safe-area-inset-bottom, 0px));
+    min-height: 62px;
+    background: #fff;
+    border-top: 2px solid var(--accent);
+    box-shadow: 0 -4px 12px rgba(0,0,0,.08);
+    margin: 8px -8px 0;
+    flex-shrink: 0;
+  }
+  .act-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: .5px;
+    box-shadow: var(--shadow-sm);
+    text-transform: uppercase;
+    background: var(--green-mid);
+    color: #fff;
+    transition: transform .12s;
+    min-width: 110px;
+    text-align: center;
+  }
+  .act-btn:active { transform: scale(.96); }
+  .act-btn.primary { background: var(--accent); }
+  .act-btn.secondary { background: #f5f5f5; color: var(--ink); border: 2px solid rgba(0,0,0,.15); }
+  .act-btn.win { background: var(--gold); color: var(--ink); animation: pulse-win 1.2s infinite; font-size: 15px; }
+  .act-btn.danger { background: var(--red); }
+  .act-btn:disabled { background: #ddd; color: #999; box-shadow: none; }
+  @keyframes pulse-win {
+    0%, 100% { box-shadow: 0 0 0 rgba(255,201,60,0); }
+    50% { box-shadow: 0 0 0 8px rgba(255,201,60,.4); }
+  }
+  .act-hint {
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-style: italic;
+    padding: 8px 12px;
+    font-weight: 600;
+  }
   .btn-action {
     padding: 6px 12px;
     border-radius: 6px;
@@ -402,7 +450,7 @@
     gap: 4px;
     justify-content: center;
     align-items: flex-end;
-    min-height: 130px;
+    min-height: 100px;
     overflow-x: auto;
     padding: 0 4px;
     scrollbar-width: none;
@@ -660,12 +708,9 @@
     <div class="hand-area">
       <div class="hand-header">
         <div class="hand-label" id="hand-label">Ta main</div>
-        <div class="hand-btns">
-          <button class="btn-action end" id="btn-end" onclick="endTurn()">Fin de tour</button>
-          <button class="btn-action victory" id="btn-win" onclick="tryVictory()">Clamer victoire</button>
-        </div>
       </div>
       <div class="hand" id="hand"></div>
+      <div class="actions-bar" id="actions-bar"></div>
     </div>
   </div>
 
@@ -895,6 +940,7 @@ function checkVictory(p) {
    ============================================================ */
 
 function playerDraw() {
+  if (!canAct()) return;
   const p = currentPlayer();
   if (p.isBot || state.phase !== 'draw') return;
   const drawn = drawCards(p, 1);
@@ -902,12 +948,13 @@ function playerDraw() {
     addLog('event', 'Pioche épuisée !');
     return;
   }
-  addLog('own', `Tu pioches : ${drawn[0].name}`);
+  addLog('own', `${p.name} pioche : ${drawn[0].name}`);
   state.phase = 'action';
   render();
 }
 
 function selectCard(id) {
+  if (!canAct()) return;
   const p = currentPlayer();
   if (p.isBot) return;
   const card = p.hand.find(c => c.id === id);
@@ -921,15 +968,25 @@ function selectCard(id) {
     return;
   }
 
+  // Toggle sélection : la barre d'actions s'adapte
   state.selectedId = state.selectedId === id ? null : id;
-  if (card.type === 'strategy' && state.phase === 'action' && !state.hasPlayedAction && card.effect !== 'sofa') {
-    showCardAction(p, card);
-  } else if (card.type === 'strategy' && card.effect === 'sofa') {
-    // SOFA : ne se joue pas. Info uniquement
-    toast('SOFA se garde en main pour te protéger (révélée aux adversaires).');
-    state.selectedId = null;
-  } else {
-    render();
+  render();
+}
+
+// Déclencheur direct depuis la barre d'actions
+function playSelectedStrategy() {
+  if (!canAct()) return;
+  const p = currentPlayer();
+  if (p.isBot || state.selectedId === null) return;
+  const card = p.hand.find(c => c.id === state.selectedId);
+  if (!card || card.type !== 'strategy' || card.effect === 'sofa') return;
+  if (state.phase !== 'action' || state.hasPlayedAction) return;
+  state.selectedId = null;
+  switch (card.effect) {
+    case 'loumo': startLoumo(p, card); break;
+    case 'syli':  startSyli(p, card);  break;
+    case 'kpawo': doKpawo(p, card);    break;
+    case 'nimba': startNimba(p, card); break;
   }
 }
 
@@ -1159,6 +1216,7 @@ function finalizeNimba(player, card, nbSwaps) {
    ============================================================ */
 
 function endTurn() {
+  if (!canAct()) return;
   const p = currentPlayer();
   if (p.isBot) return;
   if (state.phase === 'draw') return;
@@ -1197,6 +1255,7 @@ function nextPlayer() {
 }
 
 function tryVictory() {
+  if (!canAct()) return;
   const p = currentPlayer();
   if (p.isBot) return;
   const v = checkVictory(p);
@@ -1213,6 +1272,10 @@ function declareVictory(p, v) {
   const seconds = Math.round((Date.now() - gameStartTime) / 1000);
   postProgress({ kind: 'iwdi-victory', region: v.region, player: p.name, seconds, isHuman: !p.isBot });
   postProgress({ kind: 'iwdi-fini', seconds });
+  // Mode réseau : signal explicite de victoire (winnerPosition)
+  if (networkMode) {
+    syncStateToParent({ winnerPosition: p.id });
+  }
   showModal({
     title: `🏆 ${p.name} gagne !`,
     body: `<div class="victory"><p>Collection <b>${REGIONS[v.region].name}</b> complétée en ${seconds}s</p>` +
@@ -1231,6 +1294,7 @@ function declareVictory(p, v) {
    ============================================================ */
 
 function scheduleBotTurn() {
+  if (networkMode) return;   // pas de bots en mode réseau
   const p = currentPlayer();
   if (!p.isBot) return;
   setTimeout(botPlay, 900);
@@ -1364,19 +1428,23 @@ function renderCard(c, opts = {}) {
 }
 
 function renderHand() {
-  const p = currentPlayer();
+  // En mode réseau : on affiche TOUJOURS ma main (myPosition), pas celle du currentIdx
+  const p = networkMode && myPosition >= 0 ? state.players[myPosition] : currentPlayer();
+  if (!p) return '';
   if (p.isBot) return `<div style="color:var(--ink-mute);padding:20px;text-align:center"><em>${p.name} joue…</em></div>`;
+  const playablePhase = state.phase === 'action' && !state.hasPlayedAction && (!networkMode || isMyTurn());
   return p.hand.map(c => {
     const selected = state.selectedId === c.id || (loumoSelActive && loumoSel.includes(c.id));
-    const playable = state.phase === 'action' && !state.hasPlayedAction && c.type === 'strategy' && c.effect !== 'sofa';
+    const playable = playablePhase && c.type === 'strategy' && c.effect !== 'sofa';
     return `<div class="card${selected ? ' selected' : ''}${playable ? ' playable' : ''}" data-name="${c.name}" style="background-image:url('${img(c.slug)}')" onclick="selectCard(${c.id})"></div>`;
   }).join('');
 }
 
 function renderOpponents() {
-  const p = currentPlayer();
+  // Le "moi" du point de vue de l'affichage
+  const meIdx = networkMode && myPosition >= 0 ? myPosition : state.currentIdx;
   return state.players.map(op => {
-    if (op.id === p.id && !p.isBot) return '';    // en solo/hotseat le tour actif est en bas
+    if (op.id === meIdx) return '';   // ne pas afficher soi-même dans les adversaires
     const active = op.id === state.currentIdx ? 'active-turn' : '';
     const sofa = hasSofa(op) ? '<div class="opp-sofa">🛡 SOFA</div>' : '';
     const count = op.hand.length;
@@ -1426,22 +1494,112 @@ function render() {
   document.getElementById('hand').innerHTML = renderHand();
   document.getElementById('hand-label').textContent = p.isBot ? `Tour de ${p.name}` : `${p.name} — ${p.hand.length} carte${p.hand.length > 1 ? 's' : ''}`;
   document.getElementById('tracker').innerHTML = renderTracker();
-
-  const btnEnd = document.getElementById('btn-end');
-  const btnWin = document.getElementById('btn-win');
-  if (p.isBot) {
-    btnEnd.style.display = 'none';
-    btnWin.style.display = 'none';
-  } else {
-    btnEnd.style.display = state.phase === 'action' ? 'inline-block' : 'none';
-    btnEnd.classList.toggle('can-end', p.hand.length <= 5);
-    btnWin.style.display = state.phase === 'action' ? 'inline-block' : 'none';
-  }
+  renderActions();
 
   // Log
   const logEl = document.getElementById('log');
   logEl.innerHTML = state.log.slice(-8).map(l => `<div class="log-line ${l.type}">${l.text}</div>`).join('');
   logEl.scrollTop = logEl.scrollHeight;
+
+  // Mode réseau : propager l'état à React (source de vérité)
+  syncStateToParent();
+}
+
+/* ============================================================
+   BARRE D'ACTIONS — toujours visible sous la main
+   ============================================================ */
+
+function renderActions() {
+  const bar = document.getElementById('actions-bar');
+  const p = currentPlayer();
+  bar.innerHTML = '';
+  if (!p) return;
+
+  // Mode réseau : si ce n'est pas mon tour, on affiche juste un hint
+  if (networkMode && !isMyTurn()) {
+    bar.innerHTML = `<div class="act-hint">⏳ Au tour de <strong>${p.name}</strong>…</div>`;
+    return;
+  }
+
+  if (p.isBot) {
+    bar.innerHTML = '<div class="act-hint">🤖 Le bot joue…</div>';
+    return;
+  }
+
+  // --- Phase PIOCHE ---
+  if (state.phase === 'draw') {
+    const btn = document.createElement('button');
+    btn.className = 'act-btn primary';
+    btn.textContent = '🃏 Piocher';
+    btn.onclick = playerDraw;
+    bar.appendChild(btn);
+    return;
+  }
+
+  // --- Phase ACTION ---
+  if (state.phase === 'action') {
+    // 1. Victoire possible ?
+    const v = checkVictory(p);
+    if (v) {
+      const winBtn = document.createElement('button');
+      winBtn.className = 'act-btn win';
+      winBtn.textContent = `🏆 JE GAGNE (${v.region})`;
+      winBtn.onclick = tryVictory;
+      bar.appendChild(winBtn);
+    }
+
+    // 2. Carte sélectionnée : jouer / défausser
+    if (state.selectedId !== null) {
+      const card = p.hand.find(c => c.id === state.selectedId);
+      if (card && card.type === 'strategy' && card.effect !== 'sofa' && !state.hasPlayedAction) {
+        const play = document.createElement('button');
+        play.className = 'act-btn';
+        play.textContent = `▶ Jouer ${card.name}`;
+        play.onclick = playSelectedStrategy;
+        bar.appendChild(play);
+      }
+      if (card && card.effect === 'sofa') {
+        const info = document.createElement('button');
+        info.className = 'act-btn secondary';
+        info.textContent = '🛡 SOFA reste en main';
+        info.disabled = true;
+        bar.appendChild(info);
+      }
+      // Défausse manuelle (utile si la main dépasse 5)
+      if (p.hand.length > 5) {
+        const drop = document.createElement('button');
+        drop.className = 'act-btn danger';
+        drop.textContent = '✂ Défausser cette carte';
+        drop.onclick = () => discardSelectedCard();
+        bar.appendChild(drop);
+      }
+    }
+
+    // 3. Passer / Terminer le tour
+    const passBtn = document.createElement('button');
+    passBtn.className = 'act-btn secondary';
+    if (p.hand.length > 5) {
+      passBtn.textContent = `⚠ Défausse ${p.hand.length - 5} carte(s) puis passe`;
+      passBtn.onclick = endTurn;   // ouvre la modale de défausse
+    } else {
+      passBtn.textContent = state.hasPlayedAction ? 'Terminer tour' : 'Passer (fin de tour)';
+      passBtn.onclick = endTurn;
+    }
+    bar.appendChild(passBtn);
+    return;
+  }
+}
+
+function discardSelectedCard() {
+  const p = currentPlayer();
+  if (state.selectedId === null) return;
+  const [card] = removeFromHand(p, [state.selectedId]);
+  if (card) {
+    discard([card], true);   // sous la pioche
+    addLog('event', `Tu défausses ${card.name}`);
+  }
+  state.selectedId = null;
+  render();
 }
 
 /* ============================================================
@@ -1577,6 +1735,109 @@ function showRules() {
 let supabaseCfg = null;
 let inFrame = false;
 
+// ═══════════════════════════════════════════════════════════════════
+// MODE RÉSEAU (multi en ligne piloté par React + Supabase Realtime)
+// ═══════════════════════════════════════════════════════════════════
+
+let networkMode = false;
+let myPosition = -1;
+let networkPlayers = [];
+let isApplyingNetworkState = false;   // évite la boucle in/out sync
+let lastSyncedStateStr = null;         // évite les syncs redondants
+
+function isMyTurn() {
+  return networkMode && state && state.currentIdx === myPosition;
+}
+
+function canAct() {
+  if (!networkMode) return true;
+  return isMyTurn();
+}
+
+/** Poste l'état actuel à React (source de vérité = Supabase). */
+function syncStateToParent(opts) {
+  if (!networkMode || isApplyingNetworkState || !state) return;
+  const winnerPos = opts && opts.winnerPosition !== undefined ? opts.winnerPosition : null;
+  const stateStr = JSON.stringify(state);
+  if (stateStr === lastSyncedStateStr && winnerPos === null) return;   // rien changé
+  lastSyncedStateStr = stateStr;
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'iwdi-network-action',
+        state: JSON.parse(stateStr),
+        winnerPosition: winnerPos,
+      }, '*');
+    }
+  } catch (e) {}
+}
+
+/** Applique un état reçu de React et re-render. */
+function applyNetworkState(newState, myPos, players) {
+  networkMode = true;
+  if (typeof myPos === 'number') myPosition = myPos;
+  if (Array.isArray(players)) networkPlayers = players;
+  if (!newState) return;
+  isApplyingNetworkState = true;
+  try {
+    state = newState;
+    // Réinjecte les noms des joueurs (peuvent avoir été changés côté React)
+    if (state.players && networkPlayers.length) {
+      state.players.forEach((p, i) => {
+        const np = networkPlayers.find(x => x.position === i);
+        if (np) { p.name = np.name; p.id = i; }
+      });
+    }
+    lastSyncedStateStr = JSON.stringify(state);
+    // Affiche le plateau
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('game').classList.add('active');
+    render();
+  } finally {
+    isApplyingNetworkState = false;
+  }
+}
+
+/** Construit l'état initial d'une partie réseau (appelé par l'hôte à start). */
+function buildInitialNetworkState(players, myPos) {
+  networkMode = true;
+  myPosition = myPos;
+  networkPlayers = players;
+  const gamePlayers = players.map((p) => ({
+    id: p.position,
+    name: p.name,
+    isBot: false,
+    hand: [],
+    lastCardsDiff: 0,
+  }));
+  const deck = shuffle(buildDeck());
+  gamePlayers.forEach((p) => {
+    for (let i = 0; i < 5; i++) p.hand.push(deck.shift());
+  });
+  const initialState = {
+    players: gamePlayers,
+    deck,
+    discard: [],
+    currentIdx: 0,
+    phase: 'draw',
+    hasPlayedAction: false,
+    log: [
+      { type: 'event', text: `— Partie en ligne : ${players.length} joueurs —` },
+      { type: 'event', text: `Au tour de ${gamePlayers[0].name}` },
+    ],
+    selectedId: null,
+    turn: 1,
+  };
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'iwdi-network-initial-state',
+        state: initialState,
+      }, '*');
+    }
+  } catch (e) {}
+}
+
 window.addEventListener('message', (e) => {
   const d = e.data;
   if (!d || !d.type) return;
@@ -1585,6 +1846,10 @@ window.addEventListener('message', (e) => {
     inFrame = true;
   } else if (d.type === 'pati-fs') {
     document.body.classList.toggle('iframe-mode', d.on);
+  } else if (d.type === 'iwdi-network-state') {
+    applyNetworkState(d.state, d.myPosition, d.players);
+  } else if (d.type === 'iwdi-network-build-initial') {
+    buildInitialNetworkState(d.players, d.myPosition);
   }
 });
 

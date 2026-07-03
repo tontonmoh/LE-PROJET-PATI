@@ -73,7 +73,7 @@ const JEUX: Jeu[] = [
     id: "iwdi", slug: "iwdi", jeu: "cartes-strategie",
     label: "IWDI LAGUINÈ — Conquête des Régions",
     section: "pati", icon: Layers, accent: "#C8841E",
-    playPrefix: "/iwdi", withCodeInPath: false, hasLiveScores: false,
+    playPrefix: "/iwdi", withCodeInPath: true, hasLiveScores: false,
   },
   {
     id: "corridor", slug: "corridor", jeu: "defi",
