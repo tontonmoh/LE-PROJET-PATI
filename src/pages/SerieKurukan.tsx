@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, BookOpen, Hourglass } from "lucide-react";
 import { KURUKAN } from "../data/series/kurukanFuga";
+import { useTrackRead } from "../hooks/useTrackRead";
 
 const NAVY = "#1A2A4A";
 const GOLD = "#FFC93C";
@@ -9,6 +10,8 @@ export default function SerieKurukan() {
   const episodes = KURUKAN.episodes;
   const live = episodes.filter((e) => e.statut === "live").length;
   const total = episodes.length;
+
+  useTrackRead({ slug: "kurukan-fuga", type: "serie", title: KURUKAN.titre });
 
   return (
     <div className="bg-[#FFF6E7] min-h-screen">

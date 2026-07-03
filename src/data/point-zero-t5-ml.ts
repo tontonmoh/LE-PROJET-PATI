@@ -16,7 +16,7 @@ export const POINT_ZERO_T5_ML: Partial<Record<Lang, RBook>> = {
     bookTitle: "Le Point Zéro — L'éclat changé en or",
     sections: [
     { title: "", image: "/images/point-zero/pz5-01.webp", paragraphs: [
-        "Je les ai sentis venir avant de les voir. Deux enfants, portés par une lumière qui n'était pas la mienne — celle d'Amak, là-haut, qui les tirait vers l'est.",
+        "Je les ai sentis venir avant de les voir. Deux enfants, portés par une lumière qui n'était pas la mienne — celle d'Amak, là-haut, qui les tirait vers l'ouest.",
         "Ils n'étaient pas rentrés à Kassa depuis deux voyages. Avant de filer, Bangaly avait porté un coquillage à sa bouche.",
         "« Kamara. On ne rentre pas. Pas encore. Et ce sera long. »",
         "Loin, sur son rocher, le vieux gardien avait fait cligner le phare. Une fois. Il avait compris.",
@@ -42,6 +42,7 @@ export const POINT_ZERO_T5_ML: Partial<Record<Lang, RBook>> = {
         "Tout, là-haut, était vivant. Un champ de maïs, haut, vert, qui buvait l'eau par les racines. Des oiseaux. Le soleil sur la boue.",
         "Au bord du champ, une femme les attendait. Elle ne s'étonnait pas — comme si elle savait depuis toujours.",
         "« Bienvenue sur la terre des eaux », dit Awa.",
+        "Elle regarda le bateau derrière eux, à moitié enfoncé dans la boue. Elle n'ajouta rien. Les siens étaient venus de l'autre côté. Autrefois. Sans pouvoir choisir.",
         "Djènè a regardé Bangaly. Pas besoin de mots.",
         "La terre des eaux. Le château d'eau. La même.",
     ] },

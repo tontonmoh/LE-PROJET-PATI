@@ -4,6 +4,7 @@ import { BOOKS } from "../data/books";
 import { SERIES } from "../data/series";
 import { getCredits } from "../data/credits";
 import BookGrid from "../components/BookGrid";
+import { useTrackRead } from "../hooks/useTrackRead";
 
 const BANDS = [
   { key: "Mômes", label: "Pati Mômes", age: "4–6 ans" },
@@ -110,6 +111,8 @@ const matchTheme = (tokens: string[], cap = 12): Card[] =>
 
 export default function Catalogue() {
   const [mode, setMode] = useState<Mode>("themes");
+
+  useTrackRead({ slug: "catalogue", type: "encyclopedie", title: "Catalogue Pati" });
 
   /* Rangées dérivées */
   const nouveautes = ENTRIES.filter((e) => e.nouveau).map((e) => e.card);

@@ -46,7 +46,7 @@ export const POINT_ZERO_T3_ML: Partial<Record<Lang, RBook>> = {
         "Un jour, j'ai vu quelque chose tomber.",
         "Une étoile.",
         "Blanche. Solitaire. Sans peur.",
-        "Elle tombait vers un champ d'arachides à Kassa.",
+        "Elle tombait. Vers la mer. Vers chez moi.",
     ] },
     { title: "", image: "/images/point-zero/pz3-04.webp", paragraphs: [
         "Je l'ai reconnue.",
@@ -80,6 +80,7 @@ export const POINT_ZERO_T3_ML: Partial<Record<Lang, RBook>> = {
     { title: "", image: "/images/point-zero/pz3-07.webp", paragraphs: [
         "J'ai enseigné l'agriculture selon la méthode Baga.",
         "Comment cultiver. Comment respecter la terre. Comment nourrir.",
+        "Eux m'ont appris à lire ce ciel-là, qui n'est pas celui de Kassa. À parler à des esprits qui ne sont pas les nôtres.",
         "Les autochtones ont appris. Ils ont planté. La jungle s'est transformée. Fertile. Vivante. Humaine.",
         "Pendant longtemps, j'ai fait cela seul.",
         "Puis Kamara est né à Kassa.",

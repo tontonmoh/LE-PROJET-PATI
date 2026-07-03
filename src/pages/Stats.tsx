@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { sbRpc, sbCountBookReads } from "../lib/sb";
 import {
   ResponsiveContainer,
   BarChart,
@@ -30,13 +30,9 @@ function useTotal(slug: string | null) {
   useEffect(() => {
     let cancelled = false;
     setTotal(null);
-    let q = supabase
-      .from("book_reads")
-      .select("*", { count: "exact", head: true });
-    if (slug) q = q.eq("item_slug", slug);
-    q.then(({ count, error }) => {
+    sbCountBookReads(slug).then((count) => {
       if (cancelled) return;
-      if (!error) setTotal(count ?? 0);
+      setTotal(count);
     });
     return () => {
       cancelled = true;
@@ -45,18 +41,18 @@ function useTotal(slug: string | null) {
   return total;
 }
 
-function useDistribution<T = any>(rpc: string, slug: string | null) {
+function useDistribution<T = unknown>(rpc: string, slug: string | null) {
   const [data, setData] = useState<T[] | null>(null);
   useEffect(() => {
     let cancelled = false;
     setData(null);
-    supabase.rpc(rpc, { p_slug: slug }).then(({ data: rows, error }) => {
+    sbRpc<T[]>(rpc, { p_slug: slug }).then(({ data: rows, error }) => {
       if (cancelled) return;
       if (error) {
         console.error(rpc, error);
         setData([]);
       } else {
-        setData((rows as T[]) || []);
+        setData(rows || []);
       }
     });
     return () => {
@@ -90,8 +86,8 @@ export default function Stats() {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.rpc("get_distinct_items").then(({ data, error }) => {
-      if (!error && data) setItems(data as ItemRow[]);
+    sbRpc<ItemRow[]>("get_distinct_items").then(({ data, error }) => {
+      if (!error && data) setItems(data);
     });
   }, []);
 
@@ -113,7 +109,6 @@ export default function Stats() {
     selectedSlug
   );
 
-  // Normalisation : remplir les buckets vides avec 0 pour des graphes lisibles
   const fillHour = Array.from({ length: 24 }, (_, i) => {
     const found = (byHour || []).find((r) => r.hour_of_day === i);
     return { hour: `${i}h`, reads: found?.read_count ?? 0 };

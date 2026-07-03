@@ -7,6 +7,7 @@ import {
   TOTAL_PREFECTURES,
   TOTAL_COMMUNES_CONAKRY,
 } from '../data/territoires';
+import { useTrackRead } from '../hooks/useTrackRead';
 
 type Vue = 'national' | 'conakry';
 
@@ -14,6 +15,8 @@ const DISPLAY = '"Fraunces", "Cormorant Garamond", Georgia, serif';
 
 export default function GuinePage() {
   const [vue, setVue] = useState<Vue>('national');
+
+  useTrackRead({ slug: "guine", type: "encyclopedie", title: "LaGuinè — Le Pays" });
 
   return (
     <main className="min-h-screen bg-[#F4ECD8]">

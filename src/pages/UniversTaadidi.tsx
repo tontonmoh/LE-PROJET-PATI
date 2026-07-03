@@ -8,6 +8,7 @@ import { TAADIDI } from "../data/series/taadidi";
 import { track } from "../lib/track";
 import { resumePage } from "../lib/reading";
 import TaadidiLignee from "../components/TaadidiLignee";
+import { useTrackRead } from "../hooks/useTrackRead";
 
 // ── Charte ──────────────────────────────────────────────────────────────────
 const GREEN         = "#0D2B1A";
@@ -675,6 +676,8 @@ export default function UniversTaadidi() {
   const eps      = TAADIDI.episodes;
   const progress = useReadProgress();
   const [tab, setTab] = useState<"episodes" | "personnages" | "apropos">("episodes");
+
+  useTrackRead({ slug: "taadidi", type: "serie", title: "Taadidi" });
 
   // Épisode suivant à lire (premier non "done" parmi les live)
   const nextEp = eps.find(

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, BookOpen, Hourglass } from "lucide-react";
 import { G2040 } from "../data/generation-2040";
+import { useTrackRead } from "../hooks/useTrackRead";
 
 const GREEN = "#0D2B1A";
 const GOLD = "#FFC93C";
@@ -9,6 +10,8 @@ export default function SerieG2040() {
   const tomes = G2040.tomes;
   const live = tomes.filter((t) => t.statut === "live").length;
   const total = tomes.length;
+
+  useTrackRead({ slug: "generation-2040", type: "serie", title: G2040.titre });
 
   return (
     <div className="bg-[#FFF6E7] min-h-screen">

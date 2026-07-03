@@ -9,10 +9,13 @@ import foutaDiwals, { FoutaDiwal } from '../data/foutaQuests';
 import FoutaCarte from '../components/FoutaCarte';
 
 import FoutaQuete from '../components/FoutaQuete';
+import { useTrackRead } from '../hooks/useTrackRead';
 
 export default function FoutaPage() {
   const [selectedDiwalId, setSelectedDiwalId] = useState<string | null>(null);
   const selectedDiwal = foutaDiwals.find((d: FoutaDiwal) => d.id === selectedDiwalId);
+
+  useTrackRead({ slug: "fouta", type: "encyclopedie", title: "Fouta — La théocratie peule" });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#e8dcc8] to-[#d4c4a8]">

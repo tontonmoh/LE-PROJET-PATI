@@ -8,6 +8,7 @@ import { useState } from 'react';
 import horoyaChapitres, { HoroyaChapitre } from '../data/horoyaQuests';
 import HoroyaCarte from '../components/HoroyaCarte';
 import HoroyaQuete from '../components/HoroyaQuete';
+import { useTrackRead } from '../hooks/useTrackRead';
 
 // ── Charte HOROYA (vert profond / or / rouge guinéen) ──────────────────────
 const VERT  = '#1a5e3a';
@@ -19,6 +20,8 @@ const INK   = '#241c10';
 export default function HoroyaPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = horoyaChapitres.find((c: HoroyaChapitre) => c.id === selectedId);
+
+  useTrackRead({ slug: "horoya", type: "encyclopedie", title: "Horoya — L'indépendance guinéenne" });
 
   return (
     <div className="min-h-screen" style={{ background: `linear-gradient(to bottom, ${CREAM} 0%, #e8dcb8 100%)` }}>

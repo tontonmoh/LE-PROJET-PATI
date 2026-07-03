@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, BookOpen, Hourglass } from "lucide-react";
 import { POINT_ZERO } from "../data/point-zero";
+import { useTrackRead } from "../hooks/useTrackRead";
 
 const NAVY = "#1A2A4A";
 const GOLD = "#FFC93C";
@@ -9,6 +10,8 @@ export default function SeriePointZero() {
   const tomes = POINT_ZERO.tomes;
   const live = tomes.filter((t) => t.statut === "live").length;
   const total = tomes.length;
+
+  useTrackRead({ slug: "point-zero", type: "serie", title: POINT_ZERO.titre });
 
   return (
     <div className="bg-[#FFF6E7] min-h-screen">

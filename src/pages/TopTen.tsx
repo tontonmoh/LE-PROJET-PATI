@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../lib/supabaseClient";
+import { sbRpc } from "../lib/sb";
 
 type Period = "24h" | "7d" | "30d" | "all";
 
@@ -33,7 +33,6 @@ function periodToSince(p: Period): string | null {
 }
 
 function routeFor(row: TopRow): string {
-  // À ajuster selon les conventions de routes de projetpati.com
   if (row.item_type === "livre") return `/livre/${row.item_slug}/lire`;
   if (row.item_type === "serie") return `/serie/${row.item_slug}`;
   return `/${row.item_slug}`;
@@ -69,22 +68,20 @@ function TopList({
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    supabase
-      .rpc("get_top_items", {
-        p_type: type,
-        p_since: periodToSince(period),
-        p_limit: limit,
-      })
-      .then(({ data, error }) => {
-        if (cancelled) return;
-        if (error) {
-          console.error(error);
-          setRows([]);
-        } else {
-          setRows((data as TopRow[]) || []);
-        }
-        setLoading(false);
-      });
+    sbRpc<TopRow[]>("get_top_items", {
+      p_type: type,
+      p_since: periodToSince(period),
+      p_limit: limit,
+    }).then(({ data, error }) => {
+      if (cancelled) return;
+      if (error) {
+        console.error(error);
+        setRows([]);
+      } else {
+        setRows(data || []);
+      }
+      setLoading(false);
+    });
     return () => {
       cancelled = true;
     };

@@ -43,6 +43,8 @@ const ProposerActivite = lazy(() => import("./pages/ProposerActivite"));
 const AtelierSolidaire = lazy(() => import("./pages/AtelierSolidaire"));
 const Sobela = lazy(() => import("./pages/Sobela"));
 const ImpactReport = lazy(() => import("./pages/ImpactReport"));
+const TopTen = lazy(() => import("./pages/TopTen"));
+const Stats = lazy(() => import("./pages/Stats"));
 const Presse = lazy(() => import("./pages/Presse"));
 const Senag = lazy(() => import("./pages/Senag"));
 const Contribuer = lazy(() => import("./pages/Contribuer"));
@@ -138,6 +140,8 @@ export default function App() {
             <Route path="/atelier-solidaire" element={<AtelierSolidaire />} />
             <Route path="/sobela" element={<Sobela />} />
             <Route path="/impact" element={<ImpactReport />} />
+            <Route path="/top-10" element={<TopTen />} />
+            <Route path="/stats" element={<Stats />} />
             <Route path="/presse" element={<Presse />} />
             <Route path="/senag" element={<Senag />} />
 

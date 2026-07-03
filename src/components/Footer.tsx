@@ -31,6 +31,8 @@ export default function Footer() {
             <a href={SOCIAL.websiteAtelier} target="_blank" rel="noopener noreferrer" className="pf-link">L'Atelier Solidaire</a>
             <Link to="/partenaires" className="pf-link">Partenaires</Link>
             <Link to="/impact" className="pf-link">Impact &amp; transparence</Link>
+            <Link to="/top-10" className="pf-link">Les plus lus</Link>
+            <Link to="/stats" className="pf-link">Statistiques de lecture</Link>
             <Link to="/presse" className="pf-link">Presse &amp; médias</Link>
             <Link to="/collaboration" className="pf-link">Offres de collaboration</Link>
             <Link to="/personnalisation" className="pf-link">Créations personnalisées</Link>

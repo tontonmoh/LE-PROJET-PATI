@@ -75,16 +75,16 @@ export default function LeDefi() {
         </div>
         <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
 
-        {/* ── Bandeau campagne : Le 1000e Bâtisseur ── */}
+        {/* ── Bandeau campagne : Cap sur le 2000e Bâtisseur ── */}
         <div
           className="rounded-2xl px-4 py-3 mb-4 flex items-center gap-3"
           style={{ background: "linear-gradient(180deg,#FFE08A,#FFC93C)", color: "#0D2B1A" }}
         >
           <span className="text-2xl shrink-0" aria-hidden="true">🏆</span>
           <span className="flex-1">
-            <span className="block font-display font-bold text-sm sm:text-base">Sois le 1000ᵉ Bâtisseur de la Guinée&nbsp;!</span>
+            <span className="block font-display font-bold text-sm sm:text-base">Cap sur le 2000ᵉ Bâtisseur de la Guinée&nbsp;!</span>
             <span className="block font-semibold text-xs sm:text-sm" style={{ color: "#3D2410" }}>
-              Le/la 1000ᵉ à terminer la carte gagne le livre <strong>BAABATA</strong> dédicacé, à son nom. Chaque partie est une chance&nbsp;— rejoue&nbsp;! Partage ta carte avec <strong>#JeConstruisLaGuinée</strong>.
+              Le/la 2000ᵉ à terminer la carte gagne le livre <strong>BAABATA</strong> dédicacé, à son nom. Chaque partie est une chance&nbsp;— rejoue&nbsp;! Partage ta carte avec <strong>#JeConstruisLaGuinée</strong>.
             </span>
           </span>
         </div>

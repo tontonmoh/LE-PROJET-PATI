@@ -12,6 +12,7 @@
 import { useState } from 'react';
 import { quests } from '../data/mansayaQuests';
 import MansayaQuete from '../components/MansayaQuete';
+import { useTrackRead } from '../hooks/useTrackRead';
 
 // Ordre d'affichage chronologique + icône par empire.
 const ORDER: { slug: string; icon: string; period: string }[] = [
@@ -23,6 +24,8 @@ const ORDER: { slug: string; icon: string; period: string }[] = [
 
 export default function MansayaPage() {
   const [active, setActive] = useState<string | null>(null);
+
+  useTrackRead({ slug: "mansaya", type: "encyclopedie", title: "Mansaya — Les empires africains" });
 
   return (
     <div style={{ padding: '2rem 1rem', maxWidth: 760, margin: '0 auto' }}>

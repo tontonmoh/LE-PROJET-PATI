@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, BookOpen, Hourglass } from "lucide-react";
 import { RESISTANCE } from "../data/resistance";
+import { useTrackRead } from "../hooks/useTrackRead";
 
 const NAVY = "#1A2A4A";
 const GOLD = "#FFC93C";
@@ -9,6 +10,11 @@ export default function SerieResistance() {
   const tomes = RESISTANCE.tomes;
   const live = tomes.filter((t) => t.statut === "live").length;
   const total = tomes.length;
+
+  // Double tracking : la page est à la fois "série Résistance" ET "encyclopédie SOFA"
+  // (présentation publique en 5 encyclopédies sur la home, même URL)
+  useTrackRead({ slug: "resistance", type: "serie", title: RESISTANCE.titre });
+  useTrackRead({ slug: "sofa", type: "encyclopedie", title: "Sofa — Les Résistants" });
 
   return (
     <div className="bg-[#FFF6E7] min-h-screen">

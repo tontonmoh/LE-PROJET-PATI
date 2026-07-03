@@ -8,9 +8,8 @@ export const POINT_ZERO_T1_ML = {
       {
         title: "L'appel de Kamara",
         paragraphs: [
-          "Le lendemain du phare, Kamara nous appela.",
+          "La coque battait encore dans nos paumes. Kamara ne nous laissa pas le temps de redescendre.",
           "— C'est maintenant, dit-il. Vous allez nord.",
-          "Il posa deux coques d'arachide dans nos paumes. Elles battaient encore, légèrement.",
           "— Il y a une femme là-bas. Elle s'appelle Damba. Elle garde quelque chose depuis longtemps. Et elle vous reconnaîtra quand vous arriverez.",
           "Bangaly demanda : — Comment elle va nous reconnaître ?",
           "— Par l'arachide, dit Kamara. Et par votre cœur. Mangez et allez."
@@ -46,7 +45,7 @@ export const POINT_ZERO_T1_ML = {
         title: "Le sentier de Damba",
         paragraphs: [
           "Damba nous emmena par un sentier que seule sa main semblait connaître. Les arbres ici attendaient depuis longtemps.",
-          "Puis nous arrivâmes à un village. Des cases en paille. Des autels de bois décorés de coquillages et de plumes. Une case plus grande, avec des masques suspendus à l'intérieur. Masques de requins, de raies, de taureaux sauvages.",
+          "Puis on arriva à un village. Des cases en paille. Des autels de bois décorés de coquillages et de plumes. Une case plus grande, avec des masques suspendus à l'intérieur. Masques de requins, de raies, de taureaux sauvages.",
           "— C'est ici qu'on se souvient, dit Damba. Avec le corps. Pas avec les mots."
         ],
         image: "/images/point-zero/point-zero-t1-04.webp"
@@ -66,6 +65,9 @@ export const POINT_ZERO_T1_ML = {
         title: "Les oiseaux qui reviennent",
         paragraphs: [
           "Damba nous mena au bord de la mer.",
+          "Bangaly enleva sa chemise avant qu'on lui dise pourquoi on était là. Il entra dans l'eau. Pas un éclaboussement. La mer l'avala comme un poisson de plus.",
+          "Damba sourit. — Lui sait.",
+          "Il ressortit avec un coquillage dans la main. Petit. Spiralé. Il le glissa dans sa poche.",
           "— Écoutez, dit-elle.",
           "D'abord rien. Puis un bruit — comme si le ciel parlait. Des cris, des battements. Du retour.",
           "— Les oiseaux, murmura Bangaly.",
@@ -78,7 +80,7 @@ export const POINT_ZERO_T1_ML = {
       {
         title: "La fidélité",
         paragraphs: [
-          "— Pourquoi ils reviennent ? demandai-je.",
+          "— Pourquoi ils reviennent ?",
           "— Parce qu'un endroit devient tellement important dans votre corps que vous ne pouvez pas le quitter, dit Damba. Même si vous partez loin. Même si vous traversez l'océan. Vous revenez. C'est la fidélité.",
           "Elle regarda vers le sud, vers quelque chose que nous ne voyions pas.",
           "— À Conakry, ils ne nous voient pas. Nous ne les voyons pas. Mais on partage le même ciel. Et les oiseaux, eux, ils ne connaissent pas les frontières. Ils volent de l'une à l'autre. Nous sommes sœurs. C'est tout."
@@ -132,7 +134,7 @@ export const POINT_ZERO_T1_ML = {
       {
         title: "Le retour",
         paragraphs: [
-          "Nous arrivâmes au champ de Kassa au lever du soleil.",
+          "On arriva au champ de Kassa au lever du soleil.",
           "Kamara était assis exactement où nous l'avions laissé.",
           "— Alors ? demanda-t-il.",
           "Bangaly lui tendit la vieille coque de Damba.",
