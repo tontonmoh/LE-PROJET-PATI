@@ -9,38 +9,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Base */
-    --bg: #FFF6DD;
-    --paper: #FFFEFA;
-    --ink: #2B1F14;
-    --ink-soft: #6E5B44;
-    --rule: #E9DDBC;
-    --rule-soft: #F4EBCF;
+    /* Neutrals — softer & more modern */
+    --bg: #FBF5E4;
+    --bg-2: #FFFCF1;
+    --paper: #FFFFFF;
+    --ink: #1E1815;
+    --ink-2: #4A413A;
+    --ink-3: #8A7E6E;
+    --line: #EDE4CB;
+    --line-soft: #F5EEDA;
 
     /* Feedback */
-    --leaf: #2EB86A;
-    --sienna: #E23E24;
-    --ochre: #F9B233;
-    --ochre-deep: #D4901D;
+    --leaf: #22C55E;
+    --leaf-soft: #DCFCE7;
+    --sienna: #EF4444;
+    --sienna-soft: #FEE2E2;
+    --gold: #F59E0B;
+    --gold-soft: #FEF3C7;
 
-    /* Terrains — one color per scope */
+    /* Terrains */
     --c-all: #7B3FBF;
-    --c-basse: #1F76B8;
-    --c-moyenne: #D4732A;
-    --c-haute: #F9B233;
-    --c-forestiere: #147246;
-    --c-adm_boke: #B85A1A;
-    --c-adm_kindia: #6BAA43;
-    --c-adm_labe: #5B4EBD;
-    --c-adm_mamou: #E8A83A;
-    --c-adm_faranah: #2E9AA7;
-    --c-adm_kankan: #C79B2A;
-    --c-adm_nzerekore: #1E5F3E;
-    --c-adm_conakry: #2B5FB8;
+    --c-basse: #2563EB;
+    --c-moyenne: #EA580C;
+    --c-haute: #F59E0B;
+    --c-forestiere: #059669;
+    --c-adm_boke: #C2410C;
+    --c-adm_kindia: #65A30D;
+    --c-adm_labe: #6366F1;
+    --c-adm_mamou: #D97706;
+    --c-adm_faranah: #0891B2;
+    --c-adm_kankan: #CA8A04;
+    --c-adm_nzerekore: #047857;
+    --c-adm_conakry: #1D4ED8;
 
-    /* Active terrain (set dynamically) */
+    /* Terrain glow (dynamic) */
     --terrain: var(--c-all);
-    --terrain-soft: rgba(123, 63, 191, 0.14);
+    --terrain-glow: rgba(123, 63, 191, 0.28);
+    --terrain-tint: rgba(123, 63, 191, 0.08);
+
+    /* Shadow layers */
+    --shadow-sm: 0 1px 2px rgba(30, 24, 21, 0.04), 0 2px 6px rgba(30, 24, 21, 0.04);
+    --shadow-md: 0 2px 6px rgba(30, 24, 21, 0.05), 0 8px 20px rgba(30, 24, 21, 0.06);
+    --shadow-lg: 0 4px 12px rgba(30, 24, 21, 0.06), 0 16px 40px rgba(30, 24, 21, 0.08);
+    --shadow-terrain: 0 4px 20px var(--terrain-glow), 0 2px 6px rgba(30, 24, 21, 0.04);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.2, 0.9, 0.3, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,493 +67,640 @@
     font-family: 'Fredoka', system-ui, -apple-system, sans-serif;
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
     overscroll-behavior: none;
     user-select: none;
     -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     display: flex;
     flex-direction: column;
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+    padding: env(safe-area-inset-top) 18px env(safe-area-inset-bottom);
     min-height: 100vh;
     background-image:
-      radial-gradient(circle at 20% 8%, rgba(249,178,51,0.10), transparent 40%),
-      radial-gradient(circle at 90% 82%, rgba(46,154,167,0.08), transparent 50%);
+      radial-gradient(circle at 15% -5%, rgba(245, 158, 11, 0.10), transparent 45%),
+      radial-gradient(circle at 88% 12%, rgba(37, 99, 235, 0.06), transparent 42%),
+      radial-gradient(circle at 50% 100%, rgba(5, 150, 105, 0.06), transparent 50%);
+    position: relative;
   }
-  body.fs-on {
-    max-width: 900px;
+
+  /* Confetti canvas */
+  #confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
   }
-  body.fs-on .brand-mark { font-size: 52px; }
-  body.fs-on .card .name { font-size: clamp(36px, 6vw, 56px); }
 
   .screen {
     display: none;
     flex-direction: column;
     flex: 1;
-    padding: 18px 0 24px;
+    padding: 20px 0 28px;
   }
-  .screen.active { display: flex; }
+  .screen.active { display: flex; animation: screenIn 0.3s var(--ease-out); }
+  @keyframes screenIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-  /* -------- MENU -------- */
-
-  .brand {
+  /* ═══════════════ HERO ═══════════════ */
+  .hero {
+    padding: 8px 0 10px;
+  }
+  .brand-row {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 12px;
-    margin-bottom: 4px;
+    margin-bottom: 14px;
   }
-  .brand-mark {
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(38px, 10vw, 52px);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    font-variation-settings: "opsz" 144;
+    color: var(--ink);
+  }
+  .brand .accent {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--c-forestiere), var(--c-moyenne));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .brand .three {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--c-adm_boke), var(--c-haute));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tag {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 700;
+    padding: 5px 11px;
+    background: var(--gold-soft);
+    color: var(--ink);
+    border-radius: 999px;
+  }
+  .tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 28;
+    max-width: 480px;
+  }
+
+  /* ═══════════════ META PROGRESS PANEL ═══════════════ */
+  .parcours {
+    margin: 24px 0 32px;
+    background: var(--paper);
+    border-radius: 20px;
+    padding: 20px 22px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+  }
+  .parcours::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--c-basse), var(--c-moyenne), var(--c-haute), var(--c-forestiere));
+    border-radius: 3px 3px 0 0;
+  }
+  .parcours-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .parcours-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .parcours-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--c-forestiere);
+    font-variant-numeric: tabular-nums;
+  }
+  .parcours-number {
     font-family: 'Fraunces', serif;
     font-weight: 900;
     font-size: 42px;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    font-variation-settings: "opsz" 144;
-    line-height: 1;
-  }
-  .brand-mark em {
-    font-style: italic;
-    color: var(--c-forestiere);
-    font-variation-settings: "opsz" 144;
-  }
-  .brand-mark .three {
-    color: var(--c-adm_boke);
-    font-style: italic;
-  }
-  .brand-tag {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    font-weight: 700;
-    padding: 3px 8px;
-    background: var(--ochre);
-    color: var(--ink);
-    border-radius: 20px;
-  }
-
-  .subtitle {
-    font-family: 'Fraunces', serif;
-    font-size: 16px;
-    color: var(--ink-soft);
-    line-height: 1.4;
-    margin-bottom: 22px;
-    font-style: italic;
-    font-weight: 500;
-    font-variation-settings: "opsz" 24;
-  }
-
-  .meta-panel {
-    background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 14px;
-    padding: 14px 16px;
-    margin-bottom: 26px;
-    box-shadow: 3px 3px 0 var(--ink);
-  }
-  .meta-panel .label {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    font-weight: 700;
-    margin-bottom: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .meta-panel .value {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: 30px;
     color: var(--ink);
     line-height: 1;
     display: flex;
     align-items: baseline;
-    gap: 6px;
+    gap: 8px;
     font-variation-settings: "opsz" 144;
+    margin-bottom: 14px;
   }
-  .meta-panel .value .of {
-    font-size: 18px;
-    color: var(--ink-soft);
+  .parcours-number .found { color: var(--c-forestiere); }
+  .parcours-number .of {
+    font-size: 20px;
+    color: var(--ink-3);
     font-weight: 700;
   }
-  .meta-panel .value .ok {
-    color: var(--leaf);
-  }
-  .meta-bar {
-    margin-top: 10px;
-    height: 8px;
-    background: var(--rule-soft);
-    border-radius: 4px;
+  .parcours-bar {
+    height: 10px;
+    background: var(--line-soft);
+    border-radius: 999px;
     overflow: hidden;
     position: relative;
   }
-  .meta-bar-fill {
+  .parcours-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--c-basse), var(--c-moyenne), var(--c-haute), var(--c-forestiere));
-    border-radius: 4px;
-    transition: width 0.4s ease;
+    background: linear-gradient(90deg, var(--c-basse), var(--c-moyenne) 40%, var(--c-haute) 65%, var(--c-forestiere));
+    border-radius: 999px;
+    transition: width 0.9s var(--ease-out);
+    position: relative;
   }
-  .meta-note {
-    font-size: 11px;
-    color: var(--ink-soft);
-    margin-top: 8px;
+  .parcours-bar-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 3s infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+  .parcours-note {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 10px;
     font-style: italic;
   }
 
-  .section-label {
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: 11px;
+  /* ═══════════════ SECTIONS ═══════════════ */
+  .section-title {
+    font-family: 'Fraunces', serif;
     font-weight: 700;
-    color: var(--ink-soft);
-    margin-bottom: 10px;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 24px 0 14px;
+    font-variation-settings: "opsz" 48;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .section-label::before, .section-label::after {
+  .section-title::before {
     content: "";
-    flex: 1;
-    height: 2px;
-    background: var(--rule);
-    border-radius: 1px;
-  }
-  .section-label span {
-    padding: 0 4px;
+    width: 6px;
+    height: 22px;
+    background: var(--terrain);
+    border-radius: 3px;
+    transition: background 0.3s;
   }
 
-  .options {
+  /* ═══════════════ SCOPE TILES ═══════════════ */
+  .scopes {
     display: grid;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 10px;
   }
-  .options.grid-1 { grid-template-columns: 1fr; }
-  .options.grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .options.grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .scopes.one { grid-template-columns: 1fr; }
+  .scopes.two { grid-template-columns: repeat(2, 1fr); }
 
-  .scope-tile {
+  .scope {
     background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 12px 14px;
+    border-radius: 16px;
+    padding: 14px 16px;
     cursor: pointer;
-    transition: transform 0.08s, box-shadow 0.08s;
     font-family: 'Fredoka', sans-serif;
     text-align: left;
-    line-height: 1.15;
-    box-shadow: 2px 2px 0 var(--ink);
+    transition: all 0.2s var(--ease-out);
+    box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     overflow: hidden;
     position: relative;
+    border: 1px solid var(--line);
   }
-  .scope-tile:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 var(--ink);
+  .scope:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--tile-color);
   }
-  .scope-tile:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0 0 0 var(--ink);
+  .scope:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
   }
-  .scope-tile .dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
+  .scope-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     background: var(--tile-color);
-    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    box-shadow: inset 0 -2px 6px rgba(0,0,0,0.15), 0 4px 10px var(--tile-color-glow);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
   }
-  .scope-tile .info {
+  .scope-info {
     flex: 1;
     min-width: 0;
   }
-  .scope-tile .name {
-    font-size: 14px;
+  .scope-name {
+    font-size: 14.5px;
     font-weight: 700;
     color: var(--ink);
     display: block;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    line-height: 1.15;
   }
-  .scope-tile .stat {
-    font-size: 11px;
-    color: var(--ink-soft);
+  .scope-stat {
+    font-size: 11.5px;
+    color: var(--ink-3);
     font-weight: 500;
-    margin-top: 2px;
+    margin-top: 3px;
+    font-variant-numeric: tabular-nums;
   }
-  .scope-tile.selected {
+  .scope-stat .found {
+    color: var(--tile-color);
+    font-weight: 700;
+  }
+  .scope.selected {
+    border-color: var(--tile-color);
+    background: linear-gradient(135deg, var(--paper) 0%, var(--tile-tint) 100%);
+    box-shadow: 0 4px 20px var(--tile-color-glow), var(--shadow-sm);
+  }
+  .scope.selected .scope-name { color: var(--tile-color); }
+  .scope.selected::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 8px;
+    height: 8px;
     background: var(--tile-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--tile-tint);
   }
-  .scope-tile.selected .name,
-  .scope-tile.selected .stat {
+  .scope.complete {
+    background: linear-gradient(135deg, var(--tile-color) 0%, color-mix(in srgb, var(--tile-color) 75%, black) 100%);
     color: white;
+    border-color: transparent;
   }
-  .scope-tile.selected .dot {
-    background: white;
-  }
-  .scope-tile.complete {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--tile-color),
-      var(--tile-color) 8px,
-      color-mix(in srgb, var(--tile-color) 80%, white) 8px,
-      color-mix(in srgb, var(--tile-color) 80%, white) 16px
-    );
-  }
-  .scope-tile.complete .name,
-  .scope-tile.complete .stat {
-    color: white;
-  }
-  .scope-tile.complete::after {
+  .scope.complete .scope-name,
+  .scope.complete .scope-stat,
+  .scope.complete .scope-stat .found { color: white; }
+  .scope.complete .scope-mark { background: rgba(255,255,255,0.2); }
+  .scope.complete::after {
     content: "★";
     position: absolute;
-    top: 8px;
-    right: 12px;
+    top: 10px;
+    right: 14px;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
   }
-
-  .scope-tile.all-tile {
-    padding: 16px;
+  .scope.big {
+    padding: 18px 20px;
   }
-  .scope-tile.all-tile .name { font-size: 16px; }
-  .scope-tile.all-tile .dot { width: 26px; height: 26px; }
+  .scope.big .scope-name { font-size: 17px; }
+  .scope.big .scope-mark { width: 48px; height: 48px; font-size: 17px; }
 
-  .count-tile {
+  /* ═══════════════ COUNT PILLS ═══════════════ */
+  .counts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .count {
     background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    padding: 12px 6px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 6px;
     font-family: 'Fraunces', serif;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 22px;
     color: var(--ink);
     cursor: pointer;
     text-align: center;
-    box-shadow: 2px 2px 0 var(--ink);
-    transition: transform 0.08s, box-shadow 0.08s;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease-out);
     font-variation-settings: "opsz" 144;
   }
-  .count-tile:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 var(--ink);
+  .count:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
-  .count-tile:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0 0 0 var(--ink);
-  }
-  .count-tile.selected {
-    background: var(--terrain);
+  .count.selected {
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 85%, black));
     color: white;
+    border-color: transparent;
+    box-shadow: var(--shadow-terrain);
+    transform: translateY(-1px);
   }
-  .count-tile:disabled {
-    opacity: 0.28;
+  .count:disabled {
+    opacity: 0.3;
     cursor: not-allowed;
-    box-shadow: 1px 1px 0 var(--ink);
+    background: var(--line-soft);
+  }
+  .count-none {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 18px;
+    background: var(--gold-soft);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    border-radius: 14px;
+    font-weight: 600;
   }
 
-  .primary-btn {
-    background: var(--terrain);
+  /* ═══════════════ CTA ═══════════════ */
+  .cta {
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 82%, black));
     color: white;
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 16px 24px;
-    font-size: 17px;
+    border: none;
+    border-radius: 16px;
+    padding: 18px 28px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     cursor: pointer;
     font-family: 'Fredoka', sans-serif;
-    margin-top: 18px;
-    box-shadow: 4px 4px 0 var(--ink);
-    transition: transform 0.08s, box-shadow 0.08s;
+    margin-top: 22px;
+    box-shadow: var(--shadow-terrain);
+    transition: all 0.2s var(--ease-out);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
-  .primary-btn:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 5px 5px 0 var(--ink);
+  .cta:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--terrain-glow), var(--shadow-md);
   }
-  .primary-btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: 1px 1px 0 var(--ink);
-  }
-  .primary-btn:disabled {
-    opacity: 0.35;
+  .cta:active:not(:disabled) { transform: translateY(0); }
+  .cta:disabled {
+    background: var(--line);
+    color: var(--ink-3);
     cursor: not-allowed;
-    background: var(--rule);
-    color: var(--ink-soft);
-    box-shadow: 2px 2px 0 var(--rule);
+    box-shadow: var(--shadow-sm);
   }
+  .cta-arrow {
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+  .cta:hover .cta-arrow { transform: translateX(4px); }
 
   .reset-row {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 22px;
   }
   .reset-btn {
     background: transparent;
     border: none;
-    color: var(--ink-soft);
+    color: var(--ink-3);
     font-family: 'Fredoka', sans-serif;
-    font-size: 12px;
+    font-size: 12.5px;
     cursor: pointer;
-    padding: 6px 10px;
-    text-decoration: underline;
-    text-decoration-color: var(--rule);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.2s, background 0.2s;
   }
-  .reset-btn:hover { color: var(--sienna); text-decoration-color: var(--sienna); }
+  .reset-btn:hover {
+    color: var(--sienna);
+    background: var(--sienna-soft);
+  }
 
-  /* -------- GAME -------- */
-
-  #game { padding: 12px 0; }
+  /* ═══════════════ GAME SCREEN ═══════════════ */
+  #game { padding: 14px 0 20px; }
 
   .hud {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
+    gap: 12px;
+    padding: 14px 18px;
     background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    box-shadow: 2px 2px 0 var(--ink);
+    border-radius: 18px;
+    box-shadow: var(--shadow-md);
     margin-bottom: 14px;
   }
-  .hud-chrono {
+  .chrono {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 800;
     color: var(--terrain);
     font-variant-numeric: tabular-nums;
+    line-height: 1;
+    text-shadow: 0 2px 12px var(--terrain-glow);
+    transition: color 0.3s;
   }
-  .hud-scope {
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 0.14em;
+  .chrono-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: var(--ink-3);
     font-weight: 700;
-    font-family: 'Fredoka', sans-serif;
+    margin-top: 2px;
   }
-  .hud-progress {
+  .scope-name-hud {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 600;
+    font-family: 'Fredoka', sans-serif;
+    line-height: 1.2;
+  }
+  .progress-hud {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
-    color: var(--ink);
-    font-variant-numeric: tabular-nums;
-    background: var(--terrain);
     color: white;
-    padding: 4px 10px;
-    border-radius: 8px;
+    background: var(--terrain);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    box-shadow: var(--shadow-sm);
   }
 
   .quit-row {
     display: flex;
     justify-content: center;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .quit-btn {
     background: transparent;
     border: none;
-    color: var(--ink-soft);
+    color: var(--ink-3);
     font-family: 'Fredoka', sans-serif;
-    font-size: 12px;
+    font-size: 12.5px;
     cursor: pointer;
-    padding: 4px 12px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    transition: color 0.2s, background 0.2s;
   }
-  .quit-btn:hover { color: var(--sienna); }
+  .quit-btn:hover { color: var(--sienna); background: var(--sienna-soft); }
 
+  /* Card stage & combo */
   .card-stage {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0 16px;
-    min-height: 130px;
+    padding: 30px 0 20px;
+    min-height: 160px;
+    position: relative;
   }
+
+  .combo {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    background: linear-gradient(135deg, var(--gold), #F97316);
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.5);
+    opacity: 0;
+    transform: scale(0.5) rotate(-8deg);
+    transition: all 0.3s var(--ease-bounce);
+    font-variation-settings: "opsz" 144;
+    pointer-events: none;
+  }
+  .combo.show {
+    opacity: 1;
+    transform: scale(1) rotate(-4deg);
+  }
+  .combo .x { font-size: 14px; opacity: 0.85; margin-right: 2px; }
+  @keyframes comboPop {
+    0% { transform: scale(1) rotate(-4deg); }
+    50% { transform: scale(1.2) rotate(-8deg); }
+    100% { transform: scale(1) rotate(-4deg); }
+  }
+  .combo.pop { animation: comboPop 0.4s var(--ease-bounce); }
 
   .card {
     background: var(--paper);
-    border: 3px solid var(--ink);
-    border-radius: 14px;
-    padding: 22px 24px 22px;
-    box-shadow: 4px 4px 0 var(--terrain);
+    border-radius: 20px;
+    padding: 26px 30px 26px;
+    box-shadow: var(--shadow-terrain), var(--shadow-md);
     text-align: center;
     max-width: 100%;
     position: relative;
-    transform: rotate(-1deg);
-    animation: cardEnter 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    transform: rotate(-1.2deg);
+    animation: cardEnter 0.35s var(--ease-bounce);
+    border: 1px solid var(--line);
   }
   .card::before {
     content: "SOUS-PRÉFECTURE";
     position: absolute;
-    top: -10px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Fredoka', sans-serif;
     font-size: 9px;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.28em;
     color: white;
-    background: var(--terrain);
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 2px solid var(--ink);
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 80%, black));
+    padding: 5px 12px;
+    border-radius: 999px;
     font-weight: 700;
     white-space: nowrap;
+    box-shadow: 0 4px 10px var(--terrain-glow);
   }
   .card .name {
     font-family: 'Fraunces', serif;
-    font-size: clamp(28px, 8vw, 44px);
+    font-size: clamp(30px, 9vw, 46px);
     font-weight: 900;
     color: var(--ink);
-    line-height: 1.1;
+    line-height: 1.05;
     margin-top: 8px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     font-variation-settings: "opsz" 144;
   }
   .card.wrong {
-    animation: cardShake 0.4s;
+    animation: cardShake 0.45s var(--ease-out);
+    box-shadow: 0 4px 30px rgba(239, 68, 68, 0.35), var(--shadow-md);
     border-color: var(--sienna);
-    box-shadow: 4px 4px 0 var(--sienna);
   }
   .card.right {
+    box-shadow: 0 4px 30px rgba(34, 197, 94, 0.35), var(--shadow-md);
     border-color: var(--leaf);
-    box-shadow: 4px 4px 0 var(--leaf);
   }
   .card.right::after {
     content: "✓";
     position: absolute;
-    top: 6px;
-    right: 12px;
-    font-size: 24px;
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
     color: var(--leaf);
     font-weight: 900;
+    animation: checkPop 0.4s var(--ease-bounce);
+  }
+  .card.wrong::after {
+    content: "✗";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
+    color: var(--sienna);
+    font-weight: 900;
+    animation: checkPop 0.4s var(--ease-bounce);
+  }
+  @keyframes checkPop {
+    0% { transform: scale(0) rotate(-45deg); }
+    60% { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0); }
   }
 
   @keyframes cardEnter {
-    from { opacity: 0; transform: rotate(-1deg) translateY(-8px) scale(0.94); }
-    to { opacity: 1; transform: rotate(-1deg) translateY(0) scale(1); }
+    0% { opacity: 0; transform: rotate(-1.2deg) translateY(-14px) scale(0.9); }
+    60% { opacity: 1; transform: rotate(0deg) translateY(4px) scale(1.02); }
+    100% { transform: rotate(-1.2deg) translateY(0) scale(1); }
   }
   @keyframes cardShake {
-    0%, 100% { transform: rotate(-1deg) translateX(0); }
-    20% { transform: rotate(-1deg) translateX(-6px); }
-    40% { transform: rotate(-1deg) translateX(6px); }
-    60% { transform: rotate(-1deg) translateX(-4px); }
-    80% { transform: rotate(-1deg) translateX(4px); }
+    0%, 100% { transform: rotate(-1.2deg) translateX(0); }
+    20% { transform: rotate(-1.2deg) translateX(-8px); }
+    40% { transform: rotate(-1.2deg) translateX(8px); }
+    60% { transform: rotate(-1.2deg) translateX(-5px); }
+    80% { transform: rotate(-1.2deg) translateX(5px); }
   }
 
   .prompt {
     text-align: center;
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin: 8px 0 14px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    margin: 12px 0 16px;
     font-family: 'Fredoka', sans-serif;
     font-weight: 500;
   }
@@ -547,175 +709,185 @@
     font-weight: 700;
   }
 
+  /* ═══════════════ PREFECTURE GRID ═══════════════ */
   .pref-grid {
     display: grid;
-    gap: 8px;
+    gap: 10px;
     padding-bottom: 20px;
   }
   .pref {
     background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    padding: 12px 8px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 8px;
     font-family: 'Fredoka', sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--ink);
     cursor: pointer;
     text-align: center;
     line-height: 1.15;
-    box-shadow: 2px 2px 0 var(--ink);
-    transition: transform 0.06s, box-shadow 0.06s, background 0.1s;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s var(--ease-out);
   }
-  .pref:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 var(--ink);
+  .pref:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--terrain);
   }
-  .pref:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0 0 0 var(--ink);
-  }
+  .pref:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
   .pref.flash-wrong {
-    background: var(--sienna);
+    background: linear-gradient(135deg, var(--sienna), #DC2626);
     color: white;
-    animation: prefFlash 0.4s;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+    animation: prefFlash 0.4s var(--ease-bounce);
   }
   .pref.flash-right {
-    background: var(--leaf);
+    background: linear-gradient(135deg, var(--leaf), #16A34A);
     color: white;
-    animation: prefFlash 0.4s;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+    animation: prefFlash 0.4s var(--ease-bounce);
   }
   @keyframes prefFlash {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.12); }
+    50% { transform: scale(1.15); }
   }
 
-  .penalty-flash {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--sienna);
-    color: white;
-    padding: 8px 18px;
-    border-radius: 24px;
-    font-family: 'Fredoka', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    z-index: 100;
-    animation: penaltyFly 1s forwards;
-    pointer-events: none;
-    border: 2px solid var(--ink);
-    box-shadow: 3px 3px 0 var(--ink);
-  }
-  @keyframes penaltyFly {
-    0% { opacity: 0; transform: translate(-50%, 10px); }
-    20% { opacity: 1; transform: translate(-50%, 0); }
-    80% { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%, -16px); }
-  }
-
-  /* -------- WIN -------- */
-
-  .win-header {
+  /* ═══════════════ WIN SCREEN ═══════════════ */
+  .win-hero {
     text-align: center;
-    padding: 36px 0 16px;
+    padding: 48px 0 24px;
   }
-  .win-header .accolade {
+  .win-accolade {
+    display: inline-block;
     font-family: 'Fredoka', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(135deg, var(--terrain), color-mix(in srgb, var(--terrain) 80%, black));
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-terrain);
+  }
+  .win-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 12vw, 60px);
+    color: var(--ink);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144;
+    line-height: 1;
+  }
+
+  .win-score-hero {
+    text-align: center;
+    margin: 24px 0 20px;
+    padding: 24px 20px;
+    background: linear-gradient(135deg, var(--paper) 0%, var(--terrain-tint) 100%);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+  }
+  .win-score-hero .label {
     font-size: 11px;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: white;
-    background: var(--terrain);
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 2px solid var(--ink);
+    color: var(--ink-3);
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
   }
-  .win-header h2 {
+  .win-score-hero .value {
     font-family: 'Fraunces', serif;
-    font-size: 40px;
-    color: var(--ink);
     font-weight: 900;
-    letter-spacing: -0.02em;
+    font-size: clamp(56px, 18vw, 88px);
+    color: var(--terrain);
+    line-height: 1;
     font-variation-settings: "opsz" 144;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+  }
+  .win-score-hero .of {
+    color: var(--ink-3);
+    font-size: 0.5em;
+  }
+  .win-score-hero .sub {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 8px;
+    font-weight: 600;
   }
 
   .win-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin: 20px 0;
+    margin-bottom: 20px;
   }
   .win-stat {
     background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 16px 12px;
+    border-radius: 16px;
+    padding: 16px 14px;
     text-align: center;
-    box-shadow: 3px 3px 0 var(--ink);
+    box-shadow: var(--shadow-sm);
   }
   .win-stat .label {
-    font-family: 'Fredoka', sans-serif;
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: var(--ink-3);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .win-stat .value {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 800;
-    color: var(--terrain);
+    color: var(--ink);
     font-variant-numeric: tabular-nums;
   }
   .win-stat .sub {
     font-family: 'Fredoka', sans-serif;
     font-size: 11px;
-    color: var(--ink-soft);
+    color: var(--ink-3);
     margin-top: 4px;
     font-weight: 500;
   }
 
   .win-meta {
     background: var(--paper);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-    box-shadow: 3px 3px 0 var(--ink);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
   }
   .win-meta .label {
-    font-family: 'Fredoka', sans-serif;
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: var(--ink-3);
     font-weight: 700;
     margin-bottom: 6px;
   }
   .win-meta .value {
     font-family: 'Fraunces', serif;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     color: var(--ink);
     font-variation-settings: "opsz" 144;
   }
-  .win-meta .value .discovered {
-    color: var(--leaf);
-  }
+  .win-meta .discovered { color: var(--c-forestiere); }
   .win-meta .newly {
     font-family: 'Fredoka', sans-serif;
-    font-size: 12px;
-    color: var(--ochre-deep);
+    font-size: 12.5px;
+    color: var(--gold);
     margin-top: 4px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .win-actions {
@@ -724,30 +896,26 @@
     gap: 10px;
     margin-top: auto;
   }
-  .secondary-btn {
-    background: transparent;
+  .secondary {
+    background: var(--paper);
     color: var(--ink);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 14px 20px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 15px 20px;
     font-family: 'Fredoka', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    letter-spacing: 0.04em;
-    box-shadow: 3px 3px 0 var(--ink);
-    transition: transform 0.08s, box-shadow 0.08s;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease-out);
   }
-  .secondary-btn:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-  .secondary-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 var(--ink);
+  .secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
-  /* -------- RESPONSIVE PREF GRID -------- */
+  /* Responsive pref grid */
   @media (min-width: 480px) {
     .pref-grid.tight { grid-template-columns: repeat(3, 1fr); }
     .pref-grid.medium { grid-template-columns: repeat(4, 1fr); }
@@ -759,52 +927,61 @@
     .pref-grid.medium { grid-template-columns: repeat(3, 1fr); }
     .pref-grid.wide { grid-template-columns: repeat(3, 1fr); }
     .pref-grid.national { grid-template-columns: repeat(3, 1fr); }
-    .pref { font-size: 12px; padding: 10px 4px; }
+    .pref { font-size: 12.5px; padding: 12px 4px; }
+    .scopes.two { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
 <body>
 
+<canvas id="confetti"></canvas>
+
 <!-- ============ MENU ============ -->
 <section id="menu" class="screen active">
-  <div class="brand">
-    <span class="brand-mark">La<em>Guin</em>è<span class="three">378</span></span>
-    <span class="brand-tag">Sprint</span>
-  </div>
-  <p class="subtitle">
-    Chaque sous-préfecture n'apparaît qu'une fois. Complète les 378 et tu connais la Guinée sur le bout des doigts.
-  </p>
-
-  <div class="meta-panel">
-    <div class="label">
-      <span>Mon parcours</span>
-      <span id="metaPercent">0%</span>
+  <div class="hero">
+    <div class="brand-row">
+      <div class="brand">La<span class="accent">Guin</span>è<span class="three">378</span></div>
+      <span class="tag">Sprint</span>
     </div>
-    <div class="value">
-      <span class="ok" id="metaCounter">0</span>
+    <p class="tagline">
+      Rattache chaque sous-préfecture à sa préfecture. Le plus vite possible. Chaque trouvaille ne revient plus.
+    </p>
+  </div>
+
+  <div class="parcours">
+    <div class="parcours-head">
+      <span class="parcours-label">Mon parcours</span>
+      <span class="parcours-pct" id="metaPct">0%</span>
+    </div>
+    <div class="parcours-number">
+      <span class="found" id="metaCount">0</span>
       <span class="of">/ 378</span>
     </div>
-    <div class="meta-bar"><div class="meta-bar-fill" id="metaBarFill" style="width:0%"></div></div>
-    <div class="meta-note" id="metaNote">Base v1 · 349 sous-préf. répertoriées, les 29 restantes seront ajoutées.</div>
+    <div class="parcours-bar">
+      <div class="parcours-bar-fill" id="metaBar" style="width:0%"></div>
+    </div>
+    <div class="parcours-note" id="metaNote">Base v1 · 349 sous-préf. répertoriées, les 29 restantes seront ajoutées.</div>
   </div>
 
-  <div class="section-label"><span>Toute la Guinée</span></div>
-  <div class="options grid-1" id="scopeAll"></div>
+  <div class="section-title">Toute la Guinée</div>
+  <div class="scopes one" id="scopeAll"></div>
 
-  <div class="section-label"><span>Régions naturelles</span></div>
-  <div class="options grid-2" id="scopeNat"></div>
+  <div class="section-title">Régions naturelles</div>
+  <div class="scopes two" id="scopeNat"></div>
 
-  <div class="section-label"><span>Régions administratives</span></div>
-  <div class="options grid-2" id="scopeAdm"></div>
+  <div class="section-title">Régions administratives</div>
+  <div class="scopes two" id="scopeAdm"></div>
 
-  <div class="section-label"><span>Combien de sous-préf. ?</span></div>
-  <div class="options grid-4" id="countOptions"></div>
+  <div class="section-title">Combien de sous-préf. ?</div>
+  <div class="counts" id="counts"></div>
 
-  <button class="primary-btn" id="startBtn" disabled>Commencer le sprint</button>
+  <button class="cta" id="startBtn" disabled>
+    Commencer le sprint <span class="cta-arrow">→</span>
+  </button>
 
   <div class="reset-row">
     <button class="reset-btn" id="resetBtn">Réinitialiser mon parcours</button>
@@ -814,14 +991,18 @@
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
-    <div class="hud-chrono" id="chrono">0.0s</div>
-    <div class="hud-scope" id="hudScope"></div>
-    <div class="hud-progress"><span id="progNow">0</span>/<span id="progTotal">0</span></div>
+    <div>
+      <div class="chrono" id="chrono">0.0s</div>
+      <div class="chrono-label">Chrono</div>
+    </div>
+    <div class="scope-name-hud" id="hudScope"></div>
+    <div class="progress-hud"><span id="progNow">0</span>/<span id="progTotal">0</span></div>
   </div>
   <div class="quit-row">
     <button class="quit-btn" id="quitBtn">← Abandonner</button>
   </div>
   <div class="card-stage">
+    <div class="combo" id="combo"><span class="x">×</span><span id="comboNum">3</span></div>
     <div class="card" id="card">
       <div class="name" id="cardName">—</div>
     </div>
@@ -832,21 +1013,29 @@
 
 <!-- ============ WIN ============ -->
 <section id="win" class="screen">
-  <div class="win-header">
-    <div class="accolade" id="winAccolade">Défi accompli</div>
-    <h2 id="winTitle">Bravo !</h2>
+  <div class="win-hero">
+    <div class="win-accolade" id="winAccolade">Défi accompli</div>
+    <h2 class="win-title" id="winTitle">Bravo !</h2>
+  </div>
+
+  <div class="win-score-hero">
+    <div class="label">Score</div>
+    <div class="value">
+      <span id="winScoreN">0</span><span class="of">/<span id="winScoreT">0</span></span>
+    </div>
+    <div class="sub" id="winAccuracy">— % de bonnes réponses</div>
   </div>
 
   <div class="win-stats">
     <div class="win-stat">
-      <div class="label">Score</div>
-      <div class="value" id="winScore">—</div>
-      <div class="sub" id="winAccuracy">—</div>
-    </div>
-    <div class="win-stat">
       <div class="label">Temps</div>
       <div class="value" id="winTime">—</div>
       <div class="sub" id="winPace">—</div>
+    </div>
+    <div class="win-stat">
+      <div class="label">Meilleur combo</div>
+      <div class="value" id="winCombo">×0</div>
+      <div class="sub">Sans faute d'affilée</div>
     </div>
   </div>
 
@@ -857,13 +1046,14 @@
   </div>
 
   <div class="win-actions">
-    <button class="primary-btn" id="againBtn">Encore un sprint</button>
-    <button class="secondary-btn" id="backBtn">Changer de terrain</button>
+    <button class="cta" id="againBtn">Encore un sprint <span class="cta-arrow">→</span></button>
+    <button class="secondary" id="backBtn">Changer de terrain</button>
   </div>
 </section>
 
 <script>
-console.log("LaGuinè378 v2.1 — one-shot per sous-préf");
+console.log("LaGuinè378 v3 — modern refresh");
+
 const DATA = [
   // === CONAKRY ===
   ["Kaloum","Conakry","conakry","basse"],
@@ -1235,36 +1425,37 @@ const DATA = [
 
 // ============ SCOPES ============
 const SCOPES = [
-  { id: "all", label: "Toute la Guinée", type: "all", color: "#7B3FBF" },
-  { id: "basse", label: "Basse-Guinée", type: "nat", key: "basse", color: "#1F76B8" },
-  { id: "moyenne", label: "Moyenne-Guinée (Fouta)", type: "nat", key: "moyenne", color: "#D4732A" },
-  { id: "haute", label: "Haute-Guinée", type: "nat", key: "haute", color: "#F9B233" },
-  { id: "forestiere", label: "Guinée Forestière", type: "nat", key: "forestiere", color: "#147246" },
-  { id: "adm_boke", label: "Région Boké", type: "adm", key: "boke", color: "#B85A1A" },
-  { id: "adm_kindia", label: "Région Kindia", type: "adm", key: "kindia", color: "#6BAA43" },
-  { id: "adm_labe", label: "Région Labé", type: "adm", key: "labe", color: "#5B4EBD" },
-  { id: "adm_mamou", label: "Région Mamou", type: "adm", key: "mamou", color: "#E8A83A" },
-  { id: "adm_faranah", label: "Région Faranah", type: "adm", key: "faranah", color: "#2E9AA7" },
-  { id: "adm_kankan", label: "Région Kankan", type: "adm", key: "kankan", color: "#C79B2A" },
-  { id: "adm_nzerekore", label: "Région N'Zérékoré", type: "adm", key: "nzerekore", color: "#1E5F3E" },
-  { id: "adm_conakry", label: "Conakry", type: "adm", key: "conakry", color: "#2B5FB8" }
+  { id: "all", label: "Toute la Guinée", type: "all", color: "#7B3FBF", mark: "GN" },
+  { id: "basse", label: "Basse-Guinée", type: "nat", key: "basse", color: "#2563EB", mark: "BG" },
+  { id: "moyenne", label: "Moyenne-Guinée (Fouta)", type: "nat", key: "moyenne", color: "#EA580C", mark: "MG" },
+  { id: "haute", label: "Haute-Guinée", type: "nat", key: "haute", color: "#F59E0B", mark: "HG" },
+  { id: "forestiere", label: "Guinée Forestière", type: "nat", key: "forestiere", color: "#059669", mark: "GF" },
+  { id: "adm_boke", label: "Région Boké", type: "adm", key: "boke", color: "#C2410C", mark: "BK" },
+  { id: "adm_kindia", label: "Région Kindia", type: "adm", key: "kindia", color: "#65A30D", mark: "KD" },
+  { id: "adm_labe", label: "Région Labé", type: "adm", key: "labe", color: "#6366F1", mark: "LB" },
+  { id: "adm_mamou", label: "Région Mamou", type: "adm", key: "mamou", color: "#D97706", mark: "MM" },
+  { id: "adm_faranah", label: "Région Faranah", type: "adm", key: "faranah", color: "#0891B2", mark: "FR" },
+  { id: "adm_kankan", label: "Région Kankan", type: "adm", key: "kankan", color: "#CA8A04", mark: "KN" },
+  { id: "adm_nzerekore", label: "Région N'Zérékoré", type: "adm", key: "nzerekore", color: "#047857", mark: "NZ" },
+  { id: "adm_conakry", label: "Conakry", type: "adm", key: "conakry", color: "#1D4ED8", mark: "CK" }
 ];
 
 function scopeById(id) { return SCOPES.find(s => s.id === id); }
 
 // ============ STATE ============
 const state = {
-  scope: null,        // scope id
-  target: null,       // 10 | 20 | 30 | 50 | -1 (toutes restantes)
+  scope: null,
+  target: null,
   deck: [],
   index: 0,
   correct: 0,
   errors: 0,
   startedAt: null,
-  penalty: 0,
   chronoTimer: null,
   scopePrefs: [],
-  newlyDiscovered: []
+  newlyDiscovered: [],
+  streak: 0,
+  bestStreak: 0
 };
 
 // ============ META (localStorage) ============
@@ -1282,12 +1473,37 @@ function saveEncountered(set) {
 }
 function metaCount() { return loadEncountered().size; }
 
-function refreshMetaCounter() {
+function animateMetaCounter(oldCount, newCount) {
+  const countEl = document.getElementById("metaCount");
+  const pctEl = document.getElementById("metaPct");
+  const barEl = document.getElementById("metaBar");
+  const duration = 800;
+  const start = performance.now();
+  const step = (t) => {
+    const elapsed = t - start;
+    const p = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const cur = Math.round(oldCount + (newCount - oldCount) * eased);
+    countEl.textContent = cur;
+    const pct = Math.round((cur / TOTAL_TARGET) * 100);
+    pctEl.textContent = pct + "%";
+    barEl.style.width = Math.min(pct, 100) + "%";
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function refreshMetaCounter(animated) {
   const c = metaCount();
-  document.getElementById("metaCounter").textContent = c;
-  const pct = Math.round((c / TOTAL_TARGET) * 100);
-  document.getElementById("metaPercent").textContent = pct + "%";
-  document.getElementById("metaBarFill").style.width = Math.min(pct, 100) + "%";
+  if (animated) {
+    const old = parseInt(document.getElementById("metaCount").textContent) || 0;
+    animateMetaCounter(old, c);
+  } else {
+    document.getElementById("metaCount").textContent = c;
+    const pct = Math.round((c / TOTAL_TARGET) * 100);
+    document.getElementById("metaPct").textContent = pct + "%";
+    document.getElementById("metaBar").style.width = Math.min(pct, 100) + "%";
+  }
 }
 
 // ============ HELPERS ============
@@ -1299,8 +1515,6 @@ function shuffle(arr) {
   }
   return a;
 }
-
-// Full pool for a scope (before exclusion of guessed)
 function poolFor(scopeId) {
   const scope = scopeById(scopeId);
   if (!scope || scope.type === "all") return DATA;
@@ -1308,14 +1522,10 @@ function poolFor(scopeId) {
   if (scope.type === "adm") return DATA.filter(row => row[2] === scope.key);
   return DATA;
 }
-
 function prefsFor(scopeId) {
-  const pool = poolFor(scopeId);
-  const set = new Set(pool.map(row => row[1]));
+  const set = new Set(poolFor(scopeId).map(row => row[1]));
   return [...set].sort((a, b) => a.localeCompare(b, "fr"));
 }
-
-// Merge homonyms → [{ name, validPrefs: Set }]
 function mergeByName(arr) {
   const map = new Map();
   for (const [sp, pref] of arr) {
@@ -1324,27 +1534,26 @@ function mergeByName(arr) {
   }
   return [...map.values()];
 }
-
-// How many unique names in scope
-function scopeUniqueSize(scopeId) {
-  return mergeByName(poolFor(scopeId)).length;
-}
-
-// How many unique names remain (not yet guessed) in scope
 function scopeRemainingSize(scopeId) {
   const encountered = loadEncountered();
   return mergeByName(poolFor(scopeId)).filter(e => !encountered.has(e.name)).length;
 }
-
-// Available count options given the scope
 function availableCounts(scopeId) {
   const remaining = scopeRemainingSize(scopeId);
   const options = [10, 20, 30, 50].filter(n => n <= remaining);
-  // If remaining but < 10, offer "toutes"
   if (remaining > 0 && remaining < 10) {
     return [{ n: -1, label: "Toutes (" + remaining + ")", target: remaining }];
   }
   return options.map(n => ({ n, label: String(n), target: n }));
+}
+
+// Convert hex color to rgba string with given alpha
+function hexToRgba(hex, alpha) {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.substr(0, 2), 16);
+  const g = parseInt(h.substr(2, 2), 16);
+  const b = parseInt(h.substr(4, 2), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
 }
 
 // ============ MENU RENDERING ============
@@ -1364,14 +1573,16 @@ function renderScopes() {
     const remaining = total - found;
 
     const tile = document.createElement("button");
-    tile.className = "scope-tile" + (scope.id === "all" ? " all-tile" : "");
+    tile.className = "scope" + (scope.id === "all" ? " big" : "");
     tile.style.setProperty("--tile-color", scope.color);
+    tile.style.setProperty("--tile-color-glow", hexToRgba(scope.color, 0.35));
+    tile.style.setProperty("--tile-tint", hexToRgba(scope.color, 0.10));
     tile.dataset.scope = scope.id;
     tile.innerHTML = `
-      <div class="dot"></div>
-      <div class="info">
-        <span class="name">${scope.label}</span>
-        <div class="stat">${found} / ${total} découvertes · ${remaining} restantes</div>
+      <div class="scope-mark">${scope.mark}</div>
+      <div class="scope-info">
+        <span class="scope-name">${scope.label}</span>
+        <div class="scope-stat"><span class="found">${found}</span> / ${total} découvertes · ${remaining} restantes</div>
       </div>
     `;
     if (remaining === 0 && total > 0) {
@@ -1385,13 +1596,12 @@ function renderScopes() {
 }
 
 function renderCounts() {
-  const container = document.getElementById("countOptions");
+  const container = document.getElementById("counts");
   container.innerHTML = "";
   if (!state.scope) {
-    // Placeholder disabled buttons
     [10, 20, 30, 50].forEach(n => {
       const b = document.createElement("button");
-      b.className = "count-tile";
+      b.className = "count";
       b.disabled = true;
       b.textContent = n;
       container.appendChild(b);
@@ -1401,16 +1611,15 @@ function renderCounts() {
   const opts = availableCounts(state.scope);
   if (opts.length === 0) {
     const msg = document.createElement("div");
-    msg.style.cssText = "grid-column: 1/-1; text-align:center; padding: 14px; color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic;";
+    msg.className = "count-none";
     msg.textContent = "Terrain complété ! Choisis un autre terrain ou réinitialise ton parcours.";
     container.appendChild(msg);
     return;
   }
   opts.forEach(opt => {
     const b = document.createElement("button");
-    b.className = "count-tile";
+    b.className = "count";
     b.dataset.target = opt.target;
-    b.dataset.n = opt.n;
     b.textContent = opt.label;
     b.addEventListener("click", () => selectCount(opt.target, b));
     container.appendChild(b);
@@ -1420,40 +1629,36 @@ function renderCounts() {
 function applyTerrainColor(scopeId) {
   const scope = scopeById(scopeId);
   if (!scope) return;
-  document.documentElement.style.setProperty("--terrain", scope.color);
-  // Soft version for backgrounds
-  document.documentElement.style.setProperty("--terrain-soft", scope.color + "22");
+  const root = document.documentElement;
+  root.style.setProperty("--terrain", scope.color);
+  root.style.setProperty("--terrain-glow", hexToRgba(scope.color, 0.28));
+  root.style.setProperty("--terrain-tint", hexToRgba(scope.color, 0.08));
 }
 
 function selectScope(scopeId) {
   state.scope = scopeId;
   state.target = null;
-  document.querySelectorAll(".scope-tile").forEach(el => {
+  document.querySelectorAll(".scope").forEach(el => {
     el.classList.toggle("selected", el.dataset.scope === scopeId);
   });
   applyTerrainColor(scopeId);
   renderCounts();
   refreshStartBtn();
 }
-
 function selectCount(target, btnEl) {
   state.target = target;
-  document.querySelectorAll(".count-tile").forEach(el => el.classList.remove("selected"));
+  document.querySelectorAll(".count").forEach(el => el.classList.remove("selected"));
   if (btnEl) btnEl.classList.add("selected");
   refreshStartBtn();
 }
-
 function refreshStartBtn() {
   document.getElementById("startBtn").disabled = !(state.scope && state.target);
 }
 
 // ============ GAME LOGIC ============
 function startGame() {
-  const scope = scopeById(state.scope);
   applyTerrainColor(state.scope);
   const encountered = loadEncountered();
-
-  // Build the deck: entries in scope not yet encountered
   const remainingEntries = mergeByName(poolFor(state.scope)).filter(e => !encountered.has(e.name));
   const shuffled = shuffle(remainingEntries);
   state.deck = shuffled.slice(0, state.target);
@@ -1461,13 +1666,15 @@ function startGame() {
   state.index = 0;
   state.correct = 0;
   state.errors = 0;
-  state.penalty = 0;
   state.newlyDiscovered = [];
+  state.streak = 0;
+  state.bestStreak = 0;
   state.startedAt = performance.now();
 
-  document.getElementById("hudScope").textContent = scope.label;
+  document.getElementById("hudScope").textContent = scopeById(state.scope).label;
   document.getElementById("progTotal").textContent = state.deck.length;
   document.getElementById("progNow").textContent = "0";
+  hideCombo();
 
   renderPrefGrid();
   showCard();
@@ -1483,7 +1690,6 @@ function renderPrefGrid() {
   else if (n <= 8) grid.classList.add("medium");
   else if (n <= 12) grid.classList.add("wide");
   else grid.classList.add("national");
-
   grid.innerHTML = "";
   state.scopePrefs.forEach(pref => {
     const btn = document.createElement("button");
@@ -1496,17 +1702,33 @@ function renderPrefGrid() {
 }
 
 function currentCard() { return state.deck[state.index]; }
-
 let acceptingInput = true;
 
 function showCard() {
   const entry = currentCard();
   const card = document.getElementById("card");
-  const nameEl = document.getElementById("cardName");
-  nameEl.textContent = entry.name;
   card.classList.remove("wrong", "right");
-  card.style.transform = `rotate(${state.index % 2 === 0 ? -1 : 1}deg)`;
+  document.getElementById("cardName").textContent = entry.name;
+  card.style.transform = `rotate(${state.index % 2 === 0 ? -1.2 : 1.2}deg)`;
   acceptingInput = true;
+}
+
+function showCombo(n) {
+  const el = document.getElementById("combo");
+  document.getElementById("comboNum").textContent = n;
+  el.classList.add("show");
+  el.classList.remove("pop");
+  void el.offsetWidth;  // reflow to restart animation
+  el.classList.add("pop");
+  vibrate(30);
+}
+function hideCombo() {
+  const el = document.getElementById("combo");
+  el.classList.remove("show", "pop");
+}
+
+function vibrate(ms) {
+  if (navigator.vibrate) try { navigator.vibrate(ms); } catch(e) {}
 }
 
 function handlePrefTap(btn, pref) {
@@ -1515,16 +1737,22 @@ function handlePrefTap(btn, pref) {
 
   if (entry.validPrefs.has(pref)) {
     state.correct++;
+    state.streak++;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
     btn.classList.add("flash-right");
     document.getElementById("card").classList.add("right");
     acceptingInput = false;
+    vibrate(15);
+
     const enc = loadEncountered();
     if (!enc.has(entry.name)) {
       enc.add(entry.name);
       state.newlyDiscovered.push(entry.name);
       saveEncountered(enc);
     }
-    // Notifie le parent (React wrapper via logProgress) — chaque sous-préf trouvée
+
+    if (state.streak >= 3) showCombo(state.streak);
+
     try {
       window.parent.postMessage({
         type: "pati-progress",
@@ -1532,6 +1760,7 @@ function handlePrefTap(btn, pref) {
         ref: entry.name
       }, "*");
     } catch(e) {}
+
     setTimeout(() => {
       btn.classList.remove("flash-right");
       state.index++;
@@ -1544,15 +1773,17 @@ function handlePrefTap(btn, pref) {
     }, 420);
   } else {
     state.errors++;
+    state.streak = 0;
+    hideCombo();
     btn.classList.add("flash-wrong");
     document.getElementById("card").classList.add("wrong");
     acceptingInput = false;
+    vibrate([20, 40, 20]);
+
     setTimeout(() => {
       btn.classList.remove("flash-wrong");
       state.index++;
       document.getElementById("progNow").textContent = state.index;
-      // La sous-préf ratée n'est PAS ajoutée à encountered — elle pourra revenir dans un prochain sprint.
-      // On avance sur la carte suivante ou on termine si on a épuisé le deck.
       if (state.index >= state.deck.length) {
         finishGame();
       } else {
@@ -1562,20 +1793,11 @@ function handlePrefTap(btn, pref) {
   }
 }
 
-function flashPenalty(text) {
-  const el = document.createElement("div");
-  el.className = "penalty-flash";
-  el.textContent = text;
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1000);
-}
-
 // ============ CHRONO ============
 function startChrono() {
   const chronoEl = document.getElementById("chrono");
   const tick = () => {
-    const now = performance.now();
-    const elapsed = (now - state.startedAt + state.penalty) / 1000;
+    const elapsed = (performance.now() - state.startedAt) / 1000;
     chronoEl.textContent = elapsed.toFixed(1) + "s";
   };
   tick();
@@ -1586,22 +1808,78 @@ function stopChrono() {
   state.chronoTimer = null;
 }
 
+// ============ CONFETTI ============
+function launchConfetti(intensity) {
+  const canvas = document.getElementById("confetti");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext("2d");
+  const colors = ["#F59E0B", "#22C55E", "#2563EB", "#EA580C", "#7B3FBF", "#059669"];
+  const count = intensity || 90;
+  const particles = [];
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight * 0.35;
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: cx + (Math.random() - 0.5) * 60,
+      y: cy,
+      vx: (Math.random() - 0.5) * 14,
+      vy: -Math.random() * 16 - 6,
+      color: colors[i % colors.length],
+      size: Math.random() * 8 + 5,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.35,
+      shape: Math.random() > 0.5 ? "rect" : "circle"
+    });
+  }
+  let frames = 0;
+  const max = 180;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.42;
+      p.vx *= 0.995;
+      p.angle += p.spin;
+      const alpha = Math.max(0, 1 - frames / max);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      if (p.shape === "rect") {
+        ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.6);
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    });
+    frames++;
+    if (frames < max) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  draw();
+}
+
 // ============ FINISH ============
 function finishGame() {
   stopChrono();
-  const totalMs = (performance.now() - state.startedAt) + state.penalty;
-  const totalSec = totalMs / 1000;
+  hideCombo();
+  const totalSec = (performance.now() - state.startedAt) / 1000;
   const cardsSeen = state.deck.length;
   const pacePerCard = totalSec / Math.max(cardsSeen, 1);
 
+  document.getElementById("winScoreN").textContent = state.correct;
+  document.getElementById("winScoreT").textContent = cardsSeen;
+  const accuracy = cardsSeen > 0 ? Math.round((state.correct / cardsSeen) * 100) : 0;
+  document.getElementById("winAccuracy").textContent = accuracy + " % de bonnes réponses";
   document.getElementById("winTime").textContent = totalSec.toFixed(1) + "s";
-  document.getElementById("winPace").textContent = pacePerCard.toFixed(1) + "s / sous-préf.";
-  document.getElementById("winScore").textContent = state.correct + " / " + cardsSeen;
-  const accuracy = cardsSeen > 0
-    ? Math.round((state.correct / cardsSeen) * 100)
-    : 0;
-  document.getElementById("winAccuracy").textContent = accuracy + "% de bonnes réponses";
-  document.getElementById("winMetaCount").textContent = metaCount();
+  document.getElementById("winPace").textContent = pacePerCard.toFixed(1) + "s / carte";
+  document.getElementById("winCombo").textContent = "×" + state.bestStreak;
+
   const newly = state.newlyDiscovered.length;
   const newlyEl = document.getElementById("winNewly");
   if (newly > 0) {
@@ -1611,12 +1889,43 @@ function finishGame() {
   }
 
   const title = document.getElementById("winTitle");
-  if (state.errors === 0 && state.correct === cardsSeen) title.textContent = "Sans faute !";
-  else if (accuracy >= 80) title.textContent = "Bien joué !";
-  else if (accuracy >= 50) title.textContent = "Pas mal.";
-  else title.textContent = "À réessayer.";
+  const accolade = document.getElementById("winAccolade");
+  if (state.errors === 0 && state.correct === cardsSeen) {
+    title.textContent = "Sans faute !";
+    accolade.textContent = "Perfection";
+  } else if (accuracy >= 90) {
+    title.textContent = "Excellent !";
+    accolade.textContent = "Défi accompli";
+  } else if (accuracy >= 70) {
+    title.textContent = "Bien joué !";
+    accolade.textContent = "Défi accompli";
+  } else if (accuracy >= 50) {
+    title.textContent = "Pas mal.";
+    accolade.textContent = "Défi accompli";
+  } else {
+    title.textContent = "À réessayer.";
+    accolade.textContent = "Défi terminé";
+  }
 
   switchScreen("win");
+
+  // Meta counter animation on the win screen — animate discovery count
+  const oldCount = metaCount() - newly;
+  const winMetaEl = document.getElementById("winMetaCount");
+  const dur = 800;
+  const start = performance.now();
+  const stepMeta = (t) => {
+    const p = Math.min((t - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    winMetaEl.textContent = Math.round(oldCount + newly * eased);
+    if (p < 1) requestAnimationFrame(stepMeta);
+  };
+  requestAnimationFrame(stepMeta);
+
+  // Confetti calibrated by score
+  if (accuracy >= 80) launchConfetti(120);
+  else if (accuracy >= 50) launchConfetti(60);
+  else launchConfetti(30);
 
   try {
     window.parent.postMessage({
@@ -1626,20 +1935,11 @@ function finishGame() {
       target: state.target,
       correct: state.correct,
       errors: state.errors,
+      bestStreak: state.bestStreak,
       seconds: totalSec
     }, "*");
   } catch(e) {}
 }
-
-// Écoute les messages du parent (React wrapper) — plein écran, config Supabase future
-window.addEventListener("message", (e) => {
-  const d = e.data;
-  if (!d || typeof d !== "object") return;
-  if (d.type === "pati-fs") {
-    document.body.classList.toggle("fs-on", !!d.on);
-  }
-  // pati-config (Supabase) : ignoré en v1 — le jeu tourne en localStorage
-});
 
 // ============ SCREENS ============
 function switchScreen(name) {
@@ -1648,8 +1948,7 @@ function switchScreen(name) {
   if (name === "menu") {
     refreshMetaCounter();
     renderScopes();
-    // If a scope was selected before, keep it; else clear counts
-    if (state.scope) renderCounts(); else renderCounts();
+    renderCounts();
   }
 }
 
@@ -1659,13 +1958,24 @@ function resetProgress() {
   try { localStorage.removeItem(META_KEY); } catch(e) {}
   state.scope = null;
   state.target = null;
-  document.querySelectorAll(".scope-tile").forEach(el => el.classList.remove("selected"));
+  document.querySelectorAll(".scope").forEach(el => el.classList.remove("selected"));
   document.documentElement.style.setProperty("--terrain", "#7B3FBF");
+  document.documentElement.style.setProperty("--terrain-glow", "rgba(123,63,191,0.28)");
+  document.documentElement.style.setProperty("--terrain-tint", "rgba(123,63,191,0.08)");
   refreshMetaCounter();
   renderScopes();
   renderCounts();
   refreshStartBtn();
 }
+
+// ============ PARENT MESSAGES ============
+window.addEventListener("message", (e) => {
+  const d = e.data;
+  if (!d || typeof d !== "object") return;
+  if (d.type === "pati-fs") {
+    document.body.classList.toggle("fs-on", !!d.on);
+  }
+});
 
 // ============ INIT ============
 document.addEventListener("DOMContentLoaded", () => {
@@ -1678,25 +1988,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.getElementById("quitBtn").addEventListener("click", () => {
     stopChrono();
+    hideCombo();
     state.scope = null;
     state.target = null;
     document.documentElement.style.setProperty("--terrain", "#7B3FBF");
+    document.documentElement.style.setProperty("--terrain-glow", "rgba(123,63,191,0.28)");
+    document.documentElement.style.setProperty("--terrain-tint", "rgba(123,63,191,0.08)");
     switchScreen("menu");
   });
   document.getElementById("againBtn").addEventListener("click", () => {
-    // Re-check remaining pool: if enough, restart same setup; else back to menu
     if (state.scope && scopeRemainingSize(state.scope) >= state.target) {
       startGame();
     } else {
       switchScreen("menu");
-      // Refresh counts as pool likely changed
-      if (state.scope) renderCounts();
     }
   });
   document.getElementById("backBtn").addEventListener("click", () => {
     state.scope = null;
     state.target = null;
     document.documentElement.style.setProperty("--terrain", "#7B3FBF");
+    document.documentElement.style.setProperty("--terrain-glow", "rgba(123,63,191,0.28)");
+    document.documentElement.style.setProperty("--terrain-tint", "rgba(123,63,191,0.08)");
     switchScreen("menu");
   });
   document.getElementById("resetBtn").addEventListener("click", resetProgress);
