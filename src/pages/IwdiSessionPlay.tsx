@@ -35,30 +35,31 @@ export default function IwdiSessionPlay() {
   // ── Chargement initial + abonnement Realtime ─────────────────────────
   useEffect(() => {
     if (!code) return;
+    let cancelled = false;
     let unsub: (() => void) | null = null;
     (async () => {
       try {
         const g = await fetchIwdiGame(code);
-        if (!g) {
-          setErr("Partie introuvable. Vérifie le code.");
-          setLoading(false);
-          return;
-        }
+        if (cancelled) return;
+        // g peut être null : la partie n'existe pas encore côté iwdi_games.
+        // C'est normal : le 1er joueur qui rejoint la créera automatiquement.
         setGame(g);
         setLoading(false);
-        // Si je suis déjà dans la partie (reconnexion)
-        if (g.players.some((p) => p.id === myId)) setJoined(true);
-        // Abonnement aux mises à jour
+        if (g && g.players.some((p) => p.id === myId)) setJoined(true);
+        // Abonnement aux mises à jour (déclenché dès qu'une ligne est créée)
+        if (cancelled) return;
         unsub = subscribeIwdiGame(code, (newGame) => {
           setGame(newGame);
           setConnected(true);
         });
       } catch (e: any) {
+        if (cancelled) return;
         setErr(e.message || "Erreur de chargement");
         setLoading(false);
       }
     })();
     return () => {
+      cancelled = true;
       if (unsub) unsub();
     };
   }, [code, myId]);
@@ -183,12 +184,23 @@ export default function IwdiSessionPlay() {
     );
   }
 
-  if (!game) return null;
+  // Si la partie n'existe pas encore côté iwdi_games, on affiche un lobby vide.
+  // Le 1er "Rejoindre" créera la ligne (via joinIwdiGame → _createIwdiRow).
+  const displayGame: IwdiGame = game || {
+    code: code!,
+    host_id: "",
+    players: [],
+    state: null,
+    status: "lobby",
+    winner_position: null,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
 
   // ═══════════════════════════════════════════════════════════════════
   // LOBBY : partie pas encore lancée
   // ═══════════════════════════════════════════════════════════════════
-  if (game.status === "lobby") {
+  if (displayGame.status === "lobby") {
     return (
       <div style={{ background: CREAM, minHeight: "80vh" }}>
         <section className="max-w-2xl mx-auto px-6 py-8">
@@ -243,10 +255,10 @@ export default function IwdiSessionPlay() {
           {/* Joueurs */}
           <div className="mb-6">
             <div className="text-sm font-bold uppercase tracking-widest mb-3" style={{ color: "#3a4a42" }}>
-              Joueurs ({game.players.length}/4)
+              Joueurs ({displayGame.players.length}/4)
             </div>
             <div className="space-y-2">
-              {game.players.map((p) => (
+              {displayGame.players.map((p) => (
                 <div
                   key={p.id}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl"
@@ -275,7 +287,7 @@ export default function IwdiSessionPlay() {
                   )}
                 </div>
               ))}
-              {[...Array(Math.max(0, 4 - game.players.length))].map((_, i) => (
+              {[...Array(Math.max(0, 4 - displayGame.players.length))].map((_, i) => (
                 <div
                   key={"empty-" + i}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-dashed"
@@ -307,12 +319,12 @@ export default function IwdiSessionPlay() {
                 />
                 <button
                   onClick={doJoin}
-                  disabled={joining || !name.trim() || game.players.length >= 4}
+                  disabled={joining || !name.trim() || displayGame.players.length >= 4}
                   className="px-6 py-3 rounded-lg font-bold"
                   style={{
                     background: ACCENT,
                     color: "#fff",
-                    opacity: joining || !name.trim() || game.players.length >= 4 ? 0.5 : 1,
+                    opacity: joining || !name.trim() || displayGame.players.length >= 4 ? 0.5 : 1,
                   }}
                 >
                   {joining ? <Loader2 className="animate-spin" size={18} /> : "Rejoindre"}
@@ -323,17 +335,17 @@ export default function IwdiSessionPlay() {
           ) : isHost() ? (
             <button
               onClick={doStart}
-              disabled={game.players.length < 2}
+              disabled={displayGame.players.length < 2}
               className="w-full py-4 rounded-2xl font-black text-lg tracking-wider inline-flex items-center justify-center gap-2"
               style={{
-                background: game.players.length >= 2 ? GOLD : "#ddd",
+                background: displayGame.players.length >= 2 ? GOLD : "#ddd",
                 color: GREEN,
-                opacity: game.players.length >= 2 ? 1 : 0.6,
+                opacity: displayGame.players.length >= 2 ? 1 : 0.6,
                 boxShadow: "0 4px 12px rgba(0,0,0,.1)",
               }}
             >
               <Play size={20} />
-              {game.players.length < 2 ? "En attente d'au moins 1 autre joueur…" : "DÉMARRER LA PARTIE"}
+              {displayGame.players.length < 2 ? "En attente d'au moins 1 autre joueur…" : "DÉMARRER LA PARTIE"}
             </button>
           ) : (
             <div
@@ -362,8 +374,8 @@ export default function IwdiSessionPlay() {
   // ═══════════════════════════════════════════════════════════════════
   // ENDED : partie terminée
   // ═══════════════════════════════════════════════════════════════════
-  if (game.status === "ended") {
-    const winner = game.players.find((p) => p.position === game.winner_position);
+  if (displayGame.status === "ended") {
+    const winner = displayGame.players.find((p) => p.position === displayGame.winner_position);
     return (
       <div style={{ background: CREAM }} className="min-h-[80vh]">
         <div className="max-w-md mx-auto p-8 text-center">
@@ -389,7 +401,7 @@ export default function IwdiSessionPlay() {
   // ═══════════════════════════════════════════════════════════════════
   // PLAYING : le jeu tourne
   // ═══════════════════════════════════════════════════════════════════
-  const meIn = game.players.some((p) => p.id === myId);
+  const meIn = displayGame.players.some((p) => p.id === myId);
   if (!meIn) {
     return (
       <div className="max-w-md mx-auto p-8 text-center" style={{ background: CREAM }}>
