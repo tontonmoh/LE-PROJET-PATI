@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles, BookOpen, Headphones, Film } from "lucide-react";
+import { Sparkles, BookOpen, Headphones, Film, Gamepad2 } from "lucide-react";
 import { SOCIAL } from "../data/site";
 
 // Héros : accroche + illustration de la conteuse en fond.
@@ -45,6 +45,9 @@ export default function FeaturedHero() {
             <a href={SOCIAL.youtube} target="_blank" rel="noopener noreferrer" className="btn-kid bg-[#FFC93C] text-[#0D2B1A]">
               <Film size={18} /> Regarder les dessins animés
             </a>
+            <Link to="/session/new" className="btn-kid bg-[#EA7A2C] text-white">
+              <Gamepad2 size={18} /> Jouer ensemble
+            </Link>
           </div>
         </div>
       </div>
