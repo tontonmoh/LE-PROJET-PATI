@@ -1,7 +1,13 @@
+// MODIFIÉ · src/data/series.ts
+// Ajout JAAMU :
+//   - import { JAAMU } (après KURUKAN)
+//   - Entrée JAAMU en TÊTE du registre SERIES (visibilité lancement)
+
 // Registre des SÉRIES pour le catalogue : une série = UN item (jamais un épisode).
 // La fiche-série vit déjà sur /serie/<slug> ; ici on ne décrit que la vignette.
 import { TAADIDI } from "./series/taadidi";
 import { KURUKAN } from "./series/kurukanFuga";
+import { JAAMU } from "./series/jaamu";                              // ← NOUVEAU
 
 export type SeriesItem = {
   slug: string;
@@ -17,6 +23,23 @@ export type SeriesItem = {
 };
 
 export const SERIES: SeriesItem[] = [
+  {                                                                  // ← NOUVEAU (en tête)
+    slug: JAAMU.id,
+    title: JAAMU.titre,
+    description: JAAMU.pitch,
+    cover: JAAMU.cover,
+    band: "Aventure",
+    to: "/serie/jaamu",
+    auteur: "Mohamed Doumbouya",
+    episodes: {
+      total: JAAMU.tomes.length,
+      live: JAAMU.tomes.filter((t) => t.statut === "live").length,
+    },
+    episodeSlugs: JAAMU.tomes
+      .filter((t) => t.statut === "live")
+      .map((t) => t.slug),
+    nouveau: true,
+  },
   {
     slug: KURUKAN.id,
     title: KURUKAN.titre,

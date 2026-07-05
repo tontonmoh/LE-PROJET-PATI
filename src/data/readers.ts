@@ -1,3 +1,9 @@
+// MODIFIÉ · src/data/readers.ts
+// Ajout JAAMU :
+//   - import { JAAMU, JAAMU_ACCENT } (après KURUKAN)
+//   - Boucle tomes 'live' de JAAMU (en fin de fichier, après Kurukan)
+//   - Slug direct comme clé (pas de préfixe "jaamu-") → URL parlante /livre/sakho-diadjiganke/lire
+
 // Registre unifié des livres à lecture multilingue.
 // Normalise les différents formats sources vers une structure commune,
 // consommée par le lecteur générique BookReaderML.
@@ -52,6 +58,7 @@ import g2040Tome10 from "./g2040-tome10";
 import g2040Tome11 from "./g2040-tome11";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 import { KURUKAN, KURUKAN_ACCENT } from "./series/kurukanFuga";
+import { JAAMU, JAAMU_ACCENT } from "./series/jaamu";                // ← NOUVEAU
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
@@ -202,6 +209,15 @@ for (const ep of TAADIDI.episodes) {
 for (const ep of KURUKAN.episodes) {
   if (ep.statut === "live" && ep.reader) {
     READERS["kurukan-fuga-" + ep.numero] = { ...fromLaye(ep.reader), accent: KURUKAN_ACCENT };
+  }
+}
+
+// ← NOUVEAU : Tomes 'live' de la série JAAMU -> lecteur générique
+// Slug patronymique direct comme clé (pas de préfixe "jaamu-").
+// Route publique correspondante : /livre/<slug>/lire (ex: /livre/sakho-diadjiganke/lire).
+for (const tome of JAAMU.tomes) {
+  if (tome.statut === "live" && tome.reader) {
+    READERS[tome.slug] = { ...fromLaye(tome.reader), accent: JAAMU_ACCENT };
   }
 }
 

@@ -1,3 +1,8 @@
+// MODIFIÉ · src/App.tsx
+// Ajouts JAAMU :
+//   - import lazy SerieJaamu (après SerieKurukan)
+//   - Route /serie/jaamu (après /serie/kurukan-fuga)
+
 import { useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -21,6 +26,7 @@ const SerieG2040 = lazy(() => import("./pages/SerieG2040"));
 const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const SerieResistance = lazy(() => import("./pages/SerieResistance"));
 const SerieKurukan = lazy(() => import("./pages/SerieKurukan"));
+const SerieJaamu = lazy(() => import("./pages/SerieJaamu"));   // ← NOUVEAU
 const FoutaPage = lazy(() => import("./pages/FoutaPage"));
 const MansayaPage = lazy(() => import("./pages/MansayaPage"));
 const HoroyaPage = lazy(() => import("./pages/HoroyaPage"));
@@ -120,6 +126,7 @@ export default function App() {
             <Route path="/serie/point-zero" element={<SeriePointZero />} />
             <Route path="/serie/resistance" element={<SerieResistance />} />
             <Route path="/serie/kurukan-fuga" element={<SerieKurukan />} />
+            <Route path="/serie/jaamu" element={<SerieJaamu />} />   {/* ← NOUVEAU */}
             <Route path="/mansaya" element={<MansayaPage />} />
             <Route path="/fouta" element={<FoutaPage />} />
             <Route path="/horoya" element={<HoroyaPage />} />
