@@ -104,6 +104,15 @@ export const BOOKS: Book[] = [
     keywords: ["casseroles", "daba", "tradition", "modernité", "délestage", "frigo", "marmite", "fable", "cuisine", "terre", "agriculture", "mémoire", "Pati Passage"],
     nouveau: true,
   },
+  {
+    slug: "pulaagu",
+    band: "Aventure",
+    title: "Pulaagu",
+    description: "Fanta, championne de Guinée de slam, monte à Timbo chez sa grand-mère préparer la Coupe d'Afrique à Addis-Abeba. De Cheikh Anta Diop aux quatre robes de zébu du peuple peul, elle découvre que tout ne s'écrit pas dans les livres.",
+    cover: "/images/pulaagu/pulaagu-couverture.webp",
+    keywords: ["pulaagu", "peul", "slam", "Fanta", "Cheikh Anta Diop", "Timbo", "Fouta Djalon", "Addis-Abeba", "quatre feux", "quatre robes de zébu", "semteende", "transmission", "racines et ailes", "diagonale nilotique", "grand-mère", "indigo", "Pati Aventure"],
+    nouveau: true,
+  },
   /* ════════════════════════════════════════════════════════════════
      DÉBRANCHÉS le 21/06/2026 — Alphabets Pati Mômes (N'Ko, Adlam, Koré Sèbèli)
      Pour les réafficher dans le catalogue : décommenter ce bloc.

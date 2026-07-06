@@ -1,8 +1,9 @@
 // MODIFIÉ · src/data/readers.ts
-// Ajout JAAMU :
-//   - import { JAAMU, JAAMU_ACCENT } (après KURUKAN)
-//   - Boucle tomes 'live' de JAAMU (en fin de fichier, après Kurukan)
-//   - Slug direct comme clé (pas de préfixe "jaamu-") → URL parlante /livre/sakho-diadjiganke/lire
+// PIVOT ÉDITORIAL (6 juillet 2026) : Pulaagu sort de JAAMU pour rejoindre le
+// catalogue Pati Aventure 10-12 comme livre indépendant.
+//   - Import direct de PULAAGU_ML
+//   - Entrée "pulaagu" ajoutée directement dans READERS (pas via boucle JAAMU.tomes)
+//   - Accent indigo profond (#3D2E5C) évoquant l'indigo peul
 
 // Registre unifié des livres à lecture multilingue.
 // Normalise les différents formats sources vers une structure commune,
@@ -58,7 +59,8 @@ import g2040Tome10 from "./g2040-tome10";
 import g2040Tome11 from "./g2040-tome11";
 import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 import { KURUKAN, KURUKAN_ACCENT } from "./series/kurukanFuga";
-import { JAAMU, JAAMU_ACCENT } from "./series/jaamu";                // ← NOUVEAU
+import { JAAMU, JAAMU_ACCENT } from "./series/jaamu";
+import { PULAAGU_ML } from "./pulaagu-ml";                        // ← NOUVEAU (livre indépendant, hors série)
 
 export type MLSection = { title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
@@ -78,6 +80,7 @@ function fromLaye(rec: any): { langs: string[]; books: Record<string, MLBook> } 
       dir: b.dir || "ltr",
       label: b.label || code,
       title: b.bookTitle,
+      subtitle: b.subtitle,
       sections: (b.sections || []).map((s: any) => ({ title: s.title, paragraphs: s.paragraphs, image: s.image })),
     };
   }
@@ -196,6 +199,10 @@ export const READERS: Record<string, MLReader> = {
   "g2040-la-ligne": { ...fromG2040(g2040Tome9), accent: "#18402A" },
   "g2040-port-et-pirogue": { ...fromG2040(g2040Tome10), accent: "#18402A" },
   "g2040-conseil-des-enfants": { ...fromG2040(g2040Tome11), accent: "#18402A" },
+
+  // ← NOUVEAU · livre indépendant Pati Aventure 10-12 (hors série JAAMU)
+  // Accent indigo profond évoquant l'indigo peul
+  "pulaagu": { ...fromLaye(PULAAGU_ML), accent: "#3D2E5C" },
 };
 
 // Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"
@@ -212,9 +219,9 @@ for (const ep of KURUKAN.episodes) {
   }
 }
 
-// ← NOUVEAU : Tomes 'live' de la série JAAMU -> lecteur générique
-// Slug patronymique direct comme clé (pas de préfixe "jaamu-").
-// Route publique correspondante : /livre/<slug>/lire (ex: /livre/sakho-diadjiganke/lire).
+// Tomes 'live' de la série JAAMU -> lecteur générique, id = slug patronymique
+// (À date : seul Sakho Diadjiganké est 'live'. Pulaagu était ici, il est désormais
+//  indépendant du catalogue Pati Aventure — voir entrée directe plus haut.)
 for (const tome of JAAMU.tomes) {
   if (tome.statut === "live" && tome.reader) {
     READERS[tome.slug] = { ...fromLaye(tome.reader), accent: JAAMU_ACCENT };
