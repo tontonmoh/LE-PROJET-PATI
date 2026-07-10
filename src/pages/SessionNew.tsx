@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -80,6 +80,12 @@ const JEUX: Jeu[] = [
     label: "Le Corridor — TransGuinéen",
     section: "pati", icon: Mountain, accent: "#EA7A2C",
     visual: "/images/jeux/corridor.png",
+    playPrefix: "/session", withCodeInPath: true, hasLiveScores: true,
+  },
+  {
+    id: "afrique", slug: "afrique", jeu: "defi",
+    label: "Le Puzzle de l'Afrique",
+    section: "pati", icon: Globe, accent: "#1a5e3a",
     playPrefix: "/session", withCodeInPath: true, hasLiveScores: true,
   },
   // ── SENAG ───────────────────────────────────────────────────────────────

@@ -30,6 +30,7 @@ const SerieJaamu = lazy(() => import("./pages/SerieJaamu"));   // ← NOUVEAU
 const FoutaPage = lazy(() => import("./pages/FoutaPage"));
 const MansayaPage = lazy(() => import("./pages/MansayaPage"));
 const HoroyaPage = lazy(() => import("./pages/HoroyaPage"));
+const HoroyaMemorialPage = lazy(() => import("./pages/HoroyaMemorialPage"));   // ← NOUVEAU · Mémorial Horoya
 const GuinePage = lazy(() => import("./pages/GuinePage"));
 const TerritoireFiche = lazy(() => import("./pages/TerritoireFiche"));
 const Catalogue = lazy(() => import("./pages/Catalogue"));
@@ -129,6 +130,7 @@ export default function App() {
             <Route path="/serie/jaamu" element={<SerieJaamu />} />   {/* ← NOUVEAU */}
             <Route path="/mansaya" element={<MansayaPage />} />
             <Route path="/fouta" element={<FoutaPage />} />
+            <Route path="/horoya/memorial" element={<HoroyaMemorialPage />} />   {/* ← NOUVEAU · avant /horoya */}
             <Route path="/horoya" element={<HoroyaPage />} />
             <Route path="/guine" element={<GuinePage />} />
             <Route path="/guine/:slug" element={<TerritoireFiche />} />

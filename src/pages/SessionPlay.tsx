@@ -15,7 +15,16 @@ const CREAM  = "#FFF6E7";
 const GAME_SRC: Record<string, string> = {
   "puzzle-guinee": "/jeux/puzzle-guinee.html",
   "corridor":      "/jeux/corridor.html",
+  "afrique":       "/jeux/afrique/afrique.html",
 };
+
+// Consigne d'accueil par jeu (le reste de l'UI est générique)
+const GAME_INTRO: Record<string, string> = {
+  "puzzle-guinee": "Reconstruis la Guinée le plus vite possible.",
+  "corridor":      "Reconstitue le corridor du TransGuinéen le plus vite possible.",
+  "afrique":       "Place les pays d'Afrique le plus vite possible.",
+};
+const introFor = (slug?: string) => GAME_INTRO[slug ?? ""] ?? "Termine le défi le plus vite possible.";
 
 type Phase = "loading" | "ready" | "playing" | "done" | "notfound" | "closed";
 
@@ -158,7 +167,7 @@ export default function SessionPlay() {
         </div>
         <h1 className="font-display font-bold text-2xl text-[#0D2B1A] mb-1">{session?.label || "Le Défi PATI"}</h1>
         <p className="text-[#5a6b62] font-semibold mb-6">
-          Reconstruis la Guinée le plus vite possible. Tu choisiras ton surnom au début du jeu — ton temps rejoint le classement dès que tu finis.
+          {introFor(session?.livre_slug)} Tu choisiras ton surnom au début du jeu — ton temps rejoint le classement dès que tu finis.
         </p>
         <button onClick={() => setPhase("playing")}
           className="w-full btn-kid text-white shadow-kid justify-center"
@@ -230,7 +239,7 @@ export default function SessionPlay() {
           </div>
         </div>
         <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4 text-sm">
-          Entre ton surnom dans le jeu, puis place les 34 préfectures. Ton temps rejoint le classement <b>{upper}</b> dès que tu finis.
+          Entre ton surnom dans le jeu, puis termine le défi. Ton temps rejoint le classement <b>{upper}</b> dès que tu finis.
         </p>
       </section>
 

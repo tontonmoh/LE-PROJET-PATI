@@ -70,7 +70,7 @@ export default function HoroyaPage() {
               <p className="text-center mb-8" style={{ color: INK, opacity: 0.7 }}>
                 Douze territoires votent. Un seul dit NON.
               </p>
-              <HoroyaCarte onSelectGuinee={() => setSelectedId('moment')} />
+              <HoroyaCarte onSelectGuinee={() => setSelectedId('moment')} cadrage="ouest" />
             </div>
 
             {/* Grille des 4 chapitres */}

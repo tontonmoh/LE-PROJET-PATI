@@ -1,29 +1,34 @@
-// NOUVEAU · src/data/series/jaamu.ts
-// Données de la série « JAAMU — Les Noms » (modèle calqué sur point-zero / kurukanFuga).
-// La fiche-série /serie/jaamu consomme cet objet.
-// Tome 1 (Sakho Diadjiganké) en ligne ; les 8 suivants = totems suspendus dans le baobab-mère.
+// MODIFIÉ · src/data/series/jaamu.ts
+// T4 Camara passe à statut « live » :
+//   - import CAMARA_KA_MARA_ML ajouté
+//   - tome T4 : titre « Camara, Ka-Mara », sousTitre « Une légende Camara racontée par Tonton Fadouba »
+//   - totem changé de « le djembé » à « le sabre » (cohérence narrative : Kamandjan fend la montagne)
+//   - lieu Beyla (Konianké), origine mandingue avec dispersion 4 régions guinéennes
+//   - cover jaamu-t4-couverture.webp, reader CAMARA_KA_MARA_ML, route /livre/camara/lire
 
 import { SAKHO_DIADJIGANKE_ML } from "../sakho-diadjiganke-ml";
+import { DIALLO_ML } from "../diallo-ml";
+import { TOURE_MANDJOU_ML } from "../toure-mandjou-ml";
+import { CAMARA_KA_MARA_ML } from "../camara-ka-mara-ml";           // ← NOUVEAU
 
 export type JaamuTome = {
-  slug: string;                // slug patronyme (sert de clé READERS + route /livre/<slug>/lire)
-  numero: number;              // ordre roadmap éditoriale
+  slug: string;
+  numero: number;
   titre: string;
   sousTitre?: string;
-  totem: string;               // symbole visuel dans le baobab
-  patronyme: string;           // orthographes du nom
-  origine: string;             // « soninké — empire du Wagadou », etc.
-  lieu: string;                // ancrage guinéen du présent
+  totem: string;
+  patronyme: string;
+  origine: string;
+  lieu: string;
   statut: "live" | "soon";
-  to?: string;                 // route de lecture si live
-  cover?: string;              // couverture portrait du tome
+  to?: string;
+  cover?: string;
   coverLandscape?: string;
-  reader?: any;                // reader ML si live (branché dans readers.ts)
-  baobabX: number;             // position % X du totem sur la cover série
-  baobabY: number;             // position % Y du totem sur la cover série
+  reader?: any;
+  baobabX: number;
+  baobabY: number;
 };
 
-// [À VALIDER] palette accent — ocre/terre, palette Moyenne Guinée soninkée
 export const JAAMU_ACCENT = "#8B5A2B";
 
 export const JAAMU = {
@@ -31,10 +36,10 @@ export const JAAMU = {
   titre: "JAAMU — Les Noms",
   accroche: "Chaque nom porte une histoire.",
   pitch:
-    "Neuf lignées suspendues au baobab-mère. Chaque nom a traversé des siècles, des royaumes, des mélanges. Diadjiga, Sény, Fatoumata et les autres remontent la piste de leur patronyme, un tome à la fois.",
+    "Neuf lignées suspendues au baobab-mère. Chaque nom a traversé des siècles, des royaumes, des mélanges. Diadjiga, Diénabou, Mandjou, Karifa et les autres remontent la piste de leur patronyme, un tome à la fois.",
   intro:
     "Comment est né ton nom ? De qui as-tu hérité les silences, les gestes, la manière de tenir debout ? La collection JAAMU — Les Noms explore, patronyme après patronyme, l'origine des grandes lignées ouest-africaines. Un tome, un nom, une légende. À lire seul, à lire en famille — parce que chacun a besoin de savoir d'où vient son nom.",
-  cover: "/images/jaamu/jaamu-serie-hero.webp", // [À VALIDER] à uploader
+  cover: "/images/jaamu/jaamu-serie-hero.webp",
   accent: JAAMU_ACCENT,
 
   tomes: [
@@ -49,8 +54,8 @@ export const JAAMU = {
       lieu: "Lélouma",
       statut: "live",
       to: "/livre/sakho-diadjiganke/lire",
-      cover: "/images/jaamu/jaamu-t1-couverture.webp",           // [À VALIDER] à uploader
-      coverLandscape: "/images/jaamu/jaamu-t1-couverture.webp",  // [À VALIDER] paysage à générer si besoin
+      cover: "/images/jaamu/jaamu-t1-couverture.webp",
+      coverLandscape: "/images/jaamu/jaamu-t1-couverture.webp",
       reader: SAKHO_DIADJIGANKE_ML,
       baobabX: 27,
       baobabY: 18,
@@ -58,36 +63,51 @@ export const JAAMU = {
     {
       slug: "diallo",
       numero: 2,
-      titre: "Diallo",
+      titre: "Diallo, Wakilarè",
+      sousTitre: "Les stoïques",
       totem: "le bâton du berger",
-      patronyme: "Diallo",
-      origine: "peul — Fouta Djalon",
-      lieu: "Timbo",
-      statut: "soon",
+      patronyme: "Diallo · Jallo · Jalloh · Djaló",
+      origine: "peul — Macina → Fouta Djalon → diaspora",
+      lieu: "Cocody, Abidjan",
+      statut: "live",
+      to: "/livre/diallo/lire",
+      cover: "/images/jaamu/jaamu-t2-couverture.webp",
+      coverLandscape: "/images/jaamu/jaamu-t2-couverture.webp",
+      reader: DIALLO_ML,
       baobabX: 33,
       baobabY: 34,
     },
     {
       slug: "toure",
       numero: 3,
-      titre: "Touré",
+      titre: "Touré, Mandjou",
+      sousTitre: "Une légende Manden Mori racontée par Aïssata",
       totem: "le tapis de prière",
-      patronyme: "Touré",
-      origine: "soninké — 4ᵉ fils de Dinga",
-      lieu: "Kankan",
-      statut: "soon",
+      patronyme: "Touré · Sitourou",
+      origine: "soninké → Manden Mori — Wagadou → Batè → Wassoulou",
+      lieu: "Kipé, Conakry",
+      statut: "live",
+      to: "/livre/toure/lire",
+      cover: "/images/jaamu/jaamu-t3-couverture.webp",
+      coverLandscape: "/images/jaamu/jaamu-t3-couverture.webp",
+      reader: TOURE_MANDJOU_ML,
       baobabX: 75,
       baobabY: 42,
     },
-    {
+    {                                                                // ← MODIFIÉ · devient live
       slug: "camara",
       numero: 4,
-      titre: "Camara",
-      totem: "le djembé",
-      patronyme: "Camara",
-      origine: "mandingue",
-      lieu: "Haute Guinée",
-      statut: "soon",
+      titre: "Camara, Ka-Mara",
+      sousTitre: "Une légende Camara racontée par Tonton Fadouba",
+      totem: "le sabre",                                              // ← CHANGÉ (était le djembé)
+      patronyme: "Camara · Kamara · Kamandjan",
+      origine: "mandingue — Mandé (Sibi, Kita, Kirina, Niani) puis dispersion 4 régions",
+      lieu: "Beyla, Konianké",
+      statut: "live",
+      to: "/livre/camara/lire",
+      cover: "/images/jaamu/jaamu-t4-couverture.webp",
+      coverLandscape: "/images/jaamu/jaamu-t4-couverture.webp",
+      reader: CAMARA_KA_MARA_ML,
       baobabX: 58,
       baobabY: 18,
     },
@@ -154,7 +174,6 @@ export const JAAMU = {
     },
   ] as JaamuTome[],
 
-  // Helpers comptage (même pattern que POINT_ZERO)
   getLiveCount: function () {
     return this.tomes.filter((t) => t.statut === "live").length;
   },
