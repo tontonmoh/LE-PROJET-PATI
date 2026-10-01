@@ -2,9 +2,13 @@
 // Ajouts JAAMU :
 //   - import lazy SerieJaamu (après SerieKurukan)
 //   - Route /serie/jaamu (après /serie/kurukan-fuga)
+// Ajouts GINÈ (Pionnières) :
+//   - import lazy PionnieresPage + routes /pionnieres et /pionnieres/:slug
+//   - liens courts QR /p et /p/:n
 
 import { useEffect, lazy, Suspense } from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate, useParams } from "react-router-dom";
+import { slugDepuisNumero } from "./data/pionnieres";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Stub from "./pages/Stub";
@@ -27,12 +31,14 @@ const SeriePointZero = lazy(() => import("./pages/SeriePointZero"));
 const SerieResistance = lazy(() => import("./pages/SerieResistance"));
 const SerieKurukan = lazy(() => import("./pages/SerieKurukan"));
 const SerieJaamu = lazy(() => import("./pages/SerieJaamu"));   // ← NOUVEAU
+const AcademiePati = lazy(() => import("./pages/AcademiePati"));
 const FoutaPage = lazy(() => import("./pages/FoutaPage"));
 const MansayaPage = lazy(() => import("./pages/MansayaPage"));
 const HoroyaPage = lazy(() => import("./pages/HoroyaPage"));
 const HoroyaMemorialPage = lazy(() => import("./pages/HoroyaMemorialPage"));   // ← NOUVEAU · Mémorial Horoya
 const GuinePage = lazy(() => import("./pages/GuinePage"));
 const TerritoireFiche = lazy(() => import("./pages/TerritoireFiche"));
+const PionnieresPage = lazy(() => import("./pages/PionnieresPage"));   // ← NOUVEAU · GINÈ
 const Catalogue = lazy(() => import("./pages/Catalogue"));
 const AudioBibliotheque = lazy(() => import("./pages/AudioBibliotheque"));
 const DecouvrirTonGenie = lazy(() => import("./pages/DecouvrirTonGenie"));
@@ -87,6 +93,13 @@ const Momes = lazy(() => import("./pages/Momes"));
 const Imagier = lazy(() => import("./pages/Imagier"));
 const SIMPLE = ["a-propos", "partenaires", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
+// QR des panneaux de l'expo : /p/01 → /pionnieres/<slug> (redirection modifiable sans réimprimer)
+function QrPionniere() {
+  const { n } = useParams<{ n: string }>();
+  const slug = slugDepuisNumero(n);
+  return <Navigate to={slug ? `/pionnieres/${slug}?src=qr` : "/pionnieres?src=qr"} replace />;
+}
+
 function PageLoader() {
   return (
     <div className="min-h-[60vh] grid place-items-center" role="status" aria-label="Chargement">
@@ -134,6 +147,10 @@ export default function App() {
             <Route path="/horoya" element={<HoroyaPage />} />
             <Route path="/guine" element={<GuinePage />} />
             <Route path="/guine/:slug" element={<TerritoireFiche />} />
+            <Route path="/pionnieres" element={<PionnieresPage />} />          {/* ← NOUVEAU · GINÈ */}
+            <Route path="/pionnieres/:slug" element={<PionnieresPage />} />
+            <Route path="/p" element={<Navigate to="/pionnieres?src=qr" replace />} />
+            <Route path="/p/:n" element={<QrPionniere />} />
             <Route path="/charte" element={<CharteViewer />} />
             <Route path="/ecouter-les-contes" element={<Contes />} />
             <Route path="/audio" element={<AudioBibliotheque />} />
@@ -158,6 +175,7 @@ export default function App() {
             <Route path="/stats" element={<Stats />} />
             <Route path="/presse" element={<Presse />} />
             <Route path="/senag" element={<Senag />} />
+            <Route path="/academie-pati" element={<AcademiePati />} />
 
             {/* ── Mode Session (classement contextuel) ── */}
             <Route path="/session/new"          element={<SessionNew />} />

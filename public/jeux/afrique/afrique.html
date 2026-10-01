@@ -38,6 +38,13 @@
   .tools{display:flex;gap:8px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}
   .tool{background:var(--paper);border:1.5px solid var(--or)}
   .tool:active{transform:scale(.96)}
+  /* Coop : barre des joueurs + pièce prise par un autre */
+  .playersBar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;padding:6px 10px;background:#fff;border-radius:10px;box-shadow:0 1px 6px rgba(36,28,16,.07)}
+  .playersBar .pbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--vert)}
+  #players{display:flex;gap:6px;flex-wrap:wrap}
+  .pchip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;background:var(--paper);border-radius:20px;padding:3px 9px}
+  .pchip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .piece.claimed{cursor:not-allowed}
   .stat{background:#fff;border-radius:10px;padding:6px 12px;font-weight:800;font-size:15px;box-shadow:0 1px 6px rgba(36,28,16,.07)}
   .stat small{font-weight:600;opacity:.55;font-size:10px;text-transform:uppercase;letter-spacing:.08em;display:block}
   .btn{border:none;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer;background:#efe6cd;color:var(--ink)}
@@ -127,6 +134,12 @@
         <div class="stat"><small>Placés</small><span id="progress">0/0</span></div>
         <div class="stat"><small>Temps</small><span id="timer">0:00</span></div>
       </div>
+    </div>
+
+    <!-- Barre des joueurs connectés (mode coop) -->
+    <div id="playersBar" class="playersBar" style="display:none">
+      <span class="pbl">🟢 En direct :</span>
+      <div id="players"></div>
     </div>
 
     <!-- Barre d'outils (mode Pavage) — comme le Défi puzzle Guinée -->
@@ -253,6 +266,128 @@ function notifyDone(sec){
   }
 }
 
+// ================= MODE COOP (temps réel « Google Doc ») =================
+// S'active avec ?coop=1&room=CODE. Additif : ne touche pas au jeu solo.
+// Un seul plateau partagé ; un pays posé disparaît pour tous les joueurs.
+// Réutilisable tel quel pour Conakry (140 quartiers), Guinée (375 s-préf), monde…
+const QP = new URLSearchParams(location.search);
+const COOP = {
+  on: QP.get('coop')==='1' || QP.get('coop')==='true',
+  room: (QP.get('room')||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,12),
+  client: null, channel: null,
+  players: {},           // presenceKey -> {name,color}
+  claims: {},            // iso -> presenceKey (pièce prise par quelqu'un)
+  myKey: null,
+  ready: false,
+};
+const COOP_PALETTE = ['#e0542e','#1f9e6b','#3a7bd5','#c9a227','#8e44ad','#e07b39','#16a8a0','#c0392b'];
+function coopColorFor(key){
+  // couleur stable par joueur (index d'arrivée)
+  const keys = Object.keys(COOP.players);
+  const i = keys.indexOf(key);
+  return COOP_PALETTE[(i<0?keys.length:i) % COOP_PALETTE.length];
+}
+function loadSupabaseClient(){
+  return new Promise((res,rej)=>{
+    if(window.supabase){res(window.supabase);return;}
+    const s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js';
+    s.onload=()=>res(window.supabase); s.onerror=rej;
+    document.head.appendChild(s);
+  });
+}
+async function coopInit(){
+  if(!COOP.on || !COOP.room) return false;
+  const url=SB_URL||SUPABASE_URL, key=SB_KEY||SUPABASE_KEY;
+  if(!url||!key){ toast('Coop indisponible : Supabase non configuré'); COOP.on=false; return false; }
+  try{
+    const lib=await loadSupabaseClient();
+    COOP.client=lib.createClient(url,key);
+    return true;
+  }catch(e){ toast('Coop : échec de connexion'); COOP.on=false; return false; }
+}
+
+// Rejoint le salon pour la partie courante (mode + région)
+async function coopJoin(){
+  if(!COOP.client) return;
+  const room = COOP.room + ':' + mode + ':' + region;   // salon = code + config de partie
+  const ch = COOP.client.channel('coop:'+room, { config:{ presence:{ key: (joueur||'Anonyme')+'_'+Math.random().toString(36).slice(2,7) } } });
+  COOP.channel = ch;
+  COOP.myKey = ch.params?.config?.presence?.key;
+
+  // PRÉSENCE : qui est connecté
+  ch.on('presence',{event:'sync'},()=>{
+    const state=ch.presenceState(); COOP.players={};
+    Object.keys(state).forEach(k=>{ COOP.players[k]={ name: state[k][0]?.name || 'Joueur' }; });
+    renderPlayers();
+  });
+
+  // CLAIM : une pièce prise par quelqu'un se grise pour les autres
+  ch.on('broadcast',{event:'claim'},({payload})=>{
+    if(payload.by===COOP.myKey) return;
+    COOP.claims[payload.iso]=payload.by;
+    markClaimed(payload.iso, true, payload.by);
+  });
+  ch.on('broadcast',{event:'unclaim'},({payload})=>{
+    if(payload.by===COOP.myKey) return;
+    if(COOP.claims[payload.iso]===payload.by){ delete COOP.claims[payload.iso]; markClaimed(payload.iso,false); }
+  });
+
+  // PLACEMENT : posé par quelqu'un → disparaît pour tous (via la table = persistant pour les arrivants tardifs)
+  ch.on('postgres_changes',{event:'INSERT',schema:'public',table:'coop_placements',filter:'room=eq.'+room},({new:row})=>{
+    coopReceivePlacement(row.iso, row.actor, false);
+  });
+
+  await ch.subscribe(async (status)=>{
+    if(status!=='SUBSCRIBED') return;
+    await ch.track({ name: joueur||'Anonyme' });
+    // Rejoue l'état déjà posé (arrivant tardif)
+    const { data } = await COOP.client.from('coop_placements').select('iso,actor').eq('room', room);
+    (data||[]).forEach(r=>coopReceivePlacement(r.iso, r.actor, false));
+    COOP.ready=true;
+    toast('Salon '+COOP.room+' — coopératif');
+  });
+}
+
+// Reçoit un placement distant : force la pièce à sa place, l'ôte de tout le monde
+function coopReceivePlacement(iso, actor, local){
+  const pc=pieces[iso]; if(!pc || pc.placed) return;
+  // si c'est la pièce que JE suis en train de glisser, j'annule mon drag
+  if(drag && drag.iso===iso){ window.removeEventListener('pointermove',onDragMove); window.removeEventListener('pointerup',onDragUp); drag=null; }
+  const g=pc.g;
+  g._dx=0; g._dy=0; g.setAttribute('transform','translate(0 0)');
+  g.setAttribute('class','piece placed');
+  addLabel(iso);
+  pc.placed=true; placed++; updateProgress();
+  delete COOP.claims[iso];
+  if(placed>=total) finish();
+  else raiseUnplaced();
+}
+
+// Diffuse mon placement (écrit en base → tout le monde le reçoit)
+async function coopBroadcastPlacement(iso){
+  if(!COOP.channel) return;
+  const room = COOP.room + ':' + mode + ':' + region;
+  try{ await COOP.client.from('coop_placements').insert({ room, iso, actor: joueur||'Anonyme' }); }catch(e){}
+}
+function coopClaim(iso, on){
+  if(!COOP.channel) return;
+  COOP.channel.send({ type:'broadcast', event: on?'claim':'unclaim', payload:{ iso, by: COOP.myKey } });
+}
+function markClaimed(iso, on, byKey){
+  const pc=pieces[iso]; if(!pc||pc.placed) return;
+  if(on){ pc.g.classList.add('claimed'); pc.g.style.pointerEvents='none';
+          pc.g.querySelector('path').setAttribute('opacity','.45'); }
+  else  { pc.g.classList.remove('claimed'); pc.g.style.pointerEvents='';
+          pc.g.querySelector('path').setAttribute('opacity','1'); }
+}
+function renderPlayers(){
+  const el=document.getElementById('players'); if(!el) return;
+  const keys=Object.keys(COOP.players);
+  el.innerHTML = keys.map(k=>`<span class="pchip"><i style="background:${coopColorFor(k)}"></i>${COOP.players[k].name}${k===COOP.myKey?' (toi)':''}</span>`).join('')
+    || '<span class="pchip">Connexion…</span>';
+}
+
 // ---------- Setup UI ----------
 function pick(container, attr, cb){
   container.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{
@@ -262,7 +397,16 @@ function pick(container, attr, cb){
 }
 pick(document.getElementById('modeOpts'),'data-mode',v=>mode=v);
 pick(document.getElementById('regOpts'),'data-reg',v=>region=v);
-document.getElementById('startBtn').onclick=start;
+
+// Si on arrive via un lien de salon coop, l'annoncer sur l'écran setup
+if(COOP.on && COOP.room){
+  const card=document.querySelector('#setup .card');
+  const banner=document.createElement('div');
+  banner.style.cssText='margin-bottom:14px;padding:12px 14px;border-radius:12px;background:#eafaf1;border:1.5px solid var(--vert);font-size:14px;font-weight:600;color:var(--ink)';
+  banner.innerHTML='🤝 Partie coopérative — salon <b>'+COOP.room+'</b>. Choisis le mode <b>Pavage</b> et la même région que tes coéquipiers, mets ton surnom, puis Commence.';
+  card.parentNode.insertBefore(banner, card);
+}
+document.getElementById('startBtn').onclick=async ()=>{ if(COOP.on) await coopInit(); start(); };
 document.getElementById('backBtn').onclick=toMenu;
 document.getElementById('menuBtn').onclick=toMenu;
 document.getElementById('againBtn').onclick=start;
@@ -306,6 +450,10 @@ function start(){
   if(mode==='pavage'){ buildPavage(isos); document.getElementById('tools').style.display='flex'; document.getElementById('quiz').innerHTML=''; }
   else { buildSituer(isos); document.getElementById('tools').style.display='none'; }
   buildLegend();
+  // Coop : rejoindre le salon partagé (pavage uniquement)
+  const pbar=document.getElementById('playersBar');
+  if(COOP.on && mode==='pavage'){ if(pbar)pbar.style.display='flex'; coopJoin(); }
+  else if(pbar){ pbar.style.display='none'; }
 }
 
 // Légende : les régions présentes dans la partie, avec leur couleur (modèle puzzle Guinée)
@@ -389,10 +537,12 @@ function surface(){
 let drag=null; // {g, iso, offx, offy}
 function startPieceDrag(e,g){
   if(g.classList.contains('placed'))return;
+  if(g.classList.contains('claimed'))return;        // pièce prise par un autre joueur (coop)
   startTimer();e.preventDefault();
   g.setAttribute('class','piece grab');
   svg.appendChild(g); // passe au premier plan
   const pt=svgPoint(e);const iso=g._iso;
+  if(COOP.on) coopClaim(iso, true);                 // je réserve cette pièce pour les autres
   // offset entre le doigt et le centre courant de la pièce (centre + décalage actuel)
   drag={g,iso,offx:pt.x-(PAYS[iso].cx+g._dx),offy:pt.y-(PAYS[iso].cy+g._dy)};
   window.addEventListener('pointermove',onDragMove);
@@ -427,10 +577,12 @@ function onDragUp(){
     g.setAttribute('class','piece placed glow');
     addLabel(iso);
     pieces[iso].placed=true;placed++;updateProgress();
+    if(COOP.on) coopBroadcastPlacement(iso);   // coop : posé = disparaît pour tous
     if(placed>=total)finish();
     else raiseUnplaced(); // remonte les restantes après chaque pose
   } else {
     g.setAttribute('class','piece'); // repose là où on l'a lâchée
+    if(COOP.on) coopClaim(iso, false);         // je relâche : la pièce redevient dispo
     raiseUnplaced();                  // et laisse les petites devant
   }
   drag=null;
