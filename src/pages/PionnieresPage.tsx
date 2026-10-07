@@ -114,6 +114,7 @@ function Fiche({ slug }: { slug: string }) {
     <article>
       <header className="gine-fiche-tete">
         <Link to="/pionnieres" className="gine-retour">← Toutes les pionnières</Link>
+        {p.photo && <img className="gine-portrait" src={p.photo} alt={`Portrait de ${p.nom}`} />}
         <h1>{nomFiche(p)}</h1>
         {p.surnom && <p className="gine-surnom">« {p.surnom} »</p>}
         {p.dates && <p className="gine-dates">{p.dates}</p>}
@@ -205,6 +206,7 @@ const CSS = `
 /* ─── Fiche ─── */
 .gine-fiche-tete{background:${C.indigo};color:${C.creme};text-align:center;padding:2rem 1.5rem 2.5rem;position:relative}
 .gine-retour{display:inline-block;margin-bottom:1.5rem;font-family:Montserrat,sans-serif;font-weight:700;color:${C.ocre};text-decoration:none}
+.gine-portrait{display:block;width:200px;height:200px;object-fit:cover;margin:0 auto 1.5rem;border:4px solid ${C.ocre};filter:grayscale(1)}
 .gine-fiche-tete h1{font-family:'Playfair Display',serif;font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,5vw,3rem);line-height:1.05;margin:0}
 .gine-surnom,.gine-dates{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.2rem,3.5vw,1.7rem);margin:.3rem 0 0}
 .gine-sous{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;margin:.8rem 0 0;color:${C.ocre}}

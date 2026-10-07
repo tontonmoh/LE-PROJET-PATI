@@ -26,7 +26,7 @@ export interface Pionniere {
 
 export const PIONNIERES: Pionniere[] = [
   {
-    slug: "mbalia-camara", youtube: "UFAsoedpFu0", nom: "M'Balia Camara", dates: "1929 – 1955", vivante: false, valide: true,
+    slug: "mbalia-camara", photo: "/images/pionnieres/mbalia-camara.jpg", youtube: "UFAsoedpFu0", nom: "M'Balia Camara", dates: "1929 – 1955", vivante: false, valide: true,
     lieu: "Posséah, Dubréka", titre: "Première martyre de la lutte pour l'indépendance", mot: "COURAGE",
     chapeau: "Paysanne de Dubréka, elle prend la tête des femmes du RDA à Tondon. En 1955, elle tombe en refusant un impôt injuste et devient le symbole du combat pour l'indépendance.",
     bio: [
@@ -38,7 +38,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La place des femmes dans le combat pour l'indépendance.",
   },
   {
-    slug: "jeanne-martin-cisse", nom: "Jeanne Martin Cissé", dates: "1926 – 2017", vivante: false, valide: true,
+    slug: "jeanne-martin-cisse", photo: "/images/pionnieres/jeanne-martin-cisse.jpg", nom: "Jeanne Martin Cissé", dates: "1926 – 2017", vivante: false, valide: true,
     lieu: "Kankan", titre: "Première femme à présider le Conseil de sécurité de l'ONU", mot: "ELLE EST GUINÉENNE",
     chapeau: "Institutrice née à Kankan, elle porte la voix de la Guinée à l'ONU. En 1972, elle devient la première femme au monde à présider le Conseil de sécurité.",
     bio: [
@@ -50,7 +50,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La présidence du Conseil de sécurité de l'ONU, jusque-là réservée aux hommes.",
   },
   {
-    slug: "loffo-camara", nom: "Loffo Camara", dates: "1925 – 1971", vivante: false, valide: true,
+    slug: "loffo-camara", photo: "/images/pionnieres/loffo-camara.jpg", nom: "Loffo Camara", dates: "1925 – 1971", vivante: false, valide: true,
     lieu: "Macenta", titre: "Première femme ministre de Guinée", mot: "PREMIÈRE",
     chapeau: "Sage-femme et couturière de Macenta, elle entre au gouvernement en 1961 : la première femme ministre de l'histoire de la Guinée.",
     bio: [
@@ -62,7 +62,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La porte du gouvernement aux femmes guinéennes.",
   },
   {
-    slug: "andree-toure", youtube: "xVotCJjZSOI", nom: "Hadja Andrée Touré", dates: "1934 – 2026", vivante: false, valide: true,
+    slug: "andree-toure", photo: "/images/pionnieres/andree-toure.jpg", youtube: "xVotCJjZSOI", nom: "Hadja Andrée Touré", dates: "1934 – 2026", vivante: false, valide: true,
     lieu: "Macenta", titre: "Première Première dame de la Guinée indépendante", mot: "DIGNITÉ",
     chapeau: "Née à Macenta, première Première dame de la Guinée indépendante, elle a traversé les épreuves et gardé jusqu'au bout la mémoire du pays.",
     bio: [
@@ -74,7 +74,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Le rôle de Première dame dans la Guinée indépendante, et une mémoire gardée jusqu'au bout.",
   },
   {
-    slug: "rabiatou-serah-diallo", youtube: "RBGCZbJr0sA", nom: "Hadja Rabiatou Serah Diallo", dates: "1949 – 2023", vivante: false, valide: true,
+    slug: "rabiatou-serah-diallo", photo: "/images/pionnieres/rabiatou-serah-diallo.jpg", youtube: "RBGCZbJr0sA", nom: "Hadja Rabiatou Serah Diallo", dates: "1949 – 2023", vivante: false, valide: true,
     lieu: "Mamou", titre: "Première femme d'Afrique à la tête d'une centrale syndicale nationale", mot: "MARMITE",
     chapeau: "Syndicaliste de Mamou, elle devient en 2000 la première femme d'Afrique à diriger une centrale syndicale nationale, et mène les grandes grèves de 2006-2007.",
     bio: [
@@ -86,7 +86,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La direction d'une centrale syndicale nationale par une femme, première sur le continent.",
   },
   {
-    slug: "mafory-bangoura", youtube: "S8Y7VXgG5iA", nom: "Hadja Mafory Bangoura", dates: "v. 1910 – 1976", vivante: false, valide: true,
+    slug: "mafory-bangoura", photo: "/images/pionnieres/mafory-bangoura.jpg", youtube: "S8Y7VXgG5iA", nom: "Hadja Mafory Bangoura", dates: "v. 1910 – 1976", vivante: false, valide: true,
     lieu: "Wonkifong, Coyah", titre: "Mère de la mobilisation des femmes pour l'indépendance", mot: "PREMIÈRE FEMME",
     chapeau: "Couturière de Wonkifong, elle mobilise les femmes de Conakry dès 1953 et fait d'elles une force de l'indépendance. Son visage figure sur le billet de 1 syli.",
     bio: [
@@ -98,7 +98,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La mobilisation des femmes comme force politique de l'indépendance.",
   },
   {
-    slug: "binta-pilote", youtube: "93Hge4VQS98", nom: "Fatoumata Binta Diallo", surnom: "Binta Pilote", dates: "1949 – 2020", vivante: false, valide: true,
+    slug: "binta-pilote", photo: "/images/pionnieres/binta-pilote.jpg", youtube: "93Hge4VQS98", nom: "Fatoumata Binta Diallo", surnom: "Binta Pilote", dates: "1949 – 2020", vivante: false, valide: true,
     lieu: "Pounthioun, Labé", titre: "Première femme pilote d'hélicoptère d'Afrique noire", mot: "DEVENIR PILOTE",
     livre: { titre: "Binta Diallo — La Dame Oiseau", url: "/binta-diallo" },
     chapeau: "Née dans la région de Labé, elle obtient son brevet en 1974 : première femme pilote d'hélicoptère de Guinée, et l'une des premières d'Afrique noire.",
@@ -111,7 +111,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Le cockpit, jusque-là réservé aux hommes.",
   },
   {
-    slug: "djene-keita", youtube: "2Ss4jRDrPdM", nom: "Djènè Keïta", dates: "née en 1964", vivante: true, valide: true,
+    slug: "djene-keita", photo: "/images/pionnieres/djene-keita.jpg", youtube: "2Ss4jRDrPdM", nom: "Djènè Keïta", dates: "née en 1964", vivante: true, valide: true,
     lieu: "", titre: "Première Guinéenne à diriger une agence des Nations unies", mot: "PREMIÈRE GUINÉENNE",
     chapeau: "Juriste et femme de terrain, ministre en 2018, elle devient en 2025 la première Guinéenne à diriger une agence des Nations unies, l'UNFPA.",
     bio: [
@@ -123,7 +123,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La direction d'une agence onusienne par une Guinéenne.",
   },
   {
-    slug: "mariama-sow", youtube: "Ozv0j2FKkD8", nom: "Hadja Mariama Sow", dates: "née en 1942", vivante: true, valide: true,
+    slug: "mariama-sow", photo: "/images/pionnieres/mariama-sow.jpg", youtube: "Ozv0j2FKkD8", nom: "Hadja Mariama Sow", dates: "née en 1942", vivante: true, valide: true,
     lieu: "Tountouroun, Labé", titre: "Parmi les 1 000 femmes proposées au prix Nobel de la paix", mot: "DOUZE ANS",
     chapeau: "Enseignante née près de Labé, députée pendant douze ans, elle consacre sa vie aux femmes, au dialogue et à la paix.",
     bio: [
@@ -135,7 +135,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Une présence durable des femmes dans l'hémicycle et les instances de paix.",
   },
   {
-    slug: "aicha-bah", youtube: "6w0WvHyyfac", nom: "Hadja Aïcha Bah", dates: "née en 1942", vivante: true, valide: true,
+    slug: "aicha-bah", photo: "/images/pionnieres/aicha-bah.jpg", youtube: "6w0WvHyyfac", nom: "Hadja Aïcha Bah", dates: "née en 1942", vivante: true, valide: true,
     lieu: "Kouroussa", titre: "La ministre qui a doublé le nombre de filles à l'école", mot: "DOUBLE",
     chapeau: "Proviseure puis ministre de l'Éducation, elle a doublé le nombre de filles à l'école en Guinée, avant de porter ce combat à l'UNESCO.",
     bio: [
@@ -146,7 +146,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Les portes de l'école à des dizaines de milliers de filles guinéennes.",
   },
   {
-    slug: "josephine-guilao", nom: "Joséphine Lenaud Guilao", dates: "", vivante: true, valide: false,
+    slug: "josephine-guilao", photo: "/images/pionnieres/josephine-guilao.jpg", nom: "Joséphine Lenaud Guilao", dates: "", vivante: true, valide: true,
     lieu: "", titre: "Une femme de dialogue", mot: "DIALOGUE",
     chapeau: "Institutrice et syndicaliste, ministre du Travail, elle est restée une femme de dialogue là où les positions se durcissent.",
     bio: [
