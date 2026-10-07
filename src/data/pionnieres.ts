@@ -16,7 +16,8 @@ export interface Pionniere {
   titre: string;
   mot: string;
   photo?: string; // ex. /images/pionnieres/binta-pilote.jpg
-  video?: string; // URL de la capsule 60 s
+  video?: string; // URL d'un fichier vidéo (mp4) — optionnel
+  youtube?: string; // ID YouTube de la capsule (ex. youtu.be/S8Y7VXgG5iA → "S8Y7VXgG5iA")
   livre?: { titre: string; url: string };
   bio: string[];
   ouvert: string;
@@ -24,7 +25,7 @@ export interface Pionniere {
 
 export const PIONNIERES: Pionniere[] = [
   {
-    slug: "mbalia-camara", nom: "M'Balia Camara", dates: "1929 – 1955", vivante: false, valide: true,
+    slug: "mbalia-camara", youtube: "UFAsoedpFu0", nom: "M'Balia Camara", dates: "1929 – 1955", vivante: false, valide: true,
     lieu: "Posséah, Dubréka", titre: "Première martyre de la lutte pour l'indépendance", mot: "COURAGE",
     bio: [
       "M'Balia Camara naît en 1929 à Posséah, dans la préfecture de Dubréka. Paysanne, elle n'a jamais été à l'école. Cela ne l'empêche pas de comprendre ce qui se joue autour d'elle : dans la Guinée coloniale des années 1950, les chefs de canton prélèvent l'impôt, souvent sans justice.",
@@ -57,7 +58,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La porte du gouvernement aux femmes guinéennes.",
   },
   {
-    slug: "andree-toure", nom: "Hadja Andrée Touré", dates: "1934 – 2026", vivante: false, valide: true,
+    slug: "andree-toure", youtube: "xVotCJjZSOI", nom: "Hadja Andrée Touré", dates: "1934 – 2026", vivante: false, valide: true,
     lieu: "Macenta", titre: "Première Première dame de la Guinée indépendante", mot: "DIGNITÉ",
     bio: [
       "Andrée Kourouma naît en 1934 à Macenta. Bonne élève, elle rencontre à Kankan Ahmed Sékou Touré, qu'elle épouse en 1953.",
@@ -68,7 +69,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Le rôle de Première dame dans la Guinée indépendante, et une mémoire gardée jusqu'au bout.",
   },
   {
-    slug: "rabiatou-serah-diallo", nom: "Hadja Rabiatou Serah Diallo", dates: "1949 – 2023", vivante: false, valide: true,
+    slug: "rabiatou-serah-diallo", youtube: "RBGCZbJr0sA", nom: "Hadja Rabiatou Serah Diallo", dates: "1949 – 2023", vivante: false, valide: true,
     lieu: "Mamou", titre: "Première femme d'Afrique à la tête d'une centrale syndicale nationale", mot: "MARMITE",
     bio: [
       "Rabiatou Serah Diallo naît en 1949 dans la région de Mamou et s'engage très tôt dans le syndicalisme.",
@@ -79,7 +80,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La direction d'une centrale syndicale nationale par une femme, première sur le continent.",
   },
   {
-    slug: "mafory-bangoura", nom: "Hadja Mafory Bangoura", dates: "v. 1910 – 1976", vivante: false, valide: true,
+    slug: "mafory-bangoura", youtube: "S8Y7VXgG5iA", nom: "Hadja Mafory Bangoura", dates: "v. 1910 – 1976", vivante: false, valide: true,
     lieu: "Wonkifong, Coyah", titre: "Mère de la mobilisation des femmes pour l'indépendance", mot: "PREMIÈRE FEMME",
     bio: [
       "Mafory Bangoura naît vers 1910 à Wonkifong, dans la préfecture de Coyah. Elle n'a pas été à l'école. Installée à Conakry, elle est couturière : son atelier est aussi un lieu où les femmes se parlent.",
@@ -90,7 +91,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La mobilisation des femmes comme force politique de l'indépendance.",
   },
   {
-    slug: "binta-pilote", nom: "Fatoumata Binta Diallo", surnom: "Binta Pilote", dates: "1949 – 2020", vivante: false, valide: true,
+    slug: "binta-pilote", youtube: "93Hge4VQS98", nom: "Fatoumata Binta Diallo", surnom: "Binta Pilote", dates: "1949 – 2020", vivante: false, valide: true,
     lieu: "Pounthioun, Labé", titre: "Première femme pilote d'hélicoptère d'Afrique noire", mot: "DEVENIR PILOTE",
     livre: { titre: "Binta Diallo — La Dame Oiseau", url: "/binta-diallo" },
     bio: [
@@ -102,7 +103,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Le cockpit, jusque-là réservé aux hommes.",
   },
   {
-    slug: "djene-keita", nom: "Djènè Keïta", dates: "née en 1964", vivante: true, valide: true,
+    slug: "djene-keita", youtube: "2Ss4jRDrPdM", nom: "Djènè Keïta", dates: "née en 1964", vivante: true, valide: true,
     lieu: "", titre: "Première Guinéenne à diriger une agence des Nations unies", mot: "PREMIÈRE GUINÉENNE",
     bio: [
       "Djènè Keïta est docteure en droit de l'Université Paris 1 Panthéon-Sorbonne, spécialiste de l'économie internationale et du droit du développement.",
@@ -113,7 +114,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La direction d'une agence onusienne par une Guinéenne.",
   },
   {
-    slug: "mariama-sow", nom: "Hadja Mariama Sow", dates: "née en 1942", vivante: true, valide: true,
+    slug: "mariama-sow", youtube: "Ozv0j2FKkD8", nom: "Hadja Mariama Sow", dates: "née en 1942", vivante: true, valide: true,
     lieu: "Tountouroun, Labé", titre: "Parmi les 1 000 femmes proposées au prix Nobel de la paix", mot: "DOUZE ANS",
     bio: [
       "Mariama Sow naît en 1942 à Tountouroun, près de Labé. Elle devient enseignante à Conakry.",
@@ -124,7 +125,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Une présence durable des femmes dans l'hémicycle et les instances de paix.",
   },
   {
-    slug: "aicha-bah", nom: "Hadja Aïcha Bah", dates: "née en 1942", vivante: true, valide: true,
+    slug: "aicha-bah", youtube: "6w0WvHyyfac", nom: "Hadja Aïcha Bah", dates: "née en 1942", vivante: true, valide: true,
     lieu: "Kouroussa", titre: "La ministre qui a doublé le nombre de filles à l'école", mot: "DOUBLE",
     bio: [
       "Aïcha Bah naît en 1942 à Kouroussa, en Haute-Guinée. Professeure, elle dirige le lycée de Conakry de 1966 à 1984 : des générations d'élèves passent entre ses mains.",
