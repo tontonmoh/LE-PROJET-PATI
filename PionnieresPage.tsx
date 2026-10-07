@@ -34,8 +34,8 @@ const LEPPI_SVG = `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='1
 </svg>`;
 const LEPPI = `url("data:image/svg+xml,${LEPPI_SVG.replace(/\n/g, "").replace(/#/g, "%23").replace(/"/g, "'")}")`;
 
-// Seul élément de la marque conservé sur ces pages : le logo (même fichier que la Navbar)
-const LOGO = "/images/pati-logo-white.png";
+// Seul élément de la marque conservé sur ces pages : le logo (vérifier le chemin dans Layout.tsx)
+const LOGO = "/logo-pati.png";
 
 // Page dédiée à la ministre qui a consacré la Semaine de la fête nationale 2026 à ses aînées
 const DEDICACE = {
@@ -227,7 +227,7 @@ const CSS = `
 .gine *{box-sizing:border-box}
 .gine{min-height:100vh}
 .gine-barre{background:${C.nuit};padding:.8rem 1.5rem;display:flex;align-items:center}
-.gine-barre img{height:72px;width:auto;display:block}
+.gine-barre img{height:52px;width:auto;display:block}
 .gine a:focus-visible,.gine button:focus-visible{outline:3px solid ${C.or};outline-offset:3px}
 
 /* ─── Accueil : bandeau ─── */
