@@ -22,6 +22,7 @@ export interface EncyclopedieCarte {
   route: string;
   totem: CarteTotem;
   coverUrl?: string;
+  coverPosition?: string; // cadrage de la couverture dans la carte (CSS object-position), défaut 'center'
   couleurs: {
     fond: string;        // couleur dominante de la carte
     bord: string;        // bordure foncée
@@ -137,7 +138,8 @@ export const encyclopedies: EncyclopedieCarte[] = [
     description: "Douze femmes qui ont ouvert la voie. À nous de la poursuivre.",
     route: '/pionnieres',
     totem: 'torch',
-    // coverUrl: '/images/encyclopedies/gine-cover.jpg', // à réactiver quand l'image sera posée
+    coverUrl: '/images/encyclopedies/gine-cover.jpg',
+    coverPosition: 'center 10%', // garde la flamme visible
     couleurs: {
       fond: '#C8102E',
       bord: '#6e0718',
