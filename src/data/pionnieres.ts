@@ -38,7 +38,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La place des femmes dans le combat pour l'indépendance.",
   },
   {
-    slug: "jeanne-martin-cisse", photo: "/images/pionnieres/jeanne-martin-cisse.jpg", nom: "Jeanne Martin Cissé", dates: "1926 – 2017", vivante: false, valide: true,
+    slug: "jeanne-martin-cisse", youtube: "UFB69oS86ik", photo: "/images/pionnieres/jeanne-martin-cisse.jpg", nom: "Jeanne Martin Cissé", dates: "1926 – 2017", vivante: false, valide: true,
     lieu: "Kankan", titre: "Première femme à présider le Conseil de sécurité de l'ONU", mot: "ELLE EST GUINÉENNE",
     chapeau: "Institutrice née à Kankan, elle porte la voix de la Guinée à l'ONU. En 1972, elle devient la première femme au monde à présider le Conseil de sécurité.",
     bio: [
@@ -50,7 +50,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "La présidence du Conseil de sécurité de l'ONU, jusque-là réservée aux hommes.",
   },
   {
-    slug: "loffo-camara", photo: "/images/pionnieres/loffo-camara.jpg", nom: "Loffo Camara", dates: "1925 – 1971", vivante: false, valide: true,
+    slug: "loffo-camara", youtube: "Mu15SphzmOA", photo: "/images/pionnieres/loffo-camara.jpg", nom: "Loffo Camara", dates: "1925 – 1971", vivante: false, valide: true,
     lieu: "Macenta", titre: "Première femme ministre de Guinée", mot: "PREMIÈRE",
     chapeau: "Sage-femme et couturière de Macenta, elle entre au gouvernement en 1961 : la première femme ministre de l'histoire de la Guinée.",
     bio: [
@@ -146,7 +146,7 @@ export const PIONNIERES: Pionniere[] = [
     ouvert: "Les portes de l'école à des dizaines de milliers de filles guinéennes.",
   },
   {
-    slug: "josephine-guilao", photo: "/images/pionnieres/josephine-guilao.jpg", nom: "Joséphine Lenaud Guilao", dates: "", vivante: true, valide: true,
+    slug: "josephine-guilao", youtube: "YR8IglDITC8", photo: "/images/pionnieres/josephine-guilao.jpg", nom: "Joséphine Lenaud Guilao", dates: "", vivante: true, valide: true,
     lieu: "", titre: "Une femme de dialogue", mot: "DIALOGUE",
     chapeau: "Institutrice et syndicaliste, ministre du Travail, elle est restée une femme de dialogue là où les positions se durcissent.",
     bio: [
