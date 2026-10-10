@@ -23,6 +23,18 @@ const PODIUM = [
   { color: "#CD8B5A", ring: "#b3743f", icon: Medal,  label: "3e"  },
 ];
 
+// ── URL de jonction selon le jeu (slug) ─────────────────────────────────────
+// Les jeux en ?session=CODE n'ont pas la même route que le Puzzle (/session/CODE).
+function buildPlayPath(slug: string | undefined, code: string): string {
+  switch (slug) {
+    case "quiz-sebe":     return `/sebe?session=${code}`;
+    case "quiz-senag":    return `/senag/quiz?session=${code}`;
+    case "primo":         return `/senag/primo?session=${code}`;
+    case "train-memoire": return `/senag/jeu?session=${code}`;
+    default:              return `/session/${code}`;
+  }
+}
+
 // Seuil au-delà duquel on collapse en "voir tous"
 const TOP_VISIBLE = 10; // podium (3) + 7 suivants
 
@@ -43,7 +55,7 @@ export default function SessionScores() {
   const [search, setSearch]   = useState("");
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://projetpati.com";
-  const joinUrl = `${baseUrl}/session/${upper}`;
+  const joinUrl = `${baseUrl}${buildPlayPath(session?.livre_slug, upper)}`;
   const isClosed = !!session?.closed_at;
 
   // ── Charger la session ──────────────────────────────────────────────────
@@ -121,7 +133,7 @@ export default function SessionScores() {
 
         {/* ── En-tête ── */}
         <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
-          <Link to={`/session/${upper}`} className="inline-flex items-center gap-1.5 font-display font-semibold hover:underline"
+          <Link to={buildPlayPath(session?.livre_slug, upper)} className="inline-flex items-center gap-1.5 font-display font-semibold hover:underline"
             style={{ color: GOLD }}>
             <ArrowLeft size={18} /> Rejoindre
           </Link>

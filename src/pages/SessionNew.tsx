@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -18,7 +18,7 @@ const PATI_GREEN = "#0F6E56";
 const DISPLAY = "'Fraunces', Georgia, serif";
 
 // ── Catalogue des jeux/livres jouables en session ───────────────────────────
-// 10 cartes : 6 Pati + 4 SENAG. Entrée unique pour TOUS les modes :
+// 12 cartes : 8 Pati + 4 SENAG. Entrée unique pour TOUS les modes :
 // solo (joueur seul), classe (1 prof + 30 élèves), forum (stand/atelier).
 //
 // `visual` : chemin optionnel d'une illustration servie depuis /public/images/jeux/
@@ -87,6 +87,12 @@ const JEUX: Jeu[] = [
     label: "Le Puzzle de l'Afrique",
     section: "pati", icon: Globe, accent: "#1a5e3a",
     playPrefix: "/session", withCodeInPath: true, hasLiveScores: true,
+  },
+  {
+    id: "sebe", slug: "quiz-sebe", jeu: "quiz",
+    label: "Sèbè — Le jeu littéraire guinéen",
+    section: "pati", icon: BookOpen, accent: "#2F2A5E",
+    playPrefix: "/sebe", withCodeInPath: false, hasLiveScores: true,
   },
   // ── SENAG ───────────────────────────────────────────────────────────────
   {
