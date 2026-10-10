@@ -4,7 +4,6 @@ import { BookOpen, ExternalLink, Loader2, Trophy } from 'lucide-react';
 import { QUIZ_SEBE, tirerPartie, type SebeQuestion, type SebeStrate } from '../data/quizSebe';
 import { QuizCard } from '../components/senag/QuizSenag/QuizCard';
 import type { QuizQuestion, QuizOptionId } from '../data/quizSenag';
-// ⚠️ À ALIGNER sur src/lib/session.ts — voir enregistrerScore() plus bas.
 import { submitScore } from '../lib/session';
 
 // ── Charte Sèbè ──────────────────────────────────────────────────────────────
@@ -334,11 +333,8 @@ function SebeResult({
   );
 }
 
-// ── Enregistrement du score ──────────────────────────────────────────────────
-// ⚠️ UNE SEULE FONCTION À ALIGNER sur la signature réelle de submitScore()
-// dans src/lib/session.ts (celle utilisée par le Puzzle de la Guinée).
-// Le classement (SessionScores) lit `pseudo` et `time_ms` ; score/total sont
-// optionnels si la table les accepte.
-async function enregistrerScore(code: string, pseudo: string, time_ms: number, score: number, total: number) {
-  await submitScore({ code, pseudo, time_ms, score, total } as never);
+// ── Enregistrement du score (RPC pati_submit_session_score) ─────────────────
+// time_ms = temps réel + 60 s par erreur → le classement trie par time_ms croissant.
+async function enregistrerScore(code: string, pseudo: string, time_ms: number, score: number, _total: number) {
+  await submitScore({ code, livre_slug: 'quiz-sebe', jeu: 'quiz', pseudo, score, time_ms });
 }

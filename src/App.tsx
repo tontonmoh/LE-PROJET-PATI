@@ -2,6 +2,8 @@
 // Ajouts JAAMU :
 //   - import lazy SerieJaamu (après SerieKurukan)
 //   - Route /serie/jaamu (après /serie/kurukan-fuga)
+// Ajouts SÈBÈ (jeu littéraire) :
+//   - import lazy SebeQuiz + routes /sebe et /sebe/:code/scores
 // Ajouts GINÈ (Pionnières) :
 //   - import lazy PionnieresPage + routes /pionnieres et /pionnieres/:slug
 //   - liens courts QR /p et /p/:n
@@ -80,6 +82,7 @@ const SessionCompagnonsScores = lazy(() => import("./pages/SessionCompagnonsScor
 const SenagJeu = lazy(() => import("./pages/SenagJeu"));
 const SenagPrimo = lazy(() => import("./pages/SenagPrimo"));
 const SenagQuiz = lazy(() => import("./pages/SenagQuiz"));
+const SebeQuiz = lazy(() => import("./pages/SebeQuiz"));   // ← NOUVEAU · Sèbè
 const AccesPati = lazy(() => import("./pages/AccesPati"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Langue = lazy(() => import("./pages/Langue"));
@@ -191,6 +194,8 @@ export default function App() {
             <Route path="/senag/jeu"   element={<SenagJeu />} />
             <Route path="/senag/primo" element={<SenagPrimo />} />
             <Route path="/senag/quiz"  element={<SenagQuiz />} />
+            <Route path="/sebe"              element={<SebeQuiz />} />   {/* ← NOUVEAU · Sèbè */}
+            <Route path="/sebe/:code/scores" element={<SessionScores />} />
 
             <Route path="/contribuer" element={<Contribuer />} />
             <Route path="/collaboration" element={<Collaboration />} />
