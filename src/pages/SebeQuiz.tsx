@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { BookOpen, ExternalLink, Loader2, Trophy } from 'lucide-react';
+import { ExternalLink, Loader2, Trophy } from 'lucide-react';
 import { QUIZ_SEBE, tirerPartie, type SebeQuestion, type SebeStrate } from '../data/quizSebe';
 import { QuizCard } from '../components/senag/QuizSenag/QuizCard';
 import type { QuizQuestion, QuizOptionId } from '../data/quizSenag';
@@ -155,9 +155,12 @@ function SebeSetup({ onStart, sessionCode }: { onStart: (f: Format) => void; ses
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="text-center mb-10">
-        <div className="mb-4 inline-flex w-16 h-16 rounded-2xl items-center justify-center" style={{ background: `${INK}12` }}>
-          <BookOpen size={34} style={{ color: INK }} />
-        </div>
+        <img
+          src="/images/jeux/sebe.jpg"
+          alt="Deux collégiens, livres levés, face à face"
+          className="w-full rounded-2xl mb-6 shadow-md"
+          style={{ aspectRatio: '3 / 2', objectFit: 'cover', border: `3px solid ${INK}` }}
+        />
         <h1 className="text-4xl md:text-5xl font-bold mb-2" style={{ fontFamily: DISPLAY, color: INK }}>Sèbè</h1>
         <p className="text-lg font-semibold" style={{ color: ACCENT }}>Le jeu littéraire guinéen</p>
         <p className="mt-3 max-w-md mx-auto leading-relaxed italic" style={{ color: `${INK}B0` }}>

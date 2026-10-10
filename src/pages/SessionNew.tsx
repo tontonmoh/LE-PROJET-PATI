@@ -92,6 +92,7 @@ const JEUX: Jeu[] = [
     id: "sebe", slug: "quiz-sebe", jeu: "quiz",
     label: "Sèbè — Le jeu littéraire guinéen",
     section: "pati", icon: BookOpen, accent: "#2F2A5E",
+    visual: "/images/jeux/sebe.jpg",
     playPrefix: "/sebe", withCodeInPath: false, hasLiveScores: true,
   },
   // ── SENAG ───────────────────────────────────────────────────────────────
