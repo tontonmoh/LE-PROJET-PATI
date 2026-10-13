@@ -1,5 +1,5 @@
 // Sèbè — le jeu littéraire guinéen
-// Pool pilote : 50 questions, toutes maîtrisées. Strate « encyclopedies » = pages publiques du site. Schéma figé pour démultiplier sans refonte.
+// Pool : 69 questions (50 pilote + 19 plumes féminines, veille 10/10/2026). Strate « encyclopedies » = pages publiques du site. Schéma figé pour démultiplier sans refonte.
 // Tirage : voir tirerPartie() en bas de fichier.
 
 export type SebeType =
@@ -11,7 +11,7 @@ export type SebeType =
   | 'mot-manquant' // titre à trou
   | 'portrait';    // bio en 2 lignes → trouver l'auteur
 
-export type SebeStrate = 'fondateurs' | 'contemporains' | 'oralite' | 'encyclopedies';
+export type SebeStrate = 'fondateurs' | 'contemporains' | 'oralite' | 'encyclopedies' | 'plumes';
 
 export interface SebeQuestion {
   id: string;
@@ -418,6 +418,145 @@ export const QUIZ_SEBE: SebeQuestion[] = [
     ],
     reponse: 0,
     fiche: '1235, 1725, 1958. Trois moments, trois encyclopédies : MANSAYA, FOUTA, HOROYA.',
+  },
+  // ─────────────── PLUMES FÉMININES (questions allégées : l'autrice est souvent nommée dans l'énoncé) ───────────────
+  {
+    id: 'w01', type: 'qcm', strate: 'plumes', auteur: 'Binta Ann', difficulte: 1,
+    question: 'Qui a écrit « Le Mariage par colis » (2004), roman sur les épouses « envoyées » au village ?',
+    choix: ['Binta Ann', 'Kesso Barry', 'Bilguissa Diallo', 'Koumanthio Zeinab Diallo'],
+    reponse: 0,
+    fiche: 'Binta Ann, comédienne de théâtre à Conakry, publie ce roman chez L\'Harmattan. Cheick reçoit ses épouses de ses parents, comme on reçoit un paquet.',
+  },
+  {
+    id: 'w02', type: 'qui-parle', strate: 'plumes', auteur: 'Binta Ann', difficulte: 2,
+    question: 'Cheick quitte son village pour Conakry, envoie son premier salaire à ses parents… qui lui expédient une épouse. Puis une autre. Quel roman ?',
+    choix: ['Le Mariage par colis', 'Diasporama', 'Entrée dans la tribu', 'La Petite Peule'],
+    reponse: 0,
+    fiche: 'Le titre dit tout. Binta Ann s\'attaque au mariage arrangé avec un humour qui ne pardonne rien.',
+  },
+  {
+    id: 'w03', type: 'qcm', strate: 'plumes', auteur: 'Binta Ann', difficulte: 2,
+    question: 'Avant son roman, Binta Ann a écrit « Awa, la petite mendiante », un texte sur l\'éducation des filles. Qui l\'a adapté en court-métrage ?',
+    choix: ['L\'UNICEF', 'La RTG', 'Le CCFG', 'L\'UNESCO'],
+    reponse: 0,
+    fiche: 'Binta Ann milite pour la petite enfance et contre le sida. Écrire, pour elle, c\'est d\'abord agir.',
+  },
+  {
+    id: 'w04', type: 'qcm', strate: 'plumes', auteur: 'Juliana Diallo', difficulte: 1,
+    question: 'Juliana Diallo, née en Hongrie et installée à Conakry depuis 1991, a publié en 2010 un roman sur un hameau isolé de Guinée. Son titre ?',
+    choix: ['Entrée dans la tribu', 'Le Village au bout du monde', 'La Tribu des silences', 'Loin du marché'],
+    reponse: 0,
+    fiche: '« Entrée dans la tribu » (L\'Harmattan) : un hameau à plus d\'une journée de marche du premier marché, et ce qu\'on appelle pauvreté vu de l\'intérieur.',
+  },
+  {
+    id: 'w05', type: 'qcm', strate: 'plumes', auteur: 'Juliana Diallo', difficulte: 2,
+    question: 'Avant « Entrée dans la tribu », Juliana Diallo avait publié « Néné Salé » (2008). De quoi parle ce récit ?',
+    choix: ['De la naissance prématurée de son dernier enfant', 'De son arrivée à Conakry', 'De son enfance en Hongrie', 'D\'un voyage au Fouta'],
+    reponse: 0,
+    fiche: 'Un récit autobiographique sur la peur, l\'attente et l\'amour maternel. Juliana Diallo est docteure en psychologie du travail.',
+  },
+  {
+    id: 'w06', type: 'qcm', strate: 'plumes', auteur: 'Kadiatou Konaté', difficulte: 1,
+    question: '« Les mères de la liberté » (L\'Harmattan Guinée, 2025) raconte le rôle des femmes dans l\'indépendance et la construction du pays. Qui l\'a écrit ?',
+    choix: ['Kadiatou Konaté', 'Kadiatou Kaba', 'Nadine Bari', 'Binta Ann'],
+    reponse: 0,
+    fiche: 'Kadiatou Konaté, militante, s\'attaque à ce qu\'elle appelle l\'effacement systématique des femmes dans l\'histoire guinéenne. Cinq chapitres, de la colonie à aujourd\'hui.',
+    route: '/horoya/memorial',
+  },
+  {
+    id: 'w07', type: 'qcm', strate: 'plumes', auteur: 'Kadiatou Konaté', difficulte: 2,
+    question: 'Dans « Les mères de la liberté », un chapitre est consacré aux femmes oubliées. Comment sont-elles classées ?',
+    choix: ['Par région et par communauté', 'Par ordre alphabétique', 'Par année de naissance', 'Par métier'],
+    reponse: 0,
+    fiche: 'L\'idée : chaque région a eu ses militantes, pas seulement Conakry. Le livre a été dédicacé le 26 juillet 2025.',
+  },
+  {
+    id: 'w08', type: 'qcm', strate: 'plumes', auteur: 'Kadiatou Kaba', difficulte: 1,
+    question: 'Kadiatou Kaba, présentatrice du journal télévisé de la RTG, a publié son premier livre en 2022, un hommage à son père disparu. Son titre ?',
+    choix: ['Cœur meurtri', 'Rêve brisé', 'Larmes de Kankan', 'La Voix du soir'],
+    reponse: 0,
+    fiche: 'Cent pages, quatorze chapitres, de la vie de famille à Kankan au retour à Conakry. Elle dit l\'avoir écrit pour guérir.',
+  },
+  {
+    id: 'w09', type: 'qcm', strate: 'plumes', auteur: 'Kadiatou Kaba', difficulte: 2,
+    question: 'Dans « Rêve brisé » (2024) de Kadiatou Kaba, l\'héroïne Monèba rêvait de se marier vierge pour honorer ses parents. De quoi traite le livre ?',
+    choix: ['Des violences faites aux filles et aux femmes', 'Du mariage par colis', 'De la vie des journalistes', 'De l\'exil en France'],
+    reponse: 0,
+    fiche: 'Deuxième livre de la journaliste. Elle dit écrire pour les parents, les victimes et les auteurs de violences — tous les trois.',
+  },
+  {
+    id: 'w10', type: 'qcm', strate: 'plumes', auteur: 'Koumanthio Zeinab Diallo', difficulte: 2,
+    question: 'Koumanthio Zeinab Diallo, poétesse et conteuse née à Labé en 1956, a cofondé un lieu culturel dans sa ville. Lequel ?',
+    choix: ['Le Musée du Fouta-Djalon', 'La Bibliothèque de Labé', 'Le Théâtre national', 'La Maison des écrivains'],
+    reponse: 0,
+    fiche: 'Avec son Théâtre du Musée et une section poésie et contes. Elle a aussi fondé la section guinéenne du PEN Club. Une quinzaine de livres au compteur.',
+    route: '/fouta',
+  },
+  {
+    id: 'w11', type: 'qcm', strate: 'plumes', auteur: 'Koumanthio Zeinab Diallo', difficulte: 3,
+    question: 'Koumanthio Zeinab Diallo a publié chez Ganndal, en 1996, « Pellun Gondhi ». Dans quelle langue ?',
+    choix: ['En pular', 'En soussou', 'En malinké', 'En arabe'],
+    reponse: 0,
+    fiche: 'Un recueil de poésie en langue peule, édité à Conakry. Ses contes du Fouta-Djalon (« Daado l\'orpheline », « Le Fils du roi Guémé ») sont parus chez L\'Harmattan en 2004.',
+  },
+  {
+    id: 'w12', type: 'qcm', strate: 'plumes', auteur: 'Kesso Barry', difficulte: 2,
+    question: 'Fille d\'un Almamy du Fouta-Djalon, elle a raconté sa vie dans « Kesso, princesse peuhle » (1988). Qui est-elle ?',
+    choix: ['Kesso Barry', 'Mariama Barry', 'Sirah Baldé de Labé', 'Aïssatou Barry'],
+    reponse: 0,
+    fiche: 'Une autobiographie publiée à Paris : l\'enfance au Fouta, puis l\'Europe. Le titre dit la double identité.',
+    route: '/fouta',
+  },
+  {
+    id: 'w13', type: 'qcm', strate: 'plumes', auteur: 'Mariama Barry', difficulte: 2,
+    question: 'Qui a écrit « La Petite Peule » (2000), récit d\'une enfance entre Fouta et banlieue parisienne ?',
+    choix: ['Mariama Barry', 'Kesso Barry', 'Bilguissa Diallo', 'Juliana Diallo'],
+    reponse: 0,
+    fiche: 'Mariama Barry raconte l\'excision, l\'école et l\'exil avec la voix d\'une enfant. Un des récits guinéens les plus lus en France.',
+  },
+  {
+    id: 'w14', type: 'qcm', strate: 'plumes', auteur: 'Bilguissa Diallo', difficulte: 2,
+    question: '« Diasporama » (2005), fresque d\'une famille guinéenne entre deux continents, est le roman de qui ?',
+    choix: ['Bilguissa Diallo', 'Binta Ann', 'Koumanthio Zeinab Diallo', 'Kadiatou Konaté'],
+    reponse: 0,
+    fiche: 'Un titre-valise : diaspora + panorama. Bilguissa Diallo écrit depuis la France sur ce que l\'éloignement fait aux familles.',
+  },
+  {
+    id: 'w15', type: 'intrus', strate: 'plumes', auteur: 'divers', difficulte: 1,
+    question: 'Une de ces autrices n\'est pas guinéenne. Laquelle ?',
+    choix: ['Binta Ann', 'Mariama Bâ', 'Kesso Barry', 'Koumanthio Zeinab Diallo'],
+    reponse: 1,
+    fiche: 'Mariama Bâ, autrice d\'« Une si longue lettre », est sénégalaise. Les trois autres sont bien de chez nous.',
+  },
+  {
+    id: 'w16', type: 'qcm', strate: 'plumes', auteur: 'Mariame M\'Boh', difficulte: 1,
+    question: 'À 11 ans, M\'Boh Mariame Kourouma publie chez L\'Harmattan un recueil que l\'État commande à 5 000 exemplaires pour les écoles. Son titre ?',
+    choix: ['Les Contes de M\'Boh', 'Les Rêves de Sonfonia', 'Le Cahier de Mariame', 'Petite Plume'],
+    reponse: 0,
+    fiche: 'Née à Conakry en 2013, elle a commencé à écrire en CE2. Plus jeune autrice du Salon du livre africain de Paris, où elle a vendu plus de 100 exemplaires en deux jours.',
+  },
+  {
+    id: 'w17', type: 'qcm', strate: 'plumes', auteur: 'Mariame M\'Boh', difficulte: 2,
+    question: 'Où est née la passion de lecture de M\'Boh Mariame Kourouma, la plus jeune écrivaine de Guinée ?',
+    choix: ['Dans le coin lecture de son école', 'À la Bibliothèque nationale', 'Chez sa grand-mère à Kankan', 'Sur une tablette'],
+    reponse: 0,
+    fiche: 'Un coin lecture installé dans son école de Sonfonia pendant « Conakry, capitale mondiale du livre ». Les politiques publiques, parfois, ça marche.',
+  },
+  {
+    id: 'w18', type: 'qcm', strate: 'plumes', auteur: 'Jeanne Martin Cissé', difficulte: 1,
+    question: 'Première femme à présider le Conseil de sécurité de l\'ONU, elle a raconté sa vie dans « La Fille du Milo » (Présence Africaine). Qui est-elle ?',
+    choix: ['Jeanne Martin Cissé', 'Loffo Camara', 'Mafory Bangoura', 'Hadja Andrée Touré'],
+    reponse: 0,
+    fiche: 'Institutrice, syndicaliste, ambassadrice, ministre : une autobiographie qui traverse tout le XXᵉ siècle guinéen. Elle est l\'une des dix Pionniers du Mémorial HOROYA.',
+    route: '/horoya/memorial',
+  },
+  {
+    id: 'w19', type: 'qcm', strate: 'plumes', auteur: 'Jeanne Martin Cissé', difficulte: 2,
+    question: 'Pourquoi Jeanne Martin Cissé a-t-elle intitulé son autobiographie « La Fille du Milo » ?',
+    choix: ['Elle est née à Kankan, sur les rives du Milo', 'Le Milo était le nom de son école', 'C\'était le surnom de sa mère', 'Elle a été ambassadrice sur le fleuve Milo'],
+    reponse: 0,
+    fiche: 'Le Milo, affluent du Niger, traverse Kankan. Dire d\'où l\'on vient avant de dire ce qu\'on est devenue — tout le livre tient dans le titre.',
+    route: '/horoya/memorial',
   },
 ];
 

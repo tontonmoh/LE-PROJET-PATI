@@ -27,6 +27,7 @@ const STRATE_LABELS: Record<SebeStrate, string> = {
   contemporains: 'Les contemporains',
   oralite: 'La parole',
   encyclopedies: 'Les encyclopédies',
+  plumes: 'Plumes féminines',
 };
 
 const ABCD: QuizOptionId[] = ['A', 'B', 'C', 'D'];
