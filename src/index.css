@@ -373,3 +373,25 @@ h1, h2, h3, .font-display {
 html.lite [data-decorative]{display:none!important}
 html.lite .bg-decor{background-image:none!important}
 html.lite *{animation-duration:0s!important;animation-iteration-count:1!important;transition:none!important}
+
+/* ===== Tactile & tablette (ajouté 15/10/2026) ===== */
+/* Pas de halo gris iOS au tap, pas de double-tap-zoom sur les boutons */
+a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+/* Les effets de survol ne s'appliquent qu'aux appareils à souris.
+   Sur iPad, un :hover après un tap reste "collé" (carte soulevée, bouton surélevé). */
+@media (hover: none) {
+  .card-kid:hover { transform: none; box-shadow: 0 10px 30px -12px rgba(15, 110, 86, 0.2); }
+  .btn-kid:hover  { transform: none; filter: none; }
+}
+/* Retour tactile franc à la place : léger enfoncement au tap */
+@media (hover: none) {
+  .card-kid:active { transform: scale(0.98); }
+}
+
+/* Lecture : police un cran plus grande sur tablette et plus (écran plus loin des yeux) */
+@media (min-width: 768px) {
+  .reader-text { font-size: 1.35rem; }
+  .reader-ar   { font-size: 1.5rem; }
+  .reader-zh   { font-size: 1.3rem; }
+}
