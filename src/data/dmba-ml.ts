@@ -1,6 +1,9 @@
 // dmba-ml.ts
 // « Sacrée D'mba — Amadou et Fifi au paradis »
 // Source de référence : PDF officiel de l'éditeur (nimba.pdf).
+// Révision 15/10/2026 : section « collection-pati » retirée (toutes langues) ;
+// illustrations public/livres/dmba/ — une par section, champ `image` sur les sections fr.
+// Le livre s'ouvre directement sur Fifi.
 // Lecteur multilingue Pati — même principe que laye-ml.ts / chateau-ml.ts :
 //   • Latin (fr / en) : police Andika
 //   • Arabe (ar)      : police Noto Naskh Arabic, dir = "rtl"
@@ -13,49 +16,8 @@ export interface DmbaSection {
   id: string;          // identifiant stable, identique d'une langue à l'autre
   title: string;
   paragraphs: string[];
+  image?: string;      // illustration de la section (BookReaderML lit celle de la version fr)
 }
-
-// ──────────────────────────────────────────────────────────────────────────
-// ILLUSTRATIONS — indépendantes de la langue, indexées par `id` de section.
-// Fichiers dans public/livres/dmba/ (planches Gemini 15/10/2026, découpées
-// depuis deux grilles 16:9 ; 344×192 px — à remplacer par les versions HD
-// quand elles seront générées, sans toucher à ce mapping).
-// Ordre = ordre d'affichage dans la section.
-// ──────────────────────────────────────────────────────────────────────────
-export const DMBA_IMG_BASE = "/livres/dmba/";
-
-export const DMBA_IMAGES: Record<string, string[]> = {
-  // — Récit (grille 1, v2)
-  fifi:                 ["dmba-01-fifi-v2.png"],
-  amadou:               ["dmba-02-amadou-v2.png"],
-  "la-guinee":          ["dmba-03-guinee-v2.png"],
-  "musee-nimba":        ["dmba-04-musee-v2.png"],
-  "appel-mamie":        ["dmba-05-appel-v2.png"],
-  voyage:               ["dmba-06-voyage-v2.png"],
-  aeroport:             ["dmba-07-aeroport-v2.png"],
-  "route-kamsar":       ["dmba-08-route-v2.png"],
-  "eau-partout":        ["dmba-09-eau-v2.png"],
-  "malle-masque":       ["dmba-10-malle-v2.png"],
-  "mamie-explique":     ["dmba-11-mamie-v2.png"],
-  promesse:             ["dmba-12-promesse-v2.png"],
-  // — Documentaire (grille 1 cases 13-16 + grille 2 "doc")
-  "branding-national":  ["dmba-13-branding-v2.png"],
-  "nimba-branding":     ["dmba-doc-12-monde-v1.png"],
-  "valeurs-nimba":      ["dmba-doc-07-valeurs-v1.png"],
-  "pourquoi-nimba-1":   ["dmba-doc-01-legende-v1.png", "dmba-doc-02-cretes-v1.png"],
-  "pourquoi-nimba-2":   ["dmba-doc-03-sculpteurs-v1.png", "dmba-doc-04-mont-nimba-v1.png", "dmba-14-carte-v2.png"],
-  armoiries:            ["dmba-doc-05-armoiries-v1.png"],
-  "difference-branding":["dmba-doc-06-armoiries-vs-branding-v1.png"],
-  "tresor-musees":      ["dmba-doc-08-musees-v1.png"],
-  "picasso-tresor":     ["dmba-15-picasso-v2.png", "dmba-doc-10-collection-privee-v1.png", "dmba-doc-11-encheres-v1.png"],
-  "en-mission":         ["dmba-16-mission-v2.png"],
-  "autres-metiers":     ["dmba-doc-13-metiers-1-v1.png", "dmba-doc-14-metiers-2-v1.png", "dmba-doc-15-metiers-3-v1.png", "dmba-doc-16-marketing-digital-v1.png"],
-  // Non illustrées volontairement : dedicace, quiz, petit-dico, ton-tour
-};
-
-/** Chemins absolus prêts pour <img src>, ou [] si la section n'a pas d'image. */
-export const dmbaImages = (sectionId: string): string[] =>
-  (DMBA_IMAGES[sectionId] ?? []).map((f) => DMBA_IMG_BASE + f);
 
 export interface DmbaBook {
   lang: DmbaLang;
@@ -76,17 +38,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     bookTitle: "Sacrée D'mba — Amadou et Fifi au paradis",
     sections: [
       {
-        id: "collection-pati",
-        title: "La collection Pati",
-        paragraphs: [
-          `Il était une fois, dans un pays baigné de soleil et d'eau, une collection de livres merveilleux appelée Pati.`,
-          `Pati, c'est le doux nom que l'on donne aux grands-mères, gardiennes de la mémoire et des secrets d'antan. Ces livres enchantés renferment les récits fabuleux des héros et des traditions qui ont façonné l'histoire de la Guinée.`,
-          `Ouvre grand tes yeux, car tu vas découvrir l'histoire de la Sacrée D'mba, ce masque ancestral du peuple Baga, et partir à l'aventure avec Amadou et Fifi dans le berceau de leur peuple, à Kamsar.`,
-          `Tu t'émerveilleras devant les trésors de notre patrimoine, et tu comprendras comment le D'mba, symbole de fertilité et de prospérité, est devenu le nouveau « Branding Guinée ». La collection Pati est un voyage à travers le temps, pour que les enfants d'aujourd'hui et de demain puissent s'approprier leur héritage et en être fiers.`,
-          `Ce livre nous raconte l'histoire de deux jeunes citadins qui, guidés par la sagesse de leur grand-mère, vont découvrir la beauté de leur culture.`,
-        ],
-      },
-      {
         id: "dedicace",
         title: "Dédicace",
         paragraphs: [
@@ -96,6 +47,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "fifi",
+        image: "/livres/dmba/dmba-01-fifi-v2.png",
         title: "Salut les followers, ici Fifi !",
         paragraphs: [
           `Salut les followers ! Ici Fifi, votre future influenceuse préférée ! 15 ans, et déjà une pro des réseaux. Mode, beauté, lifestyle : je partage tout avec ma communauté.`,
@@ -104,6 +56,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "amadou",
+        image: "/livres/dmba/dmba-02-amadou-v2.png",
         title: "Moi, c'est Amadou",
         paragraphs: [
           `Moi, c'est Amadou. 13 ans, et un seul rêve : devenir le prochain grand footballeur français, comme Paul Pogba !`,
@@ -112,6 +65,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "la-guinee",
+        image: "/livres/dmba/dmba-03-guinee-v2.png",
         title: "La Guinée ?",
         paragraphs: [
           `La Guinée ? C'est l'origine de nos parents, mais on n'y connaissait pas grand-chose.`,
@@ -120,6 +74,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "musee-nimba",
+        image: "/livres/dmba/dmba-04-musee-v2.png",
         title: "Au musée : un masque immense !",
         paragraphs: [
           `Un jour, notre classe a visité un musée d'art africain. Et là, BAM ! Un masque immense et magnifique : le Nimba, de Guinée ! La guide a dit que c'était l'un des masques les plus chers et les plus connus d'Afrique.`,
@@ -128,6 +83,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "appel-mamie",
+        image: "/livres/dmba/dmba-05-appel-v2.png",
         title: "L'appel de Mamie",
         paragraphs: [
           `Mamie nous a appelés. Et comme d'habitude, elle nous invitait au pays ; on hésitait toujours.`,
@@ -136,6 +92,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "voyage",
+        image: "/livres/dmba/dmba-06-voyage-v2.png",
         title: "Le grand voyage",
         paragraphs: [
           `Le voyage était long, mais on était trop excités ! On allait enfin découvrir la Guinée !`,
@@ -143,6 +100,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "aeroport",
+        image: "/livres/dmba/dmba-07-aeroport-v2.png",
         title: "« Wo nou senen — Bienvenue chez vous »",
         paragraphs: [
           `À l'aéroport, surprise ! Une grande image du D'mba !`,
@@ -151,6 +109,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "route-kamsar",
+        image: "/livres/dmba/dmba-08-route-v2.png",
         title: "La route pour Kamsar",
         paragraphs: [
           `Tout le monde était déjà en vacances, et nous avons directement pris la route pour Kamsar. C'est Mamie qui conduisait. Et sur la route, nous n'avons pas arrêté de poser des questions.`,
@@ -159,6 +118,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "eau-partout",
+        image: "/livres/dmba/dmba-09-eau-v2.png",
         title: "De l'eau partout",
         paragraphs: [
           `Il y a de l'eau partout en Guinée, quelle beauté ! Les champs verts, les rivières et les fleuves, et surtout le sourire des populations. Les gens semblent chaleureux.`,
@@ -167,6 +127,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "malle-masque",
+        image: "/livres/dmba/dmba-10-malle-v2.png",
         title: "Le masque dans la malle",
         paragraphs: [
           `Une fois arrivés, nous avons rencontré beaucoup de cousins et de cousines. Comme c'étaient les vacances, ils étaient venus eux aussi passer du temps avec Papy et Mamie à Kamsar.`,
@@ -175,6 +136,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "mamie-explique",
+        image: "/livres/dmba/dmba-11-mamie-v2.png",
         title: "Mamie explique le D'mba",
         paragraphs: [
           `Mamie explique : « Au départ, ces masques ne sont pas que des objets d'art. Ils possèdent une énergie ancestrale, un esprit vital qui nous relie à nos ancêtres. »`,
@@ -184,6 +146,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "promesse",
+        image: "/livres/dmba/dmba-12-promesse-v2.png",
         title: "Une nouvelle responsabilité",
         paragraphs: [
           `Profondément touchés par les histoires de Mamie, nous avons ressenti une nouvelle responsabilité. « Nous devons partager la beauté de notre culture avec le monde ! » Nous avons promis à Mamie de revenir bientôt. « Le D'mba est notre symbole, et nous sommes fiers de notre héritage. Nous le partagerons avec tous ! »`,
@@ -192,6 +155,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "branding-national",
+        image: "/livres/dmba/dmba-13-branding-v2.png",
         title: "Qu'est-ce qu'un « branding » national ?",
         paragraphs: [
           `Imagine que tu doives dessiner la France pour un ami qui ne la connaît pas. Que dessinerais-tu ? Sûrement la Tour Eiffel, n'est-ce pas ? Quand on voit sa silhouette, on pense tout de suite à Paris. Elle est devenue un « branding » de la France : une image forte, facilement reconnaissable, qui représente tout un pays et ce qu'il a de beau à offrir.`,
@@ -200,6 +164,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "nimba-branding",
+        image: "/livres/dmba/dmba-doc-12-monde-v1.png",
         title: "Le Nimba, « Branding Guinée »",
         paragraphs: [
           `Eh bien, en 2022, la Guinée a décidé de faire la même chose. Elle a choisi un symbole très spécial pour représenter le pays tout entier : le masque Nimba, ou le D'mba !`,
@@ -208,6 +173,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "valeurs-nimba",
+        image: "/livres/dmba/dmba-doc-07-valeurs-v1.png",
         title: "Les valeurs du Nimba",
         paragraphs: [
           `Les Nimba sont de grands masques d'épaules qui représentent une femme forte et fertile. Ses seins tombants montrent qu'elle a nourri de nombreux enfants, et sa coiffure en tresse rappelle les champs de riz bien cultivés.`,
@@ -217,6 +183,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "pourquoi-nimba-1",
+        image: "/livres/dmba/dmba-doc-01-legende-v1.png",
         title: "Pourquoi le Nimba ? (1)",
         paragraphs: [
           `1. La Basse Guinée et l'histoire de D'mba : le masque Nimba est né chez les Baga, en Basse Guinée. La légende raconte qu'un sculpteur voulut aider sa sœur, qui ne pouvait pas avoir d'enfant. Alors qu'ils se trouvaient près d'une rivière, un génie lui apparut et lui demanda de sculpter la déesse de la fertilité. C'est de cette histoire qu'est né le masque, symbole de la femme qui donne la vie.`,
@@ -225,6 +192,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "pourquoi-nimba-2",
+        image: "/livres/dmba/dmba-doc-03-sculpteurs-v1.png",
         title: "Pourquoi le Nimba ? (2)",
         paragraphs: [
           `3. La Haute Guinée et l'art de la sculpture : aujourd'hui, l'art de sculpter ces masques est transmis par des artisans talentueux, souvent issus des peuples mandingues de la Haute Guinée. Des familles de sculpteurs, comme les Sidimé, sont devenues très douées dans l'art de transformer le bois en masques magnifiques.`,
@@ -233,6 +201,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "armoiries",
+        image: "/livres/dmba/dmba-doc-05-armoiries-v1.png",
         title: "Les armoiries",
         paragraphs: [
           `Chaque pays a ses armoiries, comme une sorte de carte d'identité visuelle officielle.`,
@@ -241,6 +210,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "difference-branding",
+        image: "/livres/dmba/dmba-doc-06-armoiries-vs-branding-v1.png",
         title: "Armoiries ou branding : quelle différence ?",
         paragraphs: [
           `Le « branding » est un peu différent. C'est une image plus moderne, choisie pour communiquer avec les gens du monde entier et les inviter à découvrir le pays. C'est un peu comme le logo d'une marque qui veut raconter une histoire et donner envie de la découvrir.`,
@@ -249,6 +219,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "tresor-musees",
+        image: "/livres/dmba/dmba-doc-08-musees-v1.png",
         title: "Une star dans les grands musées",
         paragraphs: [
           `Le masque Nimba n'est pas célèbre qu'en Guinée : c'est une véritable star dans le monde entier ! Comment un masque en bois, sculpté il y a très longtemps en Guinée, est-il devenu aussi célèbre ? C'est simple : sa beauté et son énergie sont si grandes que les grands musées et les artistes ont voulu l'avoir près d'eux.`,
@@ -257,6 +228,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "picasso-tresor",
+        image: "/livres/dmba/dmba-15-picasso-v2.png",
         title: "Picasso et un trésor convoité",
         paragraphs: [
           `Un artiste très célèbre, Pablo Picasso, a découvert l'art africain au début du XXᵉ siècle. Il a été tellement fasciné par les formes des masques et leur force qu'il a complètement changé sa manière de peindre. Les formes géométriques du Nimba, son style unique, l'ont beaucoup inspiré pour créer un nouveau style de peinture : le Cubisme ! Grâce à Picasso, le masque Nimba a influencé l'art dans le monde entier.`,
@@ -300,6 +272,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "en-mission",
+        image: "/livres/dmba/dmba-16-mission-v2.png",
         title: "En mission pour la Guinée",
         paragraphs: [
           `Après leur incroyable voyage et leurs découvertes, Amadou et Fifi ont compris une chose : connaître son histoire et sa culture, c'est aussi savoir comment construire l'avenir de son pays ! Leurs passions et leurs talents pourraient être utiles pour le faire grandir.`,
@@ -309,6 +282,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "autres-metiers",
+        image: "/livres/dmba/dmba-doc-13-metiers-1-v1.png",
         title: "Plein de métiers pour faire rayonner la Guinée",
         paragraphs: [
           `Il y a plein d'autres métiers qui permettent de faire rayonner la culture de la Guinée : archéologue, pour fouiller le sol et découvrir les trésors du passé ; guide touristique, pour accompagner les visiteurs et faire respecter les sites ; conservateur de musée, pour prendre soin d'œuvres comme le masque Nimba ; artisan d'art, pour continuer à sculpter, tisser ou fabriquer des instruments de musique traditionnels ; historien de l'art, pour étudier les masques et les sculptures ; documentaliste, pour classer et archiver les documents, photos et vidéos du patrimoine guinéen.`,
@@ -335,17 +309,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     label: "English",
     bookTitle: "Sacred D'mba — Amadou and Fifi in Paradise",
     sections: [
-      {
-        id: "collection-pati",
-        title: "The Pati collection",
-        paragraphs: [
-          `Once upon a time, in a land bathed in sunshine and water, there was a collection of wonderful books called Pati.`,
-          `Pati is the tender name given to grandmothers, the keepers of memory and of the secrets of old. These enchanted books hold the marvellous tales of the heroes and traditions that shaped the history of Guinea.`,
-          `Open your eyes wide, for you are about to discover the story of the Sacred D'mba, the ancestral mask of the Baga people, and to set off on an adventure with Amadou and Fifi to the cradle of their people, in Kamsar.`,
-          `You will marvel at the treasures of our heritage, and you will understand how the D'mba — a symbol of fertility and prosperity — became the new "Brand Guinea." The Pati collection is a journey through time, so that the children of today and tomorrow can take ownership of their heritage and be proud of it.`,
-          `This book tells the story of two young city children who, guided by the wisdom of their grandmother, come to discover the beauty of their culture.`,
-        ],
-      },
       {
         id: "dedicace",
         title: "Dedication",
@@ -597,17 +560,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     bookTitle: "دمبا المقدّسة — أمادو وفيفي في الجنّة",
     sections: [
       {
-        id: "collection-pati",
-        title: "مجموعة باتي",
-        paragraphs: [
-          `كان يا ما كان، في بلدٍ تغمره الشمس والماء، مجموعة كتبٍ رائعة اسمها «باتي».`,
-          `«باتي» هو الاسم الحنون الذي يُطلق على الجدّات، حارسات الذاكرة وأسرار الزمن الجميل. تحتوي هذه الكتب الساحرة على الحكايات العجيبة للأبطال والتقاليد التي صاغت تاريخ غينيا.`,
-          `افتح عينيك جيّدًا، فأنت على وشك أن تكتشف قصّة «دمبا المقدّسة»، ذلك القناع العريق لشعب الباغا، وأن تنطلق في مغامرة مع أمادو وفيفي إلى مهد قومهما، في كامسار.`,
-          `ستندهش أمام كنوز تراثنا، وستفهم كيف صار الـدمبا، رمز الخصوبة والازدهار، «هُويّة غينيا» (Branding Guinée) الجديدة. مجموعة «باتي» رحلة عبر الزمن، كي يتمكّن أطفال اليوم والغد من تملُّك إرثهم والاعتزاز به.`,
-          `يحكي لنا هذا الكتاب قصّة طفلَين من المدينة، يكتشفان جمال ثقافتهما بإرشاد من حكمة جدّتهما.`,
-        ],
-      },
-      {
         id: "dedicace",
         title: "إهداء",
         paragraphs: [
@@ -857,17 +809,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     label: "中文",
     bookTitle: "神圣的邓巴——阿马杜和菲菲在天堂",
     sections: [
-      {
-        id: "collection-pati",
-        title: "“巴提”系列",
-        paragraphs: [
-          `很久很久以前，在一个阳光与水交织的国度，有一套美妙的图书，名叫“巴提”（Pati）。`,
-          `“巴提”是人们对祖母的亲切称呼，她们是记忆与古老秘密的守护者。这些被施了魔法的书，收藏着塑造了几内亚历史的英雄与传统的奇妙故事。`,
-          `睁大你的眼睛吧，因为你即将认识“神圣的邓巴”的故事——这是巴加人（Baga）的祖传面具——并和阿马杜、菲菲一起，前往他们民族的摇篮卡姆萨尔展开冒险。`,
-          `你会为我们遗产中的珍宝惊叹，也会明白邓巴——这个象征丰饶与繁荣的符号——是如何成为几内亚全新的“国家品牌”（Branding Guinée）的。“巴提”系列是一场穿越时光的旅程，让今天和明天的孩子都能拥抱自己的传承，并为之自豪。`,
-          `这本书讲述了两个城市孩子的故事：在祖母智慧的引领下，他们渐渐发现了自己文化之美。`,
-        ],
-      },
       {
         id: "dedicace",
         title: "献词",

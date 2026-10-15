@@ -2,7 +2,7 @@
 // Collection Pati · L'Atelier Solidaire — Pati Passage (13–15 ans).
 // Aborde l'excision par une approche culturelle : remplacer la lame par la parole, le chant et le savoir.
 // Chants soussou + traductions conservés intacts (consigne autrice).
-// FR posé en premier ; EN / AR / ZH à ajouter ensuite (même procédé que les autres livres).
+// EN / AR / ZH en place. Illustrations : public/images/fendani/ (1 par section, 15/10/2026 ; fnd-x1/x2 = planches en réserve).
 export type FendaniLang = "fr" | "en" | "ar" | "zh";
 type Section = { id: string; title: string; paragraphs: string[]; image?: string };
 type Book = { lang: FendaniLang; dir: "ltr" | "rtl"; label: string; bookTitle: string; sections: Section[] };
@@ -11,12 +11,12 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
   fr: {
     lang: "fr", dir: "ltr", label: "Français", bookTitle: "Fendani — Le Secret de la Forêt sans Douleur",
     sections: [
-      { id: "avant-propos", title: "Avant-propos", paragraphs: [
+      { id: "avant-propos", title: "Avant-propos", image: "/images/fendani/fnd-00-foret.webp", paragraphs: [
         "La culture n'est pas un monument figé dans le passé, mais un arbre vivant qui puise sa force dans ses racines pour mieux s'épanouir vers le ciel. En Guinée, nos rites d'initiation ont toujours été le ciment de notre identité, transmettant courage, pudeur et dignité aux jeunes filles.",
         "Mais le cœur de cette transmission s'est parfois perdu derrière la douleur du couteau. Fendani fait un choix : que les rites conservent toute leur puissance symbolique et éducative, en remplaçant la mutilation par la parole, le chant et la connaissance. Protéger l'intégrité physique de nos filles, et magnifier notre patrimoine.",
         "Ce conte, Le Secret de la Forêt sans Douleur, est plus qu'une histoire. C'est une promesse faite à Mayenie et à toutes les filles de notre nation : la preuve que l'on peut devenir une femme accomplie, entière et fière de ses origines, par la seule puissance de la parole et du savoir." ] },
 
-      { id: "ch1", title: "Chapitre 1 — Le Poids du Silence", paragraphs: [
+      { id: "ch1", title: "Chapitre 1 — Le Poids du Silence", image: "/images/fendani/fnd-01-manguier.webp", paragraphs: [
         "C'est dans une école de la capitale que commence l'histoire de Mayenie, treize ans. Ce matin-là, elle franchit le seuil de l'école primaire de Gbessia Port, son centre d'examen. La cour, bercée par la brume marine, semblait annoncer un jour qui compterait ; mais Mayenie n'y pensait pas. Son esprit était déjà tout entier tourné vers l'épreuve.",
         "Dans la salle, armée de ses stylos, elle attendait.",
         "Le surveillant : Vérifiez que vous avez vos stylos et que le numéro de PV est bien noté sur la fiche, avant le lancement de l'épreuve.",
@@ -37,7 +37,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Le père chercha ses mots : autrefois, on croyait cette douleur nécessaire pour apprendre la patience. La mère serra contre elle sa fille qui sanglotait.",
         "Maman : Mayenie, longtemps notre société a cru que la mutilation était la porte d'entrée vers nos traditions. Beaucoup de femmes en ont souffert toute leur vie. Nous avons décidé que ton corps resterait entier, car ta valeur ne dépend pas d'une blessure. Mais tu as raison : tu mérites des mots, mon cœur, pas seulement notre silence." ] },
 
-      { id: "ch2", title: "Chapitre 2 — Le Choix de Fendani", paragraphs: [
+      { id: "ch2", title: "Chapitre 2 — Le Choix de Fendani", image: "/images/fendani/fnd-02-parents.webp", paragraphs: [
         "La nuit est tombée. Longtemps après que leur fille s'est endormie, les parents de Mayenie parlent à voix basse dans la cuisine. Ils ont protégé son corps. Ils ont oublié de préparer son esprit.",
         "Le silence laisse place au désaccord, puis à la recherche. La mère est catégorique : on ne touche pas au corps des filles, mais on ne perd pas ses racines. Le père s'interroge sur le poids du regard des autres, tout en refusant la barbarie de l'acte.",
         "Papa : Elle a raison. Nous lui avons évité la douleur, mais pas l'exclusion. Ce n'est pas suffisant.",
@@ -48,7 +48,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "De l'impasse naît une résolution. Ils ne sont pas seuls dans ce cas. Ils décident d'organiser une rencontre, pour voir si d'autres parents ressentent ce même besoin : un chemin pour élever leurs filles, dans la morale et dans la santé, sans les blesser.",
         "Cette nuit-là, les parents de Mayenie ne dormirent guère. Ils écrivirent, planifièrent, téléphonèrent. À l'aube, Fendani prenait forme." ] },
 
-      { id: "ch3", title: "Chapitre 3 — Le Retour aux Sources", paragraphs: [
+      { id: "ch3", title: "Chapitre 3 — Le Retour aux Sources", image: "/images/fendani/fnd-03-conseil.webp", paragraphs: [
         "Quelques jours plus tard, par une soirée pluvieuse, la réunion se tient dans le salon de la matriarche, Nga Nana. D'un côté, des femmes aux cheveux blancs, assises sur des nattes. De l'autre, les parents venus interroger la tradition. L'atmosphère est tendue, comme avant un orage.",
         "La maman de Mayenie : Nous ne venons pas vous juger. Vous avez été les gardiennes d'un passage, d'une transformation. Nous voulons comprendre : que transmettiez-vous vraiment, derrière l'acte ? Quels secrets portait ce rite, avant que le couteau ne prenne toute la place ?",
         "La vieille Nga Nana regarde ses mains ridées. Elle inspire, prend un long moment, comme pour se plonger dans ses souvenirs.",
@@ -58,7 +58,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Mama Yéli : Fendani nous offre une chance de redevenir ce que nous étions au départ : des éducatrices. Des passeuses de sagesse. Pas des chirurgiennes de l'ombre.",
         "Les têtes blanches se tournèrent les unes vers les autres. Et pour la première fois depuis longtemps, dans cette pièce, quelque chose de doux s'installa — comme une réconciliation silencieuse avec elles-mêmes." ] },
 
-      { id: "ch4", title: "Chapitre 4 — La Nuit du Savoir", paragraphs: [
+      { id: "ch4", title: "Chapitre 4 — La Nuit du Savoir", image: "/images/fendani/fnd-04-nuit-savoir.webp", paragraphs: [
         "Cette nuit-là, dans la cour de l'école, le ciel était dégagé. La lune brillait comme une reine entourée de ses dames de compagnie, ces étoiles qui l'acclamaient de leur scintillement. Un feu avait été allumé au centre de la cour ; les flammes dansaient dans l'air tiède. Petites et jeunes filles formaient un cercle. Les batteurs de tam-tam et le joueur de flûte, cachés derrière les feuillages, donnèrent le coup d'envoi. Les anciennes, debout, armées de wassakhoumba, commencèrent l'initiation.",
         "La cour était transformée. Les vieilles sages, les Sema, entouraient les jeunes filles. Nga Nana, vêtue d'une longue robe d'un blanc immaculé, une couronne rouge ornée d'épines et de cauris sur la tête, leva son instrument garni de bouts de calebasse et entonna le chant de la purification de l'âme.",
         "♪ Nga wobé bira khi tokhogbi nè / An nkha sa a makha khoummawali ma…",
@@ -77,9 +77,9 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Pour clore la session, les Sema entonnèrent le chant du marchand : la dignité de la femme est comme un pagne précieux, qu'il faut savoir porter avec honneur.",
         "♪ Nfafé Youlai Nfafé Youlai Ayi ya ! / Nfafé Youlai dougui di ndé bé ayi ya !",
         "« Oyé cher marchand, il y a un pagne ici tout frais, tout brillant… Il faut bien se tenir et faire bonne figure pour être digne. »",
-        "Cette nuit-là, les filles n'apprirent pas seulement des chants. Elles apprirent à se connaître : leurs droits, leur corps, leur histoire. Elles parlèrent de santé, de respect, de l'amour que l'on se doit à soi-même. Les anciennes parlèrent longtemps, et les filles écoutèrent comme on boit de l'eau fraîche après une longue marche." ], image: "/images/fendani-nuit-savoir.webp" },
+        "Cette nuit-là, les filles n'apprirent pas seulement des chants. Elles apprirent à se connaître : leurs droits, leur corps, leur histoire. Elles parlèrent de santé, de respect, de l'amour que l'on se doit à soi-même. Les anciennes parlèrent longtemps, et les filles écoutèrent comme on boit de l'eau fraîche après une longue marche." ]},
 
-      { id: "ch5", title: "Chapitre 5 — Les Ambassadrices de Fendani", paragraphs: [
+      { id: "ch5", title: "Chapitre 5 — Les Ambassadrices de Fendani", image: "/images/fendani/fnd-05-ambassadrices.webp", paragraphs: [
         "L'aube se leva, rose et or. Le feu s'était éteint doucement. Les filles, assises en cercle, avaient les yeux brillants de fatigue et de quelque chose qui ressemblait à de la fierté. Une à une, elles reçurent leur insigne d'Ambassadrice Fendani.",
         "Hawa : Mayenie, tu es désormais une initiée du savoir. Non par la douleur, mais par la compréhension. Ton combat commence ici, ce matin, dans cette cour. Et il ira loin.",
         "Mayenie tint dans ses deux mains son bout de pagne, son collier de bambou et sa canne d'initiée. Elle pensa à Aïcha. Elle pensa à sa mère, debout dans la cuisine cette nuit-là. Elle pensa aux vieilles femmes qui avaient choisi, après toutes ces années, d'écouter et de transmettre.",
@@ -88,7 +88,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Ses parents, eux, étaient fiers d'avoir permis à leur fille de connaître la forêt. Pas n'importe laquelle : une forêt où les arbres murmurent des secrets plutôt que des cris.",
         "Les autres filles reprirent en chœur, doucement, puis de plus en plus fort, jusqu'à ce que les mots montent dans le ciel du matin comme des oiseaux. Et dans la forêt qui bordait l'école — celle que les anciens appelaient autrefois Laaga, la forêt des rites — il n'y eut plus, ce matin-là, ni cris ni larmes. Seulement des voix qui chantaient." ] },
 
-      { id: "epilogue", title: "Épilogue — La Forêt qui Fleurit", paragraphs: [
+      { id: "epilogue", title: "Épilogue — La Forêt qui Fleurit", image: "/images/fendani/fnd-06-epilogue.webp", paragraphs: [
         "Depuis cette nuit-là, d'autres cours d'école s'allument, d'autres feux, d'autres chants. De préfecture en préfecture, des filles grandissent avec la connaissance comme bouclier et la dignité comme couronne.",
         "Parce que la culture est un arbre. Elle a besoin de racines profondes et de branches qui s'ouvrent vers le ciel. Elle peut se transformer sans mourir. Elle peut transmettre sans blesser.",
         "« Fendani : parce que la culture est une richesse qui se transmet par la parole, pas par le sang. »",
@@ -100,11 +100,11 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
   en: {
     lang: "en", dir: "ltr", label: "English", bookTitle: "Fendani — The Secret of the Forest Without Pain",
     sections: [
-      { id: "avant-propos", title: "Foreword", paragraphs: [
+      { id: "avant-propos", title: "Foreword", image: "/images/fendani/fnd-00-foret.webp", paragraphs: [
         "Culture is not a monument frozen in the past, but a living tree that draws its strength from its roots in order to flourish toward the sky. In Guinea, our rites of initiation have always been the cement of our identity, passing on courage, modesty and dignity to young girls.",
         "But the heart of this transmission was sometimes lost behind the pain of the blade. Fendani makes a choice: that the rites keep all their symbolic and educational power, by replacing mutilation with speech, song and knowledge. To protect the physical integrity of our girls, and to honour our heritage.",
         "This tale, The Secret of the Forest Without Pain, is more than a story. It is a promise made to Mayenie and to all the girls of our nation: proof that one can become an accomplished woman, whole and proud of her origins, through the sole power of speech and knowledge." ] },
-      { id: "ch1", title: "Chapter 1 — The Weight of Silence", paragraphs: [
+      { id: "ch1", title: "Chapter 1 — The Weight of Silence", image: "/images/fendani/fnd-01-manguier.webp", paragraphs: [
         "It is in a school in the capital that the story of Mayenie, thirteen, begins. That morning, she crossed the threshold of the Gbessia Port primary school, her examination centre. The courtyard, cradled by the sea mist, seemed to announce a day that would matter; but Mayenie was not thinking of that. Her mind was already wholly turned toward the exam.",
         "In the room, armed with her pens, she waited.",
         "The invigilator: Check that you have your pens and that the report number is written on your sheet, before the test begins.",
@@ -124,7 +124,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "The silence returned, heavier still — that of parents realizing they had avoided this conversation for years.",
         "The father searched for his words: long ago, people believed this pain was necessary to learn patience. The mother held her sobbing daughter close.",
         "Mum: Mayenie, for a long time our society believed that mutilation was the gateway to our traditions. Many women suffered from it all their lives. We decided that your body would remain whole, because your worth does not depend on a wound. But you are right: you deserve words, my heart, not only our silence." ] },
-      { id: "ch2", title: "Chapter 2 — Fendani's Choice", paragraphs: [
+      { id: "ch2", title: "Chapter 2 — Fendani's Choice", image: "/images/fendani/fnd-02-parents.webp", paragraphs: [
         "Night has fallen. Long after their daughter has fallen asleep, Mayenie's parents talk in low voices in the kitchen. They protected her body. They forgot to prepare her mind.",
         "Silence gives way to disagreement, then to searching. The mother is categorical: you do not touch girls' bodies, but you do not lose your roots. The father wonders about the weight of others' eyes, while refusing the barbarity of the act.",
         "Dad: She's right. We spared her the pain, but not the exclusion. It's not enough.",
@@ -134,7 +134,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Mum: We will create our own rite. Replace the blade with speech. Initiation with knowledge. And for that, we must go and find those who know… the elder women.",
         "From the impasse a resolution is born. They are not alone in this. They decide to organize a gathering, to see whether other parents feel the same need: a path to raise their daughters, in morality and in health, without hurting them.",
         "That night, Mayenie's parents hardly slept. They wrote, planned, made calls. By dawn, Fendani was taking shape." ] },
-      { id: "ch3", title: "Chapter 3 — Return to the Source", paragraphs: [
+      { id: "ch3", title: "Chapter 3 — Return to the Source", image: "/images/fendani/fnd-03-conseil.webp", paragraphs: [
         "A few days later, on a rainy evening, the meeting is held in the living room of the matriarch, Nga Nana. On one side, white-haired women seated on mats. On the other, the parents who have come to question tradition. The atmosphere is tense, like before a storm.",
         "Mayenie's mother: We do not come to judge you. You were the keepers of a passage, of a transformation. We want to understand: what did you really pass on, behind the act? What secrets did this rite carry, before the blade took up all the room?",
         "Old Nga Nana looks at her wrinkled hands. She breathes in, takes a long moment, as if to plunge into her memories.",
@@ -143,7 +143,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Nga Nana: But it's true… over the years, the blade became more visible than the word. As if we had forgotten that it was only the shell, and that the heart of the rite was something else.",
         "Mama Yéli: Fendani offers us a chance to become again what we were at the start: educators. Bearers of wisdom. Not surgeons of the shadows.",
         "The white heads turned toward one another. And for the first time in a long while, in that room, something gentle settled in — like a silent reconciliation with themselves." ] },
-      { id: "ch4", title: "Chapter 4 — The Night of Knowledge", paragraphs: [
+      { id: "ch4", title: "Chapter 4 — The Night of Knowledge", image: "/images/fendani/fnd-04-nuit-savoir.webp", paragraphs: [
         "That night, in the school courtyard, the sky was clear. The moon shone like a queen surrounded by her ladies-in-waiting, those stars that cheered her with their sparkle. A fire had been lit in the centre of the courtyard; the flames danced in the warm air. Little girls and young girls formed a circle. The drummers and the flute player, hidden behind the foliage, gave the signal. The elder women, standing, armed with wassakhoumba, began the initiation.",
         "The courtyard was transformed. The wise old women, the Sema, surrounded the young girls. Nga Nana, dressed in a long, immaculate white robe, a red crown adorned with thorns and cowries on her head, raised her instrument fitted with bits of calabash and began the song of the purification of the soul.",
         "♪ Nga wobé bira khi tokhogbi nè / An nkha sa a makha khoummawali ma…",
@@ -163,7 +163,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "♪ Nfafé Youlai Nfafé Youlai Ayi ya ! / Nfafé Youlai dougui di ndé bé ayi ya !",
         "“O dear merchant, here is a wrapper, fresh and gleaming… One must carry oneself well to be worthy.”",
         "That night, the girls did not only learn songs. They learned to know themselves: their rights, their bodies, their history. They spoke of health, of respect, of the love one owes oneself. The elder women spoke for a long time, and the girls listened the way one drinks cool water after a long walk." ] },
-      { id: "ch5", title: "Chapter 5 — The Ambassadors of Fendani", paragraphs: [
+      { id: "ch5", title: "Chapter 5 — The Ambassadors of Fendani", image: "/images/fendani/fnd-05-ambassadrices.webp", paragraphs: [
         "Dawn rose, pink and gold. The fire had died down gently. The girls, seated in a circle, had eyes bright with tiredness and with something that looked like pride. One by one, they received their Fendani Ambassador badge.",
         "Hawa: Mayenie, you are now an initiate of knowledge. Not through pain, but through understanding. Your fight begins here, this morning, in this courtyard. And it will go far.",
         "Mayenie held in both hands her piece of wrapper, her bamboo necklace and her initiate's staff. She thought of Aïcha. She thought of her mother, standing in the kitchen that night. She thought of the old women who had chosen, after all these years, to listen and to pass on.",
@@ -171,7 +171,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "Deep down, Mayenie was no longer the confused little girl of the schoolyard. She was an initiate. The secret of the forest lay not in the blade, but in those melodies that had taught her who she was.",
         "Her parents, for their part, were proud to have let their daughter know the forest. Not just any forest: a forest where the trees whisper secrets instead of cries.",
         "The other girls took up the chorus, softly, then louder and louder, until the words rose into the morning sky like birds. And in the forest that bordered the school — the one the elders once called Laaga, the forest of rites — there were, that morning, no more cries or tears. Only voices that sang." ] },
-      { id: "epilogue", title: "Epilogue — The Forest That Blooms", paragraphs: [
+      { id: "epilogue", title: "Epilogue — The Forest That Blooms", image: "/images/fendani/fnd-06-epilogue.webp", paragraphs: [
         "Since that night, other school courtyards light up, other fires, other songs. From prefecture to prefecture, girls grow up with knowledge as a shield and dignity as a crown.",
         "Because culture is a tree. It needs deep roots and branches that open toward the sky. It can transform without dying. It can pass on without wounding.",
         "“Fendani: because culture is a wealth passed on through the word, not through blood.”",
@@ -183,11 +183,11 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
   ar: {
     lang: "ar", dir: "rtl", label: "العربية", bookTitle: "فينداني — سرّ الغابة بلا ألم",
     sections: [
-      { id: "avant-propos", title: "تمهيد", paragraphs: [
+      { id: "avant-propos", title: "تمهيد", image: "/images/fendani/fnd-00-foret.webp", paragraphs: [
         "الثقافة ليست نصبًا متجمّدًا في الماضي، بل شجرة حيّة تستمدّ قوّتها من جذورها لتزدهر نحو السماء. في غينيا، كانت طقوس التنشئة دائمًا أساس هويّتنا، تنقل الشجاعة والحياء والكرامة إلى الفتيات.",
         "لكنّ جوهر هذا النقل ضاع أحيانًا خلف ألم النصل. تختار فينداني أن تحتفظ الطقوس بكلّ قوّتها الرمزية والتربوية، باستبدال البتر بالكلمة والغناء والمعرفة. أن نحمي السلامة الجسدية لبناتنا، وأن نُعلي تراثنا.",
         "هذه الحكاية، سرّ الغابة بلا ألم، أكثر من مجرّد قصّة. إنها وعدٌ لِمايني ولكلّ فتيات أمّتنا: دليلٌ على أنّ المرء يمكن أن يصبح امرأة كاملة، سليمة وفخورة بأصولها، بقوّة الكلمة والمعرفة وحدها." ] },
-      { id: "ch1", title: "الفصل الأول — ثِقل الصمت", paragraphs: [
+      { id: "ch1", title: "الفصل الأول — ثِقل الصمت", image: "/images/fendani/fnd-01-manguier.webp", paragraphs: [
         "في مدرسة بالعاصمة تبدأ قصّة مايني، ذات الثلاثة عشر عامًا. في ذلك الصباح، عبرت عتبة مدرسة غبيسيا بور الابتدائية، مركز امتحانها. بدا الفناء، الذي يداعبه ضباب البحر، وكأنه يُنبئ بيومٍ مهمّ؛ لكنّ مايني لم تفكّر في ذلك. كان عقلها كلّه منصرفًا إلى الامتحان.",
         "في القاعة، وقد تسلّحت بأقلامها، انتظرت.",
         "المراقب: تأكّدوا من أنّ معكم أقلامكم وأنّ رقم المحضر مدوَّن على البطاقة قبل بدء الاختبار.",
@@ -207,7 +207,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "عاد الصمت أثقل بعد — صمت والدَين يدركان أنّهما تجنّبا هذا الحديث لسنوات.",
         "بحث الأب عن كلماته: قديمًا، كان الناس يظنّون هذا الألم ضروريًّا لتعلّم الصبر. ضمّت الأمّ ابنتها الباكية إليها.",
         "ماما: مايني، طويلًا اعتقد مجتمعنا أنّ البتر هو باب الدخول إلى تقاليدنا. عانت نساء كثيرات منه طوال حياتهنّ. قرّرنا أن يبقى جسدكِ سليمًا، لأنّ قيمتكِ لا تتوقّف على جرح. لكنّكِ محقّة: تستحقّين كلماتٍ يا قلبي، لا صمتنا وحده." ] },
-      { id: "ch2", title: "الفصل الثاني — اختيار فينداني", paragraphs: [
+      { id: "ch2", title: "الفصل الثاني — اختيار فينداني", image: "/images/fendani/fnd-02-parents.webp", paragraphs: [
         "حلّ الليل. بعد وقتٍ طويل من نوم ابنتهما، يتحدّث والدا مايني بصوتٍ خافت في المطبخ. حَمَيا جسدها. ونسيا أن يُعِدّا عقلها.",
         "يفسح الصمت المجال للخلاف، ثم للبحث. الأمّ حاسمة: لا نمسّ أجساد الفتيات، لكن لا نفقد جذورنا. والأب يتساءل عن وطأة نظرات الآخرين، رافضًا في الوقت نفسه وحشية الفعل.",
         "بابا: إنها محقّة. جنّبناها الألم، لكن لا الإقصاء. هذا لا يكفي.",
@@ -217,7 +217,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "ماما: سنبتكر طقسنا الخاصّ. نستبدل النصل بالكلمة. والتنشئة بالمعرفة. ولأجل ذلك، علينا أن نبحث عمّن يعرفن… المُسنّات.",
         "من المأزق تولد عزيمة. ليسا وحدهما في هذا. يقرّران تنظيم لقاء، ليريا إن كان آباء آخرون يشعرون بالحاجة نفسها: طريقٌ لتربية بناتهم، في الأخلاق والصحّة، دون إيذائهنّ.",
         "في تلك الليلة، لم ينَم والدا مايني إلّا قليلًا. كتبا وخطّطا واتّصلا. ومع الفجر، كانت فينداني تتشكّل." ] },
-      { id: "ch3", title: "الفصل الثالث — العودة إلى الأصول", paragraphs: [
+      { id: "ch3", title: "الفصل الثالث — العودة إلى الأصول", image: "/images/fendani/fnd-03-conseil.webp", paragraphs: [
         "بعد أيّامٍ قليلة، في أمسيةٍ ماطرة، يُعقد اللقاء في صالة الجدّة الكبرى، نغا نانا. في جهة، نساء بِيض الشعر جالسات على الحُصُر. وفي الأخرى، الآباء الذين جاؤوا يسائلون التقليد. الأجواء متوتّرة، كما قبل عاصفة.",
         "أمّ مايني: لم نأتِ لنحكم عليكنّ. كنتنّ حارسات عبور، حارسات تحوّل. نريد أن نفهم: ماذا كنتنّ تنقلن حقًّا، خلف الفعل؟ أيّ أسرارٍ حملها هذا الطقس قبل أن يحتلّ النصل كلّ المكان؟",
         "تنظر نغا نانا العجوز إلى يديها المجعّدتين. تتنفّس، تأخذ وقتًا طويلًا، كأنّها تغوص في ذكرياتها.",
@@ -226,7 +226,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "نغا نانا: لكن صحيحٌ… مع السنين، صار النصل أوضح من الكلمة. كأنّنا نسينا أنّه لم يكن سوى القشرة، وأنّ قلب الطقس كان شيئًا آخر.",
         "ماما ييلي: تمنحنا فينداني فرصة لنعود إلى ما كنّاه في البدء: مربّيات. ناقلات حكمة. لا جرّاحاتٍ في الظلّ.",
         "التفتت الرؤوس البيضاء بعضها نحو بعض. ولأوّل مرّة منذ زمنٍ طويل، حلّ في تلك الغرفة شيءٌ لطيف — كمصالحةٍ صامتة مع الذات." ] },
-      { id: "ch4", title: "الفصل الرابع — ليلة المعرفة", paragraphs: [
+      { id: "ch4", title: "الفصل الرابع — ليلة المعرفة", image: "/images/fendani/fnd-04-nuit-savoir.webp", paragraphs: [
         "في تلك الليلة، في فناء المدرسة، كانت السماء صافية. أشرق القمر كملِكةٍ تحيط بها وصيفاتها، تلك النجوم التي تهتف له ببريقها. أُوقدت نارٌ في وسط الفناء؛ ترقص الألسنة في الهواء الدافئ. شكّلت الصغيرات والفتيات حلقة. وأعطى قارعو الطبول وعازف الناي، المختبئون خلف الأغصان، إشارة البدء. وبدأت المُسنّات، واقفات، حاملات الوَسّاخومبا، التنشئة.",
         "تحوّل الفناء. أحاطت الحكيمات العجائز، الـسيما، بالفتيات. رفعت نغا نانا، في ثوبٍ أبيض ناصع طويل، وعلى رأسها تاجٌ أحمر مزيّن بالأشواك والوَدَع، آلتها المرصّعة بقطع القرع، وأنشدت أنشودة تطهير الروح.",
         "♪ Nga wobé bira khi tokhogbi nè / An nkha sa a makha khoummawali ma…",
@@ -246,7 +246,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "♪ Nfafé Youlai Nfafé Youlai Ayi ya ! / Nfafé Youlai dougui di ndé bé ayi ya !",
         "«يا أيّها التاجر العزيز، ها هنا ثوبٌ جديد لامع… على المرء أن يُحسن هيئته ليكون جديرًا.»",
         "في تلك الليلة، لم تتعلّم الفتيات أناشيد فحسب. تعلّمن أن يعرفن أنفسهنّ: حقوقهنّ، أجسادهنّ، تاريخهنّ. تحدّثن عن الصحّة، عن الاحترام، عن الحبّ الذي يدين به المرء لنفسه. تحدّثت المُسنّات طويلًا، وأصغت الفتيات كما يُشرَب الماء البارد بعد مسيرٍ طويل." ] },
-      { id: "ch5", title: "الفصل الخامس — سفيرات فينداني", paragraphs: [
+      { id: "ch5", title: "الفصل الخامس — سفيرات فينداني", image: "/images/fendani/fnd-05-ambassadrices.webp", paragraphs: [
         "أطلّ الفجر ورديًّا وذهبيًّا. خمدت النار بهدوء. كانت عيون الفتيات الجالسات في حلقةٍ تلمع تعبًا وشيئًا يشبه الفخر. واحدةً تلو الأخرى، تسلّمن شارة سفيرة فينداني.",
         "هاوا: مايني، أنتِ الآن مُنتسِبة إلى المعرفة. لا بالألم، بل بالفهم. معركتكِ تبدأ هنا، هذا الصباح، في هذا الفناء. وستمضي بعيدًا.",
         "أمسكت مايني بكلتا يديها قطعة ثوبها، وعقد الخيزران، وعصا التنشئة. فكّرت في عائشة. فكّرت في أمّها، واقفةً في المطبخ تلك الليلة. فكّرت في العجائز اللواتي اخترن، بعد كلّ تلك السنين، أن يُصغين وأن يَنقُلن.",
@@ -254,7 +254,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "في أعماقها، لم تعد مايني الطفلة الحائرة في فناء المدرسة. صارت مُنتسِبة. لم يكن سرّ الغابة في النصل، بل في تلك الألحان التي علّمتها مَن تكون.",
         "أمّا والداها، فكانا فخورَين بأنّهما أتاحا لابنتهما أن تعرف الغابة. لا أيّ غابة: غابة تهمس أشجارها بالأسرار بدل الصرخات.",
         "ردّدت الفتيات الأخريات الجوقة، بهدوء، ثم بصوتٍ أعلى فأعلى، حتى صعدت الكلمات في سماء الصباح كالعصافير. وفي الغابة المحاذية للمدرسة — تلك التي كان القدماء يسمّونها لاغا، غابة الطقوس — لم يعد ثمّة، ذلك الصباح، صرخاتٌ ولا دموع. أصواتٌ تغنّي فحسب." ] },
-      { id: "epilogue", title: "الخاتمة — الغابة التي تُزهر", paragraphs: [
+      { id: "epilogue", title: "الخاتمة — الغابة التي تُزهر", image: "/images/fendani/fnd-06-epilogue.webp", paragraphs: [
         "منذ تلك الليلة، تُضاء أفنية مدارس أخرى، ونيران أخرى، وأناشيد أخرى. من محافظةٍ إلى محافظة، تكبر فتياتٌ والمعرفة درعهنّ والكرامة تاجهنّ.",
         "لأنّ الثقافة شجرة. تحتاج إلى جذورٍ عميقة وأغصانٍ تنفتح نحو السماء. يمكنها أن تتحوّل دون أن تموت. ويمكنها أن تنقل دون أن تجرح.",
         "«فينداني: لأنّ الثقافة ثروة تُنقَل بالكلمة، لا بالدم.»",
@@ -266,11 +266,11 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
   zh: {
     lang: "zh", dir: "ltr", label: "中文", bookTitle: "芬达尼 — 无痛之林的秘密",
     sections: [
-      { id: "avant-propos", title: "前言", paragraphs: [
+      { id: "avant-propos", title: "前言", image: "/images/fendani/fnd-00-foret.webp", paragraphs: [
         "文化不是凝固于过去的纪念碑，而是一棵从根脉汲取力量、向天空舒展的活树。在几内亚，我们的成年礼始终是身份的基石，向少女传递勇气、端庄与尊严。",
         "但这种传承的核心，有时被刀的痛苦所掩盖。芬达尼作出选择：让仪式保留其全部的象征与教育力量，以言语、歌声与知识取代切割。守护我们女儿们身体的完整，并彰显我们的传统。",
         "这则故事《无痛之林的秘密》不只是一个故事。它是对马耶妮以及全国所有女孩的承诺：证明仅凭言语与知识的力量，人也能成为一个完整、为自己出身而自豪的成熟女性。" ] },
-      { id: "ch1", title: "第一章 — 沉默之重", paragraphs: [
+      { id: "ch1", title: "第一章 — 沉默之重", image: "/images/fendani/fnd-01-manguier.webp", paragraphs: [
         "马耶妮的故事，始于首都的一所学校，她十三岁。那天早晨，她踏进自己的考点——格贝西亚港小学。被海雾轻抚的院子，仿佛预示着重要的一天；但马耶妮没有想这些。她的心思早已全在考试上。",
         "在考场里，她握着笔，等待着。",
         "监考员：开考前，请检查你们带了笔，并把准考证号写在卡片上。",
@@ -290,7 +290,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "沉默再次降临，更加沉重——那是意识到自己多年来一直回避这场谈话的父母的沉默。",
         "父亲斟酌着措辞：从前，人们相信这种痛苦是学会忍耐所必需的。母亲把哭泣的女儿紧紧搂在怀里。",
         "妈妈：马耶妮，很久以来，我们的社会都以为切割是进入传统的大门。许多女人因此痛苦了一生。我们决定让你的身体保持完整，因为你的价值不取决于一道伤口。但你说得对：你应得的是话语，我的心肝，而不只是我们的沉默。" ] },
-      { id: "ch2", title: "第二章 — 芬达尼的抉择", paragraphs: [
+      { id: "ch2", title: "第二章 — 芬达尼的抉择", image: "/images/fendani/fnd-02-parents.webp", paragraphs: [
         "夜幕已落。在女儿入睡很久之后，马耶妮的父母在厨房里低声交谈。他们保护了她的身体，却忘了准备她的心灵。",
         "沉默让位于分歧，再让位于求索。母亲态度坚决：不碰女孩的身体，但也不丢失自己的根。父亲既忧虑他人目光的分量，又拒绝那残忍的行为。",
         "爸爸：她说得对。我们替她免去了痛苦，却没免去排斥。这还不够。",
@@ -300,7 +300,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "妈妈：我们要创造属于我们自己的仪式。用言语取代刀。用知识取代切割。为此，我们必须去找那些懂的人……那些老人家。",
         "从僵局中诞生了决心。他们并不孤单。他们决定组织一次聚会，看看是否还有别的父母怀着同样的需要：一条不伤害女儿、在德行与健康中养育她们的路。",
         "那一夜，马耶妮的父母几乎没睡。他们写、计划、打电话。黎明时分，芬达尼已初具雏形。" ] },
-      { id: "ch3", title: "第三章 — 回到根源", paragraphs: [
+      { id: "ch3", title: "第三章 — 回到根源", image: "/images/fendani/fnd-03-conseil.webp", paragraphs: [
         "几天后，一个雨夜，聚会在女族长恩加·娜娜的客厅举行。一边，是坐在席子上的白发女人；另一边，是前来叩问传统的父母。气氛紧张，如同暴风雨来临之前。",
         "马耶妮的母亲：我们不是来评判你们的。你们曾是一场过渡、一场蜕变的守护者。我们想明白：在那行为的背后，你们真正传递的是什么？在刀占据一切之前，这仪式承载着怎样的秘密？",
         "年迈的恩加·娜娜看着自己布满皱纹的双手。她吸了口气，停顿良久，仿佛要潜入自己的回忆。",
@@ -309,7 +309,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "恩加·娜娜：但确实……随着岁月流逝，刀变得比言语更显眼。仿佛我们忘了它只是外壳，而仪式的核心，是别的东西。",
         "妈妈·耶丽：芬达尼给了我们一个机会，重新成为我们最初的样子：教育者，智慧的传递者，而不是暗处的『刀手』。",
         "白发的头一个个转向彼此。许久以来第一次，在那房间里，有某种温柔降临——像一场与自己的无声和解。" ] },
-      { id: "ch4", title: "第四章 — 知识之夜", paragraphs: [
+      { id: "ch4", title: "第四章 — 知识之夜", image: "/images/fendani/fnd-04-nuit-savoir.webp", paragraphs: [
         "那一夜，在学校的院子里，天空晴朗。月亮像一位被宫女环绕的王后，那些星星以闪烁向她欢呼。院子中央燃起一堆火；火苗在温暖的空气中起舞。小女孩和少女们围成一圈。藏在枝叶后的鼓手与笛手奏响了序曲。老人家们站立着，手持瓦萨昆巴，开始了仪式。",
         "院子变了样。被称作『塞玛』的智慧长者们围着少女们。恩加·娜娜身着一袭洁白的长袍，头戴一顶饰有荆棘与海贝的红冠，举起她那镶着葫芦碎片的乐器，唱起净化灵魂之歌。",
         "♪ Nga wobé bira khi tokhogbi nè / An nkha sa a makha khoummawali ma…",
@@ -329,7 +329,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "♪ Nfafé Youlai Nfafé Youlai Ayi ya ! / Nfafé Youlai dougui di ndé bé ayi ya !",
         "「哦，亲爱的商人，这里有一块崭新闪亮的布巾……人要端正仪态，才配得上它。」",
         "那一夜，女孩们学到的不只是歌。她们学会了认识自己：自己的权利、身体与历史。她们谈健康，谈尊重，谈一个人对自己应有的爱。老人家们讲了很久，女孩们聆听着，像长途跋涉后饮下清凉的水。" ] },
-      { id: "ch5", title: "第五章 — 芬达尼的使者", paragraphs: [
+      { id: "ch5", title: "第五章 — 芬达尼的使者", image: "/images/fendani/fnd-05-ambassadrices.webp", paragraphs: [
         "黎明升起，玫瑰色与金色交织。火渐渐熄灭。围坐成圈的女孩们，眼里闪着疲惫，以及某种近乎自豪的光。她们一个接一个，领取了『芬达尼使者』的徽章。",
         "哈娃：马耶妮，从此你是知识的入门者。不是凭痛苦，而是凭领悟。你的斗争从这里开始，就在今晨，就在这院子里。它将走得很远。",
         "马耶妮双手捧着她的那块布巾、竹项链和入门者之杖。她想起阿伊莎。想起那夜站在厨房里的母亲。想起那些老妇人——在这么多年之后，选择了倾听与传承。",
@@ -337,7 +337,7 @@ export const FENDANI_ML: Partial<Record<FendaniLang, Book>> = {
         "在内心深处，马耶妮已不再是校园里那个困惑的小女孩。她是一名入门者。森林的秘密不在于刀刃，而在于那些教会她认识自己的旋律。",
         "而她的父母，为让女儿认识了森林而自豪。不是随便哪一片森林：而是一片树木低语秘密、而非发出哭喊的森林。",
         "别的女孩们齐声应和，先是轻轻地，然后越来越响，直到那些词语像鸟儿一样升入清晨的天空。在学校旁的森林里——那片古人曾称作『拉加』、即仪式之林的森林——那个早晨，再没有哭喊与泪水。只有歌唱的声音。" ] },
-      { id: "epilogue", title: "尾声 — 绽放的森林", paragraphs: [
+      { id: "epilogue", title: "尾声 — 绽放的森林", image: "/images/fendani/fnd-06-epilogue.webp", paragraphs: [
         "自那一夜起，别的校园也亮起来，别的篝火，别的歌声。从一个省到另一个省，女孩们以知识为盾、以尊严为冠地长大。",
         "因为文化是一棵树。它需要深扎的根，也需要向天空舒展的枝。它能蜕变而不死亡。它能传承而不伤人。",
         "「芬达尼：因为文化是一份以言语、而非以血来传递的财富。」",

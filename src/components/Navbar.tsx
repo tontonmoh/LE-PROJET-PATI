@@ -1,12 +1,10 @@
-// MODIFIÉ · src/components/Navbar.tsx
-// Ajout barre de recherche :
-//   - import SearchBar + icône Search
-//   - état `searchOpen` (mobile/tablette) + fermeture au changement de route
-//   - ≥ lg : <SearchBar variant="desktop" /> entre le logo et les liens
-//   - < lg : bouton loupe à côté du burger, champ pleine largeur déroulé sous la barre
+// src/components/Navbar.tsx
+// Navbar allégée (15/10/2026) : Contes, Le Défi et L'Atelier retirés — le hero et le footer
+// portent les entrées de contenu. Reste : recherche · Installer l'appli · Mon compte · Contribuer.
+// Recherche : <SearchBar variant="desktop"> inline ≥ lg ; loupe + champ déroulé < lg.
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Headphones, Heart, Menu, X, Download, Puzzle, Users, UserCircle, Search } from "lucide-react";
+import { Heart, Menu, X, Download, UserCircle, Search } from "lucide-react";
 import LowBandwidthToggle from "./LowBandwidthToggle";
 import SearchBar from "./SearchBar";
 import { getEncycloTheme } from "../data/encycloThemes";
@@ -37,30 +35,18 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Recherche inline : uniquement ≥ lg */}
-          <div className="hidden lg:block flex-1 max-w-xs">
+          {/* Recherche inline : uniquement ≥ lg. Un peu plus large qu'avant, la barre a de la place. */}
+          <div className="hidden lg:block flex-1 max-w-sm">
             <SearchBar variant="desktop" />
           </div>
 
-          {/* Liens complets : uniquement ≥ lg. L'iPad portrait (768 px) reste en menu burger. */}
+          {/* Liens : uniquement ≥ lg. L'iPad portrait (768 px) reste en menu burger. */}
           <div className="hidden lg:flex items-center gap-1">
-            <Link
-              to="/ecouter-les-contes"
-              className={`navbar-link flex items-center gap-1.5 text-[#FFC93C] hover:bg-[#FFC93C]/15 ${active("/ecouter-les-contes") ? "bg-[#FFC93C]/20" : ""}`}
-            >
-              <Headphones size={16} />Contes
-            </Link>
-            <Link to="/defi" className={`navbar-link flex items-center gap-1.5 ${active("/defi") ? "text-white bg-white/10" : ""}`}>
-              <Puzzle size={16} />Le Défi
-            </Link>
             <Link
               to="/appli-mobile"
               className={`navbar-link flex items-center gap-1.5 ${active("/appli-mobile") ? "text-white bg-white/10" : ""} bg-[#F5C518]/20 text-[#F5C518] hover:bg-[#F5C518]/30`}
             >
               <Download size={16} />Installer l'appli
-            </Link>
-            <Link to="/atelier" className={`navbar-link flex items-center gap-1.5 ${active("/atelier") ? "text-white bg-white/10" : ""}`}>
-              <Users size={16} />L'Atelier
             </Link>
             <Link to="/compte" className={`navbar-link flex items-center gap-1.5 ${active("/compte") ? "text-white bg-white/10" : ""}`}>
               <UserCircle size={16} />Mon compte
@@ -115,32 +101,11 @@ export default function Navbar() {
         <div className="lg:hidden border-t border-white/10 px-4 sm:px-6 pb-4" style={{ background: theme.navbarDark }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 mt-2">
             <Link
-              to="/ecouter-les-contes"
-              className={`navbar-link py-3.5 flex items-center gap-3 text-[#FFC93C] ${active("/ecouter-les-contes") ? "bg-[#FFC93C]/15" : ""}`}
-              onClick={() => setOpen(false)}
-            >
-              <Headphones size={20} />Contes
-            </Link>
-            <Link
-              to="/defi"
-              className={`navbar-link py-3.5 flex items-center gap-3 ${active("/defi") ? "text-[#F5C518]" : ""}`}
-              onClick={() => setOpen(false)}
-            >
-              <Puzzle size={20} />Le Défi
-            </Link>
-            <Link
               to="/appli-mobile"
               className={`navbar-link py-3.5 flex items-center gap-3 ${active("/appli-mobile") ? "text-[#F5C518]" : ""}`}
               onClick={() => setOpen(false)}
             >
               <Download size={20} />Installer l'appli
-            </Link>
-            <Link
-              to="/atelier"
-              className={`navbar-link py-3.5 flex items-center gap-3 ${active("/atelier") ? "text-[#F5C518]" : ""}`}
-              onClick={() => setOpen(false)}
-            >
-              <Users size={20} />L'Atelier
             </Link>
             <Link
               to="/compte"
