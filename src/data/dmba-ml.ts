@@ -15,6 +15,48 @@ export interface DmbaSection {
   paragraphs: string[];
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// ILLUSTRATIONS — indépendantes de la langue, indexées par `id` de section.
+// Fichiers dans public/livres/dmba/ (planches Gemini 15/10/2026, découpées
+// depuis deux grilles 16:9 ; 344×192 px — à remplacer par les versions HD
+// quand elles seront générées, sans toucher à ce mapping).
+// Ordre = ordre d'affichage dans la section.
+// ──────────────────────────────────────────────────────────────────────────
+export const DMBA_IMG_BASE = "/livres/dmba/";
+
+export const DMBA_IMAGES: Record<string, string[]> = {
+  // — Récit (grille 1, v2)
+  fifi:                 ["dmba-01-fifi-v2.png"],
+  amadou:               ["dmba-02-amadou-v2.png"],
+  "la-guinee":          ["dmba-03-guinee-v2.png"],
+  "musee-nimba":        ["dmba-04-musee-v2.png"],
+  "appel-mamie":        ["dmba-05-appel-v2.png"],
+  voyage:               ["dmba-06-voyage-v2.png"],
+  aeroport:             ["dmba-07-aeroport-v2.png"],
+  "route-kamsar":       ["dmba-08-route-v2.png"],
+  "eau-partout":        ["dmba-09-eau-v2.png"],
+  "malle-masque":       ["dmba-10-malle-v2.png"],
+  "mamie-explique":     ["dmba-11-mamie-v2.png"],
+  promesse:             ["dmba-12-promesse-v2.png"],
+  // — Documentaire (grille 1 cases 13-16 + grille 2 "doc")
+  "branding-national":  ["dmba-13-branding-v2.png"],
+  "nimba-branding":     ["dmba-doc-12-monde-v1.png"],
+  "valeurs-nimba":      ["dmba-doc-07-valeurs-v1.png"],
+  "pourquoi-nimba-1":   ["dmba-doc-01-legende-v1.png", "dmba-doc-02-cretes-v1.png"],
+  "pourquoi-nimba-2":   ["dmba-doc-03-sculpteurs-v1.png", "dmba-doc-04-mont-nimba-v1.png", "dmba-14-carte-v2.png"],
+  armoiries:            ["dmba-doc-05-armoiries-v1.png"],
+  "difference-branding":["dmba-doc-06-armoiries-vs-branding-v1.png"],
+  "tresor-musees":      ["dmba-doc-08-musees-v1.png"],
+  "picasso-tresor":     ["dmba-15-picasso-v2.png", "dmba-doc-10-collection-privee-v1.png", "dmba-doc-11-encheres-v1.png"],
+  "en-mission":         ["dmba-16-mission-v2.png"],
+  "autres-metiers":     ["dmba-doc-13-metiers-1-v1.png", "dmba-doc-14-metiers-2-v1.png", "dmba-doc-15-metiers-3-v1.png", "dmba-doc-16-marketing-digital-v1.png"],
+  // Non illustrées volontairement : dedicace, quiz, petit-dico, ton-tour
+};
+
+/** Chemins absolus prêts pour <img src>, ou [] si la section n'a pas d'image. */
+export const dmbaImages = (sectionId: string): string[] =>
+  (DMBA_IMAGES[sectionId] ?? []).map((f) => DMBA_IMG_BASE + f);
+
 export interface DmbaBook {
   lang: DmbaLang;
   dir: "ltr" | "rtl";
