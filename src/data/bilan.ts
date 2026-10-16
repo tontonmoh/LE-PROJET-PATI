@@ -7,12 +7,12 @@
 export type PillarKey = "batisseur" | "chercheur" | "createur" | "accompagnateur" | "entrepreneur" | "organisateur";
 
 export const PILLARS: Record<PillarKey, { title: string; color: string; icon: string; desc: string }> = {
-  batisseur:      { title: "Le Bâtisseur",      color: "#E8532D", icon: "build",  desc: "Construire, réparer, manier les machines et le terrain. (profil Réaliste)" },
-  chercheur:      { title: "Le Chercheur",      color: "#2563EB", icon: "search", desc: "Comprendre, analyser, explorer les sciences et les chiffres. (profil Investigateur)" },
-  createur:       { title: "Le Créateur",       color: "#DB2777", icon: "palette", desc: "Imaginer, dessiner, écrire et raconter. (profil Artistique)" },
+  batisseur:      { title: "Le Bâtisseur",      color: "#B8472A", icon: "build",  desc: "Construire, réparer, manier les machines et le terrain. (profil Réaliste)" },
+  chercheur:      { title: "Le Chercheur",      color: "#2B5C8A", icon: "search", desc: "Comprendre, analyser, explorer les sciences et les chiffres. (profil Investigateur)" },
+  createur:       { title: "Le Créateur",       color: "#FF6B4A", icon: "palette", desc: "Imaginer, dessiner, écrire et raconter. (profil Artistique)" },
   accompagnateur: { title: "L'Accompagnateur",  color: "#0F6E56", icon: "care",   desc: "Aider, soigner et transmettre aux autres. (profil Social)" },
-  entrepreneur:   { title: "L'Entrepreneur",    color: "#7C3AED", icon: "rocket", desc: "Convaincre, vendre, lancer et diriger des projets. (profil Entreprenant)" },
-  organisateur:   { title: "L'Organisateur",    color: "#0E7490", icon: "org",    desc: "Planifier, coordonner et faire tourner les choses. (profil Conventionnel)" },
+  entrepreneur:   { title: "L'Entrepreneur",    color: "#C8841E", icon: "rocket", desc: "Convaincre, vendre, lancer et diriger des projets. (profil Entreprenant)" },
+  organisateur:   { title: "L'Organisateur",    color: "#1F7A8C", icon: "org",    desc: "Planifier, coordonner et faire tourner les choses. (profil Conventionnel)" },
 };
 
 export type Metier = { id: string; title: string; pillar: PillarKey; sector: string; track: string; shortDesc: string };

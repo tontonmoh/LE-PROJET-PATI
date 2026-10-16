@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Star, BookOpen, Trophy, PenTool, Landmark, Share2, Cpu, Compass, Gift, Headphones, Film, Layers } from "lucide-react";
+import { Sparkles, Star, BookOpen, Trophy, PenTool, Landmark, Share2, Cpu, Compass, Gift, Headphones, Film, Layers, Hammer, Microscope, Palette, HeartHandshake, Rocket, ClipboardList } from "lucide-react";
+import { PILLARS } from "../data/bilan";
 import { SOCIAL } from "../data/site";
 import { BOOKS } from "../data/books";
 import { SERIES } from "../data/series";
@@ -110,17 +111,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bandeau Génie */}
+      {/* Bandeau Génie — 6 colonnes RIASEC (couleurs = PILLARS de bilan.ts) */}
       <section className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="bg-[#0F6E56] rounded-[2rem] px-8 py-10 md:px-12 md:py-12 text-center shadow-kid">
-          <h2 className="text-2xl md:text-3xl text-white mb-3">Et toi, quel est ton génie&nbsp;?</h2>
-          <p className="text-white/85 font-semibold mb-6 max-w-xl mx-auto">
-            Réponds à quelques questions rigolotes et découvre les métiers de demain qui sont faits pour toi.
-          </p>
-          <Link to="/decouvrir-son-genie" className="btn-kid bg-[#FFC93C] text-[#0D2B1A]">
-            <Sparkles size={18} /> C'est parti&nbsp;!
-          </Link>
-        </div>
+        <Link
+          to="/decouvrir-son-genie"
+          className="genie-band group relative block rounded-[2rem] overflow-hidden shadow-kid"
+          aria-label="Et toi, quel est ton génie ? Faire le bilan"
+        >
+          {/* Les 6 colonnes */}
+          <div className="grid grid-cols-6 min-h-[280px] md:min-h-[320px]">
+            {(
+              [
+                { key: "batisseur",      letter: "R", icon: Hammer },
+                { key: "chercheur",      letter: "I", icon: Microscope },
+                { key: "createur",       letter: "A", icon: Palette },
+                { key: "accompagnateur", letter: "S", icon: HeartHandshake },
+                { key: "entrepreneur",   letter: "E", icon: Rocket },
+                { key: "organisateur",   letter: "C", icon: ClipboardList },
+              ] as const
+            ).map((c) => {
+              const p = PILLARS[c.key];
+              return (
+                <div
+                  key={c.key}
+                  className="genie-col relative flex flex-col items-center pt-5 md:pt-6 px-1 text-white"
+                  style={{ background: p.color }}
+                >
+                  <c.icon size={22} className="opacity-90 mb-1.5" />
+                  <span className="font-display font-bold text-2xl md:text-3xl leading-none">{c.letter}</span>
+                  <span className="hidden md:block mt-1 text-[11px] font-display font-semibold uppercase tracking-wide text-white/85 text-center leading-tight">
+                    {p.title.replace(/^(Le |L')/, "")}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Accroche + bouton, centrés par-dessus les colonnes */}
+          <div className="absolute inset-0 flex flex-col items-center justify-end md:justify-center text-center px-6 pb-8 md:pb-0 md:pt-10 pointer-events-none">
+            <h2 className="text-2xl md:text-3xl text-white mb-3 [text-shadow:0_2px_12px_rgba(0,0,0,.45)]">Et toi, quel est ton génie&nbsp;?</h2>
+            <p className="text-white font-semibold mb-6 max-w-xl mx-auto [text-shadow:0_1px_8px_rgba(0,0,0,.5)]">
+              Réponds à quelques questions rigolotes et découvre les métiers de demain qui sont faits pour toi.
+            </p>
+            <span className="btn-kid bg-[#FFC93C] text-[#0D2B1A] pointer-events-auto group-hover:scale-105 transition-transform">
+              <Sparkles size={18} /> C'est parti&nbsp;!
+            </span>
+          </div>
+        </Link>
       </section>
 
       {/* Offre spéciale — Personnalisation */}
