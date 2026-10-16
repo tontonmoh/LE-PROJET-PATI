@@ -4,19 +4,17 @@ import { Sparkles, BookOpen, Headphones, Film, Gamepad2 } from "lucide-react";
 import { SOCIAL } from "../data/site";
 import "./FeaturedHero.css";
 
-// Héros : accroche + illustration de la conteuse.
-// 3 mises en page :
-//  - mobile (< 768)        : texte, puis illustration pleine largeur dessous
-//  - tablette (768–1023)   : 2 colonnes — texte à gauche, illustration cadrée à droite
-//  - desktop (≥ 1024)      : illustration en fond, fondue dans le crème, texte par-dessus
-// (Carte Académie Pati retirée le 07/10/2026 — session terminée ; la page /academie-pati reste accessible.)
+// Héros v2 (16/10/2026) : accroche + conteuse DÉTOURÉE (pati-conteuse-hero.webp, fond transparent).
+// Composition de la vidéo pati-hero-motion.mp4 :
+//  - ≥ md (768)  : 2 colonnes — texte à gauche, conteuse à droite posée sur le crème, halos derrière
+//  - < md        : texte, puis conteuse pleine largeur dessous
+// (Carte Académie Pati retirée le 07/10/2026 ; la page /academie-pati reste accessible.)
 //
-// Intro animée (15/10/2026) : build-in des éléments dans l'ordre de pati-hero-motion.mp4,
-// en CSS pur (FeaturedHero.css) — tout reste du vrai DOM, cliquable et responsive.
-// Jouée UNE fois par session (sessionStorage), jamais si prefers-reduced-motion.
-// Sans la classe `hero-intro`, le rendu est strictement identique à l'ancien hero.
+// Intro animée : build-in en CSS pur (FeaturedHero.css), ~4,5 s, jouée UNE fois par session
+// (sessionStorage), jamais si prefers-reduced-motion. Sans `hero-intro`, rendu statique identique.
 
 const INTRO_KEY = "pati-hero-intro-played";
+const INTRO_MS = 5200;
 
 function useHeroIntro(): boolean {
   const [intro, setIntro] = useState(false);
@@ -26,53 +24,40 @@ function useHeroIntro(): boolean {
       if (reduced || sessionStorage.getItem(INTRO_KEY)) return;
       sessionStorage.setItem(INTRO_KEY, "1");
       setIntro(true);
-      // Retire la classe une fois l'intro finie : plus aucune règle d'animation en jeu.
-      const t = window.setTimeout(() => setIntro(false), 4000);
+      const t = window.setTimeout(() => setIntro(false), INTRO_MS);
       return () => window.clearTimeout(t);
     } catch {
-      /* sessionStorage indisponible (navigation privée stricte) : pas d'intro */
+      /* sessionStorage indisponible : pas d'intro */
     }
   }, []);
   return intro;
 }
 
-// Chronologie (secondes) — calquée sur la vidéo, resserrée.
+// Chronologie (secondes) — ordre de la vidéo, étalée sur ~4,5 s.
 const T = {
-  illu: 0.15,
-  badge: 0.9,
-  h1a: 1.15,
-  h1b: 1.45,
-  accent: 1.95,
-  sub: 2.0,
-  p: 2.2,
-  btn: [2.45, 2.6, 2.75, 2.9],
+  halo: 0.1,
+  illu: 0.3,
+  badge: 1.2,
+  h1a: 1.5,
+  h1b: 1.85,
+  accent: 2.5,
+  sub: 2.6,
+  p: 2.85,
+  btn: [3.2, 3.4, 3.6, 3.8],
 };
 const d = (s: number) => ({ "--d": `${s}s` } as React.CSSProperties);
+
+const ALT = "Pati, la conteuse, raconte une histoire à trois enfants assis autour d'elle";
 
 export default function FeaturedHero() {
   const intro = useHeroIntro();
 
   return (
     <section className={`relative overflow-hidden bg-[#FFF6E7] ${intro ? "hero-intro" : ""}`}>
-      {/* Illustration de fond — desktop uniquement */}
-      <div className="hidden lg:block absolute inset-0 overflow-hidden" aria-hidden="true">
-        <img
-          src="/images/pati-conteuse.webp"
-          alt=""
-          className="w-full h-full object-cover object-center hi-illu"
-          style={{ transform: "scale(1.14) translateX(7%)", transformOrigin: "center", ...d(T.illu) }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, #FFF6E7 0%, #FFF6E7 28%, rgba(255,246,231,0.55) 50%, rgba(255,246,231,0.15) 100%)" }}
-        />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-6 py-12 md:py-14 lg:py-24 lg:min-h-[440px]">
-        {/* Tablette : grille 2 colonnes. Desktop : bloc simple (l'image est derrière). */}
-        <div className="md:grid md:grid-cols-[1.15fr_1fr] md:gap-8 md:items-center lg:block">
+      <div className="relative max-w-6xl mx-auto px-6 pt-10 pb-0 md:py-14 lg:py-20">
+        <div className="md:grid md:grid-cols-[1.1fr_1fr] md:gap-8 lg:gap-12 md:items-center">
           {/* ─── Accroche ─── */}
-          <div className="lg:max-w-[560px]">
+          <div>
             <div
               className="hi inline-flex items-center gap-2 text-sm font-display font-semibold text-[#0F6E56] bg-[#FFC93C]/30 px-4 py-1.5 rounded-full mb-5"
               style={d(T.badge)}
@@ -107,25 +92,24 @@ export default function FeaturedHero() {
             </div>
           </div>
 
-          {/* ─── Illustration tablette : colonne de droite, cadrée, arrondie ─── */}
-          <div className="hidden md:block lg:hidden">
+          {/* ─── Conteuse détourée (toutes tailles) : halos crème derrière, image posée sur le fond ─── */}
+          <div className="relative mt-10 md:mt-0 -mx-6 md:mx-0">
+            <div className="hi-halo absolute inset-0 pointer-events-none" aria-hidden="true" style={d(T.halo)}>
+              <span className="absolute left-[8%] top-[10%] w-[55%] aspect-square rounded-full bg-[#FFE3B8]/70 blur-2xl" />
+              <span className="absolute right-[2%] top-[30%] w-[48%] aspect-square rounded-full bg-[#F9CFA0]/60 blur-2xl" />
+              <span className="absolute left-[25%] bottom-[0%] w-[60%] aspect-[2/1] rounded-full bg-[#F4B07A]/35 blur-3xl" />
+            </div>
             <img
-              src="/images/pati-conteuse.webp"
-              alt="Pati, la conteuse, raconte une histoire à des enfants assis sur une natte"
-              className="w-full aspect-[4/5] object-cover object-[60%_center] rounded-[2rem] shadow-kid hi-illu"
+              src="/images/pati-conteuse-hero.webp"
+              alt={ALT}
+              width={1024}
+              height={795}
+              className="hi-illu relative w-full max-w-[640px] mx-auto md:max-w-none h-auto select-none"
               style={d(T.illu)}
             />
           </div>
         </div>
       </div>
-
-      {/* Illustration mobile : pleine largeur sous le texte, fondue en haut dans le crème */}
-      <img
-        src="/images/pati-conteuse.webp"
-        alt="Pati, la conteuse, raconte une histoire à des enfants assis sur une natte"
-        className="md:hidden w-full h-72 object-cover object-center hi-illu"
-        style={{ WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, #000 16%)", maskImage: "linear-gradient(to bottom, transparent 0%, #000 16%)", ...d(T.illu) }}
-      />
     </section>
   );
 }
