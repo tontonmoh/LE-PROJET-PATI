@@ -1,7 +1,7 @@
 // NOUVEAU · src/data/searchIndex.ts
 // Index unique de la barre de recherche (navbar).
 // Livres : BOOKS (hors comingSoon). Séries : SERIES. Encyclopédies / jeux / pages : statiques.
-// Vérifier les routes marquées « ?? ».
+// Routes vérifiées contre App.tsx le 16/10/2026.
 import { BOOKS } from "./books";
 import { SERIES } from "./series";
 import { getCredits } from "./credits";
@@ -18,20 +18,22 @@ export type SearchItem = {
 };
 
 const STATIC: SearchItem[] = [
-  // ——— Encyclopédies (routes ?? = à vérifier dans le router)
+  // ——— Encyclopédies
   { type: "Encyclopédie", title: "MANSAYA", sub: "Empires africains", to: "/mansaya", keywords: "Ghana Mali Songhaï Soundjata royaumes" },
   { type: "Encyclopédie", title: "Charte du Mandén", sub: "Kurukan Fuga, 1236", to: "/charte", keywords: "Kurukan Fuga Mandé 44 articles" },
   { type: "Encyclopédie", title: "HOROYA", sub: "Indépendance 1946-1960", to: "/horoya", keywords: "indépendance 1958 référendum Mémorial Compagnons" },
-  { type: "Encyclopédie", title: "Fouta Théocratique", sub: "Imamat 1725-1896", to: "/fouta", keywords: "Fouta Djalon almamy diwé peul" },      // ??
-  { type: "Encyclopédie", title: "LaGuinè", sub: "33 préfectures, 13 communes", to: "/laguine", keywords: "préfectures communes Conakry territoires" }, // ??
-  { type: "Encyclopédie", title: "SIMANDOU 2040", sub: "Encyclopédie prospective", to: "/simandou-2040", keywords: "Simandou vision 2040" },   // ??
+  { type: "Encyclopédie", title: "Fouta Théocratique", sub: "Imamat 1725-1896", to: "/fouta", keywords: "Fouta Djalon almamy diwé peul" },
+  { type: "Encyclopédie", title: "LaGuinè", sub: "33 préfectures, 13 communes", to: "/guine", keywords: "préfectures communes Conakry territoires" },
+  { type: "Encyclopédie", title: "GINÈ — La Guinée des Pionnières", sub: "12 femmes pionnières", to: "/pionnieres", keywords: "pionnières femmes M'Balia Camara Jeanne Martin Cissé" },
   // ——— Jeux
   { type: "Jeu", title: "Le Défi PATI", sub: "Jouer", to: "/defi" },
-  { type: "Jeu", title: "LaGuinè378", sub: "Relier les préfectures", to: "/session/new", keywords: "préfectures carte" },
-  { type: "Jeu", title: "LaGuinèKonakri", sub: "Quartiers ↔ communes", to: "/session/new", keywords: "Conakry quartiers communes" },
+  { type: "Jeu", title: "LaGuinè378", sub: "Relier les préfectures", to: "/laguine378", keywords: "préfectures carte" },
+  { type: "Jeu", title: "LaGuinèKonakri", sub: "Quartiers ↔ communes", to: "/konakri", keywords: "Conakry quartiers communes" },
   { type: "Jeu", title: "Puzzle de l'Afrique", sub: "Pavage / Situer", to: "/jeux/afrique/afrique.html", keywords: "Afrique carte pays" },
-  { type: "Jeu", title: "Sèbè", sub: "Quiz littérature guinéenne", to: "/session/new", keywords: "quiz littérature auteurs" },
-  { type: "Jeu", title: "IWDI LaGuinè", sub: "Jeu de cartes multijoueur", to: "/session/new", keywords: "cartes préfectures multijoueur" },
+  { type: "Jeu", title: "Sèbè", sub: "Quiz littérature guinéenne", to: "/sebe", keywords: "quiz littérature auteurs" },
+  { type: "Jeu", title: "IWDI LaGuinè", sub: "Jeu de cartes multijoueur", to: "/iwdi", keywords: "cartes préfectures multijoueur" },
+  { type: "Jeu", title: "Quiz SENAG", sub: "25 questions pour la mémoire", to: "/senag", keywords: "archives mémoire quiz" },
+  { type: "Jeu", title: "Tous les jeux", sub: "Choisir une partie", to: "/session/new", keywords: "jouer classe forum" },
   // ——— Pages
   { type: "Page", title: "Le catalogue", sub: "Toutes les histoires", to: "/catalogue", keywords: "livres bibliothèque" },
   { type: "Page", title: "Écouter les contes", sub: "Contes audio", to: "/ecouter-les-contes", keywords: "audio soussou Kini Bangaly" },
