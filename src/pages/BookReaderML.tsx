@@ -291,6 +291,8 @@ export default function BookReaderML() {
     <section className="spread-stage" data-imgside={imgLeft ? "left" : "right"}>
       <div className="spread">
         <div className="spread-art">
+          {/* Fond : même image floutée/assombrie (remplit la colonne) ; devant : image ENTIÈRE, jamais rognée */}
+          {pageImg && <img src={pageImg} alt="" aria-hidden="true" className="spread-art-bg" onError={(e) => { e.currentTarget.style.display = "none"; }} />}
           {pageImg && <img src={pageImg} alt="" className="spread-art-img" onError={(e) => { e.currentTarget.style.display = "none"; }} />}
         </div>
         <div className="spread-text">
@@ -303,7 +305,10 @@ export default function BookReaderML() {
         /* Illustration qui REMPLIT sa moitié (cover), bien positionnée, et COLLANTE */
         .spread-art{flex:1 1 50%;position:sticky;top:0;align-self:flex-start;
           height:100vh;overflow:hidden;background:#143d2e}
-        .spread-art-img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+        .spread-art-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+          filter:blur(28px) brightness(.55) saturate(1.15);transform:scale(1.15)}
+        .spread-art-img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;
+          padding:1.25rem;box-sizing:border-box;filter:drop-shadow(0 12px 28px rgba(0,0,0,.35))}
         /* Texte : coule librement -> la PAGE scrolle, le texte n'est JAMAIS tronqué */
         .spread-text{flex:1 1 50%;background:#FFFDF6}
         .spread-textinner{width:100%;max-width:560px;margin:0 auto;padding:2.25rem 2rem}
@@ -311,7 +316,8 @@ export default function BookReaderML() {
         [data-imgside="right"] .spread-text{order:1}
         @media (max-width:820px){
           .spread{flex-direction:column;min-height:0}
-          .spread-art{position:static;height:48vh;align-self:auto;order:1 !important}
+          .spread-art{position:relative;height:auto;aspect-ratio:16/9;align-self:auto;order:1 !important}
+          .spread-art-img{padding:0}
           .spread-text{order:2 !important}
           .spread-textinner{padding:1.6rem 1.2rem}
         }
