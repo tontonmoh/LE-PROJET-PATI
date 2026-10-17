@@ -2,7 +2,8 @@
 // « Sacrée D'mba — Amadou et Fifi au paradis »
 // Source de référence : PDF officiel de l'éditeur (nimba.pdf).
 // Révision 15/10/2026 : section « collection-pati » retirée (toutes langues) ;
-// illustrations public/livres/dmba/ — une par section, champ `image` sur les sections fr.
+// illustrations public/livres/dmba/ — une par section (fr), v3 HD 1376×768 webp générées le 16/10/2026
+// (Gemini, une image par scène, référence du masque jointe) ; anciennes planches 344 px archivées dans _to_delete/.
 // Le livre s'ouvre directement sur Fifi.
 // Lecteur multilingue Pati — même principe que laye-ml.ts / chateau-ml.ts :
 //   • Latin (fr / en) : police Andika
@@ -38,16 +39,8 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     bookTitle: "Sacrée D'mba — Amadou et Fifi au paradis",
     sections: [
       {
-        id: "dedicace",
-        title: "Dédicace",
-        paragraphs: [
-          `« Pour que nos enfants grandissent en étant certains que la Guinée est un paradis qui a tout à leur donner. »`,
-          `— Djiba Diakité, Ministre Directeur de Cabinet, Présidence de la République de Guinée`,
-        ],
-      },
-      {
         id: "fifi",
-        image: "/livres/dmba/dmba-01-fifi-v2.png",
+        image: "/livres/dmba/dmba-01-fifi-v3.webp",
         title: "Salut les followers, ici Fifi !",
         paragraphs: [
           `Salut les followers ! Ici Fifi, votre future influenceuse préférée ! 15 ans, et déjà une pro des réseaux. Mode, beauté, lifestyle : je partage tout avec ma communauté.`,
@@ -56,7 +49,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "amadou",
-        image: "/livres/dmba/dmba-02-amadou-v2.png",
+        image: "/livres/dmba/dmba-02-amadou-v3.webp",
         title: "Moi, c'est Amadou",
         paragraphs: [
           `Moi, c'est Amadou. 13 ans, et un seul rêve : devenir le prochain grand footballeur français, comme Paul Pogba !`,
@@ -65,7 +58,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "la-guinee",
-        image: "/livres/dmba/dmba-03-guinee-v2.png",
+        image: "/livres/dmba/dmba-03-guinee-v3.webp",
         title: "La Guinée ?",
         paragraphs: [
           `La Guinée ? C'est l'origine de nos parents, mais on n'y connaissait pas grand-chose.`,
@@ -74,7 +67,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "musee-nimba",
-        image: "/livres/dmba/dmba-04-musee-v2.png",
+        image: "/livres/dmba/dmba-04-musee-v3.webp",
         title: "Au musée : un masque immense !",
         paragraphs: [
           `Un jour, notre classe a visité un musée d'art africain. Et là, BAM ! Un masque immense et magnifique : le Nimba, de Guinée ! La guide a dit que c'était l'un des masques les plus chers et les plus connus d'Afrique.`,
@@ -83,7 +76,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "appel-mamie",
-        image: "/livres/dmba/dmba-05-appel-v2.png",
+        image: "/livres/dmba/dmba-05-appel-v3.webp",
         title: "L'appel de Mamie",
         paragraphs: [
           `Mamie nous a appelés. Et comme d'habitude, elle nous invitait au pays ; on hésitait toujours.`,
@@ -92,7 +85,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "voyage",
-        image: "/livres/dmba/dmba-06-voyage-v2.png",
+        image: "/livres/dmba/dmba-06-voyage-v3.webp",
         title: "Le grand voyage",
         paragraphs: [
           `Le voyage était long, mais on était trop excités ! On allait enfin découvrir la Guinée !`,
@@ -100,7 +93,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "aeroport",
-        image: "/livres/dmba/dmba-07-aeroport-v2.png",
+        image: "/livres/dmba/dmba-07-aeroport-v3.webp",
         title: "« Wo nou senen — Bienvenue chez vous »",
         paragraphs: [
           `À l'aéroport, surprise ! Une grande image du D'mba !`,
@@ -109,7 +102,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "route-kamsar",
-        image: "/livres/dmba/dmba-08-route-v2.png",
+        image: "/livres/dmba/dmba-08-route-v3.webp",
         title: "La route pour Kamsar",
         paragraphs: [
           `Tout le monde était déjà en vacances, et nous avons directement pris la route pour Kamsar. C'est Mamie qui conduisait. Et sur la route, nous n'avons pas arrêté de poser des questions.`,
@@ -118,7 +111,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "eau-partout",
-        image: "/livres/dmba/dmba-09-eau-v2.png",
+        image: "/livres/dmba/dmba-09-eau-v3.webp",
         title: "De l'eau partout",
         paragraphs: [
           `Il y a de l'eau partout en Guinée, quelle beauté ! Les champs verts, les rivières et les fleuves, et surtout le sourire des populations. Les gens semblent chaleureux.`,
@@ -127,7 +120,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "malle-masque",
-        image: "/livres/dmba/dmba-10-malle-v2.png",
+        image: "/livres/dmba/dmba-10-malle-v3.webp",
         title: "Le masque dans la malle",
         paragraphs: [
           `Une fois arrivés, nous avons rencontré beaucoup de cousins et de cousines. Comme c'étaient les vacances, ils étaient venus eux aussi passer du temps avec Papy et Mamie à Kamsar.`,
@@ -136,7 +129,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "mamie-explique",
-        image: "/livres/dmba/dmba-11-mamie-v2.png",
+        image: "/livres/dmba/dmba-11-mamie-v3.webp",
         title: "Mamie explique le D'mba",
         paragraphs: [
           `Mamie explique : « Au départ, ces masques ne sont pas que des objets d'art. Ils possèdent une énergie ancestrale, un esprit vital qui nous relie à nos ancêtres. »`,
@@ -146,7 +139,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "promesse",
-        image: "/livres/dmba/dmba-12-promesse-v2.png",
+        image: "/livres/dmba/dmba-12-promesse-v3.webp",
         title: "Une nouvelle responsabilité",
         paragraphs: [
           `Profondément touchés par les histoires de Mamie, nous avons ressenti une nouvelle responsabilité. « Nous devons partager la beauté de notre culture avec le monde ! » Nous avons promis à Mamie de revenir bientôt. « Le D'mba est notre symbole, et nous sommes fiers de notre héritage. Nous le partagerons avec tous ! »`,
@@ -155,7 +148,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "branding-national",
-        image: "/livres/dmba/dmba-13-branding-v2.png",
+        image: "/livres/dmba/dmba-13-branding-v3.webp",
         title: "Qu'est-ce qu'un « branding » national ?",
         paragraphs: [
           `Imagine que tu doives dessiner la France pour un ami qui ne la connaît pas. Que dessinerais-tu ? Sûrement la Tour Eiffel, n'est-ce pas ? Quand on voit sa silhouette, on pense tout de suite à Paris. Elle est devenue un « branding » de la France : une image forte, facilement reconnaissable, qui représente tout un pays et ce qu'il a de beau à offrir.`,
@@ -164,7 +157,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "nimba-branding",
-        image: "/livres/dmba/dmba-doc-12-monde-v1.png",
+        image: "/livres/dmba/dmba-14-monde-v3.webp",
         title: "Le Nimba, « Branding Guinée »",
         paragraphs: [
           `Eh bien, en 2022, la Guinée a décidé de faire la même chose. Elle a choisi un symbole très spécial pour représenter le pays tout entier : le masque Nimba, ou le D'mba !`,
@@ -173,7 +166,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "valeurs-nimba",
-        image: "/livres/dmba/dmba-doc-07-valeurs-v1.png",
+        image: "/livres/dmba/dmba-15-valeurs-v3.webp",
         title: "Les valeurs du Nimba",
         paragraphs: [
           `Les Nimba sont de grands masques d'épaules qui représentent une femme forte et fertile. Ses seins tombants montrent qu'elle a nourri de nombreux enfants, et sa coiffure en tresse rappelle les champs de riz bien cultivés.`,
@@ -183,25 +176,39 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "pourquoi-nimba-1",
-        image: "/livres/dmba/dmba-doc-01-legende-v1.png",
+        image: "/livres/dmba/dmba-16-legende-v4.webp",
         title: "Pourquoi le Nimba ? (1)",
         paragraphs: [
           `1. La Basse Guinée et l'histoire de D'mba : le masque Nimba est né chez les Baga, en Basse Guinée. La légende raconte qu'un sculpteur voulut aider sa sœur, qui ne pouvait pas avoir d'enfant. Alors qu'ils se trouvaient près d'une rivière, un génie lui apparut et lui demanda de sculpter la déesse de la fertilité. C'est de cette histoire qu'est né le masque, symbole de la femme qui donne la vie.`,
+        ],
+      },
+      {
+        id: "crete-royale",
+        image: "/livres/dmba/dmba-24-djoubhade-v4.webp",
+        title: "La crête royale du Fouta",
+        paragraphs: [
           `2. La Moyenne Guinée et la crête royale : le masque est coiffé d'une majestueuse crête royale. Cette coiffure ressemble beaucoup au Djoubadee, que portent les reines et les princesses du peuple Peul, qui vit en Moyenne Guinée. Ainsi, même les habitants du Fouta Djallon peuvent se reconnaître et se sentir représentés par ce masque.`,
         ],
       },
       {
         id: "pourquoi-nimba-2",
-        image: "/livres/dmba/dmba-doc-03-sculpteurs-v1.png",
+        image: "/livres/dmba/dmba-17-sculpteurs-v3.webp",
         title: "Pourquoi le Nimba ? (2)",
         paragraphs: [
           `3. La Haute Guinée et l'art de la sculpture : aujourd'hui, l'art de sculpter ces masques est transmis par des artisans talentueux, souvent issus des peuples mandingues de la Haute Guinée. Des familles de sculpteurs, comme les Sidimé, sont devenues très douées dans l'art de transformer le bois en masques magnifiques.`,
+        ],
+      },
+      {
+        id: "mont-nimba",
+        image: "/livres/dmba/dmba-25-mont-nimba-v4.webp",
+        title: "Le Mont Nimba, géant de la Forêt",
+        paragraphs: [
           `4. La Guinée Forestière et le Mont Nimba : enfin, le nom « Nimba » ne renvoie pas qu'au masque ! C'est aussi le nom du point culminant de la Guinée, une montagne de plus de 1 758 mètres située en Guinée Forestière. Cet autre « Nimba » est un symbole de grandeur et de force pour tout le pays.`,
         ],
       },
       {
         id: "armoiries",
-        image: "/livres/dmba/dmba-doc-05-armoiries-v1.png",
+        image: "/livres/dmba/dmba-18-armoiries-v3.webp",
         title: "Les armoiries",
         paragraphs: [
           `Chaque pays a ses armoiries, comme une sorte de carte d'identité visuelle officielle.`,
@@ -210,7 +217,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "difference-branding",
-        image: "/livres/dmba/dmba-doc-06-armoiries-vs-branding-v1.png",
+        image: "/livres/dmba/dmba-19-difference-v3.webp",
         title: "Armoiries ou branding : quelle différence ?",
         paragraphs: [
           `Le « branding » est un peu différent. C'est une image plus moderne, choisie pour communiquer avec les gens du monde entier et les inviter à découvrir le pays. C'est un peu comme le logo d'une marque qui veut raconter une histoire et donner envie de la découvrir.`,
@@ -219,7 +226,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "tresor-musees",
-        image: "/livres/dmba/dmba-doc-08-musees-v1.png",
+        image: "/livres/dmba/dmba-20-musees-v3.webp",
         title: "Une star dans les grands musées",
         paragraphs: [
           `Le masque Nimba n'est pas célèbre qu'en Guinée : c'est une véritable star dans le monde entier ! Comment un masque en bois, sculpté il y a très longtemps en Guinée, est-il devenu aussi célèbre ? C'est simple : sa beauté et son énergie sont si grandes que les grands musées et les artistes ont voulu l'avoir près d'eux.`,
@@ -228,25 +235,11 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "picasso-tresor",
-        image: "/livres/dmba/dmba-15-picasso-v2.png",
+        image: "/livres/dmba/dmba-21-picasso-v4.webp",
         title: "Picasso et un trésor convoité",
         paragraphs: [
           `Un artiste très célèbre, Pablo Picasso, a découvert l'art africain au début du XXᵉ siècle. Il a été tellement fasciné par les formes des masques et leur force qu'il a complètement changé sa manière de peindre. Les formes géométriques du Nimba, son style unique, l'ont beaucoup inspiré pour créer un nouveau style de peinture : le Cubisme ! Grâce à Picasso, le masque Nimba a influencé l'art dans le monde entier.`,
           `Aujourd'hui encore, de grandes stars de la musique et du cinéma sont passionnées par l'art africain. On trouve des masques Nimba dans des collections privées de célébrités, comme la chanteuse Alicia Keys. Cela montre que l'art de Guinée est intemporel et qu'il continue de fasciner les gens de toutes les époques. Les collectionneurs du monde entier sont prêts à tout pour en posséder un : lors de grandes enchères, certains de ces masques se vendent à des prix impressionnants.`,
-        ],
-      },
-      {
-        id: "quiz",
-        title: "Es-tu devenu un expert du Nimba ?",
-        paragraphs: [
-          `Question 1 : Dans quelle ville habitent les deux enfants qui découvrent le masque Nimba et qui partent en Guinée ? — Réponse : Paris.`,
-          `Question 2 : De quel peuple de Guinée le masque Nimba est-il originaire ? — Réponse : le peuple Baga.`,
-          `Question 3 : Quelle est la principale différence entre les armoiries de la Guinée et le « Branding Guinée » ? — Réponse : les armoiries sont le symbole officiel et solennel du pays, tandis que le branding est une image moderne, comme le Nimba, choisie pour représenter et promouvoir le pays.`,
-          `Question 4 : Quel célèbre artiste a été inspiré par le masque Nimba pour créer un nouveau style de peinture ? — Réponse : Pablo Picasso.`,
-          `Question 5 : Quel art exerçait la personne qui a offert le Nimba au monde ? — Réponse : la sculpture.`,
-          `Question 6 : Outre le masque, où trouve-t-on le nom « Nimba » en Guinée ? — Réponse : c'est le nom de la plus haute montagne de Guinée, le Mont Nimba.`,
-          `Question 7 : Quelles sont les trois valeurs que le masque Nimba symbolise ? — Réponse : la fertilité, la protection et la prospérité.`,
-          `Question 8 : Selon toi, quel autre symbole pourrait servir de branding pour la Guinée, et pourquoi ? — Réponse libre.`,
         ],
       },
       {
@@ -272,7 +265,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "en-mission",
-        image: "/livres/dmba/dmba-16-mission-v2.png",
+        image: "/livres/dmba/dmba-22-mission-v3.webp",
         title: "En mission pour la Guinée",
         paragraphs: [
           `Après leur incroyable voyage et leurs découvertes, Amadou et Fifi ont compris une chose : connaître son histoire et sa culture, c'est aussi savoir comment construire l'avenir de son pays ! Leurs passions et leurs talents pourraient être utiles pour le faire grandir.`,
@@ -282,7 +275,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "autres-metiers",
-        image: "/livres/dmba/dmba-doc-13-metiers-1-v1.png",
+        image: "/livres/dmba/dmba-23-metiers-v3.webp",
         title: "Plein de métiers pour faire rayonner la Guinée",
         paragraphs: [
           `Il y a plein d'autres métiers qui permettent de faire rayonner la culture de la Guinée : archéologue, pour fouiller le sol et découvrir les trésors du passé ; guide touristique, pour accompagner les visiteurs et faire respecter les sites ; conservateur de musée, pour prendre soin d'œuvres comme le masque Nimba ; artisan d'art, pour continuer à sculpter, tisser ou fabriquer des instruments de musique traditionnels ; historien de l'art, pour étudier les masques et les sculptures ; documentaliste, pour classer et archiver les documents, photos et vidéos du patrimoine guinéen.`,
@@ -292,9 +285,11 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "ton-tour",
+        image: "/livres/dmba/dmba-27-ton-tour.svg",
         title: "À ton tour !",
         paragraphs: [
           `Quelles que soient tes passions, tu peux toi aussi aider à faire rayonner la culture et la force de ton pays !`,
+          `Et toi, quel symbole pourrait servir de « branding » pour ta ville, et pourquoi ?`,
         ],
       },
     ],
@@ -309,14 +304,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     label: "English",
     bookTitle: "Sacred D'mba — Amadou and Fifi in Paradise",
     sections: [
-      {
-        id: "dedicace",
-        title: "Dedication",
-        paragraphs: [
-          `"So that our children may grow up certain that Guinea is a paradise that has everything to give them."`,
-          `— Djiba Diakité, Minister and Director of Cabinet, Presidency of the Republic of Guinea`,
-        ],
-      },
       {
         id: "fifi",
         title: "Hi followers, it's Fifi!",
@@ -443,6 +430,13 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         title: "Why the Nimba? (1)",
         paragraphs: [
           `1. Lower Guinea and the story of D'mba: the Nimba mask was born among the Baga, in Lower Guinea. Legend tells of a sculptor who wanted to help his sister, who could not have children. As they stood near a river, a spirit appeared to him and asked him to carve the goddess of fertility. It is from this story that the mask was born — a symbol of the woman who gives life.`,
+        ],
+      },
+      {
+        id: "crete-royale",
+        image: "/livres/dmba/dmba-24-djoubhade-v4.webp",
+        title: "The royal crest of the Fouta",
+        paragraphs: [
           `2. Middle Guinea and the royal crest: the mask wears a majestic royal crest. This headdress closely resembles the Djoubadee worn by the queens and princesses of the Fula (Peul) people, who live in Middle Guinea. In this way, even the people of the Fouta Djallon can recognise themselves and feel represented by this mask.`,
         ],
       },
@@ -451,6 +445,13 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         title: "Why the Nimba? (2)",
         paragraphs: [
           `3. Upper Guinea and the art of carving: today, the art of carving these masks is passed down by talented craftspeople, often from the Mandinka peoples of Upper Guinea. Families of sculptors, such as the Sidimé, have become highly skilled at turning wood into magnificent masks.`,
+        ],
+      },
+      {
+        id: "mont-nimba",
+        image: "/livres/dmba/dmba-25-mont-nimba-v4.webp",
+        title: "Mount Nimba, giant of the Forest",
+        paragraphs: [
           `4. Forest Guinea and Mount Nimba: finally, the name "Nimba" does not refer only to the mask! It is also the name of Guinea's highest point, a mountain over 1,758 metres high, in Forest Guinea. This other "Nimba" is a symbol of grandeur and strength for the whole country.`,
         ],
       },
@@ -484,20 +485,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         paragraphs: [
           `A very famous artist, Pablo Picasso, discovered African art at the beginning of the 20th century. He was so fascinated by the shapes of the masks and their power that he completely changed the way he painted. The geometric forms of the Nimba and its unique style greatly inspired him to create a new style of painting: Cubism! Thanks to Picasso, the Nimba mask influenced art around the world.`,
           `Even today, great stars of music and cinema are passionate about African art. Nimba masks can be found in the private collections of celebrities such as the singer Alicia Keys. This shows that the art of Guinea is timeless and continues to fascinate people of every era. Collectors all over the world will do anything to own one: at great auctions, some of these masks sell for staggering prices.`,
-        ],
-      },
-      {
-        id: "quiz",
-        title: "Are you now a Nimba expert?",
-        paragraphs: [
-          `Question 1: In which city do the two children who discover the Nimba mask and travel to Guinea live? — Answer: Paris.`,
-          `Question 2: Which people of Guinea does the Nimba mask come from? — Answer: the Baga people.`,
-          `Question 3: What is the main difference between Guinea's coat of arms and "Brand Guinea"? — Answer: the coat of arms is the country's official and solemn symbol, while the brand is a modern image, like the Nimba, chosen to represent and promote the country.`,
-          `Question 4: Which famous artist was inspired by the Nimba mask to create a new style of painting? — Answer: Pablo Picasso.`,
-          `Question 5: What art did the person who gave the Nimba to the world practise? — Answer: sculpture.`,
-          `Question 6: Besides the mask, where else is the name "Nimba" found in Guinea? — Answer: it is the name of Guinea's highest mountain, Mount Nimba.`,
-          `Question 7: What are the three values the Nimba mask symbolises? — Answer: fertility, protection and prosperity.`,
-          `Question 8: In your opinion, what other symbol could serve as a brand for Guinea, and why? — Open answer.`,
         ],
       },
       {
@@ -541,9 +528,11 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "ton-tour",
+        image: "/livres/dmba/dmba-27-ton-tour.svg",
         title: "Now it's your turn!",
         paragraphs: [
           `Whatever your passions, you too can help the culture and the strength of your country shine!`,
+          `And you — what symbol could serve as a brand for your town, and why?`,
         ],
       },
     ],
@@ -559,14 +548,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     label: "العربية",
     bookTitle: "دمبا المقدّسة — أمادو وفيفي في الجنّة",
     sections: [
-      {
-        id: "dedicace",
-        title: "إهداء",
-        paragraphs: [
-          `«كي يكبر أطفالنا وهم على يقينٍ بأنّ غينيا جنّةٌ تملك كل ما تمنحه إيّاهم.»`,
-          `— جيبا دياكيتي، الوزير مدير الديوان، رئاسة جمهوريّة غينيا`,
-        ],
-      },
       {
         id: "fifi",
         title: "مرحبًا أيها المتابعون، أنا فيفي!",
@@ -693,6 +674,13 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         title: "لماذا النيمبا؟ (1)",
         paragraphs: [
           `1. غينيا السفلى وحكاية الـدمبا: وُلد قناع النيمبا عند الباغا، في غينيا السفلى. تحكي الأسطورة أنّ نحّاتًا أراد أن يساعد أخته التي لم تكن تستطيع الإنجاب. وبينما كانا قرب نهر، ظهر له جنّيّ وطلب منه أن ينحت إلهة الخصوبة. ومن هذه الحكاية وُلد القناع، رمز المرأة التي تمنح الحياة.`,
+        ],
+      },
+      {
+        id: "crete-royale",
+        image: "/livres/dmba/dmba-24-djoubhade-v4.webp",
+        title: "عُرف فوتا الملكيّ",
+        paragraphs: [
           `2. غينيا الوسطى والعُرف الملكيّ: يعتلي القناع عُرفٌ ملكيّ مهيب. تشبه هذه التسريحة كثيرًا «جوبادي» التي ترتديها ملكات وأميرات شعب الفولاني (البول)، الذين يعيشون في غينيا الوسطى. وهكذا، يستطيع حتى سكّان فوتا جالون أن يتعرّفوا على أنفسهم ويشعروا بأنّ هذا القناع يمثّلهم.`,
         ],
       },
@@ -701,6 +689,13 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         title: "لماذا النيمبا؟ (2)",
         paragraphs: [
           `3. غينيا العليا وفنّ النحت: اليوم، يتوارث فنّ نحت هذه الأقنعة حرفيّون موهوبون، غالبًا من شعوب الماندينغ في غينيا العليا. وقد برعت عائلات من النحّاتين، مثل آل سيديمي، في فنّ تحويل الخشب إلى أقنعة رائعة.`,
+        ],
+      },
+      {
+        id: "mont-nimba",
+        image: "/livres/dmba/dmba-25-mont-nimba-v4.webp",
+        title: "جبل نيمبا، عملاق الغابة",
+        paragraphs: [
           `4. غينيا الغابيّة وجبل نيمبا: أخيرًا، لا يشير اسم «نيمبا» إلى القناع فقط! إنه أيضًا اسم أعلى قمّة في غينيا، جبلٌ يتجاوز ارتفاعه 1758 مترًا، يقع في غينيا الغابيّة. وهذا «النيمبا» الآخر رمزٌ للعظمة والقوّة لكل البلاد.`,
         ],
       },
@@ -734,20 +729,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         paragraphs: [
           `اكتشف فنّانٌ شهير جدًّا، اسمه بابلو بيكاسو، الفنّ الإفريقيّ في مطلع القرن العشرين. وقد فُتن إلى حدٍّ كبير بأشكال الأقنعة وقوّتها حتى غيّر تمامًا طريقته في الرسم. ألهمته الأشكال الهندسيّة للنيمبا، وأسلوبه الفريد، أن يبتكر أسلوبًا جديدًا في الرسم: التكعيبيّة! وبفضل بيكاسو، أثّر قناع النيمبا في الفنّ حول العالم.`,
           `وحتى اليوم، يَعشق نجوم كبار في الموسيقى والسينما الفنّ الإفريقيّ. تُوجد أقنعة نيمبا في مجموعات خاصّة لمشاهير، مثل المغنّية أليشيا كيز. وهذا يدلّ على أنّ فنّ غينيا خالد، وأنه ما يزال يَفتن الناس في كل العصور. والجامعون في العالم كله مستعدّون لفعل أي شيء لامتلاك واحدٍ منها: ففي المزادات الكبرى، تُباع بعض هذه الأقنعة بأسعار مذهلة.`,
-        ],
-      },
-      {
-        id: "quiz",
-        title: "هل صرت خبيرًا في النيمبا؟",
-        paragraphs: [
-          `السؤال 1: في أي مدينة يعيش الطفلان اللذان يكتشفان قناع النيمبا ويسافران إلى غينيا؟ — الجواب: باريس.`,
-          `السؤال 2: من أي شعبٍ في غينيا نشأ قناع النيمبا؟ — الجواب: شعب الباغا.`,
-          `السؤال 3: ما الفرق الرئيسيّ بين شعار دولة غينيا و«هُويّة غينيا»؟ — الجواب: شعار الدولة هو الرمز الرسميّ والمهيب للبلد، بينما الهُويّة صورة حديثة، مثل النيمبا، تُختار لتمثيل البلد والترويج له.`,
-          `السؤال 4: أي فنّانٍ شهير استلهم من قناع النيمبا أسلوبًا جديدًا في الرسم؟ — الجواب: بابلو بيكاسو.`,
-          `السؤال 5: ما الفنّ الذي كان يمارسه مَن قدّم النيمبا للعالم؟ — الجواب: النحت.`,
-          `السؤال 6: إلى جانب القناع، أين نجد اسم «نيمبا» في غينيا؟ — الجواب: إنه اسم أعلى جبل في غينيا، جبل نيمبا.`,
-          `السؤال 7: ما القيم الثلاث التي يرمز إليها قناع النيمبا؟ — الجواب: الخصوبة، والحماية، والازدهار.`,
-          `السؤال 8: برأيك، ما الرمز الآخر الذي يمكن أن يصلح هُويّةً لغينيا، ولماذا؟ — إجابة حرّة.`,
         ],
       },
       {
@@ -791,9 +772,11 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "ton-tour",
+        image: "/livres/dmba/dmba-27-ton-tour.svg",
         title: "حان دورك أنت!",
         paragraphs: [
           `مهما كانت شغفك واهتماماتك، تستطيع أنت أيضًا أن تساعد على إشعاع ثقافة بلدك وقوّته!`,
+          `وأنت، أيّ رمز يمكن أن يكون «علامة» لمدينتك، ولماذا؟`,
         ],
       },
     ],
@@ -809,14 +792,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
     label: "中文",
     bookTitle: "神圣的邓巴——阿马杜和菲菲在天堂",
     sections: [
-      {
-        id: "dedicace",
-        title: "献词",
-        paragraphs: [
-          `“愿我们的孩子在成长中坚信：几内亚是一座天堂，拥有一切可以给予他们的东西。”`,
-          `——吉巴·迪亚基特，部长兼内阁主任，几内亚共和国总统府`,
-        ],
-      },
       {
         id: "fifi",
         title: "嗨，粉丝们，我是菲菲！",
@@ -943,6 +918,13 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         title: "为什么是宁巴？（一）",
         paragraphs: [
           `一、下几内亚与邓巴的故事：宁巴面具诞生于下几内亚的巴加人之中。传说有一位雕刻匠想帮助他无法生育的妹妹。当他们来到一条河边时，一位精灵出现在他面前，请他雕刻丰饶女神。面具正是从这个故事中诞生的，象征着赋予生命的女性。`,
+        ],
+      },
+      {
+        id: "crete-royale",
+        image: "/livres/dmba/dmba-24-djoubhade-v4.webp",
+        title: "富塔的王室冠饰",
+        paragraphs: [
           `二、中几内亚与王室冠饰：面具顶上戴着一顶威严的王室冠饰。这种发饰很像“朱巴迪”（Djoubadee），由生活在中几内亚的颇尔人（Peul）的王后和公主佩戴。于是，连富塔贾隆的居民也能在这个面具中认出自己、感到被代表。`,
         ],
       },
@@ -951,6 +933,13 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         title: "为什么是宁巴？（二）",
         paragraphs: [
           `三、上几内亚与雕刻艺术：如今，雕刻这些面具的技艺由才华横溢的工匠传承下来，他们多来自上几内亚的曼丁各族。一些雕刻世家，比如西迪梅（Sidimé）家族，已成为把木头化作华美面具的高手。`,
+        ],
+      },
+      {
+        id: "mont-nimba",
+        image: "/livres/dmba/dmba-25-mont-nimba-v4.webp",
+        title: "宁巴山，森林的巨人",
+        paragraphs: [
           `四、森林几内亚与宁巴山：最后，“宁巴”这个名字不只指面具！它也是几内亚最高峰的名字——一座位于森林几内亚、海拔超过1758米的高山。这另一座“宁巴”，是整个国家壮丽与力量的象征。`,
         ],
       },
@@ -984,20 +973,6 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
         paragraphs: [
           `一位非常著名的艺术家——巴勃罗·毕加索，在20世纪初发现了非洲艺术。他被面具的造型与力量深深吸引，以至于彻底改变了自己的绘画方式。宁巴那些几何化的造型、那种独一无二的风格，给了他巨大的灵感，去开创一种全新的绘画风格：立体主义！多亏了毕加索，宁巴面具影响了全世界的艺术。`,
           `直到今天，音乐和电影界的大明星仍痴迷于非洲艺术。在一些名人的私人收藏中就能见到宁巴面具，比如歌手艾丽西亚·凯斯。这说明几内亚的艺术是超越时代的，它持续打动着各个时代的人。世界各地的收藏家为了拥有一件，可以不惜一切：在大型拍卖会上，有些面具能卖出惊人的高价。`,
-        ],
-      },
-      {
-        id: "quiz",
-        title: "你现在是宁巴专家了吗？",
-        paragraphs: [
-          `问题1：发现宁巴面具并前往几内亚的两个孩子住在哪座城市？——答案：巴黎。`,
-          `问题2：宁巴面具源自几内亚的哪个民族？——答案：巴加人。`,
-          `问题3：几内亚国徽与“几内亚品牌”最主要的区别是什么？——答案：国徽是国家官方而庄严的象征，而品牌是一个现代的形象，如宁巴，用来代表并推广国家。`,
-          `问题4：哪位著名艺术家受宁巴面具启发，开创了一种新的绘画风格？——答案：巴勃罗·毕加索。`,
-          `问题5：把宁巴献给世界的那个人从事的是什么艺术？——答案：雕刻。`,
-          `问题6：除了面具，“宁巴”这个名字在几内亚还出现在哪里？——答案：它是几内亚最高山峰的名字，宁巴山。`,
-          `问题7：宁巴面具象征哪三种价值？——答案：丰饶、守护与繁荣。`,
-          `问题8：在你看来，还有什么符号可以作为几内亚的品牌，为什么？——自由作答。`,
         ],
       },
       {
@@ -1041,9 +1016,11 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "ton-tour",
+        image: "/livres/dmba/dmba-27-ton-tour.svg",
         title: "现在轮到你了！",
         paragraphs: [
           `无论你的热爱是什么，你也能为自己国家的文化和力量增添光彩！`,
+          `那么你呢？什么标志可以成为你所在城市的“品牌”，为什么？`,
         ],
       },
     ],

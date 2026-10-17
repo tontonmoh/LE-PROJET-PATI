@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Sparkles, Music, Hourglass } from "lucide-react";
 import { READERS } from "../data/readers";
@@ -11,6 +11,51 @@ import { bumpCounter } from "../lib/publicStats";
 import { TAADIDI } from "../data/series/taadidi";
 import { KURUKAN } from "../data/series/kurukanFuga";
 import { POINT_ZERO } from "../data/point-zero";
+import { LEXIQUE, BAND_ORDER, type Band } from "../data/lexique";
+
+
+// ---- Petit dico cliquable : les mots définis dans la section "petit-dico" deviennent des bulles ----
+type GlosEntry = { term: string; def: string; alts: string[] };
+const DICO_IDS = ["petit-dico", "dico", "glossaire", "glossary", "lexique"];
+function parseGlossary(sections: { id?: string; title: string; paragraphs: string[] }[]): GlosEntry[] {
+  const sec = sections.find((s) => s.id && DICO_IDS.includes(s.id));
+  if (!sec) return [];
+  const out: GlosEntry[] = [];
+  for (const p of sec.paragraphs) {
+    const m = p.match(/^(.+?)\s*[:：]\s*(.+)$/s);
+    if (!m) continue;
+    let term = m[1].trim();
+    const alts: string[] = [];
+    const par = term.match(/\((?:ou|or|أو|或)\s+([^)]+)\)/i);
+    if (par) { alts.push(par[1].trim()); term = term.replace(/\s*\([^)]*\)/, "").trim(); }
+    if (term.length >= 2) out.push({ term, def: m[2].trim(), alts });
+  }
+  return out;
+}
+function lexiconEntries(lang: string, band: Band | undefined, exclude: GlosEntry[]): GlosEntry[] {
+  const lex = LEXIQUE[lang]; if (!lex) return [];
+  const level = BAND_ORDER.indexOf(band || "Aventure");
+  const taken = new Set(exclude.flatMap((e) => [e.term, ...e.alts]).map((t) => t.toLocaleLowerCase()));
+  return Object.entries(lex)
+    .filter(([w, e]) => BAND_ORDER.indexOf(e.max) >= level && !taken.has(w))
+    .map(([w, e]) => ({ term: w, def: e.def, alts: e.alts || [] }));
+}
+function escapeRe(s: string) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+function buildGlosRegex(entries: GlosEntry[], cjk: boolean) {
+  const words = entries.flatMap((e) => [e.term, ...e.alts]).sort((a, b) => b.length - a.length).map(escapeRe);
+  if (!words.length) return null;
+  if (cjk) return new RegExp(`(${words.join("|")})`, "gu");
+  try {
+    return new RegExp(`(?<![\\p{L}\\p{M}])(${words.join("|")})(s|es|x)?(?![\\p{L}\\p{M}])`, "giu");
+  } catch {
+    // Safari ancien (pas de lookbehind) : repli plus permissif
+    return new RegExp(`(${words.join("|")})(s|es|x)?(?![\\p{L}\\p{M}])`, "giu");
+  }
+}
+function glosLookup(entries: GlosEntry[], hit: string) {
+  const h = hit.toLocaleLowerCase();
+  return entries.find((e) => [e.term, ...e.alts].some((t) => { const tl = t.toLocaleLowerCase(); return h === tl || h === tl + "s" || h === tl + "es" || h === tl + "x"; }));
+}
 
 export default function BookReaderML() {
   const { id } = useParams();
@@ -18,6 +63,7 @@ export default function BookReaderML() {
   const reader = READERS[id || ""];
   const [lang, setLang] = useState(reader ? reader.langs[0] : "fr");
   const [i, setI] = useState(-1); // -1 = couverture
+  const [glosOpen, setGlosOpen] = useState<{ k: number; entry: GlosEntry } | null>(null);
   const loggedRef = useRef("");
   const book = reader?.books[lang];
   const taglineMap = getBlurb(id || "")?.tagline as Record<string, string> | undefined;
@@ -50,6 +96,7 @@ export default function BookReaderML() {
     }
   }, [i, total, id]);
   const go = useCallback((d: number) => {
+    setGlosOpen(null);
     setI((prev) => Math.max(-1, Math.min(total - 1, prev + d)));
   }, [total]);
 
@@ -198,7 +245,46 @@ export default function BookReaderML() {
             })()}
             {scene!.title && <h2 className={`font-display font-bold text-2xl md:text-3xl mb-6 ${rtl ? "text-right" : ""}`} style={{ color: accent }}>{scene!.title}</h2>}
             <div className={`${readerClass} ${lang === "fr" || lang === "en" ? "reader-drop" : ""}`} style={{ ["--accent" as any]: accent }}>
-              {scene!.paragraphs.map((p, k) => <p key={k}>{p}</p>)}
+              {(() => {
+                const isDico = !!scene!.id && DICO_IDS.includes(scene!.id);
+                const own = isDico ? [] : parseGlossary(book.sections);
+                const entries = isDico ? [] : [...own, ...lexiconEntries(lang, getBook(id || "")?.band as Band | undefined, own)];
+                const re = buildGlosRegex(entries, lang === "zh");
+                const seen = new Set<string>();
+                return scene!.paragraphs.map((p, k) => {
+                  if (!re) return <p key={k}>{p}</p>;
+                  const nodes: React.ReactNode[] = [];
+                  let last = 0; let m: RegExpExecArray | null; re.lastIndex = 0;
+                  while ((m = re.exec(p))) {
+                    const entry = glosLookup(entries, m[1]);
+                    if (!entry || seen.has(entry.term)) continue;
+                    seen.add(entry.term);
+                    nodes.push(p.slice(last, m.index));
+                    const hit = m[0];
+                    nodes.push(
+                      <button key={`g${k}-${m.index}`} type="button" className="glos-word" style={{ ["--accent" as any]: accent }}
+                        aria-expanded={glosOpen?.k === k && glosOpen.entry.term === entry.term}
+                        onClick={() => setGlosOpen((cur) => cur && cur.k === k && cur.entry.term === entry.term ? null : { k, entry })}>
+                        {hit}
+                      </button>
+                    );
+                    last = m.index + hit.length;
+                  }
+                  nodes.push(p.slice(last));
+                  const open = glosOpen && glosOpen.k === k ? glosOpen.entry : null;
+                  return (
+                    <div key={k} className="glos-para">
+                      <p>{nodes}</p>
+                      {open && (
+                        <div className="glos-bubble" role="note" style={{ ["--accent" as any]: accent }}>
+                          <strong>{open.term.charAt(0).toLocaleUpperCase() + open.term.slice(1)}</strong> {open.def}
+                          <button type="button" className="glos-close" aria-label="Fermer" onClick={() => setGlosOpen(null)}>×</button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </>
         )}

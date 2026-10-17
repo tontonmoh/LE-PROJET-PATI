@@ -62,7 +62,7 @@ import { KURUKAN, KURUKAN_ACCENT } from "./series/kurukanFuga";
 import { JAAMU, JAAMU_ACCENT } from "./series/jaamu";
 import { PULAAGU_ML } from "./pulaagu-ml";                        // ← NOUVEAU (livre indépendant, hors série)
 
-export type MLSection = { title: string; paragraphs: string[]; image?: string };
+export type MLSection = { id?: string; title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
 export type MLReader = { langs: string[]; books: Record<string, MLBook>; accent: string };
 
@@ -81,7 +81,7 @@ function fromLaye(rec: any): { langs: string[]; books: Record<string, MLBook> } 
       label: b.label || code,
       title: b.bookTitle,
       subtitle: b.subtitle,
-      sections: (b.sections || []).map((s: any) => ({ title: s.title, paragraphs: s.paragraphs, image: s.image })),
+      sections: (b.sections || []).map((s: any) => ({ id: s.id, title: s.title, paragraphs: s.paragraphs, image: s.image })),
     };
   }
   return { langs, books };
