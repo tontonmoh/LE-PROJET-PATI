@@ -74,7 +74,7 @@ export default function BelleGuinee() {
             <Link to="/" className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Accueil</Link>
           </div>
         </div>
-        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Chaque préfecture est un coffre rempli des richesses de la Guinée&nbsp;: chutes, montagnes, terroirs, patrimoine, culture. Réponds aux défis, allume les 33 préfectures, collectionne les 162 trésors.</p>
+        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Chaque préfecture est un coffre rempli des richesses de la Guinée&nbsp;: chutes, montagnes, terroirs, patrimoine, culture. Réponds aux défis, allume les 44 préfectures, collectionne les 162 trésors.</p>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">

@@ -89,7 +89,7 @@ export default function GuinePage() {
               active={vue === 'national'}
               onClick={() => setVue('national')}
               label="Carte nationale"
-              sub="33 préfectures"
+              sub="44 préfectures"
             />
             <TabButton
               active={vue === 'conakry'}
@@ -110,14 +110,14 @@ export default function GuinePage() {
         )}
       </section>
 
-      {/* ─── Les 8 régions administratives ─── */}
+      {/* ─── Les 10 régions administratives ─── */}
       <section className="bg-white border-t-2 border-[#8b6f47]/20">
         <div className="max-w-5xl mx-auto px-4 py-10 md:py-14">
           <h2
             className="text-2xl md:text-3xl font-bold text-center mb-2 text-[#241c10]"
             style={{ fontFamily: DISPLAY }}
           >
-            Les huit régions du pays
+            Les dix régions du pays
           </h2>
           <p className="text-center text-[#5a3608] italic mb-8 text-sm md:text-base">
             Sept régions administratives, plus le gouvernorat de Conakry.

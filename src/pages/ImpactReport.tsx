@@ -14,7 +14,7 @@ import {
    ========================================================================== */
 
 // ——— RÉELS (confirmés) ———
-const PREFECTURES = 34;       // 33 préfectures + Conakry (Le Défi PATI)
+const PREFECTURES = 45;       // 44 préfectures + Conakry (Le Défi PATI)
 const VILLES_DOC  = 48;       // enquête CaMPUS Baabata
 const REPONDANTS  = 854;      // enquête CaMPUS Baabata
 const SERIES      = 2;
@@ -87,7 +87,7 @@ export default function ImpactReport() {
     const prevTitle = document.title;
     document.title = 'Impact de PATI — Édutainment jeunesse Guinée | projetpati.com';
     const desc =
-      "34 préfectures, une trentaine d'enfants co-auteurs, 4 langues écrites : découvrez l'impact de PATI, l'édutainment jeunesse de L'Atelier Solidaire vers la Génération 2040.";
+      "45 territoires, une trentaine d'enfants co-auteurs, 4 langues écrites : découvrez l'impact de PATI, l'édutainment jeunesse de L'Atelier Solidaire vers la Génération 2040.";
     const set = (attr: 'name' | 'property', key: string, content: string) => {
       let el = document.head.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
       if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
@@ -172,7 +172,7 @@ export default function ImpactReport() {
       <section className="mx-auto max-w-4xl px-5 py-8">
         <SectionTitle icon={MapPin} kicker="Notre territoire" title="Un pays entier, à hauteur d'enfant" />
         <p className="text-gray-700 leading-relaxed">
-          PATI couvre <strong>les 33 préfectures de Guinée et Conakry</strong> — {PREFECTURES} territoires que les
+          PATI couvre <strong>les 44 préfectures de Guinée et Conakry</strong> — {PREFECTURES} territoires que les
           enfants apprennent en jouant, pièce par pièce, dans <em>Le Défi PATI</em>. Notre catalogue compte
           aujourd'hui <strong>{SERIES} séries, {LIVRES} livres et {CONTES} contes</strong>, nourris par une enquête
           de terrain réelle : <strong>{VILLES_DOC} villes documentées</strong> auprès de{' '}

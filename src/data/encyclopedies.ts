@@ -115,8 +115,8 @@ export const encyclopedies: EncyclopedieCarte[] = [
     titreFr: 'Les Territoires',
     sousTitre: '33 PRÉFECTURES',
     periode: 'Aujourd\'hui',
-    figures: '8 régions · 33 préfectures · 13 communes',
-    description: "Les 33 préfectures et les 13 communes de Conakry, fiche par fiche.",
+    figures: '10 régions · 44 préfectures · 13 communes',
+    description: "Les 44 préfectures et les 13 communes de Conakry, fiche par fiche.",
     route: '/guine',
     totem: 'map',
     // coverUrl : à ajouter quand la couverture LaGuinè sera posée

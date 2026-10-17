@@ -73,7 +73,7 @@ export default function LeDefi() {
             <Link to="/" className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Accueil</Link>
           </div>
         </div>
-        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
+        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-4">Fais glisser les 44 préfectures et Conakry à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
 
         {/* ── Bandeau campagne : Cap sur le 2000e Bâtisseur ── */}
         <div

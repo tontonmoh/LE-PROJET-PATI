@@ -47,7 +47,7 @@ export default function LeDefi() {
             <Link to="/" className="inline-flex items-center gap-1.5 text-[#0F6E56] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Accueil</Link>
           </div>
         </div>
-        <p className="text-[#3a4a42] font-semibold mb-5">Fais glisser les 34 préfectures à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
+        <p className="text-[#3a4a42] font-semibold mb-5">Fais glisser les 44 préfectures et Conakry à leur place, contre la montre. Sauras-tu reconstruire la carte de la Guinée&nbsp;?</p>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">

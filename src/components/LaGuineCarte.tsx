@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getPrefectures, type RegionAdministrative, type Territoire } from '../data/territoires';
 import { SVG_PATHS, SVG_VIEWBOX } from '../data/territoires-svg-paths';
 
-// ─── Palette régions administratives (7 + Conakry) ──────────────────────
+// ─── Palette régions administratives (9 + Conakry) ──────────────────────
 export const COULEURS_REGION_ADMIN: Record<RegionAdministrative, { fond: string; bord: string; label: string }> = {
   'boke':      { fond: '#B85C2D', bord: '#5E2A11', label: 'Région de Boké' },
   'kindia':    { fond: '#2A7A8C', bord: '#0E3E47', label: 'Région de Kindia' },
@@ -11,6 +11,8 @@ export const COULEURS_REGION_ADMIN: Record<RegionAdministrative, { fond: string;
   'labe':      { fond: '#8B6F47', bord: '#4A3618', label: 'Région de Labé' },
   'faranah':   { fond: '#7A8C3D', bord: '#34421A', label: 'Région de Faranah' },
   'kankan':    { fond: '#D4A04C', bord: '#6B4818', label: 'Région de Kankan' },
+  'siguiri':   { fond: '#9B5FAD', bord: '#4A2355', label: 'Région de Siguiri' },
+  'beyla':     { fond: '#B8414F', bord: '#5A1A22', label: 'Région de Beyla' },
   'nzerekore': { fond: '#1A5E3A', bord: '#0A3A22', label: "Région de N'Zérékoré" },
   'conakry':   { fond: '#2C3E66', bord: '#0F1A38', label: 'Gouvernorat de Conakry' },
 };
@@ -34,7 +36,7 @@ export default function LaGuineCarte({ onConakryClick }: LaGuineCarteProps) {
           viewBox={SVG_VIEWBOX}
           className="w-full h-auto block"
           role="img"
-          aria-label="Carte interactive des 33 préfectures de Guinée et du gouvernorat de Conakry"
+          aria-label="Carte interactive des 44 préfectures de Guinée et du gouvernorat de Conakry"
         >
           <rect width="1000" height="751" fill="#FDF6E3" />
 
@@ -95,7 +97,7 @@ export default function LaGuineCarte({ onConakryClick }: LaGuineCarteProps) {
 
       <div className="mt-5">
         <p className="text-center text-xs uppercase tracking-[0.25em] text-[#5a3608] font-semibold mb-3">
-          Les 8 régions du pays
+          Les 10 régions du pays
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
           {Object.entries(COULEURS_REGION_ADMIN).map(([key, c]) => (

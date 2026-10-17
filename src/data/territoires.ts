@@ -1,8 +1,10 @@
 /**
  * L'ENCYCLOPÉDIE GUINÉ — Territoires de la République de Guinée
  *
- * 46 entités au total :
- *   - 33 préfectures (réparties dans 7 régions administratives)
+ * 57 entités au total :
+ *   - 44 préfectures (réparties dans 9 régions administratives + Conakry),
+ *     découpage du décret du 20 août 2026 : 11 sous-préfectures érigées en
+ *     préfectures, Siguiri et Beyla érigées en régions
  *   - 13 communes urbaines de Conakry (loi du 13 mars 2024 portant
  *     promulgation du nouveau découpage communal)
  *
@@ -18,7 +20,11 @@
  *   - Sous-préfectures (chef-lieu inclus) : liste guinee-decouverte 2010,
  *     ~331 entités. À VALIDER vs liste officielle MATD actuelle (~344) —
  *     quelques sous-préfectures créées après 2010 peuvent manquer.
- *   - Découpage administratif Guinée (7 régions + 1 gouvernorat)
+ *   - Décret du 20 août 2026 (10 régions administratives, 44 préfectures)
+ *
+ * RÉSERVE : l'acte de la ministre fixant l'organisation des 11 nouvelles
+ * préfectures n'est pas publié. Chacune ne porte donc ici que sa propre
+ * sous-préfecture chef-lieu, et le rattachement régional suit le décret.
  */
 
 // ─── Catégories ─────────────────────────────────────────────────────────────
@@ -32,7 +38,7 @@ export type RegionNaturelle =
 
 export type RegionAdministrative =
   | 'boke' | 'kindia' | 'mamou' | 'labe'
-  | 'faranah' | 'kankan' | 'nzerekore'
+  | 'faranah' | 'kankan' | 'siguiri' | 'beyla' | 'nzerekore'
   | 'conakry';
 
 export type TypeEntite = 'prefecture' | 'commune-conakry';
@@ -164,7 +170,17 @@ export const territoires: Territoire[] = [
     regionNaturelle: 'basse-guinee',
     regionAdministrative: 'boke',
     carteIdentite: { chefLieu: 'Boké', population: 777101, populationAnnee: 2025 },
-    sousPrefectures: ["Boké Centre", "Bintimodia", "Dabiss", "Kamsar", "Kanfarandé", "Kolaboui", "Malapouya", "Sangarédi", "Sansalé", "Tanènè"],
+    sousPrefectures: ["Boké Centre", "Bintimodia", "Dabiss", "Kanfarandé", "Kolaboui", "Malapouya", "Sangarédi", "Sansalé", "Tanènè"],
+    patrimoine: { langueDominante: 'Soussou' },
+  },
+  {
+    slug: 'kamsar',
+    nom: 'Kamsar',
+    type: 'prefecture',
+    regionNaturelle: 'basse-guinee',
+    regionAdministrative: 'boke',
+    carteIdentite: { chefLieu: 'Kamsar' },
+    sousPrefectures: ["Kamsar Centre"],
     patrimoine: { langueDominante: 'Soussou' },
   },
   {
@@ -274,7 +290,17 @@ export const territoires: Territoire[] = [
     regionNaturelle: 'moyenne-guinee',
     regionAdministrative: 'mamou',
     carteIdentite: { chefLieu: 'Mamou', population: 460786, populationAnnee: 2025 },
-    sousPrefectures: ["Mamou Centre", "Bouliwel", "Dounet", "Gongoret", "Ouré-Kaba", "Kégnéko", "Konkouré", "Nyagara", "Porédaka", "Soyah", "Saramoussaya", "Timbo", "Tolo", "Téguéréya"],
+    sousPrefectures: ["Mamou Centre", "Bouliwel", "Dounet", "Gongoret", "Ouré-Kaba", "Kégnéko", "Konkouré", "Nyagara", "Porédaka", "Soyah", "Saramoussaya", "Tolo", "Téguéréya"],
+    patrimoine: { langueDominante: 'Pular' },
+  },
+  {
+    slug: 'timbo',
+    nom: 'Timbo',
+    type: 'prefecture',
+    regionNaturelle: 'moyenne-guinee',
+    regionAdministrative: 'mamou',
+    carteIdentite: { chefLieu: 'Timbo' },
+    sousPrefectures: ["Timbo Centre"],
     patrimoine: { langueDominante: 'Pular' },
   },
   {
@@ -409,7 +435,27 @@ export const territoires: Territoire[] = [
     regionNaturelle: 'haute-guinee',
     regionAdministrative: 'kankan',
     carteIdentite: { chefLieu: 'Kankan', population: 841969, populationAnnee: 2025 },
-    sousPrefectures: ["Kankan Centre", "Balandougou", "Baranama", "Batè-Nafadji", "Boula", "Gbérédou-Baranama", "Karfamoriah", "Koumban", "Mamouroudou", "Missamana", "Moribaya", "Tinti-Oulen", "Tokounou"],
+    sousPrefectures: ["Kankan Centre", "Balandougou", "Batè-Nafadji", "Boula", "Gbérédou-Baranama", "Karfamoriah", "Koumban", "Mamouroudou", "Missamana", "Moribaya", "Tinti-Oulen"],
+    patrimoine: { langueDominante: 'Maninka' },
+  },
+  {
+    slug: 'sabadou-baranama',
+    nom: 'Sabadou-Baranama',
+    type: 'prefecture',
+    regionNaturelle: 'haute-guinee',
+    regionAdministrative: 'kankan',
+    carteIdentite: { chefLieu: 'Sabadou-Baranama' },
+    sousPrefectures: ["Sabadou-Baranama Centre"],
+    patrimoine: { langueDominante: 'Maninka' },
+  },
+  {
+    slug: 'tokounou',
+    nom: 'Tokounou',
+    type: 'prefecture',
+    regionNaturelle: 'haute-guinee',
+    regionAdministrative: 'kankan',
+    carteIdentite: { chefLieu: 'Tokounou' },
+    sousPrefectures: ["Tokounou Centre"],
     patrimoine: { langueDominante: 'Maninka' },
   },
   {
@@ -439,7 +485,17 @@ export const territoires: Territoire[] = [
     regionNaturelle: 'haute-guinee',
     regionAdministrative: 'kankan',
     carteIdentite: { chefLieu: 'Mandiana', population: 800959, populationAnnee: 2025 },
-    sousPrefectures: ["Mandiana Centre", "Dialakoro", "Faralako", "Kantoumania", "Kiniéro", "Koundian", "Morodou", "Niantanina", "Saladou", "Sansando", "Balandougou", "Kébaly"],
+    sousPrefectures: ["Mandiana Centre", "Faralako", "Kantoumania", "Kiniéro", "Koundian", "Morodou", "Niantanina", "Saladou", "Sansando", "Balandougou", "Kébaly"],
+    patrimoine: { langueDominante: 'Maninka' },
+  },
+  {
+    slug: 'dialakoro',
+    nom: 'Dialakoro',
+    type: 'prefecture',
+    regionNaturelle: 'haute-guinee',
+    regionAdministrative: 'kankan',
+    carteIdentite: { chefLieu: 'Dialakoro' },
+    sousPrefectures: ["Dialakoro Centre"],
     patrimoine: { langueDominante: 'Maninka' },
   },
   {
@@ -447,9 +503,39 @@ export const territoires: Territoire[] = [
     nom: 'Siguiri',
     type: 'prefecture',
     regionNaturelle: 'haute-guinee',
-    regionAdministrative: 'kankan',
+    regionAdministrative: 'siguiri',
     carteIdentite: { chefLieu: 'Siguiri', population: 1718147, populationAnnee: 2025 },
-    sousPrefectures: ["Siguiri Centre", "Bankon", "Doko", "Kintinian", "Maléah", "Niagassola", "Naboun", "Niandankoro", "Norassoba", "Siguirini", "Franwalia", "Kiniébakoura"],
+    sousPrefectures: ["Siguiri Centre", "Bankon", "Maléah", "Niagassola", "Naboun", "Niandankoro", "Norassoba", "Franwalia", "Kiniébakoura"],
+    patrimoine: { langueDominante: 'Maninka' },
+  },
+  {
+    slug: 'kintinian',
+    nom: 'Kintinian',
+    type: 'prefecture',
+    regionNaturelle: 'haute-guinee',
+    regionAdministrative: 'siguiri',
+    carteIdentite: { chefLieu: 'Kintinian' },
+    sousPrefectures: ["Kintinian Centre"],
+    patrimoine: { langueDominante: 'Maninka' },
+  },
+  {
+    slug: 'siguirini',
+    nom: 'Siguirini',
+    type: 'prefecture',
+    regionNaturelle: 'haute-guinee',
+    regionAdministrative: 'siguiri',
+    carteIdentite: { chefLieu: 'Siguirini' },
+    sousPrefectures: ["Siguirini Centre"],
+    patrimoine: { langueDominante: 'Maninka' },
+  },
+  {
+    slug: 'doko',
+    nom: 'Doko',
+    type: 'prefecture',
+    regionNaturelle: 'haute-guinee',
+    regionAdministrative: 'siguiri',
+    carteIdentite: { chefLieu: 'Doko' },
+    sousPrefectures: ["Doko Centre"],
     patrimoine: { langueDominante: 'Maninka' },
   },
 
@@ -472,9 +558,29 @@ export const territoires: Territoire[] = [
     nom: 'Beyla',
     type: 'prefecture',
     regionNaturelle: 'guinee-forestiere',
-    regionAdministrative: 'nzerekore',
+    regionAdministrative: 'beyla',
     carteIdentite: { chefLieu: 'Beyla', population: 511095, populationAnnee: 2025 },
-    sousPrefectures: ["Beyla Centre", "Boola", "Diassodou", "Gbakédou", "Gbessoba", "Karala", "Diaraguéréla", "Koumandou", "Moussadou", "Nionsomoridou", "Samana", "Sinko", "Sokourala", "Fouala"],
+    sousPrefectures: ["Beyla Centre", "Boola", "Diassodou", "Gbakédou", "Gbessoba", "Diaraguéréla", "Koumandou", "Moussadou", "Nionsomoridou", "Samana", "Sokourala", "Fouala"],
+    patrimoine: { langueDominante: 'Konianké' },
+  },
+  {
+    slug: 'karala',
+    nom: 'Karala',
+    type: 'prefecture',
+    regionNaturelle: 'guinee-forestiere',
+    regionAdministrative: 'beyla',
+    carteIdentite: { chefLieu: 'Karala' },
+    sousPrefectures: ["Karala Centre"],
+    patrimoine: { langueDominante: 'Konianké' },
+  },
+  {
+    slug: 'sinko',
+    nom: 'Sinko',
+    type: 'prefecture',
+    regionNaturelle: 'guinee-forestiere',
+    regionAdministrative: 'beyla',
+    carteIdentite: { chefLieu: 'Sinko' },
+    sousPrefectures: ["Sinko Centre"],
     patrimoine: { langueDominante: 'Konianké' },
   },
   {
@@ -504,8 +610,18 @@ export const territoires: Territoire[] = [
     regionNaturelle: 'guinee-forestiere',
     regionAdministrative: 'nzerekore',
     carteIdentite: { chefLieu: 'Macenta', population: 408414, populationAnnee: 2025 },
-    sousPrefectures: ["Macenta Centre", "Balizia", "Binikala", "Bofossou", "Daro", "Kouankan", "Orémaï", "Koyamah", "Panziazou", "Sérédou", "Sengbédou", "N'Zébéla", "Watanka", "Vassérédou"],
+    sousPrefectures: ["Macenta Centre", "Balizia", "Binikala", "Bofossou", "Daro", "Orémaï", "Koyamah", "Panziazou", "Sérédou", "Sengbédou", "N'Zébéla", "Watanka", "Vassérédou"],
     patrimoine: { langueDominante: 'Loma' },
+  },
+  {
+    slug: 'kouankan',
+    nom: 'Kouankan',
+    type: 'prefecture',
+    regionNaturelle: 'guinee-forestiere',
+    regionAdministrative: 'beyla',
+    carteIdentite: { chefLieu: 'Kouankan' },
+    sousPrefectures: ["Kouankan Centre"],
+    patrimoine: { langueDominante: 'Konianké' },
   },
   {
     slug: 'yomou',
@@ -684,6 +800,8 @@ export const LIBELLE_REGION_ADMIN: Record<RegionAdministrative, string> = {
   'labe':       'Région de Labé',
   'faranah':    'Région de Faranah',
   'kankan':     'Région de Kankan',
+  'siguiri':    'Région de Siguiri',
+  'beyla':      'Région de Beyla',
   'nzerekore':  "Région de N'Zérékoré",
   'conakry':    'Gouvernorat de Conakry',
 };

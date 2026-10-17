@@ -28,16 +28,16 @@ export default function Hymne() {
         <div className="flex items-center justify-between gap-3 flex-wrap mb-3">
           <div className="flex items-center gap-2">
             <Music className="text-[#C8841E]" size={26} />
-            <h1 className="text-2xl md:text-3xl text-[#0D2B1A]">Chante Liberté</h1>
+            <h1 className="text-2xl md:text-3xl text-[#0D2B1A]">Chante LIBERTÉ</h1>
           </div>
           <div className="flex items-center gap-4">
             <button onClick={enter} className="inline-flex items-center gap-1.5 text-[#C8841E] font-display font-semibold hover:underline">
               <Maximize2 size={18} /> Plein écran
             </button>
-            <Link to="/catalogue" className="inline-flex items-center gap-1.5 text-[#C8841E] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Le catalogue</Link>
+            <Link to="/session/new" className="inline-flex items-center gap-1.5 text-[#C8841E] font-display font-semibold hover:underline"><ArrowLeft size={18} /> Tous les jeux</Link>
           </div>
         </div>
-        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-5">Apprends les vrais mots de l'hymne national de la Guinée&nbsp;: son histoire, vers par vers, puis tout seul. Dès 7 ans.</p>
+        <p className="hidden sm:block text-[#3a4a42] font-semibold mb-5">L'hymne national de la Guinée, pas à pas&nbsp;: son histoire, ses mots, et chanter de mémoire. À partir de 7 ans.</p>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
@@ -52,7 +52,7 @@ export default function Hymne() {
           <iframe
             ref={frameRef}
             src="/jeux/hymne/hymne.html"
-            title="Chante Liberté"
+            title="Chante LIBERTÉ"
             loading="lazy"
             allow="fullscreen"
             className="w-full block"

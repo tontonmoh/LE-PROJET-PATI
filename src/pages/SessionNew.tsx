@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -94,6 +94,12 @@ const JEUX: Jeu[] = [
     section: "pati", icon: BookOpen, accent: "#2F2A5E",
     visual: "/images/jeux/sebe.jpg",
     playPrefix: "/sebe", withCodeInPath: false, hasLiveScores: true,
+  },
+  {
+    id: "hymne", slug: "hymne", jeu: "chant",
+    label: "Chante LIBERTÉ — L'hymne national",
+    section: "pati", icon: Music, accent: "#CE1126",
+    playPrefix: "/hymne", withCodeInPath: false, hasLiveScores: false,
   },
   // ── SENAG ───────────────────────────────────────────────────────────────
   {
