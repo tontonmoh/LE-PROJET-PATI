@@ -398,7 +398,7 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 }
 
 /* Bandeau « Quel est ton génie ? » — 6 colonnes RIASEC (Home.tsx) */
-.genie-band .genie-col::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,.28) 100%);pointer-events:none}
+.genie-band .genie-col::after{display:none;content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,.28) 100%);pointer-events:none}
 .genie-band .genie-col{transition:filter .25s ease}
 @media (hover:hover){.genie-band:hover .genie-col{filter:saturate(1.12) brightness(1.05)}}
 

@@ -118,42 +118,46 @@ export default function Home() {
           className="genie-band group relative block rounded-[2rem] overflow-hidden shadow-kid"
           aria-label="Et toi, quel est ton génie ? Faire le bilan"
         >
-          {/* Les 6 colonnes */}
-          <div className="grid grid-cols-6 min-h-[280px] md:min-h-[320px]">
+          {/* Bande 1 : la question, sur un aplat unique */}
+          <div className="genie-top px-6 py-6 md:py-7 text-center" style={{ background: "#0D2B1A" }}>
+            <h2 className="text-2xl md:text-3xl text-white">Et toi, quel est ton génie&nbsp;?</h2>
+          </div>
+
+          {/* Bande 2 : les 6 profils RIASEC */}
+          <div className="grid grid-cols-6 min-h-[150px] md:min-h-[190px]">
             {(
               [
-                { key: "batisseur",      letter: "R", icon: Hammer },
-                { key: "chercheur",      letter: "I", icon: Microscope },
-                { key: "createur",       letter: "A", icon: Palette },
-                { key: "accompagnateur", letter: "S", icon: HeartHandshake },
-                { key: "entrepreneur",   letter: "E", icon: Rocket },
-                { key: "organisateur",   letter: "C", icon: ClipboardList },
+                { key: "batisseur",      letter: "R", name: "Réaliste",      icon: Hammer },
+                { key: "chercheur",      letter: "I", name: "Investigateur", icon: Microscope },
+                { key: "createur",       letter: "A", name: "Artiste",       icon: Palette },
+                { key: "accompagnateur", letter: "S", name: "Social",        icon: HeartHandshake },
+                { key: "entrepreneur",   letter: "E", name: "Entreprenant",  icon: Rocket },
+                { key: "organisateur",   letter: "C", name: "Conventionnel", icon: ClipboardList },
               ] as const
             ).map((c) => {
               const p = PILLARS[c.key];
               return (
                 <div
                   key={c.key}
-                  className="genie-col relative flex flex-col items-center pt-5 md:pt-6 px-1 text-white"
+                  className="genie-col relative flex flex-col items-center justify-center gap-1.5 px-1 py-5 text-white"
                   style={{ background: p.color }}
                 >
-                  <c.icon size={22} className="opacity-90 mb-1.5" />
-                  <span className="font-display font-bold text-2xl md:text-3xl leading-none">{c.letter}</span>
-                  <span className="hidden md:block mt-1 text-[11px] font-display font-semibold uppercase tracking-wide text-white/85 text-center leading-tight">
-                    {p.title.replace(/^(Le |L')/, "")}
+                  <c.icon size={22} className="opacity-90" />
+                  <span className="font-display font-bold text-3xl md:text-4xl leading-none">{c.letter}</span>
+                  <span className="hidden md:block text-[11px] font-display font-semibold uppercase tracking-wide text-white/85 text-center leading-tight">
+                    {c.name}
                   </span>
                 </div>
               );
             })}
           </div>
 
-          {/* Accroche + bouton, centrés par-dessus les colonnes */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end md:justify-center text-center px-6 pb-8 md:pb-0 md:pt-10 pointer-events-none">
-            <h2 className="text-2xl md:text-3xl text-white mb-3 [text-shadow:0_2px_12px_rgba(0,0,0,.45)]">Et toi, quel est ton génie&nbsp;?</h2>
-            <p className="text-white font-semibold mb-6 max-w-xl mx-auto [text-shadow:0_1px_8px_rgba(0,0,0,.5)]">
+          {/* Bande 3 : accroche à gauche, bouton à droite, sur un aplat unique */}
+          <div className="genie-bottom px-6 py-6 md:px-10 md:py-7 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8" style={{ background: "#0D2B1A" }}>
+            <p className="text-white/90 font-semibold text-center md:text-left max-w-xl">
               Réponds à quelques questions rigolotes et découvre les métiers de demain qui sont faits pour toi.
             </p>
-            <span className="btn-kid bg-[#FFC93C] text-[#0D2B1A] pointer-events-auto group-hover:scale-105 transition-transform">
+            <span className="btn-kid bg-[#FFC93C] text-[#0D2B1A] shrink-0 group-hover:scale-105 transition-transform">
               <Sparkles size={18} /> C'est parti&nbsp;!
             </span>
           </div>
