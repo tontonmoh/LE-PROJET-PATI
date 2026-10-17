@@ -217,7 +217,7 @@ export const DMBA_ML: Record<DmbaLang, DmbaBook> = {
       },
       {
         id: "difference-branding",
-        image: "/livres/dmba/dmba-19-difference-v3.webp",
+        image: "/livres/dmba/dmba-19-difference-v4.webp",
         title: "Armoiries ou branding : quelle différence ?",
         paragraphs: [
           `Le « branding » est un peu différent. C'est une image plus moderne, choisie pour communiquer avec les gens du monde entier et les inviter à découvrir le pays. C'est un peu comme le logo d'une marque qui veut raconter une histoire et donner envie de la découvrir.`,

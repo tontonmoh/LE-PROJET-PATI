@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Sparkles, Music, Hourglass } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, BookOpen, Sparkles, Music, Hourglass, Languages, Clock } from "lucide-react";
 import { READERS } from "../data/readers";
 import { getBlurb } from "../data/blurbs";
 import { getBook } from "../data/books";
@@ -12,6 +12,7 @@ import { TAADIDI } from "../data/series/taadidi";
 import { KURUKAN } from "../data/series/kurukanFuga";
 import { POINT_ZERO } from "../data/point-zero";
 import { LEXIQUE, BAND_ORDER, type Band } from "../data/lexique";
+import { QUIZZES } from "../data/quizzes";
 
 
 // ---- Petit dico cliquable : les mots définis dans la section "petit-dico" deviennent des bulles ----
@@ -39,6 +40,10 @@ function lexiconEntries(lang: string, band: Band | undefined, exclude: GlosEntry
   return Object.entries(lex)
     .filter(([w, e]) => BAND_ORDER.indexOf(e.max) >= level && !taken.has(w))
     .map(([w, e]) => ({ term: w, def: e.def, alts: e.alts || [] }));
+}
+// Pages lisibles = sections sans le petit dico (qui ne sert plus qu'aux bulles)
+function pagesOf(b?: { sections: { id?: string; title: string; paragraphs: string[]; image?: string }[] }) {
+  return (b?.sections || []).filter((s) => !(s.id && DICO_IDS.includes(s.id)));
 }
 function escapeRe(s: string) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 function buildGlosRegex(entries: GlosEntry[], cjk: boolean) {
@@ -68,7 +73,7 @@ export default function BookReaderML() {
   const book = reader?.books[lang];
   const taglineMap = getBlurb(id || "")?.tagline as Record<string, string> | undefined;
   const tagline = taglineMap?.[lang];
-  const total = book?.sections.length ?? 0;
+  const total = pagesOf(book).length;
 
   const koraSrc = getBook(id || "")?.kora;
   const koraRef = useRef<HTMLAudioElement>(null);
@@ -125,7 +130,7 @@ export default function BookReaderML() {
   const rtl = book.dir === "rtl";
   const readerClass = lang === "ar" ? "reader-ar" : lang === "zh" ? "reader-zh" : "reader-text";
   const cover = i < 0;
-  const scene = cover ? null : book.sections[i];
+  const scene = cover ? null : pagesOf(book)[i];
 
   // Tous les livres du catalogue = mode split (50/50 illustration | texte)
   // Charger l'info de la série (si applicable)
@@ -162,7 +167,7 @@ export default function BookReaderML() {
   const split = true;
 
   const sectionImg = !cover
-    ? (reader.books.fr?.sections[i]?.image || reader.books[reader.langs[0]]?.sections[i]?.image)
+    ? (pagesOf(reader.books.fr)[i]?.image || pagesOf(reader.books[reader.langs[0]])[i]?.image)
     : undefined;
   const pageImg = cover ? baseImg : (sectionImg || baseImg);
   const pageIdx = cover ? 0 : i;
@@ -176,6 +181,8 @@ export default function BookReaderML() {
     // Autres séries (Point Zéro, G2040) : random seeded par index
     imgLeft = randomLayout(i) === "left";
   }
+  // Couverture : l'image d'abord (à gauche), la fiche du livre à droite
+  if (cover) imgLeft = true;
 
   const inner = (
     <>
@@ -215,32 +222,54 @@ export default function BookReaderML() {
         className={(!cover && split) ? "" : "rounded-[1.75rem] border-8 border-white shadow-kid px-7 py-9 md:px-10 md:py-12 min-h-[55vh]"}
         style={(!cover && split) ? undefined : { background: "#FFFDF6" }}>
         {cover ? (
-          <div className="w-full">
-            {/* Couverture en mode paysage (plein écran) */}
-            {baseImg && (
-              <img 
-                src={baseImg} 
-                alt={book.title}
-                loading="lazy"
-                className="w-full rounded-2xl shadow-lg mb-8"
-                style={{ maxHeight: "60vh", objectFit: "cover" }}
-              />
-            )}
-            {/* Infos texte sous la couverture */}
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-6" style={{ background: `${accent}22` }}>
-                <BookOpen size={32} style={{ color: accent }} />
-              </div>
-              <h1 className="font-display font-bold text-3xl md:text-4xl text-[#0D2B1A] mb-3">{book.title}</h1>
-              {book.subtitle && <p className={readerClass} style={{ fontSize: "1.05rem", color: "#5a6b62" }}>{book.subtitle}</p>}
-              {tagline && <p className={readerClass} style={{ fontSize: "1rem", color: accent, marginTop: "0.75rem", fontStyle: "italic" }}>{tagline}</p>}
-            </div>
+          <div className="w-full" dir={rtl ? "rtl" : "ltr"}>
+            {(() => {
+              const meta = getBook(id || "");
+              const blurb = getBlurb(id || "")?.blurb as Record<string, string[]> | undefined;
+              const lines = (blurb?.[lang] || blurb?.fr || []).filter((l) => !/^Pati\s*[—-]/.test(l));
+              const minutes = Math.max(3, Math.round(pagesOf(book).reduce((n, p) => n + p.paragraphs.join(" ").split(/\s+/).length, 0) / 140));
+              const hasQuiz = !!QUIZZES[id || ""];
+              return (
+                <>
+                  {!split && baseImg && <img src={baseImg} alt={book.title} loading="lazy" className="w-full rounded-2xl shadow-lg mb-8" style={{ maxHeight: "60vh", objectFit: "cover" }} />}
+                  {meta?.band && (
+                    <span className="inline-block font-display font-semibold text-xs tracking-wide px-3 py-1 rounded-full mb-4" style={{ background: `${accent}22`, color: accent }}>
+                      Pati · {meta.band}
+                    </span>
+                  )}
+                  <h1 className="font-display font-bold text-3xl md:text-4xl text-[#0D2B1A] mb-2">{book.title}</h1>
+                  {book.subtitle && <p className={readerClass} style={{ fontSize: "1.05rem", color: "#5a6b62" }}>{book.subtitle}</p>}
+                  {tagline && <p className={readerClass} style={{ fontSize: "1.05rem", color: accent, marginTop: "0.75rem", fontStyle: "italic" }}>{tagline}</p>}
+                  {lines.length > 0 && (
+                    <div className={`${readerClass} mt-6`} style={{ fontSize: "1rem" }}>
+                      {lines.map((l, k) => <p key={k} style={{ marginBottom: "0.75rem" }}>{l}</p>)}
+                    </div>
+                  )}
+                  <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-sm font-display font-semibold text-[#5a6b62]">
+                    <span className="inline-flex items-center gap-1.5"><BookOpen size={16} style={{ color: accent }} /> {total} pages</span>
+                    <span className="inline-flex items-center gap-1.5"><Clock size={16} style={{ color: accent }} /> ~{minutes} min</span>
+                    <span className="inline-flex items-center gap-1.5"><Languages size={16} style={{ color: accent }} /> {reader.langs.map((c) => reader.books[c].label).join(" · ")}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-3 mt-7">
+                    <button onClick={() => go(1)} className="btn-kid text-white text-sm py-2.5 px-6" style={{ background: accent }}>
+                      Commencer la lecture <ChevronRight size={18} />
+                    </button>
+                    {hasQuiz && (
+                      <Link to={`/livre/${id}/quiz`} className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-5"><Sparkles size={16} style={{ color: accent }} /> Quiz</Link>
+                    )}
+                    {koraSrc && (
+                      <button onClick={toggleKora} className="btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-5"><Music size={16} style={{ color: accent }} /> {koraOn ? "Couper la kora" : "Lire avec la kora"}</button>
+                    )}
+                  </div>
+                </>
+              );
+            })()}
           </div>
         ) : (
           <>
             {/* En double page, l'illustration occupe l'autre moitié : pas d'image en ligne */}
             {!split && (() => {
-              const img = reader.books.fr?.sections[i]?.image || reader.books[reader.langs[0]]?.sections[i]?.image;
+              const img = pagesOf(reader.books.fr)[i]?.image || pagesOf(reader.books[reader.langs[0]])[i]?.image;
               return img ? <img src={img} alt={scene!.title} loading="lazy" className="w-full rounded-2xl mb-6 shadow-sm" /> : null;
             })()}
             {scene!.title && <h2 className={`font-display font-bold text-2xl md:text-3xl mb-6 ${rtl ? "text-right" : ""}`} style={{ color: accent }}>{scene!.title}</h2>}
@@ -291,7 +320,7 @@ export default function BookReaderML() {
       </article>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-6">
+      <div className={`flex items-center justify-between mt-6 ${cover ? "hidden" : ""}`}>
         <button onClick={() => go(-1)} disabled={cover}
           className={`btn-kid bg-white text-[#0D2B1A] shadow-kid text-sm py-2.5 px-5 ${cover ? "opacity-40 pointer-events-none" : ""}`}>
           <ChevronLeft size={18} /> Précédent
@@ -350,7 +379,7 @@ export default function BookReaderML() {
       </div>
 
       {/* Lire avec la kora (optionnel) */}
-      {koraSrc && (
+      {koraSrc && !cover && (
         <div className="mt-7 flex flex-col items-center gap-1.5">
           <button onClick={toggleKora}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-display font-semibold text-sm shadow-kid bg-white text-[#0D2B1A] hover:bg-[#FFC93C]/30 transition-colors">

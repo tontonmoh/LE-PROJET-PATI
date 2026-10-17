@@ -1,4 +1,3 @@
-import { bumpCounter } from '../lib/publicStats';
 import { useState } from "react";
 import { Check, X, Sparkles, RefreshCw, Lightbulb } from "lucide-react";
 import type { QuizQ } from "../data/quizzes";
@@ -32,7 +31,7 @@ export default function QuizRunner({ questions, onRestart, id }: { questions: Qu
       track("quiz_termine", { livre: id, score, total: questions.length });
       bumpCounter("quiz_joues");
       logProgress("quiz_fini", id, Math.round((score / questions.length) * 100));
-      setDone(true);bumpCounter('quiz_joues');
+      setDone(true);
     }
   };
 
