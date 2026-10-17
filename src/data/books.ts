@@ -96,6 +96,16 @@ export const BOOKS: Book[] = [
     nouveau: true,
   },
   {
+    slug: "chante-liberte",
+    band: "Découverte",
+    title: "Chante Liberté",
+    description: "L'hymne national de la Guinée : d'où vient-il, que veulent dire ses mots ? Écoute, joue et apprends les vrais mots, jusqu'à le chanter par cœur.",
+    cover: "/images/hymne/chante-liberte.svg",
+    to: "/hymne",
+    keywords: ["hymne national", "Liberté", "chant", "Guinée", "indépendance", "1958", "Alpha Yaya", "griot", "Korofo Moussa", "citoyenneté", "jeu", "Pati Découverte"],
+    nouveau: true,
+  },
+  {
     slug: "casseroles",
     band: "Passage",
     title: "La guerre des casseroles",

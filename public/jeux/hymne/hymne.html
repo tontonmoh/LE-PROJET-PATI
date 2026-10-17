@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Chante Liberté — l'hymne national</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rouge:#CE1126; --jaune:#FCD116; --vert:#009460;
+    --green:#0F6E56; --dark:#0D2B1A; --cream:#FFF6E7; --muted:#5a6b62; --sky:#4FB3E8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%; background:var(--cream); color:var(--dark); font-family:'Nunito','Trebuchet MS',system-ui,sans-serif; overflow:hidden; user-select:none; -webkit-user-select:none;}
+  h1,h2,h3,.fred{font-family:'Fredoka','Trebuchet MS',system-ui,sans-serif;}
+  button{font-family:inherit; cursor:pointer; border:0;}
+  .screen{position:absolute; inset:0; display:none; flex-direction:column; overflow:auto;}
+  .screen.on{display:flex;}
+  .flag{display:flex; height:10px; width:100%; flex-shrink:0;}
+  .flag i{flex:1;} .flag i:nth-child(1){background:var(--rouge);} .flag i:nth-child(2){background:var(--jaune);} .flag i:nth-child(3){background:var(--vert);}
+
+  /* Accueil */
+  #home .inner{display:flex; flex-direction:column; align-items:center; gap:12px; padding:20px 16px 30px; max-width:680px; margin:0 auto; width:100%;}
+  #home h1{font-size:clamp(30px,9vw,48px); color:var(--dark); text-align:center; line-height:1.05;}
+  #home h1 span{color:var(--rouge);}
+  #home .sub{font-weight:800; color:var(--muted); text-align:center; font-size:clamp(15px,4vw,18px); max-width:520px;}
+  .steps{display:flex; flex-direction:column; gap:10px; width:100%; margin-top:6px;}
+  .step{display:flex; align-items:center; gap:14px; background:#fff; border-radius:20px; padding:14px 16px; text-align:left; box-shadow:0 5px 0 rgba(0,0,0,.08); border-left:10px solid var(--c); transition:transform .1s;}
+  .step:active{transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.08);}
+  .step .n{width:40px; height:40px; border-radius:50%; background:var(--c); color:#fff; font-family:'Fredoka',sans-serif; font-weight:700; font-size:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .step .tt{font-family:'Fredoka',sans-serif; font-weight:600; font-size:clamp(17px,4.6vw,20px); display:block;}
+  .step .ds{font-size:14px; color:var(--muted); font-weight:800;}
+  .step .ok{margin-left:auto; font-size:24px;}
+  .badge{display:none; align-items:center; gap:12px; background:linear-gradient(90deg,var(--rouge),#e2a400,var(--vert)); color:#fff; border-radius:20px; padding:14px 18px; font-family:'Fredoka',sans-serif; font-weight:600; font-size:18px; width:100%;}
+  .badge.on{display:flex;}
+  .badge b{font-size:34px;}
+  .pill{background:rgba(255,255,255,.15); color:#fff; font-weight:800; border-radius:999px; padding:7px 14px; font-size:14px;}
+  .pill.light{background:#0F6E5618; color:var(--green);}
+
+  /* Barre de jeu */
+  .top{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 14px; background:var(--dark); color:#fff; flex-shrink:0;}
+  .top .ttl{font-family:'Fredoka',sans-serif; font-weight:600; font-size:clamp(16px,4.5vw,20px); text-align:center; flex:1;}
+  .top .cnt{font-weight:800; font-size:14px; opacity:.8; min-width:52px; text-align:right;}
+  .stage{flex:1; display:flex; flex-direction:column; align-items:center; padding:18px 14px 24px; gap:16px; max-width:760px; width:100%; margin:0 auto;}
+  .consigne{font-weight:800; color:var(--muted); text-align:center; font-size:clamp(15px,4vw,18px);}
+
+  /* Histoire */
+  .story{background:#fff; border-radius:24px; padding:22px 20px; box-shadow:0 6px 0 rgba(0,0,0,.07); width:100%; display:flex; flex-direction:column; gap:12px; align-items:center; text-align:center;}
+  .story .pic{font-size:clamp(60px,18vw,96px); line-height:1;}
+  .story h3{font-size:clamp(20px,5.5vw,26px); color:var(--rouge);}
+  .story p{font-size:clamp(17px,4.6vw,21px); font-weight:800; line-height:1.4;}
+  .dots{display:flex; gap:6px;} .dots i{width:10px; height:10px; border-radius:50%; background:#0d2b1a22; display:block;} .dots i.on{background:var(--rouge);}
+
+  /* Vers / paroles */
+  .verse{background:#fff; border-radius:24px; padding:22px 18px; box-shadow:0 6px 0 rgba(0,0,0,.07); width:100%; text-align:center;
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:clamp(24px,7vw,38px); line-height:1.35; min-height:120px; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:0 .3em;}
+  .w{border-radius:8px; padding:0 .08em; transition:background .15s,color .15s;}
+  .w.hl{background:var(--jaune);}
+  .w.dico{text-decoration:underline dotted var(--vert) 3px; text-underline-offset:6px; cursor:pointer;}
+  .w.lib{color:var(--rouge); letter-spacing:.04em;}
+  .prevnext{display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap;}
+  .round{width:60px; height:60px; border-radius:50%; background:#fff; color:var(--dark); font-size:26px; box-shadow:0 5px 0 rgba(0,0,0,.12);}
+  .round.play{width:76px; height:76px; background:var(--vert); color:#fff; font-size:32px;}
+  .round:active{transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.12);}
+  .round:disabled{opacity:.35;}
+  .tip{background:var(--dark); color:#fff; border-radius:18px; padding:14px 16px; font-weight:800; font-size:clamp(15px,4.2vw,18px); width:100%; line-height:1.4; display:none;}
+  .tip.on{display:block; animation:drop .25s;}
+  .tip b{color:var(--jaune); font-family:'Fredoka',sans-serif; font-size:1.1em;}
+
+  /* Choix */
+  .choices{display:grid; grid-template-columns:1fr; gap:10px; width:100%;}
+  @media(min-width:520px){ .choices{grid-template-columns:repeat(3,1fr);} }
+  .choice{background:var(--green); color:#fff; border-radius:18px; padding:16px 12px; font-family:'Fredoka',sans-serif; font-weight:600; font-size:clamp(18px,5vw,22px); box-shadow:0 5px 0 #0a4a3a;}
+  .choice:active{transform:translateY(3px); box-shadow:0 2px 0 #0a4a3a;}
+  .choice.good{background:var(--vert); animation:pop .4s;}
+  .choice.bad{background:var(--rouge); animation:wob .4s;}
+  .blank{display:inline-block; min-width:3.2em; border-bottom:4px solid var(--rouge); color:var(--rouge);}
+
+  /* Ordre */
+  .order{display:flex; flex-direction:column; gap:8px; width:100%;}
+  .ln{background:#fff; border-radius:16px; padding:12px 14px; font-weight:800; font-size:clamp(16px,4.4vw,20px); box-shadow:0 4px 0 rgba(0,0,0,.08); text-align:left; display:flex; gap:10px; align-items:center;}
+  .ln .k{width:30px; height:30px; border-radius:50%; background:#0d2b1a12; display:flex; align-items:center; justify-content:center; font-family:'Fredoka',sans-serif; flex-shrink:0;}
+  .ln.done{background:#E3F6EC; color:var(--green); pointer-events:none;}
+  .ln.done .k{background:var(--vert); color:#fff;}
+  .ln.bad{animation:wob .4s; background:#FDE3E6;}
+
+  /* Chasse à l'erreur */
+  .verse .w.tap{cursor:pointer;}
+  .verse .w.wrong{background:#FDE3E6; color:var(--rouge); text-decoration:line-through;}
+  .verse .w.right{background:#E3F6EC; color:var(--vert);}
+  .verse .w.miss{animation:wob .35s;}
+
+  /* Effacement */
+  .full{background:#fff; border-radius:24px; padding:18px 16px; box-shadow:0 6px 0 rgba(0,0,0,.07); width:100%; font-weight:800; font-size:clamp(16px,4.4vw,21px); line-height:1.7; text-align:center;}
+  .full .line{display:block;}
+  .hid{display:inline-block; min-width:2.6em; border-bottom:3px solid #0d2b1a33; color:transparent; cursor:pointer; border-radius:4px;}
+  .hid.shown{color:var(--rouge); border-color:transparent;}
+  .level{display:flex; gap:8px; justify-content:center;}
+  .level i{width:40px; height:10px; border-radius:6px; background:#0d2b1a18; display:block;}
+  .level i.on{background:var(--vert);}
+
+  .go{background:var(--vert); color:#fff; font-family:'Fredoka',sans-serif; font-weight:600; font-size:clamp(19px,5vw,23px); border-radius:999px; padding:14px 30px; box-shadow:0 6px 0 #00663f;}
+  .go:active{transform:translateY(4px); box-shadow:0 2px 0 #00663f;}
+  .go.alt{background:#fff; color:var(--green); box-shadow:0 6px 0 #0F6E5640;}
+  .hint{font-weight:800; color:var(--rouge); min-height:24px; text-align:center; font-size:clamp(15px,4vw,18px);}
+
+  /* Victoire */
+  #win{align-items:center; justify-content:center; text-align:center; gap:14px; padding:24px;}
+  #win h2{font-size:clamp(34px,10vw,54px); color:var(--vert);}
+  #win .big{font-size:clamp(56px,16vw,90px); line-height:1;}
+  #win .msg{font-weight:800; color:var(--muted); font-size:clamp(16px,4.5vw,20px); max-width:460px;}
+  .actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .confetti{position:fixed; top:-20px; width:10px; height:16px; border-radius:2px; pointer-events:none; animation:fall linear forwards; z-index:50;}
+
+  @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+  @keyframes wob{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+  @keyframes drop{from{transform:translateY(-10px); opacity:0}to{transform:none; opacity:1}}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
+</style>
+</head>
+<body>
+
+<!-- ═════════ ACCUEIL ═════════ -->
+<section id="home" class="screen on">
+  <div class="flag"><i></i><i></i><i></i></div>
+  <div class="inner">
+    <h1>Chante <span>Liberté</span></h1>
+    <p class="sub">L'hymne national de la Guinée. Apprends les vrais mots, un vers après l'autre.</p>
+    <div class="badge" id="badge"><b>🏅</b><span>Bravo&nbsp;! Tu connais l'hymne national.</span></div>
+    <div class="steps" id="steps"></div>
+    <button class="pill light" id="voiceBtn">🔊 Voix : oui</button>
+  </div>
+</section>
+
+<!-- ═════════ ÉTAPE ═════════ -->
+<section id="game" class="screen">
+  <div class="flag"><i></i><i></i><i></i></div>
+  <div class="top">
+    <button class="pill" id="quit">← Retour</button>
+    <div class="ttl" id="ttl"></div>
+    <div class="cnt" id="cnt"></div>
+  </div>
+  <div class="stage" id="stage"></div>
+</section>
+
+<!-- ═════════ VICTOIRE ═════════ -->
+<section id="win" class="screen">
+  <div class="big" id="winIcon">⭐</div>
+  <h2 id="winTitle">Bravo&nbsp;!</h2>
+  <p class="msg" id="winMsg"></p>
+  <div class="actions">
+    <button class="go" id="winNext">Étape suivante →</button>
+    <button class="go alt" id="winAgain">Rejouer</button>
+    <button class="go alt" id="winMenu">Menu</button>
+  </div>
+</section>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   DONNÉES — à éditer ici, sans toucher au moteur plus bas.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Les paroles, découpées en vers (texte fourni par Moh le 17/10/2026).
+   ⚠️ À vérifier mot pour mot contre une source officielle avant diffusion large. */
+var VERS = [
+  "Peuple d'Afrique,",
+  "le passé historique,",
+  "que chante l'hymne",
+  "de la Guinée fière et jeune,",
+  "illustre l'épopée de nos frères",
+  "morts au champ d'honneur,",
+  "en libérant l'Afrique.",
+  "Le peuple de Guinée,",
+  "prêchant l'unité,",
+  "appelle l'Afrique.",
+  "LIBERTÉ !",
+  "C'est la voix d'un peuple",
+  "qui appelle tous frères",
+  "de la Grande Afrique.",
+  "LIBERTÉ !",
+  "C'est la voix d'un peuple",
+  "qui appelle tous frères",
+  "à se retrouver.",
+  "Bâtissons l'unité africaine",
+  "dans l'indépendance recouvrée."
+];
+
+/* Petit dico : mot (tel qu'écrit dans le vers, sans ponctuation) → explication pour enfant */
+var DICO = {
+  "Peuple":"Toutes les personnes d'un pays ou d'un continent, ensemble.",
+  "historique":"Le passé historique, c'est tout ce qui s'est passé avant nous et qu'on raconte : notre histoire.",
+  "hymne":"Un chant important, qu'on chante debout, avec respect. L'hymne national est le chant de tout le pays.",
+  "fière":"Être fier, c'est être content et digne de ce qu'on est.",
+  "jeune":"La Guinée est un pays jeune : elle est devenue indépendante en 1958.",
+  "illustre":"Ici, « illustrer », c'est montrer, rappeler aux yeux de tous.",
+  "épopée":"Une grande histoire pleine de courage et d'aventures, comme celle de Soundjata.",
+  "champ":"Mourir « au champ d'honneur », c'est donner sa vie en se battant pour une grande cause.",
+  "honneur":"Mourir « au champ d'honneur », c'est donner sa vie en se battant pour une grande cause.",
+  "libérant":"Libérer, c'est rendre libre : faire que personne ne commande plus à ta place.",
+  "prêchant":"Prêcher, c'est répéter partout une idée pour que tout le monde la suive.",
+  "unité":"Être unis : être ensemble, comme les doigts d'une même main.",
+  "LIBERTÉ":"Le nom de notre hymne ! La liberté, c'est pouvoir décider soi-même de sa vie et de son pays.",
+  "voix":"Ici, la voix d'un peuple, c'est ce que tout un peuple dit d'une seule bouche.",
+  "frères":"Ici, « frères », ce sont tous les Africains : une seule grande famille.",
+  "Bâtissons":"Bâtir, c'est construire. « Bâtissons », c'est : construisons ensemble !",
+  "africaine":"L'unité africaine, c'est le rêve que tous les pays d'Afrique soient unis.",
+  "indépendance":"Être indépendant, c'est être libre de décider pour soi. La Guinée est indépendante depuis le 2 octobre 1958.",
+  "recouvrée":"Recouvrer, c'est retrouver ce qu'on avait perdu. L'indépendance recouvrée : la liberté retrouvée."
+};
+
+/* Texte à trous : pour chaque vers, le mot à cacher + 2 mots pièges */
+var TROUS = [
+  { v:0,  mot:"Afrique",      pieges:["Guinée","famille"] },
+  { v:1,  mot:"historique",   pieges:["magnifique","héroïque"] },
+  { v:3,  mot:"fière",        pieges:["chère","belle"] },
+  { v:4,  mot:"épopée",       pieges:["époque","histoire"] },
+  { v:5,  mot:"honneur",      pieges:["bonheur","labeur"] },
+  { v:6,  mot:"libérant",     pieges:["délivrant","traversant"] },
+  { v:8,  mot:"unité",        pieges:["amitié","vérité"] },
+  { v:11, mot:"voix",         pieges:["joie","foi"] },
+  { v:13, mot:"Grande",       pieges:["Belle","Vieille"] },
+  { v:17, mot:"retrouver",    pieges:["rassembler","relever"] },
+  { v:18, mot:"Bâtissons",    pieges:["Chantons","Gardons"] },
+  { v:19, mot:"recouvrée",    pieges:["retrouvée","proclamée"] }
+];
+
+/* Chasse à l'erreur : un mot du vers a été changé ; l'enfant le trouve.
+   → AJOUTER ICI les vraies erreurs que les gens chantent (faux = ce qu'on entend, vrai = le bon mot). */
+var ERREURS = [
+  { v:1,  vrai:"historique", faux:"héroïque" },
+  { v:3,  vrai:"jeune",      faux:"belle" },
+  { v:4,  vrai:"l'épopée",   faux:"l'époque" },
+  { v:5,  vrai:"champ",      faux:"chant" },
+  { v:6,  vrai:"l'Afrique",  faux:"la patrie" },
+  { v:8,  vrai:"l'unité",    faux:"l'amitié" },
+  { v:12, vrai:"frères",     faux:"peuples" },
+  { v:17, vrai:"retrouver",  faux:"rassembler" },
+  { v:19, vrai:"recouvrée",  faux:"retrouvée" }
+];
+
+/* L'histoire de l'hymne (écran 1) */
+var HISTOIRE = [
+  { pic:"🥁", titre:"Un air de griot", txt:"Il y a plus de cent ans, en 1904, des chefs de toute la Guinée se réunissent à Conakry." },
+  { pic:"🎶", titre:"Le chant pour Alpha Yaya", txt:"Le griot Korofo Moussa voit arriver Alpha Yaya, roi du Labé. Ému par sa générosité, il invente un air pour lui." },
+  { pic:"🗺️", titre:"L'air voyage", txt:"Tous les griots l'apprennent. En rentrant chez eux, ils le chantent partout. Bientôt, toute la Guinée le connaît." },
+  { pic:"🇬🇳", titre:"1958 : Liberté !", txt:"Le 2 octobre 1958, la Guinée devient indépendante. Sur ce vieil air de griot, on chante de nouvelles paroles : c'est l'hymne national, « Liberté »." },
+  { pic:"🧍🏾", titre:"À toi de chanter", txt:"Quand on chante l'hymne, on se tient debout, bien droit, en silence autour. Apprenons les vrais mots, ensemble !" }
+];
+
+/* Audio (optionnel) : enregistrement avec les droits, + temps de début de chaque vers en secondes.
+   Laisser vide → la voix de l'appareil lit les paroles. */
+var AUDIO_URL = "";
+var AUDIO_TEMPS = []; // ex. [0, 3.2, 6.1, ...] — un temps par vers, même ordre que VERS
+
+var ETAPES = [
+  { id:"histoire", t:"L'histoire de l'hymne", ds:"D'où vient « Liberté » ?", c:"#CE1126" },
+  { id:"ecoute",   t:"Écoute et répète",      ds:"Vers par vers, touche les mots soulignés", c:"#E29A00" },
+  { id:"trous",    t:"Le mot qui manque",     ds:"Choisis le bon mot", c:"#009460" },
+  { id:"ordre",    t:"Remets dans l'ordre",   ds:"Remets les vers à leur place", c:"#1F7A8C" },
+  { id:"erreur",   t:"La chasse à l'erreur",  ds:"Trouve le mot qui est faux", c:"#7A4FBF" },
+  { id:"seul",     t:"Chante tout seul",      ds:"Les mots s'effacent peu à peu", c:"#0D2B1A" }
+];
+var POUR_BADGE = ["trous","ordre","erreur","seul"];
+
+/* ═══════════════════ MOTEUR ═══════════════════ */
+var $ = function(s){ return document.querySelector(s); };
+var voiceOn = true, cur = null, audio = null;
+
+function loadDone(){ try{ return JSON.parse(localStorage.getItem("pati-hymne-done")||"{}"); }catch(e){ return {}; } }
+function markDone(id){ try{ var o=loadDone(); o[id]=1; localStorage.setItem("pati-hymne-done",JSON.stringify(o)); }catch(e){} }
+
+function speak(txt, onEnd, onWord){
+  if(!voiceOn || !window.speechSynthesis){ if(onEnd) setTimeout(onEnd,300); return; }
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(txt);
+    u.lang="fr-FR"; u.rate=.85; u.pitch=1.05;
+    var v = speechSynthesis.getVoices().filter(function(x){ return /^fr/i.test(x.lang); });
+    if(v.length) u.voice=v[0];
+    if(onEnd) u.onend=onEnd;
+    if(onWord) u.onboundary=function(e){ if(e.name==="word"||e.name===undefined) onWord(e.charIndex); };
+    speechSynthesis.speak(u);
+  }catch(e){ if(onEnd) onEnd(); }
+}
+function stopAll(){ try{ speechSynthesis.cancel(); }catch(e){} if(audio){ audio.pause(); } }
+
+var AC=null;
+function tone(f,d,type,when,vol){ try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); var t=AC.currentTime+(when||0),o=AC.createOscillator(),g=AC.createGain(); o.type=type||"triangle"; o.frequency.value=f; g.gain.setValueAtTime(vol||.16,t); g.gain.exponentialRampToValueAtTime(.001,t+d); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+d);}catch(e){} }
+function sGood(){ tone(660,.12); tone(880,.18,"triangle",.1); }
+function sBad(){ tone(220,.22,"square",0,.07); }
+function sWin(){ [523,659,784,1047,784,1047].forEach(function(f,i){ tone(f,.22,"triangle",i*.13,.18); }); }
+
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function parts(w){ var m=w.match(/^(l'|d'|qu')?(.*?)([.,;!?]*)$/); return { pre:m[1]||"", core:m[2], post:m[3] }; }
+function bare(w){ return w.replace(/[.,;!?]+$/,""); }
+function dicoKey(w){ var c=w.replace(/[.,;!?«»]/g,""); if(DICO[c]) return c; c=c.replace(/^(l'|d'|qu')/,""); return DICO[c]? c : null; }
+function words(v){ return v.split(" "); }
+function show(id){ document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("on"); }); $("#"+id).classList.add("on"); }
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+/* ─── Accueil ─── */
+function renderHome(){
+  var d=loadDone(), h="";
+  ETAPES.forEach(function(e,i){
+    h+='<button class="step" style="--c:'+e.c+'" data-i="'+i+'"><span class="n">'+(i+1)+'</span><span><span class="tt">'+e.t+'</span><span class="ds">'+e.ds+'</span></span><span class="ok">'+(d[e.id]?"✅":"")+'</span></button>';
+  });
+  $("#steps").innerHTML=h;
+  document.querySelectorAll(".step").forEach(function(b){ b.onclick=function(){ open(+b.dataset.i); }; });
+  $("#badge").classList.toggle("on", POUR_BADGE.every(function(k){ return d[k]; }));
+}
+function open(i){
+  stopAll(); cur=i; var e=ETAPES[i];
+  $("#ttl").textContent=e.t; $("#cnt").textContent="";
+  show("game");
+  ({histoire:stepHistoire, ecoute:stepEcoute, trous:stepTrous, ordre:stepOrdre, erreur:stepErreur, seul:stepSeul})[e.id]();
+}
+function finish(msg, icon){
+  stopAll(); markDone(ETAPES[cur].id);
+  var d=loadDone(), allDone=POUR_BADGE.every(function(k){ return d[k]; });
+  $("#winIcon").textContent = allDone && POUR_BADGE.indexOf(ETAPES[cur].id)>=0 ? "🏅" : (icon||"⭐");
+  $("#winTitle").textContent = "Bravo !";
+  $("#winMsg").textContent = msg + (allDone? " Tu as gagné le badge : « Je connais l'hymne national » !" : "");
+  $("#winNext").style.display = cur<ETAPES.length-1 ? "" : "none";
+  show("win"); sWin(); confetti(); speak("Bravo ! "+msg);
+  try{ parent.postMessage({ type:"pati-progress", kind:"hymne", step:ETAPES[cur].id, badge:allDone }, "*"); }catch(e){}
+}
+function confetti(){
+  if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var cols=["#CE1126","#FCD116","#009460"];
+  for(var i=0;i<70;i++){ var c=document.createElement("i"); c.className="confetti"; c.style.left=Math.random()*100+"vw"; c.style.background=cols[i%3]; c.style.animationDuration=(1.8+Math.random()*1.8)+"s"; c.style.animationDelay=(Math.random()*.6)+"s"; document.body.appendChild(c); setTimeout(function(el){ return function(){ el.remove(); }; }(c),4200); }
+}
+
+/* ─── 1. Histoire ─── */
+function stepHistoire(){
+  var i=0;
+  function draw(){
+    var s=HISTOIRE[i], dots="";
+    for(var k=0;k<HISTOIRE.length;k++) dots+='<i class="'+(k===i?"on":"")+'"></i>';
+    $("#cnt").textContent=(i+1)+"/"+HISTOIRE.length;
+    $("#stage").innerHTML='<div class="story"><div class="pic">'+s.pic+'</div><h3>'+s.titre+'</h3><p>'+s.txt+'</p><div class="dots">'+dots+'</div></div>'+
+      '<div class="prevnext"><button class="round" id="pv" '+(i===0?"disabled":"")+'>←</button><button class="round play" id="rd">🔊</button><button class="round" id="nx">→</button></div>';
+    $("#pv").onclick=function(){ if(i>0){ i--; draw(); } };
+    $("#nx").onclick=function(){ if(i<HISTOIRE.length-1){ i++; draw(); } else finish("Tu connais l'histoire de l'hymne « Liberté ».","📜"); };
+    $("#rd").onclick=function(){ speak(s.titre+". "+s.txt); };
+    speak(s.titre+". "+s.txt);
+  }
+  draw();
+}
+
+/* ─── 2. Écoute et répète ─── */
+function verseHTML(v, opts){
+  opts=opts||{};
+  return words(v).map(function(w,k){
+    var key=dicoKey(w), cls="w"+(key&&opts.dico?" dico":"")+(/LIBERT/.test(w)?" lib":"");
+    return '<span class="'+cls+'" data-k="'+k+'"'+(key&&opts.dico?' data-d="'+key+'"':"")+'>'+esc(w)+'</span>';
+  }).join(" ");
+}
+function stepEcoute(){
+  var i=0;
+  function draw(){
+    $("#cnt").textContent=(i+1)+"/"+VERS.length;
+    $("#stage").innerHTML='<p class="consigne">Écoute, puis répète à voix haute. Touche un mot souligné pour savoir ce qu\'il veut dire.</p>'+
+      '<div class="verse" id="vs">'+verseHTML(VERS[i],{dico:true})+'</div><div class="tip" id="tip"></div>'+
+      '<div class="prevnext"><button class="round" id="pv" '+(i===0?"disabled":"")+'>←</button><button class="round play" id="rd">▶</button><button class="round" id="nx">→</button></div>';
+    document.querySelectorAll(".w.dico").forEach(function(s){ s.onclick=function(){ var k=s.dataset.d; $("#tip").innerHTML='<b>'+esc(k)+'</b> : '+esc(DICO[k]); $("#tip").classList.add("on"); speak(k+". "+DICO[k]); }; });
+    $("#pv").onclick=function(){ if(i>0){ i--; draw(); } };
+    $("#nx").onclick=function(){ if(i<VERS.length-1){ i++; draw(); } else finish("Tu as écouté tout l'hymne, vers par vers.","🎧"); };
+    $("#rd").onclick=play;
+    play();
+  }
+  function play(){
+    var spans=document.querySelectorAll("#vs .w");
+    spans.forEach(function(s){ s.classList.remove("hl"); });
+    if(AUDIO_URL && AUDIO_TEMPS.length===VERS.length){
+      audio=audio||new Audio(AUDIO_URL); stopAll();
+      var a=AUDIO_TEMPS[i], b=AUDIO_TEMPS[i+1]||null;
+      audio.currentTime=a; audio.play().catch(function(){});
+      spans.forEach(function(s){ s.classList.add("hl"); });
+      audio.ontimeupdate=function(){ if(b && audio.currentTime>=b){ audio.pause(); spans.forEach(function(s){ s.classList.remove("hl"); }); } };
+      return;
+    }
+    var txt=VERS[i], starts=[], p=0;
+    words(txt).forEach(function(w){ starts.push(p); p+=w.length+1; });
+    var last=-1;
+    speak(txt.replace("LIBERTÉ","Liberté"), function(){ spans.forEach(function(s){ s.classList.remove("hl"); }); }, function(ci){
+      var k=0; for(var j=0;j<starts.length;j++) if(ci>=starts[j]) k=j;
+      if(k!==last){ if(last>=0&&spans[last]) spans[last].classList.remove("hl"); if(spans[k]) spans[k].classList.add("hl"); last=k; }
+    });
+  }
+  draw();
+}
+
+/* ─── 3. Le mot qui manque ─── */
+function stepTrous(){
+  var list=shuffle(TROUS).slice(0,8), i=0, err=0;
+  function draw(){
+    var q=list[i], v=VERS[q.v];
+    $("#cnt").textContent=(i+1)+"/"+list.length;
+    var shown=words(v).map(function(w){ var p=parts(w); return p.core===q.mot ? esc(p.pre)+'<span class="blank">?</span>'+esc(p.post) : esc(w); }).join(" ");
+    $("#stage").innerHTML='<p class="consigne">Quel mot manque&nbsp;?</p><div class="verse">'+shown+'</div>'+
+      '<div class="choices">'+shuffle([q.mot].concat(q.pieges)).map(function(m){ return '<button class="choice" data-m="'+esc(m)+'">'+esc(m)+'</button>'; }).join("")+'</div><div class="hint" id="hint"></div>';
+    var done=false;
+    document.querySelectorAll(".choice").forEach(function(b){
+      b.onclick=function(){
+        if(done) return;
+        if(b.dataset.m===q.mot){ done=true; b.classList.add("good"); sGood();
+          document.querySelector(".blank").textContent=q.mot; document.querySelector(".blank").style.borderColor="transparent";
+          speak(v.replace("LIBERTÉ","Liberté"));
+          setTimeout(function(){ i++; if(i<list.length) draw(); else finish(err<=1? "Sans presque aucune faute, bravo !" : "Tu retrouves les mots de l'hymne.","✍🏾"); },1800);
+        } else { err++; sBad(); b.classList.add("bad"); $("#hint").textContent="Non, ce n'est pas « "+b.dataset.m+" ». Essaie encore."; }
+      };
+    });
+  }
+  draw();
+}
+
+/* ─── 4. Remets dans l'ordre ─── */
+function stepOrdre(){
+  var groups=[[0,1,2,3,4,5,6],[7,8,9,10,11,12,13],[14,15,16,17,18,19]], g=0;
+  function draw(){
+    var ids=groups[g], next=0;
+    $("#cnt").textContent=(g+1)+"/"+groups.length;
+    $("#stage").innerHTML='<p class="consigne">Touche les vers dans le bon ordre, du premier au dernier.</p><div class="order" id="ord">'+
+      shuffle(ids).map(function(v){ return '<button class="ln" data-v="'+v+'"><span class="k"></span><span>'+esc(VERS[v])+'</span></button>'; }).join("")+'</div><div class="hint" id="hint"></div>';
+    document.querySelectorAll(".ln").forEach(function(b){
+      b.onclick=function(){
+        var v=+b.dataset.v;
+        if(VERS[v]===VERS[ids[next]]){ // vers identiques (refrain) acceptés
+          b.classList.add("done"); b.querySelector(".k").textContent=next+1; sGood(); next++;
+          document.getElementById("ord").appendChild(b);
+          var lns=[].slice.call(document.querySelectorAll(".ln:not(.done)")); lns.forEach(function(x){ document.getElementById("ord").appendChild(x); });
+          $("#hint").textContent="";
+          if(next===ids.length){ speak(ids.map(function(k){ return VERS[k]; }).join(" ").replace(/LIBERTÉ/g,"Liberté"));
+            setTimeout(function(){ g++; if(g<groups.length) draw(); else finish("Tu connais l'ordre de tous les vers.","🧩"); },1600); }
+        } else { sBad(); b.classList.remove("bad"); void b.offsetWidth; b.classList.add("bad"); $("#hint").textContent="Pas encore celui-là. Quel vers vient maintenant ?"; }
+      };
+    });
+  }
+  draw();
+}
+
+/* ─── 5. La chasse à l'erreur ─── */
+function stepErreur(){
+  var list=shuffle(ERREURS).slice(0,7), i=0, err=0;
+  function draw(){
+    var e=list[i], ws=words(VERS[e.v]), bad=-1;
+    for(var k=0;k<ws.length;k++){ if(bare(ws[k])===e.vrai){ ws[k]=e.faux+parts(ws[k]).post; bad=k; break; } }
+    $("#cnt").textContent=(i+1)+"/"+list.length;
+    $("#stage").innerHTML='<p class="consigne">Un mot est faux dans ce vers. Touche-le&nbsp;!</p><div class="verse" id="vs">'+
+      ws.map(function(w,k){ return '<span class="w tap" data-k="'+k+'">'+esc(w)+'</span>'; }).join(" ")+'</div><div class="hint" id="hint"></div>';
+    var done=false;
+    document.querySelectorAll("#vs .w").forEach(function(s){
+      s.onclick=function(){
+        if(done) return;
+        if(+s.dataset.k===bad){ done=true; sGood(); s.classList.add("wrong");
+          var r=document.createElement("span"); r.className="w right"; r.textContent=e.vrai+parts(s.textContent).post; s.after(document.createTextNode(" ")); s.parentNode.insertBefore(r, s.nextSibling.nextSibling);
+          $("#hint").style.color="var(--vert)"; $("#hint").textContent="Bien vu ! On ne chante pas « "+e.faux+" » mais « "+e.vrai+" ».";
+          speak("Bien vu ! On chante : "+VERS[e.v]);
+          setTimeout(function(){ $("#hint").style.color=""; i++; if(i<list.length) draw(); else finish(err<=1? "Aucune erreur ne t'échappe !" : "Tu sais repérer les erreurs.","🔍"); },2600);
+        } else { err++; sBad(); s.classList.remove("miss"); void s.offsetWidth; s.classList.add("miss"); $("#hint").textContent="Ce mot-là est juste. Cherche encore."; }
+      };
+    });
+  }
+  draw();
+}
+
+/* ─── 6. Chante tout seul (effacement progressif) ─── */
+function stepSeul(){
+  var niveaux=[0,.3,.6,1], n=0;
+  // ordre fixe de disparition pour que chaque passage efface plus de mots
+  var all=[]; VERS.forEach(function(v,i){ words(v).forEach(function(w,k){ if(!/LIBERT/.test(w)) all.push(i+"-"+k); }); });
+  var ordre=shuffle(all);
+  function draw(){
+    var cache={}; ordre.slice(0,Math.round(ordre.length*niveaux[n])).forEach(function(x){ cache[x]=1; });
+    var lv=""; for(var k=0;k<niveaux.length;k++) lv+='<i class="'+(k<=n?"on":"")+'"></i>';
+    $("#cnt").textContent=(n+1)+"/"+niveaux.length;
+    var cons=["Chante l'hymne en lisant tout le texte.","Des mots ont disparu ! Chante quand même. Touche un trou si tu bloques.","Encore plus de trous… Tu y es presque !","Plus aucun mot : chante tout seul, debout, bien droit !"][n];
+    $("#stage").innerHTML='<div class="level">'+lv+'</div><p class="consigne">'+cons+'</p><div class="full">'+
+      VERS.map(function(v,i){ return '<span class="line">'+words(v).map(function(w,k){ return cache[i+"-"+k]? '<span class="hid" title="Touche pour voir">'+esc(w)+'</span>' : '<span class="'+(/LIBERT/.test(w)?"w lib":"")+'">'+esc(w)+'</span>'; }).join(" ")+'</span>'; }).join("")+
+      '</div><div class="actions">'+(n<niveaux.length-1? '<button class="go" id="nx">J\'ai chanté ! Plus dur →</button>' : '<button class="go" id="nx">J\'ai chanté tout seul ✔</button>')+'</div>';
+    document.querySelectorAll(".hid").forEach(function(h){ h.onclick=function(){ h.classList.add("shown"); }; });
+    $("#nx").onclick=function(){ if(n<niveaux.length-1){ n++; draw(); window.scrollTo(0,0); } else finish("Tu chantes l'hymne national par cœur !","🇬🇳"); };
+  }
+  draw();
+}
+
+/* ─── Boutons ─── */
+$("#quit").onclick=function(){ stopAll(); renderHome(); show("home"); };
+$("#winMenu").onclick=function(){ renderHome(); show("home"); };
+$("#winAgain").onclick=function(){ open(cur); };
+$("#winNext").onclick=function(){ open(Math.min(cur+1,ETAPES.length-1)); };
+$("#voiceBtn").onclick=function(){ voiceOn=!voiceOn; this.textContent="🔊 Voix : "+(voiceOn?"oui":"non"); if(!voiceOn) stopAll(); };
+if(window.speechSynthesis) speechSynthesis.onvoiceschanged=function(){};
+renderHome();
+var st=new URLSearchParams(location.search).get("etape");
+ETAPES.forEach(function(e,i){ if(e.id===st) open(i); });
+</script>
+</body>
+</html>
