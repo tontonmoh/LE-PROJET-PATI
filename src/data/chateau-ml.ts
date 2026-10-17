@@ -1,63 +1,63 @@
 // « La Guinée — Château d'Eau » : texte intégral structuré, dans 4 langues.
 // Source de référence : PDF officiel fourni par l'éditeur. Traductions adaptées aux enfants.
-export type Scene = { title: string; text: string[] };
+export type Scene = { title: string; image?: string; text: string[] };
 export type BookLang = { title: string; subtitle: string; dir?: "rtl"; sections: Scene[] };
 
 const FR: BookLang = {
   title: "La Guinée — Château d'Eau",
   subtitle: "Les aventures d'ElectroMan · Dès 9 ans",
   sections: [
-    { title: "Pourquoi ce livre ?", text: [
+    { title: "Pourquoi ce livre ?", image: "/livres/chateau/chateau-01-pourquoi-v1.webp", text: [
       "Ce livre que tu as entre les mains, c'est une aventure un peu folle et très chouette. Il est né d'une idée de l'Atelier Solidaire et du Centre Culturel Franco-Guinéen (CCFG), pour les « 72h du Livre » 2025. Cette année-là, la ville invitée d'honneur, c'est Guéckédou !",
       "Mais ce n'est pas tout : ce livre a un cœur gros comme ça. Tous les bénéfices récoltés serviront à acheter des fournitures scolaires pour des enfants de Guéckédou.",
       "Dans ce livre, tu vas apprendre plein de choses sur l'eau, mais aussi t'amuser avec des jeux, des quiz et un « Peti Dic'Eau » qui explique les mots compliqués." ] },
-    { title: "Comment ce livre a-t-il été créé ?", text: [
+    { title: "Comment ce livre a-t-il été créé ?", image: "/livres/chateau/chateau-02-comment-v1.webp", text: [
       "Ce livre a une histoire vraiment spéciale ! Pour le faire, 30 enfants de différentes écoles de Conakry, publiques et privées, ont travaillé ensemble. Répartis en 5 équipes, ils ont écrit l'histoire et fait les dessins.",
       "Ils ont même appris à se servir de l'intelligence artificielle pour créer des images, comme si un ordinateur les aidait à dessiner ce qu'ils imaginaient.",
       "Avant de raconter leur histoire, ils ont cherché plein d'infos sur l'eau en Guinée. Et en cherchant, ils sont tombés sur l'histoire d'un monsieur extraordinaire : Ibrahima Tounkara. Ils ont décidé de lui rendre hommage dans ce livre.",
       "Alors, prêt à plonger dans l'aventure ?" ] },
-    { title: "Tout sur l'eau en Guinée", text: [
+    { title: "Tout sur l'eau en Guinée", image: "/livres/chateau/chateau-03-tout-eau-v1.webp", text: [
       "Le savais-tu ? La Guinée est un pays exceptionnel quand il s'agit d'eau. On la surnomme même le « Château d'eau de l'Afrique de l'Ouest » !",
       "Plongeons ensemble à la découverte des secrets et des merveilles de l'eau en Guinée." ] },
-    { title: "Pays béni par l'eau", text: [
+    { title: "Pays béni par l'eau", image: "/livres/chateau/chateau-04-beni-v1.webp", text: [
       "Plus de 15 000 rivières ! Des milliers de cours d'eau serpentent à travers notre beau pays, comme d'innombrables rubans d'argent qui apportent la vie partout où ils passent.",
       "Les sources des grands fleuves : incroyable mais vrai, certains des plus grands fleuves d'Afrique prennent leur source en Guinée. Le Niger, le Sénégal et la Gambie commencent ici leur long voyage, arrosant de nombreux pays avant de se jeter dans l'océan.",
       "La pluie, une amie généreuse : la Guinée reçoit beaucoup de pluie chaque année. Cette eau du ciel remplit nos rivières, arrose nos cultures et garde nos forêts bien vertes." ] },
-    { title: "Curiosités aquatiques", text: [
+    { title: "Curiosités aquatiques", image: "/livres/chateau/chateau-05-curiosites-v1.webp", text: [
       "Des noms d'eau qui racontent des histoires : chaque rivière, chaque cascade porte souvent un nom qui a un sens dans les langues locales. Parfois, le nom raconte une histoire, décrit la couleur de l'eau ou rappelle un événement passé.",
       "L'eau et les traditions : dans certaines communautés de Guinée, l'eau est sacrée. On organise des cérémonies et des fêtes pour remercier les esprits de l'eau ou pour demander une bonne saison des pluies." ] },
-    { title: "Des paysages et de l'énergie", text: [
+    { title: "Des paysages et de l'énergie", image: "/livres/chateau/chateau-06-paysages-v1.webp", text: [
       "Des paysages façonnés par l'eau : cascades spectaculaires, vallées profondes creusées par les rivières, zones humides pleines d'oiseaux… L'eau a sculpté des paysages magnifiques en Guinée.",
       "L'eau qui donne de l'énergie : la force de l'eau peut être transformée en électricité. Grâce à ses nombreuses rivières, la Guinée a un grand potentiel pour produire encore plus d'énergie propre." ] },
-    { title: "Protégeons l'eau, notre trésor bleu !", text: [
+    { title: "Protégeons l'eau, notre trésor bleu !", image: "/livres/chateau/chateau-07-protegeons-v1.webp", text: [
       "Même si la Guinée est riche en eau, il faut la protéger. La pollution, la déforestation près des rivières et le gaspillage menacent cette ressource précieuse.",
       "Nous devons tous être responsables pour que l'eau reste propre et disponible, aujourd'hui et demain." ] },
-    { title: "Découvrons l'histoire : ElectroMan", text: [
+    { title: "Découvrons l'histoire : ElectroMan", image: "/livres/chateau/chateau-08-electroman-v1.webp", text: [
       "Ibrahima Tounkara, un professeur de mathématiques au grand cœur, a marqué l'histoire de son village en y construisant un barrage hydroélectrique grâce à ses propres moyens. Cette initiative est la source de notre récit." ] },
-    { title: "Le village de Bolodou", text: [
+    { title: "Le village de Bolodou", image: "/livres/chateau/chateau-09-bolodou-v1.webp", text: [
       "Au sud de la Guinée, dans la région de Nzérékoré où se trouve Guéckédou, se cache le village de Bolodou.",
       "Ici, le joyeux marigot Gbasso chantait une douce mélodie chaque jour, offrant son eau aux paysans dans leurs fermes et ses poissons aux braves pêcheurs." ] },
-    { title: "Un garçon curieux", text: [
+    { title: "Un garçon curieux", image: "/livres/chateau/chateau-10-garcon-v1.webp", text: [
       "Parmi les enfants de Bolodou, il y avait Ibrahima, un garçon fasciné par les mystères de la science.",
       "Il passait des heures à observer la force tranquille de l'eau, imaginant des choses étonnantes…",
       "Dans sa tête pleine de rêves, une idée brillante commença à germer : utiliser la puissance de l'eau pour apporter la lumière à son village !" ] },
-    { title: "Ibrahima n'a jamais abandonné", text: [
+    { title: "Ibrahima n'a jamais abandonné", image: "/livres/chateau/chateau-11-jamais-abandonne-v1.webp", text: [
       "Son amour pour les sciences et son envie de servir sa communauté l'ont conduit à devenir professeur de mathématiques-physique dans un lycée à Kissidougou.",
       "Mais son projet est resté le même : offrir de la lumière à sa famille à Bolodou. Pour trouver l'argent, il a ouvert, à côté de ses cours, une boutique de panneaux solaires qui marche très bien." ] },
-    { title: "On se moque de lui", text: [
+    { title: "On se moque de lui", image: "/livres/chateau/chateau-12-moquerie-v1.webp", text: [
       "Quand Ibrahima partagea son idée, beaucoup rirent : « Un professeur de maths, construire un barrage ? Quelle drôle d'idée ! Laisse ça aux experts ! »",
       "Rien de tout cela ne découragea Ibrahima : au contraire, il aimait les défis.",
       "Sa famille, un peu inquiète de ses dépenses, croyait quand même en lui. Sa grand-mère lui rappelait un proverbe soussou : « sobè folè ma yo »." ] },
-    { title: "La construction du rêve", text: [
+    { title: "La construction du rêve", image: "/livres/chateau/chateau-13-construction-v1.webp", text: [
       "Et un jour, avec l'aide d'élèves, de quelques amis et beaucoup d'efforts, Ibrahima commença à construire son rêve au bord du Gbasso.",
       "Il construisit un long canal, comme un toboggan pour l'eau, afin de la guider doucement vers son usine magique. Ce canal d'amenée, en béton solide, utilise la pente pour que l'eau coule." ] },
-    { title: "Lumière à Bolodou !", text: [
+    { title: "Lumière à Bolodou !", image: "/livres/chateau/chateau-14-lumiere-v1.webp", text: [
       "Wéee… tèeee… faaaa… Lumière à Bolodou !",
       "L'électricité jaillit dans les maisons, les écoles et les rues. Les enfants pouvaient enfin lire le soir — grâce à la science et au travail acharné de Monsieur Ibrahima Tounkara, notre héros, notre ElectroMan !" ] },
-    { title: "Et toi ?", text: [
+    { title: "Et toi ?", image: "/livres/chateau/chateau-15-et-toi-v1.webp", text: [
       "Mais l'aventure d'ElectroMan ne s'arrête pas là. Il rêve d'apporter la lumière à d'autres villages. Avec plus de volontaires, on peut illuminer toute la région, voire le pays entier !",
       "Et toi ? Qu'est-ce que tu peux imaginer pour aider ta communauté ? L'eau est une source d'énergie incroyable. Peut-être qu'un jour, toi aussi, tu deviendras un ElectroHéros." ] },
-    { title: "Comment l'eau devient lumière", text: [
+    { title: "Comment l'eau devient lumière", image: "/livres/chateau/chateau-16-eau-lumiere-v1.webp", text: [
       "Monsieur Tounkara nous a expliqué comment transformer l'eau d'une rivière en lumière pour nos maisons et nos écoles. Une incroyable histoire de science et d'ingéniosité !",
       "1. Le barrage : un grand mur construit en travers de la rivière. Il retient l'eau, qui s'accumule et forme un grand lac — une réserve d'énergie prête à servir.",
       "2. Le canal : un long toboggan en béton qui prend l'eau du lac et la guide doucement vers la centrale.",
@@ -65,13 +65,13 @@ const FR: BookLang = {
       "4. La conduite forcée : un grand tuyau où l'eau plonge très vite et prend beaucoup de force.",
       "5. La centrale : l'eau arrive avec force et fait tourner une roue spéciale, la turbine, comme un moulin à eau géant.",
       "6. La lumière ! La turbine fait tourner la dynamo, qui transforme le mouvement en électricité. L'électricité voyage par des fils jusqu'aux maisons… et soudain, la lumière jaillit !" ] },
-    { title: "Salut, jeune scientifique !", text: [
+    { title: "Salut, jeune scientifique !", image: "/livres/chateau/chateau-17-scientifique-v1.webp", text: [
       "Tu as entre 9 et 13 ans et la science t'intéresse ? Voici le chemin qui t'attend.",
       "À l'école primaire (ton âge !) : c'est le temps de la curiosité. Pose plein de questions, fais des expériences simples, observe les insectes, fais pousser des graines, lis et regarde des documentaires.",
       "Au collège : tu découvriras la physique, la chimie, la biologie, la géologie, avec des expériences passionnantes.",
       "Au lycée : tu pourras te spécialiser en sciences ou en maths, étudier des circuits électriques, observer des cellules au microscope.",
       "À l'université : tu deviendras un expert. Génie électrique, génie mécanique, génie civil (pour bâtir des barrages !), physique, chimie, ou énergies renouvelables pour sauver la planète !" ] },
-    { title: "Le Petit Dic'Eau", text: [
+    { title: "Le Petit Dic'Eau", image: "/livres/chateau/chateau-18-dic-eau-v1.webp", text: [
       "Barrage hydroélectrique : une construction qui utilise la force de l'eau pour faire tourner des machines et produire de l'électricité.",
       "Canal d'amenée : comme un toboggan en béton qui guide l'eau de la rivière vers le barrage.",
       "Chambre d'équilibre : un bassin qui s'assure qu'il arrive toujours la bonne quantité d'eau, ni trop ni trop peu.",
@@ -82,6 +82,12 @@ const FR: BookLang = {
       "Énergies renouvelables : des énergies qui ne s'épuisent pas, comme l'eau, le soleil ou le vent.",
       "Marigot : un petit cours d'eau, comme le joyeux Gbasso.",
       "Ressources naturelles : les richesses que la nature nous offre — l'eau, le soleil, le vent." ] },
+    { title: "En mémoire d'Ibrahima Tounkara", image: "/livres/chateau/chateau-19-hommage-v1.webp", text: [
+      "ElectroMan n'est pas né seulement dans l'imagination des enfants. Il a existé pour de vrai, et il s'appelait Ibrahima Tounkara.",
+      "Professeur de mathématiques, il venait de Bolodou, un village de la forêt guinéenne où la nuit tombait sans une seule lampe. Personne ne lui avait appris à construire un barrage : il a appris seul, avec un téléphone, des vidéos et beaucoup de patience.",
+      "En mai 2017, après une année de recherches et de travaux payés sur ses propres économies, l'eau du Gbasso a fait tourner sa turbine. Près de 90 des 94 familles du village ont eu la lumière, jour et nuit. Puis il a formé un jeune de Bolodou pour entretenir la centrale — pour que la lumière continue même sans lui.",
+      "Ibrahima Tounkara nous a quittés en janvier 2026, bien trop tôt. Son village, lui, est toujours éclairé.",
+      "Merci, Monsieur Tounkara." ] },
   ],
 };
 
@@ -164,6 +170,12 @@ const EN: BookLang = {
       "Renewable energy: energy that never runs out, like water, sun or wind.",
       "Stream (marigot): a small watercourse, like the cheerful Gbasso.",
       "Natural resources: the riches nature gives us — water, sun, wind." ] },
+    { title: "In memory of Ibrahima Tounkara", image: "/livres/chateau/chateau-19-hommage-v1.webp", text: [
+      "ElectroMan was not only born in the children's imagination. He truly existed, and his name was Ibrahima Tounkara.",
+      "A mathematics teacher, he came from Bolodou, a village in the Guinean forest where night fell without a single lamp. Nobody had taught him to build a dam: he taught himself, with a phone, some videos and a great deal of patience.",
+      "In May 2017, after a year of research and work paid for out of his own savings, the water of the Gbasso turned his turbine. Nearly 90 of the village's 94 families had light, day and night. Then he trained a young man from Bolodou to maintain the plant — so that the light would go on even without him.",
+      "Ibrahima Tounkara left us in January 2026, far too soon. His village is still lit.",
+      "Thank you, Mr Tounkara." ] },
   ],
 };
 
@@ -247,6 +259,12 @@ const AR: BookLang = {
       "الطاقات المتجددة: طاقات لا تنفد، كالماء والشمس والريح.",
       "الجدول (الماريغو): مجرى ماء صغير، مثل غباسو المرح.",
       "الموارد الطبيعية: ما تمنحنا إياه الطبيعة — الماء والشمس والريح." ] },
+    { title: "في ذكرى إبراهيما تونكارا", image: "/livres/chateau/chateau-19-hommage-v1.webp", text: [
+      "لم يُولد «إلكترومان» في خيال الأطفال وحده. لقد كان موجودًا حقًّا، واسمه إبراهيما تونكارا.",
+      "كان أستاذًا للرياضيات، من قرية بولودو في غابة غينيا، حيث كان الليل يحلّ دون مصباح واحد. لم يعلّمه أحد بناء السدود: تعلّم وحده، بهاتف ومقاطع فيديو وكثير من الصبر.",
+      "في مايو 2017، بعد عام من البحث والعمل على نفقته الخاصة، أدار ماءُ غباسو توربينه. نالت نحو 90 أسرة من أصل 94 في القرية النورَ ليلًا ونهارًا. ثم درّب شابًّا من بولودو على صيانة المحطة، كي يستمرّ النور حتى من بعده.",
+      "رحل إبراهيما تونكارا في يناير 2026، مبكّرًا جدًّا. أما قريته، فما تزال مضاءة.",
+      "شكرًا لك، سيّد تونكارا." ] },
   ],
 };
 
@@ -329,6 +347,12 @@ const ZH: BookLang = {
       "可再生能源：不会枯竭的能源，比如水、太阳和风。",
       "小河（marigot）：一条小小的水流，就像欢快的格巴索。",
       "自然资源：大自然给予我们的财富——水、阳光和风。" ] },
+    { title: "纪念易卜拉希马·通卡拉", image: "/livres/chateau/chateau-19-hommage-v1.webp", text: [
+      "「电光侠」并非只诞生于孩子们的想象。他真实地存在过，名字叫易卜拉希马·通卡拉。",
+      "他是一位数学老师，来自几内亚森林中的博洛杜村——那里入夜后没有一盏灯。没有人教过他造水坝：他靠一部手机、一些视频和极大的耐心自学成才。",
+      "2017年5月，经过一年的钻研和用自己积蓄支付的施工，格巴索的河水转动了他的水轮机。全村94户人家中，近90户昼夜都有了电。随后他培训了一位博洛杜的年轻人维护电站——让光明在他不在时也能延续。",
+      "2026年1月，易卜拉希马·通卡拉离开了我们，太早了。而他的村庄，依然亮着灯。",
+      "谢谢您，通卡拉先生。" ] },
   ],
 };
 

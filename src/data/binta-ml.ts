@@ -1,53 +1,53 @@
 // « Binta Diallo — La Dame Oiseau » : texte du livre L'Atelier Solidaire,
 // structuré en 12 sections alignées sur 4 langues (source : PDF officiel FR).
 export type BintaLang = "fr" | "en" | "ar" | "zh";
-type Section = { id: string; title: string; paragraphs: string[] };
+type Section = { id: string; title: string; image?: string; paragraphs: string[] };
 type Book = { lang: BintaLang; dir: "ltr" | "rtl"; label: string; bookTitle: string; sections: Section[] };
 
 export const BINTA_ML: Record<BintaLang, Book> = {
   fr: {
     lang: "fr", dir: "ltr", label: "Français", bookTitle: "Binta Diallo — La Dame Oiseau",
     sections: [
-      { id: "intro", title: "La Dame Oiseau", image: "/images/planches/binta-01.webp", paragraphs: [
+      { id: "intro", title: "La Dame Oiseau", image: "/livres/binta/binta-01-dame-oiseau-v1.webp", paragraphs: [
         "Ce livre te raconte l'histoire de Binta Diallo, une jeune fille qui avait la tête dans les nuages… et, au fond du cœur, une grande ambition : devenir pilote." ] },
-      { id: "labe", title: "Une petite fille de Labé", image: "/images/planches/binta-02.webp", paragraphs: [
+      { id: "labe", title: "Une petite fille de Labé", image: "/livres/binta/binta-02-labe-v1.webp", paragraphs: [
         "Dans un petit village de Labé, au cœur du Fouta-Djalon, vivait une petite fille nommée Binta.",
         "Elle aimait regarder le ciel. Chaque avion qui passait au-dessus de sa tête la fascinait.",
         "« Un jour, se disait-elle, je volerai moi aussi ! »" ] },
-      { id: "ecole", title: "Travailler dur à l'école", image: "/images/planches/binta-03.webp", paragraphs: [
+      { id: "ecole", title: "Travailler dur à l'école", image: "/livres/binta/binta-03-ecole-v1.webp", paragraphs: [
         "Binta grandissait, et son rêve ne la quittait jamais. À l'école, elle étudiait beaucoup.",
         "Elle savait que, pour devenir pilote, elle devait être très forte en mathématiques et en sciences." ] },
-      { id: "president", title: "Devant le Président", image: "/images/planches/binta-04.webp", paragraphs: [
+      { id: "president", title: "Devant le Président", image: "/livres/binta/binta-04-president-v1.webp", paragraphs: [
         "À cette époque, les filles n'avaient pas le droit de devenir pilotes. On refusa même à Binta sa demande de bourse.",
         "Mais Binta ne renonça pas : elle fit tout pour rencontrer le Président Sékou Touré.",
         "— Monsieur le Président, je veux être pilote !",
         "— Mais… les filles ne pilotent pas !",
         "— Monsieur le Président, je suis très forte ! J'aime les avions, et je veux faire voler les avions de Guinée !" ] },
-      { id: "audace", title: "Une idée audacieuse", image: "/images/planches/binta-05.webp", paragraphs: [
+      { id: "audace", title: "Une idée audacieuse", image: "/livres/binta/binta-05-audace-v1.webp", paragraphs: [
         "Le Président la regarda longtemps. Il était impressionné par sa détermination.",
         "— C'est une idée audacieuse, Binta. Il y aura beaucoup de difficultés.",
         "— Je suis prête, Camarade !",
         "— Très bien, Binta. Montre au monde ce que tu sais faire. Nous allons envoyer des demandes de bourses." ] },
-      { id: "russie", title: "Cap sur la Russie", image: "/images/planches/binta-06.webp", paragraphs: [
+      { id: "russie", title: "Cap sur la Russie", image: "/livres/binta/binta-06-russie-v1.webp", paragraphs: [
         "Pour réaliser son rêve, Binta partit loin de Labé, loin de la Guinée, jusqu'en Russie, pour apprendre à piloter." ] },
-      { id: "formation", title: "Une formation difficile", image: "/images/planches/binta-07.webp", paragraphs: [
+      { id: "formation", title: "Une formation difficile", image: "/livres/binta/binta-07-formation-v1.webp", paragraphs: [
         "La formation était difficile… mais Binta était déterminée !" ] },
-      { id: "parachute", title: "Le saut en parachute", image: "/images/planches/binta-08.webp", paragraphs: [
+      { id: "parachute", title: "Le saut en parachute", image: "/livres/binta/binta-08-parachute-v1.webp", paragraphs: [
         "Un jour, pendant les évaluations, Binta était prête pour le saut en parachute. Mais l'instructeur lui dit :",
         "— Binta, on te dispense du saut. Tu auras quand même la moyenne.",
         "Binta était déçue : elle avait travaillé aussi dur que les garçons !",
         "— Non ! Je veux sauter comme tout le monde ! Je veux la meilleure note, pas une moyenne facile !",
         "L'instructeur hésita. Binta était si courageuse ! — Très bien, Binta. Mais fais attention !",
         "Binta sourit. Elle allait sauter, et montrer à tous qu'une fille pouvait être aussi brave qu'un garçon !" ] },
-      { id: "diplome", title: "Le grand jour", image: "/images/planches/binta-09.webp", paragraphs: [
+      { id: "diplome", title: "Le grand jour", image: "/livres/binta/binta-09-diplome-v1.webp", paragraphs: [
         "Enfin, le grand jour arriva : Binta reçut son diplôme de pilote !",
         "Elle devenait la première femme de Guinée et d'Afrique noire à devenir pilote !" ] },
-      { id: "capitaine", title: "Capitaine Binta", image: "/images/planches/binta-10.webp", paragraphs: [
+      { id: "capitaine", title: "Capitaine Binta", image: "/livres/binta/binta-10-capitaine-v1.webp", paragraphs: [
         "De retour en Guinée, après des épreuves de terrain au plus haut niveau, Binta devint Capitaine de l'armée de l'air." ] },
-      { id: "pilote-president", title: "La pilote du Président", image: "/images/planches/binta-11.webp", paragraphs: [
+      { id: "pilote-president", title: "La pilote du Président", image: "/livres/binta/binta-11-pilote-president-v1.webp", paragraphs: [
         "Notre héroïne devint la pilote personnelle du Président et transporta d'importantes personnalités du monde entier.",
         "On l'appelait Binta Pilote, « la Dame Oiseau »." ] },
-      { id: "ton-reve", title: "Et toi, quel est ton rêve ?", image: "/images/planches/binta-12.webp", paragraphs: [
+      { id: "ton-reve", title: "Et toi, quel est ton rêve ?", image: "/livres/binta/binta-12-ton-reve-v1.webp", paragraphs: [
         "Binta a montré au monde entier que les filles peuvent réaliser leurs rêves, même les plus grands.",
         "Son histoire inspire beaucoup de jeunes filles partout dans le monde. La Dame Oiseau a toujours suivi son rêve.",
         "Et toi, quel est ton rêve ?" ] },

@@ -30,6 +30,7 @@ const STATIC: SearchItem[] = [
   { type: "Jeu", title: "LaGuinè378", sub: "Relier les préfectures", to: "/laguine378", keywords: "préfectures carte" },
   { type: "Jeu", title: "LaGuinèKonakri", sub: "Quartiers ↔ communes", to: "/konakri", keywords: "Conakry quartiers communes" },
   { type: "Jeu", title: "Puzzle de l'Afrique", sub: "Pavage / Situer", to: "/jeux/afrique/afrique.html", keywords: "Afrique carte pays" },
+  { type: "Jeu", title: "Le Marché de Pati", sub: "Compter, payer · 2-7 ans", to: "/marche", keywords: "marché Sira compter argent monnaie francs guinéens mômes" },
   { type: "Jeu", title: "Sèbè", sub: "Quiz littérature guinéenne", to: "/sebe", keywords: "quiz littérature auteurs" },
   { type: "Jeu", title: "IWDI LaGuinè", sub: "Jeu de cartes multijoueur", to: "/iwdi", keywords: "cartes préfectures multijoueur" },
   { type: "Jeu", title: "Quiz SENAG", sub: "25 questions pour la mémoire", to: "/senag", keywords: "archives mémoire quiz" },

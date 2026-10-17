@@ -6,7 +6,7 @@ from PIL import Image
 home = os.path.expanduser("~")
 dl = os.path.join(home, "mnt", "Downloads")
 slug, name = sys.argv[1], sys.argv[2]
-cands = sorted(glob.glob(os.path.join(dl, "Gemini_Generated_Image_*")), key=os.path.getmtime)
+cands = sorted(glob.glob(os.path.join(dl, "Gemini_Generated_Image_*")) + glob.glob(os.path.join(dl, "Firefly_*")), key=os.path.getmtime)
 if not cands: sys.exit("aucune image Gemini dans Downloads")
 src = cands[-1]
 import time

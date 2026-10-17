@@ -150,6 +150,16 @@ export const BOOKS: Book[] = [
   },
   ════════════════════════════════════════════════════════════════ */
   {
+    slug: "marche-pati",
+    band: "Mômes",
+    title: "Le Marché de Pati",
+    description: "Aide Sira à faire ses courses : trouver les fruits, compter, payer en francs guinéens et rendre la monnaie. 4 niveaux, de 2 à 7 ans.",
+    cover: "/images/momes/imagier-fruits.webp",
+    to: "/marche",
+    keywords: ["marché", "jeu", "Sira", "compter", "calcul", "argent", "francs guinéens", "monnaie", "marchande", "mômes", "tout-petits", "Pati Mômes"],
+    nouveau: true,
+  },
+  {
     slug: "imagier-alphabet",
     band: "Mômes",
     title: "L'alphabet",
