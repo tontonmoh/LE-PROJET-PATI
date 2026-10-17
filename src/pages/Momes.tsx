@@ -8,10 +8,12 @@ const ACCENT = "#C8841E";
 const GOLD   = "#FFC93C";
 const GREEN  = "#0D2B1A";
 
-const THEMES = [
+// `to` (optionnel) : lien direct vers un autre jeu Mômes (sinon /imagier?theme=id)
+const THEMES: { id: string; emoji: string; titre: string; couleur: string; dispo: boolean; to?: string }[] = [
   { id: "alphabet",        emoji: "🔤",  titre: "L'alphabet",          couleur: "#B23A1E", dispo: true },
   { id: "couleurs",        emoji: "🎨",  titre: "Les couleurs",        couleur: "#7B5EA7", dispo: true },
   { id: "fruits-legumes",  emoji: "🧺",  titre: "Les fruits & légumes", couleur: "#C8841E", dispo: true },
+  { id: "marche",          emoji: "🛒",  titre: "Le Marché de Pati",    couleur: "#E8532D", dispo: true, to: "/marche" },
   { id: "animaux",         emoji: "🐾",  titre: "Les animaux",          couleur: "#1F6E52", dispo: true },
   { id: "maison",          emoji: "🏠",  titre: "Dans la maison",       couleur: "#2C7DA0", dispo: true },
   { id: "infrastructures", emoji: "🏗️", titre: "Les infrastructures",  couleur: "#3F6B7D", dispo: true },
@@ -56,7 +58,7 @@ export default function Momes() {
           {THEMES.map((t, i) => {
             if (t.dispo) {
               return (
-                <Link key={i} to={`/imagier?theme=${t.id}`}
+                <Link key={i} to={t.to ?? `/imagier?theme=${t.id}`}
                   className="group rounded-[1.5rem] p-6 flex flex-col items-center text-center gap-3 shadow-kid transition-transform hover:-translate-y-1"
                   style={{ background: t.couleur }}>
                   <span className="text-5xl">{t.emoji}</span>
