@@ -443,7 +443,7 @@ async function finish(){clearInterval(game.timer);mapViewBox();removeTray();cons
   document.getElementById('winSub').textContent='Partie libre · hors classement';
   rk.textContent=`Bravo ${game.player} !`;game.lastRank=0;refreshLb();
  }else{
-  document.getElementById('winSub').textContent=game.limit>0?`Réussi dans le temps imparti · 34 préfectures`:`Chrono arrêté · 34 Compagnons replacés`;
+  document.getElementById('winSub').textContent=game.limit>0?`Réussi dans le temps imparti · 34 Compagnons`:`Chrono arrêté · 34 Compagnons replacés`;
   const rank=await recordScore(game.player,sec);game.lastRank=rank;
   const blab={kids:'enfants',teen:'ados',adult:'adultes'}[game.bracket]||'';
   rk.textContent = rank>=1 && rank<=10 ? `${game.player} · ${rank}ᵉ${blab?(' chez les '+blab):' au classement'}` : `Bravo ${game.player} !`;
@@ -492,7 +492,7 @@ function buildCard(){const W=1080,H=1080,c=document.createElement('canvas');c.wi
  const time=(game.lastTime&&game.lastTime!=='—')?game.lastTime:'';
  const rk=document.getElementById('winRank'),sb=document.getElementById('winSub');
  const rank=(rk&&rk.textContent)||(`Bravo ${game.player||''} !`);
- const sub=(sb&&sb.textContent)||'34 préfectures placées';
+ const sub=(sb&&sb.textContent)||'34 Compagnons replacés';
  x.fillStyle='#FFC93C';x.font='700 48px Fredoka, Georgia, serif';
  try{x.letterSpacing='10px';}catch(e){}
  x.fillText('DÉFI RELEVÉ',W/2,225);

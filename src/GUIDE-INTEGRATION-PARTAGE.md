@@ -14,7 +14,7 @@ Dans la section `.win` du HTML (autour de la ligne 176), trouver :
  <h2>CHAMPION</h2>
  <div class="clock" id="winTime">0:00</div>
  <div class="rank" id="winRank"></div>
- <div class="sub" id="winSub">Chrono arrêté · 34 préfectures placées</div>
+ <div class="sub" id="winSub">Chrono arrêté · 45 pièces placées</div>
  <div class="endbtns">
   <button id="winNewBtn">Nouvelle partie</button>
   <button id="winLbBtn">Classement</button>
@@ -30,7 +30,7 @@ Dans la section `.win` du HTML (autour de la ligne 176), trouver :
  <h2>CHAMPION</h2>
  <div class="clock" id="winTime">0:00</div>
  <div class="rank" id="winRank"></div>
- <div class="sub" id="winSub">Chrono arrêté · 34 préfectures placées</div>
+ <div class="sub" id="winSub">Chrono arrêté · 45 pièces placées</div>
  <div class="endbtns">
   <button id="winNewBtn">Nouvelle partie</button>
   <button id="winShareBtn" style="opacity:0;animation:rise .5s .75s ease forwards">Partager</button>
