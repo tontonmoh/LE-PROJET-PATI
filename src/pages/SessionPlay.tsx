@@ -21,7 +21,7 @@ const GAME_SRC: Record<string, string> = {
 // Consigne d'accueil par jeu (le reste de l'UI est générique)
 const GAME_INTRO: Record<string, string> = {
   "puzzle-guinee": "Reconstruis la Guinée le plus vite possible.",
-  "corridor":      "Reconstitue le corridor du TransGuinéen le plus vite possible.",
+  "corridor":      "Pose les traverses du TransGuinéen dans l'ordre, du port de Morébaya à la mine de Simandou, le plus vite possible.",
   "afrique":       "Place les pays d'Afrique le plus vite possible.",
 };
 const introFor = (slug?: string) => GAME_INTRO[slug ?? ""] ?? "Termine le défi le plus vite possible.";

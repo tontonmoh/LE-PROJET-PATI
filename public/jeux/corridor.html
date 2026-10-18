@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Le Corridor — Construis le TransGuinéen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#14130f;--bg2:#1c1a15;--ink:#f3e7d3;--muted:#b0a085;--gold:#e0a64e;--line:#3a3328;
+ --concrete:#cabf9f;--concrete2:#a99d7c;
+ --gare:#e0a64e;--tunnel:#8a8f99;--riviere:#3f9ec4;--lieu:#5a8c3f;--port:#c4703f;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Archivo',system-ui,sans-serif;color:var(--ink);
+ background:radial-gradient(1100px 700px at 75% -10%,#2a2518 0%,transparent 60%),
+ radial-gradient(900px 700px at 0% 112%,#221a10 0%,transparent 55%),var(--bg);
+ min-height:100%;overflow-x:hidden}
+body.fs{overflow:auto}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 14px 40px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.title h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(24px,5vw,40px);line-height:.96;letter-spacing:-.02em;
+ background:linear-gradient(180deg,#fbeccc,#d99b48);-webkit-background-clip:text;background-clip:text;color:transparent}
+.title p{color:var(--muted);font-size:13px;margin-top:5px}
+button{font-family:'Archivo';font-weight:600;font-size:13px;color:var(--ink);background:rgba(255,255,255,.05);
+ border:1px solid var(--line);border-radius:10px;padding:9px 15px;cursor:pointer;transition:.16s}
+button:hover{background:rgba(224,166,78,.16);border-color:var(--gold);color:#fff}
+button.primary{background:linear-gradient(180deg,#e9b45c,#c5832f);color:#2a1c08;border-color:#e9b45c}
+button[disabled]{opacity:.4;pointer-events:none}
+
+/* ── Écran de départ ── */
+#setup{max-width:640px;margin:18px auto 0;display:flex;flex-direction:column;gap:16px}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.levels{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lv{text-align:left;padding:14px;border-radius:14px;display:flex;flex-direction:column;gap:4px}
+.lv b{font-family:'Fraunces',serif;font-size:19px}
+.lv span{font-size:12.5px;color:var(--muted);font-weight:500}
+.lv.on{border-color:var(--gold);background:rgba(224,166,78,.14)}
+input{width:100%;font:600 16px 'Archivo';color:var(--ink);background:#211d15;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+input:focus{outline:none;border-color:var(--gold)}
+.intro{font-size:14px;line-height:1.5;color:var(--ink);background:#1c1a15;border:1px solid var(--line);border-radius:14px;padding:14px}
+.intro b{color:var(--gold)}
+.go{font-size:17px;padding:14px;border-radius:14px}
+
+/* ── Jeu ── */
+#game{display:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 4px;font-size:12px;color:var(--muted)}
+.lg{display:inline-flex;align-items:center;gap:6px}.lg i{width:12px;height:12px;border-radius:3px}
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+.bar .prog{font-size:13px;color:var(--muted)}.bar .prog b{color:var(--gold);font-family:'Fraunces',serif;font-size:18px}
+.bar .time{margin-left:auto;font-size:13px;color:var(--muted)}.bar .time b{color:var(--gold);font-family:'Fraunces',serif;font-size:18px}
+.stage{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+ background:radial-gradient(700px 300px at 50% 120%,rgba(224,166,78,.05),transparent 70%),var(--bg2);
+ box-shadow:inset 0 0 70px rgba(0,0,0,.45)}
+.ends{display:flex;justify-content:space-between;padding:8px 16px 0;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.rail-area{position:relative;overflow-x:auto;overflow-y:hidden;padding:50px 0 18px;scroll-behavior:smooth}
+.track{position:relative;display:flex;align-items:center;gap:24px;min-width:max-content;padding:0 40px 0 26px;height:128px}
+.track::before,.track::after{content:"";position:absolute;left:8px;right:8px;height:6px;border-radius:3px;z-index:1;
+ background:linear-gradient(180deg,#d6dbe1,#878d96);box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.track::before{top:46px}.track::after{top:82px}
+.loco{position:relative;z-index:3;flex:0 0 auto}
+.slot{position:relative;z-index:2;flex:0 0 auto;width:58px;height:110px;border-radius:9px;
+ background:linear-gradient(180deg,var(--concrete),var(--concrete2));
+ box-shadow:0 3px 6px rgba(0,0,0,.5),inset 0 0 0 1px rgba(0,0,0,.12);border-top:7px solid var(--rg,#888)}
+.slot .num{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-family:'Fraunces',serif;font-weight:900;font-size:13px;color:#4a3f28}
+.slot .sign{position:absolute;top:-42px;left:50%;transform:translateX(-50%);background:#211d15;border:1px solid var(--rg,#555);
+ border-radius:7px;padding:4px 7px;font-size:10.5px;font-weight:700;color:var(--ink);white-space:nowrap;line-height:1.1;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.slot .sign:after{content:"";position:absolute;top:100%;left:50%;width:2px;height:15px;background:var(--rg,#555);transform:translateX(-50%)}
+.slot:nth-child(even) .sign{top:-14px}
+.slot:nth-child(odd) .sign:after{height:26px}
+.slot.in{animation:drop .42s cubic-bezier(.2,1.3,.4,1)}
+@keyframes drop{0%{transform:translateY(-22px) scale(.9);opacity:0}60%{transform:translateY(3px) scale(1.04)}100%{transform:none;opacity:1}}
+.end-slot{width:30px;height:110px;border:2px dashed #e0a64e66;border-radius:9px;flex:0 0 auto;z-index:2;animation:hp 1.6s ease-in-out infinite}
+.trayWrap{margin-top:14px}
+.trayWrap h2{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--muted);margin-bottom:8px}
+.tray{display:flex;flex-wrap:wrap;gap:9px}
+.tile{position:relative;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;
+ background:linear-gradient(180deg,#262119,#1b1710);border:1px solid var(--line);border-left:6px solid var(--rg,#888);
+ border-radius:10px;padding:9px 13px;min-width:100px}
+.tile .n{font-weight:700;font-size:13.5px;color:var(--ink)}
+.tile .s{font-size:11px;color:var(--muted);margin-top:2px}
+.tile:hover{border-color:var(--gold)}
+.tile.hintpulse{animation:hp 1s ease-in-out infinite}
+@keyframes hp{0%,100%{box-shadow:0 0 0 0 rgba(224,166,78,0)}50%{box-shadow:0 0 0 4px rgba(224,166,78,.45)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+.tile.bad{animation:shake .4s;border-left-color:#e0573f}
+.clone{position:fixed;z-index:80;pointer-events:none;opacity:.95;transform:translate(-50%,-50%) rotate(-3deg);box-shadow:0 16px 30px rgba(0,0,0,.55)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:#211d15;color:#eadfc9;border:1px solid var(--gold);
+ border-radius:12px;padding:11px 17px;font-size:13.5px;max-width:92%;text-align:center;opacity:0;pointer-events:none;transition:.3s;z-index:90;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.fact{border-color:#3f9ec4}
+.note{color:var(--muted);font-size:11px;text-align:center;margin-top:16px;line-height:1.5}
+.note a{color:var(--gold)}
+
+#confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6;display:none}
+#confetti.show{display:block}
+.run{position:absolute;top:52px;left:-90px;z-index:7;display:none}
+.win{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:20px;z-index:9;
+ background:radial-gradient(circle at 50% 40%,rgba(24,20,12,.75),rgba(12,10,7,.95));backdrop-filter:blur(3px)}
+.win.show{display:grid;animation:fade .4s ease}@keyframes fade{from{opacity:0}to{opacity:1}}
+.win .k{font-family:'Fraunces',serif;font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.win h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,9vw,68px);line-height:.92;
+ background:linear-gradient(180deg,#fff5dd,#e9b45c 55%,#c5832f);-webkit-background-clip:text;background-clip:text;color:transparent;animation:champ .7s .1s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes champ{0%{transform:scale(.5) rotate(-5deg);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+.win p{margin:10px 0 16px;font-size:15px;color:var(--ink)}
+.win p b{color:var(--gold)}
+.win .endbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:520px){.levels{grid-template-columns:1fr}.win{position:fixed}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="wrap">
+ <header>
+  <svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true">
+   <circle cx="24" cy="24" r="22" fill="none" stroke="#e0a64e" stroke-width="2.5"/>
+   <path d="M16 38 L23 12 M32 38 L25 12" stroke="#e0a64e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+   <path d="M14 33 H34 M15 27 H33 M17 21 H31 M19 16 H29" stroke="#c3c8cf" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <div class="title"><h1>Le Corridor</h1><p>Construis le TransGuinéen, du port de Morébaya à la mine de Simandou</p></div>
+ </header>
+
+ <!-- ═══ Départ ═══ -->
+ <div id="setup">
+  <div class="intro">Plus de <b>600 km</b> de rail traversent la Guinée, de la mer jusqu'aux montagnes de fer de Simandou. Pose les traverses <b>dans l'ordre du trajet</b>, en partant du port. Une traverse mal placée est refusée.</div>
+  <div>
+   <div class="lbl">1 · Ton parcours</div>
+   <div class="levels">
+    <button class="lv on" data-lv="gares"><b>Les gares</b><span>8 étapes · du port à la mine</span></button>
+    <button class="lv" data-lv="complet"><b>Le tracé complet</b><span>20 étapes · gares, tunnels, rivières</span></button>
+   </div>
+  </div>
+  <div>
+   <div class="lbl">2 · Ton surnom <span style="font-weight:500;text-transform:none;letter-spacing:0;opacity:.7">(pour le classement)</span></div>
+   <input id="nick" maxlength="20" placeholder="Ex. : Loffo" autocomplete="off">
+  </div>
+  <button class="primary go" id="startBtn">Poser la première traverse →</button>
+ </div>
+
+ <!-- ═══ Jeu ═══ -->
+ <div id="game">
+  <div class="legend" id="legend"></div>
+  <div class="bar">
+   <span class="prog">Étape <b id="prog">0</b> / <b id="total">0</b></span>
+   <button id="hintBtn">💡 Indice <span style="opacity:.6">(+5 s)</span></button>
+   <button id="resetBtn">↺ Recommencer</button>
+   <button id="menuBtn">Menu</button>
+   <span class="time">Temps <b id="time">0:00</b></span>
+  </div>
+  <div class="stage" id="stage">
+   <div class="ends"><span>◖ Départ · Port</span><span>Mine · Arrivée ◗</span></div>
+   <div class="rail-area" id="railArea">
+    <div class="track" id="track">
+     <span class="loco" id="loco"></span>
+    </div>
+    <span class="run" id="run"></span>
+   </div>
+   <canvas id="confetti"></canvas>
+   <div class="win" id="win"><div>
+    <div class="k">Corridor ouvert</div>
+    <h2>CHAMPION&nbsp;!</h2>
+    <p id="winMsg"></p>
+    <div class="endbtns">
+     <button class="primary" id="againBtn">Rejouer</button>
+     <button id="otherBtn">Changer de parcours</button>
+     <button id="bookBtn">📖 Lire « Le Corridorium »</button>
+    </div>
+   </div></div>
+  </div>
+  <div class="trayWrap">
+   <h2>Glisse la bonne traverse sur la voie (ou touche-la)</h2>
+   <div class="tray" id="tray"></div>
+  </div>
+ </div>
+
+ <p class="note">Tracé d'après la description officielle du projet par Winning Consortium Simandou (WCS). La ligne traverse 4 régions administratives, 8 préfectures et 23 sous-préfectures.<br>Emblème : création originale PATI, sans lien avec les marques de la CTG ou de WCS.</p>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   DONNÉES — d'après WCS, « Description du projet », §1.3.2 (tracé d'ouest en est).
+   t = type de point : port | gare | tunnel | riviere | lieu
+   g = true → étape du parcours « Les gares »
+   f = petit fait affiché quand la traverse est posée (facultatif)
+   ═══════════════════════════════════════════════════════════════════ */
+var STAGES=[
+ {n:"Port de Morébaya", s:"Préfecture de Forécariah", t:"port", g:true, f:"Tout commence au bord de la mer, au port de Morébaya."},
+ {n:"Forécariah",       s:"La ligne part vers l'est", t:"lieu"},
+ {n:"Kelemou",          s:"Le long de la Sierra Leone", t:"lieu", f:"Ici, le rail longe la frontière avec la Sierra Leone."},
+ {n:"Madina",           s:"Le long de la Sierra Leone", t:"lieu"},
+ {n:"Tunnel de Kindia", s:"11,8 km sous la montagne", t:"tunnel", f:"Le tunnel de Kindia mesure 11,8 km : le train roule sous la montagne !"},
+ {n:"Gare de Kassa",    s:"Gare", t:"gare", g:true},
+ {n:"Tunnel de Mamou",  s:"8,95 km sous les hauts plateaux", t:"tunnel", f:"Deuxième tunnel : 8,95 km sous les hauts plateaux, vers Mamou."},
+ {n:"Gare d'Ouré-Kaba", s:"Gare", t:"gare", g:true},
+ {n:"Tagagna",          s:"Vers le nord-est", t:"lieu"},
+ {n:"Liaya",            s:"Le long de la route N1", t:"lieu"},
+ {n:"Fleuve Niger",     s:"Le rail franchit le Niger", t:"riviere", f:"Le Niger, le grand fleuve de l'Afrique de l'Ouest, prend sa source en Guinée."},
+ {n:"Gare de Faranah",  s:"Gare", t:"gare", g:true},
+ {n:"Rivière Mafou",    s:"Au sud du parc du Haut Niger", t:"riviere", f:"Le rail longe le parc national du Haut Niger."},
+ {n:"Rivière Niandan",  s:"Rivière franchie", t:"riviere"},
+ {n:"Gare de Nialinko", s:"Gare", t:"gare", g:true},
+ {n:"Gare de Diankoya", s:"Gare", t:"gare", g:true},
+ {n:"Rivière Sonamba",  s:"Rivière franchie", t:"riviere"},
+ {n:"Gare de Kérouané", s:"À l'ouest de Kérouané", t:"gare", g:true},
+ {n:"Rivière Milo",     s:"Dernière rivière", t:"riviere", f:"La Milo est la rivière de Kankan. Ici, le rail la franchit avant la mine."},
+ {n:"Mine de Simandou", s:"Terminus · montagnes de fer", t:"port", g:true}
+];
+var TYPES={port:{c:"var(--port)",l:"Port & mine"},gare:{c:"var(--gare)",l:"Gare"},tunnel:{c:"var(--tunnel)",l:"Tunnel"},riviere:{c:"var(--riviere)",l:"Rivière"},lieu:{c:"var(--lieu)",l:"Localité"}};
+var LOCO='<svg width="62" height="48" viewBox="0 0 62 48"><rect x="6" y="16" width="40" height="20" rx="3" fill="#b5563f"/><rect x="40" y="8" width="14" height="28" rx="2" fill="#8a3f2e"/><rect x="12" y="20" width="9" height="9" rx="1.5" fill="#ffd9a0"/><rect x="25" y="20" width="9" height="9" rx="1.5" fill="#ffd9a0"/><rect x="20" y="6" width="6" height="10" rx="2" fill="#e0a64e"/><circle cx="16" cy="40" r="5" fill="#2a2018" stroke="#cabf9f" stroke-width="2"/><circle cx="34" cy="40" r="5" fill="#2a2018" stroke="#cabf9f" stroke-width="2"/><circle cx="48" cy="40" r="5" fill="#2a2018" stroke="#cabf9f" stroke-width="2"/></svg>';
+
+/* ═══════════════════ MOTEUR ═══════════════════ */
+var $=function(id){return document.getElementById(id)};
+var tray=$('tray'),track=$('track'),railArea=$('railArea');
+$('loco').innerHTML=LOCO;$('run').innerHTML=LOCO;
+var level="gares",list=[],joueur="";
+var game={next:0,start:null,timer:null,running:false,errors:0,hints:0,done:false};
+var embedded=(window.parent!==window);
+
+/* Protocole du site (comme le Puzzle de l'Afrique) */
+window.addEventListener('message',function(e){
+ var d=e.data||{};
+ if(d.type==='pati-fs') document.body.classList.toggle('fs',!!d.on);
+});
+try{ joueur=localStorage.getItem('pati-pseudo')||''; $('nick').value=joueur; }catch(x){}
+
+document.querySelectorAll('.lv').forEach(function(b){b.onclick=function(){
+ document.querySelectorAll('.lv').forEach(function(x){x.classList.remove('on')});b.classList.add('on');level=b.dataset.lv;};});
+var q=new URLSearchParams(location.search).get('parcours');
+if(q==='complet'||q==='gares'){level=q;document.querySelectorAll('.lv').forEach(function(x){x.classList.toggle('on',x.dataset.lv===q)});}
+
+$('startBtn').onclick=function(){
+ joueur=($('nick').value||'').trim().slice(0,20);
+ try{ if(joueur) localStorage.setItem('pati-pseudo',joueur); }catch(x){}
+ $('setup').style.display='none';$('game').style.display='block';reset();
+};
+$('menuBtn').onclick=$('otherBtn').onclick=function(){stopTimer();$('win').classList.remove('show');$('game').style.display='none';$('setup').style.display='flex';};
+$('bookBtn').onclick=function(){ try{ (window.top||window).location.href='/livre/corridorium'; }catch(x){ location.href='/livre/corridorium'; } };
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function col(st){return TYPES[st.t].c;}
+
+function buildLegend(){
+ var used={};list.forEach(function(s){used[s.t]=1});
+ $('legend').innerHTML=Object.keys(TYPES).filter(function(k){return used[k]}).map(function(k){
+  return '<span class="lg"><i style="background:'+TYPES[k].c+'"></i>'+TYPES[k].l+'</span>';}).join('');
+}
+function buildTray(){
+ tray.innerHTML='';
+ shuffle(list.map(function(_,i){return i})).forEach(function(i){
+  var st=list[i],t=document.createElement('div');t.className='tile';t.dataset.idx=i;
+  t.style.setProperty('--rg',col(st));
+  t.innerHTML='<div class="n">'+st.n+'</div><div class="s">'+st.s+'</div>';
+  attachDrag(t);tray.appendChild(t);
+ });
+}
+function placeSleeper(i){
+ var st=list[i],sl=document.createElement('div');sl.className='slot in';
+ sl.style.setProperty('--rg',col(st));
+ sl.innerHTML='<span class="sign">'+st.n+'</span><span class="num">'+(i+1)+'</span>';
+ var end=track.querySelector('.end-slot');track.insertBefore(sl,end);
+ var tile=tray.querySelector('.tile[data-idx="'+i+'"]');if(tile)tile.remove();
+ railArea.scrollTo({left:railArea.scrollWidth,behavior:'smooth'});
+ clack();
+ if(st.f) toast(st.f,true);
+}
+function updateProg(){$('prog').textContent=game.next;$('total').textContent=list.length;}
+
+function attempt(i){
+ if(game.done||i<game.next)return;
+ if(i===game.next){
+  if(!game.running)startTimer();
+  game.next++;placeSleeper(i);updateProg();
+  if(game.next===list.length)win();
+ } else {
+  game.errors++;buzz();
+  var tile=tray.querySelector('.tile[data-idx="'+i+'"]');
+  if(tile){tile.classList.remove('bad');void tile.offsetWidth;tile.classList.add('bad');}
+  var prev=game.next? list[game.next-1].n : "le port";
+  toast('Pas encore ! Quelle étape vient juste après '+(game.next?'« '+prev+' »':prev)+' ?');
+ }
+}
+
+/* glisser (clone flottant) ou toucher */
+var drag=null;
+function attachDrag(tile){
+ tile.addEventListener('pointerdown',function(e){
+  drag={tile:tile,idx:+tile.dataset.idx,moved:false,x:e.clientX,y:e.clientY};
+  var c=tile.cloneNode(true);c.className='tile clone';c.style.width=tile.offsetWidth+'px';c.id='dragClone';c.style.display='none';
+  document.body.appendChild(c);tile.setPointerCapture(e.pointerId);e.preventDefault();
+ });
+ tile.addEventListener('pointermove',function(e){if(!drag)return;
+  if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>8){drag.moved=true;var c=$('dragClone');if(c){c.style.display='block';c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';}}});
+ tile.addEventListener('pointerup',function(e){if(!drag)return;var c=$('dragClone');if(c)c.remove();
+  var r=$('stage').getBoundingClientRect(),over=e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;
+  if(over||!drag.moved)attempt(drag.idx);drag=null;});
+ tile.addEventListener('pointercancel',function(){var c=$('dragClone');if(c)c.remove();drag=null;});
+}
+
+/* chrono : démarre à la première traverse posée */
+function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function elapsed(){return game.start?Math.floor((Date.now()-game.start)/1000)+game.hints*5:0;}
+function startTimer(){game.start=Date.now();game.running=true;clearInterval(game.timer);
+ game.timer=setInterval(function(){$('time').textContent=fmt(elapsed())},500);}
+function stopTimer(){clearInterval(game.timer);game.running=false;}
+
+$('hintBtn').onclick=function(){
+ if(game.done)return;
+ var t=tray.querySelector('.tile[data-idx="'+game.next+'"]');if(!t)return;
+ if(!game.running)startTimer();
+ game.hints++;$('time').textContent=fmt(elapsed());
+ t.classList.add('hintpulse');t.scrollIntoView({block:'nearest',behavior:'smooth'});
+ setTimeout(function(){t.classList.remove('hintpulse')},2200);
+};
+
+/* sons */
+var actx=null;
+function tone(f,d,type,vol,w){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+ var t=actx.currentTime+(w||0),o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);
+ o.type=type||'triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.12,t+.01);
+ g.gain.exponentialRampToValueAtTime(.0001,t+d);o.start(t);o.stop(t+d+.02);}catch(e){}}
+function clack(){tone(420,.12);}
+function buzz(){tone(180,.2,'square',.06);}
+function whistle(){tone(880,.35,'sine',.1);tone(1100,.5,'sine',.08,.35);}
+
+function toast(m,fact){var t=$('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}
+ t.textContent=m;t.classList.toggle('fact',!!fact);t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},3400);}
+
+/* victoire */
+function win(){
+ stopTimer();game.done=true;
+ var secs=elapsed();
+ $('time').textContent=fmt(secs);
+ $('winMsg').innerHTML='Le train roule de Morébaya à Simandou : <b>'+list.length+' étapes</b> posées en <b>'+fmt(secs)+'</b>'+
+  (game.errors?' ('+game.errors+' erreur'+(game.errors>1?'s':'')+')':', sans aucune erreur')+(game.hints?', '+game.hints+' indice'+(game.hints>1?'s':''):'')+'.';
+ whistle();runTrain();launchConfetti();
+ setTimeout(function(){$('win').classList.add('show')},1600);
+ try{ window.parent.postMessage({type:'pati-progress',kind:'defi',seconds:secs,name:joueur||'Anonyme',parcours:level,errors:game.errors},'*'); }catch(x){}
+}
+function runTrain(){var run=$('run'),w=railArea.clientWidth;run.style.display='block';run.style.transition='none';run.style.left='-90px';
+ void run.offsetWidth;run.style.transition='left 2.6s cubic-bezier(.3,0,.5,1)';run.style.left=(w-40)+'px';}
+
+/* confettis */
+var cvs=$('confetti'),ctx=cvs.getContext('2d'),parts=[],raf=null;
+function launchConfetti(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ var r=$('stage').getBoundingClientRect();cvs.width=r.width;cvs.height=r.height;cvs.classList.add('show');
+ var cols=['#e9b45c','#3f9ec4','#c4703f','#5a8c3f','#fff5dd'];parts=[];
+ for(var i=0;i<150;i++)parts.push({x:r.width/2+(Math.random()-.5)*160,y:r.height*.5,vx:(Math.random()-.5)*13,vy:-Math.random()*15-4,g:.35+Math.random()*.2,
+  w:5+Math.random()*6,h:8+Math.random()*7,rot:Math.random()*6.28,vr:(Math.random()-.5)*.4,col:cols[i%cols.length],life:0});
+ cancelAnimationFrame(raf);tick();}
+function tick(){ctx.clearRect(0,0,cvs.width,cvs.height);var alive=false;
+ parts.forEach(function(p){p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.rot+=p.vr;p.life++;
+  if(p.y<cvs.height+30){alive=true;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.max(0,1-p.life/170);
+   ctx.fillStyle=p.col;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();}});
+ if(alive)raf=requestAnimationFrame(tick);else{ctx.clearRect(0,0,cvs.width,cvs.height);cvs.classList.remove('show');}}
+
+/* (re)départ */
+function reset(){
+ list=level==='gares'?STAGES.filter(function(s){return s.g}):STAGES.slice();
+ track.querySelectorAll('.slot,.end-slot').forEach(function(s){s.remove()});
+ var end=document.createElement('div');end.className='end-slot';track.appendChild(end);
+ game={next:0,start:null,timer:null,running:false,errors:0,hints:0,done:false};
+ stopTimer();$('time').textContent='0:00';updateProg();buildLegend();
+ $('win').classList.remove('show');$('run').style.display='none';
+ cancelAnimationFrame(raf);cvs.classList.remove('show');ctx.clearRect(0,0,cvs.width,cvs.height);
+ railArea.scrollTo({left:0});buildTray();
+}
+$('resetBtn').onclick=reset;$('againBtn').onclick=reset;
+</script>
+</body></html>
