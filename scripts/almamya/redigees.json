@@ -1273,5 +1273,18 @@
 ],
 "f": "Née à Labé en 1949, Binta Diallo entre dans l'armée en 1971 et devient pilote. PATI lui consacre un livre.",
 "s": "/livre/binta-diallo"
+},
+{
+"c": "Mandén",
+"n": 2,
+"q": "Combien d'articles compte la charte du Mandén (Kurukan Fuga) telle que PATI la présente ?",
+"r": "Quarante-quatre",
+"o": [
+"Quarante",
+"Quatorze",
+"Quatre-vingt-dix-neuf"
+],
+"f": "La charte du Mandén, proclamée selon la tradition en 1236, compte 44 articles. PATI les présente un par un.",
+"s": "/charte"
 }
 ]

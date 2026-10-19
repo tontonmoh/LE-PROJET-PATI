@@ -45,7 +45,7 @@ export default function Almamya() {
           className={fs ? "fixed inset-0 z-[9999] bg-[#16224A]" : "rounded-[1.5rem] overflow-hidden border-8 border-white shadow-kid bg-[#16224A]"}
         >
           <iframe
-            src="/jeux/almamya-zogota/index.html"
+            src="/jeux/almamya-zogota/index.html?v=3"
             title="Almamya-Zogota"
             loading="lazy"
             allow="fullscreen"

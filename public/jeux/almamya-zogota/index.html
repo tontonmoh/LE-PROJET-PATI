@@ -184,7 +184,9 @@ function accepte(saisi,rep){var a=norm(saisi),b=norm(rep);if(!a)return false;
 
 // ── Tirage sans répétition : on mémorise les questions déjà vues ──
 var vus=lsGet('az-vus',[]);
-function marquer(id){vus.push(id);if(vus.length>900)vus=vus.slice(-900);lsSet('az-vus',vus)}
+function marquer(id){var q0=Q.filter(function(x){return x.id==id})[0];
+ if(q0&&q0.qs)Q.forEach(function(x){if(x.qs===q0.qs&&x.id!==id&&vus.indexOf(x.id)<0)vus.push(x.id)});
+ vus.push(id);if(vus.length>900)vus=vus.slice(-900);lsSet('az-vus',vus)}
 function tirer(L,n,saisie){
  var pool=byL[L]||[];if(!pool.length)return null;
  var ordre=n==4?[3,2,1]:[n,n+1,n-1,n+2,n-2].filter(function(x){return x>=1&&x<=3});
@@ -201,17 +203,20 @@ function tirer(L,n,saisie){
 function rendreQuestion(zone,L,q,mode,fin){
  var typed=mode==4||q.saisie, html='<div class="qbox"><div class="big">'+L+'</div><div>'+
   '<div class="meta"><span class="tag n'+(typed?4:q.n)+'">'+NIV[typed?4:q.n]+'</span><span class="tag">'+esc(q.c)+'</span></div>'+
-  '<div class="q">'+esc(q.q)+'</div><div class="hint">La réponse commence par <b>'+L+'</b>.</div>';
+  '<div class="q">'+esc(typed&&q.qs?q.qs:q.q)+'</div><div class="hint">La réponse commence par <b>'+L+'</b>.</div>';
  if(typed){html+='<form class="typed" id="tf"><input type="text" id="ti" autocomplete="off" placeholder="'+L+'…"><button class="btn go">Valider</button></form>'}
  else{var opts=shuf([q.r].concat(q.o));html+='<div class="opts">'+opts.map(function(o){return '<button class="opt" data-v="'+esc(o)+'">'+esc(o).replace(/^(.)/,'<b>$1</b>')+'</button>'}).join('')+'</div>'}
  html+='<div id="fbz"></div></div></div>';zone.innerHTML=html;
  function verdict(ok,donne){
-  var f='<div class="fb '+(ok?'ok':'ko')+'"><strong>'+(ok?'Bonne réponse !':'Raté. La réponse était : '+esc(q.r))+'</strong>'+esc(q.f||'')+
+  var toutes=[q.r].concat(q.alt||[]),autres=toutes.filter(function(x){return x!==donne});
+  var tete=ok?'Bonne réponse !'+(typed&&autres.length?' Autres réponses possibles : '+autres.map(esc).join(', ')+'.':'')
+    :(typed&&toutes.length>1?'Raté. Réponses possibles : '+toutes.map(esc).join(', ')+'.':'Raté. La réponse était : '+esc(q.r));
+  var f='<div class="fb '+(ok?'ok':'ko')+'"><strong>'+tete+'</strong>'+esc(typed&&q.qs?'':(q.f||''))+
    (q.s?' <a href="'+esc(q.s)+'" target="_top">En savoir plus sur PATI →</a>':'')+'</div>';
   $('fbz').innerHTML=f;marquer(q.id);fin(ok,typed);
  }
  if(typed){var inp=$('ti');setTimeout(function(){inp.focus()},50);
-  $('tf').onsubmit=function(e){e.preventDefault();if(!inp.value.trim())return;var ok=accepte(inp.value,q.r);inp.disabled=true;this.querySelector('button').disabled=true;verdict(ok)}}
+  $('tf').onsubmit=function(e){e.preventDefault();if(!inp.value.trim())return;var trouve=[q.r].concat(q.alt||[]).filter(function(x){return accepte(inp.value,x)})[0];inp.disabled=true;this.querySelector('button').disabled=true;verdict(!!trouve,trouve)}}
  else zone.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){var ok=b.dataset.v===q.r;
   zone.querySelectorAll('.opt').forEach(function(x){x.disabled=true;if(x.dataset.v===q.r)x.classList.add('good')});if(!ok)b.classList.add('bad');verdict(ok)}});
 }
@@ -283,8 +288,14 @@ function duelFin(){var a=Dl.p[0],b=Dl.p[1],w=a==b?null:(a>b?0:1);
   '<div class="btns"><button class="btn go" id="again">Revanche</button><button class="btn" id="home2">Menu</button></div>';
  show('end');$('again').onclick=duelStart;$('home2').onclick=function(){show('home')}}
 
+// ── Entrée = question suivante, une fois la réponse donnée ──
+document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;
+ var t=e.target;if(t&&t.id==='ti'&&!t.disabled)return;
+ var nx=document.querySelectorAll('.next .btn.go');if(!nx.length)return;var b=nx[nx.length-1];
+ if(b.offsetParent!==null){e.preventDefault();b.click()}});
+
 // ── Chargement de la banque ──
-fetch('questions.json').then(function(r){return r.json()}).then(function(d){Q=d;
+fetch('questions.json?v=3').then(function(r){return r.json()}).then(function(d){Q=d;
  Q.forEach(function(q){(byL[q.l]=byL[q.l]||[]).push(q)});
  $('stock').textContent=Q.length+' questions sur la Guinée, tirées du contenu PATI : territoires, Conakry, histoire, pionnières, Mandén, Fouta, littérature… Chaque partie tire au hasard parmi les questions que tu n\'as pas encore vues.';
 }).catch(function(){$('stock').textContent='Impossible de charger les questions.';$('start').disabled=true});

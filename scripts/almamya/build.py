@@ -26,16 +26,31 @@ def lettre(r):
         if 'A' <= ch <= 'Z': return ch
     return None
 
+HON = re.compile(r"^(hadja |hadj |el hadj |dr |docteur )+", re.I)
+def propre(x): return HON.sub('', x.strip())
+def jetons(x): return set(sans_accent(propre(x)).lower().replace(',', ' ').split()) - {'dit', 'de', 'du', 'la', 'le'}
+def meme(a, b):
+    ja, jb = jetons(a), jetons(b)
+    return bool(ja) and bool(jb) and (ja <= jb or jb <= ja)
+
 Q = []
-def add(c, n, q, r, pool, f='', s='', o=None, ident=None):
+def add(c, n, q, r, pool, f='', s='', o=None, ident=None, alt=None, qs=None):
+    r = propre(r)
     L = lettre(r)
     if not L: return
+    if o is not None: o = [propre(x) for x in o]
+    pool = [propre(x) for x in pool]
+    alt = [a for a in dict.fromkeys(alt or []) if a != r and lettre(a) == L]
     if o is None:
-        cand = [p for p in dict.fromkeys(pool) if p != r and lettre(p) == L
-                and sans_accent(p).lower() != sans_accent(r).lower()]
-        random.shuffle(cand); o = cand[:3]
+        cand = [p for p in dict.fromkeys(pool) if p != r and p not in alt and lettre(p) == L and not meme(p, r)]
+        random.shuffle(cand); o = []
+        for cd in cand:
+            if not any(meme(cd, x) for x in o): o.append(cd)
+            if len(o) == 3: break
     Q.append({'id': ident or f'{c[:3].lower()}{len(Q)}', 'l': L, 'n': n, 'c': c, 'q': q, 'r': r, 'o': o,
               'f': f, 's': s, 'saisie': len(o) < 2})
+    if alt: Q[-1]['alt'] = alt
+    if qs: Q[-1]['qs'] = qs
 
 T = D['T']['territoires']
 REG = {k: v.replace('Région de ', '').replace('Gouvernorat de ', '') for k, v in D['T']['LIBELLE_REGION_ADMIN'].items()}
@@ -54,7 +69,9 @@ for p in prefs:
     if p['nom'] == REG[p['regionAdministrative']]: continue
     autres = [x['nom'] for x in prefs if x['regionAdministrative'] != p['regionAdministrative']]
     add('Territoires', 2, f"Laquelle de ces préfectures appartient à la région de {REG[p['regionAdministrative']]} ?",
-        p['nom'], autres, f"{p['nom']} est une préfecture de la région de {REG[p['regionAdministrative']]}.", '/laguine')
+        p['nom'], autres, f"{p['nom']} est une préfecture de la région de {REG[p['regionAdministrative']]}.", '/laguine',
+        alt=[x['nom'] for x in prefs if x['regionAdministrative'] == p['regionAdministrative']],
+        qs=f"Cite une préfecture de la région de {REG[p['regionAdministrative']]}.")
 # ── langue dominante ──
 LANGUES = sorted({p.get('patrimoine', {}).get('langueDominante') for p in prefs} - {None})
 for p in prefs:
@@ -77,7 +94,9 @@ tous_sp = list(sp_de)
 for s, p in sp_de.items():
     autres_sp = [x for x in tous_sp if sp_de[x]['nom'] != p['nom']]
     add('Sous-préfectures', 3, f"Laquelle de ces localités est une sous-préfecture de la préfecture de {p['nom']} ?",
-        s, autres_sp, f"{s} est une sous-préfecture de {p['nom']} (région de {REG[p['regionAdministrative']]}).", '/laguine')
+        s, autres_sp, f"{s} est une sous-préfecture de {p['nom']} (région de {REG[p['regionAdministrative']]}).", '/laguine',
+        alt=[x for x in tous_sp if sp_de[x]['nom'] == p['nom']],
+        qs=f"Cite une sous-préfecture de la préfecture de {p['nom']}.")
     add('Sous-préfectures', 3, f"La sous-préfecture de {s} se trouve dans quelle préfecture ?",
         p['nom'], noms_pref, f"{s} fait partie de la préfecture de {p['nom']}.", '/laguine')
 
@@ -95,7 +114,8 @@ for qn, com in quart.items():
     add('Conakry', 2, f"Dans quelle commune de Conakry se trouve le quartier {qn} ?", com, noms_com,
         f"Le quartier {qn} appartient à la commune de {com}.", '/konakri')
     add('Conakry', 2, f"Lequel de ces quartiers se trouve dans la commune de {com} ?", qn,
-        [x for x, c in quart.items() if c != com], f"{qn} est un quartier de {com}.", '/konakri')
+        [x for x, c in quart.items() if c != com], f"{qn} est un quartier de {com}.", '/konakri',
+        alt=[x for x, c in quart.items() if c == com], qs=f"Cite un quartier de la commune de {com}.")
 
 # ── Pionnières ──
 PERS = []
@@ -103,14 +123,12 @@ for p in D['P']['PIONNIERES']: PERS.append(p['nom'])
 for p in D['HM']['PIONNIERS']: PERS.append(p['nom'])
 for g in D['HM']['PREMIER_GOUVERNEMENT']:
     if '·' not in g['titulaire']: PERS.append(g['titulaire'])
+FEMMES = [x['nom'] for x in D['P']['PIONNIERES']] + ['Loffo Camara', 'Mafory Bangoura', 'Binta Ann', 'Bilguissa Diallo',
+          'Kadiatou Kaba', 'Kadiatou Konaté', 'Koumanthio Zeinab Diallo', 'Juliana Diallo', 'Mariama Barry', 'Kesso Barry', 'Miriam Makeba']
 for p in D['P']['PIONNIERES']:
     if not p.get('valide'): continue
-    add('Pionnières', 2, f"Qui est surnommée « {p['titre']} » ?", p['nom'], PERS,
+    add('Pionnières', 2, f"« La Guinée des Pionnières » : quelle femme est présentée ainsi : « {p['titre']} » ?", p['nom'], FEMMES,
         p.get('chapeau', ''), f"/pionnieres/{p['slug']}")
-    if p.get('mot'):
-        add('Pionnières', 3, f"Quel mot résume le parcours de {p['nom']} dans « La Guinée des Pionnières » ?",
-            p['mot'].capitalize(), [x['mot'].capitalize() for x in D['P']['PIONNIERES'] if x.get('mot')],
-            p.get('chapeau', ''), f"/pionnieres/{p['slug']}")
 # ── Horoya : pionniers de l'indépendance ──
 for p in D['HM']['PIONNIERS']:
     if p['id'] == 'sekou-toure': continue
@@ -128,13 +146,61 @@ for x in D['F']['foutaDiwals']:
         f"Le diwal de {x['name']} ({x.get('years','')}) — fondateur : {x['founder']}.", '/fouta')
 
 # ── Sèbè : littérature guinéenne ──
+# Les propositions d'origine ne commencent pas par la même lettre : on les remplace par des
+# éléments DU MÊME GENRE (une personne par une personne, une œuvre par une œuvre, un lieu par un lieu).
 SEB = D['S']['QUIZ_SEBE']
-pool_seb = [c for q in SEB if q['type'] != 'chronologie' for c in q['choix']]
+PERS_SEB, OEUV, LIEUX = set(PERS), set(), set(noms_pref) | set(tous_sp)
 for q in SEB:
-    if q['type'] == 'chronologie': continue
     r = q['choix'][q['reponse']]
-    if len(r) > 60: continue
-    add('Littérature', q['difficulte'], q['question'], r, pool_seb, q.get('fiche', ''), q.get('route') or '/sebe', ident='seb-' + q['id'])
+    if q['type'] == 'portrait' or q['question'].startswith('Qui '):
+        PERS_SEB.update(q['choix'])
+    elif q['type'] in ('ouverture', 'qui-parle') or 'roman' in q['question'] or 'titre' in q['question']:
+        OEUV.update(q['choix'])
+# Propositions vérifiées à la main pour les questions Sèbè (même lettre, même genre)
+OVR = {
+ 'f02': ["Entrée dans la tribu", "Les Écailles du ciel"],
+ 'f03': ["Kankan", "Kissidougou", "Kérouané"],
+ 'f04': ["Le Roi de Kahel", "Rêve brisé"],
+ 'f09': ["Soumaoro Kanté", "Samory Touré", "Sogolon Kondé"],
+ 'f11': ["Âme", "Aurore", "Alliance"],
+ 'f13': ["Saharienne indigo", "Soundjata ou l'épopée mandingue"],
+ 'f14': ["Zéro", "Zorro"],
+ 'c02': ["Le Regard du roi", "Rêve brisé"],
+ 'c04': ["La Tribu des silences", "Terre"],
+ 'c12': ["Pelourinho", "Petite Plume"],
+ 'o03': ["Samory Touré", "Sogolon Kondé", "Sassouma Bérété"],
+ 'e04': ["Mafory Bangoura", "Hadja Mariama Sow", "Mariama Barry"],
+ 'e05': ["Juliana Diallo", "Joséphine Lenaud Guilao"],
+ 'w18': ["Juliana Diallo", "Joséphine Lenaud Guilao"],
+ 'w02': ["Mémoire d'une peau", "Le Maître de la parole"],
+ 'w04': ["L'Enfant noir", "Les Écailles du ciel"],
+ 'w13': ["Mariama Bâ", "Mafory Bangoura"],
+ 'w14': ["Binta Ann", "Barry Diawadou"],
+ 'c03': ["Le Cercle des tropiques", "Cinéma", "Cœur meurtri"],
+ 'w08': ["Le Cercle des tropiques", "Les Crapauds-brousse", "Cinéma"],
+ 'w16': ["Le Cahier de Mariame", "Le Cercle des tropiques", "Cœur meurtri"],
+}
+def genre(r):
+    for nom, pool in (('pers', PERS_SEB), ('oeuv', OEUV), ('lieu', LIEUX)):
+        if r in pool: return pool
+    return None
+for q in SEB:
+    if q['type'] in ('chronologie', 'intrus') or 'Lequel ?' in q['question'] and 'Un de ces' in q['question']:
+        continue
+    if 'Parmi' in q['question'] or 'Une de ces' in q['question']: continue
+    r = q['choix'][q['reponse']]
+    if not lettre(r): continue
+    if len(r) > 45 or len(r.split()) > 5: continue
+    pool = genre(r)
+    memes = [c for c in q['choix'] if c != r and lettre(c) == lettre(r)]
+    if q['id'] in OVR:
+        add('Littérature', q['difficulte'], q['question'], r, [], q.get('fiche', ''), q.get('route') or '/sebe', o=OVR[q['id']], ident='seb-' + q['id'])
+    elif pool is not None:
+        pool = {p for p in pool if '→' not in p}
+        add('Littérature', q['difficulte'], q['question'], r, memes + sorted(pool), q.get('fiche', ''), q.get('route') or '/sebe', ident='seb-' + q['id'])
+    else:
+        Q.append({'id': 'seb-' + q['id'], 'l': lettre(r), 'n': q['difficulte'], 'c': 'Littérature', 'q': q['question'], 'r': r,
+                  'o': memes[:3], 'f': q.get('fiche', ''), 's': q.get('route') or '/sebe', 'saisie': len(memes) < 2})
 
 # ── Questions rédigées ──
 for i, x in enumerate(RED):
