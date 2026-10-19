@@ -29,7 +29,25 @@ button{font:inherit;cursor:pointer;color:inherit;border:0;background:none}
 .alpha span{font-family:'Bricolage Grotesque';font-weight:800;width:22px;height:22px;display:grid;place-items:center;font-size:12px;border-radius:50%;background:rgba(142,197,232,.12);color:var(--ciel)}
 .panel{max-width:660px;margin:12px auto 0;display:flex;flex-direction:column;gap:16px}
 .lbl{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre)}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+/* ── Course ── */
+.bigcode{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(48px,11vw,96px);letter-spacing:.12em;color:var(--ocre);line-height:1}
+.lobby{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--indigo2);border:1px solid var(--line);border-radius:18px;padding:20px}
+.lobby .url{font-size:15px;color:var(--ciel);word-break:break-all;margin-top:6px}
+#qr{background:#fff;padding:8px;border-radius:10px;width:156px;height:156px}
+.plist{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.plist span{padding:6px 11px;border-radius:99px;background:rgba(142,197,232,.14);color:var(--ecru);font-weight:600;font-size:14px}
+.count{font-family:'Bricolage Grotesque';font-weight:800;font-size:30px;color:var(--ocre)}
+.bar2{height:8px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:12px}.bar2 i{display:block;height:100%;background:var(--ocre);transition:width .25s linear}
+.board2{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.board2 div{display:flex;justify-content:space-between;padding:9px 14px;border-radius:10px;background:rgba(255,255,255,.06);font-weight:600}
+.board2 div:first-child{background:var(--ocre);color:#1a1206}
+.board2 b{font-family:'Bricolage Grotesque'}
+.win{margin-top:14px;padding:16px;border-radius:14px;background:var(--vert);color:#06210f;font-weight:700;font-size:18px}
+.win.none{background:rgba(255,255,255,.08);color:var(--ecru)}
+.wait{text-align:center;padding:40px 10px;color:var(--muted);font-size:17px}
+.wait b{display:block;font-family:'Bricolage Grotesque';font-size:28px;color:var(--ecru);margin-bottom:8px}
+@media (max-width:560px){.lobby{grid-template-columns:1fr}}
 .card{text-align:left;padding:14px;border-radius:14px;background:var(--indigo2);border:1.5px solid var(--line);display:flex;flex-direction:column;gap:4px}
 .card b{font-family:'Bricolage Grotesque';font-size:19px}
 .card span{font-size:13px;color:var(--muted)}
@@ -103,7 +121,8 @@ input[type=text]:focus{outline:none;border-color:var(--ocre)}
 .end .btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
 .recap{max-width:640px;margin:16px auto 0;text-align:left;font-size:13.5px;color:var(--muted);line-height:1.6}
 .recap b{color:var(--ecru)}
-@media (max-width:560px){.cards,.opts,.duo{grid-template-columns:1fr}.qbox{grid-template-columns:1fr;gap:4px}.big{width:auto;text-align:left;font-size:64px}.board{grid-template-columns:repeat(6,1fr)}.strip{grid-template-columns:repeat(9,1fr)}}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+@media (max-width:560px){.opts,.duo{grid-template-columns:1fr}.qbox{grid-template-columns:1fr;gap:4px}.big{width:auto;text-align:left;font-size:64px}.board{grid-template-columns:repeat(6,1fr)}.strip{grid-template-columns:repeat(9,1fr)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><div class="wrap">
 
@@ -119,9 +138,16 @@ input[type=text]:focus{outline:none;border-color:var(--ocre)}
    <div class="cards">
     <button class="card on" data-mode="solo"><b>L'alphabet</b><span>26 lettres, une question par lettre. Toujours de nouvelles questions.</span></button>
     <button class="card" data-mode="duel"><b>Le défi à deux</b><span>Chacun choisit ses lettres et son niveau. La meilleure prise gagne.</span></button>
+    <button class="card" data-mode="course"><b>La course</b><span>Classe ou forum : chacun sur son téléphone. Le premier qui trouve marque le point.</span></button>
    </div></div>
+  <div id="optCourse" class="hidden">
+   <div class="lbl">2 · Ton rôle</div>
+   <div class="chips" id="role"><button class="chip on" data-r="host">J'anime <small>· écran projeté</small></button><button class="chip" data-r="player">Je joue <small>· sur mon téléphone</small></button></div>
+   <div id="cHostTxt" class="hint" style="margin-top:8px">L'écran de l'animateur (projeté au tableau) affiche les questions et le classement. Les joueurs rejoignent avec le code ou le QR code. Un seul animateur par partie.</div>
+   <div id="cPlayerBox" class="hidden" style="margin-top:12px"><div class="duo"><input type="text" id="cCode" maxlength="8" placeholder="Code de la partie" style="text-transform:uppercase"><input type="text" id="cPseudo" maxlength="18" placeholder="Ton surnom"></div></div>
+  </div>
   <div id="optSolo">
-   <div class="lbl">2 · Le niveau</div>
+   <div class="lbl" id="lblNiv">2 · Le niveau</div>
    <div class="chips" id="niv">
     <button class="chip" data-n="1">Facile</button><button class="chip" data-n="2">Moyen</button><button class="chip" data-n="3">Difficile</button>
     <button class="chip" data-n="4">Extrême <small>· réponse à écrire</small></button>
@@ -130,7 +156,7 @@ input[type=text]:focus{outline:none;border-color:var(--ocre)}
    <div class="chips" id="ordre" style="margin-top:10px">
     <button class="chip on" data-o="az">De A à Z</button><button class="chip" data-o="mix">Lettres mélangées</button>
    </div>
-   <div style="margin-top:14px"><div class="lbl">3 · Ton surnom <span style="text-transform:none;letter-spacing:0;color:var(--muted);font-weight:500">(pour le classement)</span></div>
+   <div id="blocPseudo" style="margin-top:14px"><div class="lbl">3 · Ton surnom <span style="text-transform:none;letter-spacing:0;color:var(--muted);font-weight:500">(pour le classement)</span></div>
     <input type="text" id="pseudo" maxlength="20" placeholder="Ex. : Loffo" style="margin-top:8px"></div>
   </div>
   <div id="optDuel" class="hidden">
@@ -160,6 +186,12 @@ input[type=text]:focus{outline:none;border-color:var(--ocre)}
 </section>
 
 <!-- ═══ FIN ═══ -->
+<!-- ═══ COURSE ═══ -->
+<section id="course" class="hidden">
+ <div class="top"><div class="t"><i>A</i>lmamya-<i>Z</i>ogota · la course</div><div class="sp"><span id="cInfo"></span><button class="btn" id="quit3" style="padding:7px 12px">Menu</button></div></div>
+ <div id="czone"></div>
+</section>
+
 <section id="end" class="hidden"><div class="end" id="endBox"></div></section>
 
 </div>
@@ -225,14 +257,21 @@ function rendreQuestion(zone,L,q,mode,fin){
 var MODE='solo',NIVEAU='p',ORDRE='az';
 $('alpha').innerHTML=LETTRES.map(function(l){return '<span>'+l+'</span>'}).join('');
 document.querySelectorAll('[data-mode]').forEach(function(b){b.onclick=function(){MODE=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(function(x){x.classList.toggle('on',x===b)});
- $('optSolo').classList.toggle('hidden',MODE!='solo');$('optDuel').classList.toggle('hidden',MODE!='duel');majStart()}});
+ majPanneaux()}});
+var ROLE='host';
+document.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){ROLE=b.dataset.r;document.querySelectorAll('[data-r]').forEach(function(x){x.classList.toggle('on',x===b)});majPanneaux()}});
+function majPanneaux(){var c=MODE=='course';
+ $('optSolo').classList.toggle('hidden',!(MODE=='solo'||(c&&ROLE=='host')));$('optDuel').classList.toggle('hidden',MODE!='duel');$('optCourse').classList.toggle('hidden',!c);
+ $('blocPseudo').classList.toggle('hidden',c);$('lblNiv').textContent=c?'3 · Le niveau':'2 · Le niveau';
+ $('cPlayerBox').classList.toggle('hidden',ROLE!='player');$('cHostTxt').classList.toggle('hidden',ROLE!='host');majStart()}
 document.querySelectorAll('[data-n]').forEach(function(b){b.onclick=function(){NIVEAU=b.dataset.n;document.querySelectorAll('[data-n]').forEach(function(x){x.classList.toggle('on',x===b)})}});
 document.querySelectorAll('[data-o]').forEach(function(b){b.onclick=function(){ORDRE=b.dataset.o;document.querySelectorAll('[data-o]').forEach(function(x){x.classList.toggle('on',x===b)});majStart()}});
-function majStart(){$('start').textContent=MODE=='duel'?'Lancer le défi →':(ORDRE=='az'?'Commencer à A →':'Tirer la première lettre →')}
+function majStart(){$('start').textContent=MODE=='duel'?'Lancer le défi →':MODE=='course'?(ROLE=='host'?'Ouvrir la salle →':'Rejoindre la partie →'):(ORDRE=='az'?'Commencer à A →':'Tirer la première lettre →')}
 $('pseudo').value=lsGet('pati-pseudo','')||'';
-function show(id){['home','solo','duel','end'].forEach(function(s){$(s).classList.toggle('hidden',s!==id)});window.scrollTo(0,0)}
+function show(id){['home','solo','duel','course','end'].forEach(function(s){$(s).classList.toggle('hidden',s!==id)});window.scrollTo(0,0)}
 $('quit').onclick=$('quit2').onclick=function(){clearInterval(tick);show('home')};
-$('start').onclick=function(){MODE=='solo'?soloStart():duelStart()};
+$('quit3').onclick=function(){courseStop();show('home')};
+$('start').onclick=function(){MODE=='solo'?soloStart():MODE=='duel'?duelStart():(ROLE=='host'?hostStart():playerStart())};
 
 // ── Mode solo ──
 var S,tick;
@@ -288,6 +327,119 @@ function duelFin(){var a=Dl.p[0],b=Dl.p[1],w=a==b?null:(a>b?0:1);
   '<div class="btns"><button class="btn go" id="again">Revanche</button><button class="btn" id="home2">Menu</button></div>';
  show('end');$('again').onclick=duelStart;$('home2').onclick=function(){show('home')}}
 
+// ══════════════ LA COURSE (classe / forum) ══════════════
+// Temps réel via Supabase Realtime (broadcast + présence), sans table : l'écran de l'animateur
+// tire les questions, reçoit les réponses et arbitre — le premier qui trouve marque le point.
+var SB={url:'https://gipqwrqwouytlmsuxefj.supabase.co',key:'sb_publishable_gaOQLiWvGUeSwOozZlPPGQ_e6ii9upC'};
+window.addEventListener('message',function(e){var d=e.data;if(d&&d.type==='pati-config'&&d.url&&d.key){SB.url=d.url;SB.key=d.key}});
+var DUREE=30, PAUSE=7;
+var C=null; // état de la course
+function chargerSB(){return new Promise(function(res,rej){if(window.supabase&&window.supabase.createClient)return res(window.supabase);
+ var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';s.onload=function(){res(window.supabase)};s.onerror=rej;document.head.appendChild(s)})}
+function monId(){var id=null;try{id=sessionStorage.getItem('az-id')}catch(e){}if(!id){id='p'+Math.random().toString(36).slice(2,9);try{sessionStorage.setItem('az-id',id)}catch(e){}}return id}
+function genCode(){var a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',c='';for(var i=0;i<5;i++)c+=a[Math.random()*a.length|0];return c}
+function courseStop(){if(C){clearInterval(C.tk);clearTimeout(C.to);try{C.client.removeChannel(C.ch)}catch(e){}}C=null}
+function envoyer(m){C.ch.send({type:'broadcast',event:'az',payload:m})}
+function classement(){return Object.keys(C.scores).map(function(id){return C.scores[id]}).sort(function(a,b){return b.pts-a.pts||a.ms-b.ms})}
+function rendreBoard(lim){var b=classement().slice(0,lim||8);if(!b.length)return '';
+ return '<div class="board2">'+b.map(function(x,i){return '<div><span>'+(i+1)+'. '+esc(x.name)+'</span><b>'+x.pts+'</b></div>'}).join('')+'</div>'}
+
+// ── Animateur ──
+function hostStart(){courseStop();var code=($('cCode').value||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8)||genCode();
+ show('course');$('czone').innerHTML='<div class="wait"><b>Ouverture de la salle…</b></div>';
+ chargerSB().then(function(lib){
+  C={role:'host',code:code,client:lib.createClient(SB.url,SB.key),joueurs:{},scores:{},i:-1,ordre:ORDRE=='az'?LETTRES.slice():shuf(LETTRES),ouvert:false};
+  C.ch=C.client.channel('az:'+code,{config:{presence:{key:'host'},broadcast:{self:false}}});
+  C.ch.on('presence',{event:'sync'},function(){var st=C.ch.presenceState(),j={};
+   Object.keys(st).forEach(function(k){if(k!=='host'&&st[k][0])j[k]=st[k][0].name||'Joueur'});
+   Object.keys(j).forEach(function(k){if(!C.joueurs[k]&&C.i>=0&&C.ouvert)envoyer(C.cur)});C.joueurs=j;majLobby();majCompte()});
+  C.ch.on('broadcast',{event:'az'},function(m){hostRecoit(m.payload)});
+  C.ch.subscribe(function(s){if(s==='SUBSCRIBED'){C.ch.track({role:'host'});lobby()}else if(s==='CHANNEL_ERROR'||s==='TIMED_OUT'){$('czone').innerHTML='<div class="wait"><b>Connexion impossible</b>Vérifie la connexion internet puis réessaie.</div>'}});
+ }).catch(function(){$('czone').innerHTML='<div class="wait"><b>Connexion impossible</b>Le service temps réel n\'a pas pu être chargé.</div>'})}
+function lienJoueur(){return location.origin+'/almamya?salle='+C.code}
+function lobby(){var u=lienJoueur();
+ $('czone').innerHTML='<div class="lobby"><div id="qr"></div><div><div class="lbl">Code de la partie</div><div class="bigcode">'+C.code+'</div>'+
+  '<div class="url">'+esc(u.replace(/^https?:\/\//,''))+'</div><p class="hint" style="margin-top:8px">Scannez le QR code ou ouvrez Almamya-Zogota → La course → Je joue, puis tapez le code.</p>'+
+  '<div class="lbl" style="margin-top:14px">Joueurs connectés : <span id="nbj">0</span></div><div class="plist" id="plist"></div></div></div>'+
+  '<div class="next"><button class="btn go" id="go" disabled>Lancer la course →</button></div>';
+ if(window.QRCode){try{new QRCode($('qr'),{text:u,width:140,height:140})}catch(e){}}else{var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';s.onload=function(){try{new QRCode($('qr'),{text:u,width:140,height:140})}catch(e){}};document.head.appendChild(s)}
+ $('go').onclick=hostSuivante;majLobby()}
+function majLobby(){if(!$('plist'))return;var n=Object.keys(C.joueurs);$('nbj').textContent=n.length;
+ $('plist').innerHTML=n.map(function(k){return '<span>'+esc(C.joueurs[k])+'</span>'}).join('');$('go').disabled=!n.length;$('cInfo').textContent='Salle '+C.code}
+function hostSuivante(){clearTimeout(C.to);Object.keys(C.joueurs).forEach(function(k){if(!C.scores[k])C.scores[k]={name:C.joueurs[k],pts:0,ms:0}});C.i++;if(C.i>=26)return hostFin();
+ var L=C.ordre[C.i],n=nivPour(C.i),q=tirer(L,n,n==4);if(!q)return hostSuivante();marquer(q.id);
+ var typed=n==4||q.saisie;C.q=q;C.typed=typed;C.deja={};C.ouvert=true;C.t0=Date.now();
+ C.cur={t:'q',i:C.i,L:L,q:typed&&q.qs?q.qs:q.q,c:q.c,n:typed?4:q.n,opts:typed?null:shuf([q.r].concat(q.o)),d:DUREE};
+ envoyer(C.cur);
+ $('czone').innerHTML='<div class="qbox"><div class="big">'+L+'</div><div><div class="meta"><span class="tag n'+C.cur.n+'">'+NIV[C.cur.n]+'</span><span class="tag">'+esc(q.c)+'</span><span class="tag">Lettre '+(C.i+1)+' / 26</span></div>'+
+  '<div class="q" style="font-size:clamp(20px,3vw,28px)">'+esc(C.cur.q)+'</div>'+
+  (C.cur.opts?'<div class="opts">'+C.cur.opts.map(function(o){return '<div class="opt">'+esc(o).replace(/^(.)/,'<b>$1</b>')+'</div>'}).join('')+'</div>':'<div class="hint" style="margin-top:12px">Les joueurs écrivent leur réponse sur leur téléphone.</div>')+
+  '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:14px"><span class="hint">Réponses reçues : <b id="nbr">0</b> / <span id="nbt">'+Object.keys(C.joueurs).length+'</span></span><span class="count" id="cd">'+DUREE+'</span></div><div class="bar2"><i id="cbar" style="width:100%"></i></div>'+
+  '<div id="cres"></div></div></div>';
+ clearInterval(C.tk);C.tk=setInterval(function(){var r=Math.max(0,DUREE-(Date.now()-C.t0)/1000);if($('cd'))$('cd').textContent=Math.ceil(r);if($('cbar'))$('cbar').style.width=(r/DUREE*100)+'%';if(r<=0)hostClore(null)},250)}
+function majCompte(){if($('nbt'))$('nbt').textContent=Object.keys(C.joueurs).length;if($('nbr'))$('nbr').textContent=Object.keys(C.deja||{}).length}
+function hostRecoit(m){if(!C||C.role!=='host')return;
+ if(m.t==='hello'&&C.ouvert&&C.cur)return envoyer(C.cur);
+ if(m.t!=='a'||m.i!==C.i||!C.ouvert||C.deja[m.id])return;
+ C.deja[m.id]=1;majCompte();var q=C.q;
+ var ok=C.typed?[q.r].concat(q.alt||[]).some(function(x){return accepte(m.v,x)}):m.v===q.r;
+ if(ok){var ms=Date.now()-C.t0;var s=C.scores[m.id]||(C.scores[m.id]={name:m.name,pts:0,ms:0});s.name=m.name;s.pts++;s.ms+=ms;hostClore({id:m.id,name:m.name,v:m.v,ms:ms})}
+ else{envoyer({t:'ko',i:C.i,id:m.id});var n=Object.keys(C.joueurs).length;if(n&&Object.keys(C.deja).length>=n)hostClore(null)}}
+function hostClore(w){if(!C.ouvert)return;C.ouvert=false;clearInterval(C.tk);var q=C.q;
+ var rep=w&&C.typed?w.v:q.r;
+ envoyer({t:'res',i:C.i,w:w?{id:w.id,name:w.name}:null,r:q.r,alt:C.typed?(q.alt||[]):[],f:C.typed&&q.qs?'':q.f||'',board:classement().slice(0,5)});
+ document.querySelectorAll('#czone .opt').forEach(function(o){if(o.textContent===q.r)o.classList.add('good')});
+ $('cres').innerHTML=(w?'<div class="win">⚡ '+esc(w.name)+' a trouvé en '+(w.ms/1000).toFixed(1)+' s : '+esc(C.typed?w.v:q.r)+'</div>':'<div class="win none">Personne n\'a trouvé. Réponse : '+esc(q.r)+(C.typed&&q.alt&&q.alt.length?' (ou '+q.alt.map(esc).join(', ')+')':'')+'</div>')+
+  (q.f&&!(C.typed&&q.qs)?'<div class="fb">'+esc(q.f)+'</div>':'')+rendreBoard(5)+
+  '<div class="next"><button class="btn go" id="nx">'+(C.i<25?'Lettre suivante →':'Résultats →')+'</button></div>';
+ $('nx').onclick=hostSuivante;C.to=setTimeout(hostSuivante,PAUSE*1000+(q.f?3000:0))}
+function hostFin(){C.ouvert=false;clearInterval(C.tk);var b=classement();envoyer({t:'end',board:b.slice(0,50)});
+ $('czone').innerHTML='<div class="end"><div class="k">Fin de la course</div><h2>'+(b.length?esc(b[0].name)+' gagne !':'Personne n\'a marqué')+'</h2>'+
+  (b.length?'<p>'+b[0].pts+' bonne'+(b[0].pts>1?'s':'')+' réponse'+(b[0].pts>1?'s':'')+' sur 26</p>':'')+'<div style="max-width:520px;margin:0 auto">'+rendreBoard(10)+'</div>'+
+  '<div class="btns"><button class="btn go" id="rejouer">Nouvelle course, mêmes joueurs</button></div></div>';
+ $('rejouer').onclick=function(){C.scores={};C.i=-1;C.ordre=ORDRE=='az'?LETTRES.slice():shuf(LETTRES);envoyer({t:'reset'});hostSuivante()}}
+
+// ── Joueur ──
+function playerStart(){courseStop();var code=$('cCode').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,''),nom=$('cPseudo').value.trim();
+ if(!code){$('cCode').focus();return}if(!nom){$('cPseudo').focus();return}lsSet('pati-pseudo',nom);
+ show('course');$('cInfo').textContent='Salle '+code;$('czone').innerHTML='<div class="wait"><b>Connexion à la salle '+code+'…</b></div>';
+ chargerSB().then(function(lib){var id=monId();
+  C={role:'player',code:code,id:id,nom:nom,client:lib.createClient(SB.url,SB.key),pts:0,i:-1};
+  C.ch=C.client.channel('az:'+code,{config:{presence:{key:id},broadcast:{self:false}}});
+  C.ch.on('broadcast',{event:'az'},function(m){joueurRecoit(m.payload)});
+  C.ch.subscribe(function(s){if(s==='SUBSCRIBED'){C.ch.track({name:nom});envoyer({t:'hello',id:id});
+    if(C.i<0)$('czone').innerHTML='<div class="wait"><b>Bienvenue, '+esc(nom)+' !</b>Tu es dans la salle '+code+'. La course commence dès que l\'animateur la lance.</div>'}
+   else if(s==='CHANNEL_ERROR'||s==='TIMED_OUT')$('czone').innerHTML='<div class="wait"><b>Connexion impossible</b>Vérifie le code et ta connexion internet.</div>'});
+ }).catch(function(){$('czone').innerHTML='<div class="wait"><b>Connexion impossible</b>Le service temps réel n\'a pas pu être chargé.</div>'})}
+function joueurRecoit(m){if(!C||C.role!=='player')return;
+ if(m.t==='reset'){C.pts=0;C.i=-1;return}
+ if(m.t==='q'){if(m.i===C.i)return;C.i=m.i;C.envoye=false;C.m=m;var t0=Date.now();
+  $('czone').innerHTML='<div class="qbox"><div class="big">'+m.L+'</div><div><div class="meta"><span class="tag n'+m.n+'">'+NIV[m.n]+'</span><span class="tag">'+esc(m.c)+'</span><span class="tag">Mes points : '+C.pts+'</span></div>'+
+   '<div class="q">'+esc(m.q)+'</div><div class="hint">La réponse commence par <b>'+m.L+'</b>. Le premier qui trouve marque le point.</div>'+
+   (m.opts?'<div class="opts">'+m.opts.map(function(o){return '<button class="opt" data-v="'+esc(o)+'">'+esc(o).replace(/^(.)/,'<b>$1</b>')+'</button>'}).join('')+'</div>'
+    :'<form class="typed" id="tf"><input type="text" id="ti" autocomplete="off" placeholder="'+m.L+'…"><button class="btn go">Envoyer</button></form>')+
+   '<div class="bar2"><i id="cbar" style="width:100%"></i></div><div id="cres"></div></div></div>';
+  clearInterval(C.tk);C.tk=setInterval(function(){var r=Math.max(0,m.d-(Date.now()-t0)/1000);if($('cbar'))$('cbar').style.width=(r/m.d*100)+'%'},250);
+  function repondre(v){if(C.envoye)return;C.envoye=true;envoyer({t:'a',i:m.i,id:C.id,name:C.nom,v:v});
+   document.querySelectorAll('#czone .opt').forEach(function(o){o.disabled=true});if($('ti'))$('ti').disabled=true;
+   $('cres').innerHTML='<div class="fb">Réponse envoyée… <b>'+esc(v)+'</b></div>'}
+  if(m.opts)document.querySelectorAll('#czone .opt').forEach(function(b){b.onclick=function(){b.classList.add('on');b.style.borderColor='var(--ocre)';repondre(b.dataset.v)}});
+  else{setTimeout(function(){$('ti')&&$('ti').focus()},50);$('tf').onsubmit=function(e){e.preventDefault();var v=$('ti').value.trim();if(v)repondre(v)}}
+  return}
+ if(m.t==='ko'&&m.id===C.id&&m.i===C.i){$('cres').innerHTML='<div class="fb ko"><strong>Raté !</strong>Attends la prochaine lettre.</div>';return}
+ if(m.t==='res'&&m.i===C.i){clearInterval(C.tk);var moi=m.w&&m.w.id===C.id;if(moi)C.pts++;
+  document.querySelectorAll('#czone .opt').forEach(function(o){o.disabled=true;if(o.dataset.v===m.r)o.classList.add('good')});
+  $('cres').innerHTML=(moi?'<div class="win">⚡ Bravo, tu as été le plus rapide ! +1 point</div>':m.w?'<div class="win none">⚡ '+esc(m.w.name)+' a trouvé avant toi.</div>':'<div class="win none">Personne n\'a trouvé.</div>')+
+   '<div class="fb"><strong>Réponse : '+esc(m.r)+(m.alt&&m.alt.length?' (ou '+m.alt.map(esc).join(', ')+')':'')+'</strong>'+esc(m.f||'')+'</div>';return}
+ if(m.t==='end'){clearInterval(C.tk);var rang=m.board.findIndex(function(x){return x.name===C.nom})+1;
+  $('czone').innerHTML='<div class="end"><div class="k">Fin de la course</div><h2>'+(rang===1?'Tu as gagné !':rang?'Tu finis '+rang+'<sup>e</sup>':'Course terminée')+'</h2><p>'+C.pts+' bonne'+(C.pts>1?'s':'')+' réponse'+(C.pts>1?'s':'')+' en premier</p><div style="max-width:480px;margin:0 auto"><div class="board2">'+
+   m.board.slice(0,10).map(function(x,i){return '<div><span>'+(i+1)+'. '+esc(x.name)+'</span><b>'+x.pts+'</b></div>'}).join('')+'</div></div></div>'}}
+
+// ── Lien direct : ?salle=CODE (joueur) ou ?session=CODE (animateur depuis /session/new) ──
+var PARAMS={};location.search.replace(/[?&]([^=&]+)=([^&]*)/g,function(_,k,v){PARAMS[k]=decodeURIComponent(v)});
+if(PARAMS.salle){document.querySelector('[data-mode=course]').click();document.querySelector('[data-r=player]').click();
+ $('cCode').value=PARAMS.salle.toUpperCase();$('cPseudo').value=lsGet('pati-pseudo','')||''}
+
 // ── Entrée = question suivante, une fois la réponse donnée ──
 document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;
  var t=e.target;if(t&&t.id==='ti'&&!t.disabled)return;
@@ -295,7 +447,7 @@ document.addEventListener('keydown',function(e){if(e.key!=='Enter')return;
  if(b.offsetParent!==null){e.preventDefault();b.click()}});
 
 // ── Chargement de la banque ──
-fetch('questions.json?v=3').then(function(r){return r.json()}).then(function(d){Q=d;
+fetch('questions.json?v=4').then(function(r){return r.json()}).then(function(d){Q=d;
  Q.forEach(function(q){(byL[q.l]=byL[q.l]||[]).push(q)});
  $('stock').textContent=Q.length+' questions sur la Guinée, tirées du contenu PATI : territoires, Conakry, histoire, pionnières, Mandén, Fouta, littérature… Chaque partie tire au hasard parmi les questions que tu n\'as pas encore vues.';
 }).catch(function(){$('stock').textContent='Impossible de charger les questions.';$('start').disabled=true});

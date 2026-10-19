@@ -1,10 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { getSession } from "../lib/session";
 import { Type, ArrowLeft, Maximize2, Minimize2 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
 export default function Almamya() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [fs, setFs] = useState(false);
+  const [params] = useSearchParams();
+  // Classe / forum : le code de session devient le code de « La course » (tout le monde arrive sur ce lien).
+  const [salle, setSalle] = useState<string | null>(params.get("salle"));
+  useEffect(() => {
+    const code = params.get("session");
+    if (!code || params.get("salle")) return;
+    getSession(code).then((s) => { if (s && s.type !== "solo") setSalle(s.code); }).catch(() => {});
+  }, [params]);
+  const src = `/jeux/almamya-zogota/index.html?v=4${salle ? `&salle=${encodeURIComponent(salle)}` : ""}`;
 
   const enter = () => {
     setFs(true);
@@ -45,7 +55,8 @@ export default function Almamya() {
           className={fs ? "fixed inset-0 z-[9999] bg-[#16224A]" : "rounded-[1.5rem] overflow-hidden border-8 border-white shadow-kid bg-[#16224A]"}
         >
           <iframe
-            src="/jeux/almamya-zogota/index.html?v=3"
+            key={src}
+            src={src}
             title="Almamya-Zogota"
             loading="lazy"
             allow="fullscreen"
