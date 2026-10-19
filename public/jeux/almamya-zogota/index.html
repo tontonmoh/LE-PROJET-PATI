@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Almamya-Zogota — la Guinée de A à Z</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Indigo du leppi (teinture du Fouta) + ocre + coton écru */
+:root{--indigo:#16224A;--indigo2:#1E2F62;--indigo3:#2A3F7E;--ecru:#F4ECDD;--ocre:#E8963A;--ocre2:#C9761E;--ciel:#8EC5E8;--vert:#4FB477;--rouge:#E25D4A;--muted:#A9B4D6;--line:#33498C}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+body{font-family:'Figtree',system-ui,sans-serif;color:var(--ecru);background:var(--indigo);
+ background-image:radial-gradient(circle at 12% 18%,rgba(142,197,232,.10) 0 2px,transparent 3px),radial-gradient(circle at 70% 60%,rgba(142,197,232,.07) 0 2px,transparent 3px),
+ repeating-radial-gradient(circle at 85% -10%,rgba(255,255,255,.035) 0 14px,transparent 14px 30px),repeating-radial-gradient(circle at -10% 110%,rgba(255,255,255,.03) 0 12px,transparent 12px 28px);
+ background-size:38px 38px,52px 52px,auto,auto}
+.wrap{max-width:980px;margin:0 auto;padding:18px 14px 40px}
+h1,.disp{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.02em}
+button{font:inherit;cursor:pointer;color:inherit;border:0;background:none}
+.btn{font-weight:700;font-size:15px;padding:12px 18px;border-radius:12px;background:var(--indigo3);border:1px solid var(--line);transition:.15s}
+.btn:hover{border-color:var(--ciel)}
+.btn.go{background:var(--ocre);color:#1a1206;border-color:var(--ocre)}
+.btn.go:hover{background:#f2a54d}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.hidden{display:none!important}
+/* ── Accueil ── */
+.hero{text-align:center;padding:10px 0 16px}
+.hero h1{font-size:clamp(34px,8vw,64px);line-height:.95}
+.hero h1 .a,.hero h1 .z{color:var(--ocre)}
+.hero p{color:var(--muted);margin-top:8px;font-size:15px}
+.alpha{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin:14px auto 4px;max-width:640px}
+.alpha span{font-family:'Bricolage Grotesque';font-weight:800;width:22px;height:22px;display:grid;place-items:center;font-size:12px;border-radius:50%;background:rgba(142,197,232,.12);color:var(--ciel)}
+.panel{max-width:660px;margin:12px auto 0;display:flex;flex-direction:column;gap:16px}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.card{text-align:left;padding:14px;border-radius:14px;background:var(--indigo2);border:1.5px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.card b{font-family:'Bricolage Grotesque';font-size:19px}
+.card span{font-size:13px;color:var(--muted)}
+.card.on{border-color:var(--ocre);background:#2a2f55}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{padding:9px 14px;border-radius:99px;background:var(--indigo2);border:1.5px solid var(--line);font-weight:600;font-size:14px}
+.chip.on{border-color:var(--ocre);background:#2a2f55;color:#fff}
+.chip small{color:var(--muted);font-weight:500}
+input[type=text]{width:100%;font:600 16px 'Figtree';color:var(--ecru);background:var(--indigo2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+input[type=text]:focus{outline:none;border-color:var(--ocre)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.note{color:var(--muted);font-size:12px;text-align:center;line-height:1.5;margin-top:14px}
+/* ── Bandeau ── */
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.top .t{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px}
+.top .t i{font-style:normal;color:var(--ocre)}
+.top .sp{margin-left:auto;display:flex;gap:14px;font-size:13px;color:var(--muted)}
+.top .sp b{font-family:'Bricolage Grotesque';font-size:19px;color:var(--ecru)}
+.strip{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin-bottom:14px}
+.strip span{font-family:'Bricolage Grotesque';font-weight:800;text-align:center;font-size:13px;padding:5px 0;border-radius:7px;background:rgba(255,255,255,.05);color:var(--muted)}
+.strip span.cur{background:var(--ocre);color:#1a1206}
+.strip span.ok{background:var(--vert);color:#06210f}
+.strip span.ko{background:var(--rouge);color:#2a0905}
+/* ── Question ── */
+.qbox{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;background:var(--indigo2);border:1px solid var(--line);border-radius:18px;padding:18px}
+.big{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(64px,14vw,120px);line-height:.85;color:var(--ocre);width:1.1em;text-align:center;text-shadow:0 4px 0 rgba(0,0,0,.25)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:99px;background:rgba(142,197,232,.14);color:var(--ciel)}
+.tag.n1{background:rgba(79,180,119,.18);color:#8fe0ad}.tag.n2{background:rgba(232,150,58,.18);color:#f3b874}.tag.n3{background:rgba(226,93,74,.2);color:#f39a8c}.tag.n4{background:#E25D4A;color:#fff}
+.q{font-size:clamp(17px,2.6vw,21px);font-weight:600;line-height:1.35}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.opt{text-align:left;padding:13px 15px;border-radius:12px;background:var(--indigo3);border:1.5px solid var(--line);font-weight:600;font-size:15.5px;line-height:1.25}
+.opt:hover{border-color:var(--ciel)}
+.opt b{color:var(--ocre);font-family:'Bricolage Grotesque';font-size:18px}
+.opt.good{background:var(--vert);border-color:var(--vert);color:#06210f}.opt.good b{color:#06210f}
+.opt.bad{background:var(--rouge);border-color:var(--rouge);color:#2a0905}.opt.bad b{color:#2a0905}
+.opt[disabled]{pointer-events:none}
+.typed{display:flex;gap:8px;margin-top:14px}
+.typed input{flex:1}
+.fb{margin-top:14px;padding:13px 15px;border-radius:12px;background:rgba(255,255,255,.06);border-left:4px solid var(--ciel);font-size:14.5px;line-height:1.45}
+.fb.ok{border-left-color:var(--vert)}.fb.ko{border-left-color:var(--rouge)}
+.fb strong{display:block;font-size:16px;margin-bottom:3px}
+.fb a{color:var(--ciel);font-weight:700}
+.next{display:flex;justify-content:flex-end;margin-top:12px;gap:8px}
+/* ── Duel ── */
+.players{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.pl{padding:10px 14px;border-radius:14px;background:var(--indigo2);border:2px solid transparent;display:flex;justify-content:space-between;align-items:center}
+.pl b{font-family:'Bricolage Grotesque';font-size:18px}
+.pl .pts{font-family:'Bricolage Grotesque';font-weight:800;font-size:26px}
+.pl.turn{border-color:currentColor}
+.p1{color:#F4B266}.p2{color:#8EC5E8}
+.board{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.tile{aspect-ratio:1;border-radius:14px;background:var(--indigo2);border:1.5px solid var(--line);font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(22px,5vw,36px);display:grid;place-items:center;position:relative}
+.tile:hover{border-color:var(--ocre)}
+.tile small{position:absolute;bottom:4px;font:600 10px 'Figtree';color:var(--muted)}
+.tile.t1{background:#F4B266;color:#2a1600;border-color:#F4B266}
+.tile.t2{background:#8EC5E8;color:#0a2233;border-color:#8EC5E8}
+.tile.burn{opacity:.28;pointer-events:none}
+.tile.t1,.tile.t2{pointer-events:none}
+.pick{margin-top:14px;padding:14px;border-radius:14px;background:var(--indigo2);border:1px solid var(--line)}
+.pick h3{font-family:'Bricolage Grotesque';font-size:18px;margin-bottom:8px}
+/* ── Fin ── */
+.end{text-align:center;padding:24px 10px}
+.end .k{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ocre);font-weight:700}
+.end h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(36px,9vw,64px);margin:6px 0}
+.end p{color:var(--muted);font-size:16px}
+.end .stats{display:flex;justify-content:center;gap:22px;margin:16px 0}
+.end .stats div{display:flex;flex-direction:column}
+.end .stats b{font-family:'Bricolage Grotesque';font-size:34px;color:var(--ecru)}
+.end .btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.recap{max-width:640px;margin:16px auto 0;text-align:left;font-size:13.5px;color:var(--muted);line-height:1.6}
+.recap b{color:var(--ecru)}
+@media (max-width:560px){.cards,.opts,.duo{grid-template-columns:1fr}.qbox{grid-template-columns:1fr;gap:4px}.big{width:auto;text-align:left;font-size:64px}.board{grid-template-columns:repeat(6,1fr)}.strip{grid-template-columns:repeat(9,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="wrap">
+
+<!-- ═══ ACCUEIL ═══ -->
+<section id="home">
+ <div class="hero">
+  <h1><span class="a">A</span>lmamya-<span class="z">Z</span>ogota</h1>
+  <p>Le quiz de la Guinée, de A à Z. Chaque réponse commence par une lettre de l'alphabet.</p>
+  <div class="alpha" id="alpha"></div>
+ </div>
+ <div class="panel">
+  <div><div class="lbl">1 · Le jeu</div>
+   <div class="cards">
+    <button class="card on" data-mode="solo"><b>L'alphabet</b><span>26 lettres, une question par lettre. Toujours de nouvelles questions.</span></button>
+    <button class="card" data-mode="duel"><b>Le défi à deux</b><span>Chacun choisit ses lettres et son niveau. La meilleure prise gagne.</span></button>
+   </div></div>
+  <div id="optSolo">
+   <div class="lbl">2 · Le niveau</div>
+   <div class="chips" id="niv">
+    <button class="chip" data-n="1">Facile</button><button class="chip" data-n="2">Moyen</button><button class="chip" data-n="3">Difficile</button>
+    <button class="chip" data-n="4">Extrême <small>· réponse à écrire</small></button>
+    <button class="chip on" data-n="p">Progressif <small>· de facile à extrême</small></button>
+   </div>
+   <div class="chips" id="ordre" style="margin-top:10px">
+    <button class="chip on" data-o="az">De A à Z</button><button class="chip" data-o="mix">Lettres mélangées</button>
+   </div>
+   <div style="margin-top:14px"><div class="lbl">3 · Ton surnom <span style="text-transform:none;letter-spacing:0;color:var(--muted);font-weight:500">(pour le classement)</span></div>
+    <input type="text" id="pseudo" maxlength="20" placeholder="Ex. : Loffo" style="margin-top:8px"></div>
+  </div>
+  <div id="optDuel" class="hidden">
+   <div class="lbl">2 · Les joueurs</div>
+   <div class="duo" style="margin-top:8px"><input type="text" id="j1" maxlength="16" placeholder="Joueur 1"><input type="text" id="j2" maxlength="16" placeholder="Joueur 2"></div>
+   <p class="hint" style="margin-top:8px">À tour de rôle, chacun choisit une lettre libre et un niveau : Facile 1 pt, Moyen 2, Difficile 3, Extrême 5. Bonne réponse : la lettre est à toi. Mauvaise réponse : elle est brûlée.</p>
+  </div>
+  <button class="btn go" id="start" style="font-size:17px;padding:15px">Commencer à A →</button>
+  <p class="note" id="stock"></p>
+ </div>
+</section>
+
+<!-- ═══ JEU SOLO ═══ -->
+<section id="solo" class="hidden">
+ <div class="top"><div class="t"><i>A</i>lmamya-<i>Z</i>ogota</div>
+  <div class="sp"><span>Score <b id="sScore">0</b></span><span>Temps <b id="sTime">0:00</b></span></div></div>
+ <div class="strip" id="strip"></div>
+ <div id="qzone"></div>
+ <div class="next"><button class="btn" id="quit">Menu</button></div>
+</section>
+
+<!-- ═══ DUEL ═══ -->
+<section id="duel" class="hidden">
+ <div class="top"><div class="t"><i>A</i>lmamya-<i>Z</i>ogota · le défi</div><div class="sp"><button class="btn" id="quit2" style="padding:7px 12px">Menu</button></div></div>
+ <div class="players"><div class="pl p1" id="pl1"><b id="n1">Joueur 1</b><span class="pts" id="pt1">0</span></div><div class="pl p2" id="pl2"><b id="n2">Joueur 2</b><span class="pts" id="pt2">0</span></div></div>
+ <div id="dzone"></div>
+</section>
+
+<!-- ═══ FIN ═══ -->
+<section id="end" class="hidden"><div class="end" id="endBox"></div></section>
+
+</div>
+<script>
+var LETTRES='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+var NIV=['','Facile','Moyen','Difficile','Extrême'];
+var PTS={1:1,2:2,3:3,4:5};
+var Q=[],byL={};
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.random()*(i+1)|0,t=a[i];a[i]=a[j];a[j]=t}return a}
+function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function norm(s){return String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/^(l'|l’|le |la |les |un |une |hadja |el hadj |dr )+/,'').replace(/\(.*?\)/g,'').replace(/[^a-z0-9]/g,'')}
+function lev(a,b){var m=a.length,n=b.length,d=[];for(var i=0;i<=m;i++){d[i]=[i]}for(var j=1;j<=n;j++)d[0][j]=j;
+ for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[m][n]}
+function accepte(saisi,rep){var a=norm(saisi),b=norm(rep);if(!a)return false;
+ var tol=b.length>=10?2:(b.length>=5?1:0);if(lev(a,b)<=tol)return true;
+ var mots=rep.replace(/\(.*?\)/g,'').trim().split(/\s+/);
+ if(mots.length>1){var dernier=norm(mots[mots.length-1]);if(dernier.length>=4&&lev(a,dernier)<=(dernier.length>=7?1:0))return true}
+ return false}
+
+// ── Tirage sans répétition : on mémorise les questions déjà vues ──
+var vus=lsGet('az-vus',[]);
+function marquer(id){vus.push(id);if(vus.length>900)vus=vus.slice(-900);lsSet('az-vus',vus)}
+function tirer(L,n,saisie){
+ var pool=byL[L]||[];if(!pool.length)return null;
+ var ordre=n==4?[3,2,1]:[n,n+1,n-1,n+2,n-2].filter(function(x){return x>=1&&x<=3});
+ for(var k=0;k<ordre.length;k++){
+  var c=pool.filter(function(q){return q.n==ordre[k]&&(saisie||!q.saisie)});
+  if(!c.length)continue;
+  var neufs=c.filter(function(q){return vus.indexOf(q.id)<0});
+  if(!neufs.length){var ids=c.map(function(q){return q.id});vus=vus.filter(function(v){return ids.indexOf(v)<0});neufs=c}
+  return neufs[Math.random()*neufs.length|0]}
+ if(!saisie)return tirer(L,4,true);
+ return pool[Math.random()*pool.length|0]}
+
+// ── Affichage d'une question ──
+function rendreQuestion(zone,L,q,mode,fin){
+ var typed=mode==4||q.saisie, html='<div class="qbox"><div class="big">'+L+'</div><div>'+
+  '<div class="meta"><span class="tag n'+(typed?4:q.n)+'">'+NIV[typed?4:q.n]+'</span><span class="tag">'+esc(q.c)+'</span></div>'+
+  '<div class="q">'+esc(q.q)+'</div><div class="hint">La réponse commence par <b>'+L+'</b>.</div>';
+ if(typed){html+='<form class="typed" id="tf"><input type="text" id="ti" autocomplete="off" placeholder="'+L+'…"><button class="btn go">Valider</button></form>'}
+ else{var opts=shuf([q.r].concat(q.o));html+='<div class="opts">'+opts.map(function(o){return '<button class="opt" data-v="'+esc(o)+'">'+esc(o).replace(/^(.)/,'<b>$1</b>')+'</button>'}).join('')+'</div>'}
+ html+='<div id="fbz"></div></div></div>';zone.innerHTML=html;
+ function verdict(ok,donne){
+  var f='<div class="fb '+(ok?'ok':'ko')+'"><strong>'+(ok?'Bonne réponse !':'Raté. La réponse était : '+esc(q.r))+'</strong>'+esc(q.f||'')+
+   (q.s?' <a href="'+esc(q.s)+'" target="_top">En savoir plus sur PATI →</a>':'')+'</div>';
+  $('fbz').innerHTML=f;marquer(q.id);fin(ok,typed);
+ }
+ if(typed){var inp=$('ti');setTimeout(function(){inp.focus()},50);
+  $('tf').onsubmit=function(e){e.preventDefault();if(!inp.value.trim())return;var ok=accepte(inp.value,q.r);inp.disabled=true;this.querySelector('button').disabled=true;verdict(ok)}}
+ else zone.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){var ok=b.dataset.v===q.r;
+  zone.querySelectorAll('.opt').forEach(function(x){x.disabled=true;if(x.dataset.v===q.r)x.classList.add('good')});if(!ok)b.classList.add('bad');verdict(ok)}});
+}
+
+// ── Accueil ──
+var MODE='solo',NIVEAU='p',ORDRE='az';
+$('alpha').innerHTML=LETTRES.map(function(l){return '<span>'+l+'</span>'}).join('');
+document.querySelectorAll('[data-mode]').forEach(function(b){b.onclick=function(){MODE=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(function(x){x.classList.toggle('on',x===b)});
+ $('optSolo').classList.toggle('hidden',MODE!='solo');$('optDuel').classList.toggle('hidden',MODE!='duel');majStart()}});
+document.querySelectorAll('[data-n]').forEach(function(b){b.onclick=function(){NIVEAU=b.dataset.n;document.querySelectorAll('[data-n]').forEach(function(x){x.classList.toggle('on',x===b)})}});
+document.querySelectorAll('[data-o]').forEach(function(b){b.onclick=function(){ORDRE=b.dataset.o;document.querySelectorAll('[data-o]').forEach(function(x){x.classList.toggle('on',x===b)});majStart()}});
+function majStart(){$('start').textContent=MODE=='duel'?'Lancer le défi →':(ORDRE=='az'?'Commencer à A →':'Tirer la première lettre →')}
+$('pseudo').value=lsGet('pati-pseudo','')||'';
+function show(id){['home','solo','duel','end'].forEach(function(s){$(s).classList.toggle('hidden',s!==id)});window.scrollTo(0,0)}
+$('quit').onclick=$('quit2').onclick=function(){clearInterval(tick);show('home')};
+$('start').onclick=function(){MODE=='solo'?soloStart():duelStart()};
+
+// ── Mode solo ──
+var S,tick;
+function nivPour(i){if(NIVEAU!='p')return +NIVEAU;return i<7?1:i<14?2:i<20?3:4}
+function soloStart(){var p=$('pseudo').value.trim();lsSet('pati-pseudo',p);
+ S={ordre:ORDRE=='az'?LETTRES.slice():shuf(LETTRES),i:0,score:0,res:{},t0:null,sec:0,pseudo:p};
+ $('strip').innerHTML=LETTRES.map(function(l){return '<span id="st'+l+'">'+l+'</span>'}).join('');
+ $('sScore').textContent='0';$('sTime').textContent='0:00';show('solo');
+ clearInterval(tick);S.t0=Date.now();tick=setInterval(function(){S.sec=(Date.now()-S.t0)/1000;var s=Math.floor(S.sec);$('sTime').textContent=Math.floor(s/60)+':'+('0'+s%60).slice(-2)},500);
+ soloQ()}
+function soloQ(){var L=S.ordre[S.i],n=nivPour(S.i);
+ document.querySelectorAll('.strip span').forEach(function(x){x.classList.remove('cur')});$('st'+L).classList.add('cur');
+ var q=tirer(L,n,n==4);if(!q){S.i++;return S.i<26?soloQ():soloFin()}
+ rendreQuestion($('qzone'),L,q,n,function(ok,typed){
+  var pts=ok?PTS[typed?4:q.n]:0;S.score+=pts;S.res[L]={ok:ok,q:q};$('sScore').textContent=S.score;
+  var st=$('st'+L);st.classList.remove('cur');st.classList.add(ok?'ok':'ko');
+  var nx=document.createElement('div');nx.className='next';nx.innerHTML='<button class="btn go">'+(S.i<25?'Lettre suivante →':'Voir mon résultat →')+'</button>';
+  $('qzone').appendChild(nx);var b=nx.querySelector('button');b.focus();
+  b.onclick=function(){S.i++;S.i<26?soloQ():soloFin()}})}
+function soloFin(){clearInterval(tick);var bons=LETTRES.filter(function(l){return S.res[l]&&S.res[l].ok}).length;
+ var s=Math.round(S.sec),t=Math.floor(s/60)+' min '+('0'+s%60).slice(-2);
+ var rates=LETTRES.filter(function(l){return S.res[l]&&!S.res[l].ok});
+ $('endBox').innerHTML='<div class="k">De A à Z</div><h2>'+bons+' / 26</h2><p>'+(bons>=22?'Une encyclopédie vivante de la Guinée !':bons>=14?'Beau parcours. La Guinée n\'a presque plus de secrets pour toi.':'Chaque partie tire de nouvelles questions : rejoue pour apprendre encore.')+'</p>'+
+  '<div class="stats"><div><b>'+S.score+'</b>points</div><div><b>'+t+'</b>temps</div></div>'+
+  (rates.length?'<div class="recap"><b>À retenir :</b><br>'+rates.map(function(l){return '<b>'+l+'</b> · '+esc(S.res[l].q.r)}).join('<br>')+'</div>':'')+
+  '<div class="btns"><button class="btn go" id="again">Rejouer avec de nouvelles questions</button><button class="btn" id="home2">Menu</button></div>';
+ show('end');$('again').onclick=soloStart;$('home2').onclick=function(){show('home')};
+ try{parent.postMessage({type:'pati-progress',kind:'defi',seconds:S.sec,name:S.pseudo||'Anonyme',score:S.score,bonnes:bons,niveau:NIVEAU},'*')}catch(e){}
+}
+
+// ── Mode défi à deux ──
+var Dl;
+function duelStart(){Dl={n:[$('j1').value.trim()||'Joueur 1',$('j2').value.trim()||'Joueur 2'],p:[0,0],tour:0,etat:{}};
+ $('n1').textContent=Dl.n[0];$('n2').textContent=Dl.n[1];show('duel');duelBoard()}
+function duelMaj(){$('pt1').textContent=Dl.p[0];$('pt2').textContent=Dl.p[1];$('pl1').classList.toggle('turn',Dl.tour==0);$('pl2').classList.toggle('turn',Dl.tour==1)}
+function duelBoard(){duelMaj();var libres=LETTRES.filter(function(l){return !Dl.etat[l]});if(!libres.length)return duelFin();
+ $('dzone').innerHTML='<p class="hint" style="margin-bottom:10px"><b style="color:'+(Dl.tour?'#8EC5E8':'#F4B266')+'">'+esc(Dl.n[Dl.tour])+'</b>, choisis une lettre.</p><div class="board">'+
+  LETTRES.map(function(l){var e=Dl.etat[l];return '<button class="tile'+(e?(e=='x'?' burn':' t'+e):'')+'" data-l="'+l+'">'+l+'</button>'}).join('')+'</div><div id="pickz"></div>';
+ document.querySelectorAll('.tile[data-l]').forEach(function(t){t.onclick=function(){duelNiveau(t.dataset.l)}})}
+function duelNiveau(L){$('pickz').innerHTML='<div class="pick"><h3>Lettre '+L+' : quel niveau ?</h3><div class="chips">'+
+ [1,2,3,4].map(function(n){return '<button class="chip" data-dn="'+n+'">'+NIV[n]+' <small>· '+PTS[n]+' pt'+(PTS[n]>1?'s':'')+'</small></button>'}).join('')+'</div></div>';
+ document.querySelectorAll('[data-dn]').forEach(function(b){b.onclick=function(){duelQ(L,+b.dataset.dn)}});$('pickz').scrollIntoView({behavior:'smooth',block:'center'})}
+function duelQ(L,n){var q=tirer(L,n,n==4);if(!q){Dl.etat[L]='x';return duelBoard()}
+ rendreQuestion($('dzone'),L,q,n,function(ok,typed){var pts=PTS[typed?4:n];
+  if(ok){Dl.p[Dl.tour]+=pts;Dl.etat[L]=String(Dl.tour+1)}else Dl.etat[L]='x';duelMaj();
+  var nx=document.createElement('div');nx.className='next';nx.innerHTML='<button class="btn go">Au tour de '+esc(Dl.n[1-Dl.tour])+' →</button>';$('dzone').appendChild(nx);
+  nx.querySelector('button').onclick=function(){Dl.tour=1-Dl.tour;duelBoard()}})}
+function duelFin(){var a=Dl.p[0],b=Dl.p[1],w=a==b?null:(a>b?0:1);
+ var l1=LETTRES.filter(function(l){return Dl.etat[l]=='1'}).join(' '),l2=LETTRES.filter(function(l){return Dl.etat[l]=='2'}).join(' ');
+ $('endBox').innerHTML='<div class="k">Fin du défi</div><h2>'+(w===null?'Égalité !':esc(Dl.n[w])+' gagne')+'</h2>'+
+  '<div class="stats"><div><b class="p1">'+a+'</b>'+esc(Dl.n[0])+'</div><div><b class="p2">'+b+'</b>'+esc(Dl.n[1])+'</div></div>'+
+  '<div class="recap"><b>'+esc(Dl.n[0])+' :</b> '+(l1||'—')+'<br><b>'+esc(Dl.n[1])+' :</b> '+(l2||'—')+'</div>'+
+  '<div class="btns"><button class="btn go" id="again">Revanche</button><button class="btn" id="home2">Menu</button></div>';
+ show('end');$('again').onclick=duelStart;$('home2').onclick=function(){show('home')}}
+
+// ── Chargement de la banque ──
+fetch('questions.json').then(function(r){return r.json()}).then(function(d){Q=d;
+ Q.forEach(function(q){(byL[q.l]=byL[q.l]||[]).push(q)});
+ $('stock').textContent=Q.length+' questions sur la Guinée, tirées du contenu PATI : territoires, Conakry, histoire, pionnières, Mandén, Fouta, littérature… Chaque partie tire au hasard parmi les questions que tu n\'as pas encore vues.';
+}).catch(function(){$('stock').textContent='Impossible de charger les questions.';$('start').disabled=true});
+</script></body></html>

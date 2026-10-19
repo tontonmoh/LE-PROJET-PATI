@@ -96,6 +96,7 @@ const Momes = lazy(() => import("./pages/Momes"));
 const Imagier = lazy(() => import("./pages/Imagier"));
 const Marche = lazy(() => import("./pages/Marche"));
 const Hymne = lazy(() => import("./pages/Hymne"));
+const Almamya = lazy(() => import("./pages/Almamya"));
 const SIMPLE = ["a-propos", "partenaires", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
 // QR des panneaux de l'expo : /p/01 → /pionnieres/<slug> (redirection modifiable sans réimprimer)
@@ -149,6 +150,7 @@ export default function App() {
             <Route path="/imagier" element={<Imagier />} />
             <Route path="/marche" element={<Marche />} />
             <Route path="/hymne" element={<Hymne />} />
+            <Route path="/almamya" element={<Almamya />} />
             <Route path="/gabarit-test" element={<EpisodeGabarit />} />
             <Route path="/serie/taadidi" element={<Navigate to="/univers/taadidi" replace />} />
             <Route path="/serie/generation-2040" element={<SerieG2040 />} />

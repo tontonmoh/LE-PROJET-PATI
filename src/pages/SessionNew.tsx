@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music, Type,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -104,6 +104,13 @@ const JEUX: Jeu[] = [
     label: "Chante LIBERTÉ — L'hymne national",
     section: "pati", icon: Music, accent: "#CE1126",
     playPrefix: "/hymne", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "almamya", slug: "almamya-zogota", jeu: "quiz-az",
+    visual: "/images/jeux/almamya.webp",
+    label: "Almamya-Zogota — La Guinée de A à Z",
+    section: "pati", icon: Type, accent: "#16224A",
+    playPrefix: "/almamya", withCodeInPath: false, hasLiveScores: false,
   },
   // ── SENAG ───────────────────────────────────────────────────────────────
   {

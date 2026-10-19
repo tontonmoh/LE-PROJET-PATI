@@ -1,0 +1,1277 @@
+[
+{
+"c": "Histoire",
+"n": 1,
+"q": "Qui fut le premier président de la République de Guinée ?",
+"r": "Ahmed Sékou Touré",
+"o": [
+"Alpha Condé",
+"Ahmadou Ahidjo",
+"Amílcar Cabral"
+],
+"f": "Ahmed Sékou Touré dirige la Guinée de l'indépendance (1958) à sa mort en 1984.",
+"s": "/horoya"
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "Quel roi de Labé résista à la colonisation française et mourut en exil en 1912 ?",
+"r": "Alpha Yaya Diallo",
+"o": [
+"Alfa Ibrahima Sambégou",
+"Almamy Bocar Biro",
+"Alfa Issaga"
+],
+"f": "Alpha Yaya Diallo, roi de Labé, est déporté par les Français et meurt en exil en 1912.",
+"s": "/fouta"
+},
+{
+"c": "Fouta",
+"n": 1,
+"q": "Quel titre portait le chef suprême du Fouta-Djalon théocratique ?",
+"r": "Almamy",
+"o": [
+"Askia",
+"Amenokal",
+"Asantehene"
+],
+"f": "L'Almamy, chef suprême du Fouta, siégeait à Timbo. Le pouvoir alternait entre deux familles.",
+"s": "/fouta"
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "Avant 1958, la Guinée faisait partie de quelle fédération coloniale française ?",
+"r": "Afrique-Occidentale française",
+"o": [
+"Afrique-Équatoriale française",
+"Afrique orientale allemande",
+"Algérie française"
+],
+"f": "La Guinée française était l'un des territoires de l'AOF, gouvernée depuis Dakar.",
+"s": "/horoya"
+},
+{
+"c": "Ressources",
+"n": 1,
+"q": "Quel minerai, dont la Guinée possède parmi les plus grandes réserves du monde, est exporté depuis Kamsar ?",
+"r": "Bauxite",
+"o": [
+"Basalte",
+"Béryl",
+"Bronze"
+],
+"f": "La bauxite sert à fabriquer l'aluminium. Le port minéralier de Kamsar l'exporte depuis les années 1970.",
+"s": "/laguine"
+},
+{
+"c": "Musique",
+"n": 2,
+"q": "Quel orchestre national, fondé à Beyla en 1961, a rendu célèbre le guitariste Sékou « Diamond Fingers » Diabaté ?",
+"r": "Bembeya Jazz National",
+"o": [
+"Balla et ses Baladins",
+"Baobab (Orchestra Baobab)",
+"Bozambo Jazz"
+],
+"f": "Le Bembeya Jazz National est l'un des orchestres phares de la politique culturelle des années 1960-1970."
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Quel fleuve naît au Fouta-Djalon et forme la branche principale du fleuve Sénégal ?",
+"r": "Bafing",
+"o": [
+"Bakoye",
+"Bani",
+"Baoulé"
+],
+"f": "Le Bafing (« fleuve noir ») prend sa source au Fouta-Djalon et rejoint le Bakoye au Mali pour former le Sénégal.",
+"s": "/laguine"
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quelle est la capitale de la République de Guinée ?",
+"r": "Conakry",
+"o": [
+"Cotonou",
+"Casablanca",
+"Coyah"
+],
+"f": "Conakry, sur la presqu'île de Kaloum, compte aujourd'hui 13 communes.",
+"s": "/konakri"
+},
+{
+"c": "Culture",
+"n": 1,
+"q": "Quelle noix offre-t-on en signe de respect, d'alliance et de paix ?",
+"r": "Cola",
+"o": [
+"Cajou",
+"Coco",
+"Café"
+],
+"f": "La cola se partage lors des mariages, des baptêmes et des réconciliations. Un livre PATI lui est consacré.",
+"s": "/livre/secret-cola"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Quelle ville de Basse-Guinée est célèbre pour son eau minérale ?",
+"r": "Coyah",
+"o": [
+"Conakry",
+"Corréra",
+"Coronthie"
+],
+"f": "Coyah, à une cinquantaine de kilomètres de Conakry, a donné son nom à une eau minérale connue dans tout le pays."
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Quelle ville du Fouta-Djalon est réputée pour son climat frais, ses pins et ses villas coloniales ?",
+"r": "Dalaba",
+"o": [
+"Dabola",
+"Dinguiraye",
+"Dubréka"
+],
+"f": "Perchée à plus de 1 000 m d'altitude, Dalaba est une station climatique depuis l'époque coloniale.",
+"s": "/laguine"
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "Dans quelle ville El Hadj Omar Tall a-t-il fait bâtir sa célèbre mosquée au XIXe siècle ?",
+"r": "Dinguiraye",
+"o": [
+"Dalaba",
+"Dabola",
+"Dubréka"
+],
+"f": "El Hadj Omar Tall s'installe à Dinguiraye vers 1849 avant de lancer ses conquêtes.",
+"s": "/laguine"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Dans quelle préfecture se trouvent les chutes de la Soumba et le rocher du « Chien qui fume » ?",
+"r": "Dubréka",
+"o": [
+"Dalaba",
+"Dinguiraye",
+"Dabola"
+],
+"f": "Au pied du Kakoulima, Dubréka offre la cascade de la Soumba et la silhouette du Chien qui fume.",
+"s": "/laguine"
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Quel est le nom mandingue du fleuve Niger ?",
+"r": "Djoliba",
+"o": [
+"Diani",
+"Dion",
+"Djoué"
+],
+"f": "Djoliba est le nom du Niger en maninka. Le fleuve prend sa source en Guinée."
+},
+{
+"c": "Culture",
+"n": 2,
+"q": "Que signifie « syli », le nom de l'ancienne monnaie guinéenne et le surnom de l'équipe nationale ?",
+"r": "Éléphant",
+"o": [
+"Épervier",
+"Écureuil",
+"Étoile"
+],
+"f": "Syli veut dire éléphant en soussou. Le syli a servi de monnaie de 1972 à 1986."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel massif est surnommé le « château d'eau de l'Afrique de l'Ouest » ?",
+"r": "Fouta-Djalon",
+"o": [
+"Fouta-Toro",
+"Faranah",
+"Forécariah"
+],
+"f": "Le Gambie, le Sénégal (par le Bafing) et plusieurs affluents du Niger naissent au Fouta-Djalon.",
+"s": "/fouta"
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Dans quelle préfecture le fleuve Niger prend-il sa source ?",
+"r": "Faranah",
+"o": [
+"Fria",
+"Forécariah",
+"Fougoumba"
+],
+"f": "Le Niger naît à Tembakounda, dans la préfecture de Faranah, près de la frontière sierra-léonaise.",
+"s": "/laguine"
+},
+{
+"c": "Ressources",
+"n": 3,
+"q": "Dans quelle ville a été mise en service, en 1960, la première usine d'alumine d'Afrique ?",
+"r": "Fria",
+"o": [
+"Faranah",
+"Forécariah",
+"Fougoumba"
+],
+"f": "L'usine de Fria transforme la bauxite en alumine dès 1960.",
+"s": "/laguine"
+},
+{
+"c": "Culture",
+"n": 2,
+"q": "Qui fonda en 1952 les Ballets africains, devenus troupe nationale de Guinée ?",
+"r": "Fodéba Keïta",
+"o": [
+"Fodé Kaba",
+"Fakoli Koroma",
+"Fanta Damba"
+],
+"f": "Keïta Fodéba crée les Ballets africains à Paris, puis la troupe devient nationale après l'indépendance."
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Quel fleuve naît au Fouta-Djalon, près de Labé, et se jette dans l'Atlantique à Banjul ?",
+"r": "Gambie",
+"o": [
+"Géba",
+"Gorgol",
+"Grand Bassam"
+],
+"f": "Le fleuve Gambie traverse le Sénégal et la Gambie avant d'atteindre l'océan.",
+"s": "/fouta"
+},
+{
+"c": "Conakry",
+"n": 2,
+"q": "Dans quelle commune de Conakry se trouve l'aéroport international ?",
+"r": "Gbessia",
+"o": [
+"Gaoual",
+"Guéckédou",
+"Gaya"
+],
+"f": "L'aéroport de Conakry est situé à Gbessia, devenue commune en 2024.",
+"s": "/konakri"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Quelle ville de Guinée forestière accueille un grand marché hebdomadaire, près des frontières avec la Sierra Leone et le Libéria ?",
+"r": "Guéckédou",
+"o": [
+"Gaoual",
+"Gbessia",
+"Gueasso"
+],
+"f": "Le marché de Guéckédou attire des commerçants des trois pays voisins.",
+"s": "/laguine"
+},
+{
+"c": "Histoire",
+"n": 1,
+"q": "Quel mot, qui signifie liberté et dignité, a donné son nom à un journal et à un club de football guinéens ?",
+"r": "Horoya",
+"o": [
+"Hafia",
+"Harmattan",
+"Hamdallaye"
+],
+"f": "Horoya est le mot de l'indépendance. PATI lui consacre une encyclopédie.",
+"s": "/horoya"
+},
+{
+"c": "Sport",
+"n": 2,
+"q": "Quel club de Conakry a remporté trois fois la Coupe d'Afrique des clubs champions dans les années 1970 ?",
+"r": "Hafia FC",
+"o": [
+"Horoya AC",
+"Hearts of Oak",
+"Hassania d'Agadir"
+],
+"f": "Le Hafia FC est champion d'Afrique en 1972, 1975 et 1977."
+},
+{
+"c": "Climat",
+"n": 1,
+"q": "Comment s'appelle le vent sec et poussiéreux qui souffle du Sahara pendant la saison sèche ?",
+"r": "Harmattan",
+"o": [
+"Hivernage",
+"Houle",
+"Horoya"
+],
+"f": "L'harmattan souffle de décembre à février et voile le ciel de poussière."
+},
+{
+"c": "Climat",
+"n": 1,
+"q": "Quel nom donne-t-on souvent à la saison des pluies en Afrique de l'Ouest ?",
+"r": "Hivernage",
+"o": [
+"Harmattan",
+"Houle",
+"Hamada"
+],
+"f": "L'hivernage va en gros de mai à octobre. Conakry est l'une des capitales les plus pluvieuses d'Afrique."
+},
+{
+"c": "Histoire",
+"n": 1,
+"q": "Qu'a proclamé la Guinée le 2 octobre 1958 ?",
+"r": "Indépendance",
+"o": [
+"Insurrection",
+"Intégration",
+"Investiture"
+],
+"f": "Après le « Non » du 28 septembre 1958, la Guinée proclame son indépendance le 2 octobre.",
+"s": "/horoya"
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel archipel fait face à Conakry, avec les îles Kassa, Tamara et Room ?",
+"r": "Îles de Loos",
+"o": [
+"Îles Bijagos",
+"Îles Banana",
+"Îles du Cap-Vert"
+],
+"f": "Les îles de Loos sont à quelques kilomètres de Kaloum, accessibles en pirogue.",
+"s": "/konakri"
+},
+{
+"c": "Pionnières",
+"n": 2,
+"q": "Quelle Guinéenne fut, en 1972, la première femme à présider le Conseil de sécurité de l'ONU ?",
+"r": "Jeanne Martin Cissé",
+"o": [
+"Joséphine Lenaud Guilao",
+"Jacqueline Sultan"
+],
+"f": "Jeanne Martin Cissé, ambassadrice de Guinée à l'ONU, préside le Conseil de sécurité en 1972.",
+"s": "/pionnieres/jeanne-martin-cisse"
+},
+{
+"c": "Conakry",
+"n": 1,
+"q": "Comment s'appelle la presqu'île, centre historique de Conakry, où siègent la présidence et les ministères ?",
+"r": "Kaloum",
+"o": [
+"Kassa",
+"Kagbélén",
+"Kipé"
+],
+"f": "Kaloum est la pointe de la presqu'île de Conakry.",
+"s": "/konakri"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Dans quelle ville de Haute-Guinée se trouve l'université Julius-Nyerere ?",
+"r": "Kankan",
+"o": [
+"Kindia",
+"Kissidougou",
+"Kouroussa"
+],
+"f": "Kankan, au bord du Milo, est la grande ville de Haute-Guinée.",
+"s": "/laguine"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Quelle ville abrite Pastoria, l'institut réputé pour ses serpents et ses sérums antivenimeux ?",
+"r": "Kindia",
+"o": [
+"Kankan",
+"Kissidougou",
+"Koundara"
+],
+"f": "L'institut Pasteur de Kindia, surnommé Pastoria, est fondé dans les années 1920.",
+"s": "/laguine"
+},
+{
+"c": "Conakry",
+"n": 3,
+"q": "Comment s'appellent les grottes sacrées de la commune de Ratoma, à Conakry ?",
+"r": "Kakimbon",
+"o": [
+"Kakoulima",
+"Kaporo",
+"Kassa"
+],
+"f": "Les grottes de Kakimbon sont un lieu de mémoire baga, au bord de la mer.",
+"s": "/konakri"
+},
+{
+"c": "Géographie",
+"n": 3,
+"q": "Quel mont domine la ville de Dubréka ?",
+"r": "Kakoulima",
+"o": [
+"Kakimbon",
+"Kounounkan",
+"Kaloum"
+],
+"f": "Le Kakoulima, près de Dubréka, culmine à environ 1 000 m."
+},
+{
+"c": "Musique",
+"n": 1,
+"q": "Quel instrument mandingue à 21 cordes, fait d'une grande calebasse, accompagne les griots ?",
+"r": "Kora",
+"o": [
+"Krin",
+"Kalimba",
+"Karignan"
+],
+"f": "La kora est la harpe-luth des djélis du Manden.",
+"s": "/mansaya"
+},
+{
+"c": "Énergie",
+"n": 2,
+"q": "Sur quel fleuve ont été construits les barrages de Kaléta et de Souapiti ?",
+"r": "Konkouré",
+"o": [
+"Kolenté",
+"Kogon",
+"Kakrima"
+],
+"f": "Le Konkouré, né au Fouta-Djalon, est le fleuve de l'hydroélectricité guinéenne.",
+"s": "/laguine"
+},
+{
+"c": "Énergie",
+"n": 3,
+"q": "Quel barrage hydroélectrique, inauguré en 2015 sur le Konkouré, a amélioré l'électricité de Conakry ?",
+"r": "Kaléta",
+"o": [
+"Kinkon",
+"Kakimbon",
+"Kassa"
+],
+"f": "Kaléta produit 240 mégawatts. Souapiti, plus en amont, a suivi.",
+"s": "/laguine"
+},
+{
+"c": "Territoires",
+"n": 1,
+"q": "Quelle ville est considérée comme la capitale du Fouta-Djalon ?",
+"r": "Labé",
+"o": [
+"Lola",
+"Lélouma",
+"Linsan"
+],
+"f": "Labé est la grande ville du Fouta-Djalon et la capitale de la région du même nom.",
+"s": "/laguine"
+},
+{
+"c": "Pionnières",
+"n": 2,
+"q": "Qui fut la première femme membre d'un gouvernement guinéen ?",
+"r": "Loffo Camara",
+"o": [
+"Lansana Béavogui",
+"Léopold Sédar Senghor"
+],
+"f": "Loffo Camara est présentée par le Mémorial Horoya comme la première femme au gouvernement.",
+"s": "/pionnieres"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Dans quelle préfecture se trouve la partie guinéenne des monts Nimba ?",
+"r": "Lola",
+"o": [
+"Labé",
+"Lélouma",
+"Linsan"
+],
+"f": "Les monts Nimba, à cheval sur la Guinée, la Côte d'Ivoire et le Libéria, culminent à 1 752 m.",
+"s": "/laguine"
+},
+{
+"c": "Territoires",
+"n": 3,
+"q": "Dans quelle préfecture se trouve Sérédou, connue pour ses plantations de thé et de quinquina ?",
+"r": "Macenta",
+"o": [
+"Mamou",
+"Mandiana",
+"Mali"
+],
+"f": "Sérédou, sur les hauteurs de Macenta, a longtemps produit le thé et la quinine guinéens.",
+"s": "/laguine"
+},
+{
+"c": "Musique",
+"n": 1,
+"q": "Quel chanteur et joueur de kora guinéen a connu un succès mondial avec « Yéké Yéké » en 1987 ?",
+"r": "Mory Kanté",
+"o": [
+"Mamady Keïta",
+"Momo Wandel Soumah",
+"Moussa Diakité"
+],
+"f": "Mory Kanté, le « griot électrique », a fait danser le monde entier avec « Yéké Yéké »."
+},
+{
+"c": "Musique",
+"n": 2,
+"q": "Quel maître guinéen du djembé a fait connaître cet instrument sur tous les continents ?",
+"r": "Mamady Keïta",
+"o": [
+"Mory Kanté",
+"Momo Wandel Soumah",
+"Mamadou Barry"
+],
+"f": "Mamady Keïta (1950-2021), venu de Balandougou, a créé des écoles de djembé dans le monde entier."
+},
+{
+"c": "Musique",
+"n": 2,
+"q": "Quelle chanteuse sud-africaine, surnommée « Mama Africa », a vécu en Guinée à partir de 1968 ?",
+"r": "Miriam Makeba",
+"o": [
+"Mariam Doumbia",
+"Mory Kanté",
+"Mahawa Kouyaté"
+],
+"f": "Miriam Makeba s'installe en Guinée en 1968 et représente le pays à l'ONU."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel grand fleuve d'Afrique de l'Ouest prend sa source en Guinée ?",
+"r": "Niger",
+"o": [
+"Nil",
+"Niari",
+"Nyong"
+],
+"f": "Le Niger naît en Guinée, traverse le Mali, le Niger et le Nigeria : 4 200 km.",
+"s": "/laguine"
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Quels monts, inscrits au patrimoine mondial de l'UNESCO, abritent le crapaud vivipare ?",
+"r": "Nimba",
+"o": [
+"N'Zérékoré",
+"Niandan",
+"Nialia"
+],
+"f": "Les monts Nimba sont classés à l'UNESCO depuis 1981, pour une faune et une flore uniques."
+},
+{
+"c": "Territoires",
+"n": 1,
+"q": "Quelle ville est la capitale de la Guinée forestière ?",
+"r": "N'Zérékoré",
+"o": [
+"Nialia",
+"Niandan",
+"Nimba"
+],
+"f": "N'Zérékoré est la grande ville du sud-est, au cœur de la forêt.",
+"s": "/laguine"
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "Le Guinéen Boubacar Diallo Telli fut le premier secrétaire général de quelle organisation ?",
+"r": "Organisation de l'unité africaine",
+"o": [
+"Organisation des Nations unies",
+"Organisation mondiale de la santé",
+"Organisation de la coopération islamique"
+],
+"f": "Diallo Telli dirige l'OUA de 1964 à 1972. L'OUA est l'ancêtre de l'Union africaine.",
+"s": "/horoya"
+},
+{
+"c": "Ressources",
+"n": 1,
+"q": "Quel métal précieux extrait-on depuis des siècles dans la région de Siguiri ?",
+"r": "Or",
+"o": [
+"Onyx",
+"Opale",
+"Oxyde"
+],
+"f": "L'or de Siguiri faisait déjà la richesse de l'empire du Mali.",
+"s": "/mansaya"
+},
+{
+"c": "Corridor",
+"n": 3,
+"q": "Quelle gare du TransGuinéen se trouve entre le tunnel de Mamou et Tagagna ?",
+"r": "Ouré-Kaba",
+"o": [
+"Ouassou"
+],
+"f": "Ouré-Kaba est l'une des gares du TransGuinéen, la ligne de Morébaya à Simandou.",
+"s": "/jeux/corridor.html"
+},
+{
+"c": "Langues",
+"n": 1,
+"q": "Quelle langue parle-t-on surtout au Fouta-Djalon ?",
+"r": "Pular",
+"o": [
+"Pidgin",
+"Persan",
+"Punu"
+],
+"f": "Le pular (ou poular) est la langue des Peuls du Fouta-Djalon.",
+"s": "/fouta"
+},
+{
+"c": "Territoires",
+"n": 2,
+"q": "Dans quelle préfecture se trouvent les chutes de Kambadaga et de Kinkon ?",
+"r": "Pita",
+"o": [
+"Pamelap",
+"Pastoria",
+"Popodara"
+],
+"f": "Pita, au cœur du Fouta-Djalon, est la préfecture des grandes chutes.",
+"s": "/laguine"
+},
+{
+"c": "Territoires",
+"n": 1,
+"q": "Combien de régions naturelles compte la Guinée ?",
+"r": "Quatre",
+"o": [
+"Quinze",
+"Quarante",
+"Quatorze"
+],
+"f": "Basse-Guinée, Moyenne-Guinée, Haute-Guinée et Guinée forestière.",
+"s": "/laguine"
+},
+{
+"c": "Territoires",
+"n": 3,
+"q": "Combien la Guinée compte-t-elle de préfectures depuis le décret du 20 août 2026 ?",
+"r": "Quarante-quatre",
+"o": [
+"Quarante",
+"Quarante-six",
+"Quatre-vingts"
+],
+"f": "Le décret du 20 août 2026 crée onze nouvelles préfectures, soit 44, réparties en 10 régions.",
+"s": "/laguine"
+},
+{
+"c": "Ressources",
+"n": 3,
+"q": "Quel arbre, cultivé à Sérédou, fournit la quinine contre le paludisme ?",
+"r": "Quinquina",
+"o": [
+"Quassia",
+"Quenettier",
+"Quillaja"
+],
+"f": "L'écorce du quinquina contient la quinine, longtemps le grand remède contre le paludisme."
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "Quel mouvement politique, fondé à Bamako en 1946, a porté la lutte pour l'émancipation en Guinée ?",
+"r": "Rassemblement démocratique africain",
+"o": [
+"Rassemblement du peuple de Guinée",
+"Rassemblement des républicains",
+"Renouveau démocratique africain"
+],
+"f": "Le RDA est créé à Bamako en octobre 1946. Sa section guinéenne devient le PDG.",
+"s": "/horoya"
+},
+{
+"c": "Conakry",
+"n": 2,
+"q": "Dans quelle commune de Conakry se trouvent les grottes de Kakimbon ?",
+"r": "Ratoma",
+"o": [
+"Room",
+"Rufisque"
+],
+"f": "Ratoma s'étend au nord de la presqu'île de Conakry.",
+"s": "/konakri"
+},
+{
+"c": "Culture",
+"n": 1,
+"q": "Quelle céréale est l'aliment de base de la plupart des familles guinéennes ?",
+"r": "Riz",
+"o": [
+"Raisin",
+"Radis",
+"Rhubarbe"
+],
+"f": "La Guinée cultive du riz de bas-fond, de plaine et de mangrove."
+},
+{
+"c": "Histoire",
+"n": 1,
+"q": "Quel almamy, fondateur de l'empire du Wassoulou, résista aux Français jusqu'à sa capture en 1898 ?",
+"r": "Samory Touré",
+"o": [
+"Sundjata Keïta",
+"Soumaoro Kanté",
+"Sékou Touré"
+],
+"f": "Samory Touré, capturé à Guélémou en 1898, meurt en exil au Gabon en 1900.",
+"s": "/mansaya"
+},
+{
+"c": "Ressources",
+"n": 1,
+"q": "Quelle chaîne de montagnes de Guinée forestière renferme l'un des plus riches gisements de fer du monde ?",
+"r": "Simandou",
+"o": [
+"Sinko",
+"Siguiri",
+"Sérédou"
+],
+"f": "Le minerai de Simandou est acheminé par le TransGuinéen jusqu'au port de Morébaya.",
+"s": "/jeux/corridor.html"
+},
+{
+"c": "Mandén",
+"n": 2,
+"q": "Quel balafon sacré, gardé à Niagassola, est inscrit au patrimoine immatériel de l'UNESCO ?",
+"r": "Sosso-Bala",
+"o": [
+"Sabar",
+"Sanza",
+"Soron"
+],
+"f": "Le Sosso-Bala aurait appartenu à Soumaoro Kanté. La famille Kouyaté le garde depuis huit siècles.",
+"s": "/mansaya"
+},
+{
+"c": "Langues",
+"n": 1,
+"q": "Quelle langue parle-t-on surtout à Conakry et en Basse-Guinée ?",
+"r": "Soussou",
+"o": [
+"Swahili",
+"Sérère",
+"Songhaï"
+],
+"f": "Le soussou est la langue la plus parlée sur la côte."
+},
+{
+"c": "Sport",
+"n": 1,
+"q": "Quel est le surnom de l'équipe nationale de football de Guinée ?",
+"r": "Syli national",
+"o": [
+"Super Eagles",
+"Stallions",
+"Squirrels"
+],
+"f": "Le Syli national, l'éléphant national : syli veut dire éléphant en soussou."
+},
+{
+"c": "Mandén",
+"n": 1,
+"q": "Quel héros fonda l'empire du Mali après la bataille de Kirina en 1235 ?",
+"r": "Sundjata Keïta",
+"o": [
+"Soumaoro Kanté",
+"Samory Touré",
+"Sakoura"
+],
+"f": "Sundjata Keïta bat Soumaoro Kanté à Kirina, puis la charte de Kurukan Fuga organise l'empire.",
+"s": "/mansaya"
+},
+{
+"c": "Fouta",
+"n": 1,
+"q": "Quelle ville fut la capitale de l'almamiat du Fouta-Djalon ?",
+"r": "Timbo",
+"o": [
+"Tougué",
+"Télimélé",
+"Tondon"
+],
+"f": "Karamoko Alfa fonde Timbo au XVIIIe siècle. Timbo est redevenue une préfecture en 2026.",
+"s": "/fouta"
+},
+{
+"c": "Énergie",
+"n": 3,
+"q": "Sur quelle rivière, affluent du Niger, a été construit le barrage de Dabola ?",
+"r": "Tinkisso",
+"o": [
+"Tominé",
+"Tamba",
+"Téné"
+],
+"f": "Le barrage du Tinkisso alimente Dabola et la région en électricité.",
+"s": "/laguine"
+},
+{
+"c": "Conakry",
+"n": 3,
+"q": "Sur quelle île la ville de Conakry s'est-elle d'abord développée ?",
+"r": "Tombo",
+"o": [
+"Tamara",
+"Tristao",
+"Thio"
+],
+"f": "Conakry naît sur l'île de Tombo, reliée ensuite à la presqu'île de Kaloum.",
+"s": "/konakri"
+},
+{
+"c": "Culture",
+"n": 2,
+"q": "Quelle organisation a inscrit le Sosso-Bala et les monts Nimba sur ses listes du patrimoine ?",
+"r": "UNESCO",
+"o": [
+"UNICEF",
+"UEMOA",
+"Union africaine"
+],
+"f": "Les monts Nimba sont classés en 1981, le Sosso-Bala en 2001 (proclamé chef-d'œuvre, inscrit en 2008).",
+"s": "/mansaya"
+},
+{
+"c": "Histoire",
+"n": 3,
+"q": "Avec le Ghana de Kwame Nkrumah, que forme la Guinée en novembre 1958 ?",
+"r": "Union Ghana-Guinée",
+"o": [
+"Unité ouest-africaine",
+"Union du fleuve Mano",
+"Union monétaire ouest-africaine"
+],
+"f": "L'Union Ghana-Guinée (1958), élargie au Mali en 1961, est une première tentative d'unité africaine.",
+"s": "/horoya"
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "À quelle date les Guinéens ont-ils voté « Non » au référendum de 1958 ?",
+"r": "Vingt-huit septembre",
+"o": [
+"Vingt-deux juin",
+"Vingt-cinq mai",
+"Vingt-quatre octobre"
+],
+"f": "Le 28 septembre 1958, la Guinée vote Non à la Communauté française, puis proclame l'indépendance le 2 octobre.",
+"s": "/horoya"
+},
+{
+"c": "Mandén",
+"n": 2,
+"q": "De quelle région Samory Touré a-t-il fait le cœur de son empire ?",
+"r": "Wassoulou",
+"o": [
+"Wagadou",
+"Walata",
+"Wolof"
+],
+"f": "L'empire du Wassoulou s'étend sur la Haute-Guinée et le sud du Mali à la fin du XIXe siècle.",
+"s": "/mansaya"
+},
+{
+"c": "Mandén",
+"n": 3,
+"q": "Comment s'appelait le pays des Soninké, berceau de l'empire du Ghana ?",
+"r": "Wagadou",
+"o": [
+"Wassoulou",
+"Walata",
+"Wolof"
+],
+"f": "Le Wagadou est le cœur de l'empire du Ghana, d'où viennent des lignées comme les Cissé et les Touré.",
+"s": "/mansaya"
+},
+{
+"c": "Corridor",
+"n": 3,
+"q": "Quelle entreprise américaine a fourni les locomotives Evolution du TransGuinéen ?",
+"r": "Wabtec",
+"o": [
+"Westinghouse",
+"Woermann",
+"Wagon-Lits"
+],
+"f": "Les locomotives Wabtec Evolution tirent les trains de minerai de Simandou à Morébaya.",
+"s": "/jeux/corridor.html"
+},
+{
+"c": "Corridor",
+"n": 3,
+"q": "Quel consortium exploite les blocs 1 et 2 de Simandou et a décrit le tracé officiel du TransGuinéen ?",
+"r": "Winning Consortium Simandou",
+"o": [
+"Wabtec",
+"Woermann"
+],
+"f": "Le WCS exploite les blocs 1 et 2 du Simandou. Son tracé officiel sert de base au jeu Le Corridor.",
+"s": "/jeux/corridor.html"
+},
+{
+"c": "Musique",
+"n": 2,
+"q": "À quelle famille d'instruments appartient le balafon, comme le Sosso-Bala ?",
+"r": "Xylophone",
+"o": [
+"Xalam",
+"Xiao",
+"Xaphoon"
+],
+"f": "Le balafon est un xylophone à lames de bois, avec des calebasses comme résonateurs.",
+"s": "/mansaya"
+},
+{
+"c": "Musique",
+"n": 1,
+"q": "Quel tube de Mory Kanté fut, en 1987, l'un des premiers succès africains à dépasser le million d'exemplaires ?",
+"r": "Yéké Yéké",
+"o": [
+"Yamore",
+"Yaye Boy",
+"Yaka"
+],
+"f": "« Yéké Yéké » est classé en tête des ventes dans plusieurs pays d'Europe en 1988."
+},
+{
+"c": "Ressources",
+"n": 3,
+"q": "Quel gisement de minerai de fer de la région de N'Zérékoré donne la seconde moitié du nom de ce jeu ?",
+"r": "Zogota",
+"o": [
+"Ziama",
+"Zérékoré",
+"Zébéla"
+],
+"f": "Almamya (à Conakry) et Zogota (en Guinée forestière) : de A à Z, d'un bout à l'autre du pays."
+},
+{
+"c": "Géographie",
+"n": 3,
+"q": "Quel massif forestier de Macenta est classé réserve de biosphère par l'UNESCO ?",
+"r": "Ziama",
+"o": [
+"Zogota",
+"Zébéla",
+"Zorzor"
+],
+"f": "Le massif du Ziama, réserve de biosphère depuis 1980, abrite éléphants de forêt et chimpanzés."
+},
+{
+"c": "Conakry",
+"n": 2,
+"q": "Quel quartier de Kaloum donne la première moitié du nom de ce jeu ?",
+"r": "Almamya",
+"o": [
+"Ambassade",
+"Abattoir",
+"Aviation"
+],
+"f": "Almamya (ou Almamiyah) est un quartier de Kaloum. Zogota est un gisement de fer en Guinée forestière.",
+"s": "/konakri"
+},
+{
+"c": "Littérature",
+"n": 1,
+"q": "Quel écrivain guinéen a écrit « L'Enfant noir » (1953), récit de son enfance à Kouroussa ?",
+"r": "Camara Laye",
+"o": [
+"Cheikh Hamidou Kane",
+"Calixthe Beyala"
+],
+"f": "L'Enfant noir reçoit le prix Charles-Veillon en 1954.",
+"s": "/sebe"
+},
+{
+"c": "Mandén",
+"n": 2,
+"q": "Selon la tradition, en quelle année fut proclamée la charte de Kurukan Fuga ?",
+"r": "Mille deux cent trente-six",
+"o": [
+"Mille deux cent trente-cinq",
+"Mille deux cent cinquante",
+"Mille trois cent vingt-quatre"
+],
+"f": "La charte du Mandén (1236) compte 44 articles. PATI l'a mise en ligne.",
+"s": "/charte"
+},
+{
+"c": "Mandén",
+"n": 1,
+"q": "Dans quelle plaine se tint, selon la tradition, l'assemblée qui proclama la charte du Mandén ?",
+"r": "Kurukan Fuga",
+"o": [
+"Kirina",
+"Kangaba",
+"Kéniéba"
+],
+"f": "Kurukan Fuga, près de Kangaba, est la clairière de l'assemblée fondatrice de l'empire du Mali.",
+"s": "/charte"
+},
+{
+"c": "Mandén",
+"n": 2,
+"q": "Quelle bataille, en 1235, oppose Sundjata Keïta à Soumaoro Kanté ?",
+"r": "Kirina",
+"o": [
+"Kangaba",
+"Kurukan Fuga",
+"Kankan"
+],
+"f": "La victoire de Kirina ouvre la voie à l'empire du Mali.",
+"s": "/mansaya"
+},
+{
+"c": "Mandén",
+"n": 1,
+"q": "Comment appelle-t-on en mandingue les gardiens de la parole et de la mémoire (les griots) ?",
+"r": "Djélis",
+"o": [
+"Dozos",
+"Diatigui",
+"Dioula"
+],
+"f": "Les djélis transmettent l'histoire, les généalogies et la musique de génération en génération.",
+"s": "/mansaya"
+},
+{
+"c": "Culture",
+"n": 1,
+"q": "Comment appelle-t-on les chasseurs traditionnels du Manden, réputés pour leurs secrets de brousse ?",
+"r": "Dozos",
+"o": [
+"Djélis",
+"Dioula",
+"Diatigui"
+],
+"f": "La confrérie des dozos réunit les chasseurs initiés de Haute-Guinée et de la région mandingue."
+},
+{
+"c": "Culture",
+"n": 2,
+"q": "Quel grand masque baga, symbole de fécondité, est devenu un emblème de la Guinée ?",
+"r": "Nimba",
+"o": [
+"N'Tomo",
+"Nkisi",
+"Ndomo"
+],
+"f": "Le Nimba (ou D'mba) est le grand masque-épaule des Baga de la côte. PATI lui consacre « Sacrée D'mba ».",
+"s": "/livre/sacree-dmba"
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Comment s'appelle le port minéralier de Boké d'où partent les navires de bauxite ?",
+"r": "Kamsar",
+"o": [
+"Kassa",
+"Kaloum",
+"Koundara"
+],
+"f": "Kamsar, érigée en préfecture en 2026, est le grand port de la bauxite.",
+"s": "/laguine"
+},
+{
+"c": "Corridor",
+"n": 2,
+"q": "Dans quel port arrive le minerai de fer de Simandou transporté par le TransGuinéen ?",
+"r": "Morébaya",
+"o": [
+"Matakang",
+"Matoto",
+"Mamou"
+],
+"f": "Le port de Morébaya, dans la préfecture de Forécariah, est le terminus maritime du TransGuinéen.",
+"s": "/jeux/corridor.html"
+},
+{
+"c": "Géographie",
+"n": 2,
+"q": "Quelle rivière arrose Kankan avant de rejoindre le Niger ?",
+"r": "Milo",
+"o": [
+"Mafou",
+"Mongo",
+"Makona"
+],
+"f": "Le Milo traverse Kankan. PATI lui consacre un livre, « Sauver le Milo ».",
+"s": "/laguine"
+},
+{
+"c": "Géographie",
+"n": 3,
+"q": "Quel fleuve forme une partie de la frontière entre la Guinée, la Sierra Leone et le Libéria, près de Guéckédou ?",
+"r": "Makona",
+"o": [
+"Milo",
+"Mafou",
+"Mongo"
+],
+"f": "La Makona, appelée Moa en Sierra Leone, prend sa source en Guinée forestière."
+},
+{
+"c": "Culture",
+"n": 1,
+"q": "Quel tambour en forme de calice, originaire du Manden, est joué dans le monde entier ?",
+"r": "Djembé",
+"o": [
+"Doundoun",
+"Djarabi",
+"Dozo"
+],
+"f": "Le djembé est taillé dans un tronc et tendu d'une peau de chèvre. Le doundoun l'accompagne."
+},
+{
+"c": "Culture",
+"n": 2,
+"q": "Quels gros tambours cylindriques, joués avec des baguettes, accompagnent le djembé ?",
+"r": "Doundouns",
+"o": [
+"Djembés",
+"Dozos",
+"Djélis"
+],
+"f": "Les doundouns (doundounba, sangban, kenkeni) donnent la base rythmique."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel océan borde la côte guinéenne ?",
+"r": "Océan Atlantique",
+"o": [
+"Océan Indien",
+"Océan Pacifique",
+"Océan Arctique"
+],
+"f": "La Guinée a environ 300 km de côte sur l'Atlantique."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel pays voisin, au sud-est, a pour capitale Monrovia ?",
+"r": "Libéria",
+"o": [
+"Libye",
+"Lesotho",
+"Liban"
+],
+"f": "La Guinée a une frontière avec six pays : Guinée-Bissau, Sénégal, Mali, Côte d'Ivoire, Libéria et Sierra Leone."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel pays voisin, au sud-ouest, a pour capitale Freetown ?",
+"r": "Sierra Leone",
+"o": [
+"Sénégal",
+"Somalie",
+"Soudan"
+],
+"f": "Freetown n'est qu'à environ 130 km de la frontière guinéenne."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel pays voisin, au nord, a pour capitale Dakar ?",
+"r": "Sénégal",
+"o": [
+"Sierra Leone",
+"Soudan",
+"Somalie"
+],
+"f": "Le Sénégal touche la Guinée au nord, du côté de Koundara."
+},
+{
+"c": "Géographie",
+"n": 1,
+"q": "Quel pays voisin, au nord-est, a pour capitale Bamako ?",
+"r": "Mali",
+"o": [
+"Maroc",
+"Mauritanie",
+"Malawi"
+],
+"f": "Mali est aussi le nom d'une préfecture guinéenne, dans la région de Labé !"
+},
+{
+"c": "Territoires",
+"n": 3,
+"q": "Quelle préfecture du Fouta-Djalon porte le même nom qu'un pays voisin ?",
+"r": "Mali",
+"o": [
+"Mamou",
+"Macenta",
+"Mandiana"
+],
+"f": "La préfecture de Mali (région de Labé), aux confins du Sénégal, abrite la « Dame de Mali », un rocher en forme de visage.",
+"s": "/laguine"
+},
+{
+"c": "Histoire",
+"n": 2,
+"q": "Quelle longue grève générale menée à Conakry en 1953 a duré 67 jours ?",
+"r": "Grève des 67 jours",
+"o": [
+"Grève des cheminots",
+"Grève générale de Dakar",
+"Grève des dockers"
+],
+"f": "En 1953, la grève des 67 jours obtient l'égalité de certains droits salariaux entre Africains et Européens.",
+"s": "/horoya"
+},
+{
+"c": "Pionnières",
+"n": 2,
+"q": "Quelle paysanne de Dubréka, morte en 1955, est devenue la première martyre de la lutte pour l'indépendance ?",
+"r": "M'Balia Camara",
+"o": [
+"Mafory Bangoura",
+"Mariama Sow"
+],
+"f": "M'Balia Camara est frappée d'un coup de sabre à Tondon en février 1955 en refusant un impôt injuste.",
+"s": "/pionnieres/mbalia-camara"
+},
+{
+"c": "Pionnières",
+"n": 2,
+"q": "Quelle Guinéenne, formée en URSS, fut l'une des premières femmes pilotes d'Afrique ?",
+"r": "Fatoumata Binta Diallo",
+"o": [
+"Fanta Damba",
+"Fodéba Keïta"
+],
+"f": "Née à Labé en 1949, Binta Diallo entre dans l'armée en 1971 et devient pilote. PATI lui consacre un livre.",
+"s": "/livre/binta-diallo"
+}
+]

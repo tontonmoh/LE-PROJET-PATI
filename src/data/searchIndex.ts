@@ -33,7 +33,7 @@ const STATIC: SearchItem[] = [
   { type: "Jeu", title: "Puzzle de l'Afrique", sub: "Pavage / Situer", to: "/jeux/afrique/afrique.html", keywords: "Afrique carte pays" },
   { type: "Jeu", title: "Chante LIBERTÉ", sub: "Apprendre l'hymne national · 7 ans et +", to: "/hymne", keywords: "hymne national Liberté chanter paroles Guinée Fodéba Keïta Korofo Moussa Alpha Yaya" },
   { type: "Jeu", title: "Le Marché de Pati", sub: "Compter, payer · 2-7 ans", to: "/marche", keywords: "marché Sira compter argent monnaie francs guinéens mômes" },
-  { type: "Jeu", title: "Chante Liberté", sub: "L'hymne national · dès 7 ans", to: "/hymne", keywords: "hymne national Liberté chanter paroles Guinée indépendance" },
+  { type: "Jeu", title: "Almamya-Zogota", sub: "Quiz de la Guinée de A à Z", to: "/almamya", keywords: "quiz alphabet lettres A à Z Guinée préfectures sous-préfectures Conakry histoire défi deux joueurs" },
   { type: "Jeu", title: "Sèbè", sub: "Quiz littérature guinéenne", to: "/sebe", keywords: "quiz littérature auteurs" },
   { type: "Jeu", title: "IWDI LaGuinè", sub: "Jeu de cartes multijoueur", to: "/iwdi", keywords: "cartes préfectures multijoueur" },
   { type: "Jeu", title: "Quiz SENAG", sub: "25 questions pour la mémoire", to: "/senag", keywords: "archives mémoire quiz" },
