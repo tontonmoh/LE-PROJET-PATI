@@ -70,6 +70,7 @@ export const g2040Tome4: LivreG2040 = {
     {
       id: "gare-et-huilerie",
       voix: "recit",
+      image: "/images/g2040/t4-p1.webp",
       fr: `Dabola est posée au milieu du pays, là où toutes les routes se croisent.
 
 Autrefois, deux fiertés faisaient battre la ville. La gare d'abord : Dabola était la première grande gare du bassin du Niger, et les wagons repartaient pleins vers la mer. L'huilerie ensuite — la grande usine d'arachide, la vitrine de la ville, où tant de familles avaient gagné leur vie. La grand-mère de Saran se souvient des deux.
@@ -102,6 +103,7 @@ All around the town, though, as far as the eye can see, there are the fields. Wh
     {
       id: "graine-et-huile",
       voix: "recit",
+      image: "/images/g2040/t4-p2.webp",
       fr: `Au marché, Saran observa un manège étrange.
 
 D'un côté, on chargeait des sacs d'arachide brute, qui partaient loin, vendus pour presque rien. De l'autre, on déchargeait des bouteilles d'huile — brillantes, chères, avec une étiquette venue d'ailleurs.
@@ -134,6 +136,7 @@ On one side, sacks of raw peanut were being loaded, leaving far away, sold for a
     {
       id: "savoir-des-mains",
       voix: "recit",
+      image: "/images/g2040/t4-p3.webp",
       fr: `La grand-mère, elle, savait faire l'huile.
 
 Elle pilait, chauffait, pressait, comme sa mère avant elle. L'huile qui coulait, dorée, sentait bon le pays. Mais à la main, une journée entière donnait à peine de quoi remplir quelques bouteilles.
@@ -158,6 +161,7 @@ She pounded, heated, pressed, as her mother had before her. The oil that flowed,
     {
       id: "retour-tante-hawa",
       voix: "recit",
+      image: "/images/g2040/t4-p4.webp",
       fr: `Cette année-là, Tante Hawa était revenue au village.
 
 Partie longtemps travailler à la ville, elle connaissait bien la grande huilerie — ses presses, ses moteurs, ses bidons. Elle écouta Saran et sa grand-mère, et sourit.
@@ -182,6 +186,7 @@ Gone for a long time to work in the city, she knew the big oil mill well — its
     {
       id: "mot-de-saran",
       voix: "recit",
+      image: "/images/g2040/t4-p5.webp",
       fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau ce que Saran avait vu au marché :
 
 ON VEND LA GRAINE
@@ -258,6 +263,7 @@ Saran 站起来，在下面写道：
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t4-p6.webp",
       fr: `Dans le dossier que Dabola envoya à la Simandou Academy, Saran avait dessiné sa ville en 2040.
 
 Au centre, la vieille huilerie réveillée, qui ronronnait de nouveau, des femmes en blouse et des jeunes aux commandes. Tout autour, des champs d'arachide à perte de vue, là pour la nourrir. Des caisses de bouteilles dorées portant une étiquette fière : Huile de Dabola. Et la gare, réveillée elle aussi : sur la Ligne du Niger ressuscitée, un train emportait l'huile vers le pays et vers le port — non plus la graine nue, mais le travail fini.
