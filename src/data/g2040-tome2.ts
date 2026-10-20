@@ -68,6 +68,7 @@ export const g2040Tome2: LivreG2040 = {
     {
       id: "marche-avant",
       voix: "recit",
+      image: "/images/g2040/t2-p1.webp",
       fr: `Quand l'appel de la Simandou Academy arriva à Guéckédou, la grand-mère de Finda se mit à rire doucement.
 
 — Un Objectif ? Mais nous, on l'a déjà eu, notre grand jour. Tu aurais dû voir ce marché, ma fille.
@@ -100,6 +101,7 @@ Finda 望着今天的集市。它依然跳动着，只是更轻了。像一颗�
     {
       id: "cousine-autre-rive",
       voix: "recit",
+      image: "/images/g2040/t2-p2.webp",
       fr: `Finda, elle, avait une raison bien à elle d'aimer le fleuve.
 
 De l'autre côté du Makona vivait Tamba, son cousin. Même famille, même langue kissi, même grand-mère — mais un autre drapeau au-dessus de sa maison. Les jours de marché, quand le débarcadère était ouvert, ils se retrouvaient ; les autres jours, ils se faisaient signe d'une rive à l'autre, par-dessus l'eau.
@@ -124,6 +126,7 @@ On the class map, the Makona was a line: a border. For Finda, it was something e
     {
       id: "frontiere-ou-chemin",
       voix: "recit",
+      image: "/images/g2040/t2-p3.webp",
       fr: `En classe, on discutait ferme.
 
 — Le fleuve, c'est la frontière, dit un garçon. C'est écrit sur la carte. De l'autre côté, c'est un autre pays.
@@ -172,6 +175,7 @@ Makona = 边界
     {
       id: "gloire-blessure",
       voix: "recit",
+      image: "/images/g2040/t2-p4.webp",
       fr: `Pour comprendre, il fallait écouter les anciens.
 
 Il y avait longtemps, quand les guerres des pays voisins étaient passées par là, les routes s'étaient tues. Les étals s'étaient vidés, les marchands avaient rangé leur courage, et tant de familles avaient traversé le fleuve dans l'autre sens, pour se mettre à l'abri. Le grand marché s'était endormi.
