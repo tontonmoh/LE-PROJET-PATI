@@ -15,6 +15,9 @@ export interface SectionG2040 {
   en: string;
   ar: string;
   zh: string;
+  /** Illustration de la planche, ex. "/images/g2040/t1-p3.webp".
+   *  Le lecteur lit celle de la version française pour toutes les langues. */
+  image?: string;
 }
 
 export interface LivreG2040 {

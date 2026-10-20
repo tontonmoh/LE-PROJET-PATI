@@ -141,8 +141,10 @@ function fromG2040(livre: any): { langs: string[]; books: Record<string, MLBook>
       label: labels[code] || code,
       title: livre.titre[code],
       sections: (livre.sections || []).map((s: any) => ({
+        id: s.id,
         title: "",
         paragraphs: String(s[code] || "").split(/\n\n+/).map((p: string) => p.trim()).filter(Boolean),
+        image: s.image,
       })),
     };
   }
