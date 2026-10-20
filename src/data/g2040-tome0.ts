@@ -27,6 +27,10 @@ export interface SectionG2040 {
   en: string;
   ar: string;
   zh: string;
+  /** Illustration de la planche, ex. "/images/g2040/t0-p3.webp".
+   *  Le tome 0 porte sa propre copie de cette interface : le champ doit y
+   *  être ajouté aussi, sinon ses planches ne compilent pas. */
+  image?: string;
 }
 
 export interface LivreG2040 {
