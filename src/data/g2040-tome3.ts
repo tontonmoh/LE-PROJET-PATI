@@ -70,6 +70,7 @@ export const g2040Tome3: LivreG2040 = {
     {
       id: "la-foret-souvre",
       voix: "recit",
+      image: "/images/g2040/t3-p1.webp",
       fr: `À Kissidougou, on sent que le pays change.
 
 Derrière l'école, c'est encore la grande forêt verte, celle des cousins de Lola et de Guéckédou. Devant, la terre s'aplanit, s'ouvre, et l'on devine déjà les longues plaines de la Haute Guinée. Kissidougou est posée juste au milieu, comme une porte.
@@ -94,6 +95,7 @@ And all around, on the hillsides as in the lowlands, there is rice. When the cal
     {
       id: "riz-de-chaque-jour",
       voix: "recit",
+      image: "/images/g2040/t3-p2.webp",
       fr: `Chez Kumba, comme dans tout le pays, on mange du riz chaque jour. Le matin, le midi, le soir.
 
 Un jour, au marché, elle remarqua quelque chose d'étrange. Beaucoup de sacs de riz venaient de très loin, de l'autre bout du monde, traversant des océans pour arriver dans son assiette.
@@ -134,6 +136,7 @@ The old woman smiled, the way you smile at a good question.
     {
       id: "deux-amis",
       voix: "recit",
+      image: "/images/g2040/t3-p3.webp",
       fr: `Dans le champ de la famille de Kumba travaillait aussi Lanciné, son ami.
 
 Kumba était kissi, des gens de la forêt. Lanciné était malinké ; sa famille était descendue, il y a longtemps, des plaines du Nord. À Kissidougou, ce sont les deux qui se rencontrent : ceux de la forêt et ceux de la savane, penchés sur la même rizière, les pieds dans la même boue.
@@ -158,6 +161,7 @@ Kumba 是 Kissi 人，森林的子民。Lanciné 是 Malinké 人；很久以前
     {
       id: "savoir-de-la-terre",
       voix: "recit",
+      image: "/images/g2040/t3-p4.webp",
       fr: `La grand-mère leur apprit ce qu'aucun sac venu de loin ne savait.
 
 Que le riz de coteau pousse sur la pente, à la seule eau du ciel. Que le riz de bas-fond aime avoir les pieds dans l'eau. Qu'il faut laisser la terre se reposer — la jachère — pour qu'elle reste forte. Que les anciens gardaient une ceinture d'arbres autour du village, pour que le sol ne meure pas. Et qu'on peut même élever des poissons dans la rizière : le poisson nourrit le riz, le riz abrite le poisson.
@@ -182,6 +186,7 @@ That hillside rice grows on the slope, on the water of the sky alone. That lowla
     {
       id: "malo-dougou",
       voix: "recit",
+      image: "/images/g2040/t3-p5.webp",
       fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau ce que Kumba avait vu au marché :
 
 LE RIZ VIENT D'AILLEURS
@@ -306,6 +311,7 @@ Lanciné 举起了手。
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t3-p6.webp",
       fr: `Dans le dossier que Kissidougou envoya à la Simandou Academy, Kumba avait dessiné la plaine de 2040.
 
 Des rizières à perte de vue, vertes puis dorées. Des bassins où sautaient les poissons. Et, à la gare, un train qu'on chargeait de sacs où l'on lisait en grand : MALODOUGOU. Le riz montait vers les villes du Nord, descendait vers la côte, vers le port. Autour des villages, toujours, la ceinture d'arbres des anciens.
