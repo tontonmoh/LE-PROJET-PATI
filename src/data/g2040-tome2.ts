@@ -208,6 +208,7 @@ But Guéckédou had never given up. The grandmother put it her own way:
     {
       id: "mot-de-finda",
       voix: "recit",
+      image: "/images/g2040/t2-p5.webp",
       fr: `Finda y pensa toute la nuit, en écoutant le fleuve. Le matin, elle alla au tableau. Elle n'effaça pas le mot de la Professeure. Elle ajouta juste, en dessous :
 
 MAKONA = UN FLEUVE QUI RELIE
@@ -268,6 +269,7 @@ Makona = 一条连接的河
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t2-p6.webp",
       fr: `Dans le dossier que la classe de Guéckédou envoya à la Simandou Academy, Finda avait dessiné le marché de 2040.
 
 On y voyait le Makona couvert de pirogues — chargées de tissu, d'huile rouge, de poisson, et non de peur. Sur les deux rives, des étals à perte de vue ; dans une seule allée, dix langues à nouveau. Des camions arrivaient par les routes neuves, le carrefour avait retrouvé son cœur. Et au milieu du pont de pirogues, une grande fille et un grand garçon se serraient la main, au-dessus de l'eau.
