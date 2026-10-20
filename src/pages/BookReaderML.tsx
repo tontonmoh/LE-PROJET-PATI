@@ -11,6 +11,7 @@ import { bumpCounter } from "../lib/publicStats";
 import { TAADIDI } from "../data/series/taadidi";
 import { KURUKAN } from "../data/series/kurukanFuga";
 import { POINT_ZERO } from "../data/point-zero";
+import { G2040 } from "../data/generation-2040";
 import { LEXIQUE, BAND_ORDER, type Band } from "../data/lexique";
 import { QUIZZES } from "../data/quizzes";
 
@@ -142,6 +143,11 @@ export default function BookReaderML() {
   const pzTome = (id || "").startsWith("point-zero-")
     ? POINT_ZERO.tomes.find((t) => t.numero === parseInt((id || "").replace("point-zero-t", ""), 10))
     : undefined;
+  // Génération 2040 : les tomes ne sont pas au catalogue, leur couverture vit
+  // dans les données de la série (repérée par le lien de lecture du tome).
+  const g2040Tome = (id || "").startsWith("g2040")
+    ? G2040.tomes.find((t) => t.to === `/livre/${id}/lire`)
+    : undefined;
 
   const planche = serieEp?.planche;
   const cote = serieEp?.cote ?? "gauche";
@@ -161,6 +167,8 @@ export default function BookReaderML() {
     baseImg = TAADIDI.cover;
   } else if (pzTome && pzTome.cover) {
     baseImg = pzTome.cover;
+  } else if (g2040Tome && g2040Tome.cover) {
+    baseImg = g2040Tome.cover;
   }
   
   // Le split s'applique à TOUS les livres
