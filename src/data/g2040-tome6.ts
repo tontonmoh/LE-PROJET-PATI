@@ -72,6 +72,7 @@ export const g2040Tome6: LivreG2040 = {
     {
       id: "taxi-qui-monte",
       voix: "recit",
+      image: "/images/g2040/t6-p1.webp",
       fr: `La nouvelle maîtresse, Madame Baldé, était partie de Faranah dans un vieux taxi chargé jusqu'au toit.
 
 La route monta longtemps. À Dabola, où l'usine d'huile ronflait de nouveau, il faisait chaud et la poussière collait à la peau. À Mamou, le grand carrefour, les taxis se croisaient dans tous les sens. Puis le taxi grimpa encore — et quelque chose changea. L'air devint frais. Des pins apparurent. Des sources couraient au bord de la route. Quand elle descendit enfin à Dalaba, Madame Baldé frissonna, surprise, et sourit : « On dirait un autre pays. »`,
@@ -88,6 +89,7 @@ The road climbed for a long time. At Dabola, where the oil mill was humming agai
     {
       id: "richesse-derriere-nous",
       voix: "recit",
+      image: "/images/g2040/t6-p2.webp",
       fr: `Dans sa nouvelle classe, on préparait l'Objectif pour la Simandou Academy.
 
 — Le trésor de Dalaba, récita Binta, c'est notre histoire : la vieille case à palabres — la suudu mauudo, « la grande case » — là où l'on prenait les grandes décisions, aujourd'hui classée. Et c'est l'artisanat de nos grands-mères : l'indigo que l'on teint à la main, et la vannerie — les vans tressés par les femmes de Pouké et de Sébori.
@@ -120,6 +122,7 @@ What she did not yet say was that these two worlds are one. For in the palaver h
     {
       id: "ce-que-madame-balde-a-vu",
       voix: "recit",
+      image: "/images/g2040/t6-p3.webp",
       fr: `— Les enfants, dit la maîtresse, je viens de traverser le pays. En bas, partout, on travaille dans la chaleur et la poussière. Et puis je suis montée chez vous… et j'ai eu froid en plein après-midi. J'ai vu des sources à chaque virage, des jardins, le calme.
 
 Elle marqua un silence.
