@@ -9,6 +9,15 @@
 //     Règle Pati = noms INVARIANTS → restaurer Mbalia / Tchotcho / Joël / Fatoumata en latin.
 //   • AR & ZH — relecture par un natif recommandée.
 //   • meta.tagline / meta.blurb : AR + ZH encore à produire (FR + EN faits).
+// -----------------------------------------------------------------------------
+//  DÉCOUPAGE (20/10/2026) : une planche = une page du lecteur. Les relances du
+//  visiteur ne vivent plus seules : chacune est collée à la réponse qu'elle
+//  appelle. 17 planches -> 10, de 358 à 922 signes (avant : 36 à 1 755).
+//  Règle de la série : viser 400-900 signes par planche, paragraphes < 400.
+//  RESTE À FAIRE : en EN/AR/ZH, cinq planches ont perdu les sauts de paragraphe
+//  du français (ouverture restaurée ; bonjour-et-visiteur, et-la-guinee,
+//  declenche, apres encore d'un seul bloc) — le lecteur non francophone reçoit
+//  un mur de texte là où le francophone a de l'air.
 // =============================================================================
 
 export interface SectionG2040 {
@@ -90,42 +99,42 @@ Mais au village, c'était la panique ! Les conseillers couraient dans tous les s
 
 « Pourquoi vouloir cacher la vérité ? » demanda-t-il doucement. « Si nous ne trouvons pas une école qui nous honore, alors c'est là que nous devons commencer notre travail. Le changement commence toujours sur les bancs de l'école. »
 
-Le Président fit signe au Préfet : « Conduisez-moi à l'école la plus proche. Peu importe l'état des lieux, peu importe le protocole. »
-
-Annoncé par les klaxons des motards qui avaient tenu à accompagner le cortège, la cour entière fut en émoi. Les gens n'en croyaient pas leurs yeux de voir apparaître ce visiteur inattendu. Il était là, vêtu simplement d'un polo, sans lunettes, entouré d'une sécurité réduite au strict minimum pour ne pas briser la magie du moment.
-
-Le DPE arrivait en toute hâte, ayant dû grimper sur une moto-taxi pour traverser la ville en un éclair, tandis que le Principal du collège, paniqué de ne pas avoir été prévenu, se posait mille questions. Il avait commencé à sortir tout le monde quand le Président lui dit : « Non, ne sortez personne, on fera cela après. »
-
-Arrivé devant une classe de 8ème année, le Président s'arrêta. Il demanda à tout le monde — adultes, gardes, officiels — de rester dehors. « Laissez le personnel vaquer à ses occupations, » dit-il avec un sourire. « Je veux juste quinze minutes avec les enfants. »`,
+Le Président fit signe au Préfet : « Conduisez-moi à l'école la plus proche. Peu importe l'état des lieux, peu importe le protocole. »`,
       en: `The President was in Boffa for the pilgrimage. As the New Year approached, an idea came to him: "For my speech, I want to be in a classroom."
 
 But in the village, it was panic! The advisors were running in all directions, and the protocol was completely turned upside down. "Mr. President, there is no suitable room!" They offered him the gardens of a luxury hotel, the plush lounges of the prefecture, or even the golden sand of the beach.
 
-"Why would we want to hide the truth?" he asked gently. "If we cannot find a school that honors us, then that is where we must begin our work. Change always starts at school desks." The President signaled to the Prefect: "Take me to the nearest school. It doesn't matter what the condition of the premises is, it doesn't matter what the protocol is."
-
-Announced by the sirens of the motorcyclists who insisted on accompanying the motorcade, the entire courtyard was in turmoil. People couldn't believe their eyes to see this unexpected visitor appear. He was there, dressed simply in a polo shirt, without glasses, surrounded by security reduced to the bare minimum so as not to break the magic of the moment.
-
-The DPE arrived in a hurry, having had to climb onto a motorcycle taxi to cross the city in a flash, while the Principal of the middle school, panicked at not having been warned, asked himself a thousand questions. He had started to bring everyone out when the President said to him: "No, don't bring anyone out, we'll do that later."
-
-Arrived in front of an 8th-grade class, the President stopped. He asked everyone—adults, guards, officials—to stay outside. "Let the staff go about their business," he said with a smile. "I just want fifteen minutes with the children."`,
+"Why would we want to hide the truth?" he asked gently. "If we cannot find a school that honors us, then that is where we must begin our work. Change always starts at school desks." The President signaled to the Prefect: "Take me to the nearest school. It doesn't matter what the condition of the premises is, it doesn't matter what the protocol is."`,
       ar: `كان الرئيس في "بوفا" من أجل الحج. ومع اقتراب العام الجديد، خطرت له فكرة: "بالنسبة لخطابي، أريد أن أكون في فصل دراسي".
 
 لكن في القرية، سادت حالة من الذعر! كان المستشارون يركضون في كل اتجاه، وكانت البروتوكولات في حالة من الفوضى. "سيدي الرئيس، لا توجد قاعة مناسبة!" اقترحوا عليه حدائق فندق فاخر، أو صالونات المحافظة الهادئة، أو حتى الرمال الذهبية للشاطئ.
 
-"لماذا نريد إخفاء الحقيقة؟" سأل برفق. "إذا لم نجد مدرسة تشرفنا، فهذا هو المكان الذي يجب أن نبدأ فيه عملنا. التغيير يبدأ دائماً من مقاعد المدرسة". أشار الرئيس للمحافظ: "خذني إلى أقرب مدرسة. لا يهم حالة المكان، ولا يهم البروتوكول".
-
-مع إعلان أصوات أبواق الدراجات النارية التي أصرت على مرافقة الموكب، أصبحت الساحة بأكملها في حالة هياج. لم يصدق الناس أعينهم لرؤية هذا الزائر غير المتوقع. كان هناك، يرتدي قميص "بولو" بسيطاً، بدون نظارات، ومحاطاً بحد أدنى من الأمن لكي لا يفسد سحر اللحظة.
-
-وصل مدير التعليم الإقليمي على عجل، بعد أن اضطر لركوب دراجة أجرة ليعبر المدينة في لمح البصر، بينما كان مدير المدرسة، الذي أصابه الذعر لعدم إبلاغه مسبقاً، يطرح على نفسه ألف سؤال. كان قد بدأ بإخراج الجميع عندما قال له الرئيس: "لا، لا تخرج أحداً، سنفعل ذلك لاحقاً".
-
-عند وصوله أمام فصل السنة الثامنة، توقف الرئيس. وطلب من الجميع—بالغين، حراساً، مسؤولين—البقاء في الخارج. قال بابتسامة: "دعوا الموظفين يمارسون أعمالهم. أريد فقط خمس عشرة دقيقة مع الأطفال".`,
+"لماذا نريد إخفاء الحقيقة؟" سأل برفق. "إذا لم نجد مدرسة تشرفنا، فهذا هو المكان الذي يجب أن نبدأ فيه عملنا. التغيير يبدأ دائماً من مقاعد المدرسة". أشار الرئيس للمحافظ: "خذني إلى أقرب مدرسة. لا يهم حالة المكان، ولا يهم البروتوكول".`,
       zh: `总统在博法进行朝圣。随着新年临近，一个想法浮现在他脑海中：“对于我的演讲，我想在一间教室里进行。”
 
 但在村子里，情况一片混乱！顾问们四处奔走，礼节完全被打乱了。“总统先生，没有合适的房间！”他们建议他去豪华酒店的花园、省政府的雅致客厅，甚至金色的海滩。
 
-“为什么要隐藏真相呢？”他温柔地问道。“如果我们找不到一所能让我们引以为傲的学校，那么这正是我们必须开始工作的地方。改变总是从学校的课桌开始。”总统向省长示意：“带我去最近的学校。无论场地状况如何，无论礼节如何。”
+“为什么要隐藏真相呢？”他温柔地问道。“如果我们找不到一所能让我们引以为傲的学校，那么这正是我们必须开始工作的地方。改变总是从学校的课桌开始。”总统向省长示意：“带我去最近的学校。无论场地状况如何，无论礼节如何。”`,
+    },
+    {
+      id: "arrivee-a-lecole",
+      voix: "visiteur",
+      fr: `Annoncé par les klaxons des motards qui avaient tenu à accompagner le cortège, la cour entière fut en émoi. Les gens n'en croyaient pas leurs yeux de voir apparaître ce visiteur inattendu. Il était là, vêtu simplement d'un polo, sans lunettes, entouré d'une sécurité réduite au strict minimum pour ne pas briser la magie du moment.
 
-随着坚持护送车队的摩托车手们的鸣笛声，整个院子陷入了骚动。人们不敢相信自己的眼睛，看到了这位意想不到的访客。他穿着简单的马球衫，没戴眼镜，安全防范减到最低，以免打破这一刻的魔力。
+Le DPE arrivait en toute hâte, ayant dû grimper sur une moto-taxi pour traverser la ville en un éclair, tandis que le Principal du collège, paniqué de ne pas avoir été prévenu, se posait mille questions. Il avait commencé à sortir tout le monde quand le Président lui dit : « Non, ne sortez personne, on fera cela après. »
+
+Arrivé devant une classe de 8ème année, le Président s'arrêta. Il demanda à tout le monde — adultes, gardes, officiels — de rester dehors. « Laissez le personnel vaquer à ses occupations, » dit-il avec un sourire. « Je veux juste quinze minutes avec les enfants. »`,
+      en: `Announced by the sirens of the motorcyclists who insisted on accompanying the motorcade, the entire courtyard was in turmoil. People couldn't believe their eyes to see this unexpected visitor appear. He was there, dressed simply in a polo shirt, without glasses, surrounded by security reduced to the bare minimum so as not to break the magic of the moment.
+
+The DPE arrived in a hurry, having had to climb onto a motorcycle taxi to cross the city in a flash, while the Principal of the middle school, panicked at not having been warned, asked himself a thousand questions. He had started to bring everyone out when the President said to him: "No, don't bring anyone out, we'll do that later."
+
+Arrived in front of an 8th-grade class, the President stopped. He asked everyone—adults, guards, officials—to stay outside. "Let the staff go about their business," he said with a smile. "I just want fifteen minutes with the children."`,
+      ar: `مع إعلان أصوات أبواق الدراجات النارية التي أصرت على مرافقة الموكب، أصبحت الساحة بأكملها في حالة هياج. لم يصدق الناس أعينهم لرؤية هذا الزائر غير المتوقع. كان هناك، يرتدي قميص "بولو" بسيطاً، بدون نظارات، ومحاطاً بحد أدنى من الأمن لكي لا يفسد سحر اللحظة.
+
+وصل مدير التعليم الإقليمي على عجل، بعد أن اضطر لركوب دراجة أجرة ليعبر المدينة في لمح البصر، بينما كان مدير المدرسة، الذي أصابه الذعر لعدم إبلاغه مسبقاً، يطرح على نفسه ألف سؤال. كان قد بدأ بإخراج الجميع عندما قال له الرئيس: "لا، لا تخرج أحداً، سنفعل ذلك لاحقاً".
+
+عند وصوله أمام فصل السنة الثامنة، توقف الرئيس. وطلب من الجميع—بالغين، حراساً، مسؤولين—البقاء في الخارج. قال بابتسامة: "دعوا الموظفين يمارسون أعمالهم. أريد فقط خمس عشرة دقيقة مع الأطفال".`,
+      zh: `随着坚持护送车队的摩托车手们的鸣笛声，整个院子陷入了骚动。人们不敢相信自己的眼睛，看到了这位意想不到的访客。他穿着简单的马球衫，没戴眼镜，安全防范减到最低，以免打破这一刻的魔力。
 
 教育部门主管匆忙赶来，他不得不坐上一辆摩托出租车闪电般穿过城市，而中学校长因未被提前通知而惊慌失措，脑子里闪过无数个疑问。他正准备疏散所有人时，总统对他说：“不，不要把任何人赶出去，我们稍后再做这些。”
 
@@ -140,123 +149,117 @@ Arrived in front of an 8th-grade class, the President stopped. He asked everyone
       zh: `在八年级教室里，黑板已经失去了颜色：一种疲惫的灰色，粉笔迹若隐若现。三张长凳用木楔垫着。后窗缺少一块玻璃；取而代之的是挂着一个袋子。老师那天早上没来——这种事常有发生。学生们独自复习，等待下一堂课和总监察员的例行巡视。`,
     },
     {
-      id: "bonjour",
-      voix: "recit",
-      fr: `— Bonjour Monsieur, dit la classe en chantant d'un seul élan, debout, dans un raclement de bancs.`,
-      en: `"Good morning, sir," the class said in a chanting voice, all at once, standing up in a scraping of benches.`,
-      ar: `"صباح الخير يا سيدي"، قال الفصل بصوت واحد كأنه غناء، واقفين مع أصوات جر المقاعد.`,
-      zh: `“老师好，”全班齐声唱道，伴随着长凳摩擦的声音，学生们站了起来。`,
-    },
-    {
-      id: "visiteur-assoit",
+      id: "bonjour-et-visiteur",
       voix: "visiteur",
-      fr: `D'un geste simple, il invita les élèves à s'asseoir. Dans la salle, le silence devint tout à coup très doux. Il posa ses mains sur le bureau, les regarda tour à tour, et sa voix, profonde et chaleureuse, s'éleva :
+      fr: `— Bonjour Monsieur, dit la classe en chantant d'un seul élan, debout, dans un raclement de bancs.
+
+D'un geste simple, il invita les élèves à s'asseoir. Dans la salle, le silence devint tout à coup très doux. Il posa ses mains sur le bureau, les regarda tour à tour, et sa voix, profonde et chaleureuse, s'éleva :
 
 « On m'a dit que votre professeur était absent aujourd'hui, alors je me suis invité à sa place », dit-il avec un clin d'œil amusé.
 
-Puis il se pencha un peu vers eux, son expression devenant plus douce, presque confiante : « Mais vous savez, je ne suis pas là pour vous faire la leçon. Si je suis là aujourd'hui, c'est parce que je suis venu pour apprendre de vous. »`,
-      en: `With a simple gesture, he invited the students to sit down. In the room, the silence suddenly became very soft. He placed his hands on the desk, looked at them one by one, and his voice, deep and warm, rose: "I was told your teacher was absent today, so I invited myself in his place," he said with an amused wink. Then he leaned slightly toward them, his expression becoming softer, almost confident: "But you know, I'm not here to lecture you. If I am here today, it is because I came to learn from you."`,
-      ar: `بحركة بسيطة، دعا الطلاب للجلوس. في القاعة، أصبح الصمت فجأة هادئاً جداً. وضع يديه على المكتب، نظر إليهم واحداً تلو الآخر، وارتفع صوته العميق والدافئ: "قيل لي إن معلمكم غائب اليوم، لذا دعوت نفسي مكانه"، قالها مع غمز عين مرحة. ثم انحنى قليلاً نحوهم، وأصبحت تعبيراته أكثر نعومة، وشبه واثقة: "لكن كما تعلمون، أنا لست هنا لألقي عليكم درساً. إذا كنت هنا اليوم، فذلك لأنني جئت لأتعلم منكم".`,
-      zh: `他用一个简单的手势示意学生们坐下。室内，沉默突然变得非常柔和。他双手放在桌子上，逐一注视着他们，他深沉而温暖的声音响起：“有人告诉我你们的老师今天缺席了，所以我代替他，不请自来，”他眨了眨眼，打趣道。然后他微微倾身靠近他们，表情变得更柔和、几乎是交心地说：“但你知道，我不是来给你们上课的。我今天来这里，是因为我是来向你们学习的。”`,
+Puis il se pencha un peu vers eux, son expression devenant plus douce, presque confiante : « Mais vous savez, je ne suis pas là pour vous faire la leçon. Si je suis là aujourd'hui, c'est parce que je suis venu pour apprendre de vous. »
+
+Les enfants semblaient dans un songe.`,
+      en: `"Good morning, sir," the class said in a chanting voice, all at once, standing up in a scraping of benches.
+
+With a simple gesture, he invited the students to sit down. In the room, the silence suddenly became very soft. He placed his hands on the desk, looked at them one by one, and his voice, deep and warm, rose: "I was told your teacher was absent today, so I invited myself in his place," he said with an amused wink. Then he leaned slightly toward them, his expression becoming softer, almost confident: "But you know, I'm not here to lecture you. If I am here today, it is because I came to learn from you."
+
+The children seemed to be in a dream.`,
+      ar: `"صباح الخير يا سيدي"، قال الفصل بصوت واحد كأنه غناء، واقفين مع أصوات جر المقاعد.
+
+بحركة بسيطة، دعا الطلاب للجلوس. في القاعة، أصبح الصمت فجأة هادئاً جداً. وضع يديه على المكتب، نظر إليهم واحداً تلو الآخر، وارتفع صوته العميق والدافئ: "قيل لي إن معلمكم غائب اليوم، لذا دعوت نفسي مكانه"، قالها مع غمز عين مرحة. ثم انحنى قليلاً نحوهم، وأصبحت تعبيراته أكثر نعومة، وشبه واثقة: "لكن كما تعلمون، أنا لست هنا لألقي عليكم درساً. إذا كنت هنا اليوم، فذلك لأنني جئت لأتعلم منكم".
+
+بدا الأطفال وكأنهم في حلم.`,
+      zh: `“老师好，”全班齐声唱道，伴随着长凳摩擦的声音，学生们站了起来。
+
+他用一个简单的手势示意学生们坐下。室内，沉默突然变得非常柔和。他双手放在桌子上，逐一注视着他们，他深沉而温暖的声音响起：“有人告诉我你们的老师今天缺席了，所以我代替他，不请自来，”他眨了眨眼，打趣道。然后他微微倾身靠近他们，表情变得更柔和、几乎是交心地说：“但你知道，我不是来给你们上课的。我今天来这里，是因为我是来向你们学习的。”
+
+孩子们仿佛置身梦中。`,
     },
     {
-      id: "songe",
+      id: "quavez-vous-appris",
       voix: "recit",
-      fr: `Les enfants semblaient dans un songe.`,
-      en: `The children seemed to be in a dream.`,
-      ar: `بدا الأطفال وكأنهم في حلم.`,
-      zh: `孩子们仿佛置身梦中。`,
-    },
-    {
-      id: "relance-appris",
-      voix: "visiteur",
-      fr: `— Qu'avez-vous appris cette semaine ?`,
-      en: `"What have you learned this week?"`,
-      ar: `"ماذا تعلمتم هذا الأسبوع؟"`,
-      zh: `“这周你们学到了什么？”`,
-    },
-    {
-      id: "asie-ameriques",
-      voix: "recit",
-      fr: `Les mains se levèrent toutes en même temps. Mbalia parla la première, fière : l'Asie, ses régions, la mousson, les fleuves immenses, les villes plus peuplées que des pays entiers. Tchotcho enchaîna sans attendre son tour : les Amériques — le Nord, le Centre, le Sud, les noms roulaient dans sa bouche comme une leçon bien récitée.
+      fr: `— Qu'avez-vous appris cette semaine ?
+
+Les mains se levèrent toutes en même temps. Mbalia parla la première, fière : l'Asie, ses régions, la mousson, les fleuves immenses, les villes plus peuplées que des pays entiers. Tchotcho enchaîna sans attendre son tour : les Amériques — le Nord, le Centre, le Sud, les noms roulaient dans sa bouche comme une leçon bien récitée.
 
 La classe brillait. Elle connaissait le monde.`,
-      en: `The hands all went up at the same time. Mbalia spoke first, proud: Asia, its regions, the monsoon, the immense rivers, cities more populous than entire countries. Tchotcho continued without waiting for his turn: the Americas—North, Central, South, the names rolled in his mouth like a well-recited lesson.
+      en: `"What have you learned this week?"
+
+The hands all went up at the same time. Mbalia spoke first, proud: Asia, its regions, the monsoon, the immense rivers, cities more populous than entire countries. Tchotcho continued without waiting for his turn: the Americas—North, Central, South, the names rolled in his mouth like a well-recited lesson.
 
 The class was shining. It knew the world.`,
-      ar: `ارتفعت الأيدي كلها في وقت واحد. تحدثت "Mbalia" أولاً، بفخر: عن آسيا، مناطقها، الرياح الموسمية، الأنهار العظيمة، ومدن يفوق عدد سكانها دولاً بأكملها. أكمل "Tchotcho" دون انتظار دوره: عن الأمريكيتين—الشمالية والوسطى والجنوبية، الأسماء تتدحرج في فمه كدرس محفوظ جيداً.
+      ar: `"ماذا تعلمتم هذا الأسبوع؟"
+
+ارتفعت الأيدي كلها في وقت واحد. تحدثت "Mbalia" أولاً، بفخر: عن آسيا، مناطقها، الرياح الموسمية، الأنهار العظيمة، ومدن يفوق عدد سكانها دولاً بأكملها. أكمل "Tchotcho" دون انتظار دوره: عن الأمريكيتين—الشمالية والوسطى والجنوبية، الأسماء تتدحرج في فمه كدرس محفوظ جيداً.
 
 كان الفصل مشعاً. إنه يعرف العالم.`,
-      zh: `所有手同时举了起来。Mbalia首先发言，自豪地说道：亚洲，它的地区，季风，巨大的河流，人口比整个国家还多的城市。Tchotcho不等轮到自己就接道：美洲——北部、中部、南部，名字在他口中流淌，就像一门背诵得很好的课程。
+      zh: `“这周你们学到了什么？”
+
+所有手同时举了起来。Mbalia首先发言，自豪地说道：亚洲，它的地区，季风，巨大的河流，人口比整个国家还多的城市。Tchotcho不等轮到自己就接道：美洲——北部、中部、南部，名字在他口中流淌，就像一门背诵得很好的课程。
 
 教室闪耀着光芒。它了解世界。`,
     },
     {
-      id: "relance-guinee",
-      voix: "visiteur",
-      fr: `— Et la Guinée ? Boffa ? Labé ? Faranah ? Lola ?`,
-      en: `"And Guinea? Boffa? Labé? Faranah? Lola?"`,
-      ar: `"وماذا عن غينيا؟ بوفا؟ لابي؟ فاراناه؟ لولا؟"`,
-      zh: `“那几内亚呢？博法？拉贝？法拉纳？洛拉？”`,
-    },
-    {
-      id: "silence-joel",
+      id: "et-la-guinee",
       voix: "recit",
-      fr: `Le silence tomba d'un coup. Les bras redescendirent. Les regards cherchèrent le sol, le sac à la fenêtre, n'importe quoi.
+      fr: `— Et la Guinée ? Boffa ? Labé ? Faranah ? Lola ?
+
+Le silence tomba d'un coup. Les bras redescendirent. Les regards cherchèrent le sol, le sac à la fenêtre, n'importe quoi.
 
 Ce fut Joël qui osa, à mi-voix :
 
 — Il paraît que ça, c'est pour la 10ᵉ année, Monsieur.
 
 Personne ne rit. Tout le monde sentit que la phrase était plus lourde qu'elle n'en avait l'air.`,
-      en: `The silence fell all at once. The arms went back down. The gazes looked for the floor, the bag at the window, anything. It was Joël who dared, in a low voice: "It seems that's for 10th grade, sir." Nobody laughed. Everyone felt that the sentence was heavier than it seemed.`,
-      ar: `سقط الصمت فجأة. انخفضت الأذرع. بحثت النظرات عن الأرض، عن الكيس في النافذة، عن أي شيء. "Joël" هو الذي تجرأ، بصوت منخفض: "يبدو أن هذا لمنهج السنة العاشرة، يا سيدي". لم يضحك أحد. شعر الجميع أن الجملة أثقل مما تبدو.`,
-      zh: `沉默瞬间降临。手臂放下了。目光搜寻着地板、窗户上的袋子，任何东西。Joël小声鼓起勇气说道：“老师，那好像是十年级学的。”没人笑。每个人都感觉到这句话比表面听起来更沉重。`,
+      en: `"And Guinea? Boffa? Labé? Faranah? Lola?"
+
+The silence fell all at once. The arms went back down. The gazes looked for the floor, the bag at the window, anything. It was Joël who dared, in a low voice: "It seems that's for 10th grade, sir." Nobody laughed. Everyone felt that the sentence was heavier than it seemed.`,
+      ar: `"وماذا عن غينيا؟ بوفا؟ لابي؟ فاراناه؟ لولا؟"
+
+سقط الصمت فجأة. انخفضت الأذرع. بحثت النظرات عن الأرض، عن الكيس في النافذة، عن أي شيء. "Joël" هو الذي تجرأ، بصوت منخفض: "يبدو أن هذا لمنهج السنة العاشرة، يا سيدي". لم يضحك أحد. شعر الجميع أن الجملة أثقل مما تبدو.`,
+      zh: `“那几内亚呢？博法？拉贝？法拉纳？洛拉？”
+
+沉默瞬间降临。手臂放下了。目光搜寻着地板、窗户上的袋子，任何东西。Joël小声鼓起勇气说道：“老师，那好像是十年级学的。”没人笑。每个人都感觉到这句话比表面听起来更沉重。`,
     },
     {
-      id: "relance-simandou-1",
-      voix: "visiteur",
-      fr: `— Qui a déjà entendu parler de Simandou ?`,
-      en: `"Who has already heard of Simandou?"`,
-      ar: `"من سمع من قبل عن سيماندو؟"`,
-      zh: `“谁听说过西芒杜？”`,
-    },
-    {
-      id: "mains-relevent",
+      id: "simandou",
       voix: "recit",
-      fr: `Toutes les mains se relevèrent — celle-là, ils la connaissaient, le mot était partout.`,
-      en: `All the hands went back up—that one, they knew, the word was everywhere.`,
-      ar: `ارتفعت كل الأيدي مجدداً—هذه الكلمة كانوا يعرفونها، كانت الكلمة في كل مكان.`,
-      zh: `所有的手又举了起来——这个词他们很熟悉，到处都是这个词。`,
+      fr: `— Qui a déjà entendu parler de Simandou ?
+
+Toutes les mains se relevèrent — celle-là, ils la connaissaient, le mot était partout.
+
+— Et qui peut me dire ce que c'est ?
+
+Et les mains retombèrent, une à une. Fatoumata ouvrit la bouche, la referma. Un garçon murmura « Simandou 2040… » puis s'arrêta, pas sûr. Le mot que tout le monde avait entendu, personne ne savait le remplir.`,
+      en: `"Who has already heard of Simandou?"
+
+All the hands went back up—that one, they knew, the word was everywhere.
+
+"And who can tell me what it is?"
+
+And the hands fell again, one by one. Fatoumata opened her mouth, closed it. A boy whispered "Simandou 2040..." then stopped, unsure. The word that everyone had heard, no one knew how to fill.`,
+      ar: `"من سمع من قبل عن سيماندو؟"
+
+ارتفعت كل الأيدي مجدداً—هذه الكلمة كانوا يعرفونها، كانت الكلمة في كل مكان.
+
+"ومن يستطيع أن يخبرني ما هي؟"
+
+وسقطت الأيدي مرة أخرى، الواحدة تلو الأخرى. فتحت "Fatoumata" فمها، ثم أغلقته. همس فتى "سيماندو 2040..." ثم توقف، غير متأكد. الكلمة التي سمعها الجميع، لم يعرف أحد كيف يملؤها.`,
+      zh: `“谁听说过西芒杜？”
+
+所有的手又举了起来——这个词他们很熟悉，到处都是这个词。
+
+“谁能告诉我那是什么？”
+
+手又一个接一个地放下了。Fatoumata张了张嘴，又合上了。一个男孩低声嘀咕“西芒杜 2040……”然后停住了，不确定。每个人都听过的这个词，没有人知道如何解读。`,
     },
     {
-      id: "relance-simandou-2",
-      voix: "visiteur",
-      fr: `— Et qui peut me dire ce que c'est ?`,
-      en: `"And who can tell me what it is?"`,
-      ar: `"ومن يستطيع أن يخبرني ما هي؟"`,
-      zh: `“谁能告诉我那是什么？”`,
-    },
-    {
-      id: "fatoumata-simandou",
+      id: "a-ma-place",
       voix: "recit",
-      fr: `Et les mains retombèrent, une à une. Fatoumata ouvrit la bouche, la referma. Un garçon murmura « Simandou 2040… » puis s'arrêta, pas sûr. Le mot que tout le monde avait entendu, personne ne savait le remplir.`,
-      en: `And the hands fell again, one by one. Fatoumata opened her mouth, closed it. A boy whispered "Simandou 2040..." then stopped, unsure. The word that everyone had heard, no one knew how to fill.`,
-      ar: `وسقطت الأيدي مرة أخرى، الواحدة تلو الأخرى. فتحت "Fatoumata" فمها، ثم أغلقته. همس فتى "سيماندو 2040..." ثم توقف، غير متأكد. الكلمة التي سمعها الجميع، لم يعرف أحد كيف يملؤها.`,
-      zh: `手又一个接一个地放下了。Fatoumata张了张嘴，又合上了。一个男孩低声嘀咕“西芒杜 2040……”然后停住了，不确定。每个人都听过的这个词，没有人知道如何解读。`,
-    },
-    {
-      id: "relance-tour-de-table",
-      voix: "visiteur",
-      fr: `— Imaginons que vous soyez à ma place : que feriez-vous ?`,
-      en: `"Let's imagine you were in my place: what would you do?"`,
-      ar: `"لنتخيل أنكم في مكاني: ماذا ستفعلون؟"`,
-      zh: `“想象一下，如果你坐在我的位置：你会怎么做？”`,
-    },
-    {
-      id: "tour-de-table",
-      voix: "recit",
-      fr: `Là, plus de silence. Les idées partirent, généreuses, désordonnées, vraies :
+      fr: `— Imaginons que vous soyez à ma place : que feriez-vous ?
+
+Là, plus de silence. Les idées partirent, généreuses, désordonnées, vraies :
 
 — Mbalia : « Je réparerais d'abord le tableau. On ne peut pas apprendre sur un mur gris. »
 — Tchotcho : « Moi, j'apprendrais la Guinée avant l'Asie. Pas à la place. Avant. »
@@ -271,7 +274,9 @@ Un petit, au fond, sans lever la main :
 — Oui, mais qu'ils reviennent, dehh ! corrigea son voisin. Sinon… si on a de bonnes écoles ici, ça suffit déjà.
 
 Quelqu'un rit, doucement, et le rire fit du bien. La classe venait de dire, sans le savoir, à peu près tout le programme.`,
-      en: `There, no more silence. The ideas flowed, generous, disorganized, true:
+      en: `"Let's imagine you were in my place: what would you do?"
+
+There, no more silence. The ideas flowed, generous, disorganized, true:
 
 — Mbalia: "I would fix the blackboard first. You can't learn on a gray wall."
 — Tchotcho: "Me, I would learn about Guinea before Asia. Not instead of. Before."
@@ -286,7 +291,9 @@ A little one, at the back, without raising his hand:
 — "Yes, but let them come back, dehh!" corrected his neighbor. "Otherwise... if we have good schools here, that's already enough."
 
 Someone laughed, gently, and the laughter felt good. The class had just said, without knowing it, almost the entire program.`,
-      ar: `هنا، انتهى الصمت. انطلقت الأفكار، سخية، غير منظمة، حقيقية:
+      ar: `"لنتخيل أنكم في مكاني: ماذا ستفعلون؟"
+
+هنا، انتهى الصمت. انطلقت الأفكار، سخية، غير منظمة، حقيقية:
 
 — Mbalia: "سأصلح السبورة أولاً. لا يمكننا التعلم على جدار رمادي".
 — Tchotcho: "أنا، سأتعلم عن غينيا قبل آسيا. ليس بدلاً منها. قبلها".
@@ -301,7 +308,9 @@ Someone laughed, gently, and the laughter felt good. The class had just said, wi
 — "نعم، ولكن بشرط أن يعودوا!" صحح له جاره. "وإلا... إذا كان لدينا مدارس جيدة هنا، فهذا يكفي".
 
 ضحك أحدهم برفق، وكانت الضحكة مريحة. كان الفصل قد قال للتو، دون أن يدري، البرنامج بأكمله تقريباً.`,
-      zh: `不再有沉默。想法喷涌而出，慷慨、杂乱、真实：
+      zh: `“想象一下，如果你坐在我的位置：你会怎么做？”
+
+不再有沉默。想法喷涌而出，慷慨、杂乱、真实：
 
 — Mbalia：“我会先修理黑板。你不能在灰色的墙上学习。”
 — Tchotcho：“我，我会先学几内亚再学亚洲。不是代替。是先学。”
