@@ -164,3 +164,61 @@ d'images générées par session avant la coupure, corrections comprises — don
 deux planches et demie par tome et par jour dans le pire des cas. Ranger et
 brancher au fur et à mesure, jamais en fin de tome : une planche rangée est
 acquise, une planche en attente est perdue.
+
+---
+
+## 9. Ce que la ré-illustration du tome 0 a appris (20/10/2026)
+
+Le premier tome 0 a été refusé par l'auteur : « Elles se ressemblent toutes. »
+Dix planches toutes prises de face, à hauteur d'homme, au même plan moyen.
+D'où les règles suivantes, qui priment sur la §2 quand les deux se contredisent :
+
+### 9.1 Un plan de tournage avant la première image
+
+On écrit d'abord le tableau des dix prises de vue du tome, et on vérifie qu'il
+n'y a pas deux fois la même. Celui du tome 0, qui a été validé :
+
+| planche | prise de vue |
+|---|---|
+| 1 ouverture | plongée sur la clairière boisée |
+| 2 l'arrivée | contre-plongée très basse, jambes énormes en amorce |
+| 3 la classe avant | nature morte, aucun visage |
+| 4 bonjour | depuis le fond, par-dessus des nuques énormes, lui petit et loin |
+| 5 les mains levées | contre-plongée sous les bras, depuis un enfant assis |
+| 6 le silence | trois visages en gros plan, regards qui fuient |
+| 7 Simandou | plan serré sur avant-bras et doigts, aucun visage |
+| 8 le tour de table | plongée presque verticale sur les bancs |
+| 9 le couloir | frise de profil à contre-jour |
+| 10 le cahier | par-dessus l'épaule, cahier dans le sens de l'élève |
+
+La hauteur de caméra constante demandée au §2 vaut à l'intérieur d'une scène
+continue, pas d'une planche à l'autre : un tome entier à hauteur d'yeux ne se
+lit pas.
+
+### 9.2 Deux consignes à répéter à chaque prompt
+
+- **« la peinture occupe TOUTE la surface, bord à bord, sans marge ni cadre »** :
+  sans elle, le générateur rend une vignette posée au milieu d'une page crème,
+  qui dans le lecteur devient un timbre-poste entouré de vide.
+- **« les têtes sont grosses et centrées en hauteur »** : laissé libre, il tasse
+  les personnages dans le quart inférieur et remplit le haut de mur vide, ce qui
+  vide la bande centrale 16:9 dont dépend l'animation.
+
+Quand une correction en fil ne passe pas au deuxième essai, **rouvrir un fil
+neuf** avec la consigne en tête de prompt : dans un fil, le générateur reproduit
+son propre défaut.
+
+### 9.3 Le texte manuscrit
+
+Pour un cahier, un carnet, une feuille d'élève : demander explicitement une
+écriture **non lisible**, lignes d'encre souples sans mot reconnaissable. Rien
+à vérifier, rien à re-lettrer en anglais, arabe ou chinois.
+
+### 9.4 Fiche personnage du tome 0 — le Président
+
+- **polo blanc**, pantalon sombre ;
+- **dépasse tous les adultes d'une tête entière** ;
+- **visage inventé**, jamais un portrait ressemblant d'un chef d'État en
+  exercice : de dos, de trois quarts, à contre-jour ou peu lisible ;
+- Boffa est une **zone boisée** : manguiers et grands arbres, jamais une
+  clairière nue.
