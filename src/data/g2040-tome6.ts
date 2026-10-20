@@ -147,6 +147,7 @@ She paused.
     {
       id: "montagnes-et-sources",
       voix: "recit",
+      image: "/images/g2040/t6-p4.webp",
       fr: `Ce mot, eau, fit réfléchir Binta.
 
 Elle savait que le Fouta était appelé le « château d'eau » : c'est sur ces hauteurs que naissent les grands fleuves — le Niger, le Sénégal, la Gambie. « Toute la sous-région boit un peu d'ici », pensa-t-elle. Mais elle savait aussi que, chaque année, on coupait des arbres, et que des sources baissaient.
@@ -171,6 +172,7 @@ To protect the forest, she understood, was to protect the water. And to protect 
     {
       id: "mot-de-binta",
       voix: "recit",
+      image: "/images/g2040/t6-p5.webp",
       fr: `Le jour de l'Objectif, Madame Baldé écrivit au tableau la phrase qu'on entendait souvent à Dalaba :
 
 ON PART D'ICI
@@ -251,6 +253,7 @@ The ideas burst out:
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t6-p6.webp",
       fr: `Dans le dossier que Dalaba envoya à la Simandou Academy, Binta avait dessiné sa ville en 2040.
 
 Des collines couvertes de forêts protégées, des sources claires, des jardins en fleurs. De petites maisons d'accueil aux plafonds tressés comme la vieille case, où des familles de Conakry et des voyageurs du monde venaient respirer et dormir au frais. La case à palabres restaurée, pleine de visiteurs levant les yeux vers sa coupole de vannerie ; l'atelier d'indigo et les vannières devenus une halte qu'on adorait. Et la villa de la chanteuse, sauvée, où l'on venait écouter de la musique et se reposer, comme elle autrefois.
