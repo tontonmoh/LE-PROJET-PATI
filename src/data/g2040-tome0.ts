@@ -183,6 +183,7 @@ The children seemed to be in a dream.`,
     {
       id: "quavez-vous-appris",
       voix: "recit",
+      image: "/images/g2040/t0-p5.webp",
       fr: `— Qu'avez-vous appris cette semaine ?
 
 Les mains se levèrent toutes en même temps. Mbalia parla la première, fière : l'Asie, ses régions, la mousson, les fleuves immenses, les villes plus peuplées que des pays entiers. Tchotcho enchaîna sans attendre son tour : les Amériques — le Nord, le Centre, le Sud, les noms roulaient dans sa bouche comme une leçon bien récitée.
@@ -207,6 +208,7 @@ The class was shining. It knew the world.`,
     {
       id: "et-la-guinee",
       voix: "recit",
+      image: "/images/g2040/t0-p6.webp",
       fr: `— Et la Guinée ? Boffa ? Labé ? Faranah ? Lola ?
 
 Le silence tomba d'un coup. Les bras redescendirent. Les regards cherchèrent le sol, le sac à la fenêtre, n'importe quoi.
