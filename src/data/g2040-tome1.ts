@@ -94,6 +94,7 @@ export const g2040Tome1: LivreG2040 = {
     {
       id: "defi",
       voix: "recit",
+      image: "/images/g2040/t1-p1.webp",
       fr: `L'appel de la Simandou Academy était arrivé jusqu'à Lola, porté par la radio et par une grande affiche collée sur le mur de l'école : chaque école raconte son Objectif. Dans la classe de Sia, ça discutait fort.
 
 — Nous, c'est facile, lança Cécé. On raconte le fer. On dit que notre montagne en est pleine. Si un jour on vient le chercher, Lola comptera enfin.
@@ -134,6 +135,7 @@ Behind them, on Mount Nimba, the clouds clung to the trees as they did every mor
     {
       id: "fer-qui-dort",
       voix: "recit",
+      image: "/images/g2040/t1-p2.webp",
       fr: `Cécé connaissait son rêve par cœur. Son grand frère était parti chercher du travail loin, du côté des grands chantiers du fer. Là-bas, racontait-il, le fer le plus pur du monde descendait déjà vers la mer, par une ligne longue comme un fleuve.
 
 — Un jour, disait Cécé, on viendra réveiller le fer qui dort sous notre montagne, à nous aussi. Et ce jour-là, mes frères n'auront plus besoin de partir.
@@ -158,6 +160,7 @@ Sia 听着。这并没有错。她也看着年轻人一个个离开。她也希�
     {
       id: "foret-vivante",
       voix: "recit",
+      image: "/images/g2040/t1-p3.webp",
       fr: `Le mercredi, la garde forestière du Nimba, Mamy Loua, emmena la classe vers Bossou. Six kilomètres, pas plus, entre la montagne et la frontière. Là, sous les arbres, les enfants firent silence.
 
 Une famille de chimpanzés cassait des noix de palme. Une pierre dessous, une pierre dessus, et le geste sûr, recommencé. Le plus âgé partageait les amandes, équitablement, en commençant par les petits.
@@ -190,6 +193,7 @@ That evening, Sia's grandmother told the other half of the story — the one the
     {
       id: "faux-choix",
       voix: "recit",
+      image: "/images/g2040/t1-p4.webp",
       fr: `Le lendemain, la dispute reprit, plus dure.
 
 — Si on creuse la montagne pour le fer, dit Gbamou, où ira la forêt ? Où iront eux ?
@@ -238,6 +242,7 @@ Mamy Loua had come to listen that day. She only said:
     {
       id: "mot-du-milieu",
       voix: "recit",
+      image: "/images/g2040/t1-p5.webp",
       fr: `Sia y pensa toute la nuit. Le matin, elle alla au tableau et, dans le grand blanc, elle écrivit un seul petit mot — ET.
 
 — On peut garder la forêt et réveiller le fer, dit-elle. Mais seulement si on le fait avec soin.
@@ -298,6 +303,7 @@ Mamy Loua 微笑着。那天来的一位公司女工程师解释说，是的，�
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t1-p6.webp",
       fr: `Dans le dossier que la classe de Lola envoya à la Simandou Academy, il y avait une seule image, dessinée par Sia.
 
 On y voyait la montagne en 2040. Si un jour on réveillait le fer du Nimba — alors qu'il en soit ainsi : en bas, le train descendrait vers la mer, chargé ; mais en haut, le Nimba porterait toujours sa forêt, verte et entière. Et à Bossou, une famille de chimpanzés casserait encore ses noix, une pierre dessous, une pierre dessus.
