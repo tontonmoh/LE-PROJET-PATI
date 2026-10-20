@@ -61,18 +61,21 @@ h1, h2, h3, .font-display {
   letter-spacing: 0.01em;
   color: #20312a;
 }
-.reader-text p { margin: 0 0 1.15rem; }
+/* pre-line : les listes d'Objectifs de Génération 2040 sont écrites une ligne
+   par item. Sans ça, le navigateur recolle les lignes et la page devient un mur
+   (cf. « Le mot de Bella », T8 : cinq Objectifs en 813 signes d'un bloc). */
+.reader-text p { margin: 0 0 1.15rem; white-space: pre-line; }
 .reader-ar {
   font-family: "Noto Naskh Arabic", Andika, serif;
   direction: rtl; text-align: right;
   font-size: 1.4rem; line-height: 2.15; color: #20312a;
 }
-.reader-ar p { margin: 0 0 1.2rem; }
+.reader-ar p { margin: 0 0 1.2rem; white-space: pre-line; }
 .reader-zh {
   font-family: "Noto Sans SC", Nunito, sans-serif;
   font-size: 1.2rem; line-height: 2.05; letter-spacing: 0.02em; color: #20312a;
 }
-.reader-zh p { margin: 0 0 1.1rem; }
+.reader-zh p { margin: 0 0 1.1rem; white-space: pre-line; }
 
 /* Lettrine façon conte (fr/en uniquement) */
 .reader-drop > p:first-of-type::first-letter,
