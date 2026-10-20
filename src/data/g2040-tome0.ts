@@ -93,6 +93,7 @@ export const g2040Tome0: LivreG2040 = {
     {
       id: "ouverture",
       voix: "visiteur",
+      image: "/images/g2040/t0-p1.webp",
       fr: `Le Président était à Boffa pour le pèlerinage. Comme le Nouvel An approchait, une idée lui vint : « Pour mon discours, je veux être dans une salle de classe. »
 
 Mais au village, c'était la panique ! Les conseillers couraient dans tous les sens, le protocole était tout chamboulé. « Monsieur le Président, il n'y a aucune salle adaptée ! » Ils lui proposaient les jardins d'un hôtel luxueux, les salons feutrés de la préfecture, ou même le sable doré de la plage.
@@ -119,6 +120,7 @@ But in the village, it was panic! The advisors were running in all directions, a
     {
       id: "arrivee-a-lecole",
       voix: "visiteur",
+      image: "/images/g2040/t0-p2.webp",
       fr: `Annoncé par les klaxons des motards qui avaient tenu à accompagner le cortège, la cour entière fut en émoi. Les gens n'en croyaient pas leurs yeux de voir apparaître ce visiteur inattendu. Il était là, vêtu simplement d'un polo, sans lunettes, entouré d'une sécurité réduite au strict minimum pour ne pas briser la magie du moment.
 
 Le DPE arrivait en toute hâte, ayant dû grimper sur une moto-taxi pour traverser la ville en un éclair, tandis que le Principal du collège, paniqué de ne pas avoir été prévenu, se posait mille questions. Il avait commencé à sortir tout le monde quand le Président lui dit : « Non, ne sortez personne, on fera cela après. »
@@ -143,6 +145,7 @@ Arrived in front of an 8th-grade class, the President stopped. He asked everyone
     {
       id: "avant",
       voix: "recit",
+      image: "/images/g2040/t0-p3.webp",
       fr: `Dans la classe de 8ᵉ année, le tableau avait perdu ses couleurs : un gris fatigué où la craie s'effaçait à moitié. Trois bancs étaient calés avec des cales de bois. Une vitre manquait à la fenêtre du fond ; on avait tendu un sac à la place. Le professeur n'était pas venu ce matin-là — ça arrivait. Les élèves révisaient seuls, en attendant le prochain cours et les passages répétés du surveillant général.`,
       en: `In the 8th-grade class, the blackboard had lost its color: a tired gray where the chalk half-faded. Three benches were propped up with wooden shims. A pane was missing from the back window; a bag had been stretched in its place. The teacher hadn't come that morning—it happened. The students were reviewing alone, waiting for the next class and the repeated passages of the general supervisor.`,
       ar: `في فصل السنة الثامنة، كانت السبورة قد فقدت ألوانها: رمادي متعب حيث يمحى الطباشير نصف محو. كانت ثلاث مقاعد مدعومة بقطع خشبية. نافذة في الخلف كانت تفتقد إلى زجاج؛ وقد وضعوا كيساً بدلاً منه. لم يأتِ المعلم في ذلك الصباح—وهذا كان يحدث. كان الطلاب يراجعون دروسهم وحدهم، بانتظار الدرس التالي وتكرار زيارات المراقب العام.`,
@@ -151,6 +154,7 @@ Arrived in front of an 8th-grade class, the President stopped. He asked everyone
     {
       id: "bonjour-et-visiteur",
       voix: "visiteur",
+      image: "/images/g2040/t0-p4.webp",
       fr: `— Bonjour Monsieur, dit la classe en chantant d'un seul élan, debout, dans un raclement de bancs.
 
 D'un geste simple, il invita les élèves à s'asseoir. Dans la salle, le silence devint tout à coup très doux. Il posa ses mains sur le bureau, les regarda tour à tour, et sa voix, profonde et chaleureuse, s'éleva :

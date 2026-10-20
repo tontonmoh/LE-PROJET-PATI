@@ -148,3 +148,19 @@ regarder.
 - **Les gestes techniques.** Les chimpanzés de Bossou sont revenus avec des
   maillets à manche. Décrire le geste exact : une pierre arrondie tenue à
   pleine main, une pierre plate au sol.
+
+### Télécharger sans rater l'image (20/10, tome 0)
+
+Le bouton de téléchargement ne répond pas s'il n'est pas à l'écran : le clic
+part, rien ne se passe, et le rangement ramasse une vieille image. La séquence
+fiable est `scroll_to` sur le bouton, une pause, puis le clic. Un `scroll` de
+la page ne suffit pas.
+
+### Quota
+
+La production du tome 0 s'est arrêtée à la 4e planche sur un refus de Gemini
+(« dès que votre limite sera réinitialisée »). Compter environ une quinzaine
+d'images générées par session avant la coupure, corrections comprises — donc
+deux planches et demie par tome et par jour dans le pire des cas. Ranger et
+brancher au fur et à mesure, jamais en fin de tome : une planche rangée est
+acquise, une planche en attente est perdue.
