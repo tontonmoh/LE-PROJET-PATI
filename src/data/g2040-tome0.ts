@@ -231,6 +231,7 @@ The silence fell all at once. The arms went back down. The gazes looked for the 
     {
       id: "simandou",
       voix: "recit",
+      image: "/images/g2040/t0-p7.webp",
       fr: `— Qui a déjà entendu parler de Simandou ?
 
 Toutes les mains se relevèrent — celle-là, ils la connaissaient, le mot était partout.
@@ -263,6 +264,7 @@ And the hands fell again, one by one. Fatoumata opened her mouth, closed it. A b
     {
       id: "a-ma-place",
       voix: "recit",
+      image: "/images/g2040/t0-p8.webp",
       fr: `— Imaginons que vous soyez à ma place : que feriez-vous ?
 
 Là, plus de silence. Les idées partirent, généreuses, désordonnées, vraies :
@@ -335,6 +337,7 @@ Someone laughed, gently, and the laughter felt good. The class had just said, wi
     {
       id: "declenche",
       voix: "visiteur",
+      image: "/images/g2040/t0-p9.webp",
       fr: `Après ces échanges précieux, le Président sortit de la classe, le cœur rempli par la générosité des enfants.
 
 En marchant dans le couloir, il se pencha vers son Directeur et chuchota : « Simandou Academy doit toucher tous les enfants, vraiment tous. Passons aux choses sérieuses : il nous faut une idée, comme un grand concours, qui aura un vrai impact, aujourd'hui et pour longtemps. »
@@ -349,6 +352,7 @@ La question était posée, sans besoin de réponse. Le Président se tourna alor
     {
       id: "apres",
       voix: "recit",
+      image: "/images/g2040/t0-p10.webp",
       fr: `Quand la porte se referma, la classe resta un instant sans un bruit, comme si l'air avait changé d'épaisseur.
 
 Puis les chuchotis repartirent. Mbalia regardait le tableau gris autrement. Tchotcho répétait tout bas : « avant, pas à la place ». Joël fixait la fenêtre au sac, du côté où passait, quelque part, la grande ligne.
