@@ -69,6 +69,7 @@ export const g2040Tome5: LivreG2040 = {
     {
       id: "ville-qui-a-ecrit",
       voix: "recit",
+      image: "/images/g2040/t5-p1.webp",
       fr: `Kouroussa est assise sur le Djoliba, le grand fleuve Niger, qui descend des hauteurs du pays et traverse tout le Mandé.
 
 Comme à Dabola, il y a la vieille gare et le pont de fer sur le fleuve — endormis, aujourd'hui, en attendant que la Ligne renaisse. Mais le vrai trésor de Kouroussa n'est ni le rail ni le pont. C'est qu'ici, autrefois, est né un enfant qui a écrit un livre. Camara Laye, on l'appelle — le fils d'un forgeron de la ville. C'est par cette gare qu'il était parti, en train, étudier au loin ; puis il avait raconté l'enfance d'un petit garçon de Kouroussa dans un livre que le monde entier a lu.
@@ -93,6 +94,7 @@ When the call of the Simandou Academy arrived — write the story of your town �
     {
       id: "tresor-qu-on-regarde-sans-voir",
       voix: "recit",
+      image: "/images/g2040/t5-p2.webp",
       fr: `Pourtant, le trésor était partout — et personne ne le regardait plus.
 
 Il y avait le dununba, la danse des hommes forts, née ici même dans le Hamana, mais qu'on ne sortait plus qu'aux grandes fêtes. Il y avait, à Baro, la mare sacrée au pied du vieux baobab, où l'on venait depuis des siècles ; on disait qu'elle risquait de se dessécher. Il y avait les histoires du vieux djeli, que les jeunes, partis à la ville, n'écoutaient plus.
@@ -117,6 +119,7 @@ There was the dununba, the dance of the strong men, born right here in the Haman
     {
       id: "vieux-mamadi-le-djeli",
       voix: "recit",
+      image: "/images/g2040/t5-p3.webp",
       fr: `Le vieux Mamadi, lui, était djeli : gardien des histoires, joueur de tambour. Il entendit Fanta, et l'emmena au bord du Djoliba.
 
 — Regarde le fleuve, dit-il. Il porte la pirogue parce qu'il vient de loin. Un peuple qui oublie ses histoires, c'est un arbre sans racines : le premier vent le couche.
@@ -149,6 +152,7 @@ The dununba, he taught her, is not just a dance: it is courage, the passage from
     {
       id: "le-declic",
       voix: "recit",
+      image: "/images/g2040/t5-p4.webp",
       fr: `Alors Fanta comprit.
 
 La culture n'était pas de « vieilles choses ». C'était une force — et une richesse d'avenir : la fierté d'un peuple, son nom dans le monde, et de quoi faire vivre toute une ville. Un festival qui fait venir le pays. Des livres. Des visiteurs à Baro. Le tambour appris aux enfants.
@@ -181,6 +185,7 @@ And the contest, all at once, seemed clear to her.
     {
       id: "mot-de-fanta",
       voix: "recit",
+      image: "/images/g2040/t5-p5.webp",
       fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau ce que Fanta avait dit en arrivant :
 
 LA CULTURE, C'EST LE PASSÉ
@@ -249,6 +254,7 @@ Fanta 站起来，在下面写道：
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t5-p6.webp",
       fr: `Dans le dossier que Kouroussa envoya à la Simandou Academy, Fanta avait dessiné sa ville en 2040.
 
 Au bord du Djoliba, la maison de Camara Laye était vivante, pleine d'enfants qui lisaient et écrivaient. Sur la grande place, le bara, le dununba battait pour le festival, et le train — la Ligne ressuscitée — déversait des visiteurs venus du pays et du monde. Plus loin, sous son baobab, la mare de Baro brillait, protégée. Et le fleuve, lui, coulait, comme toujours.
