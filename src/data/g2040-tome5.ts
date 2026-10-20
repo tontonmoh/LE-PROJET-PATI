@@ -1,288 +1,297 @@
 // =============================================================================
-//  GÉNÉRATION 2040 — Tome 5 : « Le Tambour et le Livre »
-//  Fichier de données Pati (même structure que g2040-tome1/2/3/4.ts)
+//  GÉNÉRATION 2040 — Tome 5 : « La Graine et l'Huile »
+//  Fichier de données Pati (même structure que g2040-tome1/2/3.ts)
 // -----------------------------------------------------------------------------
-//  ÉTAT : FR + EN remplis (texte de Claude). AR + ZH = BROUILLONS de Claude →
-//         À FAIRE RELIRE par un natif avant de passer le statut à "pret".
-//  NOMS INVARIANTS en latin dans les 4 langues : Fanta (héroïne), Mamadi (le
-//  djeli), Camara Laye, Kouroussa, Dabola, Baro, Djoliba, Hamana, Simandou
-//  Academy. Termes-concepts gardés tels quels et glosés : dununba, djeli, bara.
-//  GARDE-FOU : Camara Laye (auteur réel décédé) référencé FACTUELLEMENT comme
-//  patrimoine — jamais comme personnage qui parle, AUCUNE citation inventée,
-//  AUCUNE reproduction du texte de « L'Enfant noir ».
+//  ÉTAT : FR + EN remplis (texte entièrement de Claude — pas de figure réelle).
+//         AR + ZH = BROUILLONS de Claude → À FAIRE RELIRE par un natif avant
+//         de passer le statut à "pret" (même exigence que Tomes 0-3).
+//  Noms INVARIANTS en latin dans les 4 langues : Saran, Hawa, Dabola,
+//  Simandou Academy, « Huile de Dabola » (marque, gardée telle quelle).
+//  Ancrage : l'HUILERIE DE DABOLA EXISTE DÉJÀ (usine d'arachide « Sincéry »,
+//  vitrine de la préfecture, relancée 2014) ; le goulot réel = l'approvisionnement
+//  en grain → l'histoire = la NOURRIR (cultiver assez + garder le grain), non la
+//  construire. Gare de l'ancienne Ligne du Niger (Conakry-Kankan) qui renaît.
 // =============================================================================
 
 import type { LivreG2040, SectionG2040 } from "./g2040-tome1";
 
 export const g2040Tome5: LivreG2040 = {
-  slug: "g2040-tambour-et-livre",
+  slug: "g2040-graine-et-huile",
   serie: "generation-2040",
   ordre: 5,
   statut: "en_production", // FR + EN prêts ; AR/ZH = brouillons à faire relire
   titre: {
-    fr: "Le Tambour et le Livre",
-    en: "The Drum and the Book",
-    ar: "الطبل والكتاب",
-    zh: "鼓与书",
+    fr: "La Graine et l'Huile",
+    en: "The Seed and the Oil",
+    ar: "البذرة والزيت",
+    zh: "种子与油",
   },
-  lieu: "Kouroussa",
+  lieu: "Dabola",
   sousCollection: "Aventure",
   age: "dès 12 ans",
-  odd: [4, 11],
-  pilier: "Éducation & culture (patrimoine vivant, transmission)",
-  couverture: "/images/g2040-tome5-couverture.webp",
+  odd: [9, 12],
+  pilier: "Agriculture, industrie alimentaire & commerce (transformation locale)",
+  couverture: "/images/g2040-tome4-couverture.webp",
   meta: {
     tagline: {
-      fr: "À Kouroussa, un enfant a écrit un livre lu dans le monde entier. Et si notre plus grand trésor d'avenir, c'était notre culture ?",
-      en: "In Kouroussa, a child wrote a book read the world over. What if our greatest treasure for the future were our culture?",
-      ar: "في Kouroussa، كتب طفلٌ كتابًا قُرِئ في العالم كلّه. فماذا لو كان أعظمُ كنوزنا للمستقبل هو ثقافتنا؟",
-      zh: "在 Kouroussa，一个孩子写出了一本风行世界的书。倘若我们面向未来的最大财富，正是我们的文化呢？",
+      fr: "À Dabola, l'arachide part nue et l'huile revient chère. L'usine, elle, est là — elle a juste faim. Et si on la nourrissait ?",
+      en: "In Dabola, the peanut leaves bare and the oil comes back dear. The mill is right there — it is only hungry. What if we fed it?",
+      ar: "في Dabola، يخرج الفول السوداني عاريًا ويعود الزيت غاليًا. أمّا المصنع، فهو هنا — إنه جائعٌ فقط. فماذا لو أطعمناه؟",
+      zh: "在 Dabola，花生赤裸裸地运出去，油却昂贵地买回来。可榨油厂就在这儿——它只是饿了。我们何不喂饱它呢？",
     },
     blurb: {
       fr: [
-        "Kouroussa, au bord du Djoliba, est le cœur du vieux pays mandingue, le Hamana. C'est ici qu'est né Camara Laye — un enfant de forgeron qui, avec un livre, a porté sa ville jusqu'au bout du monde.",
-        "Mais Fanta, elle, croit que tout cela n'est que « le passé » : le dununba qu'on ne sort qu'aux fêtes, la mare sacrée de Baro qu'on laisse se dessécher, les histoires que les jeunes n'écoutent plus.",
-        "Le vieux Mamadi, le djeli, lui ouvre les yeux : un peuple sans ses histoires est un arbre sans racines. Pour le concours de la Simandou Academy, sa classe trouve l'Objectif : faire de la culture une richesse d'avenir — festival, maison des histoires, Baro protégée, et le train qui amène le monde jusqu'à eux.",
-        "Un livre sur la fierté, la mémoire et le pouvoir des mots. Génération 2040 · dès 12 ans.",
+        "Dabola, au cœur du pays, avait deux fiertés : sa gare — la première grande gare du bassin du Niger — et sa grande huilerie d'arachide. Aujourd'hui la gare dort, rails disparus ; et l'usine tourne au ralenti, faute de graines.",
+        "Au marché, Saran observe un manège absurde : on charge l'arachide brute, vendue pour presque rien, et on décharge des bouteilles d'huile, chères, venues d'ailleurs. La même arachide, partie nue, revenue habillée.",
+        "Pour le concours de la Simandou Academy, sa classe trouve l'Objectif : nourrir l'usine au lieu de vendre la graine ; presser l'huile ici ; et réveiller la gare pour que la Ligne emporte des bouteilles pleines, pas des sacs bradés.",
+        "Un livre sur la transformation locale, le travail qui reste au pays et la fierté retrouvée. Génération 2040 · dès 12 ans.",
       ],
       en: [
-        "Kouroussa, on the banks of the Djoliba, is the heart of the old Mandingo country, the Hamana. It is here that Camara Laye was born — a blacksmith's child who, with a single book, carried his town to the ends of the earth.",
-        "But Fanta believes all of it is just \"the past\": the dununba brought out only on feast days, the sacred pool of Baro left to dry up, the stories the young no longer listen to.",
-        "Old Mamadi, the djeli, opens her eyes: a people without its stories is a tree without roots. For the Simandou Academy contest, her class finds its Objective: to make culture a treasure for the future — a festival, a house of stories, Baro protected, and the train that brings the world to them.",
-        "A book about pride, memory, and the power of words. Génération 2040 · ages 12 and up.",
+        "Dabola, in the heart of the country, had two prides: its station — the first great station of the Niger basin — and its big peanut oil mill. Today the station sleeps, its rails gone; and the mill runs at half-speed, short of seed.",
+        "At the market, Saran watches an absurd dance: raw peanut is loaded up, sold for almost nothing, while bottles of oil are unloaded, expensive, come from elsewhere. The same peanut, leaving bare, returning dressed.",
+        "For the Simandou Academy contest, her class finds its Objective: feed the mill instead of selling the seed; press the oil here; and wake the station, so the Line carries full bottles, not cut-price sacks.",
+        "A book about local processing, work that stays in the country, and pride regained. Génération 2040 · ages 12 and up.",
       ],
       ar: [
-        "تقع Kouroussa على ضفاف Djoliba، وهي قلب بلاد الماندينغ القديمة، الـ Hamana. هنا وُلد Camara Laye — ابنُ حدّادٍ حمل مدينته، بكتابٍ واحد، إلى أقاصي الأرض.",
-        "لكنّ Fanta تظنّ أنّ هذا كلّه مجرّد «ماضٍ»: الـ dununba لا يُخرَج إلّا في الأعياد، ومستنقع Baro المقدّس يُترَك ليجفّ، والحكايات لم يعد الشباب يصغون إليها.",
-        "يفتح لها الشيخ Mamadi، الـ djeli، عينيها: شعبٌ بلا حكاياته شجرةٌ بلا جذور. ومن أجل مسابقة Simandou Academy، يجد صفّها هدفه: أن يجعل الثقافة كنزًا للمستقبل — مهرجانٌ، وبيتٌ للحكايات، وحمايةُ Baro، والقطارُ الذي يجلب العالم إليهم.",
-        "كتابٌ عن الكرامة والذاكرة وقوّة الكلمات. Génération 2040 · من 12 سنة فما فوق.",
+        "كانت لـ Dabola، في قلب البلد، فخران: محطّتها — أولى محطّات حوض النيجر الكبرى — ومصنعها الكبير لزيت الفول السوداني. أمّا اليوم، فالمحطّة نائمة وقد اختفت قضبانها؛ والمصنع يعمل بنصف طاقته، لقلّة البذور.",
+        "في السوق، تراقب Saran رقصةً عبثية: يُحمَّل الفول السوداني خامًا فيُباع بأبخس ثمن، وتُفرَّغ زجاجات الزيت غاليةً قادمةً من مكانٍ آخر. الفول نفسه: يخرج عاريًا، ويعود مكسوًّا.",
+        "ومن أجل مسابقة Simandou Academy، يجد صفّها هدفه: أن نُطعم المصنع بدل أن نبيع البذرة؛ أن نعصر الزيت هنا؛ وأن نوقظ المحطّة، كي يحمل الخطّ زجاجاتٍ ملأى، لا أكياسًا مباعةً بثمنٍ بخس.",
+        "كتابٌ عن التحويل المحلّي، والعمل الذي يبقى في البلد، والكرامة المستعادة. Génération 2040 · من 12 سنة فما فوق.",
       ],
       zh: [
-        "Kouroussa 坐落在 Djoliba 河畔，是古老曼丁哥地区——Hamana——的心脏。Camara Laye 就出生在这里：一个铁匠的孩子，凭一本书把家乡带到了天涯海角。",
-        "可 Fanta 却觉得这一切不过是「过去」：dununba 只在节庆时才搬出来，Baro 的圣潭任由它干涸，老人的故事年轻人也不再听了。",
-        "老 Mamadi——那位 djeli——点醒了她：一个没有故事的民族，就像没有根的树。为了 Simandou Academy 的比赛，全班找到了「目标」：让文化成为面向未来的财富——办 festival、建一座故事之屋、守护 Baro，让火车把世界带到他们面前。",
-        "一本关于骄傲、记忆和文字力量的书。Génération 2040 · 适合 12 岁以上。",
+        "Dabola 地处全国中心，曾有两样骄傲：它的火车站——尼日尔河流域的第一座大站——和它那座大花生榨油厂。如今车站沉睡，铁轨不知去向；榨油厂则因缺少花生，只开半工。",
+        "在集市上，Saran 看着一幕荒唐的景象：生花生被装车运走，贱卖得几乎不值钱；一瓶瓶油却被卸下来，价格高昂，来自别处。同样的花生，赤裸裸地出去，穿戴整齐地回来。",
+        "为了 Simandou Academy 的比赛，全班找到了「目标」：与其卖掉种子，不如喂饱工厂；把油榨在这里；再唤醒车站，让铁路运走的是满瓶的油，而不是贱卖的麻袋。",
+        "一本关于本地加工、把劳动留在国内、重拾骄傲的书。Génération 2040 · 适合 12 岁以上。",
       ],
     },
   },
   sections: [
     {
-      id: "ville-qui-a-ecrit",
+      id: "gare-et-huilerie",
       voix: "recit",
       image: "/images/g2040/t5-p1.webp",
-      fr: `Kouroussa est assise sur le Djoliba, le grand fleuve Niger, qui descend des hauteurs du pays et traverse tout le Mandé.
+      fr: `Dabola est posée au milieu du pays, là où toutes les routes se croisent.
 
-Comme à Dabola, il y a la vieille gare et le pont de fer sur le fleuve — endormis, aujourd'hui, en attendant que la Ligne renaisse. Mais le vrai trésor de Kouroussa n'est ni le rail ni le pont. C'est qu'ici, autrefois, est né un enfant qui a écrit un livre. Camara Laye, on l'appelle — le fils d'un forgeron de la ville. C'est par cette gare qu'il était parti, en train, étudier au loin ; puis il avait raconté l'enfance d'un petit garçon de Kouroussa dans un livre que le monde entier a lu.
+Autrefois, deux fiertés faisaient battre la ville. La gare d'abord : Dabola était la première grande gare du bassin du Niger, et les wagons repartaient pleins vers la mer. L'huilerie ensuite — la grande usine d'arachide, la vitrine de la ville, où tant de familles avaient gagné leur vie. La grand-mère de Saran se souvient des deux.
 
-Quand l'appel de la Simandou Academy arriva — écrivez l'histoire de votre ville —, Fanta resta songeuse. Sa ville, justement, avait déjà donné un livre au monde. Que pouvait-elle ajouter ?`,
-      en: `Kouroussa sits on the Djoliba, the great river Niger, which comes down from the high country and crosses all of the Mandé.
+Aujourd'hui, la gare dort : les rails ont disparu, et l'herbe a repris le quai. Et l'usine tourne au ralenti, presque à l'arrêt — non qu'elle soit cassée, mais parce qu'on ne lui apporte plus assez de graines.
 
-As in Dabola, there is the old station and the iron bridge over the river — asleep, today, waiting for the Line to be reborn. But Kouroussa's true treasure is neither the rails nor the bridge. It is that here, long ago, a child was born who wrote a book. Camara Laye, they call him — the son of a blacksmith of the town. It was from this very station that he left, by train, to study far away; then he told the childhood of a little boy of Kouroussa in a book that the whole world has read.
+Autour de la ville, pourtant, à perte de vue, il y a les champs. Quand l'appel de la Simandou Academy arriva, Saran regarda la gare endormie, l'usine assoupie, puis les champs — et sentit que tous les trois avaient quelque chose à se dire.`,
+      en: `Dabola sits in the middle of the country, where all the roads cross.
 
-When the call of the Simandou Academy arrived — write the story of your town —, Fanta grew thoughtful. Her town, precisely, had already given a book to the world. What could she add?`,
-      ar: `تقع Kouroussa على Djoliba، النهر العظيم النيجر، الذي ينحدر من أعالي البلاد ويعبر بلاد الـ Mandé كلّها.
+Long ago, two prides made the town's heart beat. The station first: Dabola was the first great station of the Niger basin, and the wagons left full toward the sea. Then the oil mill — the big peanut factory, the town's showcase, where so many families had earned their living. Saran's grandmother remembers them both.
 
-كما في Dabola، هناك المحطّة القديمة والجسر الحديديّ فوق النهر — نائمان اليوم، ينتظران أن يُبعَث الخطّ. لكنّ كنز Kouroussa الحقيقيّ ليس القضبان ولا الجسر. بل أنّه هنا، قديمًا، وُلد طفلٌ كتب كتابًا. Camara Laye يسمّونه — ابنُ حدّادٍ من المدينة. من هذه المحطّة نفسها رحل، بالقطار، ليدرس بعيدًا؛ ثمّ روى طفولة صبيٍّ صغير من Kouroussa في كتابٍ قرأه العالم كلّه.
+Today, the station sleeps: the rails are gone, and the grass has taken back the platform. And the mill runs at half-speed, almost stopped — not because it is broken, but because no one brings it enough seed anymore.
 
-حين وصل نداء Simandou Academy — اكتبوا قصّة مدينتكم —، غرقت Fanta في التفكير. فمدينتها، بالذات، قد أهدت العالم كتابًا من قبل. فماذا عساها تضيف؟`,
-      zh: `Kouroussa 坐落在 Djoliba——浩荡的尼日尔河——之畔，这条河自高地流下，穿越整个 Mandé 地区。
+All around the town, though, as far as the eye can see, there are the fields. When the call of the Simandou Academy arrived, Saran looked at the sleeping station, the dozing mill, then the fields — and felt that all three had something to say to one another.`,
+      ar: `تقع Dabola في وسط البلد، حيث تتقاطع كلّ الطرق.
 
-和 Dabola 一样，这里也有那座老火车站和横跨河面的铁桥——如今都沉睡着，等待着铁路重生。可 Kouroussa 真正的宝藏，既不是铁轨，也不是桥。而是从前，这里诞生过一个写书的孩子。人们叫他 Camara Laye——城里一位铁匠的儿子。正是从这座车站，他坐着火车离开，去远方求学；后来，他在一本书里讲述了一个 Kouroussa 小男孩的童年，而那本书，全世界都读过。
+قديمًا، كان فخران يجعلان قلب المدينة ينبض. المحطّة أولًا: كانت Dabola أولى محطّات حوض النيجر الكبرى، ومنها تنطلق العربات ملأى نحو البحر. ثمّ المصنع — مصنع الفول السوداني الكبير، واجهة المدينة، حيث كسبت عائلاتٌ كثيرة رزقها. تتذكّر جدّة Saran كليهما.
 
-当 Simandou Academy 的号召传来——写下你们城市的故事——Fanta 陷入了沉思。她的城市，恰恰已经给过世界一本书了。她还能添上什么呢？`,
+أمّا اليوم، فالمحطّة نائمة: اختفت القضبان، وغطّى العشب الرصيف. والمصنع يعمل بنصف طاقته، يكاد يتوقّف — لا لأنه معطوب، بل لأنّ أحدًا لم يعد يجلب له ما يكفي من البذور.
+
+ومع ذلك، حول المدينة، إلى ما لا تراه العين، هناك الحقول. حين وصل نداء Simandou Academy، نظرت Saran إلى المحطّة النائمة، والمصنع الغافي، ثمّ إلى الحقول — وشعرت أنّ للثلاثة شيئًا يقولونه لبعضهم.`,
+      zh: `Dabola 坐落在全国的正中央，所有道路在此交汇。
+
+很久以前，有两样骄傲让这座城市的心跳动。先是火车站：Dabola 曾是尼日尔河流域的第一座大站，一列列车厢满载着驶向大海。然后是榨油厂——那座大花生厂，城市的门面，曾有那么多家庭靠它谋生。Saran 的祖母对这两样都记得清清楚楚。
+
+可如今，车站沉睡：铁轨不见了，月台重新长满了草。榨油厂也只开半工，几乎停了下来——不是因为它坏了，而是因为再没有人给它送来足够的花生。
+
+然而，城市四周，一眼望不到尽头，是大片大片的田野。当 Simandou Academy 的号召传来时，Saran 望着沉睡的车站、打盹的工厂，再望向田野——她觉得，这三者之间，有话要说。`,
     },
     {
-      id: "tresor-qu-on-regarde-sans-voir",
+      id: "graine-et-huile",
       voix: "recit",
       image: "/images/g2040/t5-p2.webp",
-      fr: `Pourtant, le trésor était partout — et personne ne le regardait plus.
+      fr: `Au marché, Saran observa un manège étrange.
 
-Il y avait le dununba, la danse des hommes forts, née ici même dans le Hamana, mais qu'on ne sortait plus qu'aux grandes fêtes. Il y avait, à Baro, la mare sacrée au pied du vieux baobab, où l'on venait depuis des siècles ; on disait qu'elle risquait de se dessécher. Il y avait les histoires du vieux djeli, que les jeunes, partis à la ville, n'écoutaient plus.
+D'un côté, on chargeait des sacs d'arachide brute, qui partaient loin, vendus pour presque rien. De l'autre, on déchargeait des bouteilles d'huile — brillantes, chères, avec une étiquette venue d'ailleurs.
 
-— Tout ça, c'est le passé, soupira Fanta. De vieilles choses.`,
-      en: `And yet the treasure was everywhere — and no one looked at it anymore.
+— Grand-mère, demanda-t-elle, c'est la même arachide ?
 
-There was the dununba, the dance of the strong men, born right here in the Hamana, but brought out now only on great feast days. There was, at Baro, the sacred pool at the foot of the old baobab, where people had come for centuries; it was said to be at risk of drying up. There were the old djeli's stories, which the young, gone to the city, no longer listened to.
+— Bien sûr, soupira la vieille. Notre graine s'en va nue. Et notre huile nous revient habillée, au prix fort. On vend le plus dur — la terre, la sueur — et on rachète le meilleur.`,
+      en: `At the market, Saran watched a strange dance.
 
-"All that is the past," sighed Fanta. "Old things."`,
-      ar: `ومع ذلك كان الكنز في كلّ مكان — ولم يعد أحدٌ ينظر إليه.
+On one side, sacks of raw peanut were being loaded, leaving far away, sold for almost nothing. On the other, bottles of oil were being unloaded — shiny, expensive, with a label come from elsewhere.
 
-كان هناك الـ dununba، رقصة الرجال الأقوياء، المولودة هنا تمامًا في الـ Hamana، لكنّها لم تعد تُخرَج إلّا في الأعياد الكبرى. وكان هناك، في Baro، المستنقع المقدّس عند جذع الباوباب العتيق، حيث قصده الناس قرونًا؛ ويُقال إنّه مهدَّدٌ بالجفاف. وكانت هناك حكايات الـ djeli العجوز، التي لم يعد الشباب، بعد رحيلهم إلى المدينة، يصغون إليها.
+"Grandmother," she asked, "is it the same peanut?"
 
-— هذا كلّه ماضٍ، تنهّدت Fanta. أشياء قديمة.`,
-      zh: `然而宝藏遍地都是——却再没有人去看它。
+"Of course," sighed the old woman. "Our seed leaves bare. And our oil comes back to us dressed, at a high price. We sell the hardest part — the soil, the sweat — and we buy back the best."`,
+      ar: `في السوق، راقبت Saran مشهدًا غريبًا.
 
-有 dununba，那「强者之舞」，就诞生在这片 Hamana，可如今只在盛大节庆时才搬出来。在 Baro，有那座老猴面包树下的圣潭，几百年来人们都来这里；据说它如今有干涸之虞。还有老 djeli 的故事，那些进了城的年轻人，再也不听了。
+من جهة، كانت تُحمَّل أكياس الفول السوداني الخام، فتذهب بعيدًا، مباعةً بأبخس ثمن. ومن جهة أخرى، كانت تُفرَّغ زجاجات الزيت — لامعةً غاليةً، عليها ملصقٌ قادمٌ من مكانٍ آخر.
 
-「这些都是过去，」Fanta 叹了口气，「老掉牙的东西。」`,
+— يا جدّتي، سألت، أهو الفول السوداني نفسه؟
+
+— بالطبع، تنهّدت العجوز. بذرتنا تخرج عارية. وزيتنا يعود إلينا مكسوًّا، بثمنٍ غالٍ. نبيع الأصعب — الأرض والعرق — ونشتري الأطيب.`,
+      zh: `在集市上，Saran 看着一幕奇怪的景象。
+
+一边，一袋袋生花生被装上车，运往远方，贱卖得几乎不值钱。另一边，一瓶瓶油被卸下来——亮晶晶的，很贵，贴着来自别处的标签。
+
+「祖母，」她问，「这是同样的花生吗？」
+
+「当然，」老人叹了口气。「我们的种子赤裸裸地出去，我们的油却穿戴整齐地回来，要价不菲。我们卖掉最辛苦的——土地和汗水——再把最好的买回来。」`,
     },
     {
-      id: "vieux-mamadi-le-djeli",
+      id: "savoir-des-mains",
       voix: "recit",
       image: "/images/g2040/t5-p3.webp",
-      fr: `Le vieux Mamadi, lui, était djeli : gardien des histoires, joueur de tambour. Il entendit Fanta, et l'emmena au bord du Djoliba.
+      fr: `La grand-mère, elle, savait faire l'huile.
 
-— Regarde le fleuve, dit-il. Il porte la pirogue parce qu'il vient de loin. Un peuple qui oublie ses histoires, c'est un arbre sans racines : le premier vent le couche.
+Elle pilait, chauffait, pressait, comme sa mère avant elle. L'huile qui coulait, dorée, sentait bon le pays. Mais à la main, une journée entière donnait à peine de quoi remplir quelques bouteilles.
 
-Le dununba, lui apprit-il, n'est pas qu'une danse : c'est le courage, le passage de l'enfant à l'adulte, la paix qu'on refait entre les gens. La mare de Baro enseigne le respect du vivant. Et Camara Laye a montré qu'un enfant d'ici pouvait, avec des mots, porter sa ville jusqu'au bout du monde — même si, aujourd'hui, on laisse sa case et la forge de son père tomber en poussière, faute d'y prendre garde.
+— Le secret n'est pas dans la graine, dit-elle à Saran. Il est dans ce qu'on en fait. Seulement, mes mains sont lentes, et nous sommes trop peu.`,
+      en: `The grandmother, for her part, knew how to make oil.
 
-— Le passé n'est pas derrière toi, Fanta. Il te porte.`,
-      en: `Old Mamadi, for his part, was a djeli: keeper of stories, drummer. He heard Fanta, and took her down to the banks of the Djoliba.
+She pounded, heated, pressed, as her mother had before her. The oil that flowed, golden, smelled of the homeland. But by hand, a whole day barely yielded enough to fill a few bottles.
 
-"Look at the river," he said. "It carries the canoe because it comes from far away. A people who forget their stories are a tree without roots: the first wind lays them down."
+"The secret is not in the seed," she told Saran. "It is in what you make of it. Only, my hands are slow, and we are too few."`,
+      ar: `أمّا الجدّة، فكانت تعرف كيف تصنع الزيت.
 
-The dununba, he taught her, is not just a dance: it is courage, the passage from child to adult, the peace remade between people. The pool of Baro teaches respect for living things. And Camara Laye showed that a child from here could, with words, carry his town to the ends of the earth — even if, today, his hut and his father's forge are left to crumble to dust, for want of care.
+كانت تدقّ وتُسخّن وتعصر، كما فعلت أمّها من قبلها. والزيت السائل، الذهبيّ، كانت رائحته رائحة البلد. لكن باليد، كان اليوم بطوله بالكاد يكفي لملء بضع زجاجات.
 
-"The past is not behind you, Fanta. It carries you."`,
-      ar: `أمّا الشيخ Mamadi، فكان djeli: حافظ الحكايات، وضاربَ الطبل. سمع Fanta، فأخذها إلى ضفاف Djoliba.
+— السرّ ليس في البذرة، قالت لـ Saran. السرّ في ما نصنعه منها. غير أنّ يديّ بطيئتان، ونحن قليلون جدًّا.`,
+      zh: `至于祖母，她懂得怎么榨油。
 
-— انظري إلى النهر، قال. إنّه يحمل الزورق لأنّه آتٍ من بعيد. شعبٌ ينسى حكاياته شجرةٌ بلا جذور: أوّلُ ريحٍ تطرحها أرضًا.
+她像她母亲当年那样，捣碎、加热、压榨。流出来的油，金黄金黄，闻起来就是家乡的味道。可全凭一双手，忙一整天也勉强只够装满几瓶。
 
-والـ dununba، علّمها، ليس مجرّد رقصة: إنّه الشجاعة، وعبورُ الطفل إلى الرشد، والسلامُ الذي يُعاد بين الناس. ومستنقعُ Baro يعلّم احترام كلّ حيّ. وقد أثبت Camara Laye أنّ طفلًا من هنا يستطيع، بالكلمات، أن يحمل مدينته إلى أقاصي الأرض — وإن كانت اليوم كوخُه وحدّادةُ أبيه تُترَكان لتنهارا غبارًا، لقلّة العناية.
-
-— الماضي ليس خلفكِ يا Fanta. إنّه يحملكِ.`,
-      zh: `至于老 Mamadi，他是个 djeli：故事的守护者，击鼓的人。他听见了 Fanta 的话，便领她下到 Djoliba 河畔。
-
-「看看这条河，」他说。「它能托起独木舟，是因为它来自远方。一个忘掉自己故事的民族，就是一棵没有根的树：第一阵风就把它吹倒。」
-
-他告诉她，dununba 不只是一支舞：它是勇气，是孩子迈向成人的关口，是人与人之间重新缔结的和平。Baro 的圣潭教人敬重一切生命。而 Camara Laye 证明了，这里的一个孩子，能用文字把家乡带到天涯海角——尽管今天，他的小屋和他父亲的铁匠铺，因无人照管而任其化为尘土。
-
-「过去不在你身后，Fanta。它托着你向前。」`,
+「秘密不在种子里，」她对 Saran 说。「秘密在于你拿它做成什么。只是，我的手太慢了，我们的人也太少了。」`,
     },
     {
-      id: "le-declic",
+      id: "retour-tante-hawa",
       voix: "recit",
       image: "/images/g2040/t5-p4.webp",
-      fr: `Alors Fanta comprit.
+      fr: `Cette année-là, Tante Hawa était revenue au village.
 
-La culture n'était pas de « vieilles choses ». C'était une force — et une richesse d'avenir : la fierté d'un peuple, son nom dans le monde, et de quoi faire vivre toute une ville. Un festival qui fait venir le pays. Des livres. Des visiteurs à Baro. Le tambour appris aux enfants.
+Partie longtemps travailler à la ville, elle connaissait bien la grande huilerie — ses presses, ses moteurs, ses bidons. Elle écouta Saran et sa grand-mère, et sourit.
 
-Et le concours, soudain, lui parut limpide.
+— Les machines sont là, dit-elle. Vos mains savent. Ce qui manque, ce n'est pas l'usine : c'est qu'on cultive assez d'arachide, et surtout qu'on la garde pour la presser ici, au lieu de la vendre nue à ceux qui partent. L'usine a faim. Nourrissons-la.`,
+      en: `That year, Aunt Hawa had come back to the village.
 
-— On nous demande d'écrire notre ville, dit-elle. Mais un enfant d'ici l'a déjà fait, il y a longtemps. À nous d'écrire la suite.`,
-      en: `Then Fanta understood.
+Gone for a long time to work in the city, she knew the big oil mill well — its presses, its engines, its drums. She listened to Saran and her grandmother, and smiled.
 
-Culture was not "old things." It was a force — and a treasure for the future: the pride of a people, its name in the world, and enough to make a whole town live. A festival that draws the country in. Books. Visitors at Baro. The drum taught to children.
+"The machines are there," she said. "Your hands know how. What is missing is not the mill: it is that we grow enough peanut, and above all that we keep it to press it here, instead of selling it bare to those who leave. The mill is hungry. Let us feed it."`,
+      ar: `في تلك السنة، كانت العمّة Hawa قد عادت إلى القرية.
 
-And the contest, all at once, seemed clear to her.
+غابت طويلًا للعمل في المدينة، فصارت تعرف المصنع الكبير جيّدًا — مكابسه ومحرّكاته وبراميله. أصغت إلى Saran وجدّتها، وابتسمت.
 
-"We are asked to write our town," she said. "But a child from here already did it, long ago. It is for us to write what comes next."`,
-      ar: `عندئذٍ فهمت Fanta.
+— الآلات موجودة، قالت. وأيديكم تعرف. ما ينقص ليس المصنع: بل أن نزرع ما يكفي من الفول السوداني، وقبل كلّ شيء أن نحتفظ به لنعصره هنا، بدل أن نبيعه عاريًا لمن يرحلون. المصنع جائع. فلنُطعمه.`,
+      zh: `那一年，Hawa 姑姑回到了村里。
 
-لم تكن الثقافة «أشياء قديمة». كانت قوّة — وكنزًا للمستقبل: كبرياءَ شعبٍ، واسمَه في العالم، وما يكفي لإحياء مدينةٍ بأكملها. مهرجانٌ يجذب البلد. كتبٌ. زوّارٌ في Baro. وطبلٌ يُعلَّم للأطفال.
+她在城里干了很久，对那座大榨油厂了如指掌——它的压榨机、马达、油桶。她听 Saran 和她祖母说完，笑了。
 
-وفجأةً، بدت لها المسابقة واضحة.
-
-— يُطلَب منّا أن نكتب مدينتنا، قالت. لكنّ طفلًا من هنا فعل ذلك من قبل، منذ زمن بعيد. وعلينا نحن أن نكتب ما يأتي بعد.`,
-      zh: `于是 Fanta 明白了。
-
-文化并不是「老掉牙的东西」。它是一种力量——一笔面向未来的财富：一个民族的骄傲、它在世界上的名字，足以让整座城市活起来。一场把全国吸引来的 festival。书。来 Baro 的访客。教给孩子们的鼓。
-
-刹那间，这场比赛在她眼里清晰了起来。
-
-「人家要我们写自己的城市，」她说。「可这里的一个孩子，很久以前就已经写过了。接下来的故事，该由我们来写。」`,
+「机器都在，」她说。「你们的手也会做。缺的不是工厂：缺的是我们要种出足够的花生，更要紧的是把它留下来在这儿榨，而不是赤裸裸地卖给那些运走它的人。工厂饿了。我们来喂饱它。」`,
     },
     {
-      id: "mot-de-fanta",
+      id: "mot-de-saran",
       voix: "recit",
       image: "/images/g2040/t5-p5.webp",
-      fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau ce que Fanta avait dit en arrivant :
+      fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau ce que Saran avait vu au marché :
 
-LA CULTURE, C'EST LE PASSÉ
+ON VEND LA GRAINE
 
-Fanta se leva, et écrivit dessous :
+Saran se leva, et écrivit dessous :
 
-LA CULTURE, C'EST NOTRE AVENIR
+ON VEND L'HUILE
+
+— Même champ, même arachide, dit-elle. Mais si on presse l'huile ici, c'est le travail qui reste ici. Les machines, les emplois, l'argent — et l'étiquette, ce sera la nôtre.
 
 Les idées jaillirent :
 
-— On fait renaître le dununba en grand : un festival qui attire le pays et le monde, et les vieux qui l'enseignent aux enfants.
-— On rend vivante la maison de Camara Laye : une maison des histoires, une bibliothèque où l'on lit — et où l'on apprend à écrire.
-— On protège la mare de Baro et son baobab : qu'elle ne se dessèche pas, et qu'on l'accueille comme le trésor qu'elle est.
-— Et la Ligne qui renaît amènera, par le pont sur le Djoliba, les visiteurs jusqu'à nous.
+— On cultive plus d'arachide, et on l'apporte à notre usine au lieu de la vendre nue à ceux qui partent.
+— On réveille l'huilerie : le savoir des femmes, les bras des jeunes — et rien ne se perd, l'huile pour nous, le tourteau pour le bétail.
+— On réveille la gare : la Ligne qui renaît emportera des bouteilles pleines, pas des sacs bradés.
+— Et nos jeunes n'auront plus besoin de partir chercher fortune ailleurs : la fortune se presse ici.
 
-— Camara Laye a écrit un enfant d'ici, conclut Fanta. À nous d'écrire les enfants de 2040.`,
-      en: `On the day of the Objective, the teacher wrote on the board what Fanta had said when she arrived:
+— Vendre sa graine, conclut Saran, c'est vendre sa peine. Vendre son huile, c'est vendre son génie.`,
+      en: `On the day of the Objective, the teacher wrote on the board what Saran had seen at the market:
 
-CULTURE IS THE PAST
+WE SELL THE SEED
 
-Fanta stood up, and wrote beneath it:
+Saran stood up, and wrote beneath it:
 
-CULTURE IS OUR FUTURE
+WE SELL THE OIL
+
+"Same field, same peanut," she said. "But if we press the oil here, it is the work that stays here. The machines, the jobs, the money — and the label, it will be ours."
 
 The ideas burst out:
 
-"We bring the dununba back to life in a big way: a festival that draws the country and the world, and the elders who teach it to the children."
-"We make Camara Laye's house live again: a house of stories, a library where you read — and where you learn to write."
-"We protect the pool of Baro and its baobab: that it does not dry up, and that we welcome it as the treasure it is."
-"And the Line, reborn, will bring visitors to us across the bridge over the Djoliba."
+"We grow more peanut, and we bring it to our own mill instead of selling it bare to those who leave."
+"We wake the oil mill: the women's know-how, the young people's hands — and nothing is wasted, the oil for us, the press-cake for the livestock."
+"We wake the station: the Line, reborn, will carry full bottles, not cut-price sacks."
+"And our young people will no longer need to leave to seek their fortune elsewhere: the fortune is pressed right here."
 
-"Camara Laye wrote a child from here," Fanta concluded. "It is for us to write the children of 2040."`,
-      ar: `في يوم الهدف، كتبت المعلّمة على السبّورة ما قالته Fanta حين وصلت:
+"To sell your seed," Saran concluded, "is to sell your toil. To sell your oil is to sell your genius."`,
+      ar: `في يوم الهدف، كتبت المعلّمة على السبّورة ما رأته Saran في السوق:
 
-الثقافة هي الماضي
+نَبيع البذرة
 
-نهضت Fanta، وكتبت تحتها:
+نهضت Saran، وكتبت تحتها:
 
-الثقافة هي مستقبلنا
+نَبيع الزيت
+
+— الحقل نفسه، والفول نفسه، قالت. لكن إن عصرنا الزيت هنا، فالعمل يبقى هنا. الآلات، والوظائف، والمال — والملصق سيكون ملصقنا.
 
 تدفّقت الأفكار:
 
-— نُحيي الـ dununba على نطاقٍ واسع: مهرجانٌ يجذب البلد والعالم، وشيوخٌ يعلّمونه للأطفال.
-— نُعيد الحياة إلى بيت Camara Laye: بيتٌ للحكايات، ومكتبةٌ نقرأ فيها — ونتعلّم فيها الكتابة.
-— نحمي مستنقع Baro وباوبابه: ألّا يجفّ، وأن نستقبله كالكنز الذي هو عليه.
-— والخطّ، إذ يُبعَث، سيجلب إلينا الزوّار عبر الجسر فوق Djoliba.
+— نزرع المزيد من الفول السوداني، ونأتي به إلى مصنعنا بدل أن نبيعه عاريًا لمن يرحلون.
+— نوقظ المصنع: معرفة النساء، وسواعد الشباب — ولا يضيع شيء، الزيت لنا، والكُسب للماشية.
+— نوقظ المحطّة: الخطّ، إذ يُبعَث من جديد، سيحمل زجاجاتٍ ملأى، لا أكياسًا مباعةً بثمنٍ بخس.
+— ولن يحتاج شبابنا بعد اليوم إلى الرحيل بحثًا عن الرزق في مكانٍ آخر: الرزق يُعصَر هنا.
 
-— كتب Camara Laye طفلًا من هنا، خلصت Fanta. وعلينا نحن أن نكتب أطفال 2040.`,
-      zh: `在「目标」公布的那天，老师把 Fanta 刚来时说的话写在了黑板上：
+— أن تبيع بذرتك، خلصت Saran، أن تبيع تعبك. وأن تبيع زيتك، أن تبيع نبوغك.`,
+      zh: `在「目标」公布的那天，老师把 Saran 在集市上看到的写在了黑板上：
 
-文化就是过去
+我们卖种子
 
-Fanta 站起来，在下面写道：
+Saran 站起来，在下面写道：
 
-文化是我们的未来
+我们卖油
+
+「同一片田，同样的花生，」她说。「可只要我们在这里把油榨出来，劳动就留在了这里。机器、工作、钱——还有标签，都将是我们自己的。」
 
 主意一下子涌了出来：
 
-「我们把 dununba 大大方方地复兴起来：办一场吸引全国乃至世界的 festival，让老人把它教给孩子。」
-「我们让 Camara Laye 的家重新活过来：一座故事之屋，一座可以读书的图书馆——也是学写作的地方。」
-「我们守护 Baro 的圣潭和它的猴面包树：别让它干涸，把它当作它本该是的宝藏来款待。」
-「重生的铁路，会经由 Djoliba 河上的大桥，把访客带到我们这里。」
+「我们多种花生，并把它送进自己的工厂，而不是赤裸裸地卖给那些运走它的人。」
+「我们唤醒榨油厂：妇女的手艺、年轻人的双手——而且什么都不浪费，油归我们，油渣饼喂牲口。」
+「我们唤醒车站：重生的铁路，运走的将是满瓶的油，而不是贱卖的麻袋。」
+「我们的年轻人，也不必再背井离乡去别处寻找财富了：财富就在这里被榨出来。」
 
-「Camara Laye 写下了一个这里的孩子，」Fanta 总结道。「该由我们来写下 2040 年的孩子们了。」`,
+「卖掉种子，」Saran 总结道，「是卖掉自己的辛劳。卖掉油，才是卖出自己的才智。」`,
     },
     {
       id: "apres-2040",
       voix: "recit",
       image: "/images/g2040/t5-p6.webp",
-      fr: `Dans le dossier que Kouroussa envoya à la Simandou Academy, Fanta avait dessiné sa ville en 2040.
+      fr: `Dans le dossier que Dabola envoya à la Simandou Academy, Saran avait dessiné sa ville en 2040.
 
-Au bord du Djoliba, la maison de Camara Laye était vivante, pleine d'enfants qui lisaient et écrivaient. Sur la grande place, le bara, le dununba battait pour le festival, et le train — la Ligne ressuscitée — déversait des visiteurs venus du pays et du monde. Plus loin, sous son baobab, la mare de Baro brillait, protégée. Et le fleuve, lui, coulait, comme toujours.
+Au centre, la vieille huilerie réveillée, qui ronronnait de nouveau, des femmes en blouse et des jeunes aux commandes. Tout autour, des champs d'arachide à perte de vue, là pour la nourrir. Des caisses de bouteilles dorées portant une étiquette fière : Huile de Dabola. Et la gare, réveillée elle aussi : sur la Ligne du Niger ressuscitée, un train emportait l'huile vers le pays et vers le port — non plus la graine nue, mais le travail fini.
 
-Au bas du dessin, le long du fleuve, elle avait écrit :
+Au bas du dessin, là où la voie ferrée repartait vers l'horizon, elle avait écrit :
 
-« On croyait notre culture derrière nous : elle était devant. Un enfant d'ici a écrit notre enfance ; à nous d'écrire notre avenir. La suite, c'est à ceux qui viennent de l'écrire. »`,
-      en: `In the file that Kouroussa sent to the Simandou Academy, Fanta had drawn her town in 2040.
+« On vendait notre graine, on rachetait notre huile. Aujourd'hui, c'est notre huile qui voyage, et notre génie qui reste. La suite, c'est à ceux qui viennent de l'écrire. »`,
+      en: `In the file that Dabola sent to the Simandou Academy, Saran had drawn her town in 2040.
 
-On the banks of the Djoliba, Camara Laye's house was alive, full of children reading and writing. On the great square, the bara, the dununba beat for the festival, and the train — the Line resurrected — poured out visitors come from the country and from the world. Farther off, beneath its baobab, the pool of Baro shone, protected. And the river, for its part, flowed on, as always.
+At the center, the old oil mill woken up, purring again, women in work coats and young people at the controls. All around, fields of peanut as far as the eye could see, there to feed it. Crates of golden bottles bearing a proud label: Huile de Dabola. And the station, awake again too: on the resurrected Niger Line, a train carried the oil toward the country and toward the port — no longer the bare seed, but the finished work.
 
-At the bottom of the drawing, along the river, she had written:
+At the bottom of the drawing, there where the railway set off toward the horizon, she had written:
 
-"We thought our culture was behind us: it was ahead. A child from here wrote our childhood; it is for us to write our future. The rest is for those who come next to write."`,
-      ar: `في الملفّ الذي أرسلته Kouroussa إلى Simandou Academy، كانت Fanta قد رسمت مدينتها عام 2040.
+"We used to sell our seed and buy back our oil. Today it is our oil that travels, and our genius that stays. The rest is for those who come next to write."`,
+      ar: `في الملفّ الذي أرسلته Dabola إلى Simandou Academy، كانت Saran قد رسمت مدينتها عام 2040.
 
-على ضفاف Djoliba، كان بيت Camara Laye حيًّا، مفعمًا بأطفالٍ يقرؤون ويكتبون. وعلى الساحة الكبرى، الـ bara، كان الـ dununba يقرع للمهرجان، والقطار — الخطّ المبعوث من جديد — يصبّ زوّارًا قدِموا من البلد ومن العالم. وأبعدُ قليلًا، تحت باوبابه، كان مستنقع Baro يتلألأ، محميًّا. أمّا النهر، فكان يجري، كعادته دائمًا.
+في الوسط، المصنع القديم وقد استيقظ، يُدندِن من جديد، ونساءٌ بمآزرهنّ وشبابٌ على الأزرار. وحوله، حقول فولٍ سودانيّ إلى ما لا تراه العين، لتُطعمه. وصناديق زجاجاتٍ ذهبية تحمل ملصقًا فخورًا: Huile de Dabola. والمحطّة، استيقظت هي الأخرى: على خطّ النيجر المبعوث من جديد، كان قطارٌ يحمل الزيت نحو البلد ونحو الميناء — لا البذرة العارية بعد اليوم، بل العمل المُنجَز.
 
-في أسفل الرسم، على امتداد النهر، كتبت:
+في أسفل الرسم، هناك حيث تنطلق السكّة نحو الأفق، كتبت:
 
-«ظننّا ثقافتنا خلفنا: كانت أمامنا. طفلٌ من هنا كتب طفولتنا؛ وعلينا نحن أن نكتب مستقبلنا. والبقيّة على مَن يأتي بعدُ أن يكتبها.»`,
-      zh: `在 Kouroussa 寄给 Simandou Academy 的材料里，Fanta 画了一幅 2040 年的家乡。
+«كنّا نبيع بذرتنا ونشتري زيتنا. واليوم، زيتنا هو الذي يسافر، ونبوغنا هو الذي يبقى. والبقيّة على مَن يأتي بعدُ أن يكتبها.»`,
+      zh: `在 Dabola 寄给 Simandou Academy 的材料里，Saran 画了一幅 2040 年的家乡。
 
-Djoliba 河畔，Camara Laye 的家活了过来，满是读书写字的孩子。在那片大广场——bara——上，dununba 为 festival 而擂响，火车——重生的铁路——倾泻出从全国、从世界各地赶来的访客。再远些，在猴面包树下，Baro 的圣潭闪着光，受着守护。至于那条河，依旧奔流，一如往常。
+正中央，那座老榨油厂醒了过来，又欢快地运转起来，穿工作服的妇女和年轻人守在操作台前。四周是一眼望不到边的花生田，正是用来喂养它的。一箱箱金黄的油瓶贴着自豪的标签：Huile de Dabola。车站也一同苏醒：在重生的尼日尔铁路线上，一列火车载着油驶向全国、驶向港口——不再是赤裸的种子，而是完成了的劳动。
 
-在画的下方，沿着河流，她写道：
+在画的下方，正是铁路伸向地平线的地方，她写道：
 
-「我们曾以为文化在我们身后：它其实在前方。这里的一个孩子写下了我们的童年；该由我们来写下我们的未来。余下的故事，要由后来的人来书写。」`,
+「我们曾经卖掉种子，再买回油。如今，是我们的油在远行，是我们的才智在留下。余下的故事，要由后来的人来书写。」`,
     },
   ],
 };
