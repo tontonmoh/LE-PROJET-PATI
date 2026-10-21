@@ -72,6 +72,7 @@ export const g2040Tome9: LivreG2040 = {
     {
       id: "ou-irons-nous-rever",
       voix: "recit",
+      image: "/images/g2040/t9-p1.webp",
       fr: `Ce matin-là, la Maîtresse posa la craie et sourit.
 
 — Pour trouver notre idée du concours, dit-elle, nous n'allons pas rester assis. Une école qui veut parler de sa ville doit d'abord la regarder. Alors… où voulez-vous aller ?
@@ -140,6 +141,7 @@ The teacher laughed.
     {
       id: "le-chauffeur-des-trains",
       voix: "recit",
+      image: "/images/g2040/t9-p2.webp",
       fr: `Le lendemain, le vieux car les attendait — et au volant, il y avait le grand-père de Fatim. Car avant de conduire ce car, lui, autrefois, il avait conduit des trains.
 
 Sur la route, quand ils longèrent une vieille trace de rails mangée par l'herbe, Fatim ne put se retenir :
@@ -212,6 +214,7 @@ The grandfather laughed as he drove.
     {
       id: "le-lac-qui-danse",
       voix: "recit",
+      image: "/images/g2040/t9-p3.webp",
       fr: `Puis le lac apparut, immense, au pied des falaises du Gangan.
 
 Fatim retint son souffle. Sur l'eau calme glissaient des pirogues colorées — une vraie danse. C'était dimanche, jour de marché : de tous les villages cachés au bout des bras du lac, les pirogues arrivaient, chargées d'oranges, d'avocats, de tomates. Sur la rive, on s'appelait, on riait, et des enfants pieds nus entraînèrent aussitôt ceux de la classe dans leurs jeux.
@@ -244,6 +247,7 @@ Fatim 屏住了呼吸。平静的水面上，一只只彩色的独木舟滑行�
     {
       id: "le-chemin-du-retour",
       voix: "recit",
+      image: "/images/g2040/t9-p4.webp",
       fr: `Le soir, dans le car, on était fatigué et heureux. Les uns chantaient ; les autres montraient leurs mains collantes de jus d'orange.
 
 Fatim, le front contre la vitre, se mit à rêver tout haut.
@@ -308,6 +312,7 @@ Fatim 笑了。这正是她心里想的。`,
     {
       id: "la-reponse-de-kindia",
       voix: "recit",
+      image: "/images/g2040/t9-p5.webp",
       fr: `De retour en classe, ils écrivirent leur réponse au concours — tous ensemble, en se coupant la parole, en riant.
 
 Ils racontèrent le lac qui danse, le mont Gangan, les pirogues, les fruits qu'on garderait au frais pour qu'ils voyagent loin, les villages qu'on relierait par des ponts et de bonnes routes, et la ville-jardin qui ne perdrait jamais ses arbres.
@@ -388,6 +393,7 @@ Kindia，连接与呼吸之城`,
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t9-p6.webp",
       fr: `Dans le dossier que Kindia envoya à la Simandou Academy, Fatim avait dessiné son rêve.
 
 Le lac de Samaya dansait toujours de ses pirogues — mais un petit pont, maintenant, reliait deux villages du bord. Des pistes claires grimpaient vers les hameaux, sous le Gangan. Près du marché, les paniers d'oranges partaient au frais vers la ville et la mer. Au milieu, Kindia était restée verte et tranquille, traversée de rivières limpides — une grande ville, et pourtant pleine d'arbres et d'oiseaux. Tout au loin, au sud, filait la grande Ligne du fer. Et dans un coin du dessin, une enveloppe s'envolait vers la France, pour les amis avec qui l'on échange.
