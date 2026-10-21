@@ -61,6 +61,7 @@ const livre: LivreG2040 = {
     {
       id: "des-colleges-aux-dix-villes",
       voix: "recit",
+      image: "/images/g2040/t11-p1.webp",
       fr: `Le concours avait commencé bien avant Conakry.
 
 Dans chaque préfecture, des dizaines de collèges avaient proposé leur Objectif. Et, à chaque fois, un seul avait été retenu. Au bout du compte, trente-quatre propositions étaient arrivées à la Simandou Academy : une par préfecture, et une pour Conakry.
@@ -85,6 +86,7 @@ From those thirty-four, ten towns were shortlisted for the grand final, in the c
     {
       id: "la-villa",
       voix: "recit",
+      image: "/images/g2040/t11-p2.webp",
       fr: `Chaque ville finaliste envoya deux élèves : un garçon et une fille. Vingt enfants en tout, réunis trois jours dans une grande et belle villa pour préparer la finale. À l'intérieur, des murs tressés, des nattes, une case à palabres — comme on en fait là-haut, dans le Fouta.
 
 Le premier soir, vingt enfants qui ne se connaissaient pas se partagèrent les chambres.
@@ -133,6 +135,7 @@ They laughed at one another's accents, got the names wrong, started over. In thr
     {
       id: "le-discours-de-remerciement",
       voix: "recit",
+      image: "/images/g2040/t11-p3.webp",
       fr: `L'avant-veille de la cérémonie, on leur confia une tâche : écrire ensemble un discours de remerciement, puis choisir l'un d'eux pour le lire, au nom de tous.
 
 Le discours, ils l'écrivirent sans peine. Mais au moment de choisir qui le lirait, plus personne ne parla.
@@ -173,6 +176,7 @@ That was when the idea came to them.`,
     {
       id: "la-lettre-au-president",
       voix: "recit",
+      image: "/images/g2040/t11-p4.webp",
       fr: `Ce fut Néné Gallé, de Mali, qui la dit tout haut.
 
 — Et si personne ne lisait seul ? Et si, au lieu d'un discours, on écrivait tous ensemble une lettre au Président ?
