@@ -76,6 +76,7 @@ export const g2040Tome8: LivreG2040 = {
     {
       id: "carrefour-aux-huit-voisins",
       voix: "recit",
+      image: "/images/g2040/t8-p1.webp",
       fr: `Télimélé est posée là où le Fouta s'incline vers la mer : on quitte les hautes montagnes, et la côte n'est plus très loin. C'est sans doute la ville de Guinée qui a le plus de voisins — elle en touche huit, tout autour. Une vraie porte entre la montagne et l'océan.
 
 Pour le concours de la Simandou Academy, Bella et son amie Yama cherchaient par où commencer.
@@ -108,6 +109,7 @@ For the Simandou Academy contest, Bella and her friend Yama were trying to find 
     {
       id: "teli-et-meli",
       voix: "recit",
+      image: "/images/g2040/t8-p2.webp",
       fr: `Le grand-père de Bella, qui avait tout vu, sourit quand elles lui posèrent la question.
 
 — Vous cherchez loin ce qui est dans votre nom, dit-il. « Télimélé », savez-vous d'où ça vient ? D'un arbre. Les Peuls l'appellent téli. Les Soussous l'appellent méli. Le même arbre, deux langues. On raconte que c'est de là qu'est né le nom de la ville.
@@ -140,6 +142,7 @@ He looked at the two of them — Bella the Soussou, Yama the Fulani.
     {
       id: "le-konkoure",
       voix: "recit",
+      image: "/images/g2040/t8-p3.webp",
       fr: `Il y avait aussi le fleuve. Le Konkouré naît tout là-haut dans le Fouta, passe sous le grand pont de Télimélé, traverse les vieux villages djallonkés, puis descend, descend jusqu'à la mer.
 
 Sur ce fleuve, plus bas, on a bâti de grands barrages. Leurs turbines fabriquent de l'électricité — celle qui allume Conakry et une bonne partie du pays.
@@ -180,6 +183,7 @@ Then she fell silent. For evening was settling over Télimélé, and, as every e
     {
       id: "garder-le-fleuve-vivant",
       voix: "recit",
+      image: "/images/g2040/t8-p4.webp",
       fr: `Le grand-père hocha la tête.
 
 — Et ce n'est pas tout. Ces barrages ont besoin du fleuve plein. Or le fleuve, lui, a besoin des arbres : sans eux, les berges s'écroulent, les pluies se dérèglent, et l'eau finit par baisser. Si on coupe tous les arbres, un jour il n'y aura plus assez d'eau — ni pour eux, ni pour nous.
@@ -228,6 +232,7 @@ Bella 又想起了 téli，想起了 méli——他们名字里的那棵树。
     {
       id: "mot-de-bella",
       voix: "recit",
+      image: "/images/g2040/t8-p5.webp",
       fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau ce que Bella avait dit la veille :
 
 NOTRE FLEUVE ÉCLAIRE LE PAYS
@@ -324,6 +329,7 @@ The ideas burst out:
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t8-p6.webp",
       fr: `Dans le dossier que Télimélé envoya à la Simandou Academy, Bella et Yama avaient dessiné leur ville — et ce n'était plus si loin.
 
 La nuit, les villages brillaient enfin, alimentés par le Konkouré, leur propre fleuve — et, dans la salle des machines des barrages, on trouvait des techniciennes et des ingénieurs nés à Télimélé. Le long de l'eau, les berges reboisées étaient redevenues vertes : c'était le Konkouré Fé, le grand rendez-vous annuel où l'on plantait des arbres, où Peuls et Soussous dansaient, partageaient, échangeaient. Le grand pont voyait passer camions et voyageurs entre la montagne et la mer.
