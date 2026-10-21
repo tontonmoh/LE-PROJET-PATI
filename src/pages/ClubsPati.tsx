@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { BookOpen, PenTool, Landmark, Share2, Mic, FileText, Palette, Drama, Trophy, Sparkles, Cpu, Compass, ArrowRight } from "lucide-react";
 
-const ACTIVITES = [
+type Activite = {
+  icon: typeof BookOpen; color: string; t: string; d: string;
+  to?: string; cta: string; soon?: boolean;
+};
+
+const ACTIVITES: Activite[] = [
   { icon: BookOpen, color: "#0F6E56", t: "Lecture & Découverte", d: "Lire ensemble les histoires PATI, les commenter, les partager. Chaque club reçoit un kit de lecture adapté à son niveau.", to: "/catalogue", cta: "Explorer le catalogue" },
   { icon: PenTool, color: "#FF6B4A", t: "Expression & Création", d: "Écrire, illustrer, raconter ses propres histoires inspirées du patrimoine guinéen. Les meilleures créations sont publiées sur la plateforme.", to: "/proposer-creation", cta: "Proposer une création de mon club" },
   { icon: Landmark, color: "#1F7A8C", t: "Culture & Patrimoine", d: "Explorer les cultures guinéennes par la pratique : musique (kora, balafon, tam-tam), peinture, sculpture, slam, théâtre, conte. Sorties et rencontres avec des aînés.", to: "/culture-patrimoine", cta: "Voir les ateliers" },
