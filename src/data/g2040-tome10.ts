@@ -59,6 +59,7 @@ const livre: LivreG2040 = {
     {
       id: "la-chance-de-forecariah",
       voix: "recit",
+      image: "/images/g2040/t10-p1.webp",
       fr: `Ce matin-là, la classe est fière, et elle le dit tout haut.
 
 La grande Ligne a traversé toute la Guinée. Les montagnes de fer, les plateaux, le Fouta, les plaines — gare après gare, elle est descendue jusqu'à la mer. Et c'est chez nous, dans la préfecture de Forécariah, qu'elle s'arrête. Au port de Morébaya.
@@ -107,6 +108,7 @@ Mr. Camara smiled, then added a word of caution.
     {
       id: "la-route-du-port",
       voix: "recit",
+      image: "/images/g2040/t10-p2.webp",
       fr: `Le car sort de Forécariah au petit matin.
 
 On traverse le pont de fer sur le Mellacorée. On passe Allassoyah. On arrive au carrefour de Maférinyah — qui n'arrête plus de grossir : boutiques, garages, gargotes, camions garés partout. Un vrai marché qui ne dort jamais.
@@ -155,6 +157,7 @@ The children stood open-mouthed before the machines. Mr. Camara called them back
     {
       id: "ce-que-les-gens-nous-ont-dit",
       voix: "recit",
+      image: "/images/g2040/t10-p3.webp",
       fr: `Les enfants se séparent par petits groupes. Le soir, dans le car, chacun raconte.
 
 Morlaye a parlé à un pêcheur. « La mangrove, là-bas, c'est la nurserie : les petits poissons y grandissent. Depuis le grand chantier, le poisson se fait plus rare. On nous a donné des filets, du matériel. Mais ce qu'il nous faut, c'est un vrai quai, et de la glace. »
@@ -195,6 +198,7 @@ Yakha had stayed near Maférinyah. A market woman laughed with delight: "Since t
     {
       id: "la-chance-ne-suffit-pas",
       voix: "recit",
+      image: "/images/g2040/t10-p4.webp",
       fr: `De retour en classe, les enfants font le tri dans tout ce qu'ils ont entendu.
 
 Ils comprennent une chose, et elle est simple. Accueillir le bout de la Ligne, c'est une chance. Mais une chance ne se transforme pas toute seule en écoles, en emplois, en mer protégée.
@@ -243,6 +247,7 @@ Yakha was already taking out a sheet of paper.`,
     {
       id: "la-reponse-de-forecariah",
       voix: "recit",
+      image: "/images/g2040/t10-p5.webp",
       fr: `Pour le dossier de la Simandou Academy, la classe écrit ce qu'elle a décidé.
 
 Que le port forme et embauche d'abord les gens d'ici. Que les familles déplacées soient relogées dignement — avec école, eau et route. Que la commune transforme sa part en équipements pour tous, et qu'on organise enfin le carrefour de Maférinyah.
@@ -283,6 +288,7 @@ Sira wrote the sentence that summed it all up: "The end of the Line is here, in 
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t10-p6.webp",
       fr: `Sur le dessin que Forécariah envoie, c'est la côte de demain.
 
 Le grand port travaille. Des navires énormes emportent le fer et la poudre blanche qui ont traversé tout le pays par la Ligne. Mais cette fois, la richesse ne fait pas que passer : elle laisse des traces ici.
