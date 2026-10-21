@@ -74,6 +74,7 @@ export const g2040Tome7: LivreG2040 = {
     {
       id: "la-dame-qu-on-montre",
       voix: "recit",
+      image: "/images/g2040/t7-p1.webp",
       fr: `Mali est la ville la plus haute du pays, tout au nord du Fouta, là où la montagne touche presque le ciel. Et au sommet du mont Loura, taillée dans la pierre par le vent et la pluie depuis des temps que personne ne compte, se dresse la silhouette d'une femme : la Dame de Mali.
 
 Les visiteurs montent de loin pour la voir — par des routes longues et difficiles. Un jour, Dieynaba accompagna un groupe avec le guide. Et le guide raconta la vieille histoire : celle où la Dame serait une femme punie, changée en pierre pour être montrée à tous, pour toujours.
@@ -98,6 +99,7 @@ Dieynaba 感到羞愧涌上脸颊。「人们从天涯海角赶来，」她想�
     {
       id: "raconter-autrement",
       voix: "recit",
+      image: "/images/g2040/t7-p2.webp",
       fr: `Le soir, elle en parla à sa grand-mère, qui cultivait la pomme de terre sur les hauteurs.
 
 — Cette roche était là bien avant qu'on invente cette histoire, dit la vieille femme. Une montagne ne porte pas de faute. Et une femme ne mérite pas qu'on la montre du doigt pour l'éternité.
@@ -130,6 +132,7 @@ She smiled.
     {
       id: "nene-galle-la-lampe",
       voix: "recit",
+      image: "/images/g2040/t7-p3.webp",
       fr: `Alors, pour le concours de la Simandou Academy, la classe de Dieynaba choisit de raconter la femme qu'avait été la Dame.
 
 On l'appelait Néné Gallé — « la mère du foyer ». Le soir, quand tout le travail du jour était fini, elle aimait monter au point le plus haut de la ville, une petite lampe à la main. De là, elle regardait au loin : les véhicules qui montaient vers Mali, les gens qui rentraient des champs. Et elle se laissait aller à ses songes.
@@ -162,6 +165,7 @@ She kept watch like this for so many years, and from so high, that the mountain 
     {
       id: "le-tresor-qui-aime-le-froid",
       voix: "recit",
+      image: "/images/g2040/t7-p4.webp",
       fr: `Il y avait une autre preuve que les hauteurs de Mali n'étaient pas une punition, mais un don.
 
 La pomme de terre — la Belle de Guinée — était venue de très loin, des montagnes froides d'un autre continent. Pour pousser, il lui fallait un climat frais ; et le coin le plus haut et le plus frais du pays, c'était ici. C'est à Mali, la première, qu'elle avait germé en Guinée. Aujourd'hui encore, chaque année, on y célèbre la fête de la pomme de terre, où montent les gens de tout le pays et même des pays voisins.
@@ -194,6 +198,7 @@ It is above all the women who grow it, and it gives them their living. The cold 
     {
       id: "mot-de-dieynaba",
       voix: "recit",
+      image: "/images/g2040/t7-p5.webp",
       fr: `Le jour de l'Objectif, la Maîtresse écrivit au tableau la phrase qui résumait l'ancienne histoire :
 
 ON LA REGARDE
@@ -274,6 +279,7 @@ The ideas burst out:
     {
       id: "apres-2040",
       voix: "recit",
+      image: "/images/g2040/t7-p6.webp",
       fr: `Dans le dossier que Mali envoya à la Simandou Academy, Dieynaba avait dessiné sa ville en 2040.
 
 Au sommet du mont Loura, la lampe de Néné Gallé — devenue un vrai phare — brillait de nouveau dans la nuit, visible depuis la plaine et jusqu'au Sénégal. Une belle route montait, pleine de cars de visiteurs venus saluer Néné Foutah — et, dans l'autre sens, de camions chargés de pommes de terre qui descendaient enfin vendre sans tout perdre en route. Sur la grande place, la fête de la pomme de terre battait son plein, les femmes productrices en tête. Et là-haut, la Dame de pierre veillait, honorée.
