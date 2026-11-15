@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Binta Pilote</title>
-<meta name="binta-build" content="v32-mur-tap">
+<meta name="binta-build" content="v33">
 <style>[hidden]{display:none!important}html,body{margin:0}body{font:14px system-ui;background:#f4f1e4}img{max-width:100%}</style>
 </head>
 <body>
@@ -318,7 +318,7 @@ const LEVELS=[
   outro:t=>t>=75?[['Le récit','De retour à Conakry, le cheikh serra bien la main de Binta.'],['Le récit','Il fit même des douas pour elle, tant il était content.'],['Binta','Je m\'appelle Fatoumata Binta Diallo. Je suis pilote.']]
    :[['Le récit','De retour à Conakry, le cheikh remercia Binta et lui serra la main.'],['Le récit','Avec un vol encore plus doux, il aurait fait des douas pour elle. Tu peux rejouer !']],last:'Amine !'},
  build(a){a.g(0,23,9)}},
-{name:'L\'Assemblée',sub:'Niveau 9 · L\'Assemblée nationale',w:30,theme:'conakry',final:true,suit:'marche',suitH:76,floor:'rgba(198,166,116,.34)',floorD:'rgba(173,137,88,.28)',pick:'plume',pickLabel:'personnes saluées',key:'insigne',need:0,goal:{x:26,type:'siege'},gotKey:'',noKey:'',
+{name:'L\'Assemblée',sub:'Niveau 9 · L\'Assemblée nationale',w:30,theme:'conakry',final:true,noJump:true,suit:'marche',suitH:76,floor:'rgba(198,166,116,.34)',floorD:'rgba(173,137,88,.28)',pick:'plume',pickLabel:'personnes saluées',key:'insigne',need:0,goal:{x:26,type:'siege'},gotKey:'',noKey:'',
  quote:'« La petite fille qui regardait le ciel parle maintenant au nom des autres. »',
  next:'Et toi, quel est ton rêve ?',
  build(a){a.zone('hemicycle',0,0,true,true);a.g(0,29,9);a.cp(2);a.cp(13);
@@ -480,6 +480,7 @@ function reset(i){
   stamps=L.stamps.map(s=>({x:s.x*T-4,w:40,h:36,y:8,floor:L.top(s.x)*T-36,state:'wait',t:0,vy:0}));
   shots=[];puffs=[];
   time=0;plumes=0;hearts=3;keysGot=0;goggles=0;winT=0;camX=0;respawnX=2*T;cpIndex=-1;doorOpen=false;seated=false;tipLad=false;tipWall=false;
+  {const jb=$('btn-jump');if(jb)jb.hidden=!!L.def.noJump;}
   keys.left=keys.right=keys.jump=false;jumpPressed=false;
   flyby=i===0?{x:-150,y:72}:null;flyT=0;tipPlane=false;tipJump=false;tipLad=false;tipVine=false;
   qIdx=quizSeen[i];if(!qIdx)partUsed=[];tipIce=tipWind=false;if((L.def.quizzes||[]).length)keysGot=qIdx;
