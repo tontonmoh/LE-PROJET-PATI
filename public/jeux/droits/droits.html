@@ -19,6 +19,7 @@
     assets/lieux/mairie.jpg  centre-sante.jpg  terrain.jpg  entraineur.jpg  maison.jpg
                  ecole.jpg  marche.jpg  cyber.jpg  vendeur.jpg             (vignettes des lieux, carrées)
     assets/aidants/tchotcho.jpg  penda.jpg  lanfia.jpg  binta.jpg  sayon.jpg  (scènes avec l'adulte qui aide ; facultatives)
+    assets/logos/ministere.webp  simandou.webp       (ouverture et fermeture du jeu)
     assets/audio/<langue>/<id>.mp3                                         (voix ; liste des id : voir AUDIO_IDS en bas)
   Tout fichier absent est remplacé automatiquement (silhouette, pictogramme, voix du téléphone en français).
 
@@ -42,6 +43,12 @@ body.groupe{--fs:clamp(20px,2.4vw,34px)}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:focus-visible,.lieu:focus-visible{outline:4px solid #000;outline-offset:3px}
 .ecran{display:none;min-height:100vh;min-height:100dvh;padding:16px;flex-direction:column;align-items:center}
+/* ---------- ouverture (logo du Ministère) et fermeture (logo Simandou) ---------- */
+.splash{justify-content:center;gap:18px;background:var(--creme);cursor:pointer;text-align:center}
+.splash img{width:min(62vw,62vh,420px);height:auto;opacity:0;transform:scale(.94);transition:opacity .9s ease,transform 1.4s ease}
+.splash.vu img{opacity:1;transform:scale(1)}
+.splash .sous{font-weight:800;color:var(--encre2);opacity:0;transition:opacity .9s ease .6s}
+.splash.vu .sous{opacity:1}
 .ecran.actif{display:flex}
 .col{width:100%;max-width:980px;display:flex;flex-direction:column;gap:16px;flex:1}
 h1,h2,h3,p{margin:0}
@@ -253,7 +260,17 @@ body.groupe #ataplace .consigne{margin:0}
 
 <!-- ===================== ÉCRANS ===================== -->
 
-<section id="accueil" class="ecran actif" aria-labelledby="t-titre">
+<section id="ouverture" class="ecran actif splash" aria-label="Ouverture">
+  <img id="logoOuverture" alt="Ministère de la Femme, de la Famille et des Solidarités">
+  <p class="sous" data-t="ui.presente"></p>
+</section>
+
+<section id="fermeture" class="ecran splash" aria-label="Fermeture">
+  <img id="logoFermeture" alt="Simandou 2040">
+  <p class="sous" data-t="ui.merci"></p>
+</section>
+
+<section id="accueil" class="ecran" aria-labelledby="t-titre">
   <div class="col">
     <div class="titre-bloc">
       <p class="petit" data-t="ui.surtitre"></p>
@@ -394,6 +411,7 @@ body.groupe #ataplace .consigne{margin:0}
       <button class="btn" id="btnCartesFin" data-t="ui.troisCartes"></button>
       <button class="btn" id="btnAtpFin" data-t="ui.aTaPlace"></button>
       <button class="btn clair" id="btnAdultes" data-t="ui.pourAdultes"></button>
+      <button class="btn clair" id="btnTerminer" data-t="ui.terminer"></button>
     </div>
   </div>
 </section>
@@ -466,6 +484,7 @@ fr: {
     commencer:"On y va !", choisirEncore:"Je choisis encore", suivant:"Enfant suivant",
     voirFin:"Voir les cinq enfants", rejouer:"Rejouer", pourAdultes:"Pour les adultes",
     accueil:"Retour à l'accueil",
+    presente:"présente", merci:"Merci d'avoir joué !", terminer:"Terminer",
     vote:"Votez à main levée : 1, 2 ou 3 ?",
     aideClavier:"Animateur : touchez le signe dans l'image · touches 1, 2, 3 pour choisir · Entrée pour continuer · R pour réécouter",
     oui:"Oui !", pasEncore:"Pas encore…", quiAide:"Qui aide :", ville:"Ville :",
@@ -1262,10 +1281,28 @@ const AUDIO_IDS = (() => {
 })();
 window.AUDIO_IDS = AUDIO_IDS; // console : copy(AUDIO_IDS.join("\n")) pour la liste aux comédiens
 
+/* ---- Ouverture et fermeture ---- */
+function splash(id, url, duree, ensuite){
+  const ec = $("#" + id), img = ec.querySelector("img");
+  let fini = false;
+  const suite = () => { if (fini) return; fini = true; ec.classList.remove("vu"); if (ec.classList.contains("actif") || !img.src) ensuite(); };
+  imageExiste(url, ok => {
+    if (!ok){ suite(); return; }          // logo absent : on passe directement
+    img.src = url; montrer(id);
+    requestAnimationFrame(() => requestAnimationFrame(() => ec.classList.add("vu")));
+    ec.onclick = suite;
+    setTimeout(suite, duree);
+  });
+}
+function ouvrir(){ splash("ouverture", asset("assets/logos/ministere.webp"), 2800, () => montrer("accueil")); }
+function fermer(ensuite){ stopSon(); splash("fermeture", asset("assets/logos/simandou.webp"), 3200, ensuite); }
+$("#btnTerminer").onclick = () => fermer(() => montrer("accueil"));
+
 appliquerTextes();
 construireAccueil();
 majBoutonsSon();
 precharger();
+ouvrir();
 </script>
 </body>
 </html>
