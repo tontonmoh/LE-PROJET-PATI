@@ -33,7 +33,7 @@ const STATIC: SearchItem[] = [
   { type: "Jeu", title: "Puzzle de l'Afrique", sub: "Pavage / Situer", to: "/jeux/afrique/afrique.html", keywords: "Afrique carte pays" },
   { type: "Jeu", title: "Chante LIBERTÉ", sub: "Apprendre l'hymne national · 7 ans et +", to: "/hymne", keywords: "hymne national Liberté chanter paroles Guinée Fodéba Keïta Korofo Moussa Alpha Yaya" },
   { type: "Jeu", title: "Binta Pilote", sub: "Jeu de plateforme · 7 ans et +", to: "/binta", keywords: "Binta Diallo Dame Oiseau pilote avion parachute Fouta Labé Russie plateforme course saut" },
-  { type: "Jeu", title: "Rends-leur leurs couleurs", sub: "Droits de l'enfant · 6 ans et +", to: "/droits", keywords: "droits de l'enfant JIDE MFFS ministère Tchotcho Penda Lanfia Binta Sayon identité santé jeu éducation expression à ta place trois cartes classe" },
+  { type: "Jeu", title: "Mes droits, mon avenir", sub: "Jeu sur les droits de l'enfant · 6 ans et +", to: "/droits", keywords: "mes droits mon avenir rends-leur leurs couleurs droits de l'enfant JIDE MFFS ministère Tchotcho Penda Lanfia Binta Sayon identité santé jeu éducation expression à ta place trois cartes classe" },
   { type: "Jeu", title: "Le Marché de Pati", sub: "Compter, payer · 2-7 ans", to: "/marche", keywords: "marché Sira compter argent monnaie francs guinéens mômes" },
   { type: "Jeu", title: "Almamya-Zogota", sub: "Quiz de la Guinée de A à Z", to: "/almamya", keywords: "quiz alphabet lettres A à Z Guinée préfectures sous-préfectures Conakry histoire défi deux joueurs" },
   { type: "Jeu", title: "Sèbè", sub: "Quiz littérature guinéenne", to: "/sebe", keywords: "quiz littérature auteurs" },

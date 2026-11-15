@@ -28,7 +28,7 @@ export default function Droits() {
         <div className="flex items-center justify-between gap-3 flex-wrap mb-3">
           <div className="flex items-center gap-2">
             <Palette className="text-[#C8841E]" size={26} />
-            <h1 className="text-2xl md:text-3xl text-[#0D2B1A]">Rends-leur leurs couleurs</h1>
+            <h1 className="text-2xl md:text-3xl text-[#0D2B1A]">Mes droits, mon avenir</h1>
           </div>
           <div className="flex items-center gap-4">
             <button onClick={enter} className="inline-flex items-center gap-1.5 text-[#C8841E] font-display font-semibold hover:underline">
@@ -52,7 +52,7 @@ export default function Droits() {
           <iframe
             ref={frameRef}
             src="/jeux/droits/droits.html"
-            title="Rends-leur leurs couleurs"
+            title="Mes droits, mon avenir"
             loading="lazy"
             allow="fullscreen"
             className="w-full block"

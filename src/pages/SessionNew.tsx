@@ -115,7 +115,7 @@ const JEUX: Jeu[] = [
   {
     id: "droits", slug: "droits", jeu: "droits-enfant",
     visual: "/images/jeux/droits.webp",
-    label: "Rends-leur leurs couleurs — Les droits de l'enfant",
+    label: "Mes droits, mon avenir — Les droits de l'enfant",
     section: "pati", icon: Palette, accent: "#2E9E4F",
     playPrefix: "/droits", withCodeInPath: false, hasLiveScores: false,
   },
