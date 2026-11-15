@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music, Type, Plane,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music, Type, Plane, Palette,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -111,6 +111,13 @@ const JEUX: Jeu[] = [
     label: "Binta Pilote — La Dame Oiseau",
     section: "pati", icon: Plane, accent: "#2F8A4A",
     playPrefix: "/binta", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
+    id: "droits", slug: "droits", jeu: "droits-enfant",
+    visual: "/images/jeux/droits.webp",
+    label: "Rends-leur leurs couleurs — Les droits de l'enfant",
+    section: "pati", icon: Palette, accent: "#2E9E4F",
+    playPrefix: "/droits", withCodeInPath: false, hasLiveScores: false,
   },
   {
     id: "almamya", slug: "almamya-zogota", jeu: "quiz-az",

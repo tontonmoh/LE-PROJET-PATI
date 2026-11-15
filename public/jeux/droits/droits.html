@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1B2A5C">
+<title>Rends-leur leurs couleurs</title>
+<meta name="description" content="Jeu sur les droits de l'enfant en Guinée — L'Atelier Solidaire × MFFS">
+<!--
+  RENDS-LEUR LEURS COULEURS — Le quartier qui aide
+  L'Atelier Solidaire × Ministère de la Femme, de la Famille et des Solidarités (MFFS)
+  Version 1 — 15 novembre 2026
+
+  FICHIERS ATTENDUS (à côté de ce fichier HTML, dossier "assets/") :
+    assets/perso/tchotcho.webp  penda.webp  lanfia.webp  binta.webp  sayon.webp   (enfants de l'affiche, fond transparent)
+    assets/perso/affiche.webp                                              (les 5 enfants dans la pose de l'affiche, écran final)
+    assets/scenes/tchotcho.jpg  penda.jpg  lanfia.jpg  binta.jpg  sayon.jpg  (plans de la série, fond de chaque niveau)
+    assets/decors/quartier.jpg                                             (la rue commune, écran d'accueil)
+    assets/lieux/mairie.jpg  centre-sante.jpg  terrain.jpg  entraineur.jpg  maison.jpg
+                 ecole.jpg  marche.jpg  cyber.jpg  vendeur.jpg             (vignettes des lieux, carrées)
+    assets/aidants/tchotcho.jpg  penda.jpg  lanfia.jpg  binta.jpg  sayon.jpg  (scènes avec l'adulte qui aide ; facultatives)
+    assets/audio/<langue>/<id>.mp3                                         (voix ; liste des id : voir AUDIO_IDS en bas)
+  Tout fichier absent est remplacé automatiquement (silhouette, pictogramme, voix du téléphone en français).
+
+  TRADUCTIONS : remplir l'objet TXT, une clé par langue (sus, fuf, emk, gkp, tod, kss).
+  Une phrase non traduite s'affiche en français.
+
+  RELECTURE MFFS : ouvrir le fichier avec ?relecture à la fin de l'adresse
+  pour voir en jaune toutes les phrases marquées [À VÉRIFIER PAR LE MFFS].
+-->
+<style>
+:root{
+  --creme:#FFF8EC; --encre:#1A1A1A; --encre2:#4A4A4A; --gris:#9EA3A8; --blanc:#fff;
+  --tchotcho:#1B2A5C; --penda:#F28C28; --lanfia:#4FB3E8; --binta:#F5C518; --sayon:#2E9E4F;
+  --accent:#1B2A5C; --ok:#2E9E4F; --doux:#F1E6D2; --ombre:0 6px 18px rgba(0,0,0,.14);
+  --r:18px; --fs:clamp(17px,4.3vw,22px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:var(--creme);color:var(--encre);font:600 var(--fs)/1.35 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;overflow-x:hidden}
+body.groupe{--fs:clamp(20px,2.4vw,34px)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,.lieu:focus-visible{outline:4px solid #000;outline-offset:3px}
+.ecran{display:none;min-height:100vh;min-height:100dvh;padding:16px;flex-direction:column;align-items:center}
+.ecran.actif{display:flex}
+.col{width:100%;max-width:980px;display:flex;flex-direction:column;gap:16px;flex:1}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(30px,8vw,64px);line-height:1.05;font-weight:900;letter-spacing:-.01em}
+h2{font-size:clamp(24px,6vw,44px);line-height:1.1;font-weight:900}
+.petit{font-size:.8em;color:var(--encre2);font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:12px 24px;border-radius:999px;background:var(--accent);color:#fff;font-weight:800;box-shadow:var(--ombre)}
+.btn.clair{background:#fff;color:var(--encre);border:3px solid var(--encre)}
+.btn.grand{min-height:76px;font-size:1.15em;padding:14px 34px}
+.btn:active{transform:scale(.97)}
+.rang{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+
+/* ---------- barre haute ---------- */
+.barre{width:100%;max-width:980px;display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:8px}
+.pastilles{display:flex;gap:8px}
+.pastille{width:30px;height:30px;border-radius:50%;background:var(--gris);border:3px solid #fff;box-shadow:0 0 0 2px var(--gris);transition:background .6s}
+.pastille.fait{background:var(--c)}
+.pastille.encours{box-shadow:0 0 0 3px var(--encre)}
+.rond{width:58px;height:58px;border-radius:50%;background:#fff;border:3px solid var(--encre);display:inline-flex;align-items:center;justify-content:center;font-size:26px}
+.rond[aria-pressed="false"]{opacity:.45}
+
+/* ---------- personnages ---------- */
+.perso{position:relative;display:inline-block;color:var(--c);transition:filter 1.4s ease, color 1.4s ease, transform .5s}
+.perso img{display:block;width:100%;height:100%;object-fit:contain}
+.perso svg{display:block;width:100%;height:100%}
+.perso.gris{filter:grayscale(1) contrast(.85) brightness(1.08);color:var(--gris)}
+.perso.revient{animation:revient 1.2s ease}
+@keyframes revient{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+.halo{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,var(--c) 0%,transparent 65%);opacity:0;pointer-events:none}
+.perso.revient .halo{animation:halo 1.6s ease}
+@keyframes halo{0%{opacity:0}30%{opacity:.55}100%{opacity:0}}
+
+/* ---------- accueil ---------- */
+#accueil{background:linear-gradient(rgba(255,248,236,.55),rgba(255,248,236,.92) 70%),url("assets/decors/quartier.jpg") center top/cover no-repeat,var(--creme)}
+.titre-bloc{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;margin-top:2vh}
+.bande{display:flex;justify-content:center;align-items:flex-end;gap:2%;width:100%;max-width:760px;margin:6px auto}
+.bande .perso{height:clamp(110px,24vh,240px);width:auto}
+.bande .perso img,.bande .perso svg{height:100%;width:auto}
+.choix-mode{display:grid;grid-template-columns:1fr;gap:12px;width:100%;max-width:560px;margin:0 auto}
+.mode{display:flex;align-items:center;gap:14px;text-align:left;min-height:84px;padding:12px 18px;border-radius:var(--r);background:#fff;border:3px solid var(--encre);box-shadow:var(--ombre)}
+.mode .ico{font-size:38px;width:52px;text-align:center}
+.mode b{display:block;font-size:1.05em}
+.mode span{font-size:.8em;color:var(--encre2)}
+.langues{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.langue{min-height:48px;padding:8px 14px;border-radius:999px;background:#fff;border:2px solid var(--encre);font-size:.82em}
+.langue[aria-pressed="true"]{background:var(--encre);color:#fff}
+
+/* ---------- intro ---------- */
+.texte-gros{font-size:1.2em;font-weight:800;text-align:center;max-width:760px;margin:0 auto}
+
+/* ---------- niveau ---------- */
+#niveau{background:var(--creme)}
+.scene{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;background:var(--doux);box-shadow:var(--ombre)}
+.scene .fond{position:absolute;inset:0;background:var(--fond-scene,none) center/cover;transition:filter 1.4s ease}
+.scene.terne .fond{filter:saturate(.25) brightness(1.04)}
+.scene #persoNiveau{position:absolute;left:6%;bottom:4%;height:86%;display:flex;align-items:flex-end}
+.scene .perso{height:100%;aspect-ratio:auto}
+.scene .perso img{height:100%;width:auto}
+.scene .perso svg{height:100%;width:auto}
+.ville{position:absolute;z-index:2;top:12px;right:12px;background:#fff;border-radius:999px;padding:6px 14px;font-size:.8em;border:2px solid var(--encre)}
+.bulle{background:#fff;border-radius:var(--r);padding:14px 16px;border:3px solid var(--encre);display:flex;flex-direction:column;gap:6px}
+.bulle .nom{font-weight:900;font-size:1.1em;color:var(--c)}
+.bulle p{font-weight:600}
+.question{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.question h3{font-size:1.25em;font-weight:900}
+.lieux{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:620px){.lieux{grid-template-columns:1fr}}
+.lieu{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;border-radius:var(--r);background:#fff;border:4px solid var(--encre);box-shadow:var(--ombre);min-height:96px;text-align:center;transition:opacity .4s,transform .2s}
+@media (max-width:620px){.lieu{flex-direction:row;text-align:left}}
+.lieu .num{position:absolute;top:-14px;left:-10px;width:46px;height:46px;border-radius:50%;background:var(--encre);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2em;border:3px solid #fff}
+.lieu .vignette{width:clamp(64px,16vw,120px);aspect-ratio:1;border-radius:14px;background:var(--doux);display:flex;align-items:center;justify-content:center;font-size:clamp(38px,9vw,64px);overflow:hidden;flex:none}
+.lieu .vignette img{width:100%;height:100%;object-fit:cover}
+.lieu .lbl{font-weight:800}
+.lieu:active{transform:scale(.97)}
+.lieu.eteint{opacity:.35;filter:grayscale(1);pointer-events:none}
+.lieu.eteint::after{content:"✓ écouté";position:absolute;right:10px;bottom:8px;font-size:.7em}
+.vote{display:none;text-align:center;background:var(--encre);color:#fff;border-radius:var(--r);padding:12px;font-weight:900;font-size:1.15em}
+body.groupe .vote{display:block}
+
+/* ---------- retour (feedback) ---------- */
+.voile{position:fixed;inset:0;background:rgba(20,20,20,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.voile.actif{display:flex}
+.carte{background:#fff;border-radius:24px;max-width:760px;width:100%;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 48px rgba(0,0,0,.3);max-height:94vh;overflow:auto}
+.carte .tete{display:flex;align-items:center;gap:14px}
+.carte .vignette{width:84px;height:84px;border-radius:14px;background:var(--doux);display:flex;align-items:center;justify-content:center;font-size:48px;overflow:hidden;flex:none}
+.carte .vignette img{width:100%;height:100%;object-fit:cover}
+.carte h3{font-size:1.3em;font-weight:900}
+.carte p{font-weight:600}
+
+/* ---------- réussite ---------- */
+.reussite{display:none;flex-direction:column;gap:14px;align-items:center;text-align:center}
+.reussite.actif{display:flex}
+.droit{font-size:1.3em;font-weight:900;background:var(--c);color:var(--txt-sur-c,#fff);padding:14px 20px;border-radius:var(--r);max-width:760px}
+.aidant{font-size:.95em;color:var(--encre2)}
+
+/* ---------- fin ---------- */
+#fin{text-align:center}
+.affiche{width:100%;max-width:760px;margin:0 auto;position:relative}
+.affiche img.pose{width:100%;display:block}
+.slogan{font-size:clamp(26px,6.5vw,52px);font-weight:900;line-height:1.1}
+.recap{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;width:100%}
+@media (max-width:620px){.recap{grid-template-columns:1fr}}
+.recap .item{background:#fff;border-radius:14px;border:3px solid var(--c);padding:10px;display:flex;flex-direction:column;gap:4px;align-items:center}
+@media (max-width:620px){.recap .item{flex-direction:row;text-align:left;gap:12px}}
+.recap .perso{height:80px;width:auto;flex:none}
+.recap .perso img,.recap .perso svg{height:100%;width:auto}
+.recap b{color:var(--encre);font-size:.9em}
+.recap span{font-size:.75em;color:var(--encre2)}
+
+/* ---------- adultes ---------- */
+#adultes .col{max-width:820px}
+.liste-droits{display:flex;flex-direction:column;gap:10px}
+.liste-droits .l{display:flex;gap:12px;align-items:flex-start;background:#fff;border-radius:14px;padding:12px 14px;border-left:10px solid var(--c)}
+.liste-droits .l b{display:block}
+.liste-droits .l span{font-size:.85em;color:var(--encre2);font-weight:600}
+.contacts{background:#fff;border-radius:14px;padding:14px;border:3px solid var(--encre)}
+.contacts ul{margin:8px 0 0;padding-left:1.2em}
+.contacts li{margin:6px 0;font-weight:600}
+.verif{background:#FFE58A;border-radius:6px;padding:0 6px;font-size:.8em;font-weight:800}
+body:not(.relecture) .verif.discret{display:none}
+.aide-clavier{display:none;font-size:.7em;color:var(--encre2);text-align:center}
+body.groupe .aide-clavier{display:block}
+
+body.groupe .lieu .vignette{width:clamp(56px,9vh,110px)}
+body.groupe #niveau .col{gap:10px}
+.carte .reecoute{align-self:flex-start}
+/* ---------- geste « repère le signe » ---------- */
+.scene{height:min(52vh,calc((min(100vw,1012px) - 32px) * 9 / 16));width:auto;max-width:100%;margin:0 auto}
+body.groupe .scene{height:min(42vh,calc((min(100vw,1012px) - 32px) * 9 / 16))}
+.scene.reperage{cursor:pointer}
+.signe{position:absolute;z-index:3;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;border:5px solid #fff;box-shadow:0 0 0 4px var(--encre);opacity:0;transition:opacity .4s}
+.signe.indice{opacity:1;animation:pulse 1.1s ease-in-out infinite}
+.signe.trouve{opacity:1;animation:none;border-color:var(--c);box-shadow:0 0 0 4px #fff,0 0 0 8px var(--c)}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+.tap{position:absolute;z-index:3;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.7);transform:translate(-50%,-50%);pointer-events:none;animation:tap .6s forwards}
+@keyframes tap{to{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+#zoneReperage{display:none;flex-direction:column;gap:10px;align-items:center;text-align:center}
+#zoneReperage.actif{display:flex}
+#zoneReperage .consigne-r{font-size:1.15em;font-weight:900}
+#btnPasser{display:none}
+body.groupe #btnPasser{display:inline-flex}
+body.groupe .bulle{padding:8px 14px}
+body.groupe .bulle p{font-size:.82em}
+body.groupe #zoneReperage .consigne-r{font-size:1em}
+body.groupe #zoneReperage{gap:6px}
+#btnCompris{display:none}
+/* scène d'aidant : fondu par-dessus le décor quand la couleur revient */
+.scene .fond2{position:absolute;inset:0;background:var(--fond-aidant,none) center/cover;opacity:0;transition:opacity 1.4s ease}
+.scene.aidant .fond2{opacity:1}
+/* ---------- Les trois cartes ---------- */
+#cartes .col{gap:12px}
+.rangee{display:flex;flex-direction:column;gap:6px}
+.rangee h3{font-size:1em;font-weight:900;display:flex;align-items:center;gap:8px}
+.rangee h3 .pas{width:32px;height:32px;border-radius:50%;background:var(--encre);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.85em}
+.cartes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cartes .k{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px;border-radius:14px;background:#fff;border:3px solid #d9cdb8;box-shadow:var(--ombre);text-align:center;font-size:.8em;font-weight:800;min-height:96px;transition:transform .2s,opacity .5s,border-color .2s}
+.cartes .k .img{width:100%;aspect-ratio:4/3;border-radius:10px;background:var(--doux) center/cover;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:clamp(26px,7vw,48px)}
+.cartes .k .img .perso{position:absolute;left:6%;bottom:3%;height:88%}
+.cartes .k .img .perso img,.cartes .k .img .perso svg{height:100%;width:auto}
+.cartes .k[aria-pressed="true"]{border-color:var(--encre);transform:translateY(-4px);box-shadow:0 0 0 3px var(--encre),var(--ombre)}
+.cartes .k.fini{border-color:var(--c);opacity:.55;pointer-events:none}
+.cartes .k.fini .img{filter:none}
+.cartes .k.secoue{animation:secoue .4s}
+@keyframes secoue{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media (max-width:620px){.cartes{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.cartes .k{font-size:.62em;padding:4px;min-height:80px}}
+.consigne{text-align:center;font-weight:800}
+body.groupe #cartes .col{gap:6px}
+body.groupe #cartes h2{display:none}
+body.groupe .cartes .k .img{aspect-ratio:16/9}
+body.groupe .cartes .k{min-height:0;padding:4px;gap:2px}
+body.groupe .rangee h3{font-size:.85em}
+body.groupe .consigne{font-size:.8em}
+body.groupe #cartes .barre{margin-bottom:0}
+body.groupe .cartes .k span{font-size:.9em}
+.trio{display:flex;gap:10px;justify-content:center;align-items:stretch;flex-wrap:wrap}
+.trio{flex-wrap:nowrap}
+.trio .t{flex:1 1 0;min-width:0;max-width:220px;font-size:.85em;background:#fff;border-radius:14px;border:4px solid var(--c);padding:10px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;font-weight:800}
+.trio .t .img{width:100%;aspect-ratio:4/3;border-radius:10px;background:var(--doux) center/cover;position:relative;display:flex;align-items:center;justify-content:center;font-size:42px}
+.trio .t .img .perso{position:absolute;left:6%;bottom:3%;height:88%}
+.trio .t .img .perso img,.trio .t .img .perso svg{height:100%;width:auto}
+/* ---- À ta place ---- */
+#ataplace .col{gap:12px}
+.scene #persoAtp{position:absolute;left:6%;bottom:4%;height:86%;display:flex;align-items:flex-end}
+.scene #persoAtp .perso{transition:filter 1.4s ease}
+.scene #persoAtp .perso.moitie{filter:grayscale(.5) contrast(.92)}
+.role-atp{font-weight:900;font-size:1.05em}
+.reponses-atp{display:flex;flex-direction:column;gap:10px}
+.rep-atp{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px 14px 14px;border-radius:var(--r);background:#fff;border:4px solid var(--encre);box-shadow:var(--ombre);text-align:left;font-weight:700;min-height:64px;transition:transform .2s,opacity .4s}
+.rep-atp .num{flex:none;width:44px;height:44px;border-radius:50%;background:var(--encre);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15em}
+.rep-atp:active{transform:scale(.98)}
+.rep-atp.eteint{opacity:.4;pointer-events:none}
+.retour-atp{display:none;flex-direction:column;gap:12px;align-items:center;text-align:center;background:#fff;border-radius:var(--r);border:4px solid var(--encre);padding:16px}
+.retour-atp.actif{display:flex}
+.retour-atp h3{font-size:1.35em;font-weight:900}
+.retour-atp.bon{border-color:#2E9E4F}.retour-atp.bon h3{color:#1f7a3a}
+.retour-atp.moitie{border-color:#E3A400}.retour-atp.moitie h3{color:#8A6A00}
+.retour-atp.non h3{color:#B3261E}
+.retour-atp .expl{font-weight:600}
+body.groupe .rep-atp{min-height:0;padding:8px 12px;font-size:.85em}
+body.groupe #ataplace .col{gap:8px}
+body.groupe #ataplace .scene{height:min(30vh,calc((min(100vw,1012px) - 32px) * 9 / 16))}
+body.groupe #ataplace .bulle p{font-size:.78em}
+body.groupe #ataplace .consigne{margin:0}
+@media (prefers-reduced-motion:reduce)
+{*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ===================== ÉCRANS ===================== -->
+
+<section id="accueil" class="ecran actif" aria-labelledby="t-titre">
+  <div class="col">
+    <div class="titre-bloc">
+      <p class="petit" data-t="ui.surtitre"></p>
+      <h1 id="t-titre" data-t="ui.titre"></h1>
+      <p data-t="ui.soustitre"></p>
+    </div>
+    <div class="bande" id="bandeAccueil"></div>
+    <div class="choix-mode" role="group" aria-label="Mode de jeu">
+      <button class="mode" data-mode="solo"><span class="ico">📱</span><span><b data-t="ui.modeSolo"></b><span data-t="ui.modeSoloAide"></span></span></button>
+      <button class="mode" data-mode="classe"><span class="ico">🏫</span><span><b data-t="ui.modeClasse"></b><span data-t="ui.modeClasseAide"></span></span></button>
+      <button class="mode" data-mode="forum"><span class="ico">🎪</span><span><b data-t="ui.modeForum"></b><span data-t="ui.modeForumAide"></span></span></button>
+    </div>
+    <div class="langues" id="langues" role="group" aria-label="Langue"></div>
+    <p class="petit" style="text-align:center"><button class="btn clair" id="btnAdultesAccueil" data-t="ui.pourAdultes"></button></p>
+  </div>
+</section>
+
+<section id="intro" class="ecran" aria-live="polite">
+  <div class="barre"><span></span><button class="rond" id="sonIntro" aria-pressed="true" aria-label="Son">🔊</button></div>
+  <div class="col" style="justify-content:center">
+    <div class="bande" id="bandeIntro"></div>
+    <p class="texte-gros" data-t="intro.l1"></p>
+    <p class="texte-gros" data-t="intro.l2"></p>
+    <div class="rang"><button class="btn grand" id="btnCommencer" data-t="ui.commencer"></button><button class="btn clair" id="btnCartesIntro" data-t="ui.troisCartes"></button><button class="btn clair" id="btnAtpIntro" data-t="ui.aTaPlace"></button></div>
+    <p class="aide-clavier" data-t="ui.aideClavier"></p>
+  </div>
+</section>
+
+<section id="niveau" class="ecran">
+  <div class="barre">
+    <div class="pastilles" id="pastilles" aria-label="Progression"></div>
+    <div class="rang" style="gap:8px">
+      <button class="rond" id="btnReecouter" aria-label="Réécouter">🔁</button>
+      <button class="rond" id="btnSon" aria-pressed="true" aria-label="Son">🔊</button>
+    </div>
+  </div>
+  <div class="col">
+    <div class="scene" id="scene">
+      <div class="fond"></div>
+      <div class="fond2"></div>
+      <span class="ville" id="ville"></span>
+      <div id="persoNiveau"></div>
+      <span class="signe" id="signe"></span>
+    </div>
+    <div class="bulle" aria-live="polite">
+      <span class="nom" id="nomEnfant"></span>
+      <p id="situation"></p>
+    </div>
+
+    <div id="zoneReperage" aria-live="polite">
+      <p class="consigne-r" id="consigneR"></p>
+      <div class="rang">
+        <button class="btn grand" id="btnCompris"></button>
+        <button class="btn clair" id="btnPasser" data-t="ui.passer"></button>
+      </div>
+    </div>
+
+    <div id="zoneChoix">
+      <div class="question"><h3 id="question"></h3></div>
+      <p class="vote" data-t="ui.vote"></p>
+      <div class="lieux" id="lieux" role="group"></div>
+      <p class="aide-clavier" data-t="ui.aideClavier"></p>
+    </div>
+
+    <div class="reussite" id="reussite" aria-live="polite">
+      <p class="droit" id="droitTexte"></p>
+      <p class="aidant" id="aidantTexte"></p>
+      <button class="btn grand" id="btnSuivant"></button>
+    </div>
+  </div>
+</section>
+
+<section id="cartes" class="ecran">
+  <div class="barre">
+    <div class="pastilles" id="pastillesCartes" aria-label="Progression"></div>
+    <div class="rang" style="gap:8px">
+      <button class="rond" id="btnReecouterCartes" aria-label="Réécouter">🔁</button>
+      <button class="rond" id="btnSonCartes" aria-pressed="true" aria-label="Son">🔊</button>
+    </div>
+  </div>
+  <div class="col">
+    <h2 data-t="cartes.titre"></h2>
+    <p class="consigne" id="consigneCartes"></p>
+    <div class="rangee"><h3><span class="pas">1</span><span data-t="cartes.rangSituation"></span></h3><div class="cartes" id="rgSituation"></div></div>
+    <div class="rangee"><h3><span class="pas">2</span><span data-t="cartes.rangDroit"></span></h3><div class="cartes" id="rgDroit"></div></div>
+    <div class="rangee"><h3><span class="pas">3</span><span data-t="cartes.rangAidant"></span></h3><div class="cartes" id="rgAidant"></div></div>
+  </div>
+</section>
+
+<div class="voile" id="voileCartes" role="dialog" aria-modal="true" aria-labelledby="trioTitre">
+  <div class="carte">
+    <h3 id="trioTitre"></h3>
+    <div class="trio" id="trio"></div>
+    <p id="trioTexte"></p>
+    <div class="rang"><button class="btn grand" id="btnTrio"></button></div>
+  </div>
+</div>
+
+<section id="ataplace" class="ecran">
+  <div class="barre">
+    <div class="pastilles" id="pastillesAtp" aria-label="Progression"></div>
+    <div class="rang" style="gap:8px">
+      <button class="rond" id="btnReecouterAtp" aria-label="Réécouter">🔁</button>
+      <button class="rond" id="btnSonAtp" aria-pressed="true" aria-label="Son">🔊</button>
+    </div>
+  </div>
+  <div class="col">
+    <p class="consigne" id="consigneAtp" data-t="ataplace.consigne"></p>
+    <div class="scene" id="sceneAtp">
+      <div class="fond"></div>
+      <span class="ville" id="villeAtp"></span>
+      <div id="persoAtp"></div>
+    </div>
+    <div class="bulle" aria-live="polite">
+      <span class="nom" id="nomAtp"></span>
+      <p class="role-atp" id="roleAtp"></p>
+      <p id="situationAtp"></p>
+    </div>
+    <div class="reponses-atp" id="reponsesAtp" role="group"></div>
+    <p class="vote" data-t="ui.vote"></p>
+    <div class="retour-atp" id="retourAtp" aria-live="polite">
+      <h3 id="verdictAtp"></h3>
+      <p class="expl" id="explAtp"></p>
+      <p class="droit" id="droitAtp"></p>
+      <div class="rang"><button class="btn grand" id="btnAtp"></button></div>
+    </div>
+  </div>
+</section>
+
+<section id="fin" class="ecran">
+  <div class="col" style="align-items:center">
+    <div class="affiche" id="affiche"></div>
+    <p class="slogan" data-t="fin.slogan"></p>
+    <p data-t="fin.sais"></p>
+    <div class="recap" id="recap"></div>
+    <div class="rang">
+      <button class="btn grand" id="btnRejouer" data-t="ui.rejouer"></button>
+      <button class="btn" id="btnCartesFin" data-t="ui.troisCartes"></button>
+      <button class="btn" id="btnAtpFin" data-t="ui.aTaPlace"></button>
+      <button class="btn clair" id="btnAdultes" data-t="ui.pourAdultes"></button>
+    </div>
+  </div>
+</section>
+
+<section id="adultes" class="ecran">
+  <div class="col">
+    <h2 data-t="adultes.titre"></h2>
+    <p data-t="adultes.intro"></p>
+    <div class="liste-droits" id="listeDroits"></div>
+    <div class="contacts">
+      <b data-t="adultes.contactsTitre"></b>
+      <ul id="contacts"></ul>
+    </div>
+    <p class="petit" data-t="adultes.credits"></p>
+    <div class="rang"><button class="btn" id="btnAtpAdultes" data-t="ui.aTaPlaceAdultes"></button><button class="btn clair" id="btnRetourAccueil" data-t="ui.accueil"></button></div>
+  </div>
+</section>
+
+<!-- retour après un choix -->
+<div class="voile" id="voile" role="dialog" aria-modal="true" aria-labelledby="retourTitre">
+  <div class="carte">
+    <div class="tete"><div class="vignette" id="retourVignette"></div><h3 id="retourTitre"></h3></div>
+    <p id="retourTexte"></p>
+    <button class="rond reecoute" id="btnReecouterCarte" aria-label="Réécouter">🔁</button>
+    <div class="rang"><button class="btn grand" id="btnRetour" data-t="ui.choisirEncore"></button></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   1. DONNÉES DU JEU (structure, indépendante de la langue)
+   ===================================================================== */
+const ENFANTS = [
+  { id:"tchotcho", couleur:"#1B2A5C", texteSurCouleur:"#fff", fauteuil:false, icone:"🪪", aidantLieu:"mairie", signe:{x:52, y:50, r:7},
+    choix:[ {lieu:"mairie", bon:true}, {lieu:"cyber"}, {lieu:"maison"} ] },
+  { id:"penda", couleur:"#F28C28", texteSurCouleur:"#1A1A1A", fauteuil:false, icone:"🩺", aidantLieu:"centre-sante", signe:{perso:true},
+    choix:[ {lieu:"vendeur"}, {lieu:"centre-sante", bon:true}, {lieu:"maison"} ] },
+  { id:"lanfia", couleur:"#4FB3E8", texteSurCouleur:"#1A1A1A", fauteuil:true, icone:"⚽", aidantLieu:"entraineur", signe:{x:74, y:56, r:10},
+    choix:[ {lieu:"terrain"}, {lieu:"maison"}, {lieu:"entraineur", bon:true} ] },
+  { id:"binta", couleur:"#F5C518", texteSurCouleur:"#1A1A1A", fauteuil:false, icone:"📚", aidantLieu:"maison", signe:{x:60, y:84, r:8},
+    choix:[ {lieu:"marche"}, {lieu:"maison", bon:true}, {lieu:"ecole"} ] },
+  { id:"sayon", couleur:"#2E9E4F", texteSurCouleur:"#fff", fauteuil:false, icone:"🗣️", aidantLieu:"ecole", signe:{x:71, y:51, r:7},
+    choix:[ {lieu:"ecole", bon:true}, {lieu:"terrain"}, {lieu:"maison"} ] }
+];
+/* Pictogramme de secours tant que la vignette assets/lieux/<id>.png n'existe pas */
+const LIEUX = {
+  "mairie":"🏛️", "centre-sante":"🏥", "terrain":"⚽", "entraineur":"📣",
+  "maison":"🏠", "ecole":"🏫", "marche":"🧺", "cyber":"🖨️", "vendeur":"💊"
+};
+const LANGUES = [
+  {code:"fr",  nom:"Français"}, {code:"sus", nom:"Sosoxui"}, {code:"fuf", nom:"Pular"},
+  {code:"emk", nom:"Maninkakan"}, {code:"gkp", nom:"Kpɛlɛwoo (guerzé)"},
+  {code:"tod", nom:"Loma (toma)"}, {code:"kss", nom:"Kisiei (kissi)"}
+];
+
+/* =====================================================================
+   2. TEXTES — un objet par langue. Seul le français est rempli.
+   Les traducteurs remplissent les mêmes clés dans sus, fuf, emk, gkp, tod, kss.
+   "verif": true = phrase à faire valider par le MFFS (visible en mode ?relecture).
+   ===================================================================== */
+const TXT = {
+fr: {
+  ui: {
+    surtitre:"L'Atelier Solidaire × Ministère de la Femme, de la Famille et des Solidarités",
+    titre:"Rends-leur leurs couleurs",
+    soustitre:"Cinq enfants, cinq droits. Trouve qui peut les aider.",
+    modeSolo:"Je joue seul", modeSoloAide:"Sur mon téléphone",
+    modeClasse:"En classe", modeClasseAide:"L'enseignant projette, la classe vote",
+    modeForum:"Au stand", modeForumAide:"Grand écran, le public vote à main levée",
+    commencer:"On y va !", choisirEncore:"Je choisis encore", suivant:"Enfant suivant",
+    voirFin:"Voir les cinq enfants", rejouer:"Rejouer", pourAdultes:"Pour les adultes",
+    accueil:"Retour à l'accueil",
+    vote:"Votez à main levée : 1, 2 ou 3 ?",
+    aideClavier:"Animateur : touchez le signe dans l'image · touches 1, 2, 3 pour choisir · Entrée pour continuer · R pour réécouter",
+    oui:"Oui !", pasEncore:"Pas encore…", quiAide:"Qui aide :", ville:"Ville :",
+    troisCartes:"Les trois cartes",
+    reperer:"Touche ce qui montre que quelque chose ne va pas.",
+    regardeEncore:"Regarde encore. Qu'est-ce qui ne va pas pour {nom} ?",
+    indiceSigne:"Regarde ce qui clignote.",
+    compris:"Qui peut l'aider ?", passer:"Passer",
+    aTaPlace:"À ta place", aTaPlaceAdultes:"Jouer « À ta place »"
+  },
+  cartes: {
+    titre:"Les trois cartes",
+    consigne:"Pour chaque enfant, choisis une carte dans chaque rangée : sa situation, son droit, et qui l'aide.",
+    rangSituation:"Ce qui lui arrive", rangDroit:"Son droit", rangAidant:"Qui l'aide",
+    bravo:"Les trois cartes vont ensemble !",
+    pasEnsemble:"Ces cartes ne vont pas ensemble. Regarde encore.",
+    indiceDroit:"Le droit ne va pas avec cette situation. Écoute encore l'histoire de {nom}.",
+    indiceAidant:"Ce n'est pas la bonne personne pour {nom}. Qui peut vraiment l'aider ?",
+    suivant:"Continuer", fin:"Voir les cinq enfants"
+  },
+  ataplace: {
+    consigne:"Cette fois, c'est toi l'adulte. Que fais-tu ?",
+    verdict:{ bon:"Merci !", moitie:"À moitié", non:"Pas encore" },
+    reessayer:"Choisir à nouveau", suivant:"Enfant suivant", fin:"Voir les cinq enfants",
+    enfants: {
+      tchotcho:{ role:"Tu es la maman de Tchotcho.",
+        situation:"Le directeur réclame l'acte de naissance de ton fils pour l'inscrire à l'examen. Tchotcho n'en a jamais eu.",
+        reponses:[
+          { t:"« Ce n'est pas grave, il passera l'examen plus tard. »", v:"non", e:"Sans acte de naissance, chaque examen sera bloqué, cette année comme les suivantes." },
+          { t:"« Je vais à la mairie demander comment déclarer sa naissance. »", v:"bon", e:"Tchotcho a retrouvé son nom. Écrit, il est reconnu partout.", verif:true },
+          { t:"« Je l'inscris sous le nom d'un cousin qui a des papiers. »", v:"non", e:"Il perdrait son nom à lui, celui de son grand-père, et ses droits avec." } ] },
+      penda:{ role:"Tu es l'infirmière du poste de santé.",
+        situation:"Tu viens de vacciner un bébé. Sa grande sœur, Penda, le porte sur son dos. Tu remarques qu'elle est brûlante, mais elle ne dit rien.",
+        reponses:[
+          { t:"« Reviens demain avec ta maman. »", v:"non", e:"La fièvre d'un enfant n'attend pas demain." },
+          { t:"« Je l'examine maintenant et je la soigne. »", v:"bon", e:"Penda est venue pour son frère. Elle aussi avait droit aux soins." },
+          { t:"« Je ne m'occupe que du bébé, c'est lui qui est inscrit. »", v:"non", e:"Penda est venue jusqu'à toi. Elle compte autant que son frère." } ] },
+      lanfia:{ role:"Tu es le maître de Lanfia.",
+        situation:"Lanfia se déplace en fauteuil roulant. Une marche bloque l'entrée de ta classe, et au terrain, personne ne lui passe le ballon.",
+        reponses:[
+          { t:"« Je le porte chaque matin pour entrer en classe. »", v:"moitie", e:"C'est gentil, mais il dépend toujours de toi. Peux-tu faire mieux ?" },
+          { t:"« Avec les parents, on pose une rampe, et je lui confie les buts. »", v:"bon", e:"Maintenant, Lanfia entre seul et il joue avec les autres." },
+          { t:"« Je lui conseille une autre école. »", v:"non", e:"Sa place est ici, avec ses camarades." } ] },
+      binta:{ role:"Tu es le papa de Binta.",
+        situation:"Binta vend des oranges au marché le matin et arrive en retard à l'école. La voisine te dit : « Elle compte bien, ta fille. Marie-la, tu seras tranquille. »",
+        reponses:[
+          { t:"« La voisine a raison. »", v:"non", e:"Une enfant n'est pas en âge de se marier." },
+          { t:"« Je garde Binta au marché, on a besoin d'argent. »", v:"non", e:"L'argent d'aujourd'hui lui coûterait son avenir." },
+          { t:"« Je porte le panier. Binta va à l'école jusqu'au bout. »", v:"bon", e:"Le panier peut attendre, pas l'école. Binta ira loin." } ] },
+      sayon:{ role:"Tu es l'enseignante de Sayon.",
+        situation:"À la récréation, Sayon vient te dire tout bas que son ami Nyankoye est frappé chez lui.",
+        reponses:[
+          { t:"« Ce sont des affaires de famille. »", v:"non", e:"Un enfant frappé, c'est l'affaire de tous." },
+          { t:"« Merci de me l'avoir dit. Je préviens discrètement le comité de protection. »", v:"bon", e:"Sayon a parlé, tu l'as écouté, et tu as agi.", verif:true },
+          { t:"« Je vais gronder ses parents devant tout le monde. »", v:"non", e:"D'abord protéger l'enfant, sans l'exposer." } ] }
+    }
+  },
+  intro: {
+    l1:"Voici Tchotcho, Penda, Lanfia, Binta et Sayon. Ce matin, ils ont perdu leurs couleurs.",
+    l2:"À chacun, il manque un droit. Dans le quartier, quelqu'un peut les aider. À toi de trouver qui !"
+  },
+  lieux: {
+    "mairie":"La mairie", "centre-sante":"Le centre de santé", "terrain":"Le bord du terrain",
+    "entraineur":"Le banc de l'entraîneur", "maison":"La maison", "ecole":"L'école",
+    "marche":"Le marché", "cyber":"Le cyber du coin", "vendeur":"Le vendeur de médicaments"
+  },
+  enfants: {
+    tchotcho: {
+      nom:"Tchotcho", ville:"Conakry", droitCourt:"Un nom",
+      situation:"C'est le jour de l'examen. Le maître appelle : « Tchotcho ! » Personne ne répond. Au quartier, tout le monde dit Junior. Et Tchotcho n'a pas d'acte de naissance. Sans ce papier, pas d'examen.",
+      question:"Où Tchotcho doit-il aller ?",
+      choix: {
+        "mairie":{ texte:"Avec son papa, Tchotcho va à la mairie. L'agent de l'état civil leur explique les démarches. Bientôt, la mairie écrira son vrai nom : Tchotcho. Ce nom sera à lui, pour toujours.", verif:true },
+        "cyber":{ texte:"Un papier fabriqué n'est pas un vrai acte. Il peut causer des problèmes plus tard. Le vrai papier se fait à la mairie." },
+        "maison":{ texte:"Attendre ne fait pas venir le papier. Chaque année sans acte, une porte de plus se ferme." }
+      },
+      lieuxSpecial:{ "mairie":"La mairie : l'état civil", "cyber":"Le cyber : acheter un papier", "maison":"La maison : attendre l'an prochain" },
+      aidant:"l'agent de l'état civil, avec un parent",
+      aidantCourt:"L'agent d'état civil",
+      situationCourte:"Pas d'acte de naissance, pas d'examen",
+      signe:"La porte de la salle d'examen est fermée. Sans acte de naissance, Tchotcho reste dehors.",
+      droit:"Tout enfant a droit à un nom et à un acte de naissance."
+    },
+    penda: {
+      nom:"Penda", ville:"Labé", droitCourt:"La santé",
+      situation:"Penda emmène son petit frère se faire vacciner. Elle a chaud, la tête lui tourne. Mais elle ne dit rien : aujourd'hui, c'est lui qu'on soigne, pense-t-elle.",
+      question:"Où Penda peut-elle trouver de l'aide, pour elle aussi ?",
+      choix: {
+        "centre-sante":{ texte:"Penda le dit à l'infirmière. On regarde sa fièvre tout de suite. Elle aussi, elle compte." },
+        "vendeur":{ texte:"On ne sait pas encore ce qu'elle a. Seul un agent de santé peut le savoir et donner le bon soin." },
+        "maison":{ texte:"Une fièvre peut devenir grave vite. Dire qu'on a mal, ce n'est pas se plaindre." }
+      },
+      lieuxSpecial:{ "centre-sante":"Le centre de santé : l'infirmière", "vendeur":"Le vendeur au bord de la route", "maison":"La maison : se coucher sans rien dire" },
+      aidant:"l'agent de santé",
+      aidantCourt:"L'infirmière",
+      situationCourte:"Elle cache sa fièvre",
+      signe:"C'est Penda ! Elle a chaud, la tête lui tourne. Elle aussi a besoin d'être soignée.",
+      droit:"Tout enfant a droit à la santé et aux soins."
+    },
+    lanfia: {
+      nom:"Lanfia", ville:"Kankan", droitCourt:"Le jeu",
+      situation:"Au terrain, on fait les équipes. Lanfia attend au bord, dans son fauteuil. Personne ne l'appelle. Pourtant il a de bonnes mains : il veut garder les buts.",
+      question:"Vers qui Lanfia peut-il aller ?",
+      choix: {
+        "entraineur":{ texte:"L'entraîneur écoute Lanfia. On dégage le sol devant le but. Lanfia garde les buts, et il arrête le premier tir !" },
+        "terrain":{ texte:"Attendre qu'on pense à lui peut durer longtemps. Lanfia a le droit de demander sa place." },
+        "maison":{ texte:"Rester seul, c'est perdre le plaisir de jouer ensemble. Le jeu est pour tous les enfants." }
+      },
+      lieuxSpecial:{ "entraineur":"Le banc de l'entraîneur", "terrain":"Le bord du terrain : attendre", "maison":"La maison : rentrer seul" },
+      aidant:"l'entraîneur ou l'éducateur sportif",
+      aidantCourt:"L'entraîneur",
+      situationCourte:"On le laisse au bord du terrain",
+      signe:"Les buts sont vides. Lanfia pourrait les garder, mais personne ne le lui a demandé.",
+      droit:"Tout enfant a le droit de jouer, avec les autres."
+    },
+    binta: {
+      nom:"Binta", ville:"Boké", droitCourt:"L'école",
+      situation:"Chaque matin, Binta vend au marché avant l'école. Elle arrive en retard, essoufflée. Elle a entendu les grands parler de la marier.",
+      question:"Où Binta peut-elle trouver de l'aide ?",
+      choix: {
+        "maison":{ texte:"Binta dit à sa maman : « Je veux arriver à l'heure. » Sa maîtresse vient en parler aussi. Binta vendra après l'école. Et le mariage ? Binta est une enfant : sa place est à l'école." },
+        "marche":{ texte:"Binta court plus vite, mais elle dort en classe. Ce n'est pas à elle seule de régler ça." },
+        "ecole":{ texte:"Se cacher au fond de la classe évite les reproches, mais personne ne sait qu'elle a besoin d'aide." }
+      },
+      lieuxSpecial:{ "maison":"La maison : parler à maman", "marche":"Le marché : vendre plus vite", "ecole":"L'école : se cacher au fond" },
+      aidant:"sa maman, avec la maîtresse",
+      aidantCourt:"Maman et la maîtresse",
+      situationCourte:"Elle vend au marché, elle arrive en retard",
+      signe:"Sa petite table au marché. À l'heure de l'école, Binta vend encore.",
+      droit:"Tout enfant a droit d'aller à l'école, et d'y rester."
+    },
+    sayon: {
+      nom:"Sayon", ville:"N'Zérékoré", droitCourt:"La parole",
+      situation:"Le soir, Sayon entend des cris chez son ami. Le lendemain, son ami a des marques. Il dit qu'il est tombé. Sayon sait que ce n'est pas vrai. Il a peur de parler.",
+      question:"À qui Sayon peut-il le dire ?",
+      choix: {
+        "ecole":{ texte:"Sayon parle à son maître. Le maître le remercie : Sayon a bien fait. Le maître sait qui prévenir pour protéger son ami." },
+        "terrain":{ texte:"Un copain peut écouter, mais il ne peut pas protéger. Il faut un adulte." },
+        "maison":{ texte:"Un secret qui fait mal, on a le droit de le dire. Parler, ce n'est pas trahir son ami : c'est l'aider." }
+      },
+      lieuxSpecial:{ "ecole":"L'école : parler au maître", "terrain":"Le terrain : le dire à un copain", "maison":"La maison : garder le secret" },
+      aidant:"un adulte de confiance : son maître",
+      aidantCourt:"Le maître",
+      situationCourte:"Il a peur de dire ce qu'il sait",
+      signe:"La fenêtre de son ami. Hier soir, Sayon a entendu des cris. Il sait, mais il se tait.",
+      droit:"Tout enfant a le droit de dire ce qu'il pense, et d'être écouté."
+    }
+  },
+  fin: {
+    slogan:"Ma journée. Mes droits. Mon avenir.",
+    sais:"Bravo ! Les cinq enfants ont retrouvé leurs couleurs. Voici ce que tu sais maintenant :"
+  },
+  adultes: {
+    titre:"Pour les parents, enseignants et animateurs",
+    intro:"Chaque enfant du jeu montre un droit. Dans chaque situation, ce sont les adultes qui protègent et qui aiment : ils écoutent, ils agissent, ils savent vers qui se tourner.",
+    droits: {
+      tchotcho:"Identité — Déclarez la naissance de votre enfant à la mairie. Sans acte de naissance, il ne peut pas passer ses examens.",
+      penda:"Santé — Un enfant qui a de la fièvre va au centre de santé, même quand il s'occupe d'un plus petit.",
+      lanfia:"Jeu — Tous les enfants jouent ensemble. Pour un enfant en fauteuil, on adapte le jeu : on ne le laisse pas au bord.",
+      binta:"Éducation — L'école passe avant le travail. Une fille est une enfant : sa place est à l'école.",
+      sayon:"Expression — Écoutez l'enfant qui ose parler. Remerciez-le, puis prévenez qui peut protéger."
+    },
+    droitsVerif:{ tchotcho:true },
+    contactsTitre:"Qui contacter",
+    contacts:[
+      { t:"La mairie de votre commune, service de l'état civil (naissance, acte, jugement supplétif).", verif:true },
+      { t:"Le centre de santé ou le poste de santé le plus proche.", verif:false },
+      { t:"L'école : enseignant, directeur ou directrice.", verif:false },
+      { t:"Le comité de protection de l'enfant de votre quartier ou de votre village.", verif:true },
+      { t:"Numéro d'aide pour enfants en danger : en attente de confirmation par le MFFS.", verif:true }
+    ],
+    credits:"Rends-leur leurs couleurs — L'Atelier Solidaire, avec le Ministère de la Femme, de la Famille et des Solidarités. Journée internationale des droits de l'enfant, 20-21 novembre 2026."
+  },
+  verifEtiquette:"[À VÉRIFIER PAR LE MFFS]"
+},
+sus:{}, fuf:{}, emk:{}, gkp:{}, tod:{}, kss:{}
+};
+
+/* =====================================================================
+   3. MOTEUR
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+/* Version autonome : les images sont incluses dans window.ASSETS ; sinon on lit le dossier assets/. */
+const asset = u => (window.ASSETS && window.ASSETS[u]) || u;
+const etat = { langue:"fr", mode:"solo", son:true, index:0, faits:[], essais:[] };
+const RELECTURE = /[?&]relecture/.test(location.search);
+if (RELECTURE) document.body.classList.add("relecture");
+
+function lire(obj, chemin){ return chemin.split(".").reduce((o,k)=>o==null?undefined:o[k], obj); }
+function t(chemin){
+  const v = lire(TXT[etat.langue], chemin);
+  return (v === undefined || v === "") ? lire(TXT.fr, chemin) : v;
+}
+function appliquerTextes(){
+  document.querySelectorAll("[data-t]").forEach(el => { el.textContent = t(el.dataset.t); });
+  document.documentElement.lang = etat.langue;
+}
+
+/* ---- images avec secours ---- */
+function silhouette(fauteuil){
+  // Silhouette provisoire en aplat, sans visage — remplacée dès que le PNG existe.
+  const roue = fauteuil
+    ? '<circle cx="50" cy="128" r="26" fill="none" stroke="currentColor" stroke-width="7"/><rect x="22" y="96" width="56" height="10" rx="5" fill="currentColor"/>'
+    : '<rect x="30" y="104" width="15" height="52" rx="7" fill="currentColor"/><rect x="55" y="104" width="15" height="52" rx="7" fill="currentColor"/>';
+  return '<svg viewBox="0 0 100 166" aria-hidden="true"><circle cx="50" cy="24" r="18" fill="currentColor"/>'
+       + '<path d="M26 50 Q50 40 74 50 L80 104 Q50 112 20 104 Z" fill="currentColor"/>' + roue + '</svg>';
+}
+function perso(enfant, gris){
+  const d = document.createElement("div");
+  d.className = "perso" + (gris ? " gris" : "");
+  d.style.setProperty("--c", enfant.couleur);
+  d.innerHTML = '<span class="halo"></span>' + silhouette(enfant.fauteuil);
+  const img = new Image();
+  img.alt = "";
+  img.onload = () => { d.querySelector("svg")?.remove(); d.appendChild(img); };
+  img.src = asset("assets/perso/" + enfant.id + ".webp");
+  return d;
+}
+function vignetteLieu(id){
+  const v = document.createElement("div");
+  v.className = "vignette";
+  v.textContent = LIEUX[id] || "📍";
+  const img = new Image(); img.alt = "";
+  img.onload = () => { v.textContent = ""; v.appendChild(img); };
+  img.src = asset("assets/lieux/" + id + ".jpg");
+  return v;
+}
+
+function imageExiste(url, rappel){ const i = new Image(); i.onload = () => rappel(true); i.onerror = () => rappel(false); i.src = url; }
+
+/* ---- son : fichier mp3 d', sinon voix du téléphone (français seulement) ---- */
+let audioCourant = null, fileParole = [];
+function stopSon(){
+  if (audioCourant){ audioCourant.pause(); audioCourant = null; }
+  fileParole = [];
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+}
+function voixFr(){
+  const v = ("speechSynthesis" in window) ? speechSynthesis.getVoices() : [];
+  return v.find(x => /fr[-_](FR|GN|SN|CI)/i.test(x.lang)) || v.find(x => /^fr/i.test(x.lang));
+}
+function parlerTTS(texte, ensuite){
+  if (!("speechSynthesis" in window) || etat.langue !== "fr"){ ensuite && ensuite(); return; }
+  const u = new SpeechSynthesisUtterance(texte);
+  u.lang = "fr-FR"; u.rate = .92; const v = voixFr(); if (v) u.voice = v;
+  u.onend = () => ensuite && ensuite(); u.onerror = () => ensuite && ensuite();
+  speechSynthesis.speak(u);
+}
+function jouerUn(id, texte, ensuite){
+  const a = new Audio("assets/audio/" + etat.langue + "/" + id + ".mp3");
+  let bascule = false;
+  const secours = () => { if (bascule) return; bascule = true; audioCourant = null; parlerTTS(texte, ensuite); };
+  a.onerror = secours;
+  a.onended = () => { audioCourant = null; ensuite && ensuite(); };
+  audioCourant = a;
+  a.play().catch(secours);
+}
+/* dire([[id, texte], [id, texte] ...]) enchaîne plusieurs morceaux */
+function dire(morceaux){
+  stopSon();
+  if (!etat.son) return;
+  fileParole = morceaux.slice();
+  const suivant = () => {
+    if (!etat.son || !fileParole.length) return;
+    const [id, texte] = fileParole.shift();
+    jouerUn(id, texte, suivant);
+  };
+  suivant();
+}
+let derniereParole = [];
+function direEtRetenir(m){ derniereParole = m; dire(m); }
+function majBoutonsSon(){
+  document.querySelectorAll("#btnSon,#sonIntro,#btnSonCartes,#btnSonAtp").forEach(b => {
+    b.setAttribute("aria-pressed", etat.son); b.textContent = etat.son ? "🔊" : "🔇";
+  });
+}
+function basculerSon(){ etat.son = !etat.son; majBoutonsSon(); if (!etat.son) stopSon(); else dire(derniereParole); }
+
+/* ---- navigation ---- */
+function montrer(id){
+  document.querySelectorAll(".ecran").forEach(e => e.classList.toggle("actif", e.id === id));
+  window.scrollTo(0,0);
+}
+
+/* ---- accueil ---- */
+function construireAccueil(){
+  const b = $("#bandeAccueil"); b.innerHTML = "";
+  ENFANTS.forEach(e => b.appendChild(perso(e,false)));
+  const l = $("#langues"); l.innerHTML = "";
+  LANGUES.forEach(lg => {
+    const btn = document.createElement("button");
+    btn.className = "langue"; btn.textContent = lg.nom;
+    btn.setAttribute("aria-pressed", lg.code === etat.langue);
+    btn.onclick = () => { etat.langue = lg.code; appliquerTextes(); construireAccueil(); };
+    l.appendChild(btn);
+  });
+}
+document.querySelectorAll(".mode").forEach(b => b.onclick = () => {
+  etat.mode = b.dataset.mode;
+  document.body.classList.toggle("groupe", etat.mode !== "solo");
+  lancerIntro();
+});
+
+/* ---- intro : les enfants perdent leurs couleurs ---- */
+function lancerIntro(){
+  // débloque la voix du téléphone sur Android (doit partir d'un geste)
+  if ("speechSynthesis" in window) speechSynthesis.getVoices();
+  montrer("intro");
+  const b = $("#bandeIntro"); b.innerHTML = "";
+  const els = ENFANTS.map(e => { const p = perso(e,false); b.appendChild(p); return p; });
+  els.forEach((p,i) => setTimeout(() => p.classList.add("gris"), 900 + i*350));
+  direEtRetenir([["intro-1", t("intro.l1")], ["intro-2", t("intro.l2")]]);
+  setTimeout(() => $("#btnCommencer").focus(), 200);
+}
+$("#btnCommencer").onclick = () => { etat.index = 0; etat.faits = []; etat.essais = []; lancerNiveau(); };
+
+/* ---- niveau ---- */
+function libelleLieu(enfantId, lieuId){
+  const sp = t("enfants." + enfantId + ".lieuxSpecial");
+  return (sp && sp[lieuId]) || t("lieux." + lieuId);
+}
+function pastilles(){
+  const p = $("#pastilles"); p.innerHTML = "";
+  ENFANTS.forEach((e,i) => {
+    const s = document.createElement("span");
+    s.className = "pastille" + (etat.faits.includes(e.id) ? " fait" : "") + (i === etat.index ? " encours" : "");
+    s.style.setProperty("--c", e.couleur);
+    s.title = t("enfants." + e.id + ".nom");
+    p.appendChild(s);
+  });
+}
+function lancerNiveau(){
+  const e = ENFANTS[etat.index], k = "enfants." + e.id + ".";
+  montrer("niveau");
+  pastilles();
+  document.documentElement.style.setProperty("--c", e.couleur);
+  $("#niveau").style.setProperty("--c", e.couleur);
+  $("#scene").style.setProperty("--fond-scene", 'url("' + asset("assets/scenes/" + e.id + ".jpg") + '")');
+  $("#scene").classList.remove("aidant");
+  $("#scene").style.removeProperty("--fond-aidant");
+  imageExiste(asset("assets/aidants/" + e.id + ".jpg"), ok => { if (ok) $("#scene").style.setProperty("--fond-aidant", 'url("' + asset("assets/aidants/" + e.id + ".jpg") + '")'); });
+  $("#ville").textContent = "📍 " + t(k + "ville");
+  $("#nomEnfant").textContent = t(k + "nom");
+  $("#nomEnfant").style.color = ({ "#F5C518":"#8A6A00", "#4FB3E8":"#1A6E9E", "#F28C28":"#B35A00" })[e.couleur] || e.couleur;
+  $("#situation").textContent = t(k + "situation");
+  const box = $("#persoNiveau"); box.innerHTML = "";
+  const p = perso(e,false); box.appendChild(p);
+  $("#scene").classList.remove("terne");
+  setTimeout(() => { p.classList.add("gris"); $("#scene").classList.add("terne"); }, 700);
+
+  $("#question").textContent = t(k + "question");
+  $("#zoneChoix").style.display = "none";
+  $("#reussite").classList.remove("actif");
+  const L = $("#lieux"); L.innerHTML = "";
+  L.setAttribute("aria-label", t(k + "question"));
+  e.choix.forEach((c,i) => {
+    const b = document.createElement("button");
+    b.className = "lieu"; b.dataset.lieu = c.lieu; b.dataset.i = i;
+    b.innerHTML = '<span class="num">' + (i+1) + '</span>';
+    b.appendChild(vignetteLieu(c.lieu));
+    const lbl = document.createElement("span"); lbl.className = "lbl"; lbl.textContent = libelleLieu(e.id, c.lieu);
+    b.appendChild(lbl);
+    b.onclick = () => choisir(i);
+    L.appendChild(b);
+  });
+  // Étape 1 : repérer le signe. La voix lit la situation, puis la consigne.
+  lancerReperage(e);
+}
+
+/* ---- Étape 1 : « repère le signe » ---- */
+const rep = { actif:false, ratés:0 };
+function lancerReperage(e){
+  const k = "enfants." + e.id + ".";
+  rep.actif = true; rep.ratés = 0;
+  const sg = $("#signe"); sg.className = "signe";
+  placerSigne(e);
+  $("#consigneR").textContent = t("ui.reperer");
+  $("#btnCompris").style.display = "none";
+  $("#btnPasser").style.visibility = "";
+  $("#zoneReperage").classList.add("actif");
+  $("#scene").classList.add("reperage");
+  direEtRetenir([[e.id + "-situation", t(k + "situation")], ["reperer", t("ui.reperer")]]);
+}
+function placerSigne(e){
+  const sg = $("#signe"), sc = $("#scene").getBoundingClientRect();
+  if (e.signe.perso){
+    const pr = document.querySelector("#persoNiveau .perso").getBoundingClientRect();
+    const r = Math.max(pr.width, pr.height) * .62;
+    sg.style.left = (pr.left - sc.left + pr.width / 2) + "px";
+    sg.style.top = (pr.top - sc.top + pr.height / 2) + "px";
+    sg.style.width = sg.style.height = r + "px";
+  } else {
+    sg.style.left = e.signe.x + "%"; sg.style.top = e.signe.y + "%";
+    sg.style.width = sg.style.height = (e.signe.r * 2 * sc.width / 100) + "px";
+  }
+}
+function toucheScene(ev){
+  if (!rep.actif) return;
+  const e = ENFANTS[etat.index], k = "enfants." + e.id + ".";
+  const sc = $("#scene").getBoundingClientRect();
+  const px = ev.clientX - sc.left, py = ev.clientY - sc.top;
+  const tap = document.createElement("span"); tap.className = "tap"; tap.style.left = px + "px"; tap.style.top = py + "px";
+  $("#scene").appendChild(tap); setTimeout(() => tap.remove(), 650);
+  let ok;
+  if (e.signe.perso){
+    const pr = document.querySelector("#persoNiveau .perso").getBoundingClientRect();
+    ok = ev.clientX >= pr.left - 10 && ev.clientX <= pr.right + 10 && ev.clientY >= pr.top - 10 && ev.clientY <= pr.bottom + 10;
+  } else {
+    const dx = (px / sc.width * 100) - e.signe.x, dy = ((py / sc.height * 100) - e.signe.y) * 9 / 16;
+    ok = Math.hypot(dx, dy) <= e.signe.r * 1.25;   // un peu de tolérance pour les petits doigts
+  }
+  if (ok) signeTrouve(e);
+  else {
+    rep.ratés++;
+    const nom = t(k + "nom");
+    if (rep.ratés >= 2){ $("#signe").classList.add("indice"); $("#consigneR").textContent = t("ui.indiceSigne"); direEtRetenir([["indice-signe", t("ui.indiceSigne")]]); }
+    else { const m = t("ui.regardeEncore").replace("{nom}", nom); $("#consigneR").textContent = m; direEtRetenir([["regarde-encore-" + e.id, m]]); }
+  }
+}
+function signeTrouve(e){
+  const k = "enfants." + e.id + ".";
+  rep.actif = false;
+  $("#scene").classList.remove("reperage");
+  placerSigne(e);
+  const sg = $("#signe"); sg.style.setProperty("--c", e.couleur); sg.className = "signe trouve";
+  $("#consigneR").textContent = t(k + "signe");
+  const b = $("#btnCompris"); b.textContent = t("ui.compris") + " →"; b.style.display = "inline-flex";
+  $("#btnPasser").style.visibility = "hidden";
+  direEtRetenir([[e.id + "-signe", t(k + "signe")]]);
+  setTimeout(() => b.focus(), 50);
+}
+function versChoix(){
+  const e = ENFANTS[etat.index], k = "enfants." + e.id + ".";
+  rep.actif = false;
+  $("#scene").classList.remove("reperage");
+  $("#zoneReperage").classList.remove("actif");
+  $("#zoneChoix").style.display = "";
+  // La voix lit la question, puis les trois lieux numérotés.
+  const m = [[e.id + "-question", t(k + "question")]];
+  e.choix.forEach((c,i) => m.push([e.id + "-lieu-" + (i+1), (i+1) + " : " + libelleLieu(e.id, c.lieu) + "."]));
+  direEtRetenir(m);
+  const premier = document.querySelector(".lieu"); if (premier) premier.focus({ preventScroll:true });
+}
+$("#scene").addEventListener("click", toucheScene);
+$("#btnCompris").onclick = versChoix;
+$("#btnPasser").onclick = () => { const e = ENFANTS[etat.index]; if (rep.actif) signeTrouve(e); else versChoix(); };
+window.addEventListener("resize", () => { if ($("#signe").className.includes("trouve") || $("#signe").className.includes("indice") || rep.actif) placerSigne(ENFANTS[etat.index]); });
+
+function choisir(i){
+  const e = ENFANTS[etat.index], c = e.choix[i], k = "enfants." + e.id + ".";
+  const btn = document.querySelector('.lieu[data-i="' + i + '"]');
+  if (!btn || btn.classList.contains("eteint")) return;
+  etat.essais.push({ enfant:e.id, lieu:c.lieu, bon:!!c.bon });
+  const info = t(k + "choix." + c.lieu);
+  if (c.bon){ reussir(e, info); return; }
+  // Mauvais choix : explication bienveillante, puis on rejoue.
+  const v = $("#retourVignette"); v.replaceWith(vignetteLieu(c.lieu));
+  document.querySelector(".carte .tete .vignette").id = "retourVignette";
+  $("#retourTitre").textContent = t("ui.pasEncore") + " " + libelleLieu(e.id, c.lieu);
+  $("#retourTexte").innerHTML = "";
+  $("#retourTexte").append(document.createTextNode(info.texte));
+  $("#voile").classList.add("actif");
+  btn.classList.add("eteint");
+  direEtRetenir([[e.id + "-reponse-" + c.lieu, info.texte]]);
+  setTimeout(() => $("#btnRetour").focus(), 50);
+}
+$("#btnRetour").onclick = () => {
+  $("#voile").classList.remove("actif");
+  stopSon();
+  const reste = [...document.querySelectorAll(".lieu:not(.eteint)")];
+  if (reste[0]) reste[0].focus();
+};
+
+function reussir(e, info){
+  const k = "enfants." + e.id + ".";
+  stopSon();
+  $("#situation").textContent = info.texte;
+  if (info.verif && RELECTURE) $("#situation").insertAdjacentHTML("beforeend", ' <span class="verif">' + t("verifEtiquette") + "</span>");
+  const p = document.querySelector("#persoNiveau .perso");
+  p.classList.remove("gris"); p.classList.add("revient"); $("#scene").classList.remove("terne");
+  if ($("#scene").style.getPropertyValue("--fond-aidant")) $("#scene").classList.add("aidant");
+  if (!etat.faits.includes(e.id)) etat.faits.push(e.id);
+  pastilles();
+  $("#zoneChoix").style.display = "none";
+  $("#signe").className = "signe";
+  const d = $("#droitTexte");
+  d.textContent = t(k + "droit");
+  d.style.setProperty("--c", e.couleur); d.style.setProperty("--txt-sur-c", e.texteSurCouleur);
+  $("#aidantTexte").textContent = t("ui.quiAide") + " " + t(k + "aidant");
+  const dernier = etat.index === ENFANTS.length - 1;
+  $("#btnSuivant").textContent = dernier ? t("ui.voirFin") + " →" : t("ui.suivant") + " →";
+  $("#reussite").classList.add("actif");
+  direEtRetenir([[e.id + "-reponse-" + e.choix.find(c=>c.bon).lieu, info.texte], [e.id + "-droit", t(k + "droit")]]);
+  setTimeout(() => $("#btnSuivant").focus(), 50);
+}
+$("#btnSuivant").onclick = () => {
+  if (etat.index < ENFANTS.length - 1){ etat.index++; lancerNiveau(); }
+  else lancerFin();
+};
+
+/* ---- fin ---- */
+function lancerFin(){
+  montrer("fin");
+  const a = $("#affiche"); a.innerHTML = "";
+  const bande = document.createElement("div"); bande.className = "bande";
+  ENFANTS.forEach(e => { const p = perso(e,false); p.classList.add("revient"); bande.appendChild(p); });
+  a.appendChild(bande);
+  const pose = new Image(); pose.className = "pose"; pose.alt = "Tchotcho, Penda, Lanfia, Binta et Sayon";
+  pose.onload = () => { a.innerHTML = ""; a.appendChild(pose); };
+  pose.src = asset("assets/perso/affiche.webp");
+  const r = $("#recap"); r.innerHTML = "";
+  ENFANTS.forEach(e => {
+    const k = "enfants." + e.id + ".";
+    const it = document.createElement("div"); it.className = "item"; it.style.setProperty("--c", e.couleur);
+    it.appendChild(perso(e,false));
+    const tx = document.createElement("div");
+    tx.innerHTML = "<b></b><br><span></span>";
+    tx.querySelector("b").textContent = t(k + "nom") + " · " + t(k + "droitCourt");
+    tx.querySelector("span").textContent = t("ui.quiAide") + " " + t(k + "aidant");
+    it.appendChild(tx); r.appendChild(it);
+  });
+  direEtRetenir([["fin-slogan", t("fin.slogan")]]);
+}
+$("#btnRejouer").onclick = () => { etat.index = 0; etat.faits = []; etat.essais = []; lancerIntro(); };
+
+/* ---- LES TROIS CARTES : associer situation, droit et aidant ---- */
+const cartes = { choix:{}, faits:[] };
+function melanger(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function imageCarte(type, e){
+  const d = document.createElement("div"); d.className = "img";
+  if (type === "situation"){
+    d.style.backgroundImage = 'url("' + asset("assets/scenes/" + e.id + ".jpg") + '")';
+    const p = perso(e, true); d.appendChild(p);
+  } else if (type === "droit"){
+    d.textContent = e.icone;
+  } else {
+    d.style.backgroundImage = 'url("' + asset("assets/lieux/" + e.aidantLieu + ".jpg") + '")';
+    imageExiste(asset("assets/aidants/" + e.id + ".jpg"), ok => { if (ok) d.style.backgroundImage = 'url("' + asset("assets/aidants/" + e.id + ".jpg") + '")'; });
+  }
+  return d;
+}
+function libelleCarte(type, e){
+  const k = "enfants." + e.id + ".";
+  return type === "situation" ? t(k + "nom") : type === "droit" ? t(k + "droitCourt") : t(k + "aidantCourt");
+}
+function texteCarte(type, e){
+  const k = "enfants." + e.id + ".";
+  return type === "situation" ? t(k + "nom") + " : " + t(k + "situationCourte") : libelleCarte(type, e);
+}
+function pastillesCartes(){
+  const p = $("#pastillesCartes"); p.innerHTML = "";
+  ENFANTS.forEach(e => { const s = document.createElement("span"); s.className = "pastille" + (cartes.faits.includes(e.id) ? " fait" : ""); s.style.setProperty("--c", e.couleur); p.appendChild(s); });
+}
+function lancerCartes(){
+  stopSon(); montrer("cartes");
+  cartes.choix = {}; cartes.faits = [];
+  pastillesCartes();
+  $("#consigneCartes").textContent = t("cartes.consigne");
+  [["situation","#rgSituation"],["droit","#rgDroit"],["aidant","#rgAidant"]].forEach(([type, sel]) => {
+    const r = $(sel); r.innerHTML = "";
+    melanger(ENFANTS).forEach(e => {
+      const b = document.createElement("button");
+      b.className = "k"; b.dataset.type = type; b.dataset.id = e.id; b.style.setProperty("--c", e.couleur);
+      b.setAttribute("aria-pressed", "false");
+      b.appendChild(imageCarte(type, e));
+      const l = document.createElement("span"); l.textContent = libelleCarte(type, e); b.appendChild(l);
+      b.setAttribute("aria-label", texteCarte(type, e));
+      b.onclick = () => choisirCarte(b);
+      r.appendChild(b);
+    });
+  });
+  direEtRetenir([["cartes-consigne", t("cartes.consigne")]]);
+}
+function choisirCarte(b){
+  const type = b.dataset.type;
+  document.querySelectorAll('.cartes .k[data-type="' + type + '"]').forEach(x => x.setAttribute("aria-pressed", "false"));
+  b.setAttribute("aria-pressed", "true");
+  cartes.choix[type] = b.dataset.id;
+  const e = ENFANTS.find(x => x.id === b.dataset.id);
+  dire([["cartes-" + type + "-" + e.id, texteCarte(type, e)]]);
+  const c = cartes.choix;
+  if (c.situation && c.droit && c.aidant) setTimeout(verifierTrio, 450);
+}
+function verifierTrio(){
+  const c = cartes.choix;
+  const e = ENFANTS.find(x => x.id === c.situation);
+  const nom = t("enfants." + e.id + ".nom");
+  if (c.droit === e.id && c.aidant === e.id){
+    cartes.faits.push(e.id);
+    document.querySelectorAll('.cartes .k[data-id="' + e.id + '"]').forEach(x => { x.classList.add("fini"); x.setAttribute("aria-pressed", "false"); const p = x.querySelector(".perso"); if (p) p.classList.remove("gris"); });
+    cartes.choix = {};
+    pastillesCartes();
+    const T = $("#trio"); T.innerHTML = "";
+    ["situation","droit","aidant"].forEach(type => {
+      const d = document.createElement("div"); d.className = "t"; d.style.setProperty("--c", e.couleur);
+      const im = imageCarte(type, e); const p = im.querySelector(".perso"); if (p){ p.classList.remove("gris"); p.classList.add("revient"); }
+      d.appendChild(im); const l = document.createElement("span"); l.textContent = libelleCarte(type, e); d.appendChild(l); T.appendChild(d);
+    });
+    $("#trioTitre").textContent = t("cartes.bravo");
+    $("#trioTexte").textContent = t("enfants." + e.id + ".droit") + " " + t("ui.quiAide") + " " + t("enfants." + e.id + ".aidant") + ".";
+    const dernier = cartes.faits.length === ENFANTS.length;
+    $("#btnTrio").textContent = dernier ? t("cartes.fin") + " →" : t("cartes.suivant") + " →";
+    $("#voileCartes").classList.add("actif");
+    direEtRetenir([[e.id + "-droit", t("enfants." + e.id + ".droit")]]);
+    setTimeout(() => $("#btnTrio").focus(), 50);
+    return;
+  }
+  // Pas d'échec : on garde la situation, on dit ce qui ne va pas, on relâche la carte fautive.
+  const fautes = [];
+  if (c.droit !== e.id) fautes.push("droit");
+  if (c.aidant !== e.id) fautes.push("aidant");
+  const msg = fautes.includes("droit") ? t("cartes.indiceDroit") : t("cartes.indiceAidant");
+  fautes.forEach(type => {
+    const x = document.querySelector('.cartes .k[data-type="' + type + '"][aria-pressed="true"]');
+    if (x){ x.classList.remove("secoue"); void x.offsetWidth; x.classList.add("secoue"); x.setAttribute("aria-pressed", "false"); }
+    delete cartes.choix[type];
+  });
+  $("#consigneCartes").textContent = msg.replace("{nom}", nom);
+  direEtRetenir([["cartes-indice-" + fautes[0], msg.replace("{nom}", nom)]]);
+}
+$("#btnTrio").onclick = () => {
+  $("#voileCartes").classList.remove("actif");
+  $("#consigneCartes").textContent = t("cartes.consigne");
+  if (cartes.faits.length === ENFANTS.length) lancerFin();
+};
+$("#btnCartesIntro").onclick = lancerCartes;
+$("#btnCartesFin").onclick = lancerCartes;
+$("#btnSonCartes").onclick = basculerSon;
+$("#btnReecouterCartes").onclick = () => dire(derniereParole);
+
+/* ---- À TA PLACE : le joueur devient l'adulte ---- */
+const atp = { index:0, scores:{} };   // scores[id] = 1 (bon) | .5 (moitié)
+function pastillesAtp(){
+  const p = $("#pastillesAtp"); p.innerHTML = "";
+  ENFANTS.forEach((e,i) => {
+    const s = document.createElement("span");
+    s.className = "pastille" + (atp.scores[e.id] === 1 ? " fait" : "") + (i === atp.index ? " encours" : "");
+    s.style.setProperty("--c", e.couleur); s.title = t("enfants." + e.id + ".nom");
+    p.appendChild(s);
+  });
+}
+function lancerAtp(){ atp.index = 0; atp.scores = {}; niveauAtp(); }
+function niveauAtp(){
+  const e = ENFANTS[atp.index], k = "ataplace.enfants." + e.id + ".";
+  stopSon(); montrer("ataplace"); pastillesAtp();
+  $("#ataplace").style.setProperty("--c", e.couleur);
+  $("#sceneAtp").style.setProperty("--fond-scene", 'url("' + asset("assets/scenes/" + e.id + ".jpg") + '")');
+  $("#sceneAtp").classList.add("terne");
+  $("#villeAtp").textContent = "📍 " + t("enfants." + e.id + ".ville");
+  const box = $("#persoAtp"); box.innerHTML = ""; box.appendChild(perso(e, true));
+  $("#nomAtp").textContent = t("enfants." + e.id + ".nom") + " · " + t("enfants." + e.id + ".droitCourt");
+  $("#nomAtp").style.color = ({ "#F5C518":"#8A6A00", "#4FB3E8":"#1A6E9E", "#F28C28":"#B35A00" })[e.couleur] || e.couleur;
+  $("#roleAtp").textContent = t(k + "role");
+  $("#situationAtp").textContent = t(k + "situation");
+  $("#retourAtp").className = "retour-atp";
+  const R = $("#reponsesAtp"); R.innerHTML = ""; R.style.display = "";
+  R.setAttribute("aria-label", t("ataplace.consigne"));
+  const m = [["atp-consigne", t("ataplace.consigne")], ["atp-" + e.id + "-role", t(k + "role")], ["atp-" + e.id + "-situation", t(k + "situation")]];
+  t(k + "reponses").forEach((r,i) => {
+    const b = document.createElement("button"); b.className = "rep-atp"; b.dataset.i = i;
+    b.innerHTML = '<span class="num">' + (i+1) + '</span><span class="txt"></span>';
+    b.querySelector(".txt").textContent = r.t;
+    b.onclick = () => repondreAtp(i);
+    R.appendChild(b);
+    m.push(["atp-" + e.id + "-rep-" + (i+1), (i+1) + " : " + r.t.replace(/[«»]/g, "")]);
+  });
+  direEtRetenir(m);
+}
+function repondreAtp(i){
+  const e = ENFANTS[atp.index], k = "ataplace.enfants." + e.id + ".";
+  const r = t(k + "reponses")[i];
+  const btn = document.querySelector('.rep-atp[data-i="' + i + '"]');
+  if (!btn || btn.classList.contains("eteint") || $("#retourAtp").classList.contains("actif")) return;
+  stopSon();
+  const p = document.querySelector("#persoAtp .perso");
+  p.classList.remove("moitie", "revient");
+  if (r.v === "bon"){ atp.scores[e.id] = 1; p.classList.remove("gris"); p.classList.add("revient"); $("#sceneAtp").classList.remove("terne"); }
+  else if (r.v === "moitie"){ if (atp.scores[e.id] !== 1) atp.scores[e.id] = .5; p.classList.remove("gris"); p.classList.add("moitie"); }
+  else { btn.classList.add("eteint"); }
+  pastillesAtp();
+  $("#reponsesAtp").style.display = "none";
+  const box = $("#retourAtp"); box.className = "retour-atp actif " + r.v;
+  $("#verdictAtp").textContent = t("ataplace.verdict." + r.v);
+  $("#explAtp").textContent = r.e;
+  if (r.verif && RELECTURE) $("#explAtp").insertAdjacentHTML("beforeend", ' <span class="verif">' + t("verifEtiquette") + "</span>");
+  const d = $("#droitAtp");
+  if (r.v === "bon"){
+    d.style.display = ""; d.textContent = t("enfants." + e.id + ".droit");
+    d.style.setProperty("--c", e.couleur); d.style.setProperty("--txt-sur-c", e.texteSurCouleur);
+  } else d.style.display = "none";
+  const dernier = atp.index === ENFANTS.length - 1;
+  $("#btnAtp").textContent = r.v === "bon" ? (dernier ? t("ataplace.fin") : t("ataplace.suivant")) + " →" : t("ataplace.reessayer");
+  const m = [["atp-" + e.id + "-retour-" + (i+1), t("ataplace.verdict." + r.v) + " " + r.e]];
+  if (r.v === "bon") m.push([e.id + "-droit", t("enfants." + e.id + ".droit")]);
+  direEtRetenir(m);
+  setTimeout(() => { $("#btnAtp").focus({ preventScroll:true }); box.scrollIntoView({ behavior:"smooth", block:"nearest" }); }, 50);
+}
+$("#btnAtp").onclick = () => {
+  const e = ENFANTS[atp.index];
+  if (atp.scores[e.id] === 1){
+    if (atp.index < ENFANTS.length - 1){ atp.index++; niveauAtp(); }
+    else lancerFin();
+    return;
+  }
+  stopSon();
+  $("#retourAtp").className = "retour-atp";
+  $("#reponsesAtp").style.display = "";
+  const p = document.querySelector("#persoAtp .perso");
+  if (atp.scores[e.id] !== .5){ p.classList.remove("moitie"); p.classList.add("gris"); }
+  const reste = document.querySelector(".rep-atp:not(.eteint)"); if (reste) reste.focus();
+};
+$("#btnAtpIntro").onclick = lancerAtp;
+$("#btnAtpFin").onclick = lancerAtp;
+$("#btnAtpAdultes").onclick = () => { if ("speechSynthesis" in window) speechSynthesis.getVoices(); lancerAtp(); };
+$("#btnSonAtp").onclick = basculerSon;
+$("#btnReecouterAtp").onclick = () => dire(derniereParole);
+
+/* ---- écran adultes ---- */
+function lancerAdultes(){
+  stopSon();
+  montrer("adultes");
+  const L = $("#listeDroits"); L.innerHTML = "";
+  ENFANTS.forEach(e => {
+    const d = document.createElement("div"); d.className = "l"; d.style.setProperty("--c", e.couleur);
+    const txt = t("adultes.droits." + e.id);
+    const [titre, ...reste] = txt.split(" — ");
+    d.innerHTML = "<div><b></b><span></span></div>";
+    d.querySelector("b").textContent = t("enfants." + e.id + ".nom") + " · " + titre;
+    d.querySelector("span").textContent = reste.join(" — ");
+    if ((TXT.fr.adultes.droitsVerif || {})[e.id]) d.querySelector("span").insertAdjacentHTML("beforeend", ' <span class="verif discret">' + t("verifEtiquette") + "</span>");
+    L.appendChild(d);
+  });
+  const C = $("#contacts"); C.innerHTML = "";
+  (t("adultes.contacts") || []).forEach(c => {
+    const li = document.createElement("li"); li.textContent = c.t + " ";
+    if (c.verif) li.insertAdjacentHTML("beforeend", '<span class="verif">' + t("verifEtiquette") + "</span>");
+    C.appendChild(li);
+  });
+}
+$("#btnAdultes").onclick = lancerAdultes;
+$("#btnAdultesAccueil").onclick = lancerAdultes;
+$("#btnRetourAccueil").onclick = () => { montrer("accueil"); };
+
+/* ---- son, réécoute, clavier (animateur) ---- */
+$("#btnSon").onclick = basculerSon;
+$("#sonIntro").onclick = basculerSon;
+$("#btnReecouter").onclick = () => dire(derniereParole);
+$("#btnReecouterCarte").onclick = () => dire(derniereParole);
+document.addEventListener("keydown", ev => {
+  const ecran = document.querySelector(".ecran.actif").id;
+  const voile = $("#voile").classList.contains("actif");
+  if (voile && (ev.key === "Enter" || ev.key === " " || ev.key === "Escape")){ ev.preventDefault(); $("#btnRetour").click(); return; }
+  if ($("#voileCartes").classList.contains("actif") && (ev.key === "Enter" || ev.key === " ")){ ev.preventDefault(); $("#btnTrio").click(); return; }
+  if (ev.key === "r" || ev.key === "R"){ dire(derniereParole); return; }
+  if (ecran === "ataplace"){
+    const ouvert = $("#retourAtp").classList.contains("actif");
+    if (!ouvert && /^[123]$/.test(ev.key)){ repondreAtp(+ev.key - 1); return; }
+    if (ouvert && (ev.key === "Enter" || ev.key === " ") && document.activeElement !== $("#btnAtp")){ ev.preventDefault(); $("#btnAtp").click(); return; }
+  }
+  if (ecran === "niveau" && !voile && $("#zoneChoix").style.display !== "none" && /^[123]$/.test(ev.key)){ choisir(+ev.key - 1); return; }
+  if (ecran === "niveau" && (ev.key === "Enter") && $("#btnCompris").style.display !== "none" && $("#zoneReperage").classList.contains("actif")){ ev.preventDefault(); versChoix(); return; }
+  if ((ev.key === "Enter" || ev.key === " ") && document.activeElement === document.body){
+    ev.preventDefault();
+    if (ecran === "intro") $("#btnCommencer").click();
+    else if (ecran === "niveau" && $("#reussite").classList.contains("actif")) $("#btnSuivant").click();
+  }
+});
+
+/* ---- préchargement : une fois chargé, le jeu tourne sans connexion ---- */
+function precharger(){
+  const urls = ["assets/decors/quartier.jpg", "assets/perso/affiche.webp"];
+  ENFANTS.forEach(e => { urls.push("assets/perso/" + e.id + ".webp", "assets/scenes/" + e.id + ".jpg", "assets/aidants/" + e.id + ".jpg"); });
+  Object.keys(LIEUX).forEach(l => urls.push("assets/lieux/" + l + ".jpg"));
+  urls.forEach(u => { const i = new Image(); i.src = asset(u); });
+}
+
+/* Liste des fichiers audio attendus par langue (assets/audio/<langue>/<id>.mp3) */
+const AUDIO_IDS = (() => {
+  const ids = ["intro-1", "intro-2", "fin-slogan"];
+  ENFANTS.forEach(e => {
+    ids.push(e.id + "-situation", e.id + "-question", e.id + "-droit");
+    e.choix.forEach((c,i) => ids.push(e.id + "-lieu-" + (i+1), e.id + "-reponse-" + c.lieu));
+  });
+  ids.push("reperer", "indice-signe");
+  ENFANTS.forEach(e => ids.push(e.id + "-signe", "regarde-encore-" + e.id));
+  ids.push("cartes-consigne", "cartes-indice-droit", "cartes-indice-aidant");
+  ["situation","droit","aidant"].forEach(type => ENFANTS.forEach(e => ids.push("cartes-" + type + "-" + e.id)));
+  ids.push("atp-consigne");
+  ENFANTS.forEach(e => {
+    ids.push("atp-" + e.id + "-role", "atp-" + e.id + "-situation");
+    [1,2,3].forEach(n => ids.push("atp-" + e.id + "-rep-" + n, "atp-" + e.id + "-retour-" + n));
+  });
+  return ids;
+})();
+window.AUDIO_IDS = AUDIO_IDS; // console : copy(AUDIO_IDS.join("\n")) pour la liste aux comédiens
+
+appliquerTextes();
+construireAccueil();
+majBoutonsSon();
+precharger();
+</script>
+</body>
+</html>

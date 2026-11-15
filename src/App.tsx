@@ -97,6 +97,7 @@ const Imagier = lazy(() => import("./pages/Imagier"));
 const Marche = lazy(() => import("./pages/Marche"));
 const Hymne = lazy(() => import("./pages/Hymne"));
 const Binta = lazy(() => import("./pages/Binta"));
+const Droits = lazy(() => import("./pages/Droits"));
 const Almamya = lazy(() => import("./pages/Almamya"));
 const SIMPLE = ["a-propos", "partenaires", "contact", "charte", "developpeurs", "hors-ligne", "zero-data", "populaire-par-pays", "confidentialite", "mentions-legales", "cookies", "accessibilite"];
 
@@ -152,6 +153,7 @@ export default function App() {
             <Route path="/marche" element={<Marche />} />
             <Route path="/hymne" element={<Hymne />} />
             <Route path="/binta" element={<Binta />} />
+            <Route path="/droits" element={<Droits />} />
             <Route path="/almamya" element={<Almamya />} />
             <Route path="/gabarit-test" element={<EpisodeGabarit />} />
             <Route path="/serie/taadidi" element={<Navigate to="/univers/taadidi" replace />} />
