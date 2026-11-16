@@ -154,11 +154,11 @@ export default function LivreDetail() {
         {youtubeId && (
           <div className="mt-10">
             <div className="flex items-center gap-2 font-display font-semibold text-[#0D2B1A] text-xl mb-3">
-              <PlayCircle className="text-[#FF6B4A]" size={24} /> Le teaser
+              <PlayCircle className="text-[#FF6B4A]" size={24} /> {book.teaserLabel ?? "Le teaser"}
             </div>
             <div className="rounded-[1.5rem] overflow-hidden border-8 border-white shadow-kid" style={{ aspectRatio: "16 / 9" }}>
               <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${youtubeId}`}
-                title={`Teaser ${book.title}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                title={`${book.teaserLabel ?? "Teaser"} — ${book.title}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen />
             </div>
           </div>

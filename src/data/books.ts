@@ -14,6 +14,7 @@ export type Book = {
   kora?: string; // boucle kora (ambiance lecture)
   languages?: { label: string; pdf: string }[];
   teaser?: string; // URL YouTube du teaser
+  teaserLabel?: string; // titre du bloc vidéo (défaut : « Le teaser ») — ex. « Le film animé »
   keywords: string[];
   band?: "Mômes" | "Découverte" | "Aventure" | "Passage";
   comingSoon?: boolean;
@@ -92,6 +93,8 @@ export const BOOKS: Book[] = [
     title: "Le jour du marché",
     description: "Pour les tout-petits : Sira va au marché toute seule. Elle marchande, compte ses pièces, et découvre que tout ce qu'on mange a fait un long voyage.",
     cover: "/images/jour-du-marche-couverture.webp",
+    teaser: "https://youtu.be/L5UoyTxkWVA",
+    teaserLabel: "Le film animé",
     keywords: ["marché", "Sira", "Habib", "tomates", "poisson", "riz", "Fouta", "Boulbinet", "Boffa", "marchander", "compter", "voyage des aliments", "vivre-ensemble", "égalité filles-garçons", "tout-petits", "Pati Découverte"],
     nouveau: true,
   },
