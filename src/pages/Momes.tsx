@@ -18,6 +18,7 @@ const THEMES: { id: string; emoji: string; titre: string; couleur: string; dispo
   { id: "maison",          emoji: "🏠",  titre: "Dans la maison",       couleur: "#2C7DA0", dispo: true },
   { id: "infrastructures", emoji: "🏗️", titre: "Les infrastructures",  couleur: "#3F6B7D", dispo: true },
   { id: "corps",           emoji: "🧍",  titre: "Le corps humain",      couleur: "#A23B72", dispo: true },
+  { id: "ecoute",          emoji: "👂",  titre: "Qui fait ce bruit ?",  couleur: "#D9622B", dispo: true },
   // À venir (concept éditorial 12 titres/an)
   { id: "",                emoji: "💧",  titre: "L'eau",                couleur: "#2E8BC0", dispo: false },
   { id: "",                emoji: "🥁",  titre: "Les instruments",      couleur: "#B23A1E", dispo: false },

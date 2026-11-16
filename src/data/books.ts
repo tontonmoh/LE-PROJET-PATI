@@ -230,6 +230,16 @@ export const BOOKS: Book[] = [
     nouveau: true,
   },
   {
+    slug: "imagier-ecoute",
+    band: "Mômes",
+    title: "Qui fait ce bruit ?",
+    description: "Le coq, la pluie sur la tôle, le djembé, le klaxon… Écoute un bruit, touche qui le fait. Sans lire, dès 3 ans.",
+    cover: "/images/momes/imagier-couverture.webp",
+    to: "/imagier?theme=ecoute",
+    keywords: ["sons", "bruits", "écoute", "oreille", "qui fait ce bruit", "animaux", "instruments", "djembé", "balafon", "mémoire", "jeu", "mômes", "tout-petits", "Pati Mômes"],
+    nouveau: true,
+  },
+  {
     slug: "imagier-corps",
     band: "Mômes",
     title: "Le corps humain",

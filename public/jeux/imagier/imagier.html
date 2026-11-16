@@ -107,6 +107,34 @@
   .conf{ position:absolute; top:-16px; width:11px; height:16px; border-radius:2px; opacity:.95; will-change:transform; animation:fall linear forwards; }
   @keyframes fall{ to{ transform:translateY(112vh) rotate(720deg); } }
 
+  /* ===== Mode ÉCOUTE — « Qui fait ce bruit ? » ===== */
+  .ec{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--cream); padding:14px; gap:16px; overflow-y:auto;}
+  .ec-q{font-size:clamp(17px,5vw,23px); font-weight:bold; color:var(--green); text-align:center; max-width:520px;}
+  .ear{width:clamp(88px,24vw,130px); height:clamp(88px,24vw,130px); border-radius:50%; border:0; background:#D9622B; color:#fff; font-size:clamp(42px,12vw,64px); cursor:pointer; box-shadow:0 6px 0 rgba(0,0,0,.15); flex-shrink:0;}
+  .ear:active{transform:translateY(3px); box-shadow:0 3px 0 rgba(0,0,0,.15);}
+  .ear.playing{animation:pulse .9s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+  .ec-choices{display:grid; gap:14px; width:100%; max-width:560px;}
+  .ec-card{position:relative; aspect-ratio:1; border-radius:24px; background:#fff; border:4px solid #0d2b1a14; font-size:clamp(50px,16vw,92px); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; user-select:none; transition:transform .1s,border-color .2s,opacity .25s; padding:0;}
+  .ec-card img{width:100%; height:100%; object-fit:contain; padding:10px;}
+  .ec-card:active{transform:scale(.95);}
+  .ec-card .lbl{position:absolute; bottom:6px; left:0; right:0; font-size:clamp(12px,3.4vw,15px); font-weight:bold; color:var(--ok);}
+  .ec-card .num{position:absolute; top:6px; right:8px; width:30px; height:30px; border-radius:50%; background:var(--ok); color:#fff; font-size:17px; font-weight:bold; display:flex; align-items:center; justify-content:center;}
+  .ec-card.good{border-color:var(--ok); background:#E6F4EC; animation:pop .4s;}
+  .ec-card.wrong{animation:shake .4s;}
+  .ec-card.used{opacity:.25; pointer-events:none;}
+  .frise{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%; max-width:560px;}
+  .slot{border-radius:16px; background:#fff; border:3px dashed #0d2b1a26; min-height:clamp(70px,19vw,104px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-size:clamp(28px,8vw,44px);}
+  .slot small{font-size:12px; font-weight:bold; color:#8a9389;}
+  .slot.filled{border-style:solid; border-color:var(--ok); background:#E6F4EC; animation:pop .4s;}
+  .ec-next{border:0; border-radius:999px; padding:14px 30px; font-weight:bold; font-size:18px; cursor:pointer; background:var(--accent); color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.18);}
+  .credits-box{position:fixed; inset:0; background:rgba(13,43,26,.6); z-index:60; display:flex; align-items:center; justify-content:center; padding:16px;}
+  .credits-box .in{background:#fff; border-radius:20px; padding:20px; max-width:560px; width:100%; max-height:80vh; overflow-y:auto; text-align:left;}
+  .credits-box h3{color:var(--green); margin-bottom:8px;}
+  .credits-box li{font-size:13px; color:#3a4a42; margin:6px 0 6px 18px;}
+  .credits-box button{margin-top:12px; border:0; border-radius:999px; padding:10px 22px; font-weight:bold; background:var(--green); color:#fff; cursor:pointer;}
+
+  .screen,.ec{justify-content:safe center;}
   .hidden{display:none!important;}
 </style>
 </head>
@@ -151,6 +179,29 @@
         <span><span class="tt">Découvrir les lettres</span><span class="ds">Une lettre apparaît, tu la reconnais. À ton rythme.</span></span>
       </button>
     </div>
+    <div class="modes hidden" id="modeEcoute">
+      <button class="mode-card" style="background:#1F6E52" onclick="startEcoute('petits')">
+        <span class="ic">👂</span>
+        <span><span class="tt">Écoute</span><span class="ds">3-4 ans · Un bruit, tu touches qui le fait. 2 puis 3 images.</span></span>
+      </button>
+      <button class="mode-card" style="background:#C8841E" onclick="startEcoute('grands')">
+        <span class="ic">🎧</span>
+        <span><span class="tt">Écoute bien&nbsp;!</span><span class="ds">4-5 ans · Des bruits qui se ressemblent. 4 images.</span></span>
+      </button>
+      <button class="mode-card" style="background:#2C7DA0" onclick="startEcoute('memoire')">
+        <span class="ic">🧠</span>
+        <span><span class="tt">Mémoire</span><span class="ds">5-7 ans · 2 ou 3 bruits de suite&nbsp;: touche-les dans l'ordre.</span></span>
+      </button>
+      <button class="mode-card" style="background:#7A4FBF" onclick="startEcoute('journee')">
+        <span class="ic">🌅</span>
+        <span><span class="tt">La journée de Madi</span><span class="ds">5-7 ans · Range les bruits du matin jusqu'à la nuit.</span></span>
+      </button>
+      <button class="mode-card" style="background:#A23B72" onclick="startEcoute('parents')">
+        <span class="ic">👨‍👧</span>
+        <span><span class="tt">Avec papa, avec maman</span><span class="ds">Le grand imite le bruit, le petit devine.</span></span>
+      </button>
+      <button class="solo-replay" onclick="showCredits()">ⓘ Crédits des sons</button>
+    </div>
     <button class="solo-replay" onclick="backHome()">← Changer de thème</button>
   </section>
 
@@ -187,6 +238,33 @@
       <div id="soloImg" class="solo-img"></div>
       <div id="soloChoices" class="solo-choices"></div>
       <button class="solo-replay" onclick="speakCurrent()">🔊 Entends le mot</button>
+    </div>
+  </div>
+
+  <!-- JEU ÉCOUTE (Qui fait ce bruit ?) -->
+  <div id="ecouteGame" class="hidden" style="flex:1; display:flex; flex-direction:column;">
+    <div class="top">
+      <div class="theme"><span>👂</span><span id="ecTitle">Qui fait ce bruit&nbsp;?</span></div>
+      <div class="right">
+        <span id="ecCount" class="count"></span>
+        <button class="btn-quit" onclick="quit()">Quitter</button>
+      </div>
+    </div>
+    <div class="ec">
+      <div id="ecQ" class="ec-q"></div>
+      <button id="ecEar" class="ear" onclick="ecReplay()" aria-label="Réécouter">👂</button>
+      <div id="ecFrise" class="frise hidden"></div>
+      <div id="ecChoices" class="ec-choices"></div>
+      <button id="ecNext" class="ec-next hidden" onclick="ecParentsNext()">Suivant →</button>
+    </div>
+  </div>
+
+  <div id="creditsBox" class="credits-box hidden" onclick="if(event.target===this)this.classList.add('hidden')">
+    <div class="in">
+      <h3>Crédits des sons</h3>
+      <p style="font-size:13px;color:#5a6b62;">Sons libres de Wikimedia Commons (domaine public, CC0, CC BY, CC BY-SA), découpés et normalisés par L'Atelier Solidaire.</p>
+      <ul id="creditsList"></ul>
+      <button onclick="document.getElementById('creditsBox').classList.add('hidden')">Fermer</button>
     </div>
   </div>
 
@@ -296,7 +374,7 @@
     theme = { id:"surprise", emoji:"🎲", titre:"Surprise", couleur:"#7A4FBF", paires:picked };
     startSolo();
   };
-  function show(id){ ["home","modeScreen","game","soloGame","win"].forEach(s=>$("#"+s).classList.toggle("hidden", s!==id)); if(id==="win") celebrate(); }
+  function show(id){ ["home","modeScreen","game","soloGame","ecouteGame","win"].forEach(s=>$("#"+s).classList.toggle("hidden", s!==id)); if(id==="win") celebrate(); }
 
   // ===== Fête de fin de manche : confettis + musique + applaudissements + "Bravo !" =====
   function celebrate(){
@@ -370,7 +448,12 @@
   function chooseMode(t){
     theme=t;
     $("#modeTitle").textContent=t.emoji+" "+t.titre;
-    if(t.type==="alphabet"){
+    $("#modeEcoute").classList.toggle("hidden", t.type!=="ecoute");
+    if(t.type==="ecoute"){
+      $("#modeNormal").classList.add("hidden");
+      $("#modeAlpha").classList.add("hidden");
+      $("#modeScript").classList.add("hidden");
+    }else if(t.type==="alphabet"){
       // alphabet latin : 2 sous-modes
       $("#modeNormal").classList.add("hidden");
       $("#modeAlpha").classList.remove("hidden");
@@ -648,14 +731,193 @@
     try{ parent.postMessage({type:"pati-progress", kind:"imagier", theme:theme.id, seconds:Math.round(ms/1000)}, "*"); }catch(e){}
   }
 
+  // =====================================================================
+  // MODE ÉCOUTE — « Qui fait ce bruit ? » (3-7 ans)
+  // Aucune lecture nécessaire : consignes parlées, pas de chrono, pas d'échec.
+  // Modes : petits · grands · memoire · journee · parents
+  // =====================================================================
+  let ecMode=null, ecRounds=[], ecIdx=0, ecLocked=false, ecAudio=null, ecPos=0, ecT0=0, ecTimer=null;
+  const MOMENTS=[["matin","🌅","Matin"],["jour","☀️","Journée"],["soir","🌇","Soir"],["nuit","🌙","Nuit"]];
+
+  function ecStop(){ clearTimeout(ecTimer); try{ if(ecAudio){ ecAudio.pause(); ecAudio=null; } }catch(e){} $("#ecEar").classList.remove("playing"); }
+  function playSound(s, cb){
+    ecStop();
+    const ear=$("#ecEar"); let done=false;
+    const end=()=>{ if(done) return; done=true; ear.classList.remove("playing"); if(cb) cb(); };
+    try{
+      ecAudio=new Audio(s.sound); ear.classList.add("playing");
+      ecAudio.onended=end; ecAudio.onerror=end;
+      ecAudio.play().catch(end);
+    }catch(e){ end(); }
+  }
+  function playSeq(list, i){ i=i||0; if(i>=list.length) return; playSound(list[i], ()=>{ ecTimer=setTimeout(()=>playSeq(list,i+1), 450); }); }
+  function sayThen(text, cb){
+    if(!("speechSynthesis" in window)){ if(cb) setTimeout(cb,200); return; }
+    let done=false; const go=()=>{ if(done) return; done=true; if(cb) cb(); };
+    try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="fr-FR"; u.rate=.88; u.pitch=1.15; u.onend=go; u.onerror=go; speechSynthesis.speak(u); setTimeout(go, 400+text.length*90); }catch(e){ go(); }
+  }
+  function ecCard(s){
+    const b=document.createElement("button"); b.className="ec-card"; b.type="button";
+    b.innerHTML=imgHTML(s)+`<span class="lbl hidden">${s.fr}${s.sou?" · "+s.sou:""}</span>`;
+    return b;
+  }
+  function ecReveal(b){ const l=b.querySelector(".lbl"); if(l) l.classList.remove("hidden"); }
+  function ecCols(n){ return n===2?"1fr 1fr":n===3?"repeat(3,1fr)":"1fr 1fr"; }
+  function ecWidth(n){ return n===4?"420px":"560px"; }
+  function byId(id){ return theme.sons.find(x=>x.id===id); }
+
+  window.startEcoute = (m)=>{
+    mode="ecoute"; ecMode=m; ecIdx=0; ecT0=Date.now();
+    const cf=$("#confetti"); if(cf) cf.innerHTML="";
+    const S=theme.sons;
+    if(m==="petits"){
+      ecRounds = shuffle(S.filter(s=>s.niveau===1)).slice(0,6).map((t,i)=>({target:t, n: i<3?2:3}));
+    }else if(m==="grands"){
+      ecRounds = shuffle(S).slice(0,8).map(t=>({target:t, n:4}));
+    }else if(m==="memoire"){
+      const pool=S.filter(s=>s.niveau<=2);
+      ecRounds = [2,2,2,3,3,3].map(len=>{ const four=shuffle(pool).slice(0,4); return {cards:four, seq:shuffle(four).slice(0,len)}; });
+    }else if(m==="journee"){
+      ecRounds = [0,1,2].map(()=>({day: MOMENTS.map(([k])=>shuffle(S.filter(s=>s.moment===k))[0])}));
+    }else{ // parents
+      ecRounds = shuffle(S).slice(0,8).map(t=>({target:t}));
+    }
+    show("ecouteGame");
+    const intro={
+      petits:"Écoute bien, et touche qui fait ce bruit !",
+      grands:"Écoute bien, les bruits se ressemblent !",
+      memoire:"Écoute les bruits, puis touche-les dans le même ordre !",
+      journee:"Range la journée de Madi, du matin jusqu'à la nuit !",
+      parents:"Papa ou maman fait le bruit. Toi, tu devines !"
+    }[m];
+    ecRender(true, intro);
+  };
+
+  function ecRender(first, intro){
+    ecLocked=false; ecPos=0; ecStop();
+    const r=ecRounds[ecIdx];
+    $("#ecCount").textContent=(ecIdx+1)+" / "+ecRounds.length;
+    const box=$("#ecChoices"); box.innerHTML=""; box.classList.remove("hidden");
+    const fr=$("#ecFrise"); fr.innerHTML=""; fr.classList.add("hidden");
+    $("#ecNext").classList.add("hidden"); $("#ecEar").classList.remove("hidden");
+    const startSound = (fn)=> first ? sayThen(intro, ()=>{ ecTimer=setTimeout(fn,250); }) : (ecTimer=setTimeout(fn,450));
+
+    if(ecMode==="petits" || ecMode==="grands"){
+      $("#ecQ").textContent="Qui fait ce bruit ?";
+      const t=r.target;
+      let leurres=[];
+      if(ecMode==="grands" && t.paire && byId(t.paire)) leurres.push(byId(t.paire));
+      const autres = shuffle(theme.sons.filter(s=>s.id!==t.id && !leurres.includes(s) && (ecMode==="grands" || s.famille!==t.famille)));
+      leurres = leurres.concat(autres).slice(0, r.n-1);
+      const cards=shuffle([t, ...leurres]);
+      box.style.gridTemplateColumns=ecCols(cards.length); box.style.maxWidth=ecWidth(cards.length);
+      cards.forEach(s=>{ const b=ecCard(s); b.onclick=()=>ecPick(b,s); box.appendChild(b); });
+      startSound(()=>playSound(t));
+    }
+    else if(ecMode==="memoire"){
+      $("#ecQ").textContent = r.seq.length+" bruits : touche-les dans l'ordre !";
+      box.style.gridTemplateColumns="1fr 1fr"; box.style.maxWidth="420px";
+      r.cards.forEach(s=>{ const b=ecCard(s); b.onclick=()=>ecMemPick(b,s); box.appendChild(b); });
+      startSound(()=>playSeq(r.seq));
+    }
+    else if(ecMode==="journee"){
+      $("#ecQ").textContent="Touche une image pour l'écouter. Range la journée de Madi !";
+      $("#ecEar").classList.add("hidden");
+      fr.classList.remove("hidden");
+      MOMENTS.forEach(([k,ic,lb])=>{ const d=document.createElement("div"); d.className="slot"; d.dataset.m=k; d.innerHTML=`<span>${ic}</span><small>${lb}</small>`; fr.appendChild(d); });
+      box.style.gridTemplateColumns="1fr 1fr"; box.style.maxWidth="380px";
+      shuffle(r.day).forEach(s=>{ const b=ecCard(s); b.onclick=()=>ecDayPick(b,s); box.appendChild(b); });
+      if(first) sayThen(intro);
+    }
+    else { // parents
+      $("#ecQ").textContent="Le grand imite le bruit… Le petit devine ! Touche l'image pour entendre le vrai.";
+      $("#ecEar").classList.add("hidden");
+      box.style.gridTemplateColumns="1fr"; box.style.maxWidth="260px";
+      const b=ecCard(r.target); ecReveal(b); b.onclick=()=>playSound(r.target); box.appendChild(b);
+      $("#ecNext").classList.remove("hidden");
+      if(first) sayThen(intro);
+    }
+  }
+
+  window.ecReplay = ()=>{
+    const r=ecRounds[ecIdx]; if(!r) return;
+    if(ecMode==="memoire"){ ecResetMem(); playSeq(r.seq); }
+    else if(r.target) playSound(r.target);
+  };
+
+  function ecAdvance(delay){
+    ecTimer=setTimeout(()=>{ ecIdx++; if(ecIdx>=ecRounds.length) ecWin(); else ecRender(false); }, delay);
+  }
+
+  function ecPick(b,s){
+    if(ecLocked) return;
+    const t=ecRounds[ecIdx].target;
+    if(s.id===t.id){
+      ecLocked=true; ecStop(); b.classList.add("good"); ecReveal(b);
+      sayThen(s.fr, ()=>ecAdvance(700));
+    }else{
+      b.classList.add("wrong"); setTimeout(()=>b.classList.remove("wrong"),450);
+      ecTimer=setTimeout(()=>playSound(t), 500);
+    }
+  }
+
+  function ecResetMem(){ document.querySelectorAll("#ecChoices .ec-card").forEach(c=>{ c.classList.remove("good"); const n=c.querySelector(".num"); if(n) n.remove(); }); ecPos=0; }
+  function ecMemPick(b,s){
+    if(ecLocked) return;
+    const seq=ecRounds[ecIdx].seq;
+    if(s.id===seq[ecPos].id){
+      ecPos++; b.classList.remove("good"); void b.offsetWidth; b.classList.add("good");
+      const n=document.createElement("span"); n.className="num"; n.textContent=ecPos; b.appendChild(n);
+      if(ecPos>=seq.length){ ecLocked=true; ecStop(); sayThen("Bravo !", ()=>ecAdvance(500)); }
+    }else{
+      ecLocked=true;
+      document.querySelectorAll("#ecChoices .ec-card").forEach(c=>c.classList.add("wrong"));
+      setTimeout(()=>{ document.querySelectorAll("#ecChoices .ec-card").forEach(c=>c.classList.remove("wrong")); ecResetMem(); ecLocked=false; playSeq(seq); }, 700);
+    }
+  }
+
+  function ecDayPick(b,s){
+    if(ecLocked) return;
+    playSound(s);
+    const expected=MOMENTS[ecPos][0];
+    if(s.moment===expected){
+      const slot=document.querySelector(`#ecFrise .slot[data-m="${expected}"]`);
+      slot.innerHTML=imgHTML(s)+`<small>${MOMENTS[ecPos][2]}</small>`; slot.classList.add("filled");
+      if(slot.querySelector("img")) slot.querySelector("img").style.cssText="width:70%;height:auto";
+      b.classList.add("used"); ecPos++;
+      if(ecPos>=MOMENTS.length){ ecLocked=true; ecTimer=setTimeout(()=>sayThen("Bonne nuit Madi !", ()=>ecAdvance(400)), 1600); }
+    }else{
+      b.classList.add("wrong"); setTimeout(()=>b.classList.remove("wrong"),450);
+    }
+  }
+
+  window.ecParentsNext = ()=>{ ecStop(); ecIdx++; if(ecIdx>=ecRounds.length) ecWin(); else ecRender(false); };
+
+  function ecWin(){
+    ecStop();
+    const sec=Math.round((Date.now()-ecT0)/1000);
+    show("win");
+    $("#winTitle").textContent="Bravo ! Tu as de bonnes oreilles 🎉";
+    $("#winTime").classList.add("hidden");
+    $("#winMsg").textContent = ecMode==="parents" ? "Bien joué en famille ! On recommence ou on s'arrête là ?" : "Tu as reconnu tous les bruits ! On recommence ou on s'arrête là ?";
+    try{ parent.postMessage({type:"pati-progress", kind:"ecoute", theme:"ecoute", mode:ecMode, seconds:sec}, "*"); }catch(e){}
+  }
+
+  window.showCredits = ()=>{
+    const ul=$("#creditsList"); ul.innerHTML="";
+    (theme && theme.sons || []).forEach(s=>{ const li=document.createElement("li"); li.textContent=s.fr+" — "+s.credit; ul.appendChild(li); });
+    $("#creditsBox").classList.remove("hidden");
+  };
+
   // ---------- commun ----------
   window.replaySame = ()=>{
-    if(mode==="script") startScript();
+    if(mode==="ecoute") startEcoute(ecMode);
+    else if(mode==="script") startScript();
     else if(mode==="alpha") startAlpha(alphaVariant);
     else if(mode==="solo"){ if(theme && theme.id==="surprise") startSurprise(); else startSolo(); }
     else startDefi();
   };
-  window.quit = ()=>{ clearInterval(timerId); show("home"); };
+  window.quit = ()=>{ clearInterval(timerId); ecStop(); show("home"); };
 
   // ---------- ouverture directe ?theme=<id> ----------
   function autoStart(){

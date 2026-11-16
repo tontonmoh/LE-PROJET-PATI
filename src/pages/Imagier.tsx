@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Images, ArrowLeft, Maximize2, Minimize2 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
@@ -6,6 +6,7 @@ export default function Imagier() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [fs, setFs] = useState(false);
+  const { search } = useLocation(); // ?theme=xxx → ouvre directement le bon thème
 
   const enter = () => {
     setFs(true);
@@ -51,7 +52,7 @@ export default function Imagier() {
         >
           <iframe
             ref={frameRef}
-            src="/jeux/imagier/imagier.html"
+            src={`/jeux/imagier/imagier.html${search}`}
             title="L'Imagier PATI"
             loading="lazy"
             allow="fullscreen"
