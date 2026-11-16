@@ -93,7 +93,7 @@ export const BOOKS: Book[] = [
     title: "Le jour du marché",
     description: "Pour les tout-petits : Sira va au marché toute seule. Elle marchande, compte ses pièces, et découvre que tout ce qu'on mange a fait un long voyage.",
     cover: "/images/jour-du-marche-couverture.webp",
-    teaser: "https://youtu.be/L5UoyTxkWVA",
+    teaser: "https://youtu.be/82428TjPitY",
     teaserLabel: "Le film animé",
     keywords: ["marché", "Sira", "Habib", "tomates", "poisson", "riz", "Fouta", "Boulbinet", "Boffa", "marchander", "compter", "voyage des aliments", "vivre-ensemble", "égalité filles-garçons", "tout-petits", "Pati Découverte"],
     nouveau: true,
