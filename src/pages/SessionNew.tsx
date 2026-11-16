@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Users, QrCode, Copy, Check, Loader2, Sparkles,
   GraduationCap, MessageSquare, UserRound, Play, ArrowRight,
-  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music, Type, Plane, Palette,
+  Map as MapIcon, Mountain, Star, TrainFront, Landmark, ScrollText, MapPin, Building2, Gem, Layers, Globe, BookOpen, Music, Type, Plane, Palette, X, RotateCcw,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { createSession, type SessionType } from "../lib/session";
@@ -164,6 +164,57 @@ const JEUX: Jeu[] = [
   },
 ];
 
+// ── Vitrine : rayons, accroches et repères de chaque jeu ────────────────────
+// Clé = id du jeu dans JEUX. Un jeu sans fiche ici s'affiche avec son label.
+type RayonId = "cartes" | "histoires" | "culture" | "senag";
+type Fiche = {
+  rayon: RayonId;
+  titre: string;
+  sousTitre: string;
+  accroche: string;
+  genre: string;
+  repere: string;
+  nouveau?: boolean;
+};
+
+const FICHES: Record<string, Fiche> = {
+  "puzzle-guinee": { rayon: "cartes", titre: "Le Défi", sousTitre: "Puzzle de la Guinée", accroche: "Reconstitue la Guinée, préfecture par préfecture, le plus vite possible.", genre: "Puzzle", repere: "Classement en direct" },
+  "laguine378":    { rayon: "cartes", titre: "LaGuinè378", sousTitre: "Les sous-préfectures", accroche: "Rattache chaque sous-préfecture à sa préfecture.", genre: "Association", repere: "33 préfectures" },
+  "konakri":       { rayon: "cartes", titre: "Konakri", sousTitre: "Les quartiers", accroche: "148 quartiers, 13 communes : remets chacun à sa place.", genre: "Association", repere: "148 quartiers" },
+  "belle-guinee":  { rayon: "cartes", titre: "Belle Guinée", sousTitre: "La carte aux trésors", accroche: "Retrouve sur la carte les trésors de la Guinée.", genre: "Carte", repere: "Sites et richesses" },
+  "iwdi":          { rayon: "cartes", titre: "IWDI LAGUINÈ", sousTitre: "Conquête des Régions", accroche: "Un jeu de cartes pour conquérir les régions, à plusieurs.", genre: "Stratégie", repere: "2 à 8 joueurs" },
+  "corridor":      { rayon: "cartes", titre: "Le Corridor", sousTitre: "TransGuinéen", accroche: "Suis le TransGuinéen, du port jusqu'à la mine.", genre: "Puzzle", repere: "Classement en direct" },
+  "afrique":       { rayon: "cartes", titre: "Le Puzzle de l'Afrique", sousTitre: "Le continent", accroche: "Replace les pays d'Afrique, région par région.", genre: "Puzzle", repere: "6 régions" },
+  "binta":         { rayon: "histoires", titre: "Binta Pilote", sousTitre: "La Dame Oiseau", accroche: "Cours, saute et prends ton envol avec Binta Diallo.", genre: "Plateforme", repere: "Tiré du livre", nouveau: true },
+  "jeanne":        { rayon: "histoires", titre: "Jeanne", sousTitre: "La fille du Milo", accroche: "Suis Jeanne Martin Cissé, de Kankan jusqu'à l'ONU.", genre: "Plateforme", repere: "Biographie", nouveau: true },
+  "droits":        { rayon: "histoires", titre: "Mes droits, mon avenir", sousTitre: "Les droits de l'enfant", accroche: "Découvre tes droits et apprends à les défendre.", genre: "Histoire", repere: "Droits de l'enfant", nouveau: true },
+  "sebe":          { rayon: "culture", titre: "Sèbè", sousTitre: "Le jeu littéraire guinéen", accroche: "Teste ta connaissance des plumes guinéennes.", genre: "Quiz", repere: "65 questions" },
+  "almamya":       { rayon: "culture", titre: "Almamya-Zogota", sousTitre: "La Guinée de A à Z", accroche: "Toute la Guinée, une lettre après l'autre.", genre: "Quiz", repere: "De A à Z" },
+  "hymne":         { rayon: "culture", titre: "Chante LIBERTÉ", sousTitre: "L'hymne national", accroche: "Apprends les vrais mots de l'hymne national.", genre: "Chant", repere: "Dès 7 ans" },
+  "compagnons":    { rayon: "senag", titre: "Puzzle des Compagnons", sousTitre: "SENAG", accroche: "Reconstitue une image de l'indépendance, pièce par pièce.", genre: "Puzzle", repere: "Classement en direct" },
+  "train":         { rayon: "senag", titre: "Train de la Mémoire", sousTitre: "SENAG", accroche: "Remets les grandes dates dans l'ordre, wagon après wagon.", genre: "Chronologie", repere: "Histoire nationale" },
+  "primo":         { rayon: "senag", titre: "PriMo'", sousTitre: "Les Premiers Ministres", accroche: "Remets les Premiers ministres de la Guinée dans l'ordre.", genre: "Chronologie", repere: "Premiers ministres" },
+  "quiz":          { rayon: "senag", titre: "25 questions", sousTitre: "Pour la mémoire", accroche: "Teste ta mémoire nationale en 25 questions.", genre: "Quiz", repere: "25 questions" },
+};
+
+function ficheDe(j: Jeu): Fiche {
+  return FICHES[j.id] ?? {
+    rayon: j.section === "senag" ? "senag" : "cartes",
+    titre: j.label, sousTitre: "", accroche: "", genre: "Jeu", repere: "",
+  };
+}
+
+const RAYONS: { id: RayonId; nom: string; accroche: string; colonnes: 3 | 4; tuileClasse?: boolean }[] = [
+  { id: "cartes",    nom: "Cartes et territoires", accroche: "Connais-tu vraiment ton pays ?", colonnes: 4, tuileClasse: true },
+  { id: "histoires", nom: "Histoires à jouer",     accroche: "Entre dans la peau des héros.", colonnes: 3 },
+  { id: "culture",   nom: "Culture et quiz",       accroche: "Les mots, les livres, l'hymne.", colonnes: 3 },
+  { id: "senag",     nom: "Mémoire nationale",     accroche: "Les jeux de la Semaine des Archives.", colonnes: 4 },
+];
+
+// Jeu mis à la une (id dans JEUX) et clé du dernier jeu lancé sur cet appareil.
+const UNE_ID = "binta";
+const CLE_DERNIER = "pati_dernier_jeu";
+
 // Le mode "solo" élargit SessionType localement jusqu'à ce que
 // lib/session.ts (et la contrainte CHECK Supabase si elle existe) acceptent
 // la valeur "solo".
@@ -219,6 +270,22 @@ export default function SessionNew() {
   const [label, setLabel]     = useState("");
   const [contact, setContact] = useState("");
 
+  // Vitrine : rayon filtré, fiche ouverte, dernier jeu lancé sur cet appareil
+  const [filtre, setFiltre] = useState<"tous" | RayonId>("tous");
+  const [ouvert, setOuvert] = useState(() => {
+    const g = searchParams.get("game");
+    return !!g && JEUX.some((j) => j.id === g);
+  });
+  const [dernier] = useState<string | null>(() => {
+    try { return localStorage.getItem(CLE_DERNIER); } catch { return null; }
+  });
+  useEffect(() => {
+    if (!ouvert) return;
+    const surTouche = (e: KeyboardEvent) => { if (e.key === "Escape") setOuvert(false); };
+    window.addEventListener("keydown", surTouche);
+    return () => window.removeEventListener("keydown", surTouche);
+  }, [ouvert]);
+
   const [creating, setCreating] = useState(false);
   const [error, setError]       = useState<string | null>(null);
   const [code, setCode]         = useState<string | null>(null);
@@ -240,6 +307,7 @@ export default function SessionNew() {
         type: type as SessionType,
         created_by: contact.trim() || undefined,
       });
+      try { localStorage.setItem(CLE_DERNIER, jeu.id); } catch { /* ignore */ }
       if (isSolo) {
         navigate(buildPlayPath(jeu, s.code));
         return;
@@ -353,252 +421,336 @@ export default function SessionNew() {
   }
 
   // ════════════════════════════════════════════════════════════════════════
-  // ÉCRAN 1 — Configuration (cartes à jouer illustrées)
+  // ÉCRAN 1 — Vitrine des jeux (à la une, rayons, fiche de jeu)
   // ════════════════════════════════════════════════════════════════════════
-  const jeuxPati  = JEUX.map((j, i) => ({ j, i })).filter(({ j }) => j.section === "pati");
-  const jeuxSenag = JEUX.map((j, i) => ({ j, i })).filter(({ j }) => j.section === "senag");
+  const idxDe = (id: string) => JEUX.findIndex((j) => j.id === id);
+  const ouvrir = (i: number, t: Contexte = "solo") => {
+    setJeuIdx(i);
+    setType(t);
+    setError(null);
+    setOuvert(true);
+  };
 
-  const renderJeuCarte = (j: Jeu, i: number, delayIdx: number) => {
+  const uneIdx = Math.max(0, idxDe(UNE_ID));
+  const une = JEUX[uneIdx];
+  const uneFiche = ficheDe(une);
+  const dernierIdx = dernier ? idxDe(dernier) : -1;
+  const defiIdx = Math.max(0, idxDe("puzzle-guinee"));
+  const fiche = ficheDe(jeu);
+
+  const jeuxDuRayon = (r: RayonId) =>
+    JEUX.map((j, i) => ({ j, i })).filter(({ j }) => ficheDe(j).rayon === r);
+  const rayonsVisibles = RAYONS.filter((r) => filtre === "tous" || filtre === r.id);
+  const filtres: { id: "tous" | RayonId; nom: string; nb: number }[] = [
+    { id: "tous", nom: "Tous les jeux", nb: JEUX.length },
+    ...RAYONS.map((r) => ({ id: r.id, nom: r.nom, nb: jeuxDuRayon(r.id).length })),
+  ];
+
+  const renderCarte = (j: Jeu, i: number) => {
     const Icon = j.icon;
-    const active = jeuIdx === i;
+    const f = ficheDe(j);
     return (
       <button
         key={j.id}
-        onClick={() => setJeuIdx(i)}
-        className="pati-rise group relative overflow-hidden rounded-3xl text-left transition-all duration-300 hover:scale-[1.04] hover:-rotate-1 focus:outline-none flex flex-col"
-        style={{
-          background: "white",
-          boxShadow: active ? `0 12px 30px -8px ${j.accent}80` : `0 4px 12px -4px ${j.accent}22`,
-          border: active ? `3px solid ${j.accent}` : `3px solid transparent`,
-          animationDelay: `${delayIdx * 55}ms`,
-        }}
+        onClick={() => ouvrir(i)}
+        className="group flex flex-col text-left bg-white rounded-3xl overflow-hidden border border-[#0D2B1A]/10 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
       >
-        {/* Zone illustration — image OU icône géante sur aplat */}
-        <div
-          className="relative overflow-hidden"
-          style={{
-            aspectRatio: "3 / 2",
-            background: j.visual
-              ? "white"
-              : `linear-gradient(135deg, ${j.accent} 0%, ${j.accent}dd 100%)`,
-          }}
+        <span
+          className="relative block w-full overflow-hidden"
+          style={{ aspectRatio: "3 / 2", background: j.visual ? "#F1E7D2" : j.accent }}
         >
           {j.visual ? (
             <img
               src={j.visual}
               alt=""
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               style={{ objectPosition: j.visualObjectPosition || "center" }}
             />
           ) : (
-            <>
-              {/* Blobs blancs décoratifs sur les cartes à icône */}
-              <span className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/15 transition-transform duration-500 group-hover:scale-125" />
-              <span className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-white/10 transition-transform duration-500 group-hover:scale-125" />
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span
-                  className="inline-flex w-20 h-20 rounded-2xl items-center justify-center transition-transform duration-300 group-hover:rotate-6"
-                  style={{ background: "rgba(255,255,255,0.22)" }}
-                >
-                  <Icon size={42} className="text-white" strokeWidth={2.2} />
-                </span>
-              </span>
-            </>
-          )}
-
-          {/* Coche active */}
-          {active && (
-            <span className="absolute top-3 right-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white pati-pulse-ring shadow-md">
-              <Check size={18} style={{ color: j.accent }} strokeWidth={3} />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <Icon size={48} className="text-white" strokeWidth={2.2} />
             </span>
           )}
-        </div>
-
-        {/* Bandeau titre en bas — aplat accent */}
-        <div
-          className="px-4 py-3 flex-1 flex items-center gap-2"
-          style={{
-            background: active
-              ? `linear-gradient(135deg, ${j.accent} 0%, ${j.accent}dd 100%)`
-              : `${j.accent}12`,
-          }}
-        >
-          {/* Petite icône badge à côté du titre */}
-          <span
-            className="inline-flex w-8 h-8 rounded-xl items-center justify-center shrink-0"
-            style={{ background: active ? "rgba(255,255,255,0.22)" : `${j.accent}22` }}
-          >
-            <Icon size={16} style={{ color: active ? "white" : j.accent }} strokeWidth={2.4} />
+          {f.nouveau && (
+            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-white" style={{ background: "#C63F1D" }}>
+              Nouveau
+            </span>
+          )}
+        </span>
+        <span className="flex flex-col gap-1.5 p-3 sm:p-5 flex-1 w-full">
+          <span className="font-display font-bold text-base sm:text-xl leading-tight" style={{ color: GREEN }}>{f.titre}</span>
+          {f.sousTitre && (
+            <span className="text-xs sm:text-sm font-bold" style={{ color: PATI_GREEN }}>{f.sousTitre}</span>
+          )}
+          {f.accroche && (
+            <span className="text-[13px] sm:text-[15px] leading-snug font-semibold text-[#4A554E]">{f.accroche}</span>
+          )}
+          <span className="flex flex-wrap items-center gap-2 mt-auto pt-3">
+            <span className="px-2.5 py-1 rounded-lg text-xs font-extrabold" style={{ background: "#E1EFE9", color: "#0A4D3C" }}>{f.genre}</span>
+            {f.repere && (
+              <span className="hidden sm:inline-flex px-2.5 py-1 rounded-lg text-xs font-bold" style={{ background: "#F6EBD0", color: "#5A4410" }}>{f.repere}</span>
+            )}
+            <span className="ml-auto inline-flex w-10 h-10 rounded-full items-center justify-center shrink-0" style={{ background: GOLD }}>
+              <Play size={15} color={GREEN} fill={GREEN} />
+            </span>
           </span>
-          <h3
-            className="font-bold text-sm leading-snug"
-            style={{
-              fontFamily: DISPLAY,
-              color: active ? "white" : GREEN,
-            }}
-          >
-            {j.label}
-          </h3>
-        </div>
+        </span>
       </button>
     );
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: CREAM }}>
-      <style>{KEYFRAMES}</style>
+    <div className="min-h-screen" style={{ background: CREAM }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 flex flex-col gap-8 sm:gap-10">
 
-      {/* Blobs de fond flottants */}
-      <div className="absolute -top-24 -left-16 w-80 h-80 rounded-full pati-float-a pointer-events-none"
-        style={{ background: `${ACCENT}22`, filter: "blur(70px)" }} />
-      <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full pati-float-b pointer-events-none"
-        style={{ background: `${CORAL}18`, filter: "blur(80px)" }} />
-      <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full pati-float-c pointer-events-none"
-        style={{ background: `${GOLD}22`, filter: "blur(60px)" }} />
-
-      <div className="relative max-w-4xl mx-auto px-6 py-10">
-        <Link to="/defi" className="inline-flex items-center gap-1.5 font-display font-semibold mb-8 hover:underline"
-          style={{ color: ACCENT }}>
-          <ArrowLeft size={18} /> Retour au jeu
-        </Link>
-
-        <div className="inline-flex items-center gap-2 font-display font-semibold text-sm px-4 py-1.5 rounded-full mb-4"
-          style={{ background: `${ACCENT}18`, color: ACCENT }}>
-          <Sparkles size={15} className="pati-sparkle" /> Mode Défi
-        </div>
-        <h1 className="font-bold text-[#0D2B1A] leading-tight mb-2"
-          style={{ fontFamily: DISPLAY, fontSize: "clamp(2rem,7vw,3.2rem)" }}>
-          Choisis ton défi <span style={{ color: ACCENT }}>!</span>
-        </h1>
-        <p className="text-[#5a6b62] font-semibold mb-10 text-lg">
-          Joue en solo, ou crée un défi pour ta classe ou ton événement — jusqu'à 300 joueurs.
-        </p>
-
-        {/* 1. Choix du jeu — sections Pati / SENAG */}
-        <div className="mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex w-8 h-8 rounded-xl items-center justify-center" style={{ background: `${PATI_GREEN}18` }}>
-              <Star size={16} style={{ color: PATI_GREEN }} strokeWidth={2.5} />
-            </span>
-            <h2 className="font-display font-bold text-xl" style={{ color: GREEN }}>Les jeux Pati</h2>
+        {/* En-tête + reprise du dernier jeu */}
+        <div className="flex flex-wrap items-end justify-between gap-5">
+          <div className="flex-1 min-w-[260px]">
+            <h1 className="font-display font-bold leading-tight" style={{ color: PATI_GREEN, fontSize: "clamp(2rem,6vw,3rem)" }}>
+              Les jeux PATI
+            </h1>
+            <p className="mt-2 text-base sm:text-lg font-semibold text-[#4A554E] max-w-xl">
+              {JEUX.length} jeux pour découvrir la Guinée en jouant. Seul, ou en défi avec ta classe.
+            </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-            {jeuxPati.map(({ j, i }, idx) => renderJeuCarte(j, i, idx))}
-          </div>
-
-          <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex w-8 h-8 rounded-xl items-center justify-center" style={{ background: `${ACCENT}18` }}>
-              <Landmark size={16} style={{ color: ACCENT }} strokeWidth={2.5} />
-            </span>
-            <h2 className="font-display font-bold text-xl" style={{ color: GREEN }}>SENAG — Mémoire nationale</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {jeuxSenag.map(({ j, i }, idx) => renderJeuCarte(j, i, jeuxPati.length + idx))}
-          </div>
+          {dernierIdx >= 0 && (
+            <button
+              onClick={() => ouvrir(dernierIdx)}
+              className="flex items-center gap-3 pl-2.5 pr-5 py-2.5 bg-white rounded-2xl border border-[#0D2B1A]/15 text-left transition-shadow hover:shadow-lg focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
+            >
+              {JEUX[dernierIdx].visual ? (
+                <img src={JEUX[dernierIdx].visual} alt="" className="w-[72px] h-[52px] object-cover rounded-xl" />
+              ) : (
+                <span className="inline-flex w-[72px] h-[52px] rounded-xl items-center justify-center" style={{ background: JEUX[dernierIdx].accent }}>
+                  <RotateCcw size={20} className="text-white" />
+                </span>
+              )}
+              <span className="flex flex-col">
+                <span className="text-xs font-extrabold uppercase tracking-wider" style={{ color: PATI_GREEN }}>Reprendre</span>
+                <span className="font-display font-bold" style={{ color: GREEN }}>{JEUX[dernierIdx].label}</span>
+              </span>
+              <ArrowRight size={18} style={{ color: PATI_GREEN }} />
+            </button>
+          )}
         </div>
 
-        {/* 2. Contexte */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex w-8 h-8 rounded-xl items-center justify-center" style={{ background: `${CORAL}18` }}>
-              <Users size={16} style={{ color: CORAL }} strokeWidth={2.5} />
-            </span>
-            <h2 className="font-display font-bold text-xl" style={{ color: GREEN }}>Comment tu joues&nbsp;?</h2>
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            {TYPES.map((t, idx) => {
-              const Icon = t.icon;
-              const active = type === t.id;
-              return (
-                <button
-                  key={t.id}
-                  onClick={() => setType(t.id)}
-                  className="pati-rise group relative overflow-hidden flex flex-col items-center gap-2 rounded-3xl px-3 py-6 transition-all duration-300 hover:scale-[1.04]"
-                  style={{
-                    background: active
-                      ? `linear-gradient(135deg, ${t.color} 0%, ${t.color}dd 100%)`
-                      : "white",
-                    border: active ? `3px solid ${t.color}` : `3px solid transparent`,
-                    boxShadow: active ? `0 12px 30px -8px ${t.color}80` : `0 4px 12px -6px ${GREEN}12`,
-                    animationDelay: `${idx * 80}ms`,
-                  }}
-                >
-                  <span className="absolute -top-4 -right-4 w-16 h-16 rounded-full transition-transform duration-500 group-hover:scale-125"
-                    style={{ background: active ? "rgba(255,255,255,0.18)" : `${t.color}0d` }} />
-                  <span
-                    className="relative inline-flex w-14 h-14 rounded-2xl items-center justify-center transition-transform duration-300 group-hover:rotate-6"
-                    style={{ background: active ? "rgba(255,255,255,0.22)" : `${t.color}18` }}
-                  >
-                    <Icon size={28} style={{ color: active ? "white" : t.color }} strokeWidth={2.2} />
-                  </span>
-                  <span className="relative font-display font-bold text-lg" style={{ color: active ? "white" : GREEN }}>{t.label}</span>
-                  <span className="relative text-[11px] font-semibold text-center leading-tight" style={{ color: active ? "rgba(255,255,255,0.85)" : "#8a9389" }}>{t.ex}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 3. Label optionnel — masqué en mode Solo */}
-        {!isSolo && (
-          <div className="mb-6">
-            <label className="block font-display font-bold text-[#0D2B1A] mb-2">
-              Nom de la partie <span className="text-[#8a9389] font-semibold text-sm">(optionnel)</span>
-            </label>
-            <input
-              value={label}
-              onChange={(e) => setLabel(e.target.value)}
-              maxLength={60}
-              placeholder="Classe CM2 · École Alpha · Conakry"
-              className="w-full rounded-2xl border-2 border-[#0D2B1A]/10 bg-white px-4 py-3 font-semibold text-[#0D2B1A] outline-none focus:border-[#C8841E] transition-colors"
-            />
-          </div>
-        )}
-
-        {/* 4. Contact optionnel */}
-        <div className="mb-8">
-          <label className="block font-display font-bold text-[#0D2B1A] mb-2">
-            Ton contact <span className="text-[#8a9389] font-semibold text-sm">
-              {isSolo ? "(optionnel — pour retrouver tes scores)" : "(optionnel — pour retrouver tes sessions)"}
-            </span>
-          </label>
-          <input
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            maxLength={80}
-            placeholder="email ou WhatsApp"
-            className="w-full rounded-2xl border-2 border-[#0D2B1A]/10 bg-white px-4 py-3 font-semibold text-[#0D2B1A] outline-none focus:border-[#C8841E] transition-colors"
-          />
-        </div>
-
-        {error && (
-          <p className="text-red-600 font-semibold text-sm mb-4 bg-red-50 rounded-xl px-4 py-3">{error}</p>
-        )}
-
-        {/* CTA magnifié */}
-        <button
-          onClick={create}
-          disabled={creating}
-          className="w-full relative overflow-hidden flex items-center justify-center gap-2 font-display font-bold text-white rounded-2xl px-6 py-5 shadow-kid transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
-          style={{
-            background: `linear-gradient(135deg, ${jeu.accent} 0%, ${jeu.accent}cc 100%)`,
-            boxShadow: `0 12px 30px -8px ${jeu.accent}80`,
-            fontSize: "clamp(1rem,3vw,1.15rem)",
-          }}
-        >
-          <span className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-white/15" />
-          <span className="absolute -bottom-4 -left-4 w-14 h-14 rounded-full bg-white/10" />
-          <span className="relative flex items-center gap-2">
-            {creating ? (
-              <><Loader2 size={22} className="animate-spin" /> {isSolo ? "Préparation…" : "Création…"}</>
-            ) : isSolo ? (
-              <><Play size={22} strokeWidth={2.4} /> Jouer maintenant</>
-            ) : (
-              <><QrCode size={22} strokeWidth={2.4} /> Créer la session &amp; le QR code</>
+        {/* Jeu à la une */}
+        <section aria-label="Jeu à la une" className="rounded-[1.75rem] overflow-hidden flex flex-col md:flex-row" style={{ background: "#0A4D3C" }}>
+          <div className="relative md:w-[56%] min-h-[220px] md:min-h-[340px]" style={{ background: une.accent }}>
+            {une.visual && (
+              <img
+                src={une.visual}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ objectPosition: une.visualObjectPosition || "center" }}
+              />
             )}
-          </span>
-        </button>
+          </div>
+          <div className="flex-1 p-6 sm:p-10 flex flex-col gap-4 text-white">
+            <div className="flex flex-wrap gap-2">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider" style={{ background: GOLD, color: GREEN }}>À la une</span>
+              {uneFiche.nouveau && (
+                <span className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider text-white" style={{ background: "#C63F1D" }}>Nouveau</span>
+              )}
+            </div>
+            <h2 className="font-display font-bold leading-tight" style={{ fontSize: "clamp(1.7rem,4.5vw,2.6rem)" }}>
+              {uneFiche.titre}
+              {uneFiche.sousTitre && <><br />{uneFiche.sousTitre}</>}
+            </h2>
+            <p className="text-base sm:text-lg font-semibold" style={{ color: "#E3F0EA" }}>{uneFiche.accroche}</p>
+            <div className="flex flex-wrap items-center gap-4 mt-1">
+              <button
+                onClick={() => ouvrir(uneIdx)}
+                className="inline-flex items-center gap-2.5 font-display font-bold text-lg rounded-full px-8 py-3.5 transition-transform hover:scale-[1.03] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
+                style={{ background: GOLD, color: GREEN }}
+              >
+                <Play size={18} color={GREEN} fill={GREEN} /> Jouer
+              </button>
+              <span className="text-sm font-semibold" style={{ color: "#E3F0EA" }}>Solo, classe ou forum</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Filtres par rayon */}
+        <nav aria-label="Filtrer les jeux" className="flex flex-wrap gap-2.5">
+          {filtres.map((f) => {
+            const actif = filtre === f.id;
+            return (
+              <button
+                key={f.id}
+                onClick={() => setFiltre(f.id)}
+                aria-pressed={actif}
+                className="inline-flex items-center gap-2 min-h-[46px] px-4 rounded-full font-bold text-[15px] border-2 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
+                style={{
+                  background: actif ? PATI_GREEN : "white",
+                  color: actif ? "white" : GREEN,
+                  borderColor: actif ? PATI_GREEN : "#B9AD93",
+                }}
+              >
+                {f.nom} <span className="text-sm font-extrabold opacity-80">{f.nb}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Rayons */}
+        {rayonsVisibles.map((r) => (
+          <section key={r.id} className="flex flex-col gap-5">
+            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <h2 className="font-display font-bold text-2xl sm:text-3xl" style={{ color: PATI_GREEN }}>{r.nom}</h2>
+              <p className="text-base font-semibold text-[#4A554E]">{r.accroche}</p>
+            </div>
+            <div className={`grid grid-cols-2 gap-3 sm:gap-6 ${r.colonnes === 3 ? "lg:grid-cols-3" : "md:grid-cols-3 lg:grid-cols-4"}`}>
+              {jeuxDuRayon(r.id).map(({ j, i }) => renderCarte(j, i))}
+              {r.tuileClasse && (
+                <button
+                  onClick={() => ouvrir(defiIdx, "classe")}
+                  className="flex flex-col justify-center gap-3 p-5 sm:p-7 rounded-3xl text-left text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
+                  style={{ background: PATI_GREEN }}
+                >
+                  <GraduationCap size={40} strokeWidth={1.8} />
+                  <span className="font-display font-bold text-xl sm:text-2xl leading-tight">Défie ta classe</span>
+                  <span className="text-sm sm:text-base font-semibold" style={{ color: "#E3F0EA" }}>
+                    Choisis un jeu, crée une session et partage le QR code. Jusqu'à 300 joueurs en même temps.
+                  </span>
+                  <span className="self-start mt-1 px-4 py-2 rounded-full text-sm font-extrabold bg-white" style={{ color: "#0A4D3C" }}>
+                    Créer une session
+                  </span>
+                </button>
+              )}
+            </div>
+          </section>
+        ))}
       </div>
+
+      {/* Fiche du jeu choisi */}
+      {ouvert && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-auto"
+          style={{ background: "rgba(10,40,30,0.62)" }}
+          onClick={() => setOuvert(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Fiche du jeu ${jeu.label}`}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-4xl max-h-full overflow-auto rounded-[1.75rem] flex flex-col md:flex-row shadow-2xl"
+            style={{ background: "#FFFDF8" }}
+          >
+            <button
+              onClick={() => setOuvert(false)}
+              aria-label="Fermer"
+              className="absolute top-3 right-3 z-10 inline-flex w-11 h-11 rounded-full items-center justify-center bg-white shadow-md focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
+            >
+              <X size={20} color={GREEN} strokeWidth={2.4} />
+            </button>
+
+            <div className="relative md:w-[44%] min-h-[190px] md:min-h-[420px] shrink-0" style={{ background: jeu.visual ? "#F1E7D2" : jeu.accent }}>
+              {jeu.visual && (
+                <img
+                  src={jeu.visual}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: jeu.visualObjectPosition || "center" }}
+                />
+              )}
+              {fiche.nouveau && (
+                <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider text-white" style={{ background: "#C63F1D" }}>
+                  Nouveau
+                </span>
+              )}
+            </div>
+
+            <div className="flex-1 p-5 sm:p-9 flex flex-col gap-4">
+              <div className="flex flex-wrap gap-2 pr-12">
+                <span className="px-2.5 py-1 rounded-lg text-xs font-extrabold" style={{ background: "#E1EFE9", color: "#0A4D3C" }}>{fiche.genre}</span>
+                {fiche.repere && (
+                  <span className="px-2.5 py-1 rounded-lg text-xs font-bold" style={{ background: "#F6EBD0", color: "#5A4410" }}>{fiche.repere}</span>
+                )}
+              </div>
+              <div>
+                <h2 className="font-display font-bold leading-tight" style={{ color: PATI_GREEN, fontSize: "clamp(1.6rem,4vw,2.2rem)" }}>{fiche.titre}</h2>
+                {fiche.sousTitre && <p className="mt-1 font-bold" style={{ color: PATI_GREEN }}>{fiche.sousTitre}</p>}
+              </div>
+              {fiche.accroche && <p className="text-base sm:text-[17px] font-semibold text-[#4A554E]">{fiche.accroche}</p>}
+
+              <div>
+                <p className="font-display font-bold mb-2" style={{ color: GREEN }}>Comment tu joues&nbsp;?</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {TYPES.map((t) => {
+                    const Icon = t.icon;
+                    const actif = type === t.id;
+                    return (
+                      <button
+                        key={t.id}
+                        onClick={() => setType(t.id)}
+                        aria-pressed={actif}
+                        className="flex flex-col items-center justify-center gap-1 min-h-[76px] px-1.5 py-2 rounded-2xl border-2 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
+                        style={{
+                          background: actif ? PATI_GREEN : "white",
+                          color: actif ? "white" : GREEN,
+                          borderColor: actif ? PATI_GREEN : "#B9AD93",
+                        }}
+                      >
+                        <Icon size={20} strokeWidth={2.2} />
+                        <span className="font-display font-bold">{t.label}</span>
+                        <span className="text-[11px] font-semibold text-center leading-tight opacity-90">{t.ex}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {!isSolo && (
+                <label className="flex flex-col gap-1.5 font-display font-bold text-sm" style={{ color: GREEN }}>
+                  <span>Nom de la partie <span className="text-[#6B756E] font-semibold">(optionnel)</span></span>
+                  <input
+                    value={label}
+                    onChange={(e) => setLabel(e.target.value)}
+                    maxLength={60}
+                    placeholder="Classe CM2 · École Alpha · Conakry"
+                    className="w-full rounded-xl border-2 border-[#B9AD93] bg-white px-4 py-3 text-base font-semibold text-[#0D2B1A] outline-none focus:border-[#0F6E56] transition-colors"
+                  />
+                </label>
+              )}
+
+              <label className="flex flex-col gap-1.5 font-display font-bold text-sm" style={{ color: GREEN }}>
+                <span>Ton contact <span className="text-[#6B756E] font-semibold">
+                  {isSolo ? "(optionnel, pour retrouver tes scores)" : "(optionnel, pour retrouver tes sessions)"}
+                </span></span>
+                <input
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  maxLength={80}
+                  placeholder="email ou WhatsApp"
+                  className="w-full rounded-xl border-2 border-[#B9AD93] bg-white px-4 py-3 text-base font-semibold text-[#0D2B1A] outline-none focus:border-[#0F6E56] transition-colors"
+                />
+              </label>
+
+              {error && (
+                <p className="text-red-700 font-semibold text-sm bg-red-50 rounded-xl px-4 py-3">{error}</p>
+              )}
+
+              <button
+                onClick={create}
+                disabled={creating}
+                className="w-full inline-flex items-center justify-center gap-2.5 font-display font-bold text-lg rounded-full px-6 py-4 mt-1 transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#0F6E56]/40"
+                style={{ background: GOLD, color: GREEN }}
+              >
+                {creating ? (
+                  <><Loader2 size={22} className="animate-spin" /> {isSolo ? "Préparation…" : "Création…"}</>
+                ) : isSolo ? (
+                  <><Play size={20} color={GREEN} fill={GREEN} /> Jouer maintenant</>
+                ) : (
+                  <><QrCode size={22} strokeWidth={2.4} /> Créer la session &amp; le QR code</>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
