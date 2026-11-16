@@ -328,6 +328,13 @@
     if(pair.audio){ try{ const a=new Audio(pair.audio); a.play().catch(()=>synth(pair.fr)); return; }catch(e){} }
     synth(pair.fr);
   }
+  // Voix humaine pour les consignes (pas de repli : la consigne est aussi écrite à l'écran)
+  let _cv=null;
+  function consigne(key){ try{ if(_cv) _cv.pause(); _cv=new Audio("/jeux/imagier/voix/"+key+".mp3"); _cv.play().catch(()=>{}); }catch(e){} }
+  function speakAlpha(it, full){
+    if(it.audio){ try{ const a=new Audio(it.audio); a.play().catch(()=>speakText(full)); return; }catch(e){} }
+    speakText(full);
+  }
   function synth(text){
     if(!("speechSynthesis" in window)) return;
     try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="fr-FR"; u.rate=.85; u.pitch=1.1; speechSynthesis.speak(u);}catch(e){}
@@ -383,6 +390,7 @@
     try{ clapping(); }catch(e){}
     setTimeout(()=>{ try{
       if(mode==="ecoute"){ new Audio("/jeux/imagier/voix/bonnes-oreilles.mp3").play().catch(()=>{}); return; }
+      const bv=new Audio("/jeux/imagier/voix/bravo.mp3"); bv.play().catch(()=>synth("Bravo !")); return;
       if("speechSynthesis" in window){
         speechSynthesis.cancel();
         const u=new SpeechSynthesisUtterance("Bravo !");
@@ -512,6 +520,7 @@
     // prononce le mot à trouver SEULEMENT si l'auto-lecture est activée
     // (par défaut non : l'enfant regarde l'image et reconnaît l'objet AVANT d'entendre le mot)
     if(soloAutoSpeak) setTimeout(()=>speak(soloPair), 350);
+    else setTimeout(()=>consigne("consigne-quest-ce"), 350);
   }
 
   function soloPick(btn, pair){
@@ -624,10 +633,12 @@
     if(alphaVariant==="word"){
       // montre l'IMAGE, l'enfant choisit la LETTRE du début
       q.textContent="Par quelle lettre ça commence ?";
+      setTimeout(()=>consigne("consigne-lettre-debut"), 300);
       im.style.fontSize=""; im.innerHTML = imgHTML({img:alphaItem.img, fr:alphaItem.mot});
     }else{
       // montre la LETTRE (Aa), l'enfant la reconnaît
       q.textContent="Quelle lettre est-ce ?";
+      setTimeout(()=>consigne("consigne-quelle-lettre"), 300);
       im.style.fontSize="clamp(70px,24vw,130px)";
       im.innerHTML = `<span style="font-weight:bold;color:${theme.couleur}">${letterLabel(alphaItem)}</span>`;
     }
@@ -651,7 +662,7 @@
       alphaLocked=true;
       btn.classList.add("good");
       // dire la lettre puis le mot-exemple : "A. A comme Ananas"
-      speakText(alphaItem.maj + ". " + alphaItem.maj + " comme " + alphaItem.mot);
+      speakAlpha(alphaItem, alphaItem.maj + ". " + alphaItem.maj + " comme " + alphaItem.mot);
       setTimeout(()=>{ alphaIdx++; nextAlpha(); }, 1300);
     }else{
       btn.classList.add("wrong"); setTimeout(()=>btn.classList.remove("wrong"),450);
@@ -672,7 +683,7 @@
 
   window.speakCurrent = ()=>{
     if(mode==="script" && scrItem){ speakText(scrItem.nom); return; }
-    if(mode==="alpha" && alphaItem){ speakText(alphaItem.maj + " comme " + alphaItem.mot); return; }
+    if(mode==="alpha" && alphaItem){ speakAlpha(alphaItem, alphaItem.maj + " comme " + alphaItem.mot); return; }
     if(soloPair) speak(soloPair);
   };
   window.toggleAutoSpeak = ()=>{
@@ -702,6 +713,7 @@
     imgs.forEach(p=>{ const c=document.createElement("div"); c.className="img-card"; c.innerHTML=imgHTML(p); c.onclick=()=>onImage(c,p); ig.appendChild(c); });
     words.forEach(p=>{ const c=document.createElement("div"); c.className="word-card"; c.innerHTML=p.fr+(p.sou?`<span class="sou">${p.sou}</span>`:""); c.onclick=()=>onWord(c,p); wg.appendChild(c); });
     updateCount();
+    setTimeout(()=>consigne("consigne-relie"), 300);
     startTime=Date.now(); clearInterval(timerId);
     timerId=setInterval(()=>{ $("#chrono").textContent=fmt(Date.now()-startTime); },250);
   };
