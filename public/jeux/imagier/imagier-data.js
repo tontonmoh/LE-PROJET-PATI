@@ -176,7 +176,7 @@ window.IMAGIER_THEMES = [
   /* ============================================================
      QUI FAIT CE BRUIT ? — jeu sonore 3-7 ans (type "ecoute")
      - sound   : le bruit à reconnaître (sons/<id>.mp3, 2-4 s)
-     - img     : emoji provisoire → remplacer par /jeux/imagier/img/ecoute/<id>.webp (Gemini)
+     - img     : illustrations Adobe Firefly (Image 5), 512 px webp, dans img/ecoute/
      - sou     : soussou VIDE — à remplir par un locuteur (jamais inventé)
      - niveau  : 1 = sons très distincts (3-4 ans), 2 = sons proches (4-5 ans), 3 = fins
      - paire   : son voisin qui sert de leurre au niveau 2
@@ -190,26 +190,26 @@ window.IMAGIER_THEMES = [
     couleur: "#D9622B",
     type: "ecoute",
     sons: [
-      { id:"coq",        fr:"le coq",        sou:"", img:"🐓", sound:"/jeux/imagier/sons/coq.mp3",        famille:"animaux", niveau:1, paire:"poule",      moment:"matin", credit:"alys · domaine public · Medium rooster crowing.ogg" },
-      { id:"poule",      fr:"la poule",      sou:"", img:"🐔", sound:"/jeux/imagier/sons/poule.mp3",      famille:"animaux", niveau:2, paire:"coq",        moment:"matin", credit:"alys · domaine public · Hen announcing shes lain an egg.ogg" },
-      { id:"chevre",     fr:"la chèvre",     sou:"", img:"🐐", sound:"/jeux/imagier/sons/chevre.mp3",     famille:"animaux", niveau:1, paire:"mouton",     moment:"jour",  credit:"stephan · domaine public · Herd of goats bleating.ogg" },
-      { id:"mouton",     fr:"le mouton",     sou:"", img:"🐑", sound:"/jeux/imagier/sons/mouton.mp3",     famille:"animaux", niveau:2, paire:"chevre",     moment:"jour",  credit:"earthcalling · domaine public · Sheep bleating.ogg" },
-      { id:"ane",        fr:"l'âne",         sou:"", img:"🫏", sound:"/jeux/imagier/sons/ane.mp3",        famille:"animaux", niveau:1, paire:"",           moment:"jour",  credit:"Félix Blume · CC0 · a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav" },
-      { id:"grillon",    fr:"le grillon",    sou:"", img:"🦗", sound:"/jeux/imagier/sons/grillon.mp3",    famille:"animaux", niveau:2, paire:"grenouille", moment:"nuit",  credit:"DrTrumpet · CC BY-SA 4.0 · Audio Hörbild Grillenzirpen - nachts um 3 im Föhrenwald Mödling.ogg" },
-      { id:"grenouille", fr:"la grenouille", sou:"", img:"🐸", sound:"/jeux/imagier/sons/grenouille.mp3", famille:"animaux", niveau:3, paire:"grillon",    moment:"nuit",  credit:"JogiAsad · CC BY-SA 4.0 · Frogs croak calling chorus at night.ogg" },
-      { id:"balafon",    fr:"le balafon",    sou:"", img:"🎶", sound:"/jeux/imagier/sons/balafon.mp3",    famille:"musique", niveau:2, paire:"djembe",     moment:"soir",  credit:"KONE IF · CC BY 4.0 · Le son de balafon sénoufo.ogg" },
-      { id:"djembe",     fr:"le djembé",     sou:"", img:"🪘", sound:"/jeux/imagier/sons/djembe.mp3",     famille:"musique", niveau:1, paire:"doundoun",   moment:"soir",  credit:"Freddythehat (Wikipédia) · domaine public · Djembe.ogg" },
-      { id:"doundoun",   fr:"le doundoun",   sou:"", img:"🥁", sound:"/jeux/imagier/sons/doundoun.mp3",   famille:"musique", niveau:3, paire:"djembe",     moment:"soir",  credit:"Dunun (Commons) · CC BY-SA 3.0 · Dunun.ogg" },
-      { id:"pluie",      fr:"la pluie",      sou:"", img:"🌧️", sound:"/jeux/imagier/sons/pluie.mp3",      famille:"nature",  niveau:1, paire:"eau",        moment:"",      credit:"ezwa · domaine public · Rain on a veranda and t.ogg" },
-      { id:"vagues",     fr:"la mer",        sou:"", img:"🌊", sound:"/jeux/imagier/sons/vagues.mp3",     famille:"nature",  niveau:1, paire:"pluie",      moment:"",      credit:"earthcalling · domaine public · On a pebble beach.ogg" },
-      { id:"tonnerre",   fr:"l'orage",       sou:"", img:"⛈️", sound:"/jeux/imagier/sons/tonnerre.mp3",   famille:"nature",  niveau:2, paire:"pluie",      moment:"",      credit:"Amuzujoe · CC BY-SA 4.0 · Thunder 01.ogg" },
-      { id:"bebe",       fr:"le bébé",       sou:"", img:"👶", sound:"/jeux/imagier/sons/bebe.mp3",       famille:"maison",  niveau:1, paire:"",           moment:"",      credit:"reinsamba · CC BY 3.0 · Baby Laugh.ogg" },
-      { id:"eau",        fr:"l'eau",         sou:"", img:"💧", sound:"/jeux/imagier/sons/eau.mp3",        famille:"maison",  niveau:2, paire:"the",        moment:"matin", credit:"earthcalling · domaine public · Pouring water in mug in sink.ogg" },
-      { id:"the",        fr:"le thé",        sou:"", img:"🫖", sound:"/jeux/imagier/sons/the.mp3",        famille:"maison",  niveau:2, paire:"eau",        moment:"soir",  credit:"chocoholic · domaine public · Pouring iced tea.ogg" },
-      { id:"porte",      fr:"la porte",      sou:"", img:"🚪", sound:"/jeux/imagier/sons/porte.mp3",      famille:"maison",  niveau:3, paire:"",           moment:"",      credit:"stephan · domaine public · Door handle creaking.ogg" },
-      { id:"moto",       fr:"le klaxon",     sou:"", img:"🛵", sound:"/jeux/imagier/sons/moto.mp3",       famille:"ville",   niveau:1, paire:"voiture",    moment:"jour",  credit:"15HPanska_Ruttner_Jan · CC0 · Car Horn.wav" },
-      { id:"voiture",    fr:"la voiture",    sou:"", img:"🚗", sound:"/jeux/imagier/sons/voiture.mp3",    famille:"ville",   niveau:2, paire:"moto",       moment:"jour",  credit:"stephan · domaine public · Starting a car and driving.ogg" },
-      { id:"train",      fr:"le train",      sou:"", img:"🚂", sound:"/jeux/imagier/sons/train.mp3",      famille:"ville",   niveau:2, paire:"",           moment:"",      credit:"NIRVAAN222222 · CC0 · The horn of a Bluebird railcar.ogg" },
+      { id:"coq",        fr:"le coq",        sou:"", img:"/jeux/imagier/img/ecoute/coq.webp", sound:"/jeux/imagier/sons/coq.mp3",        famille:"animaux", niveau:1, paire:"poule",      moment:"matin", credit:"alys · domaine public · Medium rooster crowing.ogg" },
+      { id:"poule",      fr:"la poule",      sou:"", img:"/jeux/imagier/img/ecoute/poule.webp", sound:"/jeux/imagier/sons/poule.mp3",      famille:"animaux", niveau:2, paire:"coq",        moment:"matin", credit:"alys · domaine public · Hen announcing shes lain an egg.ogg" },
+      { id:"chevre",     fr:"la chèvre",     sou:"", img:"/jeux/imagier/img/ecoute/chevre.webp", sound:"/jeux/imagier/sons/chevre.mp3",     famille:"animaux", niveau:1, paire:"mouton",     moment:"jour",  credit:"stephan · domaine public · Herd of goats bleating.ogg" },
+      { id:"mouton",     fr:"le mouton",     sou:"", img:"/jeux/imagier/img/ecoute/mouton.webp", sound:"/jeux/imagier/sons/mouton.mp3",     famille:"animaux", niveau:2, paire:"chevre",     moment:"jour",  credit:"earthcalling · domaine public · Sheep bleating.ogg" },
+      { id:"ane",        fr:"l'âne",         sou:"", img:"/jeux/imagier/img/ecoute/ane.webp", sound:"/jeux/imagier/sons/ane.mp3",        famille:"animaux", niveau:1, paire:"",           moment:"jour",  credit:"Félix Blume · CC0 · a-donkey-is-braying-in-his-enclosure-in-south-of-france.wav" },
+      { id:"grillon",    fr:"le grillon",    sou:"", img:"/jeux/imagier/img/ecoute/grillon.webp", sound:"/jeux/imagier/sons/grillon.mp3",    famille:"animaux", niveau:2, paire:"grenouille", moment:"nuit",  credit:"DrTrumpet · CC BY-SA 4.0 · Audio Hörbild Grillenzirpen - nachts um 3 im Föhrenwald Mödling.ogg" },
+      { id:"grenouille", fr:"la grenouille", sou:"", img:"/jeux/imagier/img/ecoute/grenouille.webp", sound:"/jeux/imagier/sons/grenouille.mp3", famille:"animaux", niveau:3, paire:"grillon",    moment:"nuit",  credit:"JogiAsad · CC BY-SA 4.0 · Frogs croak calling chorus at night.ogg" },
+      { id:"balafon",    fr:"le balafon",    sou:"", img:"/jeux/imagier/img/ecoute/balafon.webp", sound:"/jeux/imagier/sons/balafon.mp3",    famille:"musique", niveau:2, paire:"djembe",     moment:"soir",  credit:"KONE IF · CC BY 4.0 · Le son de balafon sénoufo.ogg" },
+      { id:"djembe",     fr:"le djembé",     sou:"", img:"/jeux/imagier/img/ecoute/djembe.webp", sound:"/jeux/imagier/sons/djembe.mp3",     famille:"musique", niveau:1, paire:"doundoun",   moment:"soir",  credit:"Freddythehat (Wikipédia) · domaine public · Djembe.ogg" },
+      { id:"doundoun",   fr:"le doundoun",   sou:"", img:"/jeux/imagier/img/ecoute/doundoun.webp", sound:"/jeux/imagier/sons/doundoun.mp3",   famille:"musique", niveau:3, paire:"djembe",     moment:"soir",  credit:"Dunun (Commons) · CC BY-SA 3.0 · Dunun.ogg" },
+      { id:"pluie",      fr:"la pluie",      sou:"", img:"/jeux/imagier/img/ecoute/pluie.webp", sound:"/jeux/imagier/sons/pluie.mp3",      famille:"nature",  niveau:1, paire:"eau",        moment:"",      credit:"ezwa · domaine public · Rain on a veranda and t.ogg" },
+      { id:"vagues",     fr:"la mer",        sou:"", img:"/jeux/imagier/img/ecoute/vagues.webp", sound:"/jeux/imagier/sons/vagues.mp3",     famille:"nature",  niveau:1, paire:"pluie",      moment:"",      credit:"earthcalling · domaine public · On a pebble beach.ogg" },
+      { id:"tonnerre",   fr:"l'orage",       sou:"", img:"/jeux/imagier/img/ecoute/tonnerre.webp", sound:"/jeux/imagier/sons/tonnerre.mp3",   famille:"nature",  niveau:2, paire:"pluie",      moment:"",      credit:"Amuzujoe · CC BY-SA 4.0 · Thunder 01.ogg" },
+      { id:"bebe",       fr:"le bébé",       sou:"", img:"/jeux/imagier/img/ecoute/bebe.webp", sound:"/jeux/imagier/sons/bebe.mp3",       famille:"maison",  niveau:1, paire:"",           moment:"",      credit:"reinsamba · CC BY 3.0 · Baby Laugh.ogg" },
+      { id:"eau",        fr:"l'eau",         sou:"", img:"/jeux/imagier/img/ecoute/eau.webp", sound:"/jeux/imagier/sons/eau.mp3",        famille:"maison",  niveau:2, paire:"the",        moment:"matin", credit:"earthcalling · domaine public · Pouring water in mug in sink.ogg" },
+      { id:"the",        fr:"le thé",        sou:"", img:"/jeux/imagier/img/ecoute/the.webp", sound:"/jeux/imagier/sons/the.mp3",        famille:"maison",  niveau:2, paire:"eau",        moment:"soir",  credit:"chocoholic · domaine public · Pouring iced tea.ogg" },
+      { id:"porte",      fr:"la porte",      sou:"", img:"/jeux/imagier/img/ecoute/porte.webp", sound:"/jeux/imagier/sons/porte.mp3",      famille:"maison",  niveau:3, paire:"",           moment:"",      credit:"stephan · domaine public · Door handle creaking.ogg" },
+      { id:"moto",       fr:"le klaxon",     sou:"", img:"/jeux/imagier/img/ecoute/moto.webp", sound:"/jeux/imagier/sons/moto.mp3",       famille:"ville",   niveau:1, paire:"voiture",    moment:"jour",  credit:"15HPanska_Ruttner_Jan · CC0 · Car Horn.wav" },
+      { id:"voiture",    fr:"la voiture",    sou:"", img:"/jeux/imagier/img/ecoute/voiture.webp", sound:"/jeux/imagier/sons/voiture.mp3",    famille:"ville",   niveau:2, paire:"moto",       moment:"jour",  credit:"stephan · domaine public · Starting a car and driving.ogg" },
+      { id:"train",      fr:"le train",      sou:"", img:"/jeux/imagier/img/ecoute/train.webp", sound:"/jeux/imagier/sons/train.mp3",      famille:"ville",   niveau:2, paire:"",           moment:"",      credit:"NIRVAAN222222 · CC0 · The horn of a Bluebird railcar.ogg" },
       // À ENREGISTRER À CONAKRY (introuvables en banque libre) : pilon, kora, balai, marchande
     ],
   },
