@@ -113,6 +113,13 @@ const JEUX: Jeu[] = [
     playPrefix: "/binta", withCodeInPath: false, hasLiveScores: false,
   },
   {
+    id: "jeanne", slug: "jeanne", jeu: "plateforme",
+    visual: "/images/jeux/jeanne.webp",
+    label: "Jeanne, la fille du Milo",
+    section: "pati", icon: BookOpen, accent: "#2E4A8B",
+    playPrefix: "/jeanne", withCodeInPath: false, hasLiveScores: false,
+  },
+  {
     id: "droits", slug: "droits", jeu: "droits-enfant",
     visual: "/images/jeux/droits.webp",
     label: "Mes droits, mon avenir",
