@@ -382,6 +382,7 @@
     try{ partyMusic(); }catch(e){}
     try{ clapping(); }catch(e){}
     setTimeout(()=>{ try{
+      if(mode==="ecoute"){ new Audio("/jeux/imagier/voix/bonnes-oreilles.mp3").play().catch(()=>{}); return; }
       if("speechSynthesis" in window){
         speechSynthesis.cancel();
         const u=new SpeechSynthesisUtterance("Bravo !");
@@ -736,10 +737,19 @@
   // Aucune lecture nécessaire : consignes parlées, pas de chrono, pas d'échec.
   // Modes : petits · grands · memoire · journee · parents
   // =====================================================================
-  let ecMode=null, ecRounds=[], ecIdx=0, ecLocked=false, ecAudio=null, ecPos=0, ecT0=0, ecTimer=null;
+  let ecMode=null, ecRounds=[], ecIdx=0, ecLocked=false, ecAudio=null, ecVoice=null, ecPos=0, ecT0=0, ecTimer=null, ecIntroKey="";
+  const VOIX="/jeux/imagier/voix/";
   const MOMENTS=[["matin","🌅","Matin"],["jour","☀️","Journée"],["soir","🌇","Soir"],["nuit","🌙","Nuit"]];
 
-  function ecStop(){ clearTimeout(ecTimer); try{ if(ecAudio){ ecAudio.pause(); ecAudio=null; } }catch(e){} $("#ecEar").classList.remove("playing"); }
+  function ecStop(){ clearTimeout(ecTimer); try{ if(ecAudio){ ecAudio.pause(); ecAudio=null; } if(ecVoice){ ecVoice.pause(); ecVoice=null; } }catch(e){} $("#ecEar").classList.remove("playing"); }
+  // Voix humaine enregistrée (voix/<cle>.mp3) ; si le fichier manque → synthèse vocale du navigateur
+  function playFile(src, fallbackText, cb){
+    let done=false; const end=()=>{ if(done) return; done=true; if(cb) cb(); };
+    const fb=()=>{ if(done) return; done=true; sayThen(fallbackText, cb); };
+    try{ if(ecVoice){ ecVoice.pause(); } ecVoice=new Audio(src); ecVoice.onended=end; ecVoice.onerror=fb; ecVoice.play().catch(fb); }catch(e){ fb(); }
+  }
+  function playVoice(key, fallbackText, cb){ playFile(VOIX+key+".mp3", fallbackText, cb); }
+  function playWord(s, cb){ if(s.audio) playFile(s.audio, s.fr, cb); else sayThen(s.fr, cb); }
   function playSound(s, cb){
     ecStop();
     const ear=$("#ecEar"); let done=false;
@@ -767,7 +777,7 @@
   function byId(id){ return theme.sons.find(x=>x.id===id); }
 
   window.startEcoute = (m)=>{
-    mode="ecoute"; ecMode=m; ecIdx=0; ecT0=Date.now();
+    mode="ecoute"; ecMode=m; ecIdx=0; ecT0=Date.now(); ecIntroKey="intro-"+m;
     const cf=$("#confetti"); if(cf) cf.innerHTML="";
     const S=theme.sons;
     if(m==="petits"){
@@ -800,7 +810,11 @@
     const box=$("#ecChoices"); box.innerHTML=""; box.classList.remove("hidden");
     const fr=$("#ecFrise"); fr.innerHTML=""; fr.classList.add("hidden");
     $("#ecNext").classList.add("hidden"); $("#ecEar").classList.remove("hidden");
-    const startSound = (fn)=> first ? sayThen(intro, ()=>{ ecTimer=setTimeout(fn,250); }) : (ecTimer=setTimeout(fn,450));
+    const startSound = (fn)=> first
+      ? playVoice(ecIntroKey, intro, ()=>{ ecTimer=setTimeout(fn,250); })
+      : ((ecMode==="petits"||ecMode==="grands")
+          ? playVoice("qui-fait-ce-bruit", "Qui fait ce bruit ?", ()=>{ ecTimer=setTimeout(fn,250); })
+          : (ecTimer=setTimeout(fn,450)));
 
     if(ecMode==="petits" || ecMode==="grands"){
       $("#ecQ").textContent="Qui fait ce bruit ?";
@@ -827,7 +841,7 @@
       MOMENTS.forEach(([k,ic,lb])=>{ const d=document.createElement("div"); d.className="slot"; d.dataset.m=k; d.innerHTML=`<span>${ic}</span><small>${lb}</small>`; fr.appendChild(d); });
       box.style.gridTemplateColumns="1fr 1fr"; box.style.maxWidth="380px";
       shuffle(r.day).forEach(s=>{ const b=ecCard(s); b.onclick=()=>ecDayPick(b,s); box.appendChild(b); });
-      if(first) sayThen(intro);
+      if(first) playVoice(ecIntroKey, intro);
     }
     else { // parents
       $("#ecQ").textContent="Le grand imite le bruit… Le petit devine ! Touche l'image pour entendre le vrai.";
@@ -835,7 +849,7 @@
       box.style.gridTemplateColumns="1fr"; box.style.maxWidth="260px";
       const b=ecCard(r.target); ecReveal(b); b.onclick=()=>playSound(r.target); box.appendChild(b);
       $("#ecNext").classList.remove("hidden");
-      if(first) sayThen(intro);
+      if(first) playVoice(ecIntroKey, intro);
     }
   }
 
@@ -854,10 +868,10 @@
     const t=ecRounds[ecIdx].target;
     if(s.id===t.id){
       ecLocked=true; ecStop(); b.classList.add("good"); ecReveal(b);
-      sayThen(s.fr, ()=>ecAdvance(700));
+      playWord(s, ()=>ecAdvance(700));
     }else{
       b.classList.add("wrong"); setTimeout(()=>b.classList.remove("wrong"),450);
-      ecTimer=setTimeout(()=>playSound(t), 500);
+      playVoice("ecoute-encore", "Écoute encore !", ()=>{ ecTimer=setTimeout(()=>playSound(t), 250); });
     }
   }
 
@@ -868,7 +882,7 @@
     if(s.id===seq[ecPos].id){
       ecPos++; b.classList.remove("good"); void b.offsetWidth; b.classList.add("good");
       const n=document.createElement("span"); n.className="num"; n.textContent=ecPos; b.appendChild(n);
-      if(ecPos>=seq.length){ ecLocked=true; ecStop(); sayThen("Bravo !", ()=>ecAdvance(500)); }
+      if(ecPos>=seq.length){ ecLocked=true; ecStop(); playVoice("bravo", "Bravo !", ()=>ecAdvance(500)); }
     }else{
       ecLocked=true;
       document.querySelectorAll("#ecChoices .ec-card").forEach(c=>c.classList.add("wrong"));
@@ -885,7 +899,7 @@
       slot.innerHTML=imgHTML(s)+`<small>${MOMENTS[ecPos][2]}</small>`; slot.classList.add("filled");
       if(slot.querySelector("img")) slot.querySelector("img").style.cssText="width:70%;height:auto";
       b.classList.add("used"); ecPos++;
-      if(ecPos>=MOMENTS.length){ ecLocked=true; ecTimer=setTimeout(()=>sayThen("Bonne nuit Madi !", ()=>ecAdvance(400)), 1600); }
+      if(ecPos>=MOMENTS.length){ ecLocked=true; ecTimer=setTimeout(()=>playVoice("bonne-nuit-madi", "Bonne nuit Madi !", ()=>ecAdvance(400)), 1600); }
     }else{
       b.classList.add("wrong"); setTimeout(()=>b.classList.remove("wrong"),450);
     }
