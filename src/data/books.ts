@@ -25,6 +25,24 @@ export type Book = {
 
 export const BOOKS: Book[] = [
   {
+    slug: "jeanne-fille-du-milo",
+    band: "Aventure",
+    title: "Jeanne, la fille du Milo",
+    description: "Elle a compté les chaises, puis elle en a pris une. De la rivière de Kankan au Conseil de sécurité, cent ans après, notre Championne.",
+    cover: "/images/jeanne-livre-couverture.webp",
+    keywords: ["Jeanne Martin Cissé", "Kankan", "Milo", "Rufisque", "institutrice", "ONU", "Conseil de sécurité", "New York", "apartheid", "Dar es Salam", "pionnière", "centenaire", "femmes", "Pati Aventure"],
+    nouveau: true,
+  },
+  {
+    slug: "mbalia-camara",
+    band: "Aventure",
+    title: "M'Balia Camara, le courage de Tondon",
+    description: "Pas d'école, pas de titre, pas de micro. En 1955, à Tondon, elle a dit NON au chef de canton. Première martyre de l'indépendance.",
+    cover: "/images/mbalia-livre-couverture.webp",
+    keywords: ["M'Balia Camara", "Posséah", "Tondon", "Dubréka", "1955", "impôt", "chef de canton", "indépendance", "marché M'Balia", "courage", "pionnière", "femmes", "Pati Aventure"],
+    nouveau: true,
+  },
+  {
     slug: "resistance-t1",
     band: "Passage",
     title: "Résistance — Le roi dans la foule",

@@ -61,6 +61,8 @@ import { TAADIDI, TAADIDI_ACCENT } from "./series/taadidi";
 import { KURUKAN, KURUKAN_ACCENT } from "./series/kurukanFuga";
 import { JAAMU, JAAMU_ACCENT } from "./series/jaamu";
 import { PULAAGU_ML } from "./pulaagu-ml";                        // ← NOUVEAU (livre indépendant, hors série)
+import { JEANNE_ML } from "./jeanne-milo-ml";
+import { MBALIA_ML } from "./mbalia-ml";
 
 export type MLSection = { id?: string; title: string; paragraphs: string[]; image?: string };
 export type MLBook = { dir: "ltr" | "rtl"; label: string; title: string; subtitle?: string; sections: MLSection[] };
@@ -205,6 +207,10 @@ export const READERS: Record<string, MLReader> = {
   // ← NOUVEAU · livre indépendant Pati Aventure 10-12 (hors série JAAMU)
   // Accent indigo profond évoquant l'indigo peul
   "pulaagu": { ...fromLaye(PULAAGU_ML), accent: "#3D2E5C" },
+
+  // Pionnières · Pati Aventure 10-12 (19/11/2026) — safran pour Jeanne, rouge terre pour M'Balia
+  "jeanne-fille-du-milo": { ...fromLaye(JEANNE_ML), accent: "#D4A017" },
+  "mbalia-camara": { ...fromLaye(MBALIA_ML), accent: "#B5482E" },
 };
 
 // Épisodes 'live' de la série Taadidi -> lecteur générique, ids "taadidi-<n>"
