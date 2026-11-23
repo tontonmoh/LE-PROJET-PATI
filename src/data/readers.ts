@@ -62,6 +62,7 @@ import { KURUKAN, KURUKAN_ACCENT } from "./series/kurukanFuga";
 import { JAAMU, JAAMU_ACCENT } from "./series/jaamu";
 import { PULAAGU_ML } from "./pulaagu-ml";                        // ← NOUVEAU (livre indépendant, hors série)
 import { JEANNE_ML } from "./jeanne-milo-ml";
+import { NOV70_ML } from "./nov70-ml";
 import { MBALIA_ML } from "./mbalia-ml";
 
 export type MLSection = { id?: string; title: string; paragraphs: string[]; image?: string };
@@ -210,6 +211,7 @@ export const READERS: Record<string, MLReader> = {
 
   // Pionnières · Pati Aventure 10-12 (19/11/2026) — safran pour Jeanne, rouge terre pour M'Balia
   "jeanne-fille-du-milo": { ...fromLaye(JEANNE_ML), accent: "#D4A017" },
+  "22-novembre-1970": { ...fromLaye(NOV70_ML), accent: "#6b7046" },
   "mbalia-camara": { ...fromLaye(MBALIA_ML), accent: "#B5482E" },
 };
 

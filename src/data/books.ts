@@ -11,6 +11,7 @@ export type Book = {
   cover: string; // chemin de la couverture dans /public
   pdf?: string; // PDF du livre dans /public
   audio?: string; // extrait audio dans /public
+  audioCredit?: string; // ligne de crédit sous le lecteur audio
   kora?: string; // boucle kora (ambiance lecture)
   languages?: { label: string; pdf: string }[];
   teaser?: string; // URL YouTube du teaser
@@ -24,6 +25,19 @@ export type Book = {
 };
 
 export const BOOKS: Book[] = [
+  {
+    slug: "22-novembre-1970",
+    band: "Passage",
+    title: "22 novembre 1970",
+    description: "Fernandez adore Ronaldo mais en veut au Portugal. Tonton Moh lui demande : pourquoi ? De Mandela à Cabral, la nuit où six bateaux ont attaqué Conakry.",
+    cover: "/images/22-novembre-1970-couverture.webp",
+    teaser: "https://youtu.be/FgCw7IhPLBI",
+    teaserLabel: "Le film documentaire",
+    audio: "/contes/audio/22-novembre-1970.mp3",
+    audioCredit: "Voix : Mohamed Doumbouya (Tonton Moh) · Fernandez : voix de synthèse",
+    keywords: ["22 novembre 1970", "agression portugaise", "opération Mer verte", "Mar Verde", "Conakry", "Amílcar Cabral", "PAIGC", "Guinée-Bissau", "Sékou Touré", "Mandela", "Miriam Makeba", "Kwame Nkrumah", "Kwame Ture", "Spínola", "Bembeya Jazz", "Monument du 22 Novembre", "Fernandez", "Tonton Moh", "histoire", "Pati Passage"],
+    nouveau: true,
+  },
   {
     slug: "jeanne-fille-du-milo",
     band: "Aventure",

@@ -129,7 +129,7 @@ export default function LivreDetail() {
                 <audio controls preload="none" className="w-full">
                   <source src={book.audio} type="audio/mpeg" />
                 </audio>
-                <p className="text-xs text-[#8a9389] font-semibold mt-2">Composition : Mohamed Lamine Soumah · Lecture : à venir</p>
+                <p className="text-xs text-[#8a9389] font-semibold mt-2">{book.audioCredit ?? "Composition : Mohamed Lamine Soumah · Lecture : à venir"}</p>
               </div>
             )}
 
