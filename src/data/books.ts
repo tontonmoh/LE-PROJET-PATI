@@ -386,7 +386,11 @@ export const BOOKS: Book[] = [
     title: "Sacrée D'mba",
     description: "Les enfants découvrent le Nimba de Guinée",
     cover: "/images/couverture_nimba.jpg",
-    keywords: ["dmba", "nimba", "masque", "baga", "musee", "samori", "fifi", "amadou", "boké", "culture"],
+    teaser: "https://youtu.be/Q5j9Q9MfgYc",
+    teaserLabel: "Le film animé",
+    audio: "/contes/audio/sacree-dmba.mp3",
+    audioCredit: "Voix : Mohamed Doumbouya (Tonton Moh) · Fifi, Amadou, Mamie, Papy et la guide : voix de synthèse",
+    keywords: ["dmba", "nimba", "masque", "baga", "musee", "samori", "fifi", "amadou", "boké", "culture", "Branding Guinée", "Kamsar", "Tonton Moh"],
   },
   {
     slug: "chateau-eau",

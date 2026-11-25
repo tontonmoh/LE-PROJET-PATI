@@ -29,6 +29,7 @@ const A = (f: string) => `/contes/audio/${f}`;
 const KB = "Kini Bangaly";
 
 export const CONTES: Conte[] = [
+  { id: "sacree-dmba", title: "Sacrée D'mba — Amadou et Fifi au paradis", lang: "francais", narrator: "Mohamed Doumbouya", audio: A("sacree-dmba.mp3") },
   { id: "22-novembre-1970", title: "22 novembre 1970 — Fernandez et Tonton Moh", lang: "francais", narrator: "Mohamed Doumbouya", audio: A("22-novembre-1970.mp3") },
   { id: "00-intro",        title: "Introduction",         lang: "soussou", narrator: KB, audio: A("00-intro.mp3") },
   { id: "01-sounkhori",    title: "Sounkhori",            lang: "soussou", narrator: KB, audio: A("01-sounkhori.mp3") },
